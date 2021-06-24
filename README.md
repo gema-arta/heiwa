@@ -4,7 +4,7 @@
 <br>
 
 ## Roadmap
-- [ ] Specifies the library to be used.
+- [x] Specifies the packages and libraries to be used.
 - [ ] Building auto build systems.
 - [ ] Creating package manager (kanri).
 
