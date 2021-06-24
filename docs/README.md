@@ -34,8 +34,8 @@
   - [musl-fts](https://github.com/pullmoll/musl-fts)
   - [musl-legacy-compat](https://github.com/void-linux/void-packages/tree/master/srcpkgs/musl-legacy-compat)
   - [musl-locales](https://gitlab.com/rilian-la-te/musl-locales/-/archive/master)
-  - [musl-obstack](https://github.com/pullmoll/musl-obstack
-  - [musl-rpmatch](https://github.com/pullmoll/musl-rpmatch
+  - [musl-obstack](https://github.com/pullmoll/musl-obstack)
+  - [musl-rpmatch](https://github.com/pullmoll/musl-rpmatch)
 - [NetBSD's Curses](https://github.com/sabotage-linux/netbsd-curses)
 - [NetBSD's Libedit](https://thrysoee.dk/editline)
 - [OpenBSD's M4](https://github.com/ibara/m4)
