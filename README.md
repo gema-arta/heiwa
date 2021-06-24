@@ -2,8 +2,8 @@
 <p align="center">A hobby and performance-oriented Linux® distribution that provides aesthetics and practical functionality.</p>
 
 ## Roadmap
-[ ] Specifies the library to be used.
-[ ] Building auto build systems.
-[ ] Creating package manager (kanri).
+- [ ] Specifies the library to be used.
+- [ ] Building auto build systems.
+- [ ] Creating package manager (kanri).
 
 See [docs](./docs).
