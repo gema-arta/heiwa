@@ -3,9 +3,9 @@
 - [Check](https://github.com/libcheck/check)
 - [Clang/LLVM](https://github.com/llvm/llvm-project)
 - [Cmake](https://cmake.org/files)
-- [E2fsprogs](https://downloads.sourceforge.net/project/e2fsprogs/e2fsprogs))
+- [E2fsprogs](https://downloads.sourceforge.net/project/e2fsprogs/e2fsprogs)
 - [Eudev](https://dev.gentoo.org/~blueness/eudev)
-- [Expat](https://prdownloads.sourceforge.net/expat
+- [Expat](https://prdownloads.sourceforge.net/expat)
 - [Flex](https://github.com/westes/flex)
 - [Gettext-tiny](https://github.com/sabotage-linux/gettext-tiny)
 - [GNU's Acl](https://ftp.gnu.org/gnu/attr)
