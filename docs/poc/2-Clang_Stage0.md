@@ -54,7 +54,7 @@ cp -rv usr/include "/clang0-tools/${HEIWA_TARGET}/."
 [[ -n "$HEIWA_TARGET" ]] && mkdir -v build && cd build && \
 ../configure \
     --prefix=/clang0-tools                         \
-    --target="${HEIWA_TARGET}"                     \
+    --target="$HEIWA_TARGET"                       \
     --with-sysroot="/clang0-tools/${HEIWA_TARGET}" \
     --disable-nls                                  \
     --disable-multilib                             \
@@ -82,18 +82,18 @@ tar xzf ../mpc-1.2.1.tar.gz && mv -v mpc-1.2.1 mpc
 # Create a dedicated directory and configure source.
 [[ -n "$HEIWA_HOST" && "$HEIWA_TARGET" && "$HEIWA_CPU" ]] && \
 mkdir -v build && cd build && \
-CFLAGS="-g0 -O0" CXXFLAGS="-g0 -O0" && ../configure   \
-    --prefix=/clang0-tools    --build="${HEIWA_HOST}" \
-    --host="${HEIWA_HOST}" --target="${HEIWA_TARGET}" \
-    --with-sysroot="/clang0-tools/${HEIWA_TARGET}"    \
-    --disable-nls                       --with-newlib \
-    --disable-libitm                 --disable-libvtv \
-    --disable-libssp                 --disable-shared \
-    --disable-libgomp               --without-headers \
-    --disable-threads              --disable-multilib \
-    --disable-libatomic           --disable-libstdcxx \
-    --enable-languages=c        --disable-libquadmath \
-    --disable-libsanitizer --with-arch="${HEIWA_CPU}" \
+CFLAGS="-g0 -O0" CXXFLAGS="-g0 -O0" && ../configure \
+    --prefix=/clang0-tools    --build="$HEIWA_HOST" \
+    --host="$HEIWA_HOST"   --target="$HEIWA_TARGET" \
+    --with-sysroot="/clang0-tools/${HEIWA_TARGET}"  \
+    --disable-nls                     --with-newlib \
+    --disable-libitm               --disable-libvtv \
+    --disable-libssp               --disable-shared \
+    --disable-libgomp             --without-headers \
+    --disable-threads            --disable-multilib \
+    --disable-libatomic         --disable-libstdcxx \
+    --enable-languages=c      --disable-libquadmath \
+    --disable-libsanitizer --with-arch="$HEIWA_CPU" \
     --disable-decimal-float --enable-clocale=generic
 
 # Build only the minimum.
@@ -111,7 +111,7 @@ time { make install-gcc install-target-libgcc; }
 [[ -n "$HEIWA_TARGET" ]] && ./configure \
     CROSS_COMPILE="${HEIWA_TARGET}-"    \
     --prefix=/                          \
-    --target="${HEIWA_TARGET}"
+    --target="$HEIWA_TARGET"
 
 # Build.
 time { make; }
@@ -165,9 +165,9 @@ mkdir -v build && cd build && \
 AR=ar LDFLAGS="-Wl,-rpath,/clang0-tools/lib" \
 ../configure \
     --prefix=/clang0-tools        \
-    --build="${HEIWA_HOST}"       \
-    --host="${HEIWA_HOST}"        \
-    --target="${HEIWA_TARGET}"    \
+    --build="$HEIWA_HOST"         \
+    --host="$HEIWA_HOST"          \
+    --target="$HEIWA_TARGET"      \
     --disable-multilib            \
     --with-sysroot=/clang0-tools  \
     --disable-nls                 \
