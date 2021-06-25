@@ -222,10 +222,8 @@ cp -v ../../files/toybox-0.8.5/.config_file_no_libz_no_ssl .config
 
 # Build.
 time {
-    [[ -n "$HEIWA_TARGET" ]] && make CC="${HEIWA_TARGET}-gcc" \
-    CXX="${HEIWA_TARGET}-g++" AR="${HEIWA_TARGET}-ar"         \
-    AS="${HEIWA_TARGET}-as" RANLIB="${HEIWA_TARGET}-ranlib"   \
-    LD="${HEIWA_TARGET}-ld" STRIP="${HEIWA_TARGET}-strip"
+    [[ -n "$HEIWA_TARGET" ]] && make \
+    CC="${HEIWA_TARGET}-gcc" CFLAGS="$COMMON_FLAGS"
 }
 
 # Install.
