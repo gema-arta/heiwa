@@ -64,9 +64,8 @@ HEIWA="${HEIWA}"
 LC_ALL="POSIX"
 PATH="/clang0-tools/bin:/clang0-tools/usr/bin:/clang1-tools/bin:/clang1-tools/usr/bin:/bin:/usr/bin"
 export HEIWA LC_ALL PATH
-# CFLAGS and CXXFLAGS must not be set during the building of cross-tools.
+# CFLAGS and CXXFLAGS must not be set during the building of cross-tools (clang0).
 unset CFLAGS CXXFLAGS
-# Build PATH.
 export LLVM_SRC="\${HEIWA}/sources/llvm"
 EOF
 source ~/.bash_profile
