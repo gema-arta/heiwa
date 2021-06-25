@@ -191,7 +191,7 @@ time {
 # Install.
 time { make install; }
 
-# Adjust GCC to produce programs and libraries that will use musl libc in /clang0-tools.
+# Adjust GCC to produce programs and libraries that will use musl libc in /clang0-tools/.
 [[ -n "$HEIWA_TARGET" ]] && \
 export SPECFILE="$(dirname $(${HEIWA_TARGET}-gcc -print-libgcc-file-name))/specs"
 "${HEIWA_TARGET}-gcc" -dumpspecs > specs
