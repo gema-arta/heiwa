@@ -345,7 +345,7 @@ cmake -B build  \
     -DBacktrace_LIBRARY="/clang0-tools/lib/libexecinfo.so.1"
 
 # Build.
-make -C build
+time { make -C build; }
 
 # Install.
 time {
