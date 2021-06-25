@@ -184,8 +184,8 @@ AR=ar LDFLAGS="-Wl,-rpath,/clang0-tools/lib" \
 
 # Build.
 time {
-    [[ -n "$HEIWA_TARGET" ]] && \
-    make AS_FOR_TARGET="${HEIWA_TARGET}-as" LD_FOR_TARGET="${HEIWA_TARGET}-ld"
+    [[ -n "$HEIWA_TARGET" ]] && make \
+    AS_FOR_TARGET="${HEIWA_TARGET}-as" LD_FOR_TARGET="${HEIWA_TARGET}-ld"
 }
 
 # Install.
