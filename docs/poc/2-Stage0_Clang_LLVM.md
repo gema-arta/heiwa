@@ -119,7 +119,7 @@ time { make; }
 # Install.
 time { make DESTDIR=/clang0-tools install; }
 
-# GCC will looking for system headers in /clang0-tools/usr/include.
+# GCC will looking for system headers in "/clang0-tools/usr/include/".
 # Create the directory, then symlink it.
 mkdir -v /clang0-tools/usr && \
 ln -sv ../include /clang0-tools/usr/include
