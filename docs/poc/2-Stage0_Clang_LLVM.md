@@ -74,7 +74,7 @@ time { make install; }
 > #### `10.3.1_git20210424` (from Alpine Linux)
 > Required to compile required libraries to build Stage-0 Clang/LLVM.
 ```bash
-# GCC requires the GMP, MPFR, and MPC packages to either be present on the host or to be present in source form within the gcc source tree.
+# GCC requires the GMP, MPFR, and MPC packages to either be present on the host or to be present in source form within the GCC source tree.
 tar xf ../gmp-6.2.1.tar.xz  && mv -v gmp-6.2.1 gmp
 tar xf ../mpfr-4.1.0.tar.xz && mv -v mpfr-4.1.0 mpfr
 tar xzf ../mpc-1.2.1.tar.gz && mv -v mpc-1.2.1 mpc
@@ -144,7 +144,7 @@ EOF
 > #### `10.3.1_git20210424` (from Alpine Linux)
 > Required to compile required libraries to build Stage-0 Clang/LLVM.
 ```bash
-# GCC requires the GMP, MPFR, and MPC packages to either be present on the host or to be present in source form within the gcc source tree.
+# GCC requires the GMP, MPFR, and MPC packages to either be present on the host or to be present in source form within the GCC source tree.
 tar xf ../gmp-6.2.1.tar.xz  && mv -v gmp-6.2.1 gmp
 tar xf ../mpfr-4.1.0.tar.xz && mv -v mpfr-4.1.0 mpfr
 tar xzf ../mpc-1.2.1.tar.gz && mv -v mpc-1.2.1 mpc
