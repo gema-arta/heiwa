@@ -305,7 +305,7 @@ export CFLAGS="-g -g1"
 export CXXFLAGS="-g -g1"
 
 # Update host/target triple detection.
-cp -v ../../files/config.guess cmake/config.guess
+cp -v ../files/config.guess cmake/
 
 # Configure source.
 cmake -B build  \
