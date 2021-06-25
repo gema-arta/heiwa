@@ -259,7 +259,7 @@ pushd "${LLVM_SRC}/projects/compiler-rt/" && \
         compiler-rt-sanitizer-ppc64-musl.patch \
         compiler-rt-size_t.patch \
         compiler-rt-xray-ppc64-musl.patch
-    do patch -Np1 -i ../../patches/llvm12-compiler-rt/${P}
+    do patch -Np1 -i ../../../patches/llvm12/${P}
     done; unset P
 popd
 
@@ -268,12 +268,12 @@ pushd "${LLVM_SRC}/projects/libcxx/" && \
         libcxx-musl.patch \
         libcxx-ppc.patch \
         libcxx-ssp-nonshared.patch
-    do patch -Np1 -i ../../../patches/llvm12-libcxx/${P}
+    do patch -Np1 -i ../../../patches/llvm12/${P}
     done; unset P
 popd
 
 pushd "${LLVM_SRC}/projects/libunwind/" && \
-    patch -Np1 -i ../../../patches/llvm12-libunwind/libunwind-ppc32.patch
+    patch -Np1 -i ../../../patches/llvm12/libunwind-ppc32.patch
 popd
 
 pushd "${LLVM_SRC}/tools/clang/"
@@ -282,7 +282,7 @@ pushd "${LLVM_SRC}/tools/clang/"
         clang-002-add-musl-triples.patch \ 
         clang-003-ppc64-dynamic-linker-path.patch \
         clang-004-ppc64-musl-elfv2.patch
-    do patch -Np1 -i ../../../patches/llvm12-clang/${P}
+    do patch -Np1 -i ../../../patches/llvm12/${P}
     done; unset P
 popd
 
