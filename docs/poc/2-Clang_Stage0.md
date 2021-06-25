@@ -23,6 +23,7 @@
 > ```
 
 ### `1` - Linux API Headers
+> Recommended to use LTS.
 ```sh
 # Make sure there are no stale files embedded in the package.
 time { make mrproper; }
