@@ -266,7 +266,7 @@ pushd "${LLVM_SRC}/projects" && \
         libcxx-musl.patch \
         libcxx-ppc.patch \
         libcxx-ssp-nonshared.patch
-    do patch -Np1 -i ../../../patches/llvm12/${P}
+    do patch -Np1 -i ../../patches/llvm12/${P}
     done; unset P
     
     patch -Np1 -i ../../patches/llvm12/libunwind-ppc32.patch
