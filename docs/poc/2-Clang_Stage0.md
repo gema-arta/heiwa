@@ -1,4 +1,4 @@
-## `II` Clang Stage 0 Toolchains
+## `II` Stage-0 Clang Toolchains
 > **Compilation Instruction!**
 > ```sh
 > heiwa@localh3art /media/Heiwa/sources/pkgs $ tar xf target-package.tar.xz
