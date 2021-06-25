@@ -1,6 +1,6 @@
 ## `II` Stage-0 Clang Toolchains
 > **Compilation Instruction!**
-> ```sh
+> ```bash
 > heiwa@localh3art /media/Heiwa/sources/pkgs $ tar xf target-package.tar.xz
 > heiwa@localh3art /media/Heiwa/sources/pkgs $ tar xzf target-package.tar.gz
 > heiwa@localh3art /media/Heiwa/sources/pkgs $ pushd target-package
@@ -17,14 +17,14 @@
 > 3. Using GNU's `bison` as `yacc` replacements (symlinked).
 > 4. Using `flex` as `lex` alternative lexical analyzers (symlinked).
 > 
-> ```sh
+> ```bash
 > file $(command -v {sh,awk,yacc,lex})
 > ```
 
 ### `1` - Linux API Headers
 > #### Xanmod-CacULE, `5.10.x` or newer
 > Required for runtime C library (musl) to use Linux API.
-```sh
+```bash
 # Make sure there are no stale files embedded in the package.
 time { make mrproper; }
 
@@ -49,7 +49,7 @@ cp -rv usr/include "/clang0-tools/${HEIWA_TARGET}/."
 ### `2` - Binutils
 > #### `2.36.1` or newer
 > Required to build GCC.
-```sh
+```bash
 # Create a dedicated directory and configure source.
 [[ -n "$HEIWA_TARGET" ]] && mkdir -v build && cd build && \
 ../configure \
@@ -72,8 +72,8 @@ time { make install; }
 
 ### `3` -  GCC (static)
 > #### `10.3.1_git20210424` (from Alpine Linux)
-> Required to compile required libraries to bootstrap clang.
-```sh
+> Required to compile required libraries to build clang.
+```bash
 # GCC requires the GMP, MPFR, and MPC packages to either be present on the host or to be present in source form within the gcc source tree.
 tar xf ../gmp-6.2.1.tar.xz  && mv -v gmp-6.2.1 gmp
 tar xf ../mpfr-4.1.0.tar.xz && mv -v mpfr-4.1.0 mpfr
@@ -106,7 +106,7 @@ time { make install-gcc install-target-libgcc; }
 ### `4` - musl
 > #### `1.2.2` or newer
 > Required for most programs or libraries.
-```sh
+```bash
 # Configure source.
 [[ -n "$HEIWA_TARGET" ]] && ./configure \
     CROSS_COMPILE="${HEIWA_TARGET}-"    \
@@ -140,10 +140,10 @@ cat > /clang0-tools/etc/ld-musl-x86_64.path << "EOF"
 EOF
 ```
 
-### `4` -  GCC (final)
+### `5` -  GCC (final)
 > #### `10.3.1_git20210424` (from Alpine Linux)
-> Required to compile required libraries to bootstrap clang.
-```sh
+> Required to compile required libraries to build clang.
+```bash
 # GCC requires the GMP, MPFR, and MPC packages to either be present on the host or to be present in source form within the gcc source tree.
 tar xf ../gmp-6.2.1.tar.xz  && mv -v gmp-6.2.1 gmp
 tar xf ../mpfr-4.1.0.tar.xz && mv -v mpfr-4.1.0 mpfr
@@ -210,4 +210,24 @@ readelf -l a.out | grep Requesting
 
 # The output should be:
 #       [Requesting program interpreter: /clang0-tools/lib/ld-musl-x86_64.so.1]
+```
+
+### `6` - libexecinfo
+> #### `1.1` or newer
+> Required to build clang.
+```bash
+# Apply patches (from Alpine Linux).
+patch -Np1 -i ../../patches/libexecinfo/10-execinfo.patch
+patch -Np1 -i ../../patches/libexecinfo/20-define-gnu-source.patch
+patch -Np1 -i ../../patches/libexecinfo/30-linux-makefile.patch
+
+# Build.
+time {
+    make CC="${HEIWA_TARGET}-gcc" AR="${HEIWA_TARGET}-ar" CFLAGS="$COMMON_FLAGS -fno-omit-frame-pointer"
+}
+
+# Install.
+install -vm755 -t /clang0-tools/include/ execinfo.h stacktraverse.h
+install -vm755 -t /clang0-tools/lib/ libexecinfo.a libexecinfo.so.1
+ln -sv /clang0-tools/lib/libexecinfo.so.1 /clang0-tools/lib/libexecinfo.so
 ```
