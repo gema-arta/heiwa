@@ -234,7 +234,7 @@ ln -sv /clang0-tools/lib/libexecinfo.so.1 /clang0-tools/lib/libexecinfo.so
 
 ### `7` -  Clang/LLVM
 > #### `12.0.0`
-> Required for bootstraping Clang/LLVM toolchains without depends on `libgcc_s.so*` later.
+> Required to bootstrap Clang/LLVM toolchains without depends on `libgcc_s.so*` later.
 ```sh
 # Rename the llvm source directory to ${LLVM_SRC}.
 popd; mv -v llvm-12.0.0.src "$LLVM_SRC" && pushd "$LLVM_SRC"
