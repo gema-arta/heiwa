@@ -209,7 +209,7 @@ echo "int main(){}" > dummy.c
 readelf -l a.out | grep Requesting
 
 # | The output should be:
-# |--------------------
+# |-----------------------
 # |      [Requesting program interpreter: /clang0-tools/lib/ld-musl-x86_64.so.1]
 ```
 
