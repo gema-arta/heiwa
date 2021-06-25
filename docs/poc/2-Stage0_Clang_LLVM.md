@@ -213,7 +213,26 @@ readelf -l a.out | grep Requesting
 # |      [Requesting program interpreter: /clang0-tools/lib/ld-musl-x86_64.so.1]
 ```
 
-### `6` - libexecinfo
+### `6` - Toybox's file
+> #### `0.8.5`
+> Optional?
+```sh
+# Copy toybox's .config file.
+cp -v ../../files/toybox-0.8.5/.config_file_no_libz_no_ssl .config
+
+# Build.
+time {
+    [[ -n "$HEIWA_TARGET" ]] && make CC="${HEIWA_TARGET}-gcc" \
+    CXX="${HEIWA_TARGET}-g++" AR="${HEIWA_TARGET}-ar"         \
+    AS="${HEIWA_TARGET}-as" RANLIB="${HEIWA_TARGET}-ranlib"   \
+    LD="${HEIWA_TARGET}-ld" STRIP="${HEIWA_TARGET}-strip"
+}
+
+# Install.
+time { make PREFIX=/clang0-tools install; }
+```
+
+### `7` - libexecinfo
 > #### `1.1` or newer
 > Required to build Stage-0 Clang/LLVM.
 ```bash
@@ -233,7 +252,7 @@ install -vm755 -t /clang0-tools/lib/ libexecinfo.a libexecinfo.so.1
 ln -sv /clang0-tools/lib/libexecinfo.so.1 /clang0-tools/lib/libexecinfo.so
 ```
 
-### `7` -  Clang/LLVM
+### `8` -  Clang/LLVM
 > #### `12.0.0`
 > Required to bootstrap Stage-1 Clang/LLVM toolchains without depends on `libgcc_s.so*` later.
 ```sh
