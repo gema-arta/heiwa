@@ -89,6 +89,6 @@ EOF
 source ~/.bashrc
 ```
 
-<br>
+<h2></h2>
 
 Continue to [Stage-0 Clang/LLVM (ft. GNU) Cross-Compile Toolchains](./2-Stage0_Clang_LLVM.md).
