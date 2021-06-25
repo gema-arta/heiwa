@@ -69,3 +69,35 @@ time { make configure-host && make; }
 # Install.
 time { make install; }
 ```
+
+### `3` -  GCC (static)
+> #### `10.3.1_git20210424` (from Alpine Linux)
+> Required to compile required libraries to bootstrap clang.
+```sh
+# GCC requires the GMP, MPFR, and MPC packages to either be present on the host or to be present in source form within the gcc source tree.
+tar xf ../gmp-6.2.1.tar.xz  && mv -v gmp-6.2.1 gmp
+tar xf ../mpfr-4.1.0.tar.xz && mv -v mpfr-4.1.0 mpfr
+tar xzf ../mpc-1.2.1.tar.gz && mv -v mpc-1.2.1 mpc
+
+# Create a dedicated directory and configure source.
+[[ -n "$HEIWA_HOST" && "$HEIWA_TARGET" && "$HEIWA_CPU" ]] && \
+CFLAGS="-g0 -O0" CXXFLAGS="-g0 -O0" ../configure     \
+    --prefix=/clang0-tools     --build=${HEIWA_HOST} \
+    --host=${HEIWA_HOST}    --target=${HEIWA_TARGET} \
+    --with-sysroot=/clang0-tools/${HEIWA_TARGET}     \
+    --disable-nls                      --with-newlib \
+    --disable-libitm                --disable-libvtv \
+    --disable-libssp                --disable-shared \
+    --disable-libgomp              --without-headers \
+    --disable-threads             --disable-multilib \
+    --disable-libatomic          --disable-libstdcxx \
+    --enable-languages=c       --disable-libquadmath \
+    --disable-libsanitizer  --with-arch=${HEIWA_CPU} \
+    --disable-decimal-float --enable-clocale=generic
+
+# Build only the minimum.
+time { make all-gcc all-target-libgcc; }
+
+# Install.
+time { make install-gcc install-target-libgcc; }
+```
