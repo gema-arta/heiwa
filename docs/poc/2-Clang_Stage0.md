@@ -253,7 +253,7 @@ pushd "${LLVM_SRC}/tools/" && \
 popd
 
 # Apply patches (from Void Linux).
-pushd "${LLVM_SRC}/projects" && \
+pushd "${LLVM_SRC}/projects/" && \
     for P in \
         compiler-rt-aarch64-ucontext.patch \
         compiler-rt-sanitizer-ppc64-musl.patch \
@@ -270,7 +270,9 @@ pushd "${LLVM_SRC}/projects" && \
     done; unset P
     
     patch -Np1 -i ../../patches/llvm12/libunwind-ppc32.patch
+popd
 
+pushd "${LLVM_SRC}/tools/" && \
     for P in \
         clang-001-fix-unwind-chain-inclusion.patch \
         clang-002-add-musl-triples.patch \
