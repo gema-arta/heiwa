@@ -396,6 +396,6 @@ grep  "lib.*/crt[1in].*succeeded" dummy.log | cut -d ' ' -f 4-5 | cut -b 5-
 rm -v dummy.log dummy.c a.out
 ```
 
-<br>
+<h2></h2>
 
 Continue to [Stage-1 Clang/LLVM Toolchains](./3-Stage1_Clang_LLVM.md).
