@@ -213,7 +213,7 @@ readelf -l a.out | grep Requesting
 # |      [Requesting program interpreter: /clang0-tools/lib/ld-musl-x86_64.so.1]
 ```
 
-### `6` - Toybox's file
+### `6` - Toybox's File
 > #### `0.8.5`
 > Optional?
 ```sh
