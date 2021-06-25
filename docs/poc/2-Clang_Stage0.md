@@ -81,7 +81,8 @@ tar xzf ../mpc-1.2.1.tar.gz && mv -v mpc-1.2.1 mpc
 
 # Create a dedicated directory and configure source.
 [[ -n "$HEIWA_HOST" && "$HEIWA_TARGET" && "$HEIWA_CPU" ]] && \
-CFLAGS="-g0 -O0" CXXFLAGS="-g0 -O0" ../configure     \
+mkdir -v build && cd build && \
+CFLAGS="-g0 -O0" CXXFLAGS="-g0 -O0" && ../configure  \
     --prefix=/clang0-tools     --build=${HEIWA_HOST} \
     --host=${HEIWA_HOST}    --target=${HEIWA_TARGET} \
     --with-sysroot=/clang0-tools/${HEIWA_TARGET}     \
