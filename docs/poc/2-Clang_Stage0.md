@@ -24,6 +24,7 @@
 
 ### `1` - Linux API Headers
 > #### Xanmod-CacULE, `5.10.x` or newer
+> Required for libc (musl) to use Linux API.
 ```sh
 # Make sure there are no stale files embedded in the package.
 time { make mrproper; }
@@ -47,5 +48,24 @@ cp -rv usr/include /clang0-tools/${HEIWA_TARGET}/.
 
 ### `2` - Binutils
 > #### `2.36.1` or newer
+> Required to build GCC.
 ```sh
+# Create dedicated directory and configure source.
+mkdir -v build && cd build && \
+../configure \
+    --prefix=/clang0-tools                       \
+    --target=${HEIWA_TARGET}                     \
+    --with-sysroot=/clang0-tools/${HEIWA_TARGET} \
+    --disable-nls                                \
+    --disable-multilib                           \
+    --disable-werror                             \
+    --enable-deterministic-archives              \
+    --disable-compressed-debug-sections
+
+# Checks the host's environment and makes sure all the necessary tools are available to compile Binutils.
+# Then build.
+time { make configure-host && make; }
+
+# Install.
+time { make install; }
 ```
