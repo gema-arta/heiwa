@@ -18,10 +18,10 @@ mount -vo noatime,discard /dev/sdaX "$HEIWA"
 # Create directories to build clang with GCC libraries and the final toolchain without GCC libraries.
 # As root, Link them to host's root directory.
 if [[ -n "$HEIWA" ]]; then
-    mkdir -pv "$HEIWA"/{clang0,llvm}-tools
-    ln -sv "$HEIWA/clang0-tools" /
-    ln -sv "$HEIWA/llvm-tools" /
-    mkdir -pv "$HEIWA"/sources/{patches,files,pkgs}
+    mkdir -pv "${HEIWA}/"{clang0,llvm}-tools
+    ln -sv "${HEIWA}/clang0-tools" /
+    ln -sv "${HEIWA}/llvm-tools" /
+    mkdir -pv "${HEIWA}/sources/"{patches,files,pkgs}
 fi
 ```
 
