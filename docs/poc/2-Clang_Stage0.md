@@ -14,7 +14,7 @@
 > **Build Notes!**
 > 1. Using GNU's `bash` as current shell and symlink it to `sh`.
 > 2. Using GNU's `gawk` as `awk` implementation (symlinked).
-> 3. Using GNU's `bison` as `yacc` replacements (symlinked).
+> 3. Using GNU's `bison` as `yacc` replacements (wrapped).
 > 4. Using `flex` as `lex` alternative lexical analyzers (symlinked).
 > 
 > ```bash
