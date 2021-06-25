@@ -237,7 +237,7 @@ ln -sv /clang0-tools/lib/libexecinfo.so.1 /clang0-tools/lib/libexecinfo.so
 > Required for bootstraping clang/llvm toolchain without depends on libgcc_s.so*.
 ```sh
 # Rename the llvm source directory to ${LLVM_SRC}.
-popd; mv -v llvm-12.0.0-src llvm
+popd; mv -v llvm-12.0.0-src llvm && pushd "$LLVM_SRC"
 
 # Decompress clang, lld, compiler-rt, libcxx, libcxxabi, and libunwind to correct directories.
 pushd "${LLVM_SRC}/projects/" && \
@@ -246,6 +246,7 @@ pushd "${LLVM_SRC}/projects/" && \
     tar xf ../../pkgs/libcxxabi-12.0.0.src.tar.xz   && mv -v libcxxabi-12.0.0.src libcxxabi
     tar xf ../../pkgs/libunwind-12.0.0.src.tar.xz   && mv -v libunwind-12.0.0.src libunwind
 popd
+
 pushd "${LLVM_SRC}/tools/" && \
     tar xf ../../pkgs/clang-12.0.0.src.tar.xz && mv -v clang-12.0.0.src clang
     tar xf ../../pkgs/lld-12.0.0.src.tar.xz   && mv -v lld-12.0.0.src lld
@@ -261,7 +262,8 @@ pushd "${LLVM_SRC}/projects/compiler-rt/" && \
     do patch -Np1 -i ../../../patches/llvm12-compiler-rt/${P}
     done; unset P
 popd
-pushd "${LLVM_SRC}/projects/libcxx" && \
+
+pushd "${LLVM_SRC}/projects/libcxx/" && \
     for P in \
         libcxx-musl.patch \
         libcxx-ppc.patch \
@@ -269,10 +271,12 @@ pushd "${LLVM_SRC}/projects/libcxx" && \
     do patch -Np1 -i ../../../patches/llvm12-libcxx/${P}
     done; unset P
 popd
-pushd "${LLVM_SRC}/projects/libunwind" && \
+
+pushd "${LLVM_SRC}/projects/libunwind/" && \
     patch -Np1 -i ../../../patches/llvm12-libunwind/libunwind-ppc32.patch
 popd
-pushd "${LLVM_SRC}/tools/clang"
+
+pushd "${LLVM_SRC}/tools/clang/"
     for P in \
         clang-001-fix-unwind-chain-inclusion.patch \
         clang-002-add-musl-triples.patch \ 
@@ -280,14 +284,122 @@ pushd "${LLVM_SRC}/tools/clang"
         clang-004-ppc64-musl-elfv2.patch
     do patch -Np1 -i ../../../patches/llvm12-clang/${P}
     done; unset P
-pushd "$LLVM_SRC" && \
-    for P in \
-        llvm-001-musl.patch \
-        llvm-002-musl-ppc64-elfv2.patch \
-        llvm-003-ppc-secureplt.patch \
-        llvm-004-override-opt.patch \
-        llvm-005-ppc-bigpic.patch \
-        llvm-006-aarch64-mf_exec.patch
-    do patch  -Np1 -i ../patches/llvm12/${P}
-    done; unset P
+popd
+
+for P in \
+    llvm-001-musl.patch \
+    llvm-002-musl-ppc64-elfv2.patch \
+    llvm-003-ppc-secureplt.patch \
+    llvm-004-override-opt.patch \
+    llvm-005-ppc-bigpic.patch \
+    llvm-006-aarch64-mf_exec.patch
+do patch  -Np1 -i ../patches/llvm12/${P}
+done; unset P
+
+# Disable sanitizers for musl, fixing "early build failure".
+sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
+projects/compiler-rt/cmake/config-ix.cmake
+
+# Fix missing header for lld, (https://bugs.llvm.org/show_bug.cgi?id=49228).
+mkdir -pv tools/lld/include/mach-o
+cp -v projects/libunwind/include/mach-o/compact_unwind_encoding.h tools/lld/include/mach-o
+
+# Set flags to reduce debugging symbols.
+export CFLAGS="-g -g1"
+export CXXFLAGS="-g -g1"
+
+# Update host/target triple detection.
+cp -v ../../files/config.guess-musl cmake/config.guess
+
+# Configure source.
+cmake -B build  \
+    -DCMAKE_BUILD_TYPE=Release                                                              \
+    -DCMAKE_INSTALL_PREFIX="/clang0-tools"                                                  \
+    -DCMAKE_C_COMPILER="${HEIWA_TARGET}-gcc"                                                \
+    -DCMAKE_CXX_COMPILER="${HEIWA_TARGET}-g++"                                              \ 
+    -DLLVM_BUILD_TESTS=OFF                                                                  \
+    -DLLVM_ENABLE_LIBEDIT=OFF                                                               \
+    -DLLVM_ENABLE_LIBXML2=OFF                                                               \
+    -DLLVM_INCLUDE_GO_TESTS=OFF                                                             \
+    -DLLVM_INCLUDE_TESTS=OFF                                                                \
+    -DLLVM_INCLUDE_DOCS=OFF                                                                 \
+    -DLLVM_INCLUDE_EXAMPLES=OFF                                                             \
+    -DLLVM_INCLUDE_BENCHMARKS=OFF                                                           \
+    -DLLVM_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"                                     \
+    -DLLVM_HOST_TRIPLE="x86_64-pc-linux-musl"                                               \
+    -DLLVM_TARGET_ARCH="X86"                                                                \
+    -DLLVM_TARGETS_TO_BUILD="X86"                                                           \
+    -DCOMPILER_RT_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"                              \
+    -DCOMPILER_RT_BUILD_SANITIZERS=OFF                                                      \
+    -DCOMPILER_RT_BUILD_XRAY=OFF                                                            \
+    -DCOMPILER_RT_BUILD_PROFILE=OFF                                                         \
+    -DCOMPILER_RT_BUILD_LIBFUZZER=OFF                                                       \
+    -DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON                                                   \
+    -DCLANG_DEFAULT_CXX_STDLIB=libc++                                                       \ 
+    -DCLANG_DEFAULT_UNWINDLIB=libunwind                                                     \
+    -DCLANG_DEFAULT_RTLIB=compiler-rt                                                       \
+    -DICONV_LIBRARY_PATH="/clang0-tools/lib/libc.so"                                        \
+    -DDEFAULT_SYSROOT="/clang0-tools"                                                       \
+    -DLIBCXX_HAS_MUSL_LIBC=ON                                                               \
+    -DLLVM_ENABLE_LIBCXX=ON                                                                 \
+    -DCLANG_DEFAULT_LINKER="/clang0-tools/bin/ld.lld"                                       \
+    -DBacktrace_HEADER="/clang0-tools/include/execinfo.h"                                   \
+    -DCMAKE_EXE_LINKER_FLAGS="-Wl,-dynamic-linker /clang0-tools/lib/ld-musl-x86_64.so.1"    \
+    -DCMAKE_SHARED_LINKER_FLAGS="-Wl,-dynamic-linker /clang0-tools/lib/ld-musl-x86_64.so.1" \
+    -DBacktrace_LIBRARY="/clang0-tools/lib/libexecinfo.so.1"
+
+# Build.
+make -C build
+
+# Install.
+time {
+    pushd build\ && \
+        cmake -DCMAKE_INSTALL_PREFIX="/clang0-tools" -P cmake_install.cmake && \
+    popd && rm -rf build
+}
+
+# Set lld as default toolchain linker.
+ln -sv lld /clang0-tools/bin/ld
+
+# Since Clang/LLVM still have GCC dependencies, add the GCC libraries in the search paths of the toolchain's dynamic linker.
+echo "/clang0-tools/${HEIWA_TARGET}/lib" >> /clang0-tools/etc/ld-musl-x86_64.path
+
+# Configure Clang to build binaries with /llvm-tools/lib/ld-musl-x86_64.so.1 instead of /lib/ld-musl-x86_64.so.1.
+ln -sv clang-12 "/clang0-tools/bin/${HEIWA_TARGET}-clang"
+ln -sv clang-12 "/clang0-tools/bin/${HEIWA_TARGET}-clang++"
+cat > "/clang0-tools/bin/${HEIWA_TARGET}.cfg" << "EOF"
+-Wl,-dynamic-linker /llvm-tools/lib/ld-musl-x86_64.so.1
+EOF
+
+# Configure cross-GCC of clang0-tools to match the same output as Clang.
+export SPECFILE="$(dirname $(${HEIWA_TARGET}-gcc -print-libgcc-file-name))/specs"
+"${HEIWA_TARGET}-gcc" -dumpspecs > specs 
+sed -i 's|/lib/ld-musl-x86_64.so.1|/llvm-tools\/lib\/ld-musl-x86_64.so.1|g' specs
+
+# Check specs file.
+grep --color=auto "/llvm-tools/lib/ld-musl-x86_64.so.1" specs
+
+# Install specs file.
+mv -v specs "$SPECFILE" && unset SPECFILE
+
+# Setup new PATH.
+export PATH="/clang0-tools/bin:/clang0-tools/usr/bin:/llvm-tools/bin:/llvm-tools/usr/bin:/bin:/usr/bin"
+
+# Quick test.
+"${HEIWA_TARGET}-gcc" dummy.c -v -Wl,--verbose &> dummy.log
+readelf -l a.out | grep ": /llvm-tools"
+
+# The output should be:
+#       [Requesting program interpreter: /llvm-tools/lib/ld-musl-x86_64.so.1]
+
+# Check if the correct start files are used.
+grep  "lib.*/crt[1in].*succeeded" dummy.log | cut -d ' ' -f 4-5 | cut -b 5-
+
+# The output should be:
+# /heiwa/clang0-tools/bin/../../clang0-tools/lib/../lib/crt1.o succeeded
+# /heiwa/clang0-tools/bin/../../clang0-tools/lib/../lib/crti.o succeeded
+# /heiwa/clang0-tools/bin/../../clang0-tools/lib/../lib/crtn.o succeeded
+
+# Clean up after testing.
+rm -v dummy.log dummy.c a.out
 ```
