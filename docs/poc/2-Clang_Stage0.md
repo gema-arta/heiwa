@@ -23,7 +23,7 @@
 > ```
 
 ### `1` - Linux API Headers
-> #### Xanmod-CacULE
+> #### Xanmod-CacULE, up to `5.10.x`
 ```sh
 # Make sure there are no stale files embedded in the package.
 time { make mrproper; }
@@ -43,4 +43,9 @@ rm -v usr/include/Makefile
 [[ -n $HEIWA_TARGET ]] && \
 mkdir -pv /clang0-tools/${HEIWA_TARGET} && \
 cp -rv usr/include /clang0-tools/${HEIWA_TARGET}/.
+```
+
+### `2` - Binutils
+> #### Up to `2.36.1`
+```sh
 ```
