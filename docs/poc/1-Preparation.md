@@ -19,8 +19,8 @@ mount -vo noatime,discard /dev/sdaX "$HEIWA"
 # As root, Link them to host's root directory.
 if [[ -n "$HEIWA" ]]; then
     mkdir -pv "$HEIWA"/{clang0,llvm}-tools
-    ln -sv "$HEIWA"/clang0-tools /
-    ln -sv "$HEIWA"/llvm-tools /
+    ln -sv "$HEIWA/clang0-tools" /
+    ln -sv "$HEIWA/llvm-tools" /
     mkdir -pv "$HEIWA"/sources/{patches,files,pkgs}
 fi
 ```
