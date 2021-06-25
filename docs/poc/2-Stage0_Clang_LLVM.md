@@ -215,7 +215,7 @@ readelf -l a.out | grep Requesting
 
 ### `6` - Toybox's File
 > #### `0.8.5`
-> Optional?
+> Optional? Maybe you need.
 ```sh
 # Copy toybox's .config file.
 cp -v ../../files/toybox-0.8.5/.config_file_no_libz_no_ssl .config
