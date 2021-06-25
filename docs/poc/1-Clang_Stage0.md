@@ -15,7 +15,7 @@ mount -vo noatime,discard /dev/sdaX ${HEIWA}
 
 ### `2` - Creating packages and toolchain directory
 ```sh
-# Create directories to build clang with GCC libraries (cgnutools) and the final toolchain without GCC libraries.
+# Create directories to build clang with GCC libraries and the final toolchain without GCC libraries.
 # As root, Link them to host's root directory.
 if [ ! -z $HEIWA ]; then
     mkdir -pv ${HEIWA}/{clang0,llvm}-tools
