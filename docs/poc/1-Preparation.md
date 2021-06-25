@@ -87,3 +87,5 @@ export TARGET_TRUPLE="${TARGET_TRUPLE}"
 EOF
 source ~/.bashrc
 ```sh
+
+Continue to [2-Clang_stage0.md](./2-Clang_stage0.md).
