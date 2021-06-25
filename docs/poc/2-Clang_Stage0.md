@@ -273,7 +273,7 @@ pushd "${LLVM_SRC}/projects" && \
 
     for P in \
         clang-001-fix-unwind-chain-inclusion.patch \
-        clang-002-add-musl-triples.patch \ 
+        clang-002-add-musl-triples.patch \
         clang-003-ppc64-dynamic-linker-path.patch \
         clang-004-ppc64-musl-elfv2.patch
     do patch -Np1 -i ../../patches/llvm12/${P}
