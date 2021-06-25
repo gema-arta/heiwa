@@ -1,4 +1,4 @@
-## `II` Stage-0 Clang/LLVM Cross-Compile Toolchains
+## `II` Stage-0 Clang/LLVM (ft. GNU) Cross-Compile Toolchains
 > **Compilation Instruction!**
 > ```bash
 > heiwa@localh3art /media/Heiwa/sources/pkgs $ tar xf target-package.tar.xz
