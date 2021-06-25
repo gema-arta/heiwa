@@ -20,7 +20,7 @@ mount -vo noatime,discard /dev/sdaX "$HEIWA"
 if [[ -n "$HEIWA" ]]; then
     mkdir -pv "${HEIWA}/"{clang0,llvm}-tools
     ln -sv "${HEIWA}/clang0-tools" /
-    ln -sv "${HEIWA}/llvm-tools" /
+    ln -sv "${HEIWA}/clang1-tools" /
     mkdir -pv "${HEIWA}/sources/"{patches,files,pkgs}
 fi
 ```
@@ -62,7 +62,7 @@ set +h
 umask 022
 HEIWA="${HEIWA}"
 LC_ALL="POSIX"
-PATH="/clang0-tools/bin:/clang0-tools/usr/bin:/llvm-tools/bin:/llvm-tools/usr/bin:/bin:/usr/bin"
+PATH="/clang0-tools/bin:/clang0-tools/usr/bin:/clang1-tools/bin:/clang1-tools/usr/bin:/bin:/usr/bin"
 export HEIWA LC_ALL PATH
 # CFLAGS and CXXFLAGS must not be set during the building of cross-tools.
 unset CFLAGS CXXFLAGS
