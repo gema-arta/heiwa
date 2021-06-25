@@ -72,7 +72,7 @@ time { make install; }
 
 ### `3` -  GCC (static)
 > #### `10.3.1_git20210424` (from Alpine Linux)
-> Required to compile required libraries to build Clang/LLVM.
+> Required to compile required libraries to build Stage-0 Clang/LLVM.
 ```bash
 # GCC requires the GMP, MPFR, and MPC packages to either be present on the host or to be present in source form within the gcc source tree.
 tar xf ../gmp-6.2.1.tar.xz  && mv -v gmp-6.2.1 gmp
@@ -105,7 +105,7 @@ time { make install-gcc install-target-libgcc; }
 
 ### `4` - musl
 > #### `1.2.2` or newer
-> Required for most programs or libraries.
+> Required for every programs and libraries.
 ```bash
 # Configure source.
 [[ -n "$HEIWA_TARGET" ]] && ./configure \
@@ -142,7 +142,7 @@ EOF
 
 ### `5` -  GCC (final)
 > #### `10.3.1_git20210424` (from Alpine Linux)
-> Required to compile required libraries to build Clang/LLVM.
+> Required to compile required libraries to build Stage-0 Clang/LLVM.
 ```bash
 # GCC requires the GMP, MPFR, and MPC packages to either be present on the host or to be present in source form within the gcc source tree.
 tar xf ../gmp-6.2.1.tar.xz  && mv -v gmp-6.2.1 gmp
@@ -234,7 +234,7 @@ ln -sv /clang0-tools/lib/libexecinfo.so.1 /clang0-tools/lib/libexecinfo.so
 
 ### `7` -  Clang/LLVM
 > #### `12.0.0`
-> Required to bootstrap Clang/LLVM toolchains without depends on `libgcc_s.so*` later.
+> Required to bootstrap Stage-1 Clang/LLVM toolchains without depends on `libgcc_s.so*` later.
 ```sh
 # Rename the llvm source directory to ${LLVM_SRC}.
 popd; mv -v llvm-12.0.0.src "$LLVM_SRC" && pushd "$LLVM_SRC"
