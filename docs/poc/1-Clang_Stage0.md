@@ -57,7 +57,6 @@ CXXFLAGS="${COMMON_FLAGS}" /bin/bash
 EOF
 
 export HEIWA="/media/Heiwa"
-
 cat > ~/.bashrc << EOF
 set +h
 umask 022
@@ -68,7 +67,22 @@ export HEIWA LC_ALL PATH
 # CFLAGS and CXXFLAGS must not be set during the building of cross-tools.
 unset CFLAGS CXXFLAGS
 # Build PATH.
-export LLVM_SRC="${HEIWA}/sources/llvm"
+export LLVM_SRC="\${HEIWA}/sources/llvm"
 EOF
-
 source ~/.bash_profile
+
+export HEIWA_TARGET="x86_64-heiwa-linux-musl"
+export TARGET_TRUPLE="x86_64-pc-linux-musl"
+export HEIWA_ARCH="x86"
+export HEIWA_CPU="x86-64"
+export HEIWA_HOST="$(echo "$MACHTYPE" | \
+    sed "s/$(echo "$MACHTYPE" | cut -d- -f2)/cross/")"
+
+cat >> ~/.bashrc << EOF
+export HEIWA_HOST="${HEIWA_HOST}"
+export HEIWA_TARGET="${HEIWA_TARGET}"
+export HEIWA_ARCH="${HEIWA_ARCH}"
+export HEIWA_CPU="${HEIWA_CPU}"
+export TARGET_TRUPLE="${TARGET_TRUPLE}"
+EOF
+source ~/.bashrc
