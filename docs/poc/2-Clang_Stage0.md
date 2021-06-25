@@ -367,7 +367,7 @@ cat > "/clang0-tools/bin/${HEIWA_TARGET}.cfg" << "EOF"
 -Wl,-dynamic-linker /llvm-tools/lib/ld-musl-x86_64.so.1
 EOF
 
-# Configure cross-GCC of clang0-tools to match the same output as Clang.
+# Configure cross GCC of clang0-tools to match the same output as Clang.
 export SPECFILE="$(dirname $(${HEIWA_TARGET}-gcc -print-libgcc-file-name))/specs"
 "${HEIWA_TARGET}-gcc" -dumpspecs > specs 
 sed -i 's|/lib/ld-musl-x86_64.so.1|/llvm-tools\/lib\/ld-musl-x86_64.so.1|g' specs
