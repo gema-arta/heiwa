@@ -7,21 +7,21 @@ mkfs.ext4 -m 0 -L "Heiwa_Linux" /dev/sdaX
 
 # Export mountpoint variable and create the directory if not exists.
 export HEIWA="/media/Heiwa"
-mkdir -pv ${HEIWA}
+mkdir -pv "$HEIWA"
 
 # Mount the target volume/partition.
-mount -vo noatime,discard /dev/sdaX ${HEIWA}
+mount -vo noatime,discard /dev/sdaX "$HEIWA"
 ```
 
 ### `2` - Creating packages and toolchain directory
 ```sh
 # Create directories to build clang with GCC libraries and the final toolchain without GCC libraries.
 # As root, Link them to host's root directory.
-if [[ -n $HEIWA ]]; then
-    mkdir -pv ${HEIWA}/{clang0,llvm}-tools
-    ln -sv ${HEIWA}/clang0-tools /
-    ln -sv ${HEIWA}/llvm-tools /
-    mkdir -pv ${HEIWA}/sources/{patches,files,pkgs}
+if [[ -n "$HEIWA" ]]; then
+    mkdir -pv "$HEIWA"/{clang0,llvm}-tools
+    ln -sv "$HEIWA"/clang0-tools /
+    ln -sv "$HEIWA"/llvm-tools /
+    mkdir -pv "$HEIWA"/sources/{patches,files,pkgs}
 fi
 ```
 
@@ -34,11 +34,11 @@ passwd heiwa
 
 # Setting up directory permission.
 # Warning! This is danger, so check its variables before chown.
-# echo {${HEIWA},}/{clang0,llvm}-tools
-if [[ -n $HEIWA ]]; then
-    chmod -vR a+wt ${HEIWA}/sources
-    chown -Rv heiwa ${HEIWA}/sources
-    chown -Rv heiwa {${HEIWA},}/{clang0,llvm}-tools
+# echo {"$HEIWA",}/{clang0,llvm}-tools
+if [[ -n "$HEIWA" ]]; then
+    chmod -vR a+wt "$HEIWA"/sources
+    chown -Rv heiwa "$HEIWA"/sources
+    chown -Rv heiwa {"$HEIWA",}/{clang0,llvm}-tools
 fi
 ```
 > #### * End of as root!
