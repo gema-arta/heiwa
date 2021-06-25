@@ -237,7 +237,7 @@ ln -sv /clang0-tools/lib/libexecinfo.so.1 /clang0-tools/lib/libexecinfo.so
 > Required for bootstraping Clang/LLVM toolchains without depends on libgcc_s.so*.
 ```sh
 # Rename the llvm source directory to ${LLVM_SRC}.
-popd; mv -v llvm-12.0.0.src "${HEIWA}/sources/llvm && pushd "$LLVM_SRC"
+popd; mv -v llvm-12.0.0.src "${HEIWA}/sources/llvm" && pushd "$LLVM_SRC"
 
 # Decompress clang, lld, compiler-rt, libcxx, libcxxabi, and libunwind to correct directories.
 pushd "${LLVM_SRC}/projects/" && \
