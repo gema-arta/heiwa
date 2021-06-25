@@ -214,7 +214,7 @@ readelf -l a.out | grep Requesting
 
 ### `6` - libexecinfo
 > #### `1.1` or newer
-> Required to build Clang/LLVM.
+> Required to build Stage-0 Clang/LLVM.
 ```bash
 # Apply patches (from Alpine Linux).
 patch -Np1 -i ../../patches/libexecinfo-1.1/10-execinfo.patch
