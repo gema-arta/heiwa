@@ -86,3 +86,4 @@ export HEIWA_CPU="${HEIWA_CPU}"
 export TARGET_TRUPLE="${TARGET_TRUPLE}"
 EOF
 source ~/.bashrc
+```sh
