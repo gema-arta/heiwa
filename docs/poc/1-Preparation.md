@@ -36,8 +36,8 @@ passwd heiwa
 # Warning! This is danger, so check its variables before chown.
 # echo {"$HEIWA",}/{clang0,llvm}-tools
 if [[ -n "$HEIWA" ]]; then
-    chmod -vR a+wt "$HEIWA"/sources
-    chown -Rv heiwa "$HEIWA"/sources
+    chmod -vR a+wt "${HEIWA}/sources"
+    chown -Rv heiwa "${HEIWA}/sources"
     chown -Rv heiwa {"$HEIWA",}/{clang0,llvm}-tools
 fi
 ```
