@@ -16,6 +16,8 @@
 > 2. Using GNU's `gawk` as `awk` implementation (symlinked).
 > 3. Using GNU's `bison` as `yacc` replacements (symlinked).
 > 4. Using `flex` as `lex` alternative lexical analyzers (symlinked).
+> 
+> Verify:
 > ```sh
 > file $(command -v {sh,awk,yacc,lex})
 > ```
