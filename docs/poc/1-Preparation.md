@@ -62,7 +62,7 @@ set +h
 umask 022
 HEIWA="${HEIWA}"
 LC_ALL="POSIX"
-PATH="/cross-tools/bin:/cross-tools/usr/bin:/clang0-tools/bin:/clang0-tools/usr/bin:/llvm-tools/bin:/llvm-tools/usr/bin:/bin:/usr/bin"
+PATH="/clang0-tools/bin:/clang0-tools/usr/bin:/llvm-tools/bin:/llvm-tools/usr/bin:/bin:/usr/bin"
 export HEIWA LC_ALL PATH
 # CFLAGS and CXXFLAGS must not be set during the building of cross-tools.
 unset CFLAGS CXXFLAGS
