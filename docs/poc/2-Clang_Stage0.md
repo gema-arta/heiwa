@@ -31,9 +31,9 @@ time { make mrproper; }
 # The recommended make target "headers_install" cannot be used, because it requires rsync, which may not be available.
 # The headers are first placed in ./usr, then copied to the needed location.
 time {
-    [[ -n $HEIWA_ARCH ]] && \
-    make ARCH=${HEIWA_ARCH} headers_check && \
-    make ARCH=${HEIWA_ARCH} headers
+    [[ -n "$HEIWA_ARCH" ]] && \
+    make ARCH="${HEIWA_ARCH}" headers_check && \
+    make ARCH="${HEIWA_ARCH}" headers
 }
 
 # Remove unnecessary files.
@@ -41,7 +41,7 @@ find usr/include -name '.*' -exec rm -rfv {} \;
 rm -fv usr/include/Makefile
 
 # Install.
-[[ -n $HEIWA_TARGET ]] && \
+[[ -n "$HEIWA_TARGET" ]] && \
 mkdir -pv /clang0-tools/${HEIWA_TARGET} && \
 cp -rv usr/include /clang0-tools/${HEIWA_TARGET}/.
 ```
@@ -51,7 +51,7 @@ cp -rv usr/include /clang0-tools/${HEIWA_TARGET}/.
 > Required to build GCC.
 ```sh
 # Create a dedicated directory and configure source.
-[[ -n $HEIWA_TARGET ]] && mkdir -v build && cd build && \
+[[ -n "$HEIWA_TARGET" ]] && mkdir -v build && cd build && \
 ../configure \
     --prefix=/clang0-tools                       \
     --target=${HEIWA_TARGET}                     \
@@ -101,4 +101,41 @@ time { make all-gcc all-target-libgcc; }
 
 # Install.
 time { make install-gcc install-target-libgcc; }
+```
+
+### `4` - musl
+> #### `1.2.2` or newer
+> Required for most programs or libraries.
+```sh
+# Configure source.
+[[ -n "$HEIWA_TARGET" ]] && ./configure \
+    CROSS_COMPILE=${HEIWA_TARGET}-    \
+    --prefix=/                        \
+    --target=${HEIWA_TARGET}
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+
+# GCC will looking for system headers in /clang0-tools/usr/include.
+# Create the directory, then symlink it.
+mkdir -v /clang0-tools/usr && \
+ln -sv ../include /clang0-tools/usr/include
+
+# Fix a wrong object symlink.
+ln -sfv libc.so /clang0-tools/lib/ld-musl-x86_64.so.1
+
+# Create a ldd symlink to use to print shared object dependencies.
+ln -sv ../lib/ld-musl-x86_64.so.1 /clang0-tools/bin/ldd
+
+# Configure PATH for dynamic linker.
+mkdir -v /clang0-tools/etc && \
+cat > /clang0-tools/etc/ld-musl-x86_64.path << "EOF"
+/clang0-tools/lib
+/clang0-tools/x86_64-heiwa-linux-musl/lib
+/usr/lib
+/lib
+EOF
 ```
