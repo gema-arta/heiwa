@@ -139,3 +139,74 @@ cat > /clang0-tools/etc/ld-musl-x86_64.path << "EOF"
 /lib
 EOF
 ```
+
+### `4` -  GCC (final)
+> #### `10.3.1_git20210424` (from Alpine Linux)
+> Required to compile required libraries to bootstrap clang.
+```sh
+# GCC requires the GMP, MPFR, and MPC packages to either be present on the host or to be present in source form within the gcc source tree.
+tar xf ../gmp-6.2.1.tar.xz  && mv -v gmp-6.2.1 gmp
+tar xf ../mpfr-4.1.0.tar.xz && mv -v mpfr-4.1.0 mpfr
+tar xzf ../mpc-1.2.1.tar.gz && mv -v mpc-1.2.1 mpc
+
+# Apply patches (from Alpine Linux).
+../../patches/gcc-10.3.1_git20210424/appatch
+
+# On x86_64 hosts, set the default directory name for 64-bit libraries to 'lib'.
+case $(uname -m) in
+    x86_64) sed -e '/m64=/s/lib64/lib/' \
+            -i.orig gcc/config/i386/t-linux64
+    ;;
+esac
+
+# Create a dedicated directory and configure source.
+[[ -n "$HEIWA_HOST" && "$HEIWA_TARGET" ]] && \
+AR=ar LDFLAGS="-Wl,-rpath,/clang0-tools/lib" \
+../configure \
+    --prefix=/clang0-tools        \
+    --build="${HEIWA_HOST}"       \
+    --host="${HEIWA_HOST}"        \
+    --target="${HEIWA_TARGET}"    \
+    --disable-multilib            \
+    --with-sysroot=/clang0-tools  \
+    --disable-nls                 \
+    --enable-shared               \
+    --enable-languages=c,c++      \
+    --enable-threads=posix        \
+    --enable-clocale=generic      \
+    --enable-libstdcxx-time       \
+    --enable-fully-dynamic-string \
+    --disable-symvers             \
+    --disable-libsanitizer        \
+    --disable-lto-plugin          \
+    --disable-libssp
+
+# Build.
+time {
+    [[ -n "$HEIWA_TARGET" ]] && \
+    make AS_FOR_TARGET="${HEIWA_TARGET}-as" LD_FOR_TARGET="${HEIWA_TARGET}-ld"
+}
+
+# Install.
+time { make install; }
+
+# Adjust GCC to produce programs and libraries that will use musl libc in /clang0-tools.
+[[ -n "$HEIWA_TARGET" ]] && \
+export SPECFILE="$(dirname $(${HEIWA_TARGET}-gcc -print-libgcc-file-name))/specs"
+${HEIWA_TARGET}-gcc -dumpspecs > specs
+sed -i 's|/lib/ld-musl-x86_64.so.1|/clang0-tools/lib/ld-musl-x86_64.so.1|g' specs
+
+# Check specs file.
+grep --color=auto "/clang0-tools/lib/ld-musl-x86_64.so.1" specs
+
+# Install specs file.
+mv -v specs "$SPECFILE" && unset SPECFILE
+
+# Quick test.
+echo "int main(){}" > dummy.c
+${HEIWA_TARGET}-gcc dummy.c
+readelf -l a.out | grep Requesting
+
+# The output should be:
+#       [Requesting program interpreter: /clang0-tools/lib/ld-musl-x86_64.so.1]
+```
