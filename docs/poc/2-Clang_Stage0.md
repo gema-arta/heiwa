@@ -32,7 +32,7 @@ time { make mrproper; }
 # The recommended make target "headers_install" cannot be used, because it requires rsync, which may not be available.
 # The headers are first placed in ./usr, then copied to the needed location.
 time {
-    [ ! -z $HEIWA_ARCH ] && \
+    [[ -n $HEIWA_ARCH ]] && \
     make ARCH=${HEIWA_ARCH} headers_check && \
     make ARCH=${HEIWA_ARCH} headers
 }
@@ -40,7 +40,7 @@ time {
 find usr/include -name '.*' -exec rm -rfv {} \;
 rm -v usr/include/Makefile
 
-[ ! -z $HEIWA_TARGET ] && \
+[[ -n $HEIWA_TARGET ]] && \
 mkdir -pv /clang0-tools/${HEIWA_TARGET} && \
 cp -rv usr/include /clang0-tools/${HEIWA_TARGET}/.
 ```
