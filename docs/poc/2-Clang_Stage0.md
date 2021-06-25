@@ -288,7 +288,7 @@ pushd "${LLVM_SRC}/../" && \
         llvm-004-override-opt.patch \
         llvm-005-ppc-bigpic.patch \
         llvm-006-aarch64-mf_exec.patch
-    do patch  -Np1 -i ../patches/llvm12/${P}
+    do patch  -Np1 -i ./patches/llvm12/${P}
     done; unset P
 popd
 
