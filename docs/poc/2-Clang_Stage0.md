@@ -51,7 +51,7 @@ cp -rv usr/include /clang0-tools/${HEIWA_TARGET}/.
 > Required to build GCC.
 ```sh
 # Create dedicated directory and configure source.
-mkdir -v build && cd build && \
+[[ -n $HEIWA_TARGET ]] && mkdir -v build && cd build && \
 ../configure \
     --prefix=/clang0-tools                       \
     --target=${HEIWA_TARGET}                     \
