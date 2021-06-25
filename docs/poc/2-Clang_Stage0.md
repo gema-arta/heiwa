@@ -312,7 +312,7 @@ cmake -B build  \
     -DCMAKE_BUILD_TYPE=Release                                                              \
     -DCMAKE_INSTALL_PREFIX="/clang0-tools"                                                  \
     -DCMAKE_C_COMPILER="${HEIWA_TARGET}-gcc"                                                \
-    -DCMAKE_CXX_COMPILER="${HEIWA_TARGET}-g++"                                              \ 
+    -DCMAKE_CXX_COMPILER="${HEIWA_TARGET}-g++"                                              \
     -DLLVM_BUILD_TESTS=OFF                                                                  \
     -DLLVM_ENABLE_LIBEDIT=OFF                                                               \
     -DLLVM_ENABLE_LIBXML2=OFF                                                               \
@@ -331,7 +331,7 @@ cmake -B build  \
     -DCOMPILER_RT_BUILD_PROFILE=OFF                                                         \
     -DCOMPILER_RT_BUILD_LIBFUZZER=OFF                                                       \
     -DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON                                                   \
-    -DCLANG_DEFAULT_CXX_STDLIB=libc++                                                       \ 
+    -DCLANG_DEFAULT_CXX_STDLIB=libc++                                                       \
     -DCLANG_DEFAULT_UNWINDLIB=libunwind                                                     \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                                                       \
     -DICONV_LIBRARY_PATH="/clang0-tools/lib/libc.so"                                        \
