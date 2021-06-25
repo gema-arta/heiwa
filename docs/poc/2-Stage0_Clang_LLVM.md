@@ -28,8 +28,8 @@
 # Make sure there are no stale files embedded in the package.
 time { make mrproper; }
 
-# The recommended make target "headers_install" cannot be used, because it requires rsync, which may not be available.
-# The headers are first placed in ./usr, then copied to the needed location.
+# The recommended make target `headers_install` cannot be used, because it requires rsync, which may not be available.
+# The headers are first placed in "./usr/", then copied to the needed location.
 time {
     [[ -n "$HEIWA_ARCH" ]] && \
     make ARCH="$HEIWA_ARCH" headers_check && \
