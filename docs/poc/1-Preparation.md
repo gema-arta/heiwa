@@ -1,6 +1,6 @@
 ## `I` Preparation
 > #### * Beginning of as root!
-### `1` - Prepare the volume/partition
+### `1` - Prepare a volume/partition
 ```sh
 # Formatting.
 mkfs.ext4 -m 0 -L "Heiwa_Linux" /dev/sdaX
