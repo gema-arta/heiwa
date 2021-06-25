@@ -24,7 +24,7 @@
 
 ### `1` - Linux API Headers
 > #### Xanmod-CacULE, `5.10.x` or newer
-> Required for libc (musl) to use Linux API.
+> Required for runtime C library (musl) to use Linux API.
 ```sh
 # Make sure there are no stale files embedded in the package.
 time { make mrproper; }
