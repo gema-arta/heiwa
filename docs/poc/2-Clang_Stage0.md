@@ -39,7 +39,7 @@ time {
 }
 
 find usr/include -name '.*' -exec rm -rfv {} \;
-rm -v usr/include/Makefile
+rm -fv usr/include/Makefile
 
 [[ -n $HEIWA_TARGET ]] && \
 mkdir -pv /clang0-tools/${HEIWA_TARGET} && \
