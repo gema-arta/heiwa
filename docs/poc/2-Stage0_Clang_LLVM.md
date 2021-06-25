@@ -241,7 +241,8 @@ patch -Np1 -i ../../patches/libexecinfo-1.1/30-linux-makefile.patch
 
 # Build.
 time {
-    make CC="${HEIWA_TARGET}-gcc" AR="${HEIWA_TARGET}-ar" \
+    [[ -n "$HEIWA_TARGET" ]] && make \
+    CC="${HEIWA_TARGET}-gcc" AR="${HEIWA_TARGET}-ar" \
     CFLAGS="$COMMON_FLAGS -fno-omit-frame-pointer"
 }
 
