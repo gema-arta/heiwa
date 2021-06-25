@@ -280,15 +280,17 @@ pushd "${LLVM_SRC}/tools/" && \
     done; unset P
 popd
 
-for P in \
-    llvm-001-musl.patch \
-    llvm-002-musl-ppc64-elfv2.patch \
-    llvm-003-ppc-secureplt.patch \
-    llvm-004-override-opt.patch \
-    llvm-005-ppc-bigpic.patch \
-    llvm-006-aarch64-mf_exec.patch
-do patch  -Np1 -i ../patches/llvm12/${P}
-done; unset P
+pushd "${LLVM_SRC}/../" && \
+    for P in \
+        llvm-001-musl.patch \
+        llvm-002-musl-ppc64-elfv2.patch \
+        llvm-003-ppc-secureplt.patch \
+        llvm-004-override-opt.patch \
+        llvm-005-ppc-bigpic.patch \
+        llvm-006-aarch64-mf_exec.patch
+    do patch  -Np1 -i ../patches/llvm12/${P}
+    done; unset P
+popd
 
 # Disable sanitizers for musl, fixing "early build failure".
 sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
