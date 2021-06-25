@@ -38,9 +38,11 @@ time {
     make ARCH=${HEIWA_ARCH} headers
 }
 
+# Remove unnecessary files.
 find usr/include -name '.*' -exec rm -rfv {} \;
 rm -fv usr/include/Makefile
 
+# Install.
 [[ -n $HEIWA_TARGET ]] && \
 mkdir -pv /clang0-tools/${HEIWA_TARGET} && \
 cp -rv usr/include /clang0-tools/${HEIWA_TARGET}/.
