@@ -193,7 +193,7 @@ time { make install; }
 # Adjust GCC to produce programs and libraries that will use musl libc in /clang0-tools.
 [[ -n "$HEIWA_TARGET" ]] && \
 export SPECFILE="$(dirname $(${HEIWA_TARGET}-gcc -print-libgcc-file-name))/specs"
-${HEIWA_TARGET}-gcc -dumpspecs > specs
+"${HEIWA_TARGET}-gcc" -dumpspecs > specs
 sed -i 's|/lib/ld-musl-x86_64.so.1|/clang0-tools/lib/ld-musl-x86_64.so.1|g' specs
 
 # Check specs file.
@@ -204,7 +204,7 @@ mv -v specs "$SPECFILE" && unset SPECFILE
 
 # Quick test.
 echo "int main(){}" > dummy.c
-${HEIWA_TARGET}-gcc dummy.c
+"${HEIWA_TARGET}-gcc" dummy.c
 readelf -l a.out | grep Requesting
 
 # The output should be:
