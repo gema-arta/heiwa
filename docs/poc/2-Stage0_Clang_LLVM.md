@@ -378,16 +378,20 @@ time {
 ln -sv lld /clang0-tools/bin/ld
 
 # Since Clang/LLVM still have GCC dependencies, add the GCC libraries in the search paths of the toolchain's dynamic linker.
-echo "/clang0-tools/${HEIWA_TARGET}/lib" >> /clang0-tools/etc/ld-musl-x86_64.path
+[[ -n "$HEIWA_TARGET" ]] && \
+echo "/clang0-tools/${HEIWA_TARGET}/lib" \
+>> /clang0-tools/etc/ld-musl-x86_64.path
 
 # Configure Clang to build binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" instead of "/lib/ld-musl-x86_64.so.1".
-ln -sv clang-12 "/clang0-tools/bin/${HEIWA_TARGET}-clang"
-ln -sv clang-12 "/clang0-tools/bin/${HEIWA_TARGET}-clang++"
+[[ -n "$HEIWA_TARGET" ]] && \
+ln -sv clang-12 "/clang0-tools/bin/${HEIWA_TARGET}-clang"   && \
+ln -sv clang-12 "/clang0-tools/bin/${HEIWA_TARGET}-clang++" && \
 cat > "/clang0-tools/bin/${HEIWA_TARGET}.cfg" << "EOF"
 -Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1
 EOF
 
 # Configure cross GCC of clang0-tools to match the same output as Clang.
+[[ -n "$HEIWA_TARGET" ]] && \
 export SPECFILE="$(dirname $(${HEIWA_TARGET}-gcc -print-libgcc-file-name))/specs"
 "${HEIWA_TARGET}-gcc" -dumpspecs > specs 
 sed -i 's|/lib/ld-musl-x86_64.so.1|/clang1-tools\/lib\/ld-musl-x86_64.so.1|g' specs
@@ -399,6 +403,7 @@ grep --color=auto "/clang1-tools/lib/ld-musl-x86_64.so.1" specs
 mv -v specs "$SPECFILE" && unset SPECFILE
 
 # Quick test.
+echo "int main(){}" > dummy.c
 "${HEIWA_TARGET}-gcc" dummy.c -v -Wl,--verbose &> dummy.log
 readelf -l a.out | grep ": /clang1-tools"
 
