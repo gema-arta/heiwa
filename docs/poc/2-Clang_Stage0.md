@@ -117,7 +117,7 @@ time { make install-gcc install-target-libgcc; }
 time { make; }
 
 # Install.
-time { make install; }
+time { make DESTDIR=/clang0-tools install; }
 
 # GCC will looking for system headers in /clang0-tools/usr/include.
 # Create the directory, then symlink it.
