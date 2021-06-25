@@ -300,7 +300,7 @@ projects/compiler-rt/cmake/config-ix.cmake
 mkdir -pv tools/lld/include/mach-o && \
 cp -v projects/libunwind/include/mach-o/compact_unwind_encoding.h tools/lld/include/mach-o
 
-# Set C and C++ build flags to reduce debugging symbols.
+# Sets C and C++ build flags to reduce debugging symbols.
 export CFLAGS="-g -g1"
 export CXXFLAGS="-g -g1"
 
