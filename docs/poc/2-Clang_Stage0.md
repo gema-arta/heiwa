@@ -72,7 +72,7 @@ time { make install; }
 
 ### `3` -  GCC (static)
 > #### `10.3.1_git20210424` (from Alpine Linux)
-> Required to compile required libraries to build clang.
+> Required to compile required libraries to build Clang/LLVM.
 ```bash
 # GCC requires the GMP, MPFR, and MPC packages to either be present on the host or to be present in source form within the gcc source tree.
 tar xf ../gmp-6.2.1.tar.xz  && mv -v gmp-6.2.1 gmp
@@ -142,7 +142,7 @@ EOF
 
 ### `5` -  GCC (final)
 > #### `10.3.1_git20210424` (from Alpine Linux)
-> Required to compile required libraries to build clang.
+> Required to compile required libraries to build Clang/LLVM.
 ```bash
 # GCC requires the GMP, MPFR, and MPC packages to either be present on the host or to be present in source form within the gcc source tree.
 tar xf ../gmp-6.2.1.tar.xz  && mv -v gmp-6.2.1 gmp
@@ -214,7 +214,7 @@ readelf -l a.out | grep Requesting
 
 ### `6` - libexecinfo
 > #### `1.1` or newer
-> Required to build clang.
+> Required to build Clang.
 ```bash
 # Apply patches (from Alpine Linux).
 patch -Np1 -i ../../patches/libexecinfo-1.1/10-execinfo.patch
