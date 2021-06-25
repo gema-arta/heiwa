@@ -17,7 +17,29 @@
 > 3. Using GNU's `bison` as `yacc` replacements (symlinked).
 > 4. Using `flex` as `lex` alternative lexical analyzers (symlinked).
 > 
-> Verify:
+> **Verify:**
 > ```sh
 > file $(command -v {sh,awk,yacc,lex})
 > ```
+
+### `1` - Linux API Headers
+```sh
+# Make sure there are no stale files embedded in the package.
+time { make mrproper; }
+
+# Now extract the user-visible kernel headers from the source.
+# The recommended make target "headers_install" cannot be used, because it requires rsync, which may not be available.
+# The headers are first placed in ./usr, then copied to the needed location.
+time {
+    [ ! -z $HEIWA_ARCH ] && \
+    make ARCH=${HEIWA_ARCH} headers_check && \
+    make ARCH=${HEIWA_ARCH} headers
+}
+
+find usr/include -name '.*' -exec rm -rfv {} \;
+rm -v usr/include/Makefile
+
+[ ! -z $HEIWA_TARGET ] && \
+mkdir -pv /clang0-tools/${HEIWA_TARGET} && \
+cp -rv usr/include /clang0-tools/${HEIWA_TARGET}/.
+```
