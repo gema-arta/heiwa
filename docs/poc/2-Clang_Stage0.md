@@ -388,7 +388,6 @@ readelf -l a.out | grep ": /llvm-tools"
 # The output should be:
 #       [Requesting program interpreter: /llvm-tools/lib/ld-musl-x86_64.so.1]
 
-# Check if the correct start files are used.
 grep  "lib.*/crt[1in].*succeeded" dummy.log | cut -d ' ' -f 4-5 | cut -b 5-
 
 # The output should be:
