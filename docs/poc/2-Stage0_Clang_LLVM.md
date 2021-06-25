@@ -408,18 +408,17 @@ echo "int main(){}" > dummy.c
 "${HEIWA_TARGET}-gcc" dummy.c -v -Wl,--verbose &> dummy.log
 readelf -l a.out | grep ": /clang1-tools"
 
-# The output should be:
-#       [Requesting program interpreter: /clang1-tools/lib/ld-musl-x86_64.so.1]
+# | The output should be:
+# |-----------------------
+# |      [Requesting program interpreter: /clang0-tools/lib/ld-musl-x86_64.so.1]
 
 grep  "lib.*/crt[1in].*succeeded" dummy.log | cut -d ' ' -f 4-5 | cut -b 5-
 
-# The output should be:
-# /heiwa/clang0-tools/bin/../../clang0-tools/lib/../lib/crt1.o succeeded
-# /heiwa/clang0-tools/bin/../../clang0-tools/lib/../lib/crti.o succeeded
-# /heiwa/clang0-tools/bin/../../clang0-tools/lib/../lib/crtn.o succeeded
-
-# Clean up after testing.
-rm -v dummy.log dummy.c a.out
+# | The output should be:
+# |-----------------------
+# | /heiwa/clang0-tools/bin/../../clang0-tools/lib/../lib/crt1.o succeeded
+# | /heiwa/clang0-tools/bin/../../clang0-tools/lib/../lib/crti.o succeeded
+# | /heiwa/clang0-tools/bin/../../clang0-tools/lib/../lib/crtn.o succeeded
 ```
 
 <h2></h2>
