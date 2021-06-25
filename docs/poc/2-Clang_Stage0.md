@@ -152,7 +152,7 @@ tar xzf ../mpc-1.2.1.tar.gz && mv -v mpc-1.2.1 mpc
 # Apply patches (from Alpine Linux).
 ../../patches/gcc-10.3.1_git20210424/appatch
 
-# On x86_64 hosts, set the default directory name for 64-bit libraries to 'lib'.
+# On x86_64 hosts, set the default directory name for 64-bit libraries to "lib".
 case $(uname -m) in
     x86_64) sed -e '/m64=/s/lib64/lib/' \
             -i.orig gcc/config/i386/t-linux64
