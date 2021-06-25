@@ -91,4 +91,4 @@ source ~/.bashrc
 
 <br>
 
-Continue to [2-Clang_Stage0.md](./2-Clang_Stage0.md).
+Continue to [Stage-0 Clang/LLVM (ft. GNU) Cross-Compile Toolchains](./2-Stage0_Clang_LLVM.md).
