@@ -5,7 +5,8 @@
 
 ## Roadmap
 - [x] Specifies the packages and libraries to be used.
-- [ ] Building auto build systems.
+- [ ] Creating proof-of-concept (similiar to LFS books).
+- [ ] Build an auto build systems.
 - [ ] Creating package manager (kanri).
 
 See [docs](./docs).

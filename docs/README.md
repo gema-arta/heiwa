@@ -43,7 +43,7 @@
 - [OpenSSL](https://www.openssl.org/source)
 - [Perl](https://www.cpan.org/src)
 - [Pigz](https://zlib.net/pigz)
-- [Python](https://www.python.org/ftp/python/)
+- [Python](https://www.python.org/ftp/python)
 - [Samurai (ninja-compat)](https://github.com/michaelforney/samurai)
 - [Shadow](https://github.com/shadow-maint/shadow)
 - [Toybox](https://github.com/landley/toybox)

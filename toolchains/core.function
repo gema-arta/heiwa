@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+_chkdep() { command -v "$@" &>/dev/null; }
+
+_chkmnt() { findmnt "$HEIWA"; }
+
+.hmake() { ; }
+
+commenv() {
+    set +h
+    umask 022
+    LC_ALL="POSIX"
+
+    COMMON_FLAGS="-march=native -Os -pipe"
+    CFLAGS="${COMMON_FLAGS}"
+    CXXFLAGS="${COMMON_FLAGS}"
+    export COMMON_FLAGS CFLAGS CXXFLAGS
+}
+
+currenv() {
+    HEIWA_HOST="$(echo "$MACHTYPE" | sed "s/$(echo "$MACHTYPE" | cut -d- -f2)/cross/")"
+    HEIWA_TARGET="${HEIWA_TARGET}"
+    HEIWA_ARCH="${HEIWA_ARCH}"
+    HEIWA_CPU="${HEIWA_CPU}"
+    export HEIWA_{HOST,TARGET,ARCH,CPU}
+}
