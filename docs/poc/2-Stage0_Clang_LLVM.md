@@ -208,8 +208,9 @@ echo "int main(){}" > dummy.c
 "${HEIWA_TARGET}-gcc" dummy.c
 readelf -l a.out | grep Requesting
 
-# The output should be:
-#       [Requesting program interpreter: /clang0-tools/lib/ld-musl-x86_64.so.1]
+# | The output should be:
+# |--------------------
+# |      [Requesting program interpreter: /clang0-tools/lib/ld-musl-x86_64.so.1]
 ```
 
 ### `6` - libexecinfo
