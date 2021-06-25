@@ -261,27 +261,22 @@ pushd "${LLVM_SRC}/projects" && \
         compiler-rt-xray-ppc64-musl.patch
     do patch -Np1 -i ../../patches/llvm12/${P}
     done; unset P
-
-pushd "${LLVM_SRC}/projects/libcxx/" && \
+    
     for P in \
         libcxx-musl.patch \
         libcxx-ppc.patch \
         libcxx-ssp-nonshared.patch
     do patch -Np1 -i ../../../patches/llvm12/${P}
     done; unset P
-popd
+    
+    patch -Np1 -i ../../patches/llvm12/libunwind-ppc32.patch
 
-pushd "${LLVM_SRC}/projects/libunwind/" && \
-    patch -Np1 -i ../../../patches/llvm12/libunwind-ppc32.patch
-popd
-
-pushd "${LLVM_SRC}/tools/clang/"
     for P in \
         clang-001-fix-unwind-chain-inclusion.patch \
         clang-002-add-musl-triples.patch \ 
         clang-003-ppc64-dynamic-linker-path.patch \
         clang-004-ppc64-musl-elfv2.patch
-    do patch -Np1 -i ../../../patches/llvm12/${P}
+    do patch -Np1 -i ../../patches/llvm12/${P}
     done; unset P
 popd
 
