@@ -17,4 +17,5 @@
 > 3. Using GNU's `bison` as `yacc` replacements (symlinked).
 > 4. Using `flex` as `lex` alternative lexical analyzers (symlinked).
 > ```sh
+> file $(command -v {sh,awk,yacc,lex})
 > ```
