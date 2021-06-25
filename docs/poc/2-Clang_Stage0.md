@@ -161,6 +161,7 @@ esac
 
 # Create a dedicated directory and configure source.
 [[ -n "$HEIWA_HOST" && "$HEIWA_TARGET" ]] && \
+mkdir -v build && cd build && \
 AR=ar LDFLAGS="-Wl,-rpath,/clang0-tools/lib" \
 ../configure \
     --prefix=/clang0-tools        \
