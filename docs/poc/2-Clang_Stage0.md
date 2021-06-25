@@ -378,9 +378,6 @@ grep --color=auto "/llvm-tools/lib/ld-musl-x86_64.so.1" specs
 # Install specs file.
 mv -v specs "$SPECFILE" && unset SPECFILE
 
-# Setup new PATH.
-export PATH="/clang0-tools/bin:/clang0-tools/usr/bin:/llvm-tools/bin:/llvm-tools/usr/bin:/bin:/usr/bin"
-
 # Quick test.
 "${HEIWA_TARGET}-gcc" dummy.c -v -Wl,--verbose &> dummy.log
 readelf -l a.out | grep ": /llvm-tools"
