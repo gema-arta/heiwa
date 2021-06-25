@@ -217,9 +217,9 @@ readelf -l a.out | grep Requesting
 > Required to build clang.
 ```bash
 # Apply patches (from Alpine Linux).
-patch -Np1 -i ../../patches/libexecinfo/10-execinfo.patch
-patch -Np1 -i ../../patches/libexecinfo/20-define-gnu-source.patch
-patch -Np1 -i ../../patches/libexecinfo/30-linux-makefile.patch
+patch -Np1 -i ../../patches/libexecinfo-1.1/10-execinfo.patch
+patch -Np1 -i ../../patches/libexecinfo-1.1/20-define-gnu-source.patch
+patch -Np1 -i ../../patches/libexecinfo-1.1/30-linux-makefile.patch
 
 # Build.
 time {
@@ -230,4 +230,64 @@ time {
 install -vm755 -t /clang0-tools/include/ execinfo.h stacktraverse.h
 install -vm755 -t /clang0-tools/lib/ libexecinfo.a libexecinfo.so.1
 ln -sv /clang0-tools/lib/libexecinfo.so.1 /clang0-tools/lib/libexecinfo.so
+```
+
+### `7` -  Clang/LLVM
+> #### `12.0.0`
+> Required for bootstraping clang/llvm toolchain without depends on libgcc_s.so*.
+```sh
+# Rename the llvm source directory to ${LLVM_SRC}.
+popd; mv -v llvm-12.0.0-src llvm
+
+# Decompress clang, lld, compiler-rt, libcxx, libcxxabi, and libunwind to correct directories.
+pushd "${LLVM_SRC}/projects/" && \
+    tar xf ../../pkgs/compiler-rt-12.0.0.src.tar.xz && mv -v compiler-rt-12.0.0.src compiler-rt
+    tar xf ../../pkgs/libcxx-12.0.0.src.tar.xz      && mv -v libcxx-12.0.0.src libcxx
+    tar xf ../../pkgs/libcxxabi-12.0.0.src.tar.xz   && mv -v libcxxabi-12.0.0.src libcxxabi
+    tar xf ../../pkgs/libunwind-12.0.0.src.tar.xz   && mv -v libunwind-12.0.0.src libunwind
+popd
+pushd "${LLVM_SRC}/tools/" && \
+    tar xf ../../pkgs/clang-12.0.0.src.tar.xz && mv -v clang-12.0.0.src clang
+    tar xf ../../pkgs/lld-12.0.0.src.tar.xz   && mv -v lld-12.0.0.src lld
+popd
+
+# Apply patches (from Void Linux).
+pushd "${LLVM_SRC}/projects/compiler-rt/" && \
+    for P in \
+        compiler-rt-aarch64-ucontext.patch \
+        compiler-rt-sanitizer-ppc64-musl.patch \
+        compiler-rt-size_t.patch \
+        compiler-rt-xray-ppc64-musl.patch
+    do patch -Np1 -i ../../../patches/llvm12-compiler-rt/${P}
+    done; unset P
+popd
+pushd "${LLVM_SRC}/projects/libcxx" && \
+    for P in \
+        libcxx-musl.patch \
+        libcxx-ppc.patch \
+        libcxx-ssp-nonshared.patch
+    do patch -Np1 -i ../../../patches/llvm12-libcxx/${P}
+    done; unset P
+popd
+pushd "${LLVM_SRC}/projects/libunwind" && \
+    patch -Np1 -i ../../../patches/llvm12-libunwind/libunwind-ppc32.patch
+popd
+pushd "${LLVM_SRC}/tools/clang"
+    for P in \
+        clang-001-fix-unwind-chain-inclusion.patch \
+        clang-002-add-musl-triples.patch \ 
+        clang-003-ppc64-dynamic-linker-path.patch \
+        clang-004-ppc64-musl-elfv2.patch
+    do patch -Np1 -i ../../../patches/llvm12-clang/${P}
+    done; unset P
+pushd "$LLVM_SRC" && \
+    for P in \
+        llvm-001-musl.patch \
+        llvm-002-musl-ppc64-elfv2.patch \
+        llvm-003-ppc-secureplt.patch \
+        llvm-004-override-opt.patch \
+        llvm-005-ppc-bigpic.patch \
+        llvm-006-aarch64-mf_exec.patch
+    do patch  -Np1 -i ../patches/llvm12/${P}
+    done; unset P
 ```
