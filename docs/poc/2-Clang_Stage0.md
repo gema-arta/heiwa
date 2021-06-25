@@ -261,14 +261,12 @@ pushd "${LLVM_SRC}/projects/" && \
         compiler-rt-xray-ppc64-musl.patch
     do patch -Np1 -i ../../patches/llvm12/${P}
     done; unset P
-    
     for P in \
         libcxx-musl.patch \
         libcxx-ppc.patch \
         libcxx-ssp-nonshared.patch
     do patch -Np1 -i ../../patches/llvm12/${P}
     done; unset P
-    
     patch -Np1 -i ../../patches/llvm12/libunwind-ppc32.patch
 popd
 
