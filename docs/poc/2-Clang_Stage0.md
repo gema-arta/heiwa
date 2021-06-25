@@ -253,15 +253,14 @@ pushd "${LLVM_SRC}/tools/" && \
 popd
 
 # Apply patches (from Void Linux).
-pushd "${LLVM_SRC}/projects/compiler-rt/" && \
+pushd "${LLVM_SRC}/projects" && \
     for P in \
         compiler-rt-aarch64-ucontext.patch \
         compiler-rt-sanitizer-ppc64-musl.patch \
         compiler-rt-size_t.patch \
         compiler-rt-xray-ppc64-musl.patch
-    do patch -Np0 -i ../../../patches/llvm12/${P}
+    do patch -Np1 -i ../../patches/llvm12/${P}
     done; unset P
-popd
 
 pushd "${LLVM_SRC}/projects/libcxx/" && \
     for P in \
