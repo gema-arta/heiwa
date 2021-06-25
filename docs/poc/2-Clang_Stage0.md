@@ -259,7 +259,7 @@ pushd "${LLVM_SRC}/projects/compiler-rt/" && \
         compiler-rt-sanitizer-ppc64-musl.patch \
         compiler-rt-size_t.patch \
         compiler-rt-xray-ppc64-musl.patch
-    do patch -Np1 -i ../../../patches/llvm12-compiler-rt/${P}
+    do patch -Np1 -i ../../patches/llvm12-compiler-rt/${P}
     done; unset P
 popd
 
