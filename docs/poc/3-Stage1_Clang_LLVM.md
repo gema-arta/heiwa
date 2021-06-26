@@ -185,7 +185,7 @@ patch -Np1 -i ../../patches/libexecinfo-1.1/20-define-gnu-source.patch
 patch -Np1 -i ../../patches/libexecinfo-1.1/30-linux-makefile.patch
 
 # Build.
-time { make AR=llvm-ar CFLAGS="$COMMON_FLAGS -fno-omit-frame-pointer"; }
+time { make CC=clang AR=llvm-ar CFLAGS="$COMMON_FLAGS -fno-omit-frame-pointer"; }
 
 # Install.
 install -vm755 -t /clang1-tools/include/ execinfo.h stacktraverse.h
