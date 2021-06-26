@@ -61,7 +61,7 @@ grep "ld.lld:.*crt[1in].o" dummy.log
 ```
 
 ### `2` - Linux API Headers
-> #### Xanmod-CacULE, `5.10.x` or newer
+> #### Xanmod-CacULE, `5.12.x` or newer
 > Required for runtime C library (musl) to use Linux API.
 ```bash
 # Make sure there are no stale files embedded in the package.
