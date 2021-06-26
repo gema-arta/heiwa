@@ -10,3 +10,9 @@
 > heiwa@localh3art /media/Heiwa/sources/pkgs/target-package $ popd
 > heiwa@localh3art /media/Heiwa/sources/pkgs $ rm -rf target-package
 > ```
+
+### `4` - musl
+> #### `1.2.2` or newer
+> Required for every programs and libraries.
+```bash
+```
