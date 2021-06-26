@@ -216,7 +216,7 @@ readelf -l a.out | grep Requesting
 ### `6` - NetBSD's Curses
 > #### `0.3.2` or newer
 > Required to build Stage-0 Clang/LLVM that depends on `-ltinfo` or `-lterminfo` ld's flags.
-```sh
+```bash
 # Build.
 time { make CC="${HEIWA_TARGET}-gcc" CFLAGS="$COMMON_FLAGS -Wall -fPIC" all; }
 
@@ -249,7 +249,7 @@ ln -sv libexecinfo.so.1 /clang0-tools/lib/libexecinfo.so
 ### `8` - Toybox's File
 > #### `0.8.5`
 > Optional? Maybe you need.
-```sh
+```bash
 # Copy Toybox's .config file.
 cp -v ../../files/toybox-0.8.5/.config_file_no_libz_no_ssl .config
 
@@ -266,7 +266,7 @@ time { make PREFIX=/clang0-tools install; }
 ### `9` -  Clang/LLVM
 > #### `12.0.0`
 > Required to bootstrap Stage-1 Clang/LLVM toolchains without depends on `libgcc_s.so*` later.
-```sh
+```bash
 # Rename the llvm source directory to ${LLVM_SRC}.
 popd; mv -v llvm-12.0.0.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 
