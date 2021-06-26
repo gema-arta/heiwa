@@ -214,4 +214,75 @@ popd
 
 # Apply patches (from Void Linux).
 ../patches/llvm-12/stage1-appatch
+
+# Disable sanitizers for musl, fixing "early build failure".
+sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
+projects/compiler-rt/cmake/config-ix.cmake
+
+# Set default compiler to new symlink from Stage-0 Clang/LLVM.
+# Sets C and C++ compiler's build flags to reduce debug's symbols.
+CC="${HEIWA_TARGET}-clang" CXX="${HEIWA_TARGET}-clang++"
+CFLAGS="-g -g1" CXXFLAGS="-g -g1"
+export CC CXX CFLAGS CXXFLAGS
+
+# Update host/target triple detection.
+cp -v ../files/config.guess cmake/
+
+# Configure source.
+cmake -B build \
+    -DCMAKE_BUILD_TYPE=Release                                  \
+    -DCMAKE_INSTALL_PREFIX="/clang1-tools"                      \
+    -DLLVM_INSTALL_TOOLCHAIN_ONLY=ON                            \
+    -DLLVM_LINK_LLVM_DYLIB=ON                                   \
+    -DLLVM_BUILD_LLVM_DYLIB=ON                                  \
+    -DLLVM_BUILD_TESTS=OFF                                      \
+    -DLLVM_ENABLE_LIBEDIT=OFF                                   \
+    -DLLVM_ENABLE_LIBXML2=OFF                                   \
+    -DLLVM_ENABLE_LIBCXX=ON                                     \
+    -DLLVM_INCLUDE_GO_TESTS=OFF                                 \
+    -DLLVM_INCLUDE_TESTS=OFF                                    \
+    -DLLVM_INCLUDE_DOCS=OFF                                     \
+    -DLLVM_INCLUDE_EXAMPLES=OFF                                 \
+    -DLLVM_INCLUDE_BENCHMARKS=OFF                               \
+    -DLLVM_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"         \
+    -DLLVM_HOST_TRIPLE="x86_64-pc-linux-musl"                   \
+    -DLLVM_TARGET_ARCH="X86"                                    \
+    -DLLVM_TARGETS_TO_BUILD="X86"                               \
+    -DCOMPILER_RT_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"  \
+    -DCOMPILER_RT_BUILD_SANITIZERS=OFF                          \
+    -DCOMPILER_RT_BUILD_XRAY=OFF                                \
+    -DCOMPILER_RT_BUILD_PROFILE=OFF                             \
+    -DCOMPILER_RT_BUILD_LIBFUZZER=OFF                           \
+    -DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON                       \
+    -DCLANG_DEFAULT_CXX_STDLIB=libc++                           \ 
+    -DCLANG_DEFAULT_UNWINDLIB=libunwind                         \
+    -DCLANG_DEFAULT_RTLIB=compiler-rt                           \
+    -DCLANG_DEFAULT_LINKER="/clang1-tools/bin/ld.lld"           \
+    -DDEFAULT_SYSROOT="/clang1-tools"                           \
+    -DLLVM_ENABLE_LLD=ON                                        \
+    -DLLVM_ENABLE_RTTI=ON                                       \
+    -DLLVM_ENABLE_ZLIB=OFF                                      \
+    -DBacktrace_INCLUDE_DIR="/clang1-tools/include"             \
+    -DBacktrace_LIBRARY="/clang1-tools/lib/libexecinfo.so"      \
+    -DCMAKE_CXX_COMPILER_AR="/clang0-tools/bin/llvm-ar"         \
+    -DCMAKE_C_COMPILER_AR="/clang0-tools/bin/llvm-ar"           \
+    -DCMAKE_CXX_COMPILER_RANLIB="/clang0-tools/bin/llvm-ranlib" \
+    -DCMAKE_C_COMPILER_RANLIB="/clang0-tools/bin/llvm-ranlib"   \
+    -DCMAKE_INSTALL_OLDINCLUDEDIR="/clang1-tools/include"       \
+    -DCMAKE_LINKER="/clang0-tools/bin/ld.lld"                   \
+    -DCMAKE_NM="/clang0-tools/bin/llvm-nm"                      \
+    -DCMAKE_OBJCOPY="/clang0-tools/bin/llvm-objcopy"            \
+    -DCMAKE_READELF="/clang0-tools/bin/llvm-readelf"            \
+    -DCMAKE_STRIP="/clang0-tools/bin/llvm-strip"                \
+    -DICONV_LIBRARY_PATH="/clang1-tools/lib/libc.so"
+
+# Build.
+time { make -C build; }
+
+# Install.
+time {
+    pushd build/ && \
+        cmake -DCMAKE_INSTALL_PREFIX="/clang1-tools" -P cmake_install.cmake && \
+    popd && rm -rf build
+}
 ```
