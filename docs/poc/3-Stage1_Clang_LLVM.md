@@ -71,8 +71,8 @@ time { make mrproper; }
 # The headers are first placed in "./usr/", then copied to the needed location.
 time {
     [[ -n "$HEIWA_ARCH" ]] && \
-    make ARCH="$HEIWA_ARCH" headers_check && \
-    make ARCH="$HEIWA_ARCH" headers
+    make ARCH="$HEIWA_ARCH" CC="$CC" CXX="$CXX" headers_check && \
+    make ARCH="$HEIWA_ARCH" CC="$CC" CXX="$CXX" headers
 }
 
 # Remove unnecessary files.
