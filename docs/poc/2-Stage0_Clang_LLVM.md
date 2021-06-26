@@ -250,7 +250,7 @@ ln -sv libexecinfo.so.1 /clang0-tools/lib/libexecinfo.so
 > #### `0.8.5`
 > Optional? Maybe you need.
 ```sh
-# Copy toybox's .config file.
+# Copy Toybox's .config file.
 cp -v ../../files/toybox-0.8.5/.config_file_no_libz_no_ssl .config
 
 # Build.
