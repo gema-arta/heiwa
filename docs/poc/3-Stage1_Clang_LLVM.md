@@ -15,4 +15,19 @@
 > #### `1.2.2` or newer
 > Required for every programs and libraries.
 ```bash
+# Set default compiler to Clang.
+CC=clang CXX=clang++
+export CC CXX
+
+# Configure source.
+./configure --prefix=/ 
+
+# Build.
+time { make; }
+
+# Install.
+time { make DESTDIR=/clang1-tools install; }
+
+# Fix a wrong object symlink.
+ln -sfv libc.so /clang1-tools/lib/ld-musl-x86_64.so.1
 ```
