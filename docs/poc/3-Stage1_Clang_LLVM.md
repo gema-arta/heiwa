@@ -174,7 +174,7 @@ time { make -C build; }
 # Install.
 time { make -C build install && rm -rf build && popd; }
 ```
-> **Note!**  
+> **NOTE!**  
 > Now, you can safely remove ${LLVM_SRC} directory.
 
 ### `6` - libexecinfo
