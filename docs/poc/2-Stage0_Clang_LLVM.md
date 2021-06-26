@@ -379,15 +379,15 @@ readelf -l a.out | grep ": /clang1-tools"
 
 # | The output should be:
 # |-----------------------
-# |      [Requesting program interpreter: /clang0-tools/lib/ld-musl-x86_64.so.1]
+# |      [Requesting program interpreter: /clang1-tools/lib/ld-musl-x86_64.so.1]
 
-grep  "lib.*/crt[1in].*succeeded" dummy.log | cut -d ' ' -f 4-5 | cut -b 5-
+grep  "lib.*/crt[1in].*succeeded" dummy.log | cut -d ' ' -f 4-5
 
 # | The output should be:
 # |-----------------------
-# | /heiwa/clang0-tools/bin/../../clang0-tools/lib/../lib/crt1.o succeeded
-# | /heiwa/clang0-tools/bin/../../clang0-tools/lib/../lib/crti.o succeeded
-# | /heiwa/clang0-tools/bin/../../clang0-tools/lib/../lib/crtn.o succeeded
+# |/media/Heiwa/clang0-tools/bin/../../clang0-tools/lib/../lib/crt1.o succeeded
+# |/media/Heiwa/clang0-tools/bin/../../clang0-tools/lib/../lib/crti.o succeeded
+# |/media/Heiwa/clang0-tools/bin/../../clang0-tools/lib/../lib/crtn.o succeeded
 ```
 
 <h2></h2>
