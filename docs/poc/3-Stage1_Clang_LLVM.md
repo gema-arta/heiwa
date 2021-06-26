@@ -41,4 +41,21 @@ cat > /clang1-tools/etc/ld-musl-x86_64.path << "EOF"
 /clang1-tools/lib
 /clang1-tools/gnu/lib
 EOF
+
+# Quick test for Stage-0 Clang/LLVM.
+echo "int main(){}" > dummy.c
+"${HEIWA_TARGET}-clang" dummy.c -v -Wl,--verbose &> dummy.log
+readelf -l a.out | grep ": /clang1-tools"
+
+# | The output should be:
+# |-----------------------
+# |      [Requesting program interpreter: /clang1-tools/lib/ld-musl-x86_64.so.1]
+
+grep "ld.lld:" dummy.log | grep crt[1in]
+
+# | The output should be:
+# |-----------------------
+# |ld.lld: /clang0-tools/lib/gcc/x86_64-heiwa-linux-musl/10.3.1/../../../Scrt1.o
+# |ld.lld: /clang0-tools/lib/gcc/x86_64-heiwa-linux-musl/10.3.1/../../../crti.o
+# |ld.lld: /clang0-tools/lib/gcc/x86_64-heiwa-linux-musl/10.3.1/../../../crtn.o
 ```
