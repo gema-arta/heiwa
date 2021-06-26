@@ -174,3 +174,21 @@ time { make -C build; }
 # Install.
 time { make -C build install && rm -rf build && popd; }
 ```
+
+### `6` - libexecinfo
+> #### `1.1` or newer
+> Required to build Stage-1 Clang/LLVM.
+```bash
+# Apply patches (from Alpine Linux).
+patch -Np1 -i ../../patches/libexecinfo-1.1/10-execinfo.patch
+patch -Np1 -i ../../patches/libexecinfo-1.1/20-define-gnu-source.patch
+patch -Np1 -i ../../patches/libexecinfo-1.1/30-linux-makefile.patch
+
+# Build.
+time { make AR=llvm-ar CFLAGS="$COMMON_FLAGS -fno-omit-frame-pointer"; }
+
+# Install.
+install -vm755 -t /clang1-tools/include/ execinfo.h stacktraverse.h
+install -vm755 -t /clang1-tools/lib/ libexecinfo.a libexecinfo.so.1
+ln -sv libexecinfo.so.1 /clang1-tools/lib/libexecinfo.so
+```
