@@ -15,7 +15,7 @@
 > #### `1.2.2` or newer
 > Required for every programs and libraries.
 ```bash
-# Set default compiler to Clang.
+# Set default compiler to Stage-0 Clang/LLVM.
 CC=clang CXX=clang++
 export CC CXX
 
@@ -81,4 +81,39 @@ rm -fv usr/include/Makefile
 
 # Install.
 cp -rv usr/include /clang1-tools/.
+```
+
+### `3` - libunwind from LLVM
+> #### `12.0.0`
+> Required for programs that needs to enable unwinding.
+```sh
+# Set default compiler to new symlink from Stage-0 Clang/LLVM.
+CC="${HEIWA_TARGET}-clang" CXX="${HEIWA_TARGET}-clang++"
+export CC CXX
+
+# Configure source.
+pushd "${LLVM_SRC}/projects/libunwind/" && \
+    cmake -B build \
+        -DCMAKE_INSTALL_PREFIX="/clang1-tools"           \
+        -DLIBUNWIND_ENABLE_SHARED=ON                     \
+        -DCMAKE_C_FLAGS="-fPIC"                          \
+        -DCMAKE_CXX_FLAGS="-fPIC"                        \
+        -DCMAKE_AR="/clang0-tools/bin/llvm-ar"           \
+        -DCMAKE_LINKER="/clang0-tools/bin/ld.lld"        \
+        -DCMAKE_NM="/clang0-tools/bin/llvm-nm"           \
+        -DCMAKE_OBJCOPY="/clang0-tools/bin/llvm-objcopy" \
+        -DCMAKE_OBJDUMP="/clang0-tools/bin/llvm-objdump" \
+        -DCMAKE_RANLIB="/clang0-tools/bin/llvm-ranlib"   \
+        -DCMAKE_READELF="/clang0-tools/bin/llvm-readelf" \
+        -DCMAKE_STRIP="/clang0-tools/bin/llvm-strip"     \
+        -DLIBUNWIND_USE_COMPILER_RT=ON                   \
+        -DLLVM_PATH="$LLVM_SRC"
+
+# Build.
+time { make -C build; }
+
+# Install.
+time { make -C build install && rm -rf build; }
+
+popd
 ```
