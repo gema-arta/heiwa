@@ -86,6 +86,8 @@ cp -rv usr/include /clang1-tools/.
 ### `3` - libunwind from LLVM
 > #### `12.0.0`
 > Required for programs that needs to enable unwinding.
+
+> No need to re-decompress package.
 ```sh
 # Set default compiler to new symlink from Stage-0 Clang/LLVM.
 CC="${HEIWA_TARGET}-clang" CXX="${HEIWA_TARGET}-clang++"
@@ -119,6 +121,8 @@ time { make -C build install && rm -rf build && popd; }
 ### `4` - libcxxabi from LLVM
 > #### `12.0.0`
 > Required as LLVM's C++ standard library.
+
+> No need to re-decompress package.
 ```sh
 # Configure source.
 pushd "${LLVM_SRC}/projects/libcxxabi/" && \
