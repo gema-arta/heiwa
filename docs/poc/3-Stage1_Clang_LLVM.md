@@ -120,7 +120,7 @@ time { make -C build install && rm -rf build && popd; }
 
 ### `4` - libcxxabi from LLVM
 > #### `12.0.0`
-> Required as LLVM's C++ standard library.
+> Required as LLVM's C++ ABI standard library.
 
 > No need to re-decompress package.
 ```sh
@@ -144,4 +144,34 @@ time {
     cp -v include/*.h /clang1-tools/include/ && \
     rm -rf build && popd
 }
+```
+
+### `5` - libcxx from LLVM
+> #### `12.0.0`
+> Required as LLVM's C++ standard library.
+
+> No need to re-decompress package.
+```sh
+# Configure source.
+pushd "${LLVM_SRC}/projects/libcxx/" && \
+    cmake -B build  \
+        -DCMAKE_INSTALL_PREFIX="/clang1-tools"                 \
+        -DLLVM_PATH="$LLVM_SRC"                                \
+        -DLIBCXX_ENABLE_SHARED=ON                              \
+        -DLIBCXX_ENABLE_STATIC=ON                              \
+        -DLIBCXX_HAS_MUSL_LIBC=ON                              \
+        -DLIBCXX_USE_COMPILER_RT=ON                            \
+        -DLIBCXX_CXX_ABI=libcxxabi                             \
+        -DLIBCXX_CXX_ABI_INCLUDE_PATHS="/clang1-tools/include" \
+        -DLIBCXXABI_USE_LLVM_UNWINDER=ON                       \
+        -DLIBCXX_CXX_ABI_LIBRARY_PATH="/clang1-tools/lib"      \
+        -DLIBCXX_INSTALL_HEADERS=ON                            \
+        -DCMAKE_CXX_FLAGS="-I/clang1-tools/include"            \
+        -DCMAKE_C_FLAGS="-I/clang1-tools/include" 
+
+# Build.
+time { make -C build; }
+
+# Install.
+time { make -C build install && rm -rf build && popd; }
 ```
