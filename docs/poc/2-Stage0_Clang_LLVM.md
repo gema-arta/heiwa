@@ -388,6 +388,8 @@ grep  "lib.*/crt[1in].*succeeded" dummy.log | cut -d ' ' -f 4-5
 # |/media/Heiwa/clang0-tools/bin/../../clang0-tools/lib/../lib/crt1.o succeeded
 # |/media/Heiwa/clang0-tools/bin/../../clang0-tools/lib/../lib/crti.o succeeded
 # |/media/Heiwa/clang0-tools/bin/../../clang0-tools/lib/../lib/crtn.o succeeded
+
+popd
 ```
 > #### ^ NOTE!
 > Don't delete ${LLVM_SRC} directory after above step.
