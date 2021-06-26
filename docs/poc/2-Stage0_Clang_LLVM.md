@@ -72,7 +72,7 @@ time { make install; }
 
 ### `3` -  GCC (static)
 > #### `10.3.1_git20210424` (from Alpine Linux)
-> Required to compile required libraries to build Stage-0 Clang/LLVM.
+> Required to bootstrap musl libc.
 ```bash
 # GCC requires the GMP, MPFR, and MPC packages to either be present on the host or to be present in source form within the GCC source tree.
 tar xf ../gmp-6.2.1.tar.xz  && mv -v gmp-6.2.1 gmp
