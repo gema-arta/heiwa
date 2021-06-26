@@ -80,5 +80,5 @@ find usr/include -name '.*' -exec rm -rfv {} \;
 rm -fv usr/include/Makefile
 
 # Install.
-cp -rv usr/include "/clang1-tools/."
+cp -rv usr/include /clang1-tools/.
 ```
