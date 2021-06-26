@@ -254,7 +254,7 @@ cmake -B build \
     -DCOMPILER_RT_BUILD_PROFILE=OFF                             \
     -DCOMPILER_RT_BUILD_LIBFUZZER=OFF                           \
     -DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON                       \
-    -DCLANG_DEFAULT_CXX_STDLIB=libc++                           \ 
+    -DCLANG_DEFAULT_CXX_STDLIB=libc++                           \
     -DCLANG_DEFAULT_UNWINDLIB=libunwind                         \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                           \
     -DCLANG_DEFAULT_LINKER="/clang1-tools/bin/ld.lld"           \
