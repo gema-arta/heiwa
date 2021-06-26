@@ -352,11 +352,6 @@ time {
 # Set lld as default toolchain linker.
 ln -sv lld /clang0-tools/bin/ld
 
-# Since Clang/LLVM still have GCC dependencies, add the GCC libraries in the search paths of the toolchain's dynamic linker.
-[[ -n "$HEIWA_TARGET" ]] && \
-echo "/clang0-tools/${HEIWA_TARGET}/lib" \
->> /clang0-tools/etc/ld-musl-x86_64.path
-
 # Configure Clang to build binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" instead of "/lib/ld-musl-x86_64.so.1".
 [[ -n "$HEIWA_TARGET" ]] && \
 ln -sv clang-12 "/clang0-tools/bin/${HEIWA_TARGET}-clang"   && \
