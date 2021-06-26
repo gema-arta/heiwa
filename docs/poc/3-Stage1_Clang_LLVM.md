@@ -165,8 +165,6 @@ pushd "${LLVM_SRC}/projects/libcxx/" && \
         -DLIBCXXABI_USE_LLVM_UNWINDER=ON                       \
         -DLIBCXX_CXX_ABI_LIBRARY_PATH="/clang1-tools/lib"      \
         -DLIBCXX_INSTALL_HEADERS=ON                            \
-        -DCMAKE_CXX_FLAGS="-I/clang1-tools/include/linux"      \
-        -DCMAKE_C_FLAGS="-I/clang1-tools/include/linux"        \
         -DLLVM_PATH="$LLVM_SRC"
 
 # Build.
