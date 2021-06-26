@@ -128,7 +128,7 @@ pushd "${LLVM_SRC}/projects/libcxxabi/" && \
         -DLIBCXXABI_USE_COMPILER_RT=ON                                   \
         -DLIBCXXABI_USE_LLVM_UNWINDER=ON                                 \
         -DLIBCXXABI_LIBUNWIND_PATH="/clang1-tools/lib"                   \
-        -DLIBCXXABI_LIBCXX_INCLUDES="${LLVMSRC}/projects/libcxx/include" \
+        -DLIBCXXABI_LIBCXX_INCLUDES="${LLVM_SRC}/projects/libcxx/include" \
         -DLLVM_PATH="$LLVM_SRC"
 
 # Build.
