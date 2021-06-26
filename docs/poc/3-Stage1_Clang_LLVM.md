@@ -59,3 +59,27 @@ grep "ld.lld:.*crt[1in].o" dummy.log
 # |ld.lld: /clang0-tools/lib/gcc/x86_64-heiwa-linux-musl/10.3.1/../../../crti.o
 # |ld.lld: /clang0-tools/lib/gcc/x86_64-heiwa-linux-musl/10.3.1/../../../crtn.o
 ```
+
+### `2` - Linux API Headers
+> #### Xanmod-CacULE, `5.10.x` or newer
+> Required for runtime C library (musl) to use Linux API.
+```bash
+# Make sure there are no stale files embedded in the package.
+time { make mrproper; }
+
+# The recommended make target `headers_install` cannot be used, because it requires rsync, which may not be available.
+# The headers are first placed in "./usr/", then copied to the needed location.
+time {
+    [[ -n "$HEIWA_ARCH" ]] && \
+    make ARCH="$HEIWA_ARCH" LLVM=1 headers_check && \
+    make ARCH="$HEIWA_ARCH" LLVM=1 headers
+}
+
+# Remove unnecessary files.
+find usr/include -name '.*' -exec rm -rfv {} \;
+rm -fv usr/include/Makefile
+
+# Install.
+[[ -n "$HEIWA_TARGET" ]] && \
+cp -rv usr/include "/clang1-tools/."
+```
