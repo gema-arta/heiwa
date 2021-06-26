@@ -1,7 +1,7 @@
 ## `I` Preparation
 > #### * Beginning of as root!
 ### `1` - Prepare a volume/partition
-```sh
+```bash
 # Formatting.
 mkfs.ext4 -m 0 -L "Heiwa_Linux" /dev/sdaX
 
@@ -14,7 +14,7 @@ mount -vo noatime,discard /dev/sdaX "$HEIWA"
 ```
 
 ### `2` - Creating packages and toolchain directory
-```sh
+```bash
 # Create directories to build clang with GCC libraries and the final toolchain without GCC libraries.
 # As root, Link them to host's root directory.
 if [[ -n "$HEIWA" ]]; then
@@ -26,7 +26,7 @@ fi
 ```
 
 ### `3` - Adding privileged user
-```sh
+```bash
 # Setup privileged user.
 groupadd heiwa
 useradd -s /bin/bash -g heiwa -m -k /dev/null heiwa
@@ -45,7 +45,7 @@ fi
 
 > #### * Beginning of as privileged user!
 ### `4` - Setup privileged user's environment
-```sh
+```bash
 # Login as privileged user.
 su - heiwa
 
