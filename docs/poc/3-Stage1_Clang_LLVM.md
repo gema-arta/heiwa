@@ -213,5 +213,5 @@ pushd "${LLVM_SRC}/tools/" && \
 popd
 
 # Apply patches (from Void Linux).
-../patches/llvm-12/stage0-appatch
+../patches/llvm-12/stage1-appatch
 ```
