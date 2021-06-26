@@ -224,24 +224,7 @@ time { make CC="${HEIWA_TARGET}-gcc" CFLAGS="$COMMON_FLAGS -Wall -fPIC all"; }
 time { make PREFIX=/ DESTDIR=/clang0-tools install; }
 ```
 
-### `7` - Toybox's File
-> #### `0.8.5`
-> Optional? Maybe you need.
-```sh
-# Copy toybox's .config file.
-cp -v ../../files/toybox-0.8.5/.config_file_no_libz_no_ssl .config
-
-# Build.
-time {
-    [[ -n "$HEIWA_TARGET" ]] && make \
-    CC="${HEIWA_TARGET}-gcc" CFLAGS="$COMMON_FLAGS"
-}
-
-# Install.
-time { make PREFIX=/clang0-tools install; }
-```
-
-### `8` - libexecinfo
+### `7` - libexecinfo
 > #### `1.1` or newer
 > Required to build Stage-0 Clang/LLVM.
 ```bash
@@ -261,6 +244,23 @@ time {
 install -vm755 -t /clang0-tools/include/ execinfo.h stacktraverse.h
 install -vm755 -t /clang0-tools/lib/ libexecinfo.a libexecinfo.so.1
 ln -sv libexecinfo.so.1 /clang0-tools/lib/libexecinfo.so
+```
+
+### `8` - Toybox's File
+> #### `0.8.5`
+> Optional? Maybe you need.
+```sh
+# Copy toybox's .config file.
+cp -v ../../files/toybox-0.8.5/.config_file_no_libz_no_ssl .config
+
+# Build.
+time {
+    [[ -n "$HEIWA_TARGET" ]] && make \
+    CC="${HEIWA_TARGET}-gcc" CFLAGS="$COMMON_FLAGS"
+}
+
+# Install.
+time { make PREFIX=/clang0-tools install; }
 ```
 
 ### `9` -  Clang/LLVM
