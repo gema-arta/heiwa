@@ -284,7 +284,7 @@ pushd "${LLVM_SRC}/tools/" && \
 popd
 
 # Apply patches (from Void Linux).
-../../patches/llvm-12/stage0-clang
+../patches/llvm-12/stage0-appatch
 
 # Disable sanitizers for musl, fixing "early build failure".
 sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
