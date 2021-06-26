@@ -88,7 +88,7 @@ cp -rv usr/include /clang1-tools/.
 > Required for programs that needs to enable unwinding.
 
 > No need to re-decompress package.
-```sh
+```bash
 # Set default compiler to new symlink from Stage-0 Clang/LLVM.
 CC="${HEIWA_TARGET}-clang" CXX="${HEIWA_TARGET}-clang++"
 export CC CXX
@@ -123,7 +123,7 @@ time { make -C build install && rm -rf build && popd; }
 > Required as LLVM's C++ ABI standard library.
 
 > No need to re-decompress package.
-```sh
+```bash
 # Configure source.
 pushd "${LLVM_SRC}/projects/libcxxabi/" && \
     cmake -B build \
@@ -151,7 +151,7 @@ time {
 > Required as LLVM's C++ standard library.
 
 > No need to re-decompress package.
-```sh
+```bash
 # Configure source.
 pushd "${LLVM_SRC}/projects/libcxx/" && \
     cmake -B build  \
@@ -174,7 +174,7 @@ time { make -C build; }
 # Install.
 time { make -C build install && rm -rf build && popd; }
 ```
-> **NOTE!**  
+> #### NOTE!
 > Now, you can safely remove ${LLVM_SRC} directory.
 
 ### `6` - libexecinfo
@@ -193,4 +193,10 @@ time { make CC=clang AR=llvm-ar CFLAGS="$COMMON_FLAGS -fno-omit-frame-pointer"; 
 install -vm755 -t /clang1-tools/include/ execinfo.h stacktraverse.h
 install -vm755 -t /clang1-tools/lib/ libexecinfo.a libexecinfo.so.1
 ln -sv libexecinfo.so.1 /clang1-tools/lib/libexecinfo.so
+```
+
+### `7` - Clang/LLVM
+> #### `12.0.0`
+> Bootstrapping Stage-1 Clang/LLVM toolchains with `libgcc_s.so*` and `libstdc++.so*` free.
+```bash
 ```
