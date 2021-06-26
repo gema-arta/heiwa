@@ -51,7 +51,7 @@ readelf -l a.out | grep ": /clang1-tools"
 # |-----------------------
 # |      [Requesting program interpreter: /clang1-tools/lib/ld-musl-x86_64.so.1]
 
-grep "ld.lld:" dummy.log | grep crt[1in]
+grep "ld.lld:.*crt[1in].o" dummy.log
 
 # | The output should be:
 # |-----------------------
