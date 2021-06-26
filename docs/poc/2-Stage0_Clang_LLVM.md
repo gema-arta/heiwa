@@ -265,7 +265,7 @@ time { make PREFIX=/clang0-tools install; }
 
 ### `9` -  Clang/LLVM
 > #### `12.0.0`
-> Required to bootstrap Stage-1 Clang/LLVM toolchains without depends on `libgcc_s.so*` later.
+> Required to bootstrap Stage-1 Clang/LLVM toolchains without depends on `libgcc_s.so*` and `libstdc++.so*` later.
 ```bash
 # Rename the llvm source directory to ${LLVM_SRC}.
 popd; mv -v llvm-12.0.0.src "$LLVM_SRC" && pushd "$LLVM_SRC"
@@ -389,7 +389,7 @@ grep  "lib.*/crt[1in].*succeeded" dummy.log | cut -d ' ' -f 4-5
 # |/media/Heiwa/clang0-tools/bin/../../clang0-tools/lib/../lib/crti.o succeeded
 # |/media/Heiwa/clang0-tools/bin/../../clang0-tools/lib/../lib/crtn.o succeeded
 ```
-> **NOTE!**  
+> #### NOTE!
 > Don't delete ${LLVM_SRC} directory after above step.
 
 <h2></h2>
