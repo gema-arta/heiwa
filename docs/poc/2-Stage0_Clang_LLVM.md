@@ -218,7 +218,7 @@ readelf -l a.out | grep Requesting
 > Required to build Stage-0 Clang/LLVM that depends on `-ltinfo` or `-lterminfo` ld's flags.
 ```sh
 # Build.
-time { make CC="${HEIWA_TARGET}-gcc" CFLAGS="$COMMON_FLAGS -Wall -fPIC all"; }
+time { make CC="${HEIWA_TARGET}-gcc" CFLAGS="$COMMON_FLAGS -Wall -fPIC" all; }
 
 # Install.
 time { make PREFIX=/ DESTDIR=/clang0-tools install; }
