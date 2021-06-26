@@ -123,11 +123,11 @@ time { make -C build install && rm -rf build && popd; }
 # Configure source.
 pushd "${LLVM_SRC}/projects/libcxxabi/" && \
     cmake -B build \
-        -DCMAKE_INSTALL_PREFIX="/clang1-tools"                           \
-        -DLIBCXXABI_ENABLE_STATIC=ON                                     \
-        -DLIBCXXABI_USE_COMPILER_RT=ON                                   \
-        -DLIBCXXABI_USE_LLVM_UNWINDER=ON                                 \
-        -DLIBCXXABI_LIBUNWIND_PATH="/clang1-tools/lib"                   \
+        -DCMAKE_INSTALL_PREFIX="/clang1-tools"                            \
+        -DLIBCXXABI_ENABLE_STATIC=ON                                      \
+        -DLIBCXXABI_USE_COMPILER_RT=ON                                    \
+        -DLIBCXXABI_USE_LLVM_UNWINDER=ON                                  \
+        -DLIBCXXABI_LIBUNWIND_PATH="/clang1-tools/lib"                    \
         -DLIBCXXABI_LIBCXX_INCLUDES="${LLVM_SRC}/projects/libcxx/include" \
         -DLLVM_PATH="$LLVM_SRC"
 
