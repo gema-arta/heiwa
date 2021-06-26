@@ -7,6 +7,7 @@ https://ftp.gnu.org/gnu/mpc/mpc-1.2.1.tar.gz
 https://musl.libc.org/releases/musl-1.2.2.tar.gz
 https://github.com/landley/toybox/archive/refs/tags/0.8.5.tar.gz
 http://distcache.freebsd.org/local-distfiles/itetcu/libexecinfo-1.1.tar.bz2
+https://ftp.barfooze.de/pub/sabotage/tarballs/netbsd-curses-0.3.2.tar.xz
 https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.0/llvm-12.0.0.src.tar.xz
 https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.0/clang-12.0.0.src.tar.xz
 https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.0/compiler-rt-12.0.0.src.tar.xz
