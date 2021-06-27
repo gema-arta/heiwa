@@ -322,5 +322,5 @@ EOF
 # Unset exported flags and configure new PATH since "/clang0-tools" isn't used anymore.
 unset B CFLAGS CXXFLAGS
 export PATH="/clang1-tools/bin:/clang1-tools/usr/bin:/bin:/usr/bin"
-sed -i "s|PATH=.*|PATH=\"${PATH}\"|" ~/.bashrc
+sed -i "s|PATH=.*|PATH=\"${PATH}\"|" ~/.bashrc && source ~/.bashrc
 ```
