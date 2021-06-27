@@ -331,7 +331,7 @@ CC="${TARGET_TRUPLE}-clang"
 CXX="${TARGET_TRUPLE}-clang++"
 AR="llvm-ar"
 AS="llvm-as"
-RANLIB="llvm-ranlib
+RANLIB="llvm-ranlib"
 LD="ld.lld"
 STRIP="llvm-strip"
 export CC CXX AR AS RANLIB LD STRIP
