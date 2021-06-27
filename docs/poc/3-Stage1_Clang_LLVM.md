@@ -320,6 +320,6 @@ cat > /clang1-tools/bin/x86_64-pc-linux-musl.cfg << "EOF"
 EOF
 
 # Unset exported flags and configure new PATH since "/clang0-tools" isn't used anymore.
-unset CFLAGS CXXFLAGS
+unset B CFLAGS CXXFLAGS
 export PATH="/clang1-tools/bin:/clang1-tools/usr/bin:/bin:/usr/bin"
 ```
