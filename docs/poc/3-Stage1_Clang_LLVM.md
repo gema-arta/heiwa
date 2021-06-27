@@ -39,7 +39,6 @@ ln -sv ../lib/libc.so /clang1-tools/bin/ldd
 mkdir -v /clang1-tools/etc && \
 cat > /clang1-tools/etc/ld-musl-x86_64.path << "EOF"
 /clang1-tools/lib
-/clang1-tools/gnu/lib
 EOF
 
 # Quick test for Stage-0 Clang/LLVM.
