@@ -83,6 +83,7 @@ export HEIWA_TARGET="${HEIWA_TARGET}"
 export HEIWA_ARCH="${HEIWA_ARCH}"
 export HEIWA_CPU="${HEIWA_CPU}"
 export TARGET_TRUPLE="${TARGET_TRUPLE}"
+# Make's multiple jobs based on CPU core/threads
 alias make="make -j\$(nproc) -l\$(nproc)"
 EOF
 source ~/.bashrc
