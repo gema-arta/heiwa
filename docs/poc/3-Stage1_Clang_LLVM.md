@@ -304,9 +304,22 @@ time {
     popd && rm -rf build
 }
 
-# Since binutils will not be used, create the symlinks to the LLVM counterparts.
-for B in as ar ranlib readelf nm objcopy objdump size strip
-do
+# Since Binutils won't be used, create a symlink to the LLVM counterparts.
+for B in as ar ranlib readelf nm objcopy objdump size strip; do
     ln -sv llvm-${B} /clang1-tools/bin/${B}
 done
+
+# Set lld as default toolchain linker.
+ln -sv lld /clang1-tools/bin/ld
+
+# Configure Stage-1 Clang to build binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" instead of "/lib/ld-musl-x86_64.so.1".
+ln -sv clang-12 /clang1-tools/bin/x86_64-pc-linux-musl-clang   && \
+ln -sv clang-12 /clang1-tools/bin/x86_64-pc-linux-musl-clang++ && \
+cat > /clang1-tools/bin/x86_64-pc-linux-musl.cfg << "EOF"
+-Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1
+EOF
+
+# Unset exported flags and configure new PATH since "/clang0-tools" isn't used anymore.
+unset CFLAGS CXXFLAGS
+export PATH="/clang1-tools/bin:/clang1-tools/usr/bin:/bin:/usr/bin"
 ```
