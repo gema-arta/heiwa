@@ -182,7 +182,7 @@ time { make -C build install && rm -rf build && popd; }
 > Required to build Stage-1 Clang/LLVM that depends on `-ltinfo` or `-lterminfo` ld's flags.
 ```bash
 # Build.
-time { make CC=clang CFLAGS="$COMMON_FLAGS -Wall -fPIC" all; }
+time { make CC="${HEIWA_TARGET}-clang" CFLAGS="$COMMON_FLAGS -Wall -fPIC" all; }
 
 # Install.
 time { make PREFIX=/ DESTDIR=/clang1-tools install; }
