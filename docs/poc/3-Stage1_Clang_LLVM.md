@@ -328,4 +328,6 @@ popd
 
 ### `9` - OpenBSD's M4
 > #### `6.7` or newer
-> 
+> Required for most programs and libraries. The M4 package contains a macro processor.
+```sh
+```
