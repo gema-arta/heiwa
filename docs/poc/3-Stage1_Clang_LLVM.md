@@ -294,9 +294,19 @@ cmake -B build \
 time { make -C build; }
 
 # Install.
+# But some binaries is not installed, make sure to install important binaries.
 time {
     pushd build/ && \
         cmake -DCMAKE_INSTALL_PREFIX="/clang1-tools" -P cmake_install.cmake && \
+        cp -v bin/llvm-as /clang1-tools/bin/                                && \
+        cp -v bin/llvm-readobj /clang1-tools/bin/                           && \
+        ln -sv llvm-readobj /clang1-tools/bin/llvm-readelf                  && \
     popd && rm -rf build
 }
+
+# Since binutils will not be used, create the symlinks to the LLVM counterparts.
+for B in as ar ranlib readelf nm objcopy objdump size strip
+do
+    ln -sv llvm-${B} /clang1-tools/bin/${B}
+done
 ```
