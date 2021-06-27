@@ -218,7 +218,7 @@ readelf -l a.out | grep Requesting
 > Required to build Stage-0 Clang/LLVM that depends on `-ltinfo` or `-lterminfo` ld's flags.
 ```bash
 # Build.
-time { make CC="${HEIWA_TARGET}-gcc" CFLAGS="$COMMON_FLAGS -Wall -fPIC" all; }
+time { make CC="${HEIWA_TARGET}-gcc" CFLAGS="-Wall -fPIC" all; }
 
 # Install.
 time { make PREFIX=/ DESTDIR=/clang0-tools install; }
@@ -237,7 +237,7 @@ patch -Np1 -i ../../patches/libexecinfo-1.1/30-linux-makefile.patch
 time {
     [[ -n "$HEIWA_TARGET" ]] && make \
     CC="${HEIWA_TARGET}-gcc" AR="${HEIWA_TARGET}-ar" \
-    CFLAGS="$COMMON_FLAGS -fno-omit-frame-pointer"
+    CFLAGS="-fno-omit-frame-pointer"
 }
 
 # Install.
@@ -255,8 +255,8 @@ cp -v ../../files/toybox-0.8.5/.config_file_no_libz_no_ssl .config
 
 # Build.
 time {
-    [[ -n "$HEIWA_TARGET" ]] && make \
-    CC="${HEIWA_TARGET}-gcc" CFLAGS="$COMMON_FLAGS"
+    [[ -n "$HEIWA_TARGET" ]] && \
+    make CC="${HEIWA_TARGET}-gcc" 
 }
 
 # Install.
