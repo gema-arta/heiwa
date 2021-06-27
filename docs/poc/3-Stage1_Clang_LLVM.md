@@ -349,8 +349,8 @@ popd
 # Configure source.
 ./configure --prefix=/clang1-tools --enable-m4
 
-# Build.
-time { make; }
+# Build. Fails when using multiple jobs.
+time { make -j1; }
 
 # Install.
 ```
