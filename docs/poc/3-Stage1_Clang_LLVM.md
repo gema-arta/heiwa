@@ -353,4 +353,5 @@ popd
 time { make -j1; }
 
 # Install.
+time { make install; }
 ```
