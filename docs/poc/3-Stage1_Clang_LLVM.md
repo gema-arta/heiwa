@@ -152,6 +152,8 @@ time {
 
 > No need to re-decompress package.
 ```bash
+# Disable libatomic detection for Linux, since to get a rid of GCC libraries.
+
 # Configure source.
 pushd "${LLVM_SRC}/projects/libcxx/" && \
     cmake -B build  \
