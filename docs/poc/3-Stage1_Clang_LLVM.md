@@ -318,10 +318,24 @@ cat > /clang1-tools/bin/x86_64-pc-linux-musl.cfg << "EOF"
 -Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1
 EOF
 
+
 # Unset exported flags and configure new PATH since "/clang0-tools" isn't used anymore.
 unset B CFLAGS CXXFLAGS
 export PATH="/clang1-tools/bin:/clang1-tools/usr/bin:/bin:/usr/bin"
-sed -i "s|PATH=.*|PATH=\"${PATH}\"|" ~/.bashrc && source ~/.bashrc
+
+# Configure new Stage-1 Clang/LLVM environment.
+sed -i "s|PATH=.*|PATH=\"${PATH}\"|" ~/.bashrc
+cat >> ~/.bashrc < "EOF"
+CC="${TARGET_TRUPLE}-clang"
+CXX="${TARGET_TRUPLE}-clang++"
+AR=llvm-ar
+AS=llvm-as
+RANLIB=llvm-ranlib
+LD=ld.lld
+STRIP=llvm-strip
+export CC CXX AR AS RANLIB LD STRIP
+EOF
+source ~/.bashrc
 
 popd
 ```
