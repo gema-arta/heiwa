@@ -346,4 +346,11 @@ popd
 > #### `6.7` or newer
 > Required for most programs and libraries. The M4 package contains a macro processor.
 ```sh
+# Configure source.
+./configure --prefix=/clang1-tools --enable-m4
+
+# Build.
+time { make; }
+
+# Install.
 ```
