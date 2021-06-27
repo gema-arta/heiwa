@@ -179,7 +179,7 @@ time { make -C build install && rm -rf build && popd; }
 
 ### `6` - NetBSD's Curses
 > #### `0.3.2` or newer
-> Required to build Stage-0 Clang/LLVM that depends on `-ltinfo` or `-lterminfo` ld's flags.
+> Required to build Stage-1 Clang/LLVM that depends on `-ltinfo` or `-lterminfo` ld's flags.
 ```bash
 # Build.
 time { make CC=clang CFLAGS="$COMMON_FLAGS -Wall -fPIC" all; }
