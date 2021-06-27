@@ -352,7 +352,7 @@ time {
 # Set lld as default toolchain linker.
 ln -sv lld /clang0-tools/bin/ld
 
-# Configure Clang to build binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" instead of "/lib/ld-musl-x86_64.so.1".
+# Configure Stage-0 Clang to build binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" instead of "/lib/ld-musl-x86_64.so.1".
 [[ -n "$HEIWA_TARGET" ]] && \
 ln -sv clang-12 "/clang0-tools/bin/${HEIWA_TARGET}-clang"   && \
 ln -sv clang-12 "/clang0-tools/bin/${HEIWA_TARGET}-clang++" && \
