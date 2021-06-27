@@ -177,7 +177,18 @@ time { make -C build install && rm -rf build && popd; }
 > #### ^ NOTE!
 > Now, you can safely remove ${LLVM_SRC} directory.
 
-### `6` - libexecinfo
+### `6` - NetBSD's Curses
+> #### `0.3.2` or newer
+> Required to build Stage-0 Clang/LLVM that depends on `-ltinfo` or `-lterminfo` ld's flags.
+```bash
+# Build.
+time { make CC=clang CFLAGS="$COMMON_FLAGS -Wall -fPIC" all; }
+
+# Install.
+time { make PREFIX=/ DESTDIR=/clang1-tools install; }
+```
+
+### `7` - libexecinfo
 > #### `1.1` or newer
 > Required to build Stage-1 Clang/LLVM.
 ```bash
@@ -195,7 +206,8 @@ install -vm755 -t /clang1-tools/lib/ libexecinfo.a libexecinfo.so.1
 ln -sv libexecinfo.so.1 /clang1-tools/lib/libexecinfo.so
 ```
 
-### `7` - Clang/LLVM
+
+### `8` - Clang/LLVM
 > #### `12.0.0`
 > Bootstrapping Stage-1 Clang/LLVM toolchains with `libgcc_s.so*` and `libstdc++.so*` free.
 ```bash
