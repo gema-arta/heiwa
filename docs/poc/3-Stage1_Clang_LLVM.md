@@ -381,8 +381,8 @@ EOF
 ./configure \
     --prefix=/clang1-tools   \
     --without-bash-malloc    \
-    --build=${TARGET_TRUPLE} \
-    --host=${TARGET_TRUPLE}  \
+    --build="$TARGET_TRUPLE" \
+    --host="$TARGET_TRUPLE"  \
     --cache-file=config.cache
 
 # Build.
