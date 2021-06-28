@@ -219,7 +219,9 @@ readelf -l a.out | grep Requesting
 
 ### `6` - NetBSD's Curses
 > #### `0.3.2` or newer
-> Required to build Stage-0 Clang/LLVM that depends on `-ltinfo` or `-lterminfo` ld's flags.
+> The NetBSD's Curses package contains libraries for terminal-independent handling of character screens.
+
+> **Required!** To build Stage-0 Clang/LLVM and most programs that depends on `-ltinfo` or `-lterminfo` linker's flags.
 ```bash
 # Build.
 time { make CC="${HEIWA_TARGET}-gcc" CFLAGS="-Wall -fPIC" all; }
@@ -230,7 +232,9 @@ time { make PREFIX=/ DESTDIR=/clang0-tools install; }
 
 ### `7` - libexecinfo (standalone)
 > #### `1.1` or newer
-> Required to build Stage-0 Clang/LLVM.
+> The libexecinfo package contains backtrace facility that usually found in GNU libc (glibc).
+
+> **Required!** To build Stage-0 Clang/LLVM, since using musl libc.
 ```bash
 # Apply patches (from Alpine Linux).
 patch -Np1 -i ../../patches/libexecinfo-1.1/10-execinfo.patch
