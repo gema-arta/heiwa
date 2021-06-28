@@ -275,8 +275,10 @@ time { make PREFIX=/clang0-tools install; }
 
 > **Required!** First build Clang/LLVM toolchain that will be used for bootstrapping Stage-1 Clang/LLVM toolchains without depends on `libgcc_s.so*` and `libstdc++.so*` later.
 ```bash
-# Rename the llvm source directory to ${LLVM_SRC}.
-popd; mv -v llvm-12.0.0.src "$LLVM_SRC" && pushd "$LLVM_SRC"
+popd
+
+# Rename the LLVM source directory to ${LLVM_SRC}.
+mv -v llvm-12.0.0.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 
 # Decompress clang, lld, compiler-rt, libcxx, libcxxabi, and libunwind to correct directories.
 pushd "${LLVM_SRC}/projects/" && \
