@@ -558,7 +558,7 @@ time { make install; }
 
 ### `18` - GNU's Patch
 > #### `2.7.6` or newer
-> The Patch package contains a program for modifying or creating files by applying a "patch" file typically created by the diff program.
+> The GNU's Patch package contains a program for modifying or creating files by applying a "patch" file typically created by the diff program.
 
 > **Required!** For the current and next stage (chrooting new environment). The GNU implementation of "patch" is can handle offset lines, which is powerful.
 ```bash
