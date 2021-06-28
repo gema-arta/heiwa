@@ -540,7 +540,7 @@ ln -sv unpigz /clang1-tools/bin/gunzip
 > #### `4.3` or newer
 > The GNU's Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
  
-> **Required!** For the current and next stage (chrooting new environment).
+> **Required!** For most build systems that depends on GNU implementation style.
 ```bash
 # Configure source.
 ./configure \
@@ -555,6 +555,27 @@ time { make; }
 # Install.
 time { make install; }
 ```
+
+### `18` - GNU's Patch
+> #### `2.7.6` or newer
+> The Patch package contains a program for modifying or creating files by applying a "patch" file typically created by the diff program.
+
+> **Required!** For most build systems that depends on GNU implementation style.
+```bash
+# Configure source.
+./configure \
+    --prefix=/clang1-tools   \
+    --build="$TARGET_TRUPLE" \
+    --host="$TARGET_TRUPLE"  \
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+
 
 <!--
     ### `` - OpenBSD's Yacc
