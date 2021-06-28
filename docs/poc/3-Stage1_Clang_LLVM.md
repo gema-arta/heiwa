@@ -391,3 +391,9 @@ time { make; }
 # Install.
 time { make install; }
 ```
+
+### `11` - OpenBSD's Yacc
+> #### `6.6` or newer
+> Required for some programs that using `yacc` style parser generator. The Yacc package contains a parser generator.
+```sh
+```
