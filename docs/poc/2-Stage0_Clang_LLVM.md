@@ -48,7 +48,7 @@ cp -rv usr/include "/clang0-tools/${HEIWA_TARGET}/."
 
 ### `2` - GNU's Binutils
 > #### `2.36.1` or newer
-> The Binutils package contains a linker, an assembler, and other tools for handling object files.
+> The GNU's Binutils package contains a linker, an assembler, and other tools for handling object files.
 
 > **Required!** to build GCC in current stage.
 ```bash
@@ -72,7 +72,7 @@ time { make configure-host && make; }
 time { make install; }
 ```
 
-### `3` -  GNU's GCC (static)
+### `3` -  GCC (static)
 > #### `10.3.1_git20210424` (from Alpine Linux)
 > The GCC package contains the GNU compiler collection, which includes the C and C++ compilers.
 
@@ -145,7 +145,7 @@ cat > /clang0-tools/etc/ld-musl-x86_64.path << "EOF"
 EOF
 ```
 
-### `5` -  GNU's GCC (final)
+### `5` - GCC (final)
 > #### `10.3.1_git20210424` (from Alpine Linux)
 > The GCC package contains the GNU compiler collection, which includes the C and C++ compilers.
 
