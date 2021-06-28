@@ -429,7 +429,7 @@ printf pwd readlink realpath rm rmdir seq sha1sum shred sleep sort split stat st
 tail tee test timeout touch tr true truncate tty uname uniq unlink wc who whoami yes file
 find xargs egrep grep fgrep sed tar"
 
-# Checks 87 commands, and make sure is enabled (=YES).
+# Checks 87 commands, and make sure is enabled (=y).
 # Add "| wc -l" after "done" to checks total.
 for X in ${CFFGPT}; do
     grep -v '#' .config | grep -i "_${X}=" || echo "* $X not CONFIGURED"
