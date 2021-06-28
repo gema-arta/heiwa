@@ -22,7 +22,7 @@ CC="clang" CXX="clang++"
 export CC CXX
 
 # Configure source.
-./configure --prefix=/ 
+./configure --prefix=/
 
 # Build.
 time { make; }
