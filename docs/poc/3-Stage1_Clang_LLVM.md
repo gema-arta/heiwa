@@ -524,7 +524,7 @@ time { make install; }
 > #### `2.6` or newer
 > The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
 
-> **Required!** For the next stage (chrooting new environment).
+> **Required!** For the current and next stage (chrooting new environment).
 ```bash
 # Build.
 time { make CC="$CC" CFLAGS="$CFLAGS"; }
@@ -536,6 +536,25 @@ ln -sv pigz /clang1-tools/bin/gzip
 ln -sv unpigz /clang1-tools/bin/gunzip
 ```
 
+### `17` - GNU's Make
+> #### `4.3` or newer
+> The GNU's Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
+ 
+> **Required!** For the current and next stage (chrooting new environment).
+```bash
+# Configure source.
+./configure \
+    --prefix=/clang1-tools   \
+    --build="$TARGET_TRUPLE" \
+    --host="$TARGET_TRUPLE"
+    --without-guile
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
 
 <!--
     ### `` - OpenBSD's Yacc
