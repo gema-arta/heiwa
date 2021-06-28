@@ -324,13 +324,10 @@ time {
     popd && rm -rf build
 }
 
-# Since Binutils won't be used, create a symlink to LLVM tools.
+# Since Binutils won't be used, create a symlink to LLVM tools and set lld as default toolchain linker.
 for B in as ar ranlib readelf nm objcopy objdump size strip; do
     ln -sv llvm-${B} /clang1-tools/bin/${B}
-done
-
-# Set lld as default toolchain linker.
-ln -sv lld /clang1-tools/bin/ld
+done; ln -sv lld /clang1-tools/bin/ld
 
 # Configure Stage-1 Clang to build binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" instead of "/lib/ld-musl-x86_64.so.1".
 ln -sv clang-12 /clang1-tools/bin/x86_64-pc-linux-musl-clang   && \
