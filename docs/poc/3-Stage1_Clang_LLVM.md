@@ -314,8 +314,7 @@ cmake -B build \
 # Build.
 time { make -C build; }
 
-# Install.
-# But some binaries is not installed, make sure to install important binaries.
+# Install, but some binaries is not installed, make sure to install important binaries.
 time {
     pushd build/ && \
         cmake -DCMAKE_INSTALL_PREFIX="/clang1-tools" -P cmake_install.cmake && \
