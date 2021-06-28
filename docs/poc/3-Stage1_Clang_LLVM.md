@@ -508,7 +508,7 @@ install -vm755 -t /clang1-tools/bin/ msgfmt msgmerge xgettext
 > **Required!** For the current and next stage (chrooting new environment).
 ```bash
 # Build.
-time { make CC="$CC"; }
+time { make CC="$CC" CFLAGS="$CFLAGS"; }
 
 # Install and make symlink as gzip programs.
 install -vm755 -t /clang1-tools/bin pigz
