@@ -46,9 +46,9 @@ mkdir -pv "/clang0-tools/${HEIWA_TARGET}" && \
 cp -rv usr/include "/clang0-tools/${HEIWA_TARGET}/."
 ```
 
-### `2` - GNU's Binutils
+### `2` - GNU Binutils
 > #### `2.36.1` or newer
-> The GNU's Binutils package contains a linker, an assembler, and other tools for handling object files.
+> The GNU Binutils package contains a linker, an assembler, and other tools for handling object files.
 
 > **Required!** to build GCC in current stage.
 ```bash
@@ -217,9 +217,9 @@ readelf -l a.out | grep Requesting
 # |      [Requesting program interpreter: /clang0-tools/lib/ld-musl-x86_64.so.1]
 ```
 
-### `6` - NetBSD's Curses
+### `6` - NetBSD Curses
 > #### `0.3.2` or newer
-> The NetBSD's Curses package contains libraries for terminal-independent handling of character screens.
+> The NetBSD Curses package contains libraries for terminal-independent handling of character screens.
 
 > **Required!** To build Stage-0 Clang/LLVM and most programs that depends on `-ltinfo` or `-lterminfo` linker's flags.
 ```bash
