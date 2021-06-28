@@ -31,7 +31,6 @@ time { make mrproper; }
 # The recommended make target `headers_install` cannot be used, because it requires rsync, which may not be available.
 # The headers are first placed in "./usr/", then copied to the needed location.
 time {
-    [[ -n "$HEIWA_ARCH" ]] && \
     make ARCH="$HEIWA_ARCH" headers_check && \
     make ARCH="$HEIWA_ARCH" headers
 }
@@ -41,7 +40,6 @@ find usr/include -name '.*' -exec rm -rfv {} \;
 rm -fv usr/include/Makefile
 
 # Install.
-[[ -n "$HEIWA_TARGET" ]] && \
 mkdir -pv "/clang0-tools/${HEIWA_TARGET}" && \
 cp -rv usr/include "/clang0-tools/${HEIWA_TARGET}/."
 ```
@@ -51,7 +49,7 @@ cp -rv usr/include "/clang0-tools/${HEIWA_TARGET}/."
 > Required to build GCC.
 ```bash
 # Create a dedicated directory and configure source.
-[[ -n "$HEIWA_TARGET" ]] && mkdir -v build && cd build && \
+mkdir -v build && cd build && \
 ../configure \
     --prefix=/clang0-tools                         \
     --target="$HEIWA_TARGET"                       \
@@ -80,7 +78,6 @@ tar xf ../mpfr-4.1.0.tar.xz && mv -v mpfr-4.1.0 mpfr
 tar xzf ../mpc-1.2.1.tar.gz && mv -v mpc-1.2.1 mpc
 
 # Create a dedicated directory and configure source.
-[[ -n "$HEIWA_HOST" && "$HEIWA_TARGET" && "$HEIWA_CPU" ]] && \
 mkdir -v build && cd build && \
 CFLAGS="-g0 -O0" CXXFLAGS="-g0 -O0" ../configure    \
     --prefix=/clang0-tools    --build="$HEIWA_HOST" \
@@ -108,7 +105,7 @@ time { make install-gcc install-target-libgcc; }
 > Required for every programs and libraries.
 ```bash
 # Configure source.
-[[ -n "$HEIWA_TARGET" ]] && ./configure \
+./configure \
     CROSS_COMPILE="${HEIWA_TARGET}-"    \
     --prefix=/                          \
     --target="$HEIWA_TARGET"
@@ -160,7 +157,6 @@ case $(uname -m) in
 esac
 
 # Create a dedicated directory and configure source.
-[[ -n "$HEIWA_HOST" && "$HEIWA_TARGET" ]] && \
 mkdir -v build && cd build && \
 AR=ar LDFLAGS="-Wl,-rpath,/clang0-tools/lib" \
 ../configure \
@@ -184,15 +180,13 @@ AR=ar LDFLAGS="-Wl,-rpath,/clang0-tools/lib" \
 
 # Build.
 time {
-    [[ -n "$HEIWA_TARGET" ]] && make \
-    AS_FOR_TARGET="${HEIWA_TARGET}-as" LD_FOR_TARGET="${HEIWA_TARGET}-ld"
+    make AS_FOR_TARGET="${HEIWA_TARGET}-as" LD_FOR_TARGET="${HEIWA_TARGET}-ld"
 }
 
 # Install.
 time { make install; }
 
 # Adjust GCC to produce programs and libraries that will use musl libc in "/clang0-tools/".
-[[ -n "$HEIWA_TARGET" ]] && \
 export SPECFILE="$(dirname $(${HEIWA_TARGET}-gcc -print-libgcc-file-name))/specs"
 "${HEIWA_TARGET}-gcc" -dumpspecs > specs
 sed -i 's|/lib/ld-musl-x86_64.so.1|/clang0-tools/lib/ld-musl-x86_64.so.1|g' specs
@@ -235,8 +229,7 @@ patch -Np1 -i ../../patches/libexecinfo-1.1/30-linux-makefile.patch
 
 # Build.
 time {
-    [[ -n "$HEIWA_TARGET" ]] && make \
-    CC="${HEIWA_TARGET}-gcc" AR="${HEIWA_TARGET}-ar" \
+    make CC="${HEIWA_TARGET}-gcc" AR="${HEIWA_TARGET}-ar" \
     CFLAGS="-fno-omit-frame-pointer"
 }
 
@@ -254,10 +247,7 @@ ln -sv libexecinfo.so.1 /clang0-tools/lib/libexecinfo.so
 cp -v ../../files/toybox-0.8.5/.config.file.nlns .config
 
 # Build.
-time {
-    [[ -n "$HEIWA_TARGET" ]] && \
-    make CC="${HEIWA_TARGET}-gcc" 
-}
+time { make CC="${HEIWA_TARGET}-gcc"; }
 
 # Install.
 time { make PREFIX=/clang0-tools install; }
@@ -353,7 +343,6 @@ time {
 ln -sv lld /clang0-tools/bin/ld
 
 # Configure Stage-0 Clang to build binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" instead of "/lib/ld-musl-x86_64.so.1".
-[[ -n "$HEIWA_TARGET" ]] && \
 ln -sv clang-12 "/clang0-tools/bin/${HEIWA_TARGET}-clang"   && \
 ln -sv clang-12 "/clang0-tools/bin/${HEIWA_TARGET}-clang++" && \
 cat > "/clang0-tools/bin/${HEIWA_TARGET}.cfg" << "EOF"
@@ -361,7 +350,6 @@ cat > "/clang0-tools/bin/${HEIWA_TARGET}.cfg" << "EOF"
 EOF
 
 # Configure cross GCC of clang0-tools to match the same output as Clang.
-[[ -n "$HEIWA_TARGET" ]] && \
 export SPECFILE="$(dirname $(${HEIWA_TARGET}-gcc -print-libgcc-file-name))/specs"
 "${HEIWA_TARGET}-gcc" -dumpspecs > specs 
 sed -i 's|/lib/ld-musl-x86_64.so.1|/clang1-tools\/lib\/ld-musl-x86_64.so.1|g' specs
