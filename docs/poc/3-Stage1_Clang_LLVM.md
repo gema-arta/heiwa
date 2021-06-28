@@ -524,7 +524,7 @@ time { make install; }
 > #### `2.6` or newer
 > The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
 
-> **Required!** As default ".gz" files decompressor for current and next stage (chrooting new environment).
+> **Required!** As default ".gz" files decompressor for the current and next stage (chrooting new environment).
 ```bash
 # Build.
 time { make CC="$CC" CFLAGS="$CFLAGS"; }
