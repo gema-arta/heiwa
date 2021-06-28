@@ -251,7 +251,7 @@ ln -sv libexecinfo.so.1 /clang0-tools/lib/libexecinfo.so
 > Optional? Maybe you need.
 ```bash
 # Copy Toybox's .config file.
-cp -v ../../files/toybox-0.8.5/.config_file_no_libz_no_ssl .config
+cp -v ../../files/toybox-0.8.5/.config.file.nlns .config
 
 # Build.
 time {
