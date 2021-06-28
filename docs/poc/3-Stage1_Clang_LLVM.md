@@ -192,7 +192,7 @@ time { make -C build install && rm -rf build && popd; }
 > #### `0.3.2` or newer
 > The NetBSD's Curses package contains libraries for terminal-independent handling of character screens.
 
-> **Required!** To build Stage-1 Clang/LLVM that depends on `-ltinfo` or `-lterminfo` ld's flags.
+> **Required!** To build Stage-1 Clang/LLVM that depends on `-ltinfo` or `-lterminfo` linker flags.
 ```bash
 # Build.
 time { make CC="${HEIWA_TARGET}-clang" CFLAGS="$COMMON_FLAGS -Wall -fPIC" all; }
