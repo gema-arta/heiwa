@@ -236,7 +236,7 @@ ln -sv libexecinfo.so.1 /clang1-tools/lib/libexecinfo.so
 popd
 
 # Rename the LLVM source directory to ${LLVM_SRC}.
-mv -v llvm-12.0.0.src "$LLVM_SRC" && pushd "$LLVM_SRC"
+mv -v llvm-12.0.0.src "$LLVM_SRC" && cd "$LLVM_SRC"
 
 # Decompress clang, lld, and compiler-rt to correct directories.
 pushd "${LLVM_SRC}/projects/" && \
@@ -358,7 +358,7 @@ export CC CXX AR AS RANLIB LD STRIP
 EOF
 source ~/.bash_profile
 
-popd
+cd "${HEIWA}/sources/pkgs/"
 ```
 
 ### `9` - OpenBSD's M4
