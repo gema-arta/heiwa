@@ -48,7 +48,9 @@ cp -rv usr/include "/clang0-tools/${HEIWA_TARGET}/."
 
 ### `2` - GNU's Binutils
 > #### `2.36.1` or newer
-> Required to build GCC.
+> The Binutils package contains a linker, an assembler, and other tools for handling object files.
+
+> **Required!** to build GCC in current stage.
 ```bash
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build && \
@@ -72,7 +74,9 @@ time { make install; }
 
 ### `3` -  GNU's GCC (static)
 > #### `10.3.1_git20210424` (from Alpine Linux)
-> Required to bootstrap musl libc.
+> The GCC package contains the GNU compiler collection, which includes the C and C++ compilers.
+
+> **Required!** This build of GCC is mainly done so that the C library can be built next.
 ```bash
 # GCC requires the GMP, MPFR, and MPC packages to either be present on the host or to be present in source form within the GCC source tree.
 tar xf ../gmp-6.2.1.tar.xz  && mv -v gmp-6.2.1 gmp
@@ -104,7 +108,9 @@ time { make install-gcc install-target-libgcc; }
 
 ### `4` - musl
 > #### `1.2.2` or newer
-> Required for every programs and libraries.
+> The musl package contains the main C library. This library provides the basic routines for allocating memory, searching directories, opening and closing files, reading and writing files, string handling, pattern matching, arithmetic, and so on.
+
+> **Required!**
 ```bash
 # Configure source.
 ./configure \
@@ -141,7 +147,9 @@ EOF
 
 ### `5` -  GNU's GCC (final)
 > #### `10.3.1_git20210424` (from Alpine Linux)
-> Required to compile required libraries to build Stage-0 Clang/LLVM.
+> The GCC package contains the GNU compiler collection, which includes the C and C++ compilers.
+
+> **Required!** This second build of GCC will produce the final cross compiler which will use the previously built C library.
 ```bash
 # GCC requires the GMP, MPFR, and MPC packages to either be present on the host or to be present in source form within the GCC source tree.
 tar xf ../gmp-6.2.1.tar.xz  && mv -v gmp-6.2.1 gmp
