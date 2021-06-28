@@ -377,7 +377,7 @@ time { make install; }
 > #### `5.1` (with patch level 8) or newer
 > The Bash package contains the Bourne-Again SHell.
 
-> **Required!** As default shell, for the next stage (chrooting new environment).
+> **Required!** As default shell for the next stage (chrooting new environment).
 ```bash
 # Cross compiling the configure script doesn't determine correct values for the following values.
 # Set the values manually.
