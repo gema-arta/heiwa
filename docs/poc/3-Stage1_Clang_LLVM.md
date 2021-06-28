@@ -357,7 +357,7 @@ time { make install; }
 ```
 
 ### `10` -  Bash
-> #### `5.1` (patchlevel 8) or newer
+> #### `5.1` (with patch level 8) or newer
 > Required for next stage, chrooting new environment. The Bash package contains the Bourne-Again SHell.
 ```sh
 # Cross compiling the configure script doesn't determine correct values for the following values.
