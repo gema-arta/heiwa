@@ -413,7 +413,7 @@ time { make install; }
 
 ### `11` - Toybox's (Coreutils, File, Findutils, Grep, Sed, and Tar)
 > #### `0.8.5`
-The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
+> The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
 > **Required!** For the current and next stage (chrooting new environment).
 ```bash
