@@ -203,7 +203,7 @@ time { make PREFIX=/ DESTDIR=/clang1-tools install; }
 
 ### `7` - libexecinfo (standalone)
 > #### `1.1` or newer
-> The libexecinfo package contains backtrace facility that usually found in GNU's libc (glibc).
+> The libexecinfo package contains backtrace facility that usually found in GNU libc (glibc).
 
 > **Required!** To build Stage-1 Clang/LLVM, since using musl libc.
 ```bash
