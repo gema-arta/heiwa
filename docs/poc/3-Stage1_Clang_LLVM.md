@@ -163,7 +163,9 @@ time {
 
 > **Required!**
 ```bash
-# Disable libatomic detection for Linux, since to get a rid of GCC libraries.
+# Delete the libatomic detection for Linux, since to get a rid of GCC libraries.
+sed -i '/check_library_exists(atomic __atomic_fetch_add_8 "" LIBCXX_HAS_ATOMIC_LIB)/d' \
+"${LLVM_SRC}/projects/libcxx/cmake/config-ix.cmake"
 
 # Configure source.
 pushd "${LLVM_SRC}/projects/libcxx/" && \
