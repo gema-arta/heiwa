@@ -228,7 +228,7 @@ ln -sv libexecinfo.so.1 /clang1-tools/lib/libexecinfo.so
 > #### `12.0.0`
 > C language family frontend for LLVM.
 
-> **Required!** As default toolchain. This will bootstrap Stage-1 Clang/LLVM toolchains with `libgcc_s.so*` and `libstdc++.so*` free.
+> **Required!** As default toolchain. This will build Stage-1 Clang/LLVM toolchains with `libgcc_s.so*` and `libstdc++.so*` free.
 ```bash
 # Rename the llvm source directory to ${LLVM_SRC}.
 popd
