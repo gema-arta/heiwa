@@ -441,7 +441,8 @@ time { make; }
 # Checks compiled 87 commands.
 ./toybox | tr ' ' '\n'i | grep -xE $(echo $CFFGPT | tr ' ' '|'i) | wc -l
 
-# Checks commands that not configured but compiled, "[".
+# Checks commands that not configured but compiled.
+# [
 ./toybox | tr ' ' '\n'i | grep -vxE $(echo $CFFGPT | tr ' ' '|'i)
 
 # So, totally is 88 commands.
