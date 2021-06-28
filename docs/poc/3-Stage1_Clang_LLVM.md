@@ -416,7 +416,7 @@ time { make BINDIR="${PREFIX}/bin" install && unset PREFIX; }
 ```
 
 ### `12` - Toybox's (Coreutils, File, Findutils, Grep, Sed, and Tar)
-> #### toybox-0.8.5
+> #### `0.8.5`
 > Required for the next stage, chrooting new environment. The Toybox package contains portable utilities for showing and setting the basic system characteristics.
 ```bash
 # Copy Toybox's .config file.
