@@ -501,11 +501,30 @@ time { make LIBINTL=MUSL prefix=/clang1-tools; }
 install -vm755 -t /clang1-tools/bin/ msgfmt msgmerge xgettext 
 ```
 
+### `15` - Zlib-ng
+> #### `2.0.5` or newer
+> The Zlib-ng package contains zlib data compression library for the next generation systems.
+
+> **Required!** By Pigz.
+```bash
+# Configure source.
+./configure \
+    --prefix=/clang1-tools \
+    --zlib-compat          \
+    --native
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
 ### `16` - Pigz
 > #### `2.6` or newer
 > The Pigz package contains parallel implementation of gzip, is a fully functional replacement for gzip that exploits multiple processors and multiple cores to the hilt when compressing data.
 
-> **Required!** For the current and next stage (chrooting new environment).
+> **Required!** For the next stage (chrooting new environment).
 ```bash
 # Build.
 time { make CC="$CC" CFLAGS="$CFLAGS"; }
