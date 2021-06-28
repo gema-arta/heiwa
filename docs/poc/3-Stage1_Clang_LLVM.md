@@ -490,9 +490,9 @@ time { make install; }
 
 ### `14` - Gettext-tiny
 > #### 0.3.2
-> The Gettext-tiny package provides lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices). These allow programs to be compiled with NLS (Native Language Support), enabling them to output messages in the user's native language.
+> The Gettext-tiny package provides lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
 
-> **Required!**
+> **Required!** To allow programs to be compiled with NLS (Native Language Support), enabling them to output messages in the user's native language.
 ```bash
 # Build.
 time { make LIBINTL=MUSL prefix=/clang1-tools; }
