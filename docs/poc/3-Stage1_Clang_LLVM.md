@@ -13,7 +13,9 @@
 
 ### `1` - musl
 > #### `1.2.2` or newer
-> Required for every programs and libraries.
+> The musl package contains the main C library. This library provides the basic routines for allocating memory, searching directories, opening and closing files, reading and writing files, string handling, pattern matching, arithmetic, and so on.
+
+> **Required!**
 ```bash
 # Set default compiler to Stage-0 Clang/LLVM.
 CC=clang CXX=clang++
@@ -61,7 +63,9 @@ grep "ld.lld:.*crt[1in].o" dummy.log
 
 ### `2` - Linux API Headers
 > #### Xanmod-CacULE, `5.12.x` or newer
-> Required for runtime C library (musl) to use Linux API.
+> The Linux API Headers expose the kernel's API for use by musl libc.
+
+> **Required!**
 ```bash
 # Make sure there are no stale files embedded in the package.
 time { make mrproper; }
@@ -84,9 +88,11 @@ cp -rv usr/include /clang1-tools/.
 
 ### `3` - LLVM's libunwind
 > #### `12.0.0`
-> Required for programs that needs to enable unwinding.
+> C++ runtime stack unwinder from LLVM.
 
-> No need to re-decompress package.
+> *No need to re-decompress package.*
+
+> **Required!**
 ```bash
 # Set default compiler to new symlink from Stage-0 Clang/LLVM.
 CC="${HEIWA_TARGET}-clang" CXX="${HEIWA_TARGET}-clang++"
@@ -119,9 +125,11 @@ time { make -C build install && rm -rf build && popd; }
 
 ### `4` - LLVM's libcxxabi
 > #### `12.0.0`
-> Required as Clang/LLVM's C++ ABI standard library.
+> Low level support for a standard C++ library from LLVM.
 
-> No need to re-decompress package.
+> *No need to re-decompress package.*
+
+> **Required!**
 ```bash
 # Configure source.
 pushd "${LLVM_SRC}/projects/libcxxabi/" && \
@@ -147,9 +155,11 @@ time {
 
 ### `5` - LLVM's libcxx
 > #### `12.0.0`
-> Required as Clang/LLVM's C++ standard library.
+> New implementation of the C++ standard library, targeting C++11 from LLVM.
 
-> No need to re-decompress package.
+> *No need to re-decompress package.*
+
+> **Required!**
 ```bash
 # Disable libatomic detection for Linux, since to get a rid of GCC libraries.
 
@@ -180,7 +190,9 @@ time { make -C build install && rm -rf build && popd; }
 
 ### `6` - NetBSD's Curses
 > #### `0.3.2` or newer
-> Required to build Stage-1 Clang/LLVM that depends on `-ltinfo` or `-lterminfo` ld's flags.
+> The NetBSD's Curses package contains libraries for terminal-independent handling of character screens.
+
+> **Required!** To build Stage-1 Clang/LLVM that depends on `-ltinfo` or `-lterminfo` ld's flags.
 ```bash
 # Build.
 time { make CC="${HEIWA_TARGET}-clang" CFLAGS="$COMMON_FLAGS -Wall -fPIC" all; }
@@ -191,7 +203,9 @@ time { make PREFIX=/ DESTDIR=/clang1-tools install; }
 
 ### `7` - libexecinfo (standalone)
 > #### `1.1` or newer
-> Required to build Stage-1 Clang/LLVM.
+> The libexecinfo package contains backtrace facility that usually found in GNU libc.
+
+> **Required!** To build Stage-1 Clang/LLVM, since using musl libc.
 ```bash
 # Apply patches (from Alpine Linux).
 patch -Np1 -i ../../patches/libexecinfo-1.1/10-execinfo.patch
@@ -210,7 +224,9 @@ ln -sv libexecinfo.so.1 /clang1-tools/lib/libexecinfo.so
 
 ### `8` - Clang/LLVM
 > #### `12.0.0`
-> Bootstrapping Stage-1 Clang/LLVM toolchains with `libgcc_s.so*` and `libstdc++.so*` free.
+> C language family frontend for LLVM.
+
+> **Required!** As default toolchain. This will bootstrap Stage-1 Clang/LLVM toolchains with `libgcc_s.so*` and `libstdc++.so*` free.
 ```bash
 # Rename the llvm source directory to ${LLVM_SRC}.
 popd; mv -v llvm-12.0.0.src "$LLVM_SRC" && pushd "$LLVM_SRC"
@@ -343,7 +359,9 @@ popd
 
 ### `9` - OpenBSD's M4
 > #### `6.7` or newer
-> Required for most programs and libraries. The M4 package contains a macro processor that can be used as a front end to any language (e.g., C, ratfor, fortran, lex, and yacc).
+> The OpenBSD's M4 package contains a macro processor that can be used as a front end to any language (e.g., C, ratfor, fortran, lex, and yacc).
+
+> **Required!**
 ```bash
 # Configure source.
 ./configure --prefix=/clang1-tools --enable-m4
@@ -357,7 +375,9 @@ time { make install; }
 
 ### `10` -  GNU's Bash
 > #### `5.1` (with patch level 8) or newer
-> Required for the next stage, chrooting new environment. The Bash package contains the Bourne-Again SHell.
+> The Bash package contains the Bourne-Again SHell.
+
+> **Required!** As default shell, for the next stage (chrooting new environment).
 ```bash
 # Cross compiling the configure script doesn't determine correct values for the following values.
 # Set the values manually.
@@ -393,7 +413,9 @@ time { make install; }
 
 ### `11` - Toybox's (Coreutils, File, Findutils, Grep, Sed, and Tar)
 > #### `0.8.5`
-> Required for the next stage, chrooting new environment. The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
+The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
+
+> **Required!** For the current and next stage (chrooting new environment).
 ```bash
 # Copy Toybox's .config file.
 cp -v ../../files/toybox-0.8.5/.config.coreutils_file_findutils_grep_sed_tar.nlns .config
@@ -430,7 +452,9 @@ time { make PREFIX=/clang1-tools install && unset CFFGPT; }
 
 ### `12` - GNU's Diffutils
 > #### `3.7` or newer
-> Required for most build systems that depends on GNU style (implementation). The Diffutils package contains programs that show the differences between files or directories.
+> The GNU's Diffutils package contains programs that show the differences between files or directories.
+
+> **Required!** For most build systems that depends on GNU style implementation.
 ```bash
 # Configure source.
 ./configure \
@@ -447,7 +471,9 @@ time { make install; }
 
 ### `13` - GNU's AWK
 > #### `5.1.0` or newer
-> Required for most build systems that depends on GNU style (implementation). The Gawk package contains programs for manipulating text files.
+> The GNU's AWK (gawk) package contains programs for manipulating text files.
+
+> **Required!** For most build systems that depends on GNU style implementation.
 ```bash
 # Configure source.
 ./configure \
@@ -464,7 +490,9 @@ time { make install; }
 
 ### `14` - Gettext-tiny
 > #### 0.3.2
-> Required for most programs and libraries. The Gettext-tiny package provides lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices). These allow programs to be compiled with NLS (Native Language Support), enabling them to output messages in the user's native language.
+> The Gettext-tiny package provides lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices). These allow programs to be compiled with NLS (Native Language Support), enabling them to output messages in the user's native language.
+
+> **Required!**
 ```bash
 # Build.
 time { make LIBINTL=MUSL prefix=/clang1-tools; }
