@@ -438,18 +438,15 @@ done
 # Build.
 time { make; }
 
-# Checks. 87 commands.
+# Checks compiled 87 commands.
 ./toybox | tr ' ' '\n'i | grep -xE $(echo $CFFGPT | tr ' ' '|'i) | wc -l
 
-# Checks that not configured but included, '['.
+# Checks commands that not configured but included, "[".
 ./toybox | tr ' ' '\n'i | grep -vxE $(echo $CFFGPT | tr ' ' '|'i)
 
-# So totally is 88 commands.
+# So, totally is 88 commands.
 ./toybox | wc -w
 
 # Install.
-time { make PREFIX=/tools install; }
-
-# Unset exported cffgpt variable.
-unset CFFGPT
+time { make PREFIX=/clang1-tools install && unset CFFGPT; }
 ```
