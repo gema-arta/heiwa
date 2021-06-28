@@ -373,7 +373,7 @@ time { make -j1; }
 time { make install; }
 ```
 
-### `10` -  GNU's Bash
+### `10` - GNU's Bash
 > #### `5.1` (with patch level 8) or newer
 > The Bash package contains the Bourne-Again SHell.
 
@@ -399,9 +399,9 @@ EOF
 # Configure source.
 ./configure \
     --prefix=/clang1-tools   \
-    --without-bash-malloc    \
     --build="$TARGET_TRUPLE" \
     --host="$TARGET_TRUPLE"  \
+    --without-bash-malloc    \
     --cache-file=config.cache
 
 # Build.
