@@ -381,7 +381,7 @@ time { make install; }
 
 ### `10` - GNU's Bash
 > #### `5.1` (with patch level 8) or newer
-> The Bash package contains the Bourne-Again SHell.
+> The GNU's Bash package contains the Bourne-Again SHell.
 
 > **Required!** As default shell for the next stage (chrooting new environment).
 ```bash
