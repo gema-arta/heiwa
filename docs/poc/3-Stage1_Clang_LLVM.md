@@ -419,10 +419,7 @@ time { make BINDIR="${PREFIX}/bin" install && unset PREFIX; }
 > #### toybox-0.8.5
 > Required for next stage, chrooting new environment. The Toybox package contains portable utilities for showing and setting the basic system characteristics.
 ```bash
-# Fix ncurses library flag in makefile.
-sed -i 's|-lcurses|-lcurses -ltinfo|' kconfig/Makefile
-
-# Copy toybox's configured config file.
+# Copy Toybox's .config file.
 cp -v ../../files/toybox-0.8.5/.config.coreutils_file_findutils_grep_sed_tar.nlns .config
 
 export CFFGPT="base64 base32 basename cat chgrp chmod chown chroot cksum comm cp cut date
