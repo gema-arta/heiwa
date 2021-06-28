@@ -256,8 +256,8 @@ projects/compiler-rt/cmake/config-ix.cmake
 
 # Set default compiler to new symlink from Stage-0 Clang/LLVM.
 # Sets C and C++ compiler's build flags to reduce debug's symbols.
-CC="${HEIWA_TARGET}-clang" CXX="${HEIWA_TARGET}-clang++"
-CFLAGS="-g -g1" CXXFLAGS="-g -g1"
+CC="${HEIWA_TARGET}-clang" CFLAGS="-g -g1"
+CXX="${HEIWA_TARGET}-clang++" CXXFLAGS="-g -g1"
 export CC CXX CFLAGS CXXFLAGS
 
 # Update host/target triple detection.
