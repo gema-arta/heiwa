@@ -501,6 +501,15 @@ time { make LIBINTL=MUSL prefix=/clang1-tools; }
 install -vm755 -t /clang1-tools/bin/ msgfmt msgmerge xgettext 
 ```
 
+### `15` - Pigz
+> #### `2.6` or newer
+> The Pigz package contains parallel implementation of gzip, is a fully functional replacement for gzip that exploits multiple processors and multiple cores to the hilt when compressing data.
+
+> **Required!** For the current and next stage (chrooting new environment).
+```bash
+```
+
+
 <!--
     ### `` - OpenBSD's Yacc
     > #### `6.6` or newer
