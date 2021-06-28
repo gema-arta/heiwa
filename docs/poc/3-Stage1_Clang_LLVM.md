@@ -507,6 +507,14 @@ install -vm755 -t /clang1-tools/bin/ msgfmt msgmerge xgettext
 
 > **Required!** For the current and next stage (chrooting new environment).
 ```bash
+# Build.
+time { make; }
+
+# Install.
+install -vm755 -t /clang1-tools/bin pigz
+ln -sv pigz /clang1-tools/bin/unpigz
+ln -sv pigz /clang1-tools/bin/gzip
+ln -sv unpigz /clang1-tools/bin/gunzip
 ```
 
 
