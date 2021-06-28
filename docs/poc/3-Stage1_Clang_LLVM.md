@@ -430,7 +430,7 @@ tail tee test timeout touch tr true truncate tty uname uniq unlink wc who whoami
 find xargs egrep grep fgrep sed tar"
 
 # Checks 87 commands, and make sure is enabled (=y).
-# Add " | wc -l" after "done" to checks total of commands.
+# Add " | wc -l" at the right of "done" to checks total of commands.
 for X in ${CFFGPT}; do
     grep -v '#' .config | grep -i "_${X}=" || echo "* $X not CONFIGURED"
 done
