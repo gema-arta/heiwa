@@ -232,8 +232,9 @@ ln -sv libexecinfo.so.1 /clang1-tools/lib/libexecinfo.so
 
 > **Required!** As default toolchain. This will build Stage-1 Clang/LLVM toolchains with `libgcc_s.so*` and `libstdc++.so*` free.
 ```bash
-# Rename the llvm source directory to ${LLVM_SRC}.
 popd
+
+# Rename the llvm source directory to ${LLVM_SRC}.
 mv -v llvm-12.0.0.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 
 # Decompress clang, lld, and compiler-rt to correct directories.
