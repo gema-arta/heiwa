@@ -257,7 +257,7 @@ ln -sv libexecinfo.so.1 /clang0-tools/lib/libexecinfo.so
 > #### `0.8.5`
 > The Toybox's "file" command is for determining the type of a given file or files.
 
-> **Optional?** Maybe you need.
+> **Optional?** Maybe needed for troubleshooting.
 ```bash
 # Copy Toybox's .config file.
 cp -v ../../files/toybox-0.8.5/.config.file.nlns .config
