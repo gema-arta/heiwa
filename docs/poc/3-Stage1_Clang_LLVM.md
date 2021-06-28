@@ -396,7 +396,7 @@ time { make install; }
 > #### `6.6` or newer
 > Required for some programs that using `yacc` style parser generator. The Yacc package contains a parser generator.
 ```sh
-# The oyacc-6.6 configure script seems not normal like om4. Do some tricks with variable.
+# The oyacc-6.6 configure script seems not normal like om4 above. Do some tricks with variable.
 
 # Configure source.
 PREFIX="/clang1-tools" && \
