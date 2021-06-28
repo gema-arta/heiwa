@@ -361,7 +361,7 @@ popd
 > #### `6.7` or newer
 > The OpenBSD's M4 package contains a macro processor.
 
-> **Required!** As a front end to any language (e.g., C, ratfor, fortran, lex, and yacc).
+> **Required!** As default front end to any language (e.g., C, ratfor, fortran, lex, and yacc).
 ```bash
 # Configure source.
 ./configure --prefix=/clang1-tools --enable-m4
