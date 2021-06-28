@@ -288,7 +288,6 @@ pushd "${LLVM_SRC}/projects/" && \
     tar xf ../../pkgs/libcxxabi-12.0.0.src.tar.xz   && mv -v libcxxabi-12.0.0.src libcxxabi
     tar xf ../../pkgs/libunwind-12.0.0.src.tar.xz   && mv -v libunwind-12.0.0.src libunwind
 popd
-
 pushd "${LLVM_SRC}/tools/" && \
     tar xf ../../pkgs/clang-12.0.0.src.tar.xz && mv -v clang-12.0.0.src clang
     tar xf ../../pkgs/lld-12.0.0.src.tar.xz   && mv -v lld-12.0.0.src lld
@@ -307,7 +306,8 @@ cp -v projects/libunwind/include/mach-o/compact_unwind_encoding.h \
 tools/lld/include/mach-o
 
 # Sets C and C++ compiler's build flags to reduce debug symbols.
-CFLAGS="-g -g1" CXXFLAGS="-g -g1"; export CFLAGS CXXFLAGS
+CFLAGS="-g -g1" CXXFLAGS="-g -g1"
+export CFLAGS CXXFLAGS
 
 # Update host/target triple detection.
 cp -v ../files/config.guess cmake/
