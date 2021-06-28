@@ -438,7 +438,7 @@ time { make PREFIX=/clang1-tools install && unset CFFGPT; }
     --build="$TARGET_TRUPLE" \
     --host="$TARGET_TRUPLE"
 
-# Build
+# Build.
 time { make; }
 
 # Install.
@@ -455,7 +455,7 @@ time { make install; }
     --build="$TARGET_TRUPLE" \
     --host="$TARGET_TRUPLE"
 
-# Build
+# Build.
 time { make; }
 
 # Install.
