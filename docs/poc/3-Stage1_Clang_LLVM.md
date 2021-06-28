@@ -492,7 +492,7 @@ time { make install; }
 > #### 0.3.2
 > The Gettext-tiny package provides lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
 
-> **Required!** To allow programs to be compiled with NLS (Native Language Support), enabling them to output messages in the user's native language.
+> **Required!** To allow programs compiled with NLS (Native Language Support).
 ```bash
 # Build.
 time { make LIBINTL=MUSL prefix=/clang1-tools; }
@@ -522,7 +522,7 @@ time { make install; }
 
 ### `16` - Pigz
 > #### `2.6` or newer
-> The Pigz package contains parallel implementation of gzip, is a fully functional replacement for gzip that exploits multiple processors and multiple cores to the hilt when compressing data.
+> The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
 
 > **Required!** For the next stage (chrooting new environment).
 ```bash
