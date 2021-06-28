@@ -346,7 +346,7 @@ export PATH="/clang1-tools/bin:/clang1-tools/usr/bin:/bin:/usr/bin"
 sed -i "s|PATH=.*|PATH=\"${PATH}\"|" ~/.bashrc
 sed -i '/unset CFLAGS CXXFLAGS/d' ~/.bashrc
 cat >> ~/.bashrc << "EOF"
-# Compiler environment
+# Stage-1 Clang/LLVM environment.
 CC="${TARGET_TRUPLE}-clang"
 CXX="${TARGET_TRUPLE}-clang++"
 AR="llvm-ar"
