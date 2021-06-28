@@ -560,7 +560,7 @@ time { make install; }
 > #### `2.7.6` or newer
 > The GNU's Patch package contains a program for modifying or creating files by applying a "patch" file typically created by the diff program.
 
-> **Required!** For the current and next stage (chrooting new environment). The GNU implementation of "patch" is can handle offset lines, which is powerful.
+> **Required!** For the current and next stage (chrooting new environment). The GNU implementation of "patch" is can handle offset lines, which is powerful one of all GNU's features.
 ```bash
 # Configure source.
 ./configure \
