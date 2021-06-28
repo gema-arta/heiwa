@@ -498,7 +498,7 @@ time { make install; }
 time { make LIBINTL=MUSL prefix=/clang1-tools; }
 
 # Install the msgfmt, msgmerge and xgettext programs to temporary toolchain.
-cp -v msgfmt msgmerge xgettext /tools/bin/
+install -vm755 -t /clang1-tools/bin/ msgfmt msgmerge xgettext 
 ```
 
 <!--
