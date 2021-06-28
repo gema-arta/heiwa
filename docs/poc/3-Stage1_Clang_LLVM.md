@@ -71,6 +71,7 @@ time { make mrproper; }
 
 # The recommended make target `headers_install` cannot be used, because it requires rsync, which may not be available.
 # The headers are first placed in "./usr/", then copied to the needed location.
+# @owl4ce don't know why when HOSTCC is default in "LLVM=1" and or using "clang" is failed to compile "scripts/basic/fixdep.c".
 time {
     make ARCH="$HEIWA_ARCH" LLVM=1 HOSTCC="${HEIWA_TARGET}-clang" headers_check && \
     make ARCH="$HEIWA_ARCH" LLVM=1 HOSTCC="${HEIWA_TARGET}-clang" headers
