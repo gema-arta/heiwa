@@ -546,7 +546,7 @@ ln -sv unpigz /clang1-tools/bin/gunzip
 ./configure \
     --prefix=/clang1-tools   \
     --build="$TARGET_TRUPLE" \
-    --host="$TARGET_TRUPLE"
+    --host="$TARGET_TRUPLE"  \
     --without-guile
 
 # Build.
