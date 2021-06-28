@@ -510,7 +510,7 @@ install -vm755 -t /clang1-tools/bin/ msgfmt msgmerge xgettext
 # Build.
 time { make; }
 
-# Install.
+# Install and make symlink as gzip programs.
 install -vm755 -t /clang1-tools/bin pigz
 ln -sv pigz /clang1-tools/bin/unpigz
 ln -sv pigz /clang1-tools/bin/gzip
