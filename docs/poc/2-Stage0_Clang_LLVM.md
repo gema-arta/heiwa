@@ -302,8 +302,7 @@ projects/compiler-rt/cmake/config-ix.cmake
 
 # Fix missing header for lld, (https://bugs.llvm.org/show_bug.cgi?id=49228).
 mkdir -pv tools/lld/include/mach-o && \
-cp -v projects/libunwind/include/mach-o/compact_unwind_encoding.h \
-tools/lld/include/mach-o
+cp -v projects/libunwind/include/mach-o/compact_unwind_encoding.h tools/lld/include/mach-o
 
 # Sets C and C++ compiler's build flags to reduce debug symbols.
 CFLAGS="-g -g1" CXXFLAGS="-g -g1"
