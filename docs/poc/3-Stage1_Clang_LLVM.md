@@ -343,7 +343,7 @@ popd
 
 ### `9` - OpenBSD's M4
 > #### `6.7` or newer
-> Required for most programs and libraries. The M4 package contains a macro processor.
+> Required for most programs and libraries. The M4 package contains a macro processor that can be used as a front end to any language (e.g., C, ratfor, fortran, lex, and yacc).
 ```bash
 # Configure source.
 ./configure --prefix=/clang1-tools --enable-m4
@@ -393,7 +393,7 @@ time { make install; }
 
 ### `11` - Toybox's (Coreutils, File, Findutils, Grep, Sed, and Tar)
 > #### `0.8.5`
-> Required for the next stage, chrooting new environment. The Toybox package contains portable utilities for showing and setting the basic system characteristics.
+> Required for the next stage, chrooting new environment. The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 ```bash
 # Copy Toybox's .config file.
 cp -v ../../files/toybox-0.8.5/.config.coreutils_file_findutils_grep_sed_tar.nlns .config
@@ -430,7 +430,7 @@ time { make PREFIX=/clang1-tools install && unset CFFGPT; }
 
 ### `12` - GNU's Diffutils
 > #### `3.7` or newer
-> Required for the next stage, chrooting new environment. The Diffutils package contains programs that show the differences between files or directories.
+> Required for most build systems that depends on GNU style (implementation). The Diffutils package contains programs that show the differences between files or directories.
 ```bash
 # Configure source.
 ./configure \
@@ -447,7 +447,7 @@ time { make install; }
 
 ### `13` - GNU's AWK
 > #### `5.1.0` or newer
-> Required for the next stage, chrooting new environment. The Gawk package contains programs for manipulating text files.
+> Required for most build systems that depends on GNU style (implementation). The Gawk package contains programs for manipulating text files.
 ```bash
 # Configure source.
 ./configure \
@@ -462,6 +462,16 @@ time { make; }
 time { make install; }
 ```
 
+### `14` - Gettext-tiny
+> #### 0.3.2
+> Required for most programs and libraries. The Gettext-tiny package provides lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices). These allow programs to be compiled with NLS (Native Language Support), enabling them to output messages in the user's native language.
+```bash
+# Build.
+time { make LIBINTL=MUSL prefix=/clang1-tools; }
+
+# Install the msgfmt, msgmerge and xgettext programs to temporary toolchain.
+cp -v msgfmt msgmerge xgettext /tools/bin/
+```
 
 <!--
     ### `` - OpenBSD's Yacc
