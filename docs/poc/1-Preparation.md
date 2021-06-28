@@ -5,7 +5,7 @@
 # Formatting.
 mkfs.ext4 -m 0 -L "Heiwa_Linux" /dev/sdaX
 
-# Export mountpoint variable and create the directory if not exists.
+# Export mountpoint variable and create the directory if not exist.
 export HEIWA="/media/Heiwa"
 mkdir -pv "$HEIWA"
 
