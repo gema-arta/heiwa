@@ -64,7 +64,7 @@ HEIWA="${HEIWA}"
 LC_ALL="POSIX"
 PATH="/clang0-tools/bin:/clang0-tools/usr/bin:/clang1-tools/bin:/clang1-tools/usr/bin:/bin:/usr/bin"
 export HEIWA LC_ALL PATH
-# CFLAGS and CXXFLAGS must not be set during the building of cross-tools (clang0).
+# CFLAGS and CXXFLAGS must not be set during the building of Stage-0 Clang/LLVM.
 unset CFLAGS CXXFLAGS
 export LLVM_SRC="\${HEIWA}/sources/llvm"
 EOF
@@ -83,7 +83,7 @@ export HEIWA_TARGET="${HEIWA_TARGET}"
 export HEIWA_ARCH="${HEIWA_ARCH}"
 export HEIWA_CPU="${HEIWA_CPU}"
 export TARGET_TRUPLE="${TARGET_TRUPLE}"
-# Make's multiple jobs based on CPU core/threads
+# Make's multiple jobs based on CPU core/threads.
 alias make="make -j\$(nproc) -l\$(nproc)"
 EOF
 source ~/.bashrc
