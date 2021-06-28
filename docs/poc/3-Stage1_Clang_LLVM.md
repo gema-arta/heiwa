@@ -325,7 +325,7 @@ time {
     popd && rm -rf build
 }
 
-# Since Binutils won't be used, create a symlink to the LLVM tools.
+# Since Binutils won't be used, create a symlink to LLVM tools.
 for B in as ar ranlib readelf nm objcopy objdump size strip; do
     ln -sv llvm-${B} /clang1-tools/bin/${B}
 done
