@@ -337,7 +337,7 @@ LD="ld.lld"
 STRIP="llvm-strip"
 export CC CXX AR AS RANLIB LD STRIP
 EOF
-source ~/.bashrc
+source ~/.bash_profile
 
 popd
 ```
