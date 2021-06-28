@@ -445,7 +445,7 @@ time { make; }
 time { make install; }
 ```
 
-### `13` - GNU's Awk
+### `13` - GNU's AWK
 > #### `5.1.0` or newer
 > Required for the next stage, chrooting new environment. The Gawk package contains programs for manipulating text files.
 ```bash
