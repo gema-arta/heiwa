@@ -18,8 +18,7 @@
 > **Required!**
 ```bash
 # Set default compiler to Stage-0 Clang/LLVM.
-CC=clang CXX=clang++
-export CC CXX
+CC="clang" CXX="clang++"; export CC CXX
 
 # Configure source.
 ./configure --prefix=/ 
@@ -228,7 +227,8 @@ ln -sv libexecinfo.so.1 /clang1-tools/lib/libexecinfo.so
 > **Required!** As default toolchain. This will bootstrap Stage-1 Clang/LLVM toolchains with `libgcc_s.so*` and `libstdc++.so*` free.
 ```bash
 # Rename the llvm source directory to ${LLVM_SRC}.
-popd; mv -v llvm-12.0.0.src "$LLVM_SRC" && pushd "$LLVM_SRC"
+popd
+mv -v llvm-12.0.0.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 
 # Decompress clang, lld, and compiler-rt to correct directories.
 pushd "${LLVM_SRC}/projects/" && \
