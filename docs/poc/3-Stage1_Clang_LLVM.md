@@ -454,7 +454,7 @@ time { make PREFIX=/clang1-tools install && unset CFFGPT; }
 > #### `3.7` or newer
 > The GNU's Diffutils package contains programs that show the differences between files or directories.
 
-> **Required!** For most build systems that depends on GNU style implementation.
+> **Required!** For most build systems that depends on GNU implementation style.
 ```bash
 # Configure source.
 ./configure \
@@ -473,7 +473,7 @@ time { make install; }
 > #### `5.1.0` or newer
 > The GNU's AWK (gawk) package contains programs for manipulating text files.
 
-> **Required!** For most build systems that depends on GNU style implementation.
+> **Required!** For most build systems that depends on GNU implementation style.
 ```bash
 # Configure source.
 ./configure \
