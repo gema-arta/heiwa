@@ -412,8 +412,6 @@ for X in ${CFFGPT}; do
     grep -v '#' .config | grep -i "_${X}=" || echo "* $X not CONFIGURED"
 done
 
-sed -i 's|-lcurses|-lcurses -lterminfo|' kconfig/Makefile
-
 # Build.
 time { make; }
 
