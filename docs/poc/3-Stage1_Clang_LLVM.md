@@ -119,7 +119,7 @@ time { make -C build install && rm -rf build && popd; }
 
 ### `4` - LLVM's libcxxabi
 > #### `12.0.0`
-> Required as LLVM's C++ ABI standard library.
+> Required as Clang/LLVM's C++ ABI standard library.
 
 > No need to re-decompress package.
 ```bash
@@ -147,7 +147,7 @@ time {
 
 ### `5` - LLVM's libcxx
 > #### `12.0.0`
-> Required as LLVM's C++ standard library.
+> Required as Clang/LLVM's C++ standard library.
 
 > No need to re-decompress package.
 ```bash
