@@ -398,7 +398,7 @@ grep  "lib.*/crt[1in].*succeeded" dummy.log | cut -d ' ' -f 4-5
 popd
 ```
 > #### ^ NOTE!
-> Don't delete ${LLVM_SRC} directory after above step.
+> Don't delete ${LLVM_SRC} directory after [the last step](#9----clangllvm).
 
 <h2></h2>
 
