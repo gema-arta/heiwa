@@ -255,7 +255,7 @@ ln -sv libexecinfo.so.1 /clang0-tools/lib/libexecinfo.so
 
 ### `8` - Toybox's File
 > #### `0.8.5`
-> The Toybox's "file" command is for determining the type of a given file or files.
+> The Toybox's `file` command is for determining the type of a given file or files.
 
 > **Optional?** Maybe needed for troubleshooting.
 ```bash
