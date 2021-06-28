@@ -275,7 +275,7 @@ time { make PREFIX=/clang0-tools install; }
 
 > **Required!** First build Clang/LLVM toolchain that will be used for bootstrapping Stage-1 Clang/LLVM toolchains without depends on `libgcc_s.so*` and `libstdc++.so*` later.
 ```bash
-# Exit from "llvm-12.0.0.src" directory if already in.
+# Exit from ""${HEIWA}/sources/pkg/llvm-12.0.0.src" directory if already in.
 popd
 
 # Rename the LLVM source directory to ${LLVM_SRC}.
@@ -397,6 +397,7 @@ grep  "lib.*/crt[1in].*succeeded" dummy.log | cut -d ' ' -f 4-5
 # |/media/Heiwa/clang0-tools/bin/../../clang0-tools/lib/../lib/crti.o succeeded
 # |/media/Heiwa/clang0-tools/bin/../../clang0-tools/lib/../lib/crtn.o succeeded
 
+# Back to "${HEIWA}/sources/pkg" directory.
 popd
 ```
 > #### ^ NOTE!
