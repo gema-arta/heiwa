@@ -308,8 +308,9 @@ for B in as ar ranlib readelf nm objcopy objdump size strip; do
     ln -sv llvm-${B} /clang1-tools/bin/${B}
 done
 
-# Set lld as default toolchain linker.
+# Set cc and lld as default toolchain linker.
 ln -sv lld /clang1-tools/bin/ld
+ln -sv clang-12 /clang1-tools/bin/cc
 
 # Configure Stage-1 Clang to build binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" instead of "/lib/ld-musl-x86_64.so.1".
 ln -sv clang-12 /clang1-tools/bin/x86_64-pc-linux-musl-clang   && \
@@ -411,6 +412,8 @@ find xargs egrep grep fgrep sed tar"
 for X in ${CFFGPT}; do
     grep -v '#' .config | grep -i "_${X}=" || echo "* $X not CONFIGURED"
 done
+
+sed -i 's|-lcurses|-lcurses -lterminfo|' kconfig/Makefile
 
 # Build.
 time { make; }
