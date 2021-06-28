@@ -46,7 +46,7 @@ mkdir -pv "/clang0-tools/${HEIWA_TARGET}" && \
 cp -rv usr/include "/clang0-tools/${HEIWA_TARGET}/."
 ```
 
-### `2` - Binutils
+### `2` - GNU's Binutils
 > #### `2.36.1` or newer
 > Required to build GCC.
 ```bash
@@ -70,7 +70,7 @@ time { make configure-host && make; }
 time { make install; }
 ```
 
-### `3` -  GCC (static)
+### `3` -  GNU's GCC (static)
 > #### `10.3.1_git20210424` (from Alpine Linux)
 > Required to bootstrap musl libc.
 ```bash
@@ -140,7 +140,7 @@ cat > /clang0-tools/etc/ld-musl-x86_64.path << "EOF"
 EOF
 ```
 
-### `5` -  GCC (final)
+### `5` -  GNU's GCC (final)
 > #### `10.3.1_git20210424` (from Alpine Linux)
 > Required to compile required libraries to build Stage-0 Clang/LLVM.
 ```bash
@@ -224,7 +224,7 @@ time { make CC="${HEIWA_TARGET}-gcc" CFLAGS="-Wall -fPIC" all; }
 time { make PREFIX=/ DESTDIR=/clang0-tools install; }
 ```
 
-### `7` - libexecinfo
+### `7` - libexecinfo (standalone)
 > #### `1.1` or newer
 > Required to build Stage-0 Clang/LLVM.
 ```bash
