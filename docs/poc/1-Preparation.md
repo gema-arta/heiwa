@@ -33,7 +33,7 @@ useradd -s /bin/bash -g heiwa -m -k /dev/null heiwa
 passwd heiwa
 
 # Setting up directory permission.
-# Warning! This is danger, so check its variables before chown.
+# Warning! This is danger, so check its variables before `chown`.
 # echo {"$HEIWA",}/clang{0,1}-tools
 if [[ -n "$HEIWA" ]]; then
     chmod -vR a+wt "${HEIWA}/sources"
