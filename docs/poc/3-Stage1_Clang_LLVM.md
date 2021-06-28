@@ -414,12 +414,3 @@ time { make; }
 # Install.
 time { make BINDIR="${PREFIX}/bin" install && unset PREFIX; }
 ```
-
-### `12` - Bzip2
-> #### `1.0.8` or newer
-> 
-```bash
-# Ensure installation of symbolic links are relative and the pages are installed into the correct location.
-sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
-sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
-```
