@@ -358,7 +358,7 @@ time { make install; }
 
 ### `10` -  Bash
 > #### `5.1` (with patch level 8) or newer
-> Required for next stage, chrooting new environment. The Bash package contains the Bourne-Again SHell.
+> Required for the next stage, chrooting new environment. The Bash package contains the Bourne-Again SHell.
 ```bash
 # Cross compiling the configure script doesn't determine correct values for the following values.
 # Set the values manually.
@@ -417,7 +417,7 @@ time { make BINDIR="${PREFIX}/bin" install && unset PREFIX; }
 
 ### `12` - Coreutils, File, Findutils, Grep, Sed, and Tar
 > #### toybox-0.8.5
-> Required for next stage, chrooting new environment. The Toybox package contains portable utilities for showing and setting the basic system characteristics.
+> Required for the next stage, chrooting new environment. The Toybox package contains portable utilities for showing and setting the basic system characteristics.
 ```bash
 # Copy Toybox's .config file.
 cp -v ../../files/toybox-0.8.5/.config.coreutils_file_findutils_grep_sed_tar.nlns .config
