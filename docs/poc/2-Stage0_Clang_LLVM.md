@@ -305,7 +305,7 @@ mkdir -pv tools/lld/include/mach-o && \
 cp -v projects/libunwind/include/mach-o/compact_unwind_encoding.h \
 tools/lld/include/mach-o
 
-# Sets C and C++ compiler's build flags to reduce debug's symbols.
+# Sets C and C++ compiler's build flags to reduce debug symbols.
 CFLAGS="-g -g1" CXXFLAGS="-g -g1"; export CFLAGS CXXFLAGS
 
 # Update host/target triple detection.
