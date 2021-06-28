@@ -524,7 +524,7 @@ time { make install; }
 > #### `2.6` or newer
 > The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
 
-> **Required!** For the current and next stage (chrooting new environment).
+> **Required!** As default ".gz" files decompressor for current and next stage (chrooting new environment).
 ```bash
 # Build.
 time { make CC="$CC" CFLAGS="$CFLAGS"; }
@@ -540,7 +540,7 @@ ln -sv unpigz /clang1-tools/bin/gunzip
 > #### `4.3` or newer
 > The GNU's Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
  
-> **Required!** For most build systems that depends on GNU implementation style.
+> **Required!** For the current and next stage (chrooting new environment), most build systems depends on GNU implementation style.
 ```bash
 # Configure source.
 ./configure \
@@ -560,13 +560,13 @@ time { make install; }
 > #### `2.7.6` or newer
 > The Patch package contains a program for modifying or creating files by applying a "patch" file typically created by the diff program.
 
-> **Required!** For most build systems that depends on GNU implementation style.
+> **Required!** For the current and next stage (chrooting new environment). The GNU implementation of "patch" is can handle offset lines, which is powerful.
 ```bash
 # Configure source.
 ./configure \
     --prefix=/clang1-tools   \
     --build="$TARGET_TRUPLE" \
-    --host="$TARGET_TRUPLE"  \
+    --host="$TARGET_TRUPLE"
 
 # Build.
 time { make; }
