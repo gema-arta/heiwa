@@ -82,7 +82,7 @@ rm -fv usr/include/Makefile
 cp -rv usr/include /clang1-tools/.
 ```
 
-### `3` - libunwind from LLVM
+### `3` - LLVM's libunwind
 > #### `12.0.0`
 > Required for programs that needs to enable unwinding.
 
@@ -117,7 +117,7 @@ time { make -C build; }
 time { make -C build install && rm -rf build && popd; }
 ```
 
-### `4` - libcxxabi from LLVM
+### `4` - LLVM's libcxxabi
 > #### `12.0.0`
 > Required as LLVM's C++ ABI standard library.
 
@@ -145,7 +145,7 @@ time {
 }
 ```
 
-### `5` - libcxx from LLVM
+### `5` - LLVM's libcxx
 > #### `12.0.0`
 > Required as LLVM's C++ standard library.
 
@@ -189,7 +189,7 @@ time { make CC="${HEIWA_TARGET}-clang" CFLAGS="$COMMON_FLAGS -Wall -fPIC" all; }
 time { make PREFIX=/ DESTDIR=/clang1-tools install; }
 ```
 
-### `7` - libexecinfo
+### `7` - libexecinfo (standalone)
 > #### `1.1` or newer
 > Required to build Stage-1 Clang/LLVM.
 ```bash
@@ -356,7 +356,7 @@ time { make -j1; }
 time { make install; }
 ```
 
-### `10` -  Bash
+### `10` -  GNU's Bash
 > #### `5.1` (with patch level 8) or newer
 > Required for the next stage, chrooting new environment. The Bash package contains the Bourne-Again SHell.
 ```bash
@@ -428,6 +428,20 @@ time { make; }
 # Install.
 time { make PREFIX=/clang1-tools install && unset CFFGPT; }
 ```
+
+### `12` - GNU's Diffutils
+> #### `3.7` or newer
+> Required for the next stage, chrooting new environment. The Diffutils package contains programs that show the differences between files or directories.
+```bash
+# Configure source.
+./configure \
+    --prefix=/clang1-tools   \
+    --build="$TARGET_TRUPLE" \
+    --host="$TARGET_TRUPLE"
+```
+
+
+
 
 <!--
     ### `` - OpenBSD's Yacc
