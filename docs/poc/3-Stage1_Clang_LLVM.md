@@ -234,7 +234,7 @@ ln -sv libexecinfo.so.1 /clang1-tools/lib/libexecinfo.so
 ```bash
 popd
 
-# Rename the llvm source directory to ${LLVM_SRC}.
+# Rename the LLVM source directory to ${LLVM_SRC}.
 mv -v llvm-12.0.0.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 
 # Decompress clang, lld, and compiler-rt to correct directories.
