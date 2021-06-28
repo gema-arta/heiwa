@@ -614,7 +614,7 @@ rm -rf /clang1-tools/share/{info,man,doc}/*
 # Strip off debugging symbols from binaries.
 # A large number of files will be reported as having their file format not recognized.
 # These warnings can be safely ignored. These warnings indicate that those files are scripts instead of binaries.
-strip --strip-debug /clang1-tools/lib/*
+find /clang1-tools/lib/ -maxdepth 1 -type f -exec strip --strip-debug {} \;
 /clang0-tools/bin/llvm-strip --strip-unneeded /clang1-tools/{,usr/}{,s}bin/*
 
 # Change the ownership of the "${HEIWA}/clang1-tools" directory to root by running the following command.
