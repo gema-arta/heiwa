@@ -414,3 +414,39 @@ time { make; }
 # Install.
 time { make BINDIR="${PREFIX}/bin" install && unset PREFIX; }
 ```
+
+### `12` - Coreutils, File, Findutils, Grep, Sed, and Tar
+> #### toybox-0.8.5
+> Required for next stage, chrooting new environment. The Toybox package contains portable utilities for showing and setting the basic system characteristics.
+```bash
+# Fix ncurses library flag in makefile.
+sed -i 's|-lcurses|-lcurses -ltinfo|' kconfig/Makefile
+
+# Copy toybox's configured config file.
+cp -v ../../files/toybox-0.8.5/.config_temp_tools .config
+
+export CFFGPT="base64 base32 basename cat chgrp chmod chown chroot cksum comm cp cut date dd df dirname du echo env expand expr factor false fmt fold groups head hostid id install link ln logname ls md5sum mkdir mkfifo mknod mktemp mv nice nl nohup nproc od paste printenv printf pwd readlink realpath rm rmdir seq sha1sum shred sleep sort split stat stty sync tac tail tee test timeout touch tr true truncate tty uname uniq unlink wc who whoami yes file find xargs egrep grep fgrep sed tar"
+
+# Checks. 87 commands. Add "| wc -l" after done to checks total.
+for X in ${CFFGPT}; do
+    grep -v '#' .config | grep -i "_${X}=" || echo "* $X not CONFIGURED"
+done
+
+# Build.
+time { make; }
+
+# Checks. 87 commands.
+./toybox | tr ' ' '\n'i | grep -xE $(echo $CFFGPT | tr ' ' '|'i) | wc -l
+
+# Checks that not configured but included, '['.
+./toybox | tr ' ' '\n'i | grep -vxE $(echo $CFFGPT | tr ' ' '|'i)
+
+# So totally is 88 commands.
+./toybox | wc -w
+
+# Install.
+time { make PREFIX=/tools install; }
+
+# Unset exported cffgpt variable.
+unset CFFGPT
+```
