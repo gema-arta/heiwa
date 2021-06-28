@@ -505,7 +505,7 @@ install -vm755 -t /clang1-tools/bin/ msgfmt msgmerge xgettext
 > #### `2.0.5` or newer
 > The Zlib-ng package contains zlib data compression library for the next generation systems.
 
-> **Required!** By Pigz.
+> **Required!** By Pigz in current stage.
 ```bash
 # Configure source.
 ./configure \
