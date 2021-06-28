@@ -425,7 +425,12 @@ sed -i 's|-lcurses|-lcurses -ltinfo|' kconfig/Makefile
 # Copy toybox's configured config file.
 cp -v ../../files/toybox-0.8.5/.config.coreutils_file_findutils_grep_sed_tar.nlns .config
 
-export CFFGPT="base64 base32 basename cat chgrp chmod chown chroot cksum comm cp cut date dd df dirname du echo env expand expr factor false fmt fold groups head hostid id install link ln logname ls md5sum mkdir mkfifo mknod mktemp mv nice nl nohup nproc od paste printenv printf pwd readlink realpath rm rmdir seq sha1sum shred sleep sort split stat stty sync tac tail tee test timeout touch tr true truncate tty uname uniq unlink wc who whoami yes file find xargs egrep grep fgrep sed tar"
+export CFFGPT="base64 base32 basename cat chgrp chmod chown chroot cksum comm cp cut date
+dd df dirname du echo env expand expr factor false fmt fold groups head hostid id install
+link ln logname ls md5sum mkdir mkfifo mknod mktemp mv nice nl nohup nproc od paste printenv
+printf pwd readlink realpath rm rmdir seq sha1sum shred sleep sort split stat stty sync tac
+tail tee test timeout touch tr true truncate tty uname uniq unlink wc who whoami yes file
+find xargs egrep grep fgrep sed tar"
 
 # Checks. 87 commands. Add "| wc -l" after done to checks total.
 for X in ${CFFGPT}; do
