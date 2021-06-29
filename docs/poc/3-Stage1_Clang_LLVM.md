@@ -89,7 +89,7 @@ rm -fv usr/include/Makefile
 cp -rv usr/include /clang1-tools/.
 ```
 
-### `3` - LLVM's libunwind
+### `3` - LLVM libunwind
 > #### `12.0.0`
 > C++ runtime stack unwinder from LLVM.
 
@@ -126,7 +126,7 @@ time { make -C build; }
 time { make -C build install && rm -rf build && popd; }
 ```
 
-### `4` - LLVM's libcxxabi
+### `4` - LLVM libcxxabi
 > #### `12.0.0`
 > Low level support for a standard C++ library from LLVM.
 
@@ -156,7 +156,7 @@ time {
 }
 ```
 
-### `5` - LLVM's libcxx
+### `5` - LLVM libcxx
 > #### `12.0.0`
 > New implementation of the C++ standard library, targeting C++11 from LLVM.
 
@@ -193,9 +193,9 @@ time { make -C build install && rm -rf build && popd; }
 > #### ^ NOTE!
 > Now, you can safely remove ${LLVM_SRC} directory after [above step](#5---llvms-libcxx).
 
-### `6` - NetBSD's Curses
+### `6` - NetBSD Curses
 > #### `0.3.2` or newer
-> The NetBSD's Curses package contains libraries for terminal-independent handling of character screens.
+> The NetBSD Curses package contains libraries for terminal-independent handling of character screens.
 
 > **Required!** To build Stage-1 Clang/LLVM and most programs that depends on `-ltinfo` or `-lterminfo` linker's flags.
 ```bash
@@ -361,9 +361,9 @@ source ~/.bash_profile
 cd "${HEIWA}/sources/pkgs/"
 ```
 
-### `9` - OpenBSD's M4
+### `9` - OpenBSD M4
 > #### `6.7` or newer
-> The OpenBSD's M4 package contains a macro processor.
+> The OpenBSD M4 package contains a macro processor.
 
 > **Required!** As default front end to any language (e.g., C, ratfor, fortran, lex, and yacc).
 ```bash
@@ -377,9 +377,9 @@ time { make -j1; }
 time { make install; }
 ```
 
-### `10` - GNU's Bash
+### `10` - GNU Bash
 > #### `5.1` (with patch level 8) or newer
-> The GNU's Bash package contains the Bourne-Again SHell.
+> The GNU Bash package contains the Bourne-Again SHell.
 
 > **Required!** As default shell for the next stage (chrooting new environment).
 ```bash
@@ -415,7 +415,7 @@ time { make; }
 time { make install; }
 ```
 
-### `11` - Toybox's (Coreutils, File, Findutils, Grep, Sed, and Tar)
+### `11` - Toybox (Coreutils, File, Findutils, Grep, Sed, and Tar)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
@@ -454,9 +454,9 @@ time { make; }
 time { make PREFIX=/clang1-tools install && unset CFFGPT; }
 ```
 
-### `12` - GNU's Diffutils
+### `12` - GNU Diffutils
 > #### `3.7` or newer
-> The GNU's Diffutils package contains programs that show the differences between files or directories.
+> The GNU Diffutils package contains programs that show the differences between files or directories.
 
 > **Required!** For most build systems that depends on GNU implementation style.
 ```bash
@@ -473,9 +473,9 @@ time { make; }
 time { make install; }
 ```
 
-### `13` - GNU's AWK
+### `13` - GNU AWK
 > #### `5.1.0` or newer
-> The GNU's AWK (gawk) package contains programs for manipulating text files.
+> The GNU AWK (gawk) package contains programs for manipulating text files.
 
 > **Required!** For most build systems that depends on GNU implementation style.
 ```bash
@@ -540,9 +540,9 @@ ln -sv pigz /clang1-tools/bin/gzip
 ln -sv unpigz /clang1-tools/bin/gunzip
 ```
 
-### `17` - GNU's Make
+### `17` - GNU Make
 > #### `4.3` or newer
-> The GNU's Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
+> The GNU Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
  
 > **Required!** For the current and next stage (chrooting new environment), most build systems depends on GNU implementation style.
 ```bash
@@ -560,9 +560,9 @@ time { make; }
 time { make install; }
 ```
 
-### `18` - GNU's Patch
+### `18` - GNU Patch
 > #### `2.7.6` or newer
-> The GNU's Patch package contains a program for modifying or creating files by applying a "patch" file typically created by the diff program.
+> The GNU Patch package contains a program for modifying or creating files by applying a "patch" file typically created by the diff program.
 
 > **Required!** For the current and next stage (chrooting new environment). The GNU implementation of "patch" is can handle offset lines, which is powerful feature.
 ```bash
