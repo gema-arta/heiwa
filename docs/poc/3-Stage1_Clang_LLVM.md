@@ -242,7 +242,6 @@ mv -v llvm-12.0.0.src "$LLVM_SRC" && cd "$LLVM_SRC"
 pushd "${LLVM_SRC}/projects/" && \
     tar xf ../../pkgs/compiler-rt-12.0.0.src.tar.xz && mv -v compiler-rt-12.0.0.src compiler-rt
 popd
-
 pushd "${LLVM_SRC}/tools/" && \
     tar xf ../../pkgs/clang-12.0.0.src.tar.xz && mv -v clang-12.0.0.src clang
     tar xf ../../pkgs/lld-12.0.0.src.tar.xz   && mv -v lld-12.0.0.src lld
