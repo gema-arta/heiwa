@@ -236,7 +236,7 @@ ln -sv libexecinfo.so.1 /clang1-tools/lib/libexecinfo.so
 # Exit from "${HEIWA}/sources/pkg/llvm-12.0.0.src" directory if already in.
 popd
 
-# Rename the LLVM source directory to ${LLVM_SRC}.
+# Rename the LLVM source directory to ${LLVM_SRC}, then enters.
 mv -v llvm-12.0.0.src "$LLVM_SRC" && cd "$LLVM_SRC"
 
 # Decompress clang, lld, and compiler-rt to correct directories.
