@@ -212,7 +212,7 @@ cp -rv usr/include /usr/.
 ```bash
 # Apply patch (from Void Linux).
 # To prevent crash with a NULL pointer dereference when dcngettext() is called with NULL msgid[12] arguments.
-patch -Np0 -i ../../extra/musl/patches/mo_lookup.patch
+patch -Np1 -i ../../extra/musl/patches/mo_lookup.patch
 
 # Configure source.
 LDFLAGS="-Wl,-soname,libc.musl-x86_64.so.1" \
