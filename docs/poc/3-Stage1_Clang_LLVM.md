@@ -618,7 +618,7 @@ find /clang1-tools/lib/ -maxdepth 1 -type f -exec strip --strip-debug {} \;
 find /clang1-tools/{,usr/}{,s}bin/ -maxdepth 1 -type f -exec /clang0-tools/bin/llvm-strip --strip-unneeded {} \;
 
 # Change the ownership of the "${HEIWA}/clang1-tools" directory to root by running the following command.
-# Warning! This is danger, so check its variables before chown.
+# Warning! This is danger, so check its variables before `chown`.
 # echo "${HEIWA}/clang1-tools"
 [[ -n "$HEIWA" ]] && chown -R root:root "${HEIWA}/clang1-tools"
 ```
