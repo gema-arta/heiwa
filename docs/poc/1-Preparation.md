@@ -14,7 +14,7 @@ mkdir -pv "$HEIWA"
 mount -vo noatime,discard /dev/sdaX "$HEIWA"
 ```
 
-### `2` - Creating packages and toolchain directory
+### `2` - Creating sources and toolchain directory
 ```bash
 # Create directories to build clang with GCC libraries and the final toolchain without GCC libraries.
 # As root, Link them to host's root directory.
@@ -22,7 +22,7 @@ if [[ -n "$HEIWA" ]]; then
     mkdir -pv "${HEIWA}/"clang{0,1}-tools
     ln -sv "${HEIWA}/clang0-tools" /
     ln -sv "${HEIWA}/clang1-tools" /
-    mkdir -pv "${HEIWA}/sources/"{patches,files,pkgs}
+    mkdir -pv "${HEIWA}/sources/"{extra,pkgs}
 fi
 ```
 
