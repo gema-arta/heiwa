@@ -396,8 +396,7 @@ time { make install; }
 
 > **Required!** As default shell for the next stage (chrooting new environment).
 ```bash
-# Cross compiling the configure script doesn't determine correct values for the following values.
-# Set the values manually.
+# Fix the configure script that doesn't determine correct values in cross compiling.
 cat > config.cache << "EOF"
 ac_cv_func_mmap_fixed_mapped=yes
 ac_cv_func_strcoll_works=yes
