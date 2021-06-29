@@ -233,6 +233,7 @@ ln -sv libexecinfo.so.1 /clang1-tools/lib/libexecinfo.so
 
 > **Required!** As default toolchain. This will build Stage-1 Clang/LLVM toolchains with `libgcc_s.so*` and `libstdc++.so*` free.
 ```bash
+# Exit from "${HEIWA}/sources/pkg/llvm-12.0.0.src" directory if already in.
 popd
 
 # Rename the LLVM source directory to ${LLVM_SRC}.
@@ -327,8 +328,7 @@ time {
 # Since Binutils won't be used, create a symlink to LLVM tools and set lld as default toolchain linker.
 for B in as ar ranlib readelf nm objcopy objdump size strip; do
     ln -sv llvm-${B} /clang1-tools/bin/${B}
-done
-ln -sv lld /clang1-tools/bin/ld
+done; ln -sv lld /clang1-tools/bin/ld
 
 # Configure Stage-1 Clang to build binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" instead of "/lib/ld-musl-x86_64.so.1".
 ln -sv clang-12 /clang1-tools/bin/x86_64-pc-linux-musl-clang   && \
@@ -337,8 +337,7 @@ cat > /clang1-tools/bin/x86_64-pc-linux-musl.cfg << "EOF"
 -Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1
 EOF
 
-# Unset exported flags and set the new PATH since "/clang0-tools" isn't used anymore.
-unset B CFLAGS CXXFLAGS
+# Set the new PATH since "/clang0-tools" isn't used anymore.
 export PATH="/clang1-tools/bin:/clang1-tools/usr/bin:/bin:/usr/bin"
 
 # Configure new Stage-1 Clang/LLVM environment.
@@ -357,6 +356,7 @@ export CC CXX AR AS RANLIB LD STRIP
 EOF
 source ~/.bash_profile
 
+# Back to "${HEIWA}/sources/pkg" directory.
 cd "${HEIWA}/sources/pkgs/"
 ```
 
