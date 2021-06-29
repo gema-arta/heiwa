@@ -307,10 +307,10 @@ rm -fv dummy.c a.out dummy.log
 > **Required!**
 ```bash
 # Create a directory and decompress needed tarball.
-mkdir -v tzdb && cd tzdb && \
-    tar xf ../pkgs/tzdata2021a.tar.gz && \
-    tar xf ../pkgs/tzcode2021a.tar.gz && \
-    tar xf ../pkgs/posixtz-0.5.tar.xz
+mkdir -v tzdb && pushd tzdb && \
+    tar xzf ../pkgs/tzdata2021a.tar.gz && \
+    tar xzf ../pkgs/tzcode2021a.tar.gz && \
+    tar xf  ../pkgs/posixtz-0.5.tar.xz
 
 # Apply patch to fix up lseek.
 patch -Np1 -i ../extra/tzdata/patches/0001-posixtz-fix-up-lseek.patch
@@ -337,4 +337,7 @@ unset timezones
 
 # Use `tzselect` to determine <xxx>.
 cp -v /usr/share/zoneinfo/<xxx> /etc/localtime
+
+# Back to "/sources/pkgs" directory.
+popd
 ```
