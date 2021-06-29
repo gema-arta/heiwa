@@ -41,9 +41,7 @@ if [[ -n "$HEIWA" ]]; then
     chroot "$HEIWA" /clang1-tools/usr/bin/env -i                                 \
     HOME="/root" TERM="xterm" PS1='(heiwa chroot) \u: \w \$ '                    \
     PATH="/bin:/usr/bin:/sbin:/usr/sbin:/clang1-tools/bin:/clang1-tools/usr/bin" \
-    TRUPLE="x86_64-pc-linux-musl" CC="${TRUPLE}-clang" CXX="${TRUPLE}-clang++"   \
-    COMMON_FLAGS="-march=native -Oz -pipe" CFLAGS="${COMMON_FLAGS}"              \
-    CXXFLAGS="${COMMON_FLAGS}" /clang1-tools/bin/bash --login +h
+    /clang1-tools/bin/bash --login +h
 fi
 
 # The `-i` option given to the env command will clear all variables of the chroot environment.
@@ -155,3 +153,46 @@ chmod -v 600  /var/log/btmp
 > heiwa@localh3art /media/Heiwa/sources/pkgs/target-package $ popd
 > heiwa@localh3art /media/Heiwa/sources/pkgs $ rm -rf target-package
 > ```
+
+### `4` - Linux API Headers
+> #### Xanmod-CacULE, `5.12.x` or newer
+> The Linux API Headers expose the kernel's API for use by musl libc.
+
+> **Required!**
+```bash
+# Apply some persistent environment variables.
+cat > ~/.bash_profile << "EOF"
+# Stage-1 Clang/LLVM environment.
+TRUPLE="x86_64-pc-linux-musl"
+CC="${TRUPLE}-clang"
+CXX="${TRUPLE}-clang++"
+COMMON_FLAGS="-march=native -Oz -pipe"
+CFLAGS="${COMMON_FLAGS}"
+CXXFLAGS="${COMMON_FLAGS}"
+export TRUPLE CC CXX COMMON_FLAGS CFLAGS CXXFLAGS
+# Make's multiple jobs based on CPU core/threads.
+alias make="make -j$(nproc) -l$(nproc)"
+EOF
+source ~/.bash_profile
+
+# Apply patch to fix broken swab.h in musl libc.
+patch -Np1 -i \
+../../patches/linux-headers/include-uapi-linux-swab-Fix-potentially-missing-__always_inline.patch
+
+# Make sure there are no stale files embedded in the package.
+time { make LLVM=1 LLVM_IAS=1 mrproper; }
+
+# The recommended make target `headers_install` cannot be used, because it requires rsync, which may not be available.
+# The headers are first placed in "./usr/", then copied to the needed location.
+time {
+    make LLVM=1 LLVM_IAS=1 headers_check && \
+    make LLVM=1 LLVM_IAS=1 headers
+}
+
+# Remove unnecessary files.
+find usr/include -name '.*' -exec rm -rfv {} \;
+rm -fv usr/include/Makefile
+
+# Install.
+cp -rv usr/include /usr/.
+```
