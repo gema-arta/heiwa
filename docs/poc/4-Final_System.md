@@ -247,5 +247,4 @@ for B in {cdefs,queue,tree}.h; do
     ../../extra/musl/files/musl-legacy-compat/${B}
 done; install -vm644 -t /usr/include/ \
 ../../extra/musl/files/musl-legacy-compat/error.h
-
 ```
