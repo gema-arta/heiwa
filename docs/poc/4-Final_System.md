@@ -248,3 +248,52 @@ for B in {cdefs,queue,tree}.h; do
 done; install -vm644 -t /usr/include/ \
 ../../extra/musl/files/musl-legacy-compat/error.h
 ```
+
+### `7` - Adjusting Toolchains
+```bash
+# Re-configure Stage-1 Clang/LLVM to use "/usr".
+ln -sv clang-12 /clang1-tools/bin/x86_64-heiwa-linux-musl-clang
+ln -sv clang-12 /clang1-tools/bin/x86_64-heiwa-linux-musl-clang++
+cat > /clang1-tools/bin/x86_64-heiwa-linux-musl.cfg << "EOF"
+--sysroot=/usr -Wl,-dynamic-linker /lib/ld-musl-x86_64.so.1
+EOF
+
+CC="x86_64-heiwa-linux-musl-clang"
+CXX="x86_64-heiwa-linux-musl-clang++"
+export CC CXX
+
+# Symlink Clang to be used as GCC tools.
+ln -sv x86_64-heiwa-linux-musl-clang   /clang1-tools/bin/gcc
+ln -sv gcc                             /clang1-tools/bin/cc
+ln -sv x86_64-heiwa-linux-musl-clang++ /clang1-tools/bin/g++
+
+# Quick test.
+echo 'int main(){}' > dummy.c
+"$CC" dummy.c -v -Wl,--verbose &> dummy.log
+llvm-readelf -l a.out | grep ": /lib"
+
+# | The output should be:
+# |-----------------------
+# |      [Requesting program interpreter: /lib/ld-musl-x86_64.so.1]
+
+grep "ld.lld:.*crt[1in]" dummy.log
+
+# | The output should be:
+# |-----------------------
+# |ld.lld: /usr/lib/Scrt1.o
+# |ld.lld: /usr/lib/crti.o
+# |ld.lld: /usr/lib/crtn.o
+
+grep -B1 "^ /usr/include" dummy.log
+
+# | The output should be:
+# |-----------------------
+# |#include <...> search starts here:
+# |/usr/include
+
+grep -o -- -L/usr/lib dummy.log && \
+grep -o -- -L/lib dummy.log
+
+# Clean up.
+rm -fv dummy.c a.out dummy.log
+```
