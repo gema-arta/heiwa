@@ -261,7 +261,7 @@ ln -sv libexecinfo.so.1 /clang0-tools/lib/libexecinfo.so
 > **Optional?** Maybe needed for troubleshooting.
 ```bash
 # Copy Toybox's .config file.
-cp -v ../../files/toybox-0.8.5/.config.file.nlns .config
+cp -v ../../extra/toybox/files/.config.file.nlns .config
 
 # Build.
 time { make CC="${HEIWA_TARGET}-gcc"; }
