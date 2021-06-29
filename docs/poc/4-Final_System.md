@@ -10,4 +10,3 @@
 > heiwa@localh3art /media/Heiwa/sources/pkgs/target-package $ popd
 > heiwa@localh3art /media/Heiwa/sources/pkgs $ rm -rf target-package
 > ```
-
