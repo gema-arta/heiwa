@@ -158,7 +158,7 @@ tar xf ../mpfr-4.1.0.tar.xz && mv -v mpfr-4.1.0 mpfr
 tar xzf ../mpc-1.2.1.tar.gz && mv -v mpc-1.2.1 mpc
 
 # Apply patches (from Alpine Linux).
-../../patches/gcc-10.3.1_git20210424/appatch
+../../extra/gcc/patches/appatch
 
 # On x86_64 hosts, set the default directory name for 64-bit libraries to "lib".
 case $(uname -m) in
@@ -238,9 +238,9 @@ time { make PREFIX=/ DESTDIR=/clang0-tools install; }
 > **Required!** To build Stage-0 Clang/LLVM, since using musl libc.
 ```bash
 # Apply patches (from Alpine Linux).
-patch -Np1 -i ../../patches/libexecinfo-1.1/10-execinfo.patch
-patch -Np1 -i ../../patches/libexecinfo-1.1/20-define-gnu-source.patch
-patch -Np1 -i ../../patches/libexecinfo-1.1/30-linux-makefile.patch
+patch -Np1 -i ../../extra/libexecinfo/patches/10-execinfo.patch
+patch -Np1 -i ../../extra/libexecinfo/patches/20-define-gnu-source.patch
+patch -Np1 -i ../../extra/libexecinfo/patches/30-linux-makefile.patch
 
 # Build.
 time {
@@ -295,7 +295,7 @@ pushd "${LLVM_SRC}/tools/" && \
 popd
 
 # Apply patches (from Void Linux).
-../patches/llvm-12/stage0-appatch
+../extra/llvm/patches/stage0-appatch
 
 # Disable sanitizers for musl, fixing "early build failure".
 sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
