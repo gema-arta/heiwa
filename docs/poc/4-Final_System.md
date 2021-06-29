@@ -84,14 +84,14 @@ ln -sv /clang1-tools/lib/libunwind.so{,.1}              /usr/lib
 ln -sv /clang1-tools/lib/libunwind.a                    /usr/lib
 ln -sv bash                                             /bin/sh
 
-# Historically, Linux maintains a list of the mounted file systems in the file /etc/mtab.
+# Historically, Linux maintains a list of the mounted file systems in the file "/etc/mtab".
 # Modern kernels maintain this list internally and exposes it to the user via the /proc filesystem.
-# To satisfy utilities that expect the presence of /etc/mtab, create the following symbolic link.
+# To satisfy utilities that expect the presence of "/etc/mtab", create the following symbolic link.
 ln -sv /proc/self/mounts /etc/mtab
 
-# In order for user root to be able to login and for the name "root" to be recognized, there must be relevant entries in the /etc/passwd and /etc/group files.
+# In order for user root to be able to login and for the name `root` to be recognized, there must be relevant entries in the "/etc/passwd" and "/etc/group" files.
 # Create the /etc/passwd file by running the following command.
-# User "uucp" is required by openrc for later installation.
+# User `uucp` is required by OpenRC for later installation.
 cat > /etc/passwd << "EOF"
 root:x:0:0:root:/root:/bin/bash
 bin:x:1:1:bin:/dev/null:/bin/false
@@ -102,7 +102,7 @@ nobody:x:99:99:Unprivileged User:/dev/null:/bin/false
 EOF
 
 # The actual password for root will be set later.
-# Create the /etc/group file by running the following command.
+# Create the "/etc/group" file by running the following command.
 cat > /etc/group << "EOF"
 root:x:0:
 bin:x:1:daemon
@@ -132,7 +132,7 @@ users:x:999:
 EOF
 
 # To remove the "I have no name!" prompt, start a new shell.
-# Since the /etc/passwd and /etc/group files have been created, user name and group name resolution will now work.
+# Since the "/etc/passwd" and "/etc/group" files have been created, user name and group name resolution will now work.
 exec /clang1-tools/bin/bash --login +h
 
 # The login, agetty, and init programs (and others) use a number of log files to record information such as who was logged into the system and when.
