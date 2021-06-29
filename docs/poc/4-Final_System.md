@@ -8,7 +8,7 @@
 # The device nodes must be created on the hard disk so that they are available before the kernel populates "/dev", and additionally when Linux is started with init=/bin/bash.
 # Create the directories and initial device nodes.
 if [[ -n "$HEIWA" ]]; then
-    mkdir -pv "${HEIWA}/"{dev,proc,sys,run}   && \
+    mkdir -pv "${HEIWA}/"{dev,proc,sys,run,tmp}   && \
     mknod -m 600 "${HEIWA}/dev/console" c 5 1 && \
     mknod -m 666 "${HEIWA}/dev/null" c 1 3
 fi
@@ -53,7 +53,7 @@ fi
 ### `3` - Creating Directories
 > Its time to create the full structure file system.
 ```bash
-mkdir -pv /{{,s}bin,boot,etc,home,lib/firmware,media,mnt,opt,root,{var/,}tmp}
+mkdir -pv /{{,s}bin,boot,etc,home,lib/firmware,media,mnt,opt,root,var/tmp}
 
 mkdir -pv /usr/{,local/}{bin,include,lib,sbin,src}
 mkdir -pv /usr/{,local/}share/{color,dict,doc,info,locale,man,misc,terminfo,zoneinfo}
