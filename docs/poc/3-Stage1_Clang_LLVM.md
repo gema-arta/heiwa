@@ -318,9 +318,7 @@ time { make -C build; }
 time {
     pushd build/ && \
         cmake -DCMAKE_INSTALL_PREFIX="/clang1-tools" -P cmake_install.cmake && \
-        cp -v bin/llvm-as /clang1-tools/bin/                                && \
-        cp -v bin/llvm-readobj /clang1-tools/bin/                           && \
-        ln -sv llvm-readobj /clang1-tools/bin/llvm-readelf                  && \
+        install -vm755 -t /clang1-tools/bin/ bin/llvm-{as,readobj,readelf}  && \
     popd && rm -rf build
 }
 
