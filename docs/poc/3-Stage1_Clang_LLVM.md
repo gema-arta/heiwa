@@ -619,6 +619,7 @@ exit
 # echo "${HEIWA}/clang1-tools"
 [[ -n "$HEIWA" ]] && chown -R root:root "${HEIWA}/clang1-tools"
 ```
+> #### * End of as privileged user!
 
 <h2></h2>
 
