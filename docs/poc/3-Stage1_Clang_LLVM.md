@@ -175,11 +175,11 @@ pushd "${LLVM_SRC}/projects/libcxx/" && \
         -DLIBCXX_ENABLE_STATIC=ON                              \
         -DLIBCXX_HAS_MUSL_LIBC=ON                              \
         -DLIBCXX_USE_COMPILER_RT=ON                            \
-        -DLIBCXX_CXX_ABI=libcxxabi                             \
-        -DLIBCXX_CXX_ABI_INCLUDE_PATHS="/clang1-tools/include" \
-        -DLIBCXXABI_USE_LLVM_UNWINDER=ON                       \
-        -DLIBCXX_CXX_ABI_LIBRARY_PATH="/clang1-tools/lib"      \
         -DLIBCXX_INSTALL_HEADERS=ON                            \
+        -DLIBCXX_CXX_ABI=libcxxabi                             \
+        -DLIBCXXABI_USE_LLVM_UNWINDER=ON                       \
+        -DLIBCXX_CXX_ABI_INCLUDE_PATHS="/clang1-tools/include" \
+        -DLIBCXX_CXX_ABI_LIBRARY_PATH="/clang1-tools/lib"      \
         -DCMAKE_CXX_FLAGS="-isystem /clang1-tools/include"     \
         -DLLVM_PATH="$LLVM_SRC"
 
