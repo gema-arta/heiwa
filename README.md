@@ -4,9 +4,9 @@
 <br>
 
 ## Roadmap
-- [x] Specifies the packages and libraries to be used.
-- [ ] Creating proof-of-concept (similiar to LFS books).
+- [x] Specifies the packages to be used.
+- [ ] Create Proof-of-Concept (similiar to LFS books).
 - [ ] Build an auto build systems.
-- [ ] Creating package manager (kanri).
+- [ ] Create simple package manager 「管理.」.
 
 See [docs](./docs).
