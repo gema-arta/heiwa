@@ -307,7 +307,7 @@ rm -fv dummy.c a.out dummy.log
 > **Required!**
 ```bash
 # Create a directory and decompress needed tarball.
-mkdir -v tzdb && pushd tzdb && \
+mkdir -v tzata && pushd tzdata && \
     tar xzf ../tzdata2021a.tar.gz && \
     tar xzf ../tzcode2021a.tar.gz && \
     tar xf  ../posixtz-0.5.tar.xz
