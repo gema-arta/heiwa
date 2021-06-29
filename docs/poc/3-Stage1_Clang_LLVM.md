@@ -492,7 +492,7 @@ time { make install; }
 > **Required!** For most build systems that depends on GNU implementation style.
 ```bash
 # Ensure some unneeded files are not installed.
-sed -i 's/extras//' Makefile.in
+sed -i 's|extras||' Makefile.in
 
 # Configure source.
 ./configure \
