@@ -1,4 +1,5 @@
 ## `I` Preparation
+
 > #### * Beginning of as root!
 ### `1` - Prepare a volume/partition
 ```bash
