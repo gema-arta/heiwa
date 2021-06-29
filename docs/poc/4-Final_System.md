@@ -177,7 +177,7 @@ source ~/.bash_profile
 
 # Apply patch to fix "swab.h" under musl libc.
 patch -Np1 -i \
-../../patches/linux-headers/include-uapi-linux-swab-Fix-potentially-missing-__always_inline.patch
+../../extra/linux-headers/patches/include-uapi-linux-swab-Fix-potentially-missing-__always_inline.patch
 
 # Make sure there are no stale files embedded in the package.
 time { make LLVM=1 LLVM_IAS=1 mrproper; }
