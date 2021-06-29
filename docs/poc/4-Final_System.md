@@ -166,10 +166,15 @@ cat > ~/.bash_profile << "EOF"
 TRUPLE="x86_64-pc-linux-musl"
 CC="${TRUPLE}-clang"
 CXX="${TRUPLE}-clang++"
+AR="llvm-ar"
+AS="llvm-as"
+RANLIB="llvm-ranlib"
+LD="ld.lld"
+STRIP="llvm-strip"
 COMMON_FLAGS="-march=native -Oz -pipe"
 CFLAGS="${COMMON_FLAGS}"
 CXXFLAGS="${COMMON_FLAGS}"
-export TRUPLE CC CXX COMMON_FLAGS CFLAGS CXXFLAGS
+export TRUPLE CC CXX AR AS RANLIB LD STRIP COMMON_FLAGS CFLAGS CXXFLAGS
 # Make's multiple jobs based on CPU core/threads.
 alias make="make -j$(nproc) -l$(nproc)"
 EOF
@@ -195,4 +200,50 @@ rm -fv usr/include/Makefile
 
 # Install.
 cp -rv usr/include /usr/.
+```
+
+### `5` - musl
+> #### `1.2.2` or newer
+> The musl package contains the main C library. This library provides the basic routines for allocating memory, searching directories, opening and closing files, reading and writing files, string handling, pattern matching, arithmetic, and so on.
+
+> **Required!**
+```bash
+# Apply patch (from Void Linux).
+# To prevent crash with a NULL pointer dereference when dcngettext() is called with NULL msgid[12] arguments.
+patch -Np0 -i ../../extra/musl/patches/mo_lookup.patch
+
+# Configure source.
+LDFLAGS="-Wl,-soname,libc.musl-x86_64.so.1" \
+./configure \
+    --prefix=/usr        \
+    --sysconfdir=/etc    \
+    --localstatedir=/var \
+    --disable-gcc-wrapper
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+
+# Create a ldd symlink to use to print shared object dependencies.
+ln -sv ../usr/lib/libc.so /bin/ldd
+
+# Configure PATH for dynamic linker.
+cat > /etc/ld-musl-x86_64.path << "EOF"
+/lib
+/usr/lib
+/usr/local/lib
+EOF
+
+# Install fully-featured musl ldconfig. (https://code.foxkit.us/smaeul/packages/-/commit/c631e4fc5ab64a9ad668ed5f753348ce8eae5219?view=parallel)
+install -vm755 -t /sbin/ ../../extra/musl/files/ldconfig
+
+# Install musl-legacy-compat (from Void Linux).
+for B in {cdefs,queue,tree}.h; do
+    install -vm644 -t /usr/include/sys/ \
+    ../../extra/musl/files/musl-legacy-compat/${B}
+done; install -vm644 -t /usr/include/ \
+../../extra/musl/files/musl-legacy-compat/error.h
+
 ```
