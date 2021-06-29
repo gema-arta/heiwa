@@ -337,6 +337,8 @@ install -vm755 -t /usr/bin/ posixtz-0.5/posixtz
 unset timezones
 
 # Use `tzselect` to determine <xxx>.
+tzselect
+
 cp -v /usr/share/zoneinfo/<xxx> /etc/localtime
 
 # Back to "/sources/pkgs" directory.
