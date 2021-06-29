@@ -5,7 +5,7 @@
 > Various file systems exported by the kernel are used to communicate to and from the kernel itself. These file systems are virtual in that no disk space is used for them. The content of the file systems resides in memory.
 ```bash
 # When the kernel boots the system, it requires the presence of a few device nodes, in particular the console and null devices.
-# The device nodes must be created on the hard disk so that they are available before the kernel populates /dev), and additionally when Linux is started with init=/bin/bash.
+# The device nodes must be created on the hard disk so that they are available before the kernel populates "/dev", and additionally when Linux is started with init=/bin/bash.
 # Create the directories and initial device nodes.
 if [[ -n "$HEIWA" ]]; then
     mkdir -pv "${HEIWA}/"{dev,proc,sys,run}   && \
