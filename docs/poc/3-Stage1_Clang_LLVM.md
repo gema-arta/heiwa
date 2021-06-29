@@ -18,8 +18,7 @@
 > **Required!**
 ```bash
 # Set default compiler to Stage-0 Clang/LLVM.
-CC="clang" CXX="clang++"
-export CC CXX
+CC="clang" CXX="clang++"; export CC CXX
 
 # Configure source.
 ./configure --prefix=/
@@ -610,7 +609,7 @@ find /clang1-tools/{lib,libexec} -name \*.la -exec rm -rfv {} \;
 # Remove the documentation.
 rm -rf /clang1-tools/share/{info,man,doc}/*
 
-# Strip off debugging symbols from binaries using "llvm-strip".
+# Strip off debugging symbols from binaries using `llvm-strip`.
 # A large number of files will be reported "The file was not recognized as a valid object file".
 # These warnings can be safely ignored. These warnings indicate that those files are scripts instead of binaries.
 find /clang1-tools/lib/ -maxdepth 1 -type f -exec strip --strip-debug {} \;
