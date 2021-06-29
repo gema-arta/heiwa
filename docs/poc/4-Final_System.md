@@ -1,15 +1,4 @@
 ## `IV` Final System
-> **Compilation Instruction!**
-> ```bash
-> heiwa@localh3art /media/Heiwa/sources/pkgs $ tar xf target-package.tar.xz
-> heiwa@localh3art /media/Heiwa/sources/pkgs $ tar xzf target-package.tar.gz
-> heiwa@localh3art /media/Heiwa/sources/pkgs $ pushd target-package
-> 
-> < compilation process >
-> 
-> heiwa@localh3art /media/Heiwa/sources/pkgs/target-package $ popd
-> heiwa@localh3art /media/Heiwa/sources/pkgs $ rm -rf target-package
-> ```
 
 > #### * Beginning of as root!
 ### `1` - Preparing Virtual Kernel File Systems
@@ -46,7 +35,7 @@ fi
 
 ### `2` - Entering the Chroot Environment
 > Now that all the packages which are required to build the rest of the needed tools are on the system.
-```sh
+```bash
 # Term variable is set to `xterm` for better compability, instead of ${TERM} that will broken if using `rxvt-unicode`.
 if [[ -n "$HEIWA" ]]; then
     chroot "$HEIWA" /clang1-tools/usr/bin/env -i                                 \
@@ -57,5 +46,111 @@ if [[ -n "$HEIWA" ]]; then
 fi
 
 # The `-i` option given to the env command will clear all variables of the chroot environment.
-# Note! that the bash prompt will say I have no name! This is normal because the "/etc/passwd" file has not been created yet.
+# Note! that the bash prompt will say "I have no name!". This is normal because the "/etc/passwd" file has not been created yet.
 ```
+> #### * End of as root!
+
+> #### * Beginning of as root in a chroot env!
+### `2` - Creating full structured directories
+> Its time to create the full structure file system.
+```bash
+mkdir -pv /{{,s}bin,boot,etc,home,lib/firmware,media,mnt,opt,root,{var/,}tmp}
+
+mkdir -pv /usr/{,local/}{bin,include,lib,sbin,src}
+mkdir -pv /usr/{,local/}share/{color,dict,doc,info,locale,man,misc,terminfo,zoneinfo}
+mkdir -pv /usr/{,local/}share/man/man{1..8}
+
+mkdir -pv /usr/libexec
+
+mkdir -pv /var/{opt,cache,lib/{color,misc,locate},local,log,mail,spool}
+
+ln -sv /run /var/run
+ln -sv /run/lock /var/lock
+
+chmod -v 0700 /root
+chmod -v 1777 /{var/,}tmp
+```
+
+### `3` - Creating essential files and symlinks
+```sh
+# Some programs use hard-wired paths to programs which do not exist yet.
+# In order to satisfy these programs, create a number of symbolic links which will be replaced by real files throughout the course of this chapter after the software has been installed.
+ln -sv /clang1-tools/bin/{bash,cat,echo,ln,pwd,rm,stty} /bin
+ln -sv /clang1-tools/usr/bin/{install,dd}               /usr/bin
+ln -sv /clang1-tools/lib/libc++.so{,.1}                 /usr/lib
+ln -sv /clang1-tools/lib/libc++abi.so{,.1}              /usr/lib
+ln -sv /clang1-tools/lib/libunwind.so{,.1}              /usr/lib
+ln -sv /clang1-tools/lib/libunwind.a                    /usr/lib
+ln -sv bash /bin/sh
+
+# Historically, Linux maintains a list of the mounted file systems in the file /etc/mtab.
+# Modern kernels maintain this list internally and exposes it to the user via the /proc filesystem.
+# To satisfy utilities that expect the presence of /etc/mtab, create the following symbolic link.
+ln -sv /proc/self/mounts /etc/mtab
+
+# In order for user root to be able to login and for the name "root" to be recognized, there must be relevant entries in the /etc/passwd and /etc/group files.
+# Create the /etc/passwd file by running the following command.
+# User "uucp" is required by openrc for later installation.
+cat > /etc/passwd << "EOF"
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/dev/null:/bin/false
+uucp:x:10:17:uucp:/var/spool/uucp:/bin/false
+daemon:x:6:6:Daemon User:/dev/null:/bin/false
+messagebus:x:18:18:D-Bus Message Daemon User:/run/dbus:/bin/false
+nobody:x:99:99:Unprivileged User:/dev/null:/bin/false
+EOF
+
+# The actual password for root will be set later.
+# Create the /etc/group file by running the following command.
+cat > /etc/group << "EOF"
+root:x:0:
+bin:x:1:daemon
+sys:x:2:
+kmem:x:3:
+tape:x:4:
+tty:x:5:
+daemon:x:6:
+floppy:x:7:
+disk:x:8:
+lp:x:9:
+dialout:x:10:
+audio:x:11:
+video:x:12:
+utmp:x:13:
+usb:x:14:
+cdrom:x:15:
+adm:x:16:
+uucp:x:17:uucp
+messagebus:x:18:
+input:x:24:
+mail:x:34:
+kvm:x:61:
+wheel:x:97:
+nogroup:x:99:
+users:x:999:
+EOF
+
+# To remove the "I have no name!" prompt, start a new shell.
+# Since the /etc/passwd and /etc/group files have been created, user name and group name resolution will now work.
+exec /clang1-tools/bin/bash --login +h
+
+# The login, agetty, and init programs (and others) use a number of log files to record information such as who was logged into the system and when.
+# However, these programs will not write to the log files if they do not already exist.
+# Initialize the log files and give them proper permissions.
+touch /var/log/{btmp,lastlog,faillog,wtmp}
+chgrp -v utmp /var/log/lastlog
+chmod -v 664  /var/log/lastlog
+chmod -v 600  /var/log/btmp
+```
+
+> **Compilation Instruction!**
+> ```bash
+> heiwa@localh3art /media/Heiwa/sources/pkgs $ tar xf target-package.tar.xz
+> heiwa@localh3art /media/Heiwa/sources/pkgs $ tar xzf target-package.tar.gz
+> heiwa@localh3art /media/Heiwa/sources/pkgs $ pushd target-package
+> 
+> < compilation process >
+> 
+> heiwa@localh3art /media/Heiwa/sources/pkgs/target-package $ popd
+> heiwa@localh3art /media/Heiwa/sources/pkgs $ rm -rf target-package
+> ```
