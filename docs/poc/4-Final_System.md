@@ -303,8 +303,11 @@ grep -o -- -L/lib dummy.log
 rm -fv dummy.c a.out dummy.log
 ```
 
-### `8` - TimeZone Utilities (tzdata)
-> **Required!**
+### `8` - TimeZone Database
+> #### `2021a` and `0.5` for posixtz
+> The TZDb package contains code and data that represent the history of local time for many representative locations around the globe. It is updated periodically to reflect changes made by political bodies to time zone boundaries, UTC offsets, and daylight-saving rules.
+
+> **Required!** Since using musl libc.
 ```bash
 # Create a directory and decompress needed tarball.
 mkdir -v tzata && pushd tzdata && \
