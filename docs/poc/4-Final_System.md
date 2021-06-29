@@ -302,3 +302,39 @@ grep -o -- -L/lib dummy.log
 # Clean up.
 rm -fv dummy.c a.out dummy.log
 ```
+
+### `8` - TimeZone Utilities (tzdata)
+> **Required!**
+```bash
+# Create a directory and decompress needed tarball.
+mkdir -v tzdb && cd tzdb && \
+    tar xf ../pkgs/tzdata2021a.tar.gz && \
+    tar xf ../pkgs/tzcode2021a.tar.gz && \
+    tar xf ../pkgs/posixtz-0.5.tar.xz
+
+# Apply patch to fix up lseek.
+patch -Np1 -i ../extra/tzdata/patches/0001-posixtz-fix-up-lseek.patch
+
+export timezones="africa antarctica asia australasia europe northamerica
+southamerica etcetera backward factory"
+
+# Build.
+time {
+    make CFLAGS="$CFLAGS -DHAVE_STDINT_H=1" TZDIR="/usr/share/zoneinfo" && \
+    make -C posixtz-0.5 posixtz
+}
+
+# Install.
+./zic -y ./yearistype -d /usr/share/zoneinfo ${timezones}
+./zic -y ./yearistype -d /usr/share/zoneinfo/right -L leapseconds ${timezones}
+./zic -y ./yearistype -d /usr/share/zoneinfo -p America/New_York
+install -vm444 -t /usr/share/zoneinfo/ iso3166.tab zone1970.tab zone.tab
+install -vm755 -t /usr/sbin/ zic zdump
+install -vm644 -t /usr/share/man/man8/ zic.8 zdump.8
+install -Dm755 posixtz-0.5/posixtz /usr/bin/posixtz
+
+unset timezones
+
+# Use `tzselect` to determine <xxx>.
+cp -v /usr/share/zoneinfo/<xxx> /etc/localtime
+```
