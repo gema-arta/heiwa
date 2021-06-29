@@ -73,7 +73,7 @@ chmod -v 1777 /{var/,}tmp
 ```
 
 ### `3` - Creating essential files and symlinks
-```sh
+```bash
 # Some programs use hard-wired paths to programs which do not exist yet.
 # In order to satisfy these programs, create a number of symbolic links which will be replaced by real files throughout the course of this chapter after the software has been installed.
 ln -sv /clang1-tools/bin/{bash,cat,echo,ln,pwd,rm,stty} /bin
