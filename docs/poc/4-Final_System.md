@@ -269,7 +269,7 @@ ln -sv gcc                             /clang1-tools/bin/cc
 ln -sv x86_64-heiwa-linux-musl-clang++ /clang1-tools/bin/g++
 
 # Quick test.
-echo 'int main(){}' > dummy.c
+echo "int main(){}" > dummy.c
 "$CC" dummy.c -v -Wl,--verbose &> dummy.log
 llvm-readelf -l a.out | grep ": /lib"
 
