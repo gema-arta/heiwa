@@ -600,9 +600,8 @@ time { make install; }
 
 > If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
 ```bash
-# The libtool .la files are only useful when linking with static libraries.
+# The libtool .la files are only useful when linking with static libraries. Remove those files.
 # They are unneeded, and potentially harmful, when using dynamic shared libraries, specially when using non-autotools build systems.
-# Remove those files.
 find /clang1-tools/{lib,libexec} -name \*.la -exec rm -rfv {} \;
 
 # Remove the documentation.
