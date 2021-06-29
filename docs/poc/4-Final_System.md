@@ -163,7 +163,7 @@ chmod -v 600  /var/log/btmp
 > **Required!**
 ```bash
 # Apply some persistent environment variables.
-cat > ~/.bash_profile << "EOF"
+cat > ~/.bashrc << "EOF"
 # Stage-1 Clang/LLVM environment.
 TRUPLE="x86_64-pc-linux-musl"
 CC="${TRUPLE}-clang"
@@ -180,7 +180,7 @@ export TRUPLE CC CXX AR AS RANLIB LD STRIP COMMON_FLAGS CFLAGS CXXFLAGS
 # Make's multiple jobs based on CPU core/threads.
 alias make="make -j$(nproc) -l$(nproc)"
 EOF
-source ~/.bash_profile
+source ~/.bashrc
 
 # Apply patch to fix "swab.h" under musl libc.
 patch -Np1 -i \
