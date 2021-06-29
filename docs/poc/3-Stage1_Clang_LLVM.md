@@ -336,7 +336,7 @@ cat > /clang1-tools/bin/x86_64-pc-linux-musl.cfg << "EOF"
 -Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1
 EOF
 
-# Set the new PATH since "/clang0-tools" isn't used anymore.
+# Set the new PATH since "/clang0-tools" won't be used anymore.
 export PATH="/clang1-tools/bin:/clang1-tools/usr/bin:/bin:/usr/bin"
 
 # Configure new Stage-1 Clang/LLVM environment.
