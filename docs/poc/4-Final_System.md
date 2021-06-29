@@ -313,7 +313,7 @@ mkdir -v tzdb && pushd tzdb && \
     tar xf  ../posixtz-0.5.tar.xz
 
 # Apply patch to fix up lseek.
-patch -Np1 -i ../extra/tzdata/patches/0001-posixtz-fix-up-lseek.patch
+patch -Np1 -i ../../extra/tzdata/patches/0001-posixtz-fix-up-lseek.patch
 
 export timezones="africa antarctica asia australasia europe northamerica
 southamerica etcetera backward factory"
