@@ -52,7 +52,7 @@ fi
 > #### * End of as root!
 
 > #### * Beginning of as root in a chroot env!
-### `2` - Creating full structured directories
+### `2` - Creating Directories
 > Its time to create the full structure file system.
 ```bash
 mkdir -pv /{{,s}bin,boot,etc,home,lib/firmware,media,mnt,opt,root,{var/,}tmp}
@@ -72,7 +72,7 @@ chmod -v 0700 /root
 chmod -v 1777 /{var/,}tmp
 ```
 
-### `3` - Creating essential files and symlinks
+### `3` - Creating Essential Files and Symlinks
 ```bash
 # Some programs use hard-wired paths to programs which do not exist yet.
 # In order to satisfy these programs, create a number of symbolic links which will be replaced by real files throughout the course of this chapter after the software has been installed.
