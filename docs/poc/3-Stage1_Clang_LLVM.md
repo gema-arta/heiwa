@@ -170,7 +170,7 @@ sed -i '/check_library_exists(atomic __atomic_fetch_add_8 "" LIBCXX_HAS_ATOMIC_L
 
 # Configure source.
 pushd "${LLVM_SRC}/projects/libcxx/" && \
-    cmake -B build  \
+    cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools"                 \
         -DLIBCXX_ENABLE_SHARED=ON                              \
         -DLIBCXX_ENABLE_STATIC=ON                              \
