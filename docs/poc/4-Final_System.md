@@ -192,8 +192,8 @@ time { make LLVM=1 LLVM_IAS=1 mrproper; }
 # The recommended make target `headers_install` cannot be used, because it requires rsync, which may not be available.
 # The headers are first placed in "./usr/", then copied to the needed location.
 time {
-    make LLVM=1 LLVM_IAS=1 headers_check && \
-    make LLVM=1 LLVM_IAS=1 headers
+    make LLVM=1 LLVM_IAS=1 HOSTCC="$CC" headers_check && \
+    make LLVM=1 LLVM_IAS=1 HOSTCC="$CC" headers
 }
 
 # Remove unnecessary files.
