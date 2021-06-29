@@ -31,12 +31,12 @@ fi
 # This is accomplished by bind mounting the host system's /dev directory.
 # A bind mount is a special type of mount that allows you to create a mirror of a directory or mount point to some other location.
 if [[ -n "$HEIWA" ]]; then
-    mount -Rv /dev "${HEIWA}/dev"         && \
-    mount -Rv /dev/pts "${HEIWA}/dev/pts" && \
-    mount -vt proc proc "${HEIWA}/proc"   && \
-    mount -vt sysfs sysfs "${HEIWA}/sys"  && \
-    mount -vt tmpfs tmpfs "${HEIWA}/run"  && \
-    mount -vt tmpfs tmpfs "${HEIWA}/tmp"  && \
+    mount -Rv /dev        "${HEIWA}/dev"     && \
+    mount -Rv /dev/pts    "${HEIWA}/dev/pts" && \
+    mount -vt proc proc   "${HEIWA}/proc"    && \
+    mount -vt sysfs sysfs "${HEIWA}/sys"     && \
+    mount -vt tmpfs tmpfs "${HEIWA}/run"     && \
+    mount -vt tmpfs tmpfs "${HEIWA}/tmp"     && \
     if [[ -h "${HEIWA}/dev/shm" ]]; then
         mkdir -pv "${HEIWA}/$(readlink ${HEIWA}/dev/shm)"
     fi
