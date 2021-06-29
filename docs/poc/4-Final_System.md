@@ -146,14 +146,14 @@ chmod -v 600  /var/log/btmp
 
 > **Compilation Instruction!**
 > ```bash
-> heiwa@localh3art /media/Heiwa/sources/pkgs $ tar xf target-package.tar.xz
-> heiwa@localh3art /media/Heiwa/sources/pkgs $ tar xzf target-package.tar.gz
-> heiwa@localh3art /media/Heiwa/sources/pkgs $ pushd target-package
+> (heiwa chroot) root: /sources/pkgs # tar xf target-package.tar.xz
+> (heiwa chroot) root: /sources/pkgs # tar xzf target-package.tar.gz
+> (heiwa chroot) root: /sources/pkgs # pushd target-package
 > 
 > < compilation process >
 > 
-> heiwa@localh3art /media/Heiwa/sources/pkgs/target-package $ popd
-> heiwa@localh3art /media/Heiwa/sources/pkgs $ rm -rf target-package
+> (heiwa chroot) root: /sources/pkgs/target-package # popd
+> (heiwa chroot) root: /sources/pkgs # rm -rf target-package
 > ```
 
 ### `5` - Linux API Headers
