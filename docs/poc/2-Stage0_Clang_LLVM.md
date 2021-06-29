@@ -388,7 +388,7 @@ readelf -l a.out | grep ": /clang1-tools"
 # |-----------------------
 # |      [Requesting program interpreter: /clang1-tools/lib/ld-musl-x86_64.so.1]
 
-grep --color=auto "lib.*/crt[1in].*succeeded" dummy.log | cut -d ' ' -f 4-5
+grep "lib.*/crt[1in].*succeeded" dummy.log | cut -d ' ' -f 4-5
 
 # | The output should be:
 # |-----------------------
