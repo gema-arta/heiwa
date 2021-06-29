@@ -250,6 +250,7 @@ done; install -vm644 -t /usr/include/ \
 ```
 
 ### `7` - Adjusting Toolchains
+> **Required!**
 ```bash
 # Re-configure Stage-1 Clang/LLVM to use "/usr".
 ln -sv clang-12 /clang1-tools/bin/x86_64-heiwa-linux-musl-clang
