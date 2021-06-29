@@ -308,9 +308,9 @@ rm -fv dummy.c a.out dummy.log
 ```bash
 # Create a directory and decompress needed tarball.
 mkdir -v tzdb && pushd tzdb && \
-    tar xzf ../pkgs/tzdata2021a.tar.gz && \
-    tar xzf ../pkgs/tzcode2021a.tar.gz && \
-    tar xf  ../pkgs/posixtz-0.5.tar.xz
+    tar xzf ../tzdata2021a.tar.gz && \
+    tar xzf ../tzcode2021a.tar.gz && \
+    tar xf  ../posixtz-0.5.tar.xz
 
 # Apply patch to fix up lseek.
 patch -Np1 -i ../extra/tzdata/patches/0001-posixtz-fix-up-lseek.patch
