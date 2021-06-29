@@ -229,7 +229,7 @@ ln -sv libexecinfo.so.1 /clang1-tools/lib/libexecinfo.so
 > #### `2.0.5` or newer
 > The Zlib-ng package contains zlib data compression library for the next generation systems.
 
-> **Required!** By Pigz and Clang/LLVM in current stage.
+> **Required!** By Pigz and optionally enabled for Clang/LLVM in current stage.
 ```bash
 # Configure source.
 ./configure \
@@ -312,7 +312,7 @@ cmake -B build \
     -DDEFAULT_SYSROOT="/clang1-tools"                           \
     -DLLVM_ENABLE_LLD=ON                                        \
     -DLLVM_ENABLE_RTTI=ON                                       \
-    -DLLVM_ENABLE_ZLIB=OFF                                      \
+    -DLLVM_ENABLE_ZLIB=ON                                       \
     -DBacktrace_INCLUDE_DIR="/clang1-tools/include"             \
     -DBacktrace_LIBRARY="/clang1-tools/lib/libexecinfo.so"      \
     -DCMAKE_CXX_COMPILER_AR="/clang0-tools/bin/llvm-ar"         \
