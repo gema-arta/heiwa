@@ -290,7 +290,7 @@ grep -B1 "^ /usr/include" dummy.log
 # | The output should be:
 # |-----------------------
 # |#include <...> search starts here:
-# |/usr/include
+# | /usr/include
 
 grep -o -- -L/usr/lib dummy.log && \
 grep -o -- -L/lib dummy.log
