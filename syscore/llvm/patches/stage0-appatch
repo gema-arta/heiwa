@@ -7,15 +7,15 @@ pushd "${LLVM_SRC}/projects/" && \
         compiler-rt-sanitizer-ppc64-musl.patch \
         compiler-rt-size_t.patch \
         compiler-rt-xray-ppc64-musl.patch
-    do patch -Np1 -i ../../patches/llvm-12/${P}
+    do patch -Np1 -i ../../patches/llvm/${P}
     done; unset P
     for P in \
         libcxx-musl.patch \
         libcxx-ppc.patch \
         libcxx-ssp-nonshared.patch
-    do patch -Np1 -i ../../patches/llvm-12/${P}
+    do patch -Np1 -i ../../patches/llvm/${P}
     done; unset P
-    patch -Np1 -i ../../patches/llvm-12/libunwind-ppc32.patch
+    patch -Np1 -i ../../patches/llvm/libunwind-ppc32.patch
 popd
 
 pushd "${LLVM_SRC}/tools/" && \
@@ -24,7 +24,7 @@ pushd "${LLVM_SRC}/tools/" && \
         clang-002-add-musl-triples.patch \
         clang-003-ppc64-dynamic-linker-path.patch \
         clang-004-ppc64-musl-elfv2.patch
-    do patch -Np1 -i ../../patches/llvm-12/${P}
+    do patch -Np1 -i ../../patches/llvm/${P}
     done; unset P
 popd
 
@@ -36,6 +36,6 @@ pushd "${LLVM_SRC}/../" && \
         llvm-004-override-opt.patch \
         llvm-005-ppc-bigpic.patch \
         llvm-006-aarch64-mf_exec.patch
-    do patch  -Np1 -i ./patches/llvm-12/${P}
+    do patch  -Np1 -i ./patches/llvm/${P}
     done; unset P
 popd
