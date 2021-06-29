@@ -42,7 +42,8 @@ if [[ -n "$HEIWA" ]]; then
     HOME="/root" TERM="xterm" PS1='(heiwa chroot) \u: \w \$ '                    \
     PATH="/bin:/usr/bin:/sbin:/usr/sbin:/clang1-tools/bin:/clang1-tools/usr/bin" \
     TRUPLE="x86_64-pc-linux-musl" CC="${TRUPLE}-clang" CXX="${TRUPLE}-clang++"   \
-    /clang1-tools/bin/bash --login +h
+    COMMON_FLAGS="-march=native -Oz -pipe" CFLAGS="${COMMON_FLAGS}"              \
+    CXXFLAGS="${COMMON_FLAGS}" /clang1-tools/bin/bash --login +h
 fi
 
 # The `-i` option given to the env command will clear all variables of the chroot environment.
