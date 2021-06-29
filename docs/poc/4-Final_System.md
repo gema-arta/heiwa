@@ -50,7 +50,7 @@ fi
 > #### * End of as root!
 
 > #### * Beginning of as root in a chroot env!
-### `2` - Creating Directories
+### `3` - Creating Directories
 > Its time to create the full structure file system.
 ```bash
 mkdir -pv /{{,s}bin,boot,etc,home,lib/firmware,media,mnt,opt,root,{var/,}tmp}
@@ -70,7 +70,7 @@ chmod -v 0700 /root
 chmod -v 1777 /{var/,}tmp
 ```
 
-### `3` - Creating Essential Files and Symlinks
+### `4` - Creating Essential Files and Symlinks
 ```bash
 # Some programs use hard-wired paths to programs which do not exist yet.
 # In order to satisfy these programs, create a number of symbolic links which will be replaced by real files throughout the course of this chapter after the software has been installed.
@@ -154,7 +154,7 @@ chmod -v 600  /var/log/btmp
 > heiwa@localh3art /media/Heiwa/sources/pkgs $ rm -rf target-package
 > ```
 
-### `4` - Linux API Headers
+### `5` - Linux API Headers
 > #### Xanmod-CacULE, `5.12.x` or newer
 > The Linux API Headers expose the kernel's API for use by musl libc.
 
@@ -202,7 +202,7 @@ rm -fv usr/include/Makefile
 cp -rv usr/include /usr/.
 ```
 
-### `5` - musl
+### `6` - musl
 > #### `1.2.2` or newer
 > The musl package contains the main C library. This library provides the basic routines for allocating memory, searching directories, opening and closing files, reading and writing files, string handling, pattern matching, arithmetic, and so on.
 
