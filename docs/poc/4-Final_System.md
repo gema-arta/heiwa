@@ -175,7 +175,7 @@ alias make="make -j$(nproc) -l$(nproc)"
 EOF
 source ~/.bash_profile
 
-# Apply patch to fix swab.h under musl libc.
+# Apply patch to fix "swab.h" under musl libc.
 patch -Np1 -i \
 ../../patches/linux-headers/include-uapi-linux-swab-Fix-potentially-missing-__always_inline.patch
 
