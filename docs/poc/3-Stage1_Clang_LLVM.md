@@ -18,7 +18,8 @@
 > **Required!**
 ```bash
 # Set default compiler to Stage-0 Clang/LLVM.
-CC="clang" CXX="clang++"; export CC CXX
+CC="clang" CXX="clang++"
+export CC CXX
 
 # Configure source.
 ./configure --prefix=/
