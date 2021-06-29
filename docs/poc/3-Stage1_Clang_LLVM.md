@@ -214,9 +214,9 @@ time { make PREFIX=/ DESTDIR=/clang1-tools install; }
 > **Required!** To build Stage-1 Clang/LLVM, since using musl libc.
 ```bash
 # Apply patches (from Alpine Linux).
-patch -Np1 -i ../../patches/libexecinfo-1.1/10-execinfo.patch
-patch -Np1 -i ../../patches/libexecinfo-1.1/20-define-gnu-source.patch
-patch -Np1 -i ../../patches/libexecinfo-1.1/30-linux-makefile.patch
+patch -Np1 -i ../../extra/libexecinfo/patches/10-execinfo.patch
+patch -Np1 -i ../../extra/libexecinfo/patches/20-define-gnu-source.patch
+patch -Np1 -i ../../extra/libexecinfo/patches/30-linux-makefile.patch
 
 # Build.
 time { make CC=clang AR=llvm-ar CFLAGS="$COMMON_FLAGS -fno-omit-frame-pointer"; }
@@ -267,7 +267,7 @@ pushd "${LLVM_SRC}/tools/" && \
 popd
 
 # Apply patches (from Void Linux).
-../patches/llvm-12/stage1-appatch
+../extra/llvm/patches/stage1-appatch
 
 # Disable sanitizers for musl, fixing "early build failure".
 sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
@@ -280,7 +280,7 @@ CXX="${HEIWA_TARGET}-clang++" CXXFLAGS="-g -g1"
 export CC CXX CFLAGS CXXFLAGS
 
 # Update host/target triple detection.
-cp -v ../files/config.guess cmake/
+cp -v ../extra/llvm/files/config.guess cmake/
 
 # Configure source.
 cmake -B build \
@@ -435,7 +435,7 @@ time { make install; }
 > **Required!** For the current and next stage (chrooting new environment).
 ```bash
 # Copy Toybox's .config file.
-cp -v ../../files/toybox-0.8.5/.config.coreutils_file_findutils_grep_sed_tar.nlns .config
+cp -v ../../extra/toybox/files/.config.coreutils_file_findutils_grep_sed_tar.nlns .config
 
 export CFFGPT="base64 base32 basename cat chgrp chmod chown chroot cksum comm cp cut date
 dd df dirname du echo env expand expr factor false fmt fold groups head hostid id install
