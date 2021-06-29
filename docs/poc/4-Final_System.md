@@ -307,6 +307,8 @@ rm -fv dummy.c a.out dummy.log
 > #### `2021a` and `0.5` for posixtz
 > The TZDb package contains code and data that represent the history of local time for many representative locations around the globe. It is updated periodically to reflect changes made by political bodies to time zone boundaries, UTC offsets, and daylight-saving rules.
 
+> *No need to decompress any package firstly. It will be done in this step.*
+
 > **Required!** Since using musl libc.
 ```bash
 # Create a directory and decompress needed tarball.
