@@ -48,12 +48,13 @@ fi
 > Now that all the packages which are required to build the rest of the needed tools are on the system.
 ```sh
 # Term variable is set to `xterm` for better compability, instead of ${TERM} that will broken if using `rxvt-unicode`.
-[[ -n "$HEIWA" ]] && \
-chroot "$HEIWA" /clang1-tools/usr/bin/env -i                                     \
+if [[ -n "$HEIWA" ]]; then
+    chroot "$HEIWA" /clang1-tools/usr/bin/env -i                                 \
     HOME="/root" TERM="xterm" PS1='(heiwa chroot) \u: \w \$ '                    \
     PATH="/bin:/usr/bin:/sbin:/usr/sbin:/clang1-tools/bin:/clang1-tools/usr/bin" \
     TRUPLE="x86_64-pc-linux-musl" CC="${TRUPLE}-clang" CXX="${TRUPLE}-clang++"   \
     /clang1-tools/bin/bash --login +h
+fi
 
 # The `-i` option given to the env command will clear all variables of the chroot environment.
 # Note! that the bash prompt will say I have no name! This is normal because the "/etc/passwd" file has not been created yet.
