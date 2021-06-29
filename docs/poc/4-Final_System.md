@@ -33,7 +33,7 @@ fi
 if [[ -n "$HEIWA" ]]; then
     mount -Rv /dev        "${HEIWA}/dev"     && \
     mount -Rv /dev/pts    "${HEIWA}/dev/pts" && \
-    mount -vt proc proc   "${HEIWA}/proc"    && \
+    mount -vt proc  proc  "${HEIWA}/proc"    && \
     mount -vt sysfs sysfs "${HEIWA}/sys"     && \
     mount -vt tmpfs tmpfs "${HEIWA}/run"     && \
     mount -vt tmpfs tmpfs "${HEIWA}/tmp"     && \
