@@ -1,2 +1,2 @@
 ## Table of Contents
-- [Proof-of-Concept](./poc/) (manual book)
+- [Proof-of-Concept](./poc/) (Manual Book)
