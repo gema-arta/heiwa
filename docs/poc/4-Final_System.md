@@ -295,6 +295,10 @@ grep -B1 "^ /usr/include" dummy.log
 grep -o -- -L/usr/lib dummy.log && \
 grep -o -- -L/lib dummy.log
 
+# | The output should be:
+# |-----------------------
+# |-L/usr/lib
+
 # Clean up.
 rm -fv dummy.c a.out dummy.log
 ```
