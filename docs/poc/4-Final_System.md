@@ -324,7 +324,8 @@ time {
     make -C posixtz-0.5 posixtz
 }
 
-# Install.
+# Install timezone data.
+# Ignore "warning: -y is obsolescent" warning.
 ./zic -y ./yearistype -d /usr/share/zoneinfo ${timezones}
 ./zic -y ./yearistype -d /usr/share/zoneinfo/right -L leapseconds ${timezones}
 ./zic -y ./yearistype -d /usr/share/zoneinfo -p America/New_York
