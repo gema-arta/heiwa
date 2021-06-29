@@ -225,8 +225,25 @@ install -vm755 -t /clang1-tools/lib/ libexecinfo.a libexecinfo.so.1
 ln -sv libexecinfo.so.1 /clang1-tools/lib/libexecinfo.so
 ```
 
+### `8` - Zlib-ng
+> #### `2.0.5` or newer
+> The Zlib-ng package contains zlib data compression library for the next generation systems.
 
-### `8` - Clang/LLVM
+> **Required!** By Pigz and Clang/LLVM in current stage.
+```bash
+# Configure source.
+./configure \
+    --prefix=/clang1-tools \
+    --zlib-compat --native
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `9` - Clang/LLVM
 > #### `12.0.0`
 > C language family frontend for LLVM.
 
@@ -267,7 +284,6 @@ cp -v ../files/config.guess cmake/
 cmake -B build \
     -DCMAKE_BUILD_TYPE=Release                                  \
     -DCMAKE_INSTALL_PREFIX="/clang1-tools"                      \
-    -DLLVM_INSTALL_TOOLCHAIN_ONLY=ON                            \
     -DLLVM_LINK_LLVM_DYLIB=ON                                   \
     -DLLVM_BUILD_LLVM_DYLIB=ON                                  \
     -DLLVM_BUILD_TESTS=OFF                                      \
@@ -357,7 +373,7 @@ source ~/.bash_profile
 cd "${HEIWA}/sources/pkgs/"
 ```
 
-### `9` - OpenBSD M4
+### `10` - OpenBSD M4
 > #### `6.7` or newer
 > The OpenBSD M4 package contains a macro processor.
 
@@ -373,7 +389,7 @@ time { make -j1; }
 time { make install; }
 ```
 
-### `10` - GNU Bash
+### `11` - GNU Bash
 > #### `5.1` (with patch level 8) or newer
 > The GNU Bash package contains the Bourne-Again SHell.
 
@@ -411,7 +427,7 @@ time { make; }
 time { make install; }
 ```
 
-### `11` - Toybox (Coreutils, File, Findutils, Grep, Sed, and Tar)
+### `12` - Toybox (Coreutils, File, Findutils, Grep, Sed, and Tar)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
@@ -450,7 +466,7 @@ time { make; }
 time { make PREFIX=/clang1-tools install && unset CFFGPT; }
 ```
 
-### `12` - GNU Diffutils
+### `13` - GNU Diffutils
 > #### `3.7` or newer
 > The GNU Diffutils package contains programs that show the differences between files or directories.
 
@@ -469,7 +485,7 @@ time { make; }
 time { make install; }
 ```
 
-### `13` - GNU AWK
+### `14` - GNU AWK
 > #### `5.1.0` or newer
 > The GNU AWK (gawk) package contains programs for manipulating text files.
 
@@ -488,7 +504,7 @@ time { make; }
 time { make install; }
 ```
 
-### `14` - Gettext-tiny
+### `15` - Gettext-tiny
 > #### 0.3.2
 > The Gettext-tiny package provides lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
 
@@ -499,24 +515,6 @@ time { make LIBINTL=MUSL prefix=/clang1-tools; }
 
 # Install the msgfmt, msgmerge and xgettext programs.
 install -vm755 -t /clang1-tools/bin/ msgfmt msgmerge xgettext 
-```
-
-### `15` - Zlib-ng
-> #### `2.0.5` or newer
-> The Zlib-ng package contains zlib data compression library for the next generation systems.
-
-> **Required!** By Pigz in current stage.
-```bash
-# Configure source.
-./configure \
-    --prefix=/clang1-tools \
-    --zlib-compat --native
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
 ```
 
 ### `16` - Pigz
