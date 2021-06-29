@@ -85,7 +85,7 @@ ln -sv /clang1-tools/lib/libunwind.a                    /usr/lib
 ln -sv bash                                             /bin/sh
 
 # Historically, Linux maintains a list of the mounted file systems in the file "/etc/mtab".
-# Modern kernels maintain this list internally and exposes it to the user via the /proc filesystem.
+# Modern kernels maintain this list internally and exposes it to the user via the "/proc" filesystem.
 # To satisfy utilities that expect the presence of "/etc/mtab", create the following symbolic link.
 ln -sv /proc/self/mounts /etc/mtab
 
