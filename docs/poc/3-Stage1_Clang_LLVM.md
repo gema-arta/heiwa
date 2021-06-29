@@ -514,8 +514,7 @@ install -vm755 -t /clang1-tools/bin/ msgfmt msgmerge xgettext
 # Configure source.
 ./configure \
     --prefix=/clang1-tools \
-    --zlib-compat          \
-    --native
+    --zlib-compat --native
 
 # Build.
 time { make; }
