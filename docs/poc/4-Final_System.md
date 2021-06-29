@@ -82,7 +82,7 @@ ln -sv /clang1-tools/lib/libc++.so{,.1}                 /usr/lib
 ln -sv /clang1-tools/lib/libc++abi.so{,.1}              /usr/lib
 ln -sv /clang1-tools/lib/libunwind.so{,.1}              /usr/lib
 ln -sv /clang1-tools/lib/libunwind.a                    /usr/lib
-ln -sv bash /bin/sh
+ln -sv bash                                             /bin/sh
 
 # Historically, Linux maintains a list of the mounted file systems in the file /etc/mtab.
 # Modern kernels maintain this list internally and exposes it to the user via the /proc filesystem.
