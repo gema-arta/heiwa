@@ -371,7 +371,20 @@ time { make; }
 time { make install; }
 ```
 
-### `10` - Toybox (Bc, File, Grep, Inetutils, Psmisc, Sed)
+### `10` - NetBSD Curses
+> #### `0.3.2` or newer
+> The NetBSD Curses package contains libraries for terminal-independent handling of character screens.
+
+> **Required!**
+```bash
+# Build.
+time { make CFLAGS="$COMMON_FLAGS -Wall -fPIC" all; }
+
+# Install.
+time { make PREFIX=/ DESTDIR=/ install; }
+```
+
+### `11` - Toybox (Bc, File, Grep, Inetutils, Psmisc, Sed)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
