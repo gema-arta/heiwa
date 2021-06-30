@@ -455,7 +455,7 @@ time { make BINDIR="/usr/bin" install; }
 > #### `6.7` or newer
 > The OpenBSD M4 package contains a macro processor.
 
-> **Required!** As default front end to any language (e.g. C, ratfor, fortran, lex, and yacc).
+> **Required!** As default front end to any language (e.g: C, ratfor, fortran, lex, and yacc).
 ```bash
 # Configure source.
 ./configure --prefix=/usr --enable-m4
