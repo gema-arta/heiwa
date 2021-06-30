@@ -371,17 +371,17 @@ time { make; }
 time { make install; }
 ```
 
-### `10` - NetBSD Curses
+### `10` - NetBSD Curses (curses + terminfo)
 > #### `0.3.2` or newer
 > The NetBSD Curses package contains libraries for terminal-independent handling of character screens.
 
-> **Required!**
+> **Required!** In this build, only need "libcurses" and "libterminfo" to build required packages in the next step.
 ```bash
 # Build.
-time { make CFLAGS="$CFLAGS -Wall -fPIC" all; }
+time { make CFLAGS="$CFLAGS -Wall -fPIC" all-dynamic; }
 
 # Install.
-time { make PREFIX=/ DESTDIR=/ install; }
+time { make PREFIX=/ DESTDIR=/ install-headers install-dynlibs install-pcs; }
 ```
 
 ### `11` - Toybox (Bc, File, Grep, Inetutils, Psmisc, Sed)
