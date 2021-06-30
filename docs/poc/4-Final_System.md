@@ -314,7 +314,7 @@ rm -fv dummy.c a.out dummy.log
 
 > *No need to decompress any package firstly. It will be done in this step.*
 
-> **Required!** Since using musl libc.
+> **Required!**
 ```bash
 # Create a directory and decompress needed tarball.
 mkdir -v tzdata && pushd tzdata && \
@@ -360,7 +360,7 @@ popd && rm -rf tzdata
 > #### `2.0.5` or newer
 > The Zlib-ng package contains zlib data compression library for the next generation systems.
 
-> **Required!** For most packages and Clang/LLVM.
+> **Required!**
 ```bash
 # Configure source.
 ./configure \
@@ -375,7 +375,20 @@ time { make; }
 time { make install; }
 ```
 
-### `10` - Toybox (Bc, File, Grep, Inetutils, Psmisc, Sed)
+### `10` - NetBSD Curses
+> #### `0.3.2` or newer
+> The NetBSD Curses package contains libraries for terminal-independent handling of character screens.
+
+> **Required!**
+```bash
+# Build.
+time { make CFLAGS="$COMMON_FLAGS -Wall -fPIC" all; }
+
+# Install.
+time { make PREFIX=/usr install; }
+```
+
+### `11` - Toybox (Bc, File, Grep, Inetutils, Psmisc, Sed)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
@@ -410,11 +423,11 @@ time { make; }
 time { make PREFIX=/ install && unset CFFGPT; }
 ```
 
-### `11` - NetBSD libedit
+### `12` - NetBSD libedit
 > #### `20210522-3.1` or newer
 > The NetBSD libedit pacakage contains library providing line editing, history, and tokenisation functions.
 
-> **Required!** As drop-in replacement GNU Readline.
+> **Required!**
 ```bash
 # Configure source.
 CFLAGS="$CFLAGS -D__STDC_ISO_10646__" \
@@ -433,11 +446,11 @@ ln -sv ../editline/readline.h /usr/include/readline/readline.h
 ln -sv libedit.pc /usr/lib/pkgconfig/readline.pc
 ```
 
-### `12` - OpenBSD Yacc
+### `13` - OpenBSD Yacc
 > #### `6.6` or newer
 > The OpenBSD Yacc package contains a parser generator.
 
-> **Required!** For most packages.
+> **Required!**
 ```bash
 # Configure source.
 ./configure \
@@ -451,11 +464,11 @@ time { make; }
 time { make BINDIR="/usr/bin" install; }
 ```
 
-### `13` - OpenBSD M4
+### `14` - OpenBSD M4
 > #### `6.7` or newer
 > The OpenBSD M4 package contains a macro processor.
 
-> **Required!** As default front end to any language (e.g: C, ratfor, fortran, lex, and yacc).
+> **Required!**
 ```bash
 # Configure source.
 ./configure --prefix=/usr --enable-m4
