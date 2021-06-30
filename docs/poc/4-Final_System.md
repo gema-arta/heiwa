@@ -426,7 +426,7 @@ time { make V=1; }
 # Install.
 time { make install; }
 ln -sv libedit.so /usr/lib/libreadline.so
-mkdir -pv /usr/include/readline
+mkdir -v /usr/include/readline
 touch /usr/include/readline/history.h
 touch /usr/include/readline/tilde.h
 ln -sv ../editline/readline.h /usr/include/readline/readline.h
