@@ -595,64 +595,7 @@ time { make; }
 time { make install; }
 ```
 
-### `20` - libuv
-> #### `1.41.0` or newer
-> The libuv package is contains multi-platform support library with a focus on asynchronous I/O.
-
-> **Required!** To install Cmake.
-```bash
-# Generate configure script.
-export LDFLAGS="-pthread" && \
-NOCONFIGURE=1 ./autogen.sh
-
-# Configure source.
-./configure \
-    --prefix=/clang1-tools   \
-    --build="$TARGET_TRUPLE" \
-    --host="$TARGET_TRUPLE"  \
-    --disable-static
-
-# Build.
-time { make; }
-
-# Install.
-time { make install && unset LDFLAGS; }
-```
-
-### `21` - Cmake
-> #### `3.20.5` or newer
-> The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
-
-> **Required!** For the current and next stage (chrooting new environment) to build Clang/LLVM.
-```bash
-# Disable applications using cmake from attempting to install files in "/usr/lib64/".
-sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
-
-# Configure source.
-./bootstrap \
-    --prefix=/clang1-tools           \
-    --system-zlib                    \
-    --no-system-bzip2                \
-    --no-system-curl                 \
-    --no-system-nghttp2              \
-    --no-system-expat                \
-    --no-system-libarchive           \
-    --no-system-jsoncpp              \
-    --no-system-librhash             \
-    --no-system-zstd                 \
-    --parallel=$(nproc)              \
-    --mandir=/share/man              \
-    --docdir=/share/doc/cmake-3.20.5 \
-    -- -DCMAKE_USE_OPENSSL=OFF
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
-```
-
-### `22` - Cleaning Up and Changing Ownership
+### `20` - Cleaning Up and Changing Ownership
 > **This section is optional!**
 
 > If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
