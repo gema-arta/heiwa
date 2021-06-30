@@ -381,7 +381,7 @@ time { make install; }
 time { make CFLAGS="$CFLAGS -Wall -fPIC" all-dynamic; }
 
 # Install.
-time { make PREFIX=/ DESTDIR=/ install-headers install-dynlibs install-pcs; }
+time { make PREFIX=/usr DESTDIR=/ install-headers install-dynlibs install-pcs; }
 ```
 
 ### `11` - Toybox (Bc, File, Grep, Inetutils, Psmisc, Sed)
