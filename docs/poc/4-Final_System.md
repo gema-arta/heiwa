@@ -351,6 +351,29 @@ cp -v /usr/share/zoneinfo/<xxx> /etc/localtime
 popd
 ```
 
+### `8` - Zlib-ng
+> #### `2.0.5` or newer
+> The Zlib-ng package contains zlib data compression library for the next generation systems.
+
+> **Required!** For most packages and Clang/LLVM.
+```bash
+# Configure source
+./configure \
+    --prefix=/    \
+    --zlib-compat \
+    --native
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+
+# Add missing link
+ln -sfv ../../lib/$(readlink /usr/lib/libz.so) /usr/lib/libz.so
+ln -sfv ../../lib/$(readlink /usr/lib/libz.so) /usr/lib/libz.so.1
+```
+
 <!--
     ### `9` - Argp-standalone
     > #### `1.4.1` or newer
