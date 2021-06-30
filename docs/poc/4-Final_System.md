@@ -434,6 +434,8 @@ time { make V=1; }
 
 # Install.
 time { make install; }
+
+# Create some symlinks and fake headers to replace "readline".
 ln -sv libedit.so /usr/lib/libreadline.so
 ln -sv libedit.pc /usr/lib/pkgconfig/readline.pc
 mkdir -v /usr/include/readline
@@ -442,7 +444,31 @@ touch /usr/include/readline/tilde.h
 ln -sv ../editline/readline.h /usr/include/readline/readline.h
 ```
 
-### `13` - OpenBSD Yacc
+### `13` - FLex
+> #### `2.6.4` or newer
+> The Flex package contains a utility for generating programs that recognize patterns in text.
+
+> **Required!**
+```bash
+# Configure source.
+HELP2MAN=/tools/bin/true \
+./configure \
+    --prefix=/usr \
+    --docdir=/usr/share/doc/flex-2.6.4 \
+    --disable-static
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+
+# A few programs do not know about flex yet and try to run its predecessor, lex.
+# To support those programs, create a symbolic link named lex that runs flex in lex emulation mode.
+ln -sv flex /usr/bin/lex
+```
+
+### `14` - OpenBSD Yacc
 > #### `6.6` or newer
 > The OpenBSD Yacc package contains a parser generator.
 
@@ -460,7 +486,7 @@ time { make; }
 time { make BINDIR="/usr/bin" install; }
 ```
 
-### `14` - OpenBSD M4
+### `15` - OpenBSD M4
 > #### `6.7` or newer
 > The OpenBSD M4 package contains a macro processor.
 
