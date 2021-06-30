@@ -25,8 +25,6 @@ https://zlib.net/pigz/pigz-2.6.tar.gz
 https://ftp.gnu.org/gnu/make/make-4.3.tar.gz
 https://ftp.gnu.org/gnu/patch/patch-2.7.6.tar.xz
 https://tukaani.org/xz/xz-5.2.5.tar.xz
-https://dist.libuv.org/dist/v1.41.0/libuv-v1.41.0.tar.gz
-https://github.com/Kitware/CMake/releases/download/v3.20.5/cmake-3.20.5.tar.gz
 https://www.iana.org/time-zones/repository/releases/tzdata2021a.tar.gz
 https://www.iana.org/time-zones/repository/releases/tzcode2021a.tar.gz
 https://dev.alpinelinux.org/archive/posixtz/posixtz-0.5.tar.xz
