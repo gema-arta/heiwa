@@ -444,7 +444,7 @@ touch /usr/include/readline/tilde.h
 ln -sv ../editline/readline.h /usr/include/readline/readline.h
 ```
 
-### `13` - FLex
+### `13` - Flex
 > #### `2.6.4` or newer
 > The Flex package contains a utility for generating programs that recognize patterns in text.
 
