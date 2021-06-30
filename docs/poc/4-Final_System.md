@@ -451,7 +451,7 @@ ln -sv ../editline/readline.h /usr/include/readline/readline.h
 > **Required!**
 ```bash
 # Configure source.
-HELP2MAN=/tools/bin/true \
+CC=clang CXX=clang++ \
 ./configure \
     --prefix=/usr --disable-static \
     --docdir=/usr/share/doc/flex-2.6.4
