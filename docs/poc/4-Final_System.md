@@ -504,6 +504,47 @@ time { make -j1; }
 time { make install; }
 ```
 
+### `16` - GNU Attr
+> #### `2.5.1` or newer
+> The Attr package contains utilities to administer the extended attributes on filesystem objects.
+
+> **Required!** Before GNU ACL.
+```bash
+# Configure source.
+./configure \
+    --prefix=/usr     \
+    --bindir=/bin     \
+    --disable-static  \
+    --sysconfdir=/etc \
+    --docdir=/usr/share/doc/attr-2.5.1
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `16` - GNU ACL
+> #### `2.3.1` or newer
+> The ACL package contains utilities to administer Access Control Lists, which are used to define more fine-grained discretionary access rights for files and directories.
+
+> **Required!** After GNU Attr, before Shadow.
+```bash
+# Configure source.
+./configure \
+    --prefix=/usr         \
+    --bindir=/bin         \
+    --disable-static      \
+    --docdir=/usr/share/doc/acl-2.3.1
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
 <!--
     ### `9` - Argp-standalone
     > #### `1.4.1` or newer
