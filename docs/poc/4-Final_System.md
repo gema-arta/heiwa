@@ -357,7 +357,7 @@ popd
 
 > **Required!** For most packages and Clang/LLVM.
 ```bash
-# Configure source
+# Configure source.
 ./configure \
     --prefix=/    \
     --zlib-compat \
