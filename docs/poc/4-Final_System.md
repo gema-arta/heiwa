@@ -375,20 +375,7 @@ time { make; }
 time { make install; }
 ```
 
-### `10` - NetBSD Curses (curses + terminfo)
-> #### `0.3.2` or newer
-> The NetBSD Curses package contains libraries for terminal-independent handling of character screens.
-
-> **Required!** Currently only needs "libcurses" and "libterminfo" to build required packages in the next step.
-```bash
-# Build.
-time { make CFLAGS="$CFLAGS -Wall -fPIC" all-dynamic; }
-
-# Install.
-time { make PREFIX=/usr DESTDIR=/ install-headers install-dynlibs install-pcs; }
-```
-
-### `11` - Toybox (Bc, File, Grep, Inetutils, Psmisc, Sed)
+### `10` - Toybox (Bc, File, Grep, Inetutils, Psmisc, Sed)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
@@ -421,6 +408,22 @@ time { make; }
 
 # Install.
 time { make PREFIX=/ install && unset CFFGPT; }
+```
+
+### `11` - NetBSD libedit
+> #### `20210522-3.1` or newer
+> The NetBSD libedit pacakage contains library providing line editing, history, and tokenisation functions.
+
+> **Required!** For most packages.
+```bash
+# Configure source.
+CFLAGS="$CFLAGS -D__STDC_ISO_10646__" \
+./configure --prefix=/usr --disable-static
+
+# Build.
+time { make V=1; }
+
+# Install.
 ```
 
 <!--
