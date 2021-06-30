@@ -246,11 +246,11 @@ EOF
 install -vm755 -t /sbin/ ../../extra/musl/files/ldconfig
 
 # Install musl-legacy-compat (from Void Linux).
-#for B in {cdefs,queue,tree}.h; do
-#    install -vm644 -t /usr/include/sys/ \
-#    ../../extra/musl/files/musl-legacy-compat/${B}
-#done; install -vm644 -t /usr/include/ \
-#../../extra/musl/files/musl-legacy-compat/error.h
+for B in {cdefs,queue,tree}.h; do
+    install -vm644 -t /usr/include/sys/ \
+    ../../extra/musl/files/musl-legacy-compat/${B}
+done; install -vm644 -t /usr/include/ \
+../../extra/musl/files/musl-legacy-compat/error.h
 ```
 
 ### `7` - Adjusting Toolchains
