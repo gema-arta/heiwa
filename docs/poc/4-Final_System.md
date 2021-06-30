@@ -370,6 +370,41 @@ time { make; }
 time { make install; }
 ```
 
+### `10` - Toybox (Bc, File, Grep, Inetutils, Psmisc, Sed)
+> #### `0.8.5`
+> The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
+
+> **Required!**
+```bash
+# Copy Toybox's .config file.
+cp -v ../../extra/toybox/files/.config.bc_file_grep_inetutils_psmisc_sed.nlns .config
+
+export CFFGPT="bc file egrep grep fgrep dnsdomainname ifconfig hostname ping telnet tftp
+traceroute killall sed"
+
+# Checks 14 commands, and make sure is enabled (=y).
+# Pipe to " | wc -l" at the right of "done" to checks total of commands.
+for X in ${CFFGPT}; do
+    grep -v '#' .config | grep -i "_${X}=" || echo "* $X not CONFIGURED"
+done
+
+# Build.
+time { make; }
+
+# Checks compiled 14 commands.
+./toybox | tr ' ' '\n'i | grep -xE $(echo $CFFGPT | tr ' ' '|'i) | wc -l
+
+# Checks commands that not configured but compiled.
+# `ping6` and `traceroute6` (inetutils)
+./toybox | tr ' ' '\n'i | grep -vxE $(echo $CFFGPT | tr ' ' '|'i)
+
+# So, totally is 15 commands.
+./toybox | wc -w
+
+# Install.
+time { make PREFIX=/ install && unset CFFGPT; }
+```
+
 <!--
     ### `9` - Argp-standalone
     > #### `1.4.1` or newer
