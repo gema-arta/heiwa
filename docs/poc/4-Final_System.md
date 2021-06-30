@@ -444,7 +444,25 @@ touch /usr/include/readline/tilde.h
 ln -sv ../editline/readline.h /usr/include/readline/readline.h
 ```
 
-### `13` - Flex
+### `13` - OpenBSD Yacc
+> #### `6.6` or newer
+> The OpenBSD Yacc package contains a parser generator.
+
+> **Required!**
+```bash
+# Configure source.
+./configure \
+    --prefix=/usr --enable-yacc \
+    --mandir=/usr/share/man/man1
+
+# Build.
+time { make; }
+
+# Install.
+time { make BINDIR="/usr/bin" install; }
+```
+
+### `14` - Flex
 > #### `2.6.4` or newer
 > The Flex package contains a utility for generating programs that recognize patterns in text.
 
@@ -465,24 +483,6 @@ time { make install; }
 # A few programs do not know about flex yet and try to run its predecessor, lex.
 # To support those programs, create a symbolic link named lex that runs flex in lex emulation mode.
 ln -sv flex /usr/bin/lex
-```
-
-### `14` - OpenBSD Yacc
-> #### `6.6` or newer
-> The OpenBSD Yacc package contains a parser generator.
-
-> **Required!**
-```bash
-# Configure source.
-./configure \
-    --prefix=/usr --enable-yacc \
-    --mandir=/usr/share/man/man1
-
-# Build.
-time { make; }
-
-# Install.
-time { make BINDIR="/usr/bin" install; }
 ```
 
 ### `15` - OpenBSD M4
