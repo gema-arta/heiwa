@@ -358,7 +358,7 @@ popd
 > **Required!** Since using musl libc.
 ```bash
 # Apply patch to enable `-fgnu89-inline` compile flag (from Adélie Linux).
-patch -Np0 -i ../../extra/argp-standalone/patches/gnu89-inline.patch
+patch -Np1 -i ../../extra/argp-standalone/patches/gnu89-inline.patch
 
 # Configure source.
 CFLAGS="$CFLAGS -fPIC" \
