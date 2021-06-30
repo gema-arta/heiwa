@@ -435,11 +435,11 @@ time { make V=1; }
 # Install.
 time { make install; }
 ln -sv libedit.so /usr/lib/libreadline.so
+ln -sv libedit.pc /usr/lib/pkgconfig/readline.pc
 mkdir -v /usr/include/readline
 touch /usr/include/readline/history.h
 touch /usr/include/readline/tilde.h
 ln -sv ../editline/readline.h /usr/include/readline/readline.h
-ln -sv libedit.pc /usr/lib/pkgconfig/readline.pc
 ```
 
 ### `13` - OpenBSD Yacc
