@@ -82,7 +82,7 @@ ln -sv /clang1-tools/lib/libunwind.so{,.1}              /usr/lib
 ln -sv /clang1-tools/lib/libunwind.a                    /usr/lib
 ln -sv /clang1-tools/include/term{,cap}.h               /usr/include
 ln -sv /clang1-tools/include/{n,}curses.h               /usr/include
-ln -sv /clang1-tools/lib/libcurses*.so                  /usr/lib
+ln -sv /clang1-tools/lib/lib{,n}curses*.so              /usr/lib
 ln -sv /clang1-tools/lib/libterm*.so                    /usr/lib
 ln -sv bash                                             /bin/sh
 
