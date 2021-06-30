@@ -378,7 +378,7 @@ time { make install; }
 > **Required!**
 ```bash
 # Build.
-time { make CFLAGS="$COMMON_FLAGS -Wall -fPIC" all; }
+time { make CFLAGS="$CFLAGS -Wall -fPIC" all; }
 
 # Install.
 time { make PREFIX=/ DESTDIR=/ install; }
