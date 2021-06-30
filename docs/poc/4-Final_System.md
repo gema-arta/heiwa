@@ -462,7 +462,7 @@ ln -sv ../editline/readline.h /usr/include/readline/readline.h
 time { make; }
 
 # Install.
-time { make BINDIR="/usr/bin" install; }
+time { make BINDIR=/usr/bin install; }
 ```
 
 ### `14` - Flex
