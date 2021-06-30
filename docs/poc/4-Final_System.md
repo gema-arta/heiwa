@@ -160,7 +160,7 @@ chmod -v 600  /var/log/btmp
 > #### Xanmod-CacULE, `5.12.x` or newer
 > The Linux API Headers expose the kernel's API for use by musl libc.
 
-> **Required!**
+> **Required!** First, before musl libc.
 ```bash
 # Apply some persistent environment variables.
 cat > ~/.bashrc << "EOF"
@@ -208,7 +208,7 @@ cp -rv usr/include /usr/.
 > #### `1.2.2` or newer
 > The musl package contains the main C library. This library provides the basic routines for allocating memory, searching directories, opening and closing files, reading and writing files, string handling, pattern matching, arithmetic, and so on.
 
-> **Required!**
+> **Required!** Second, after Linux API Headers.
 ```bash
 # Apply patch (from Void Linux).
 # To prevent crash with a NULL pointer dereference when dcngettext() is called with NULL msgid[12] arguments.
@@ -310,7 +310,7 @@ rm -fv dummy.c a.out dummy.log
 
 > *No need to decompress any package firstly. It will be done in this step.*
 
-> **Required!**
+> **Required!** Since using musl libc.
 ```bash
 # Create a directory and decompress needed tarball.
 mkdir -v tzdata && pushd tzdata && \
@@ -356,7 +356,7 @@ popd && rm -rf tzdata
 > #### `2.0.5` or newer
 > The Zlib-ng package contains zlib data compression library for the next generation systems.
 
-> **Required!**
+> **Required!** Before Toybox.
 ```bash
 # Configure source.
 ./configure \
@@ -375,7 +375,7 @@ time { make install; }
 > #### `0.3.2` or newer
 > The NetBSD Curses package contains libraries for terminal-independent handling of character screens.
 
-> **Required!**
+> **Required!** Before Toybox.
 ```bash
 # Build.
 time { make CFLAGS="$CFLAGS Wall -fPIC" all; }
@@ -388,10 +388,13 @@ time { make PREFIX=/usr install; }
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
-> **Required!**
+> **Required!** After Zlib-ng and NetBSD Curses.
 ```bash
 # Copy Toybox's .config file.
 cp -v ../../extra/toybox/files/.config.bc_file_grep_inetutils_psmisc_sed.nlns .config
+
+# Make sure to enable zlib.
+grep -i "libz" .config
 
 export CFFGPT="bc file egrep grep fgrep dnsdomainname ifconfig hostname ping telnet tftp
 traceroute killall sed"
@@ -423,7 +426,7 @@ time { make PREFIX=/ install && unset CFFGPT; }
 > #### `20210522-3.1` or newer
 > The NetBSD libedit pacakage contains library providing line editing, history, and tokenisation functions.
 
-> **Required!**
+> **Required!** After NetBSD Curses.
 ```bash
 # Configure source.
 CFLAGS="$CFLAGS -D__STDC_ISO_10646__" \
@@ -448,7 +451,7 @@ ln -sv ../editline/readline.h /usr/include/readline/readline.h
 > #### `6.6` or newer
 > The OpenBSD Yacc package contains a parser generator.
 
-> **Required!**
+> **Required!** Before OpenBSD M4.
 ```bash
 # Configure source.
 ./configure \
@@ -466,7 +469,7 @@ time { make BINDIR="/usr/bin" install; }
 > #### `2.6.4` or newer
 > The Flex package contains a utility for generating programs that recognize patterns in text.
 
-> **Required!**
+> **Required!** After OpenBSD Yacc, before OpenBSD M4.
 ```bash
 # Configure source.
 HELP2MAN=/clang1-t/bin/true \
@@ -489,7 +492,7 @@ ln -sv flex /usr/bin/lex
 > #### `6.7` or newer
 > The OpenBSD M4 package contains a macro processor.
 
-> **Required!**
+> **Required!** After OpenBSD Yacc and Flex.
 ```bash
 # Configure source.
 ./configure --prefix=/usr --enable-m4
