@@ -349,7 +349,7 @@ tzselect
 cp -v /usr/share/zoneinfo/<xxx> /etc/localtime
 
 # Back to "/sources/pkgs" directory.
-popd
+popd && rm -rf tzdata
 ```
 
 ### `9` - Zlib-ng
