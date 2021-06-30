@@ -259,9 +259,10 @@ cat > /clang1-tools/bin/x86_64-heiwa-linux-musl.cfg << "EOF"
 --sysroot=/usr -Wl,-dynamic-linker /lib/ld-musl-x86_64.so.1
 EOF
 
-CC="x86_64-heiwa-linux-musl-clang"
-CXX="x86_64-heiwa-linux-musl-clang++"
-export CC CXX
+# Set the new toolchain configuration.
+sed -i 's|CC=".*"|CC="x86_64-heiwa-linux-musl-clang"|' ~/.bashrc
+sed -i 's|CXX=".*"|CXX="x86_64-heiwa-linux-musl-clang++"|'
+source ~/.bashrc
 
 # Symlink Clang to be used as GCC tools.
 ln -sv x86_64-heiwa-linux-musl-clang   /clang1-tools/bin/gcc
