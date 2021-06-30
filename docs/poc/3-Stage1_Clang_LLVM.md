@@ -625,7 +625,7 @@ time { make install && unset LDFLAGS; }
 
 > **Required!** For the current and next stage (chrooting new environment) to build Clang/LLVM.
 ```bash
-# Disable applications using cmake from attempting to install files in /usr/lib64/.
+# Disable applications using cmake from attempting to install files in "/usr/lib64/".
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
 
 # Configure source.
