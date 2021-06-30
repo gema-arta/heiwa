@@ -632,6 +632,14 @@ sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
 ./bootstrap \
     --prefix=/clang1-tools           \
     --system-zlib                    \
+    --no-system-bzip2                \
+    --no-system-curl                 \
+    --no-system-nghttp2              \
+    --no-system-expat                \
+    --no-system-libarchive           \
+    --no-system-jsoncpp              \
+    --no-system-librhash             \
+    --no-system-zstd                 \
     --parallel=$(nproc)              \
     --mandir=/share/man              \
     --docdir=/share/doc/cmake-3.20.5 \
