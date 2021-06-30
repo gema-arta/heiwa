@@ -540,7 +540,7 @@ ln -sv unpigz /clang1-tools/bin/gunzip
 > #### `4.3` or newer
 > The GNU Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
  
-> **Required!** For the current and next stage (chrooting new environment), most build systems depends on GNU implementation style.
+> **Required!** For the current and next stage (chrooting new environment) that most build systems depends on GNU implementation style.
 ```bash
 # Configure source.
 ./configure \
@@ -595,7 +595,39 @@ time { make; }
 time { make install; }
 ```
 
-### `20` - Cleaning Up and Changing Ownership
+### `20` - libuv
+> #### `1.41.0` or newer
+> The libuv package is contains multi-platform support library with a focus on asynchronous I/O.
+
+> **Required!** To install Cmake.
+```bash
+# Generate configure script.
+NOCONFIGURE=1 ./autogen.sh
+
+# Configure source.
+export LDFLAGS="-pthread" && \
+./configure \
+    --prefix=/clang1-tools   \
+    --build="$TARGET_TRUPLE" \
+    --host="$TARGET_TRUPLE"  \
+    --disable-static
+
+# Build.
+time { make; }
+
+# Install.
+time { make install && unset LDFLAGS; }
+```
+
+### `21` - Cmake
+> #### `3.20.5` or newer
+> The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
+
+> **Required!** For the current and next stage (chrooting new environment) to build Clang/LLVM.
+```bash
+```
+
+### `22` - Cleaning Up and Changing Ownership
 > **This section is optional!**
 
 > If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
