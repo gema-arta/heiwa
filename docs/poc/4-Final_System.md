@@ -368,10 +368,6 @@ time { make; }
 
 # Install.
 time { make install; }
-
-# Add missing link.
-ln -sfv ../../lib/$(readlink /usr/lib/libz.so) /usr/lib/libz.so
-ln -sfv ../../lib/$(readlink /usr/lib/libz.so) /usr/lib/libz.so.1
 ```
 
 <!--
