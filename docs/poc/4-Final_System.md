@@ -414,7 +414,7 @@ time { make PREFIX=/ install && unset CFFGPT; }
 > #### `20210522-3.1` or newer
 > The NetBSD libedit pacakage contains library providing line editing, history, and tokenisation functions.
 
-> **Required!** For most packages.
+> **Required!** As drop-in replacement GNU Readline.
 ```bash
 # Configure source.
 CFLAGS="$CFLAGS -D__STDC_ISO_10646__" \
@@ -431,6 +431,22 @@ touch /usr/include/readline/history.h
 touch /usr/include/readline/tilde.h
 ln -sv ../editline/readline.h /usr/include/readline/readline.h
 ln -sv libedit.pc /usr/lib/pkgconfig/readline.pc
+```
+
+### `12` - OpenBSD M4
+> #### `6.7` or newer
+> The OpenBSD M4 package contains a macro processor.
+
+> **Required!** As default front end to any language (e.g., C, ratfor, fortran, lex, and yacc).
+```bash
+# Configure source.
+./configure --prefix=/clang1-tools --enable-m4
+
+# Build. Fails when using multiple jobs.
+time { make -j1; }
+
+# Install.
+time { make install; }
 ```
 
 <!--
