@@ -440,7 +440,7 @@ ln -sv libedit.pc /usr/lib/pkgconfig/readline.pc
 > **Required!** As default front end to any language (e.g., C, ratfor, fortran, lex, and yacc).
 ```bash
 # Configure source.
-./configure --prefix=/clang1-tools --enable-m4
+./configure --prefix=/usr --enable-m4
 
 # Build. Fails when using multiple jobs.
 time { make -j1; }
