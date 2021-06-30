@@ -399,7 +399,7 @@ time { make; }
 # `ping6` and `traceroute6` (inetutils)
 ./toybox | tr ' ' '\n'i | grep -vxE $(echo $CFFGPT | tr ' ' '|'i)
 
-# So, totally is 15 commands.
+# So, totally is 16 commands.
 ./toybox | wc -w
 
 # Install.
