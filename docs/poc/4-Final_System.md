@@ -434,7 +434,7 @@ ln -sv libedit.pc /usr/lib/pkgconfig/readline.pc
 ```
 
 ### `12` - OpenBSD Yacc
-> ### `6.6` or newer
+> #### `6.6` or newer
 > The OpenBSD Yacc package contains a parser generator.
 
 > **Required!** For most packages.
