@@ -359,7 +359,7 @@ popd
 ```bash
 # Configure source.
 ./configure \
-    --prefix=/    \
+    --prefix=/usr \
     --zlib-compat \
     --native
 
