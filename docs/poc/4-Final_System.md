@@ -375,7 +375,7 @@ time { make install; }
 > #### `0.3.2` or newer
 > The NetBSD Curses package contains libraries for terminal-independent handling of character screens.
 
-> **Required!** In this build, only need "libcurses" and "libterminfo" to build required packages in the next step.
+> **Required!** In this built, only need "libcurses" and "libterminfo" to build required packages in the next step.
 ```bash
 # Build.
 time { make CFLAGS="$CFLAGS -Wall -fPIC" all-dynamic; }
