@@ -363,9 +363,9 @@ patch -Np0 -i ../../extra/argp-standalone/patches/gnu89-inline.patch
 # Configure source.
 CFLAGS="$CFLAGS -fPIC" \
 ./configure \
-    --prefix=/usr     \
-    --disable-static  \
-    --sysconfdir=/etc \
+    --prefix=/usr      \
+    --disable-static   \
+    --sysconfdir=/etc  \
     --localstatedir=/var
 
 # Build.
