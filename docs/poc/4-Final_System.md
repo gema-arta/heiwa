@@ -351,7 +351,7 @@ cp -v /usr/share/zoneinfo/<xxx> /etc/localtime
 popd
 ```
 
-### `8` - Zlib-ng
+### `9` - Zlib-ng
 > #### `2.0.5` or newer
 > The Zlib-ng package contains zlib data compression library for the next generation systems.
 
