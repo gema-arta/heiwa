@@ -602,10 +602,10 @@ time { make install; }
 > **Required!** To install Cmake.
 ```bash
 # Generate configure script.
+export LDFLAGS="-pthread" && \
 NOCONFIGURE=1 ./autogen.sh
 
 # Configure source.
-export LDFLAGS="-pthread" && \
 ./configure \
     --prefix=/clang1-tools   \
     --build="$TARGET_TRUPLE" \
