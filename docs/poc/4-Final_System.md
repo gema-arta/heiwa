@@ -433,7 +433,25 @@ ln -sv ../editline/readline.h /usr/include/readline/readline.h
 ln -sv libedit.pc /usr/lib/pkgconfig/readline.pc
 ```
 
-### `12` - OpenBSD M4
+### `12` - OpenBSD Yacc
+> ### `6.6` or newer
+> The OpenBSD Yacc package contains a parser generator.
+
+> **Required!** For most packages.
+```bash
+# Configure source.
+./configure \
+    --prefix=/usr --enable-yacc \
+    --mandir=/usr/share/man/man1
+
+# Build.
+time { make; }
+
+# Install.
+time { make BINDIR="/usr/bin" install; }
+```
+
+### `13` - OpenBSD M4
 > #### `6.7` or newer
 > The OpenBSD M4 package contains a macro processor.
 
