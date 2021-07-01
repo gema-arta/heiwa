@@ -623,6 +623,59 @@ sed -i 's|yes|no|' /etc/default/useradd
 passwd root
 ```
 
+### `20` - libuv
+> #### `1.41.0` or newer
+> The libuv package is a multi-platform support library with a focus on asynchronous I/O.
+
+> **Required!** Before Cmake.
+```bash
+# Generate configure script.
+sh autogen.sh
+
+# Configure source.
+./configure \
+    --prefix=/usr \
+    --disable-static
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `21` - Cmake
+> #### `3.20.5` or newer
+> The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
+
+> **Required!** Before Clang/LLVM.
+```bash
+# Disable applications using cmake from attempting to install files in "/usr/lib64".
+sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
+
+# Configure source.
+./bootstrap \
+    --prefix=/usr          \
+    --system-zlib          \
+    --mandir=/share/man    \
+    --parallel=$(nproc)    \
+    --docdir=/share/doc/cmake-3.20.5
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `22` - LLVM libunwind
+> #### `12.0.0`
+> C++ runtime stack unwinder from LLVM.
+
+> **Required!**
+```bash
+```
+
 <!--
     ### `` - Bzip2
     > #### `1.0.8` or newer
