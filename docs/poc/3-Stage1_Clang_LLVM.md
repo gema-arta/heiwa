@@ -622,7 +622,7 @@ time { make PREFIX=/clang1-tools install; }
 > #### `1.41.0` or newer
 > The libuv package is a multi-platform support library with a focus on asynchronous I/O.
 
-> **Required!** Before Cmake.
+> **Required!** By Cmake.
 ```bash
 # Generate configure script.
 export LDFLAGS="-pthread"
