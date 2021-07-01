@@ -486,8 +486,8 @@ time { make; }
 # Install.
 time { make install; }
 
-# A few programs do not know about flex yet and try to run its predecessor, lex.
-# To support those programs, create a symbolic link named lex that runs flex in lex emulation mode.
+# A few programs do not know about `flex` yet and try to run its predecessor, `lex`.
+# To support those programs, create a symbolic link named `lex` that runs `flex` in `lex` emulation mode.
 ln -sv flex /usr/bin/lex
 ```
 
