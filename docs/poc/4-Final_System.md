@@ -530,8 +530,13 @@ sh Configure \
 # Build.
 time { make; }
 
-# Install.
-time { make install && export CFLAGS="$COMMON_FLAGS"; }
+# Only install few utilites.
+time {
+    install -vm755 -t /bin/ perl cpan/podlators/scripts/pod2man
+    mkdir -pv /usr/lib/perl5/5.34
+    cp -av lib/* /llvmtools/lib/perl5/5.34/
+    export CFLAGS="$COMMON_FLAGS"
+}
 ```
 
 ### `17` - Attr
