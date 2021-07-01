@@ -639,7 +639,15 @@ NOCONFIGURE=1 ./autogen.sh
 time { make; }
 
 # Install.
-time { make install && uset LDFLAGS; }
+time { make install && unset LDFLAGS; }
+```
+
+### `22` - Cmake
+> #### `3.20.5` or newer
+> The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
+
+> **Required!** To build Clang/LLVM in the next stage (chrooting new environment).
+```bash
 ```
 
 ### `23` - Cleaning Up and Changing Ownership
