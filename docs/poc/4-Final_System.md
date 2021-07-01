@@ -510,7 +510,7 @@ time { make install; }
 > #### `2.5.1` or newer
 > The Attr package contains utilities to administer the extended attributes on filesystem objects.
 
-> **Required!** After Perl; before ACL.
+> **Required!** Before ACL.
 ```bash
 # Configure source.
 ./configure \
@@ -531,7 +531,7 @@ time { make install; }
 > #### `2.3.1` or newer
 > The ACL package contains utilities to administer Access Control Lists, which are used to define more fine-grained discretionary access rights for files and directories.
 
-> **Required!** After Perl and Attr; before Shadow.
+> **Required!** After Attr; before Shadow.
 ```bash
 # Configure source.
 ./configure \
