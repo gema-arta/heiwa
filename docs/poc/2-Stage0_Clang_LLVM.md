@@ -225,10 +225,10 @@ readelf -l a.out | grep Requesting
 > **Required!** To build Stage-0 Clang/LLVM and for most programs that depends on `-ltinfo` or `-lterminfo` linker's flags.
 ```bash
 # Build.
-time { make CC="${HEIWA_TARGET}-gcc" CFLAGS="-Wall -fPIC" all; }
+time { make CC="${HEIWA_TARGET}-gcc" CFLAGS="-Wall -fPIC" all-dynamic; }
 
 # Install.
-time { make PREFIX=/ DESTDIR=/clang0-tools install; }
+time { make PREFIX=/ DESTDIR=/clang0-tools install-dynamic; }
 ```
 
 ### `7` - libexecinfo (standalone)
