@@ -558,12 +558,12 @@ patch -Np1 -i ../../extra/libcap-ng/patches/apply-disable.patch
 
 # Configure source.
 ./configure \
-    --prefix=/usr \
-    --sysconfdir=/etc \
-    --mandir=/usr/share/man \
+    --prefix=/usr             \
+    --sysconfdir=/etc         \
+    --mandir=/usr/share/man   \
     --infodir=/usr/share/info \
-    --without-python \
-    --without-python3 \
+    --without-python          \
+    --without-python3         \
     --disable-static
 
 # Build.
