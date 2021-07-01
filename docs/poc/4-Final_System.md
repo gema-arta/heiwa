@@ -506,40 +506,7 @@ time { make -j1; }
 time { make install; }
 ```
 
-### `16` - Perl <kbd>pass1</kbd>
-> #### `5.34.0` or newer
-> The Perl package contains the Practical Extraction and Report Language.
-
-> **Required!** Before Attr, ACL, and Red Hat libcap-ng.
-```bash
-export CFLAGS="$CFLAGS -DNO_POSIX_2008_LOCALE"
-
-# Apply patch (from Alpine Linux) to fix "locale.c" errors in programs such as `rxvt-unicode`.
-patch -Np1 -i ../../extra/perl/patches/musl-locale.patch
-
-# Configure source.
-sh Configure \
-    -des -Dprefix=/usr -Dvendorprefix=/usr       \
-    -Dprivlib=/usr/lib/perl5/5.34/core_perl      \
-    -Darchlib=/usr/lib/perl5/5.34/core_perl      \
-    -Dsitelib=/usr/lib/perl5/5.34/site_perl      \
-    -Dsitearch=/usr/lib/perl5/5.34/site_perl     \
-    -Dvendorlib=/usr/lib/perl5/5.34/vendor_perl  \
-    -Dvendorarch=/usr/lib/perl5/5.34/vendor_perl
-
-# Build.
-time { make; }
-
-# Only install few utilites.
-time {
-    install -vm755 -t /usr/bin/ perl cpan/podlators/scripts/pod2man
-    mkdir -pv /usr/lib/perl5/5.34 && \
-    cp -av lib/* /usr/lib/perl5/5.34/
-    export CFLAGS="$COMMON_FLAGS"
-}
-```
-
-### `17` - Attr
+### `16` - Attr
 > #### `2.5.1` or newer
 > The Attr package contains utilities to administer the extended attributes on filesystem objects.
 
@@ -560,7 +527,7 @@ time { make; }
 time { make install; }
 ```
 
-### `18` - ACL
+### `17` - ACL
 > #### `2.3.1` or newer
 > The ACL package contains utilities to administer Access Control Lists, which are used to define more fine-grained discretionary access rights for files and directories.
 
@@ -580,12 +547,24 @@ time { make; }
 time { make install; }
 ```
 
-### `19` - Red Hat libcap-ng
+### `18` - Red Hat libcap-ng
 > #### `0.8.2` or newer
 > The Red Hat libcap-ng package implements the user-space interfaces to the POSIX 1003.1e capabilities available in Linux kernels. These capabilities are a partitioning of the all powerful root privilege into a set of distinct privileges. The library is intended to make programming with POSIX capabilities much easier than the traditional libcap library. It includes utilities that can analyse all currently running applications and print out any capabilities and whether or not it has an open ended bounding set.
 
-> **Required!** After Perl; before Shadow.
+> **Required!** Before Shadow.
 ```bash
+# Configure source.
+./configure \
+    --build=$CBUILD \
+    --host=$CHOST \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --mandir=/usr/share/man \
+    --infodir=/usr/share/info \
+    --without-python \
+    --without-python3 \
+    --disable-static
+
 ```
 
 <!--
