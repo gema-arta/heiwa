@@ -617,6 +617,33 @@ time { make BINDIR=/clang1-tools/bin install; }
 ```
 
 ### `21` - Perl
+> #### `5.34.0` or newer
+> The Perl package contains the Practical Extraction and Report Language.
+
+> **Required!** To build required packages in the next stage (chroot environment). 
+```bash
+cd .. &&
+tar xf perl-cross-1.3.5.tar.gz
+cd perl-5.32.1 &&
+cp -vrf ../perl-cross-1.3.5/* ./
+cp -vrf ../perl-cross-1.3.5/utils/* utils/
+
+# Configure source
+READELF=llvm-readelf OBJDUMP=llvm-objdump \
+./configure --target=${TARGET_TRUPLE} \
+            --build=${TARGET_TRUPLE} \
+            --prefix=/llvmtools
+
+# Build
+make
+
+# Only a few of the utilities and libraries need to be installed to toolchain
+cp -v perl cpan/podlators/scripts/pod2man /llvmtools/bin
+mkdir -pv /llvmtools/lib/perl5/5.32.1
+cp -Rv lib/* /llvmtools/lib/perl5/5.32.1
+
+```
+
 ### `22` - libffi 
 ### `23` - Python3
 ### `24` - Texinfo
