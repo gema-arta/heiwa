@@ -542,7 +542,7 @@ ln -sv bzip2 /bin/bzcat
 > #### `5.32.1`
 > The Perl package contains the Practical Extraction and Report Language.
 
-> **Required!** After Bzip2; before Attr, ACL, and libcap-ng.
+> **Required!** After Zlib-ng and Bzip2; before Attr, ACL, and libcap-ng.
 ```bash
 export BUILD_ZLIB=0
 export BUILD_BZIP2=0
