@@ -472,7 +472,7 @@ time { make BINDIR=/usr/bin install; }
 > #### `2.6.4` or newer
 > The Flex package contains a utility for generating programs that recognize patterns in text.
 
-> **Required!** After OpenBSD Yacc, before OpenBSD M4.
+> **Required!** After OpenBSD Yacc; before OpenBSD M4.
 ```bash
 # Configure source.
 HELP2MAN=/clang1-t/bin/true \
@@ -542,7 +542,7 @@ ln -sv bzip2 /bin/bzcat
 > #### `5.32.1`
 > The Perl package contains the Practical Extraction and Report Language.
 
-> **Required!** After Bzip2, before Attr, ACL, and libcap-ng.
+> **Required!** After Bzip2; before Attr, ACL, and libcap-ng.
 ```bash
 export BUILD_ZLIB=0
 export BUILD_BZIP2=0
@@ -585,7 +585,7 @@ export CFLAGS="$COMMON_FLAGS"
 > #### `2.5.1` or newer
 > The Attr package contains utilities to administer the extended attributes on filesystem objects.
 
-> **Required!** After Perl, before ACL.
+> **Required!** After Perl; before ACL.
 ```bash
 # Configure source.
 ./configure \
@@ -606,7 +606,7 @@ time { make install; }
 > #### `2.3.1` or newer
 > The ACL package contains utilities to administer Access Control Lists, which are used to define more fine-grained discretionary access rights for files and directories.
 
-> **Required!** After Perl and Attr, before Shadow.
+> **Required!** After Perl and Attr; before Shadow.
 ```bash
 # Configure source.
 ./configure \
@@ -626,7 +626,7 @@ time { make install; }
 > #### `0.8.2` or newer
 > The Red Hat libcap-ng package implements the user-space interfaces to the POSIX 1003.1e capabilities available in Linux kernels. These capabilities are a partitioning of the all powerful root privilege into a set of distinct privileges. The library is intended to make programming with POSIX capabilities much easier than the traditional libcap library. It includes utilities that can analyse all currently running applications and print out any capabilities and whether or not it has an open ended bounding set.
 
-> **Required!** After Perl, before Shadow.
+> **Required!** After Perl; before Shadow.
 ```bash
 ```
 
