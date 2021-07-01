@@ -547,6 +547,7 @@ rm -fv /usr/lib/libbz2.a
 
 > **Required!** After Zlib-ng and Bzip2; before Attr, ACL, and libcap-ng.
 ```bash
+# Ensure to use installed libraries on the system.
 BUILD_ZLIB=0 BUILD_BZIP2=0
 BZIP2_LIB=/usr/lib BZIP2_INCLUDE=/usr/include
 CFLAGS="$CFLAGS -DNO_POSIX_2008_LOCALE -D_GNU_SOURCE"
