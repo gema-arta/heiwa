@@ -504,11 +504,19 @@ time { make -j1; }
 time { make install; }
 ```
 
-### `16` - Attr
+### `16` - Perl
+> #### `5.34.0` or newer
+> The Perl package contains the Practical Extraction and Report Language.
+
+> **Required!** Before Attr, ACL, and libcap-ng.
+```bash
+```
+
+### `17` - Attr
 > #### `2.5.1` or newer
 > The Attr package contains utilities to administer the extended attributes on filesystem objects.
 
-> **Required!** Before ACL.
+> **Required!** After Perl, before ACL.
 ```bash
 # Configure source.
 ./configure \
@@ -525,11 +533,11 @@ time { make; }
 time { make install; }
 ```
 
-### `16` - ACL
+### `18` - ACL
 > #### `2.3.1` or newer
 > The ACL package contains utilities to administer Access Control Lists, which are used to define more fine-grained discretionary access rights for files and directories.
 
-> **Required!** After Attr, before Shadow.
+> **Required!** After Perl and Attr, before Shadow.
 ```bash
 # Configure source.
 ./configure \
@@ -543,6 +551,14 @@ time { make; }
 
 # Install.
 time { make install; }
+```
+
+### `19` - Red Hat libcap-ng
+> #### `0.8.2` or newer
+> The Red Hat libcap-ng package implements the user-space interfaces to the POSIX 1003.1e capabilities available in Linux kernels. These capabilities are a partitioning of the all powerful root privilege into a set of distinct privileges. The library is intended to make programming with POSIX capabilities much easier than the traditional libcap library. It includes utilities that can analyse all currently running applications and print out any capabilities and whether or not it has an open ended bounding set.
+
+> **Required!** After Perl, before Shadow.
+```bash
 ```
 
 <!--
