@@ -532,9 +532,9 @@ time { make; }
 
 # Only install few utilites.
 time {
-    install -vm755 -t /bin/ perl cpan/podlators/scripts/pod2man
-    mkdir -pv /usr/lib/perl5/5.34
-    cp -av lib/* /llvmtools/lib/perl5/5.34/
+    install -vm755 -t /usr/bin/ perl cpan/podlators/scripts/pod2man
+    mkdir -pv /usr/lib/perl5/5.34 && \
+    cp -av lib/* /usr/lib/perl5/5.34/
     export CFLAGS="$COMMON_FLAGS"
 }
 ```
