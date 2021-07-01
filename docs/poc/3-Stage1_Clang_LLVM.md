@@ -622,26 +622,26 @@ time { make BINDIR=/clang1-tools/bin install; }
 
 > **Required!** To build required packages in the next stage (chroot environment). 
 ```bash
-cd .. &&
-tar xf perl-cross-1.3.5.tar.gz
-cd perl-5.32.1 &&
-cp -vrf ../perl-cross-1.3.5/* ./
-cp -vrf ../perl-cross-1.3.5/utils/* utils/
+# Decompress and copy perl-cross source.s
+pushd ../ && \
+    tar xzf perl-cross-1.3.6.tar.gz && \
+popd && \
+cp -rfv ../perl-cross-1.3.6/* ./
+cp -rfv ../perl-cross-1.3.6/utils/* utils/
 
-# Configure source
-READELF=llvm-readelf OBJDUMP=llvm-objdump \
-./configure --target=${TARGET_TRUPLE} \
-            --build=${TARGET_TRUPLE} \
-            --prefix=/llvmtools
+# Configure source.
+./configure \
+    --prefix=/clang1-tools   \
+    --build="$TARGET_TRUPLE" \
+    --target="$TARGET_TRUPLE"
+    
+# Build.
+time { make; }
 
-# Build
-make
-
-# Only a few of the utilities and libraries need to be installed to toolchain
-cp -v perl cpan/podlators/scripts/pod2man /llvmtools/bin
-mkdir -pv /llvmtools/lib/perl5/5.32.1
-cp -Rv lib/* /llvmtools/lib/perl5/5.32.1
-
+# Only a few of the utilities and libraries need to be installed.
+install -vm755 -t /clang1-tools/bin perl cpan/podlators/scripts/pod2man
+mkdir -pv /clang1-tools/lib/perl5/5.34
+cp -av lib/* /clang1-tools/lib/perl5/5.34
 ```
 
 ### `22` - libffi 
