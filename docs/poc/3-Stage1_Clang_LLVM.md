@@ -637,6 +637,9 @@ time { make CC="$CC" AR="$AR" RANLIB="$RANLIB"; }
 
 # Install.
 time { make PREFIX=/clang1-tools install; }
+
+# Remove an useless static library.
+rm -fv /clang1-tools/lib/libbz2.a
 ```
 
 ### `22` - libuv
