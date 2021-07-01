@@ -15,11 +15,11 @@ https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.0/libcxx-12.
 https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.0/libcxxabi-12.0.0.src.tar.xz
 https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.0/libunwind-12.0.0.src.tar.xz
 https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.0/lld-12.0.0.src.tar.xz
+https://github.com/zlib-ng/zlib-ng/archive/refs/tags/2.0.5.tar.gz
 https://github.com/ibara/m4/releases/download/om4-6.7/om4-6.7.tar.gz
 https://ftp.gnu.org/gnu/bash/bash-5.1.8.tar.gz
 https://ftp.gnu.org/gnu/diffutils/diffutils-3.7.tar.xz
 https://ftp.gnu.org/gnu/gawk/gawk-5.1.0.tar.xz
-https://github.com/zlib-ng/zlib-ng/archive/refs/tags/2.0.5.tar.gz
 https://zlib.net/pigz/pigz-2.6.tar.gz
 https://ftp.gnu.org/gnu/make/make-4.3.tar.gz
 https://ftp.gnu.org/gnu/patch/patch-2.7.6.tar.xz
