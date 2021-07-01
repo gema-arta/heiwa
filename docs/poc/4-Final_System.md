@@ -163,7 +163,7 @@ chmod -v 600  /var/log/btmp
 > **Required!** First, before musl libc.
 ```bash
 # Apply some persistent environment variables.
-cat > ~/.bashrc << "EOF"
+cat > ~/.bash_profile << "EOF"
 # Stage-1 Clang/LLVM environment.
 TRUPLE="x86_64-pc-linux-musl"
 CC="${TRUPLE}-clang"
@@ -180,7 +180,7 @@ export TRUPLE CC CXX AR AS RANLIB LD STRIP COMMON_FLAGS CFLAGS CXXFLAGS
 # Make's multiple jobs based on CPU core/threads.
 alias make="make -j$(nproc) -l$(nproc)"
 EOF
-source ~/.bashrc
+source ~/.bash_profile
 
 # Apply patch to fix "swab.h" under musl libc.
 patch -Np1 -i \
@@ -260,9 +260,9 @@ cat > /clang1-tools/bin/x86_64-heiwa-linux-musl.cfg << "EOF"
 EOF
 
 # Set the new toolchain configuration.
-sed -i 's|CC=".*"|CC="x86_64-heiwa-linux-musl-clang"|'     ~/.bashrc
-sed -i 's|CXX=".*"|CXX="x86_64-heiwa-linux-musl-clang++"|' ~/.bashrc
-source ~/.bashrc
+sed -i 's|CC=".*"|CC="x86_64-heiwa-linux-musl-clang"|'     ~/.bash_profile
+sed -i 's|CXX=".*"|CXX="x86_64-heiwa-linux-musl-clang++"|' ~/.bash_profile
+source ~/.bash_profile
 
 # Symlink Clang to be used as GCC tools.
 ln -sv x86_64-heiwa-linux-musl-clang   /clang1-tools/bin/gcc
