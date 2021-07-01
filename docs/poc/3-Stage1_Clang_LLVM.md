@@ -628,7 +628,7 @@ pushd ../ && \
 popd && \
 cp -rfv ../perl-cross-1.3.6/*       ./     && \
 cp -rfv ../perl-cross-1.3.6/utils/* utils/ && \
-rm -rf ../perl-cross-1.3.6
+rm -rf  ../perl-cross-1.3.6
 
 # Configure source.
 ./configure \
