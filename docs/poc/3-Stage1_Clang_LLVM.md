@@ -674,7 +674,6 @@ CFLAGS="$CFLAGS -I/clang1-tools/include"     \
 CXXFLAGS="$CXXFLAGS -I/clang1-tools/include" \
 ./bootstrap \
     --prefix=/clang1-tools           \
-    --system-zlib                    \
     --mandir=/share/man              \
     --parallel=$(nproc)              \
     --docdir=/share/doc/cmake-3.20.5 \
