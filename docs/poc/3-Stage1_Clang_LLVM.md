@@ -618,6 +618,30 @@ time { make CC="$CC" AR="$AR" RANLIB="$RANLIB"; }
 time { make PREFIX=/clang1-tools install; }
 ```
 
+### `21` - libuv
+> #### `1.41.0` or newer
+> The libuv package is a multi-platform support library with a focus on asynchronous I/O.
+
+> **Required!** Before Cmake.
+```bash
+# Generate configure script.
+export LDFLAGS="-pthread"
+NOCONFIGURE=1 ./autogen.sh
+
+# Configure source.
+./configure \
+    --build="$TARGET_TRUPLE" \
+    --host="$TARGET_TRUPLE"  \
+    --prefix=/clang1-tools   \
+    --disable-static
+
+# Build.
+time { make; }
+
+# Install.
+time { make install && uset LDFLAGS; }
+```
+
 ### `21` - Cleaning Up and Changing Ownership
 > **This section is optional!**
 
