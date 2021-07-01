@@ -553,10 +553,11 @@ time { make install; }
 
 > **Required!** Before Shadow.
 ```bash
+# Apply patches to remove error codes.
+patch -Np1 -i ../../extra/libcap-ng/patches/apply-disable.patch
+
 # Configure source.
 ./configure \
-    --build=$CBUILD \
-    --host=$CHOST \
     --prefix=/usr \
     --sysconfdir=/etc \
     --mandir=/usr/share/man \
@@ -565,6 +566,11 @@ time { make install; }
     --without-python3 \
     --disable-static
 
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
 ```
 
 <!--
