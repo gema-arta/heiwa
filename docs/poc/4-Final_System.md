@@ -515,7 +515,7 @@ time { make install; }
 ```bash
 # Apply patches to fix docs installation and library soname.
 patch -Np1 -i ../../extra/bzip2/patches/install_docs-1.patch
-patch -Np0 -i ../../extra/bzip2/patches/soname.patch
+patch -Np1 -i ../../extra/bzip2/patches/soname.patch
 
 # The following command ensures installation of symbolic links are relative,
 # and ensure the man pages are installed into the correct location.
