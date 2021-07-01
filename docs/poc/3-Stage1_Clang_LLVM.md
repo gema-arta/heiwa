@@ -616,7 +616,12 @@ time { make; }
 time { make BINDIR=/clang1-tools/bin install; }
 ```
 
-### `21` - Bzip2
+### `21` - Perl
+### `22` - libffi 
+### `23` - Python3
+### `24` - Texinfo
+
+### `25` - Bzip2
 > #### `1.0.8` or newer
 > The Bzip2 package contains programs for compressing and decompressing files. Compressing text files with bzip2 yields a much better compression percentage than with the traditional gzip.
 
@@ -641,11 +646,6 @@ time { make PREFIX=/clang1-tools install; }
 # Remove an useless static library.
 rm -fv /clang1-tools/lib/libbz2.a
 ```
-
-### `22` - Perl
-### `23` - libffi 
-### `24` - Python3
-### `25` - Texinfo
 
 ### `26` - libuv
 > #### `1.41.0` or newer
