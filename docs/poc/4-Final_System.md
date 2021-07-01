@@ -510,7 +510,7 @@ time { make install; }
 
 > **Required!** Before Attr, ACL, and libcap-ng.
 ```bash
-export BUILD_ZLIB=False
+export BUILD_ZLIB=0
 export BUILD_BZIP2=0
 export CFLAGS="$CFLAGS -DNO_POSIX_2008_LOCALE -D_GNU_SOURCE"
 
