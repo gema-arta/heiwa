@@ -510,6 +510,41 @@ time { make install; }
 
 > **Required!** Before Attr, ACL, and libcap-ng.
 ```bash
+export BUILD_ZLIB=False
+export BUILD_BZIP2=0
+export CFLAGS="$CFLAGS -DNO_POSIX_2008_LOCALE -D_GNU_SOURCE"
+
+# Ensure that never accidentally bundle zlib or bzip2.
+rm -rf cpan/Compress-Raw-Zlib/zlib-src
+rm -rf cpan/Compress-Raw-Bzip2/bzip2-src
+sed -i '/\(bzip2\|zlib\)-src/d' MANIFEST
+
+# Apply patch (from Alpine Linux) to fix "locale.c" errors in programs such as rxvt-unicode.
+patch -p1 -i ../../extra/perl/patches/musl-locale.patch
+
+# Configure source.
+sh Configure \
+    -des -Dprefix=/usr -Dvendorprefix=/usr       \
+    -Dprivlib=/usr/lib/perl5/5.32/core_perl      \
+    -Darchlib=/usr/lib/perl5/5.32/core_perl      \
+    -Dsitelib=/usr/lib/perl5/5.32/site_perl      \
+    -Dsitearch=/usr/lib/perl5/5.32/site_perl     \
+    -Dvendorlib=/usr/lib/perl5/5.32/vendor_perl  \
+    -Dvendorarch=/usr/lib/perl5/5.32/vendor_perl \
+    -Dman1dir=/usr/share/man/man1                \
+    -Dman3dir=/usr/share/man/man3                \
+    -Dpager="/bin/toybox more"                   \
+    -Duseshrplib -Dusethreads                    \
+    -Dcccdlflags="-fPIC" -Dccdlflags="-rdynamic"
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+
+unset BUILD_ZLIB BUILD_BZIP2 CFLAGS
+export CFLAGS="$COMMON_FLAGS"
 ```
 
 ### `17` - Attr
