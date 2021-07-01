@@ -528,7 +528,7 @@ time  { make -f Makefile-libbz2_so && make clean; }
 # Build.
 time { make; }
 
-# Install (also its libraries) and fix the symlinks.
+# Install (also shared libraries) and fix the symlinks.
 time { make PREFIX=/usr install; }
 install -vm755 bzip2-shared /bin/bzip2
 cp -av libbz2.so* /usr/lib/
