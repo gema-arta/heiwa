@@ -517,7 +517,7 @@ time { make install; }
 time { make CC="$CC" CFLAGS="$CFLAGS"; }
 
 # Install and make symlink as gzip programs.
-install -vm755 -t /clang1-tools/bin pigz
+install -vm755 -t /clang1-tools/bin/ pigz
 ln -sv pigz /clang1-tools/bin/unpigz
 ln -sv pigz /clang1-tools/bin/gzip
 ln -sv unpigz /clang1-tools/bin/gunzip
