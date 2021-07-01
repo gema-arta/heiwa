@@ -374,25 +374,7 @@ source ~/.bash_profile
 cd "${HEIWA}/sources/pkgs/"
 ```
 
-### `10` - OpenBSD Yacc
-> #### `6.6` or newer
-> The OpenBSD Yacc package contains a parser generator.
-
-> **Required!** For the current and next stage (chrooting new environment). 
-```bash
-# Configure source.
-./configure \
-    --prefix=/clang1-tools --enable-yacc \
-    --mandir=/clang1-tools/share/man/man1
-
-# Build.
-time { make; }
-
-# Install.
-time { make BINDIR=/clang1-tools/bin install; }
-```
-
-### `11` - OpenBSD M4
+### `10` - OpenBSD M4
 > #### `6.7` or newer
 > The OpenBSD M4 package contains a macro processor.
 
@@ -408,7 +390,7 @@ time { make -j1; }
 time { make install; }
 ```
 
-### `12` - GNU Bash
+### `11` - GNU Bash
 > #### `5.1` (with patch level 8) or newer
 > The GNU Bash package contains the Bourne-Again SHell.
 
@@ -445,7 +427,7 @@ time { make; }
 time { make install; }
 ```
 
-### `13` - Toybox (Coreutils, File, Findutils, Grep, Sed, and Tar)
+### `12` - Toybox (Coreutils, File, Findutils, Grep, Sed, and Tar)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
@@ -484,7 +466,7 @@ time { make; }
 time { make PREFIX=/clang1-tools install && unset CFFGPT; }
 ```
 
-### `14` - GNU Diffutils
+### `13` - GNU Diffutils
 > #### `3.7` or newer
 > The GNU Diffutils package contains programs that show the differences between files or directories.
 
@@ -503,7 +485,7 @@ time { make; }
 time { make install; }
 ```
 
-### `15` - GNU AWK
+### `14` - GNU AWK
 > #### `5.1.0` or newer
 > The GNU AWK (gawk) package contains programs for manipulating text files.
 
@@ -525,20 +507,7 @@ time { make; }
 time { make install; }
 ```
 
-### `16` - Gettext-tiny
-> #### 0.3.2
-> The Gettext-tiny package provides lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
-
-> **Required!** To allow programs compiled with NLS (Native Language Support).
-```bash
-# Build.
-time { make LIBINTL=MUSL prefix=/clang1-tools; }
-
-# Install the msgfmt, msgmerge and xgettext.
-install -vm755 -t /clang1-tools/bin/ msgfmt msgmerge xgettext 
-```
-
-### `17` - Pigz
+### `15` - Pigz
 > #### `2.6` or newer
 > The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
 
@@ -554,7 +523,7 @@ ln -sv pigz /clang1-tools/bin/gzip
 ln -sv unpigz /clang1-tools/bin/gunzip
 ```
 
-### `18` - GNU Make
+### `16` - GNU Make
 > #### `4.3` or newer
 > The GNU Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
  
@@ -574,7 +543,7 @@ time { make; }
 time { make install; }
 ```
 
-### `19` - GNU Patch
+### `17` - GNU Patch
 > #### `2.7.6` or newer
 > The GNU Patch package contains a program for modifying or creating files by applying a "patch" file typically created by the diff program.
 
@@ -593,7 +562,7 @@ time { make; }
 time { make install; }
 ```
 
-### `20` - Xz
+### `18` - Xz
 > #### `5.2.5` or newer
 > The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
 
@@ -611,6 +580,37 @@ time { make; }
 
 # Install.
 time { make install; }
+```
+
+### `19` - Gettext-tiny
+> #### 0.3.2
+> The Gettext-tiny package provides lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
+
+> **Required!** To allow programs compiled with NLS (Native Language Support).
+```bash
+# Build.
+time { make LIBINTL=MUSL prefix=/clang1-tools; }
+
+# Install the msgfmt, msgmerge and xgettext.
+install -vm755 -t /clang1-tools/bin/ msgfmt msgmerge xgettext 
+```
+
+### `20` - OpenBSD Yacc
+> #### `6.6` or newer
+> The OpenBSD Yacc package contains a parser generator.
+
+> **Required!** For the current and next stage (chrooting new environment). 
+```bash
+# Configure source.
+./configure \
+    --prefix=/clang1-tools --enable-yacc \
+    --mandir=/clang1-tools/share/man/man1
+
+# Build.
+time { make; }
+
+# Install.
+time { make BINDIR=/clang1-tools/bin install; }
 ```
 
 ### `21` - Bzip2
