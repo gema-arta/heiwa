@@ -566,7 +566,7 @@ time { make install; }
 > #### `5.2.5` or newer
 > The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
 
-> **Required!** As default ".xz" and ".lzma" files de/compressor for the next stage (chroot environment).
+> **Required!** As default ".xz" and ".lzma" files de/compressor for the current and next stage (chroot environment).
 ```bash
 # Configure source.
 ./configure \
