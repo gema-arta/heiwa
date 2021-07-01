@@ -539,7 +539,7 @@ ln -sv bzip2 /usr/bin/bzcat
 rm -fv /usr/lib/libbz2.a
 ```
 
-### `17` - Perl (pass1)
+### `17` - Perl <kbd>pass1</kbd>
 > #### `5.34.0` or newer
 > The Perl package contains the Practical Extraction and Report Language.
 
