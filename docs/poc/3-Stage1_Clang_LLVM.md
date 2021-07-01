@@ -374,7 +374,25 @@ source ~/.bash_profile
 cd "${HEIWA}/sources/pkgs/"
 ```
 
-### `10` - OpenBSD M4
+### `10` - OpenBSD Yacc
+> #### `6.6` or newer
+> The OpenBSD Yacc package contains a parser generator.
+
+> **Required!** For the current and next stage (chrooting new environment). 
+```bash
+# Configure source.
+./configure \
+    --prefix=/clang1-tools --enable-yacc \
+    --mandir=/clang1-tools/share/man/man1
+
+# Build.
+time { make; }
+
+# Install.
+time { make BINDIR=/clang1-tools/bin install; }
+```
+
+### `11` - OpenBSD M4
 > #### `6.7` or newer
 > The OpenBSD M4 package contains a macro processor.
 
@@ -390,7 +408,7 @@ time { make -j1; }
 time { make install; }
 ```
 
-### `11` - GNU Bash
+### `12` - GNU Bash
 > #### `5.1` (with patch level 8) or newer
 > The GNU Bash package contains the Bourne-Again SHell.
 
@@ -427,7 +445,7 @@ time { make; }
 time { make install; }
 ```
 
-### `12` - Toybox (Coreutils, File, Findutils, Grep, Sed, and Tar)
+### `13` - Toybox (Coreutils, File, Findutils, Grep, Sed, and Tar)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
@@ -466,7 +484,7 @@ time { make; }
 time { make PREFIX=/clang1-tools install && unset CFFGPT; }
 ```
 
-### `13` - GNU Diffutils
+### `14` - GNU Diffutils
 > #### `3.7` or newer
 > The GNU Diffutils package contains programs that show the differences between files or directories.
 
@@ -485,7 +503,7 @@ time { make; }
 time { make install; }
 ```
 
-### `14` - GNU AWK
+### `15` - GNU AWK
 > #### `5.1.0` or newer
 > The GNU AWK (gawk) package contains programs for manipulating text files.
 
@@ -507,7 +525,7 @@ time { make; }
 time { make install; }
 ```
 
-### `15` - Gettext-tiny
+### `16` - Gettext-tiny
 > #### 0.3.2
 > The Gettext-tiny package provides lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
 
@@ -520,7 +538,7 @@ time { make LIBINTL=MUSL prefix=/clang1-tools; }
 install -vm755 -t /clang1-tools/bin/ msgfmt msgmerge xgettext 
 ```
 
-### `16` - Pigz
+### `17` - Pigz
 > #### `2.6` or newer
 > The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
 
@@ -536,7 +554,7 @@ ln -sv pigz /clang1-tools/bin/gzip
 ln -sv unpigz /clang1-tools/bin/gunzip
 ```
 
-### `17` - GNU Make
+### `18` - GNU Make
 > #### `4.3` or newer
 > The GNU Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
  
@@ -556,7 +574,7 @@ time { make; }
 time { make install; }
 ```
 
-### `18` - GNU Patch
+### `19` - GNU Patch
 > #### `2.7.6` or newer
 > The GNU Patch package contains a program for modifying or creating files by applying a "patch" file typically created by the diff program.
 
@@ -575,7 +593,7 @@ time { make; }
 time { make install; }
 ```
 
-### `19` - Xz
+### `20` - Xz
 > #### `5.2.5` or newer
 > The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
 
@@ -595,7 +613,7 @@ time { make; }
 time { make install; }
 ```
 
-### `20` - Bzip2
+### `21` - Bzip2
 > #### `1.0.8` or newer
 > The Bzip2 package contains programs for compressing and decompressing files. Compressing text files with bzip2 yields a much better compression percentage than with the traditional gzip.
 
@@ -618,7 +636,7 @@ time { make CC="$CC" AR="$AR" RANLIB="$RANLIB"; }
 time { make PREFIX=/clang1-tools install; }
 ```
 
-### `21` - libuv
+### `22` - libuv
 > #### `1.41.0` or newer
 > The libuv package is a multi-platform support library with a focus on asynchronous I/O.
 
@@ -642,7 +660,7 @@ time { make; }
 time { make install && unset LDFLAGS; }
 ```
 
-### `22` - Cmake
+### `23` - Cmake
 > #### `3.20.5` or newer
 > The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
 
@@ -667,7 +685,7 @@ time { make; }
 time { make install; }
 ```
 
-### `23` - Cleaning Up and Changing Ownership
+### `24` - Cleaning Up and Changing Ownership
 > **This section is optional!**
 
 > If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
