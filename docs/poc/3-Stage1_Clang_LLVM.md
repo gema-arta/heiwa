@@ -642,7 +642,7 @@ time { make; }
 time { make install && uset LDFLAGS; }
 ```
 
-### `21` - Cleaning Up and Changing Ownership
+### `23` - Cleaning Up and Changing Ownership
 > **This section is optional!**
 
 > If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
