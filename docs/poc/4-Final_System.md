@@ -579,7 +579,7 @@ time { make install; }
 
 > **Required!**
 ```bash
-# Disable the installation of the groups program and its man pages, as Coreutils (repacled by toybox) provides a better version.
+# Disable the installation of the groups program and its man pages, as Coreutils (replaced by Toybox) provides a better version.
 # Also, prevent the installation of manual pages.
 sed -i 's/groups$(EXEEXT) //' src/Makefile.in
 find man -name Makefile.in -exec sed -i 's/groups\.1 / /'   {} \;
