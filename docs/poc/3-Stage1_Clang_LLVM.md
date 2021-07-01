@@ -670,7 +670,8 @@ time { make install && unset LDFLAGS; }
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
 
 # Configure source.
-CFLAGS="$CFLAGS -isystem /clang1-tools/include" \
+CFLAGS="$CFLAGS -isystem /clang1-tools/include"   \
+CXXFLAGS="$CFLAGS -isystem /clang1-tools/include" \
 ./bootstrap \
     --prefix=/clang1-tools           \
     --system-zlib                    \
