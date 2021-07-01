@@ -507,11 +507,44 @@ time { make -j1; }
 time { make install; }
 ```
 
-### `16` - Perl
+### `16` - Bzip2
+> #### 
+
+> **Required!** Befor Perl.
+```bash
+# Apply patches.
+patch -Np1 -i ../../patches/bzip2/install_docs-1.patch
+patch -Np0 -i ../../patches/bzip2/soname.patch
+
+# The following command ensures installation of symbolic links are relative,
+# and ensure the man pages are installed into the correct location.
+sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
+sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
+
+# Prepare.
+time  { 
+    make -f Makefile-libbz2_so && \
+    make clean
+}
+
+# Build.
+time { make; }
+
+# Install.
+time { make PREFIX=/usr install; }
+cp -v bzip2-shared /bin/bzip2
+cp -av libbz2.so* /lib
+ln -sv ../../lib/libbz2.so.1.0 /usr/lib/libbz2.so
+rm -v /usr/bin/{bunzip2,bzcat,bzip2}
+ln -sv bzip2 /bin/bunzip2
+ln -sv bzip2 /bin/bzcat
+```
+
+### `17` - Perl
 > #### `5.32.1`
 > The Perl package contains the Practical Extraction and Report Language.
 
-> **Required!** Before Attr, ACL, and libcap-ng.
+> **Required!** After Bzip2, before Attr, ACL, and libcap-ng.
 ```bash
 export BUILD_ZLIB=0
 export BUILD_BZIP2=0
@@ -550,7 +583,7 @@ unset BUILD_ZLIB BUILD_BZIP2 CFLAGS
 export CFLAGS="$COMMON_FLAGS"
 ```
 
-### `17` - Attr
+### `18` - Attr
 > #### `2.5.1` or newer
 > The Attr package contains utilities to administer the extended attributes on filesystem objects.
 
@@ -571,7 +604,7 @@ time { make; }
 time { make install; }
 ```
 
-### `18` - ACL
+### `19` - ACL
 > #### `2.3.1` or newer
 > The ACL package contains utilities to administer Access Control Lists, which are used to define more fine-grained discretionary access rights for files and directories.
 
@@ -591,7 +624,7 @@ time { make; }
 time { make install; }
 ```
 
-### `19` - Red Hat libcap-ng
+### `20` - Red Hat libcap-ng
 > #### `0.8.2` or newer
 > The Red Hat libcap-ng package implements the user-space interfaces to the POSIX 1003.1e capabilities available in Linux kernels. These capabilities are a partitioning of the all powerful root privilege into a set of distinct privileges. The library is intended to make programming with POSIX capabilities much easier than the traditional libcap library. It includes utilities that can analyse all currently running applications and print out any capabilities and whether or not it has an open ended bounding set.
 
