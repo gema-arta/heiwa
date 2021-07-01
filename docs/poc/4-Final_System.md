@@ -549,6 +549,8 @@ rm -fv /usr/lib/libbz2.a
 ```bash
 export BUILD_ZLIB=0
 export BUILD_BZIP2=0
+export BZIP2_LIB=/usr/lib
+export BZIP2_INCLUDE=/usr/include
 export CFLAGS="$CFLAGS -DNO_POSIX_2008_LOCALE -D_GNU_SOURCE"
 
 # Ensure that never accidentally bundle zlib or bzip2.
@@ -580,7 +582,7 @@ time { make; }
 # Install.
 time { make install; }
 
-unset BUILD_ZLIB BUILD_BZIP2 CFLAGS
+unset BUILD_ZLIB BUILD_BZIP2 BZIP2_LIB BZIP2_INCLUDE CFLAGS
 export CFLAGS="$COMMON_FLAGS"
 ```
 
