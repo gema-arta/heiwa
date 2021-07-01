@@ -539,23 +539,13 @@ ln -sv bzip2 /usr/bin/bzcat
 rm -fv /usr/lib/libbz2.a
 ```
 
-### `17` - Perl
+### `17` - Perl (pass1)
 > #### `5.34.0` or newer
 > The Perl package contains the Practical Extraction and Report Language.
 
 > **Required!** After Zlib-ng and Bzip2; before Attr, ACL, and Red Hat libcap-ng.
 ```bash
-# Ensure to use installed libraries on the system.
-BUILD_ZLIB=0       BUILD_BZIP2=0
-BZIP2_LIB=/usr/lib BZIP2_INCLUDE=/usr/include
-ZLIB_LIB=/usr/lib  ZLIB_INCLUDE=/usr/include
-CFLAGS="$CFLAGS -DNO_POSIX_2008_LOCALE"
-export BUILD_ZLIB BUILD_BZIP2 BZIP2_LIB BZIP2_INCLUDE CFLAGS
-
-# Ensure that never accidentally bundle zlib or bzip2.
-rm -rf cpan/Compress-Raw-Zlib/zlib-src
-rm -rf cpan/Compress-Raw-Bzip2/bzip2-src
-sed -i '/\(bzip2\|zlib\)-src/d' MANIFEST
+export CFLAGS="$CFLAGS -DNO_POSIX_2008_LOCALE"
 
 # Apply patch (from Alpine Linux) to fix "locale.c" errors in programs such as `rxvt-unicode`.
 patch -Np1 -i ../../extra/perl/patches/musl-locale.patch
@@ -568,21 +558,13 @@ sh Configure \
     -Dsitelib=/usr/lib/perl5/5.34/site_perl      \
     -Dsitearch=/usr/lib/perl5/5.34/site_perl     \
     -Dvendorlib=/usr/lib/perl5/5.34/vendor_perl  \
-    -Dvendorarch=/usr/lib/perl5/5.34/vendor_perl \
-    -Dman1dir=/usr/share/man/man1                \
-    -Dman3dir=/usr/share/man/man3                \
-    -Dpager="/bin/toybox more"                   \
-    -Duseshrplib -Dusethreads                    \
-    -Dcccdlflags="-fPIC" -Dccdlflags="-rdynamic"
+    -Dvendorarch=/usr/lib/perl5/5.34/vendor_perl
 
 # Build.
 time { make; }
 
 # Install.
-time { make install; }
-
-unset BUILD_ZLIB BUILD_BZIP2 BZIP2_LIB BZIP2_INCLUDE CFLAGS
-export CFLAGS="$COMMON_FLAGS"
+time { make install && export CFLAGS="$COMMON_FLAGS"; }
 ```
 
 ### `18` - Attr
