@@ -626,8 +626,9 @@ time { make BINDIR=/clang1-tools/bin install; }
 pushd ../ && \
     tar xzf perl-cross-1.3.6.tar.gz && \
 popd && \
-cp -rfv ../perl-cross-1.3.6/* ./
-cp -rfv ../perl-cross-1.3.6/utils/* utils/
+cp -rfv ../perl-cross-1.3.6/*       ./     && \
+cp -rfv ../perl-cross-1.3.6/utils/* utils/ && \
+rm -rf ../perl-cross-1.3.6
 
 # Configure source.
 ./configure \
