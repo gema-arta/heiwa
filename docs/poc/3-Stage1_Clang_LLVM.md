@@ -653,11 +653,11 @@ sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
 
 # Configure source.
 ./bootstrap \
-    --prefix=/clang1-tools \
-    --system-zlib          \
-    --mandir=/share/man    \
-    --parallel=$(nproc)    \
-    --docdir=/share/doc/cmake-3.20.5
+    --prefix=/clang1-tools           \
+    --system-zlib                    \
+    --mandir=/share/man              \
+    --parallel=$(nproc)              \
+    --docdir=/share/doc/cmake-3.20.5 \
     -- -DCMAKE_USE_OPENSSL=OFF
 
 # Build.
