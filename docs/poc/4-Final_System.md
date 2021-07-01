@@ -544,7 +544,7 @@ rm -fv /usr/lib/libbz2.a
 > #### `5.34.0` or newer
 > The Perl package contains the Practical Extraction and Report Language.
 
-> **Required!** After Zlib-ng and Bzip2; before Attr, ACL, and libcap-ng.
+> **Required!** After Zlib-ng and Bzip2; before Attr, ACL, and Red Hat libcap-ng.
 ```bash
 # Ensure to use installed libraries on the system.
 BUILD_ZLIB=0 BUILD_BZIP2=0
