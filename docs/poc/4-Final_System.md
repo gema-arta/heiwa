@@ -505,7 +505,7 @@ time { make install; }
 ```
 
 ### `16` - Perl
-> #### `5.32.1` or newer
+> #### `5.32.1`
 > The Perl package contains the Practical Extraction and Report Language.
 
 > **Required!** Before Attr, ACL, and libcap-ng.
