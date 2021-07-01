@@ -595,7 +595,30 @@ time { make; }
 time { make install; }
 ```
 
-### `20` - Cleaning Up and Changing Ownership
+### `20` - Bzip2
+> #### `1.0.8` or newer
+> The Bzip2 package contains programs for compressing and decompressing files. Compressing text files with bzip2 yields a much better compression percentage than with the traditional gzip.
+
+> **Required!** As default ".bz*" files de/compressor for the current and next stage (chrooting new environment).
+```bash
+# Fix the makefile to ensures installation of symlinks are relative and the man pages are installed into correct location.
+sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
+sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
+
+# Prepare.
+time {
+    make -f Makefile-libbz2_so CC="$CC" AR="$AR" RANLIB="$RANLIB" && \
+    make clean
+}
+
+# Build.
+time { make CC="$CC" AR="$AR" RANLIB="$RANLIB"; }
+
+# Install.
+time { make PREFIX=/clang1-tools install; }
+```
+
+### `21` - Cleaning Up and Changing Ownership
 > **This section is optional!**
 
 > If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
