@@ -531,7 +531,7 @@ time { make; }
 # Install and fix a symlinks.
 time { make PREFIX=/usr install; }
 install -vm755 bzip2-shared /bin/bzip2
-rm -v /usr/bin/{bunzip2,bzcat,bzip2}
+rm -fv /usr/bin/{bunzip2,bzcat,bzip2}
 ln -sv bzip2 /bin/bunzip2
 ln -sv bzip2 /bin/bzcat
 ```
