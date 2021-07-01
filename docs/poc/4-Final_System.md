@@ -508,13 +508,14 @@ time { make install; }
 ```
 
 ### `16` - Bzip2
-> #### 
+> #### `1.0.8` or newer
+> The Bzip2 package contains programs for compressing and decompressing files. Compressing text files with bzip2 yields a much better compression percentage than with the traditional gzip.
 
-> **Required!** Befor Perl.
+> **Required!** Before Perl.
 ```bash
-# Apply patches.
-patch -Np1 -i ../../patches/bzip2/install_docs-1.patch
-patch -Np0 -i ../../patches/bzip2/soname.patch
+# Apply patches to fix docs installation and library soname.
+patch -Np1 -i ../../extra/bzip2/patches/install_docs-1.patch
+patch -Np0 -i ../../extra/bzip2/patches/soname.patch
 
 # The following command ensures installation of symbolic links are relative,
 # and ensure the man pages are installed into the correct location.
@@ -530,11 +531,9 @@ time  {
 # Build.
 time { make; }
 
-# Install.
+# Install and fix a symlinks.
 time { make PREFIX=/usr install; }
-cp -v bzip2-shared /bin/bzip2
-cp -av libbz2.so* /lib
-ln -sv ../../lib/libbz2.so.1.0 /usr/lib/libbz2.so
+install -vm755 bzip2-shared /bin/bzip2
 rm -v /usr/bin/{bunzip2,bzcat,bzip2}
 ln -sv bzip2 /bin/bunzip2
 ln -sv bzip2 /bin/bzcat
