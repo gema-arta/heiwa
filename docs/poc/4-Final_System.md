@@ -630,7 +630,7 @@ passwd root
 > **Required!** Before Cmake.
 ```bash
 # Generate configure script.
-sh autogen.sh
+./autogen.sh
 
 # Configure source.
 ./configure \
