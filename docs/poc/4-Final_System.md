@@ -519,7 +519,7 @@ rm -rf cpan/Compress-Raw-Zlib/zlib-src
 rm -rf cpan/Compress-Raw-Bzip2/bzip2-src
 sed -i '/\(bzip2\|zlib\)-src/d' MANIFEST
 
-# Apply patch (from Alpine Linux) to fix "locale.c" errors in programs such as rxvt-unicode.
+# Apply patch (from Alpine Linux) to fix "locale.c" errors in programs such as `rxvt-unicode`.
 patch -Np1 -i ../../extra/perl/patches/musl-locale.patch
 
 # Configure source.
