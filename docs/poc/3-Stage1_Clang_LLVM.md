@@ -394,7 +394,7 @@ time { make install; }
 > #### `5.1` (with patch level 8) or newer
 > The GNU Bash package contains the Bourne-Again SHell.
 
-> **Required!** As default shell for the next stage (chrooting new environment).
+> **Required!** As default shell for the next stage (chroot environment).
 ```bash
 # Fix the configure script that doesn't determine correct values in cross compiling.
 cat > config.cache << "EOF"
@@ -431,7 +431,7 @@ time { make install; }
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
-> **Required!** For the current and next stage (chrooting new environment).
+> **Required!** For the current and next stage (chroot environment).
 ```bash
 # Copy Toybox's .config file.
 cp -v ../../extra/toybox/files/.config.coreutils_file_findutils_grep_sed_tar.nlns .config
@@ -511,7 +511,7 @@ time { make install; }
 > #### `2.6` or newer
 > The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
 
-> **Required!** As default ".gz" files de/compressor for the current and next stage (chrooting new environment).
+> **Required!** As default ".gz" files de/compressor for the current and next stage (chroot environment).
 ```bash
 # Build.
 time { make CC="$CC" CFLAGS="$CFLAGS"; }
@@ -527,7 +527,7 @@ ln -sv unpigz /clang1-tools/bin/gunzip
 > #### `4.3` or newer
 > The GNU Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
  
-> **Required!** For the current and next stage (chrooting new environment) that most build systems depends on GNU implementation style.
+> **Required!** For the current and next stage (chroot environment) that most build systems depends on GNU implementation style.
 ```bash
 # Configure source.
 ./configure \
@@ -547,7 +547,7 @@ time { make install; }
 > #### `2.7.6` or newer
 > The GNU Patch package contains a program for modifying or creating files by applying a "patch" file typically created by the diff program.
 
-> **Required!** For the current and next stage (chrooting new environment). The GNU implementation of "patch" is can handle offset lines, which is powerful feature.
+> **Required!** For the current and next stage (chroot environment). The GNU implementation of "patch" is can handle offset lines, which is powerful feature.
 ```bash
 # Configure source.
 ./configure \
@@ -566,7 +566,7 @@ time { make install; }
 > #### `5.2.5` or newer
 > The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
 
-> **Required!** As default ".xz" and ".lzma" files de/compressor for the current and next stage (chrooting new environment).
+> **Required!** As default ".xz" and ".lzma" files de/compressor for the next stage (chroot environment).
 ```bash
 # Configure source.
 ./configure \
@@ -586,7 +586,7 @@ time { make install; }
 > #### 0.3.2
 > The Gettext-tiny package provides lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
 
-> **Required!** To allow programs compiled with NLS (Native Language Support).
+> **Required!** To allow programs compiled with NLS (Native Language Support) in the next stage (chroot environment).
 ```bash
 # Build.
 time { make LIBINTL=MUSL prefix=/clang1-tools; }
@@ -599,7 +599,7 @@ install -vm755 -t /clang1-tools/bin/ msgfmt msgmerge xgettext
 > #### `6.6` or newer
 > The OpenBSD Yacc package contains a parser generator.
 
-> **Required!** For the current and next stage (chrooting new environment). 
+> **Required!** To build required packages in the next stage (chroot environment). 
 ```bash
 # Configure source.
 ./configure \
@@ -617,7 +617,7 @@ time { make BINDIR=/clang1-tools/bin install; }
 > #### `1.0.8` or newer
 > The Bzip2 package contains programs for compressing and decompressing files. Compressing text files with bzip2 yields a much better compression percentage than with the traditional gzip.
 
-> **Required!** As default ".bz*" files de/compressor for the current and next stage (chrooting new environment).
+> **Required!** As default ".bz*" files de/compressor for the next stage (chroot environment).
 ```bash
 # Fix the makefile to ensures installation of symlinks are relative and the man pages are installed into correct location.
 sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
@@ -664,7 +664,7 @@ time { make install && unset LDFLAGS; }
 > #### `3.20.5` or newer
 > The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
 
-> **Required!** To build Clang/LLVM in the next stage (chrooting new environment).
+> **Required!** To build Clang/LLVM in the next stage (chroot environment).
 ```bash
 # Disable applications using cmake from attempting to install files in "/usr/lib64".
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
