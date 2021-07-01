@@ -522,7 +522,7 @@ sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
 sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
 
 # Prepare.
-time  { make -f Makefile-libbz2_so && make clean; }
+time { make -f Makefile-libbz2_so && make clean; }
 
 # Build.
 time { make; }
