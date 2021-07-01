@@ -517,8 +517,7 @@ time { make install; }
 patch -Np1 -i ../../extra/bzip2/patches/install_docs-1.patch
 patch -Np1 -i ../../extra/bzip2/patches/soname.patch
 
-# The following command ensures installation of symbolic links are relative,
-# and ensure the man pages are installed into the correct location.
+# The following command ensures installation of symbolic links are relative, and ensure the man pages are installed into the correct location.
 sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
 sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
 
