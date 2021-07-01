@@ -671,7 +671,7 @@ sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
 
 # Configure source.
 CFLAGS="$CFLAGS -isystem /clang1-tools/include"   \
-CXXFLAGS="$CFLAGS -isystem /clang1-tools/include" \
+CXXFLAGS="$CXXFLAGS -isystem /clang1-tools/include" \
 ./bootstrap \
     --prefix=/clang1-tools           \
     --system-zlib                    \
