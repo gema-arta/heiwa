@@ -645,8 +645,9 @@ rm -fv /clang1-tools/lib/libbz2.a
 ### `22` - Perl
 ### `23` - libffi 
 ### `24` - Python3
+### `25` - Texinfo
 
-### `25` - libuv
+### `26` - libuv
 > #### `1.41.0` or newer
 > The libuv package is a multi-platform support library with a focus on asynchronous I/O.
 
@@ -670,7 +671,7 @@ time { make; }
 time { make install && unset LDFLAGS; }
 ```
 
-### `26` - Cmake
+### `27` - Cmake
 > #### `3.20.5` or newer
 > The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
 
@@ -694,7 +695,7 @@ time { make; }
 time { make install; }
 ```
 
-### `27` - Cleaning Up and Changing Ownership
+### `28` - Cleaning Up and Changing Ownership
 > **This section is optional!**
 
 > If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
