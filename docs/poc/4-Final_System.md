@@ -541,7 +541,7 @@ rm -fv /usr/lib/libbz2.a
 ```
 
 ### `17` - Perl
-> #### `5.32.1`
+> #### `5.34.0` or newer
 > The Perl package contains the Practical Extraction and Report Language.
 
 > **Required!** After Zlib-ng and Bzip2; before Attr, ACL, and libcap-ng.
@@ -549,7 +549,7 @@ rm -fv /usr/lib/libbz2.a
 # Ensure to use installed libraries on the system.
 BUILD_ZLIB=0 BUILD_BZIP2=0
 BZIP2_LIB=/usr/lib BZIP2_INCLUDE=/usr/include
-CFLAGS="$CFLAGS -DNO_POSIX_2008_LOCALE -D_GNU_SOURCE"
+CFLAGS="$CFLAGS -DNO_POSIX_2008_LOCALE"
 export BUILD_ZLIB BUILD_BZIP2 BZIP2_LIB BZIP2_INCLUDE CFLAGS
 
 # Ensure that never accidentally bundle zlib or bzip2.
