@@ -543,7 +543,7 @@ rm -fv /usr/lib/libbz2.a
 > #### `5.34.0` or newer
 > The Perl package contains the Practical Extraction and Report Language.
 
-> **Required!** After Zlib-ng and Bzip2; before Attr, ACL, and Red Hat libcap-ng.
+> **Required!** Before Attr, ACL, and Red Hat libcap-ng.
 ```bash
 export CFLAGS="$CFLAGS -DNO_POSIX_2008_LOCALE"
 
