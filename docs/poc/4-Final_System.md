@@ -313,7 +313,7 @@ rm -fv dummy.c a.out dummy.log
 > **Required!** Since using musl libc.
 ```bash
 # Create a directory and decompress needed tarball.
-mkdir -v tzdata && pushd tzdata && \
+mkdir -v tzdata && pushd tzdata   && \
     tar xzf ../tzdata2021a.tar.gz && \
     tar xzf ../tzcode2021a.tar.gz && \
     tar xf  ../posixtz-0.5.tar.xz
@@ -341,15 +341,14 @@ install -vm755 -t /usr/sbin/ zic zdump
 install -vm644 -t /usr/share/man/man8/ zic.8 zdump.8
 install -vm755 -t /usr/bin/ posixtz-0.5/posixtz 
 
-unset timezones
-
+# Configure timezone.
 # Use `tzselect` to determine <xxx>.
 tzselect
 
 cp -v /usr/share/zoneinfo/<xxx> /etc/localtime
 
 # Back to "/sources/pkgs" directory.
-popd && rm -rf tzdata
+popd && rm -rf tzdata; unset timezones
 ```
 
 ### `9` - Zlib-ng
