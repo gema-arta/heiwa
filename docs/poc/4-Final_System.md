@@ -530,12 +530,15 @@ time { make; }
 
 # Install (also shared libraries) and fix the symlinks.
 time { make PREFIX=/usr install; }
-install -vm755 bzip2-shared /bin/bzip2
 cp -av libbz2.so* /usr/lib/
 ln -sv libbz2.so.1.0 /usr/lib/libbz2.so
 rm -fv /usr/bin/{bunzip2,bzcat,bzip2}
-ln -sv bzip2 /bin/bunzip2
-ln -sv bzip2 /bin/bzcat
+install -vm755 bzip2-shared /usr/bin/bzip2
+ln -sv bzip2 /usr/bin/bunzip2
+ln -sv bzip2 /usr/bin/bzcat
+
+# Remove useless static library.
+rm -fv /usr/lib/libbz2.a
 ```
 
 ### `17` - Perl
