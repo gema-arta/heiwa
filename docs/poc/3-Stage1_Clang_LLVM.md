@@ -622,7 +622,7 @@ time { make BINDIR=/clang1-tools/bin install; }
 
 > **Required!** To build required packages in the next stage (chroot environment). 
 ```bash
-# Decompress and copy perl-cross source.s
+# Decompress and copy perl-cross sources.
 pushd ../ && \
     tar xzf perl-cross-1.3.6.tar.gz && \
 popd && \
