@@ -661,6 +661,7 @@ rm -rfv Modules/_ctypes/{darwin,libffi}*
 sed -i '/def add_multiarch_paths/a \        return' setup.py
 
 # Configure source.
+ax_cv_c_float_words_bigendian=no \
 ./configure \
     --prefix=/clang1-tools   \
     --build="$TARGET_TRUPLE" \
