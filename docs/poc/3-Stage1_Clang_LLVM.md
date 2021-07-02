@@ -618,7 +618,7 @@ time { make BINDIR=/clang1-tools/bin install; }
 
 ### `21` - libffi 
 ### `22` - Python3
-### `23` - Texinfo
+### `23` - GNU Texinfo
 
 ### `24` - Bzip2
 > #### `1.0.8` or newer
