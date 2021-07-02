@@ -781,7 +781,7 @@ rm -rf /clang1-tools/share/{info,man,doc}/*
 # Strip off debugging symbols from binaries using `llvm-strip`.
 # A large number of files will be reported "The file was not recognized as a valid object file".
 # These warnings can be safely ignored. These warnings indicate that those files are scripts instead of binaries.
-find /clang1-tools/lib/ -maxdepth 1 -type f -exec strip --strip-debug {} \;
+find /clang1-tools/lib/ -maxdepth 1 -type f -exec llvm-strip --strip-debug {} \;
 find /clang1-tools/{,usr/}{,s}bin/ -maxdepth 1 -type f -exec /clang0-tools/bin/llvm-strip --strip-unneeded {} \;
 
 # Exit from privileged user.
