@@ -678,6 +678,23 @@ chmod -v 755 /clang1-tools/lib/libpython3*.so
 ```
 
 ### `23` - GNU Texinfo
+> #### `6.7`
+> The Texinfo package contains programs for reading, writing, and converting info pages.
+
+> **Required!** For the next stage (chroot environment).
+```bash
+# Configure source.
+./configure \
+    --prefix=/clang1-tools   \
+    --build="$TARGET_TRUPLE" \
+    --host="$TARGET_TRUPLE"
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
 
 ### `24` - Bzip2
 > #### `1.0.8` or newer
