@@ -673,8 +673,7 @@ time { make; }
 
 # Install.
 time { make install; }
-chmod -v 755 /clang1-tools/lib/libpython3.9.so
-chmod -v 755 /clang1-tools/lib/libpython3.so 
+chmod -v 755 /clang1-tools/lib/libpython3*.so
 ```
 
 ### `23` - GNU Texinfo
