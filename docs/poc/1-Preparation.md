@@ -1,5 +1,8 @@
 ## `I` Preparation
 
+> **Notes!**
+> Copy [`syscore/*`](./../../syscore/) to `${HEIWA}/sources/extra/.`
+
 > #### * Beginning of as root!
 ### `1` - Prepare a volume/partition
 ```bash
