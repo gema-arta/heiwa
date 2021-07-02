@@ -623,8 +623,8 @@ time { make BINDIR=/clang1-tools/bin install; }
 > **Required!** By Python for the current and next stage (chroot environment).
 ```bash
 # Apply patches (from Void Linux) to fix some issues.
-patch -Np1 -i ../extra/libffi/patches/libffi-race-condition.patch
-patch -Np1 -i ../extra/libffi/patches/no-toolexeclibdir.patch
+patch -Np1 -i ../../extra/libffi/patches/libffi-race-condition.patch
+patch -Np1 -i ../../extra/libffi/patches/no-toolexeclibdir.patch
 
 # Configure source.
 ./configure \
