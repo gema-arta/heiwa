@@ -616,7 +616,7 @@ time { make; }
 time { make BINDIR=/clang1-tools/bin install; }
 ```
 
-### `21` - libffi 
+### `21` - libffi
 ### `22` - Python3
 ### `23` - GNU Texinfo
 
