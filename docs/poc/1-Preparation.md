@@ -1,4 +1,4 @@
-## `I` Preparation
+l## `I` Preparation
 
 > #### * Beginning of as root!
 ### `1` - Prepare a volume/partition
@@ -17,7 +17,7 @@ mount -vo noatime,discard /dev/sdaX "$HEIWA"
 ### `2` - Creating sources and toolchain directory
 ```bash
 # Create directories to build clang with GCC libraries and the final toolchain without GCC libraries.
-# As root, Link them to host's root directory.
+# As root, link them to host's root directory.
 if [[ -n "$HEIWA" ]]; then
     mkdir -pv "${HEIWA}/"clang{0,1}-tools
     ln -sv "${HEIWA}/clang0-tools" /
