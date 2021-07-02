@@ -96,7 +96,7 @@ source ~/.bashrc
 ```
 
 > **Additional Instruction**  
-> * Copy [`syscore/*`](./../../syscore/) to `${HEIWA}/sources/extra/.` now!
+> Copy [`syscore/*`](./../../syscore/) to `${HEIWA}/sources/extra/.` now!
 
 <h2></h2>
 
