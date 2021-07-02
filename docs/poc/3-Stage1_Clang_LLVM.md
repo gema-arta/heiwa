@@ -648,7 +648,33 @@ time { make install; }
 
 > **Required!** To build Clang/LLVM and other required packages in the next stage (chroot environment).
 ```bash
+# Apply patches (from Void Linux).
+patch -Np1 -i ../../extra/python3/patches/musl-find_library.patch
+patch -Np1 -i ../../extra/python3/patches/ppcle.patch
+patch -Np1 -i ../../extra/python3/patches/tweak-MULTIARCH-for-powerpc-linux-musl.patch
 
+# Make sure to use installed libffi, not built-in.
+rm -rfv Modules/_ctypes/{darwin,libffi}*
+
+# The main script for building modules is written in Python, and uses hard-coded paths to the host "/usr/include" and "/usr/lib" directories.
+# Prevent this.
+sed -i '/def add_multiarch_paths/a \        return' setup.py
+
+# Configure source.
+./configure \
+    --prefix=/clang1-tools   \
+    --build="$TARGET_TRUPLE" \
+    --host="$TARGET_TRUPLE"  \
+    --enable-shared          \
+    --without-ensurepip 
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+chmod -v 755 /clang1-tools/lib/libpython3.9.so
+chmod -v 755 /clang1-tools/lib/libpython3.so 
 ```
 
 ### `23` - GNU Texinfo
