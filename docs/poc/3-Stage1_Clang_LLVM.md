@@ -617,6 +617,31 @@ time { make BINDIR=/clang1-tools/bin install; }
 ```
 
 ### `21` - libffi
+> #### `3.3` or newer
+> The libffi library provides a portable, high level programming interface to various calling conventions. This allows a programmer to call any function specified by a call interface description at run time.
+
+> **Required!** By Python for the current and next stage (chroot environment).
+```bash
+# Apply patches (from Void Linux) to fix some issues.
+patch -Np1 -i ../extra/libffi/patches/libffi-race-condition.patch
+patch -Np1 -i ../extra/libffi/patches/no-toolexeclibdir.patch
+
+# Configure source.
+./configure \
+    --prefix=/clang1-tools       \
+    --build="$TARGET_TRUPLE"     \
+    --host="$TARGET_TRUPLE"      \
+    --disable-static             \
+    --disable-multi-os-directory \
+    --with-pic --with-gcc-arch=native
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
 ### `22` - Python3
 ### `23` - GNU Texinfo
 
