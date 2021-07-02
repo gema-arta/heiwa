@@ -3,7 +3,7 @@
 > **Announcement**  
 > 1. Currently only focus on **x86_64** architecture, build with native CPU optimization.  
 > 2. Use standard and the most stable **ext4** partition type.  
-> 3. Use pure Clang/LLVM toolchain.
+> 3. Use pure Clang/LLVM toolchains.
 
 > **Additional Instruction**  
 > * Copy [`syscore/*`](./../../syscore/) to `${HEIWA}/sources/extra/.` at the end of this stage.
