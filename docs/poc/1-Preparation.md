@@ -1,8 +1,10 @@
 ## `I` Preparation
 
-> **Notes!**  
-> Currently only focus on **x86_64** architecture, build with native CPU optimization.  
-> Using standard and the most stable *ext4* partition type.  
+> **Announcement**  
+> 1. Currently only focus on **x86_64** architecture, build with native CPU optimization.  
+> 2. Using standard and the most stable *ext4* partition type.  
+>
+> **Instruction**
 > Copy [`syscore/*`](./../../syscore/) to `${HEIWA}/sources/extra/.` at the end of this stage.
 
 > #### * Beginning of as root!
