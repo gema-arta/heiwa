@@ -410,7 +410,7 @@ popd
 ```bash
 # The libtool .la files are only useful when linking with static libraries. Remove those files.
 # They are unneeded, and potentially harmful, when using dynamic shared libraries, specially when using non-autotools build systems.
-find /clang0-tools/{{,${HEIWA_TARGET}/}lib{,64},libexec}/ -name \*.la -exec rm -rfv {} \;
+find /clang0-tools/{{,"${HEIWA_TARGET}/"}lib{,64},libexec}/ -name \*.la -exec rm -rfv {} \;
 
 # Remove the documentation.
 rm -rf /clang0-tools/share/{info,man,doc}/*
