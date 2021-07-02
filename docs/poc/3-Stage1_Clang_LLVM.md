@@ -640,7 +640,7 @@ rm -rf  ../perl-cross-1.3.6
 time { make; }
 
 # Only a few of the utilities and libraries need to be installed.
-install -vm755 -t /clang1-tools/bin perl cpan/podlators/scripts/pod2man
+install -vm755 -t /clang1-tools/bin/ perl cpan/podlators/scripts/pod2man
 mkdir -pv /clang1-tools/lib/perl5/5.34
 cp -av lib/* /clang1-tools/lib/perl5/5.34
 ```
