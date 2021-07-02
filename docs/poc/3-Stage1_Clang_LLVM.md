@@ -656,8 +656,7 @@ patch -Np1 -i ../../extra/python3/patches/tweak-MULTIARCH-for-powerpc-linux-musl
 # Make sure to use installed `libffi`, not built-in.
 rm -rfv Modules/_ctypes/{darwin,libffi}*
 
-# The main script for building modules is written in Python, and uses hard-coded paths to the host "/usr/include" and "/usr/lib" directories.
-# Prevent this.
+# Prevent main script that uses hard-coded paths to the host "/usr/include" and "/usr/lib" directories.
 sed -i '/def add_multiarch_paths/a \        return' setup.py
 
 # Configure source.
