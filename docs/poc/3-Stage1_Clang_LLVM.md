@@ -643,6 +643,14 @@ time { make install; }
 ```
 
 ### `22` - Python3
+> #### `3.9.6` or newer
+> The Python 3 package contains the Python development environment. It is useful for object-oriented programming, writing scripts, prototyping large programs, or developing entire applications.
+
+> **Required!** To build Clang/LLVM and other required packages in the next stage (chroot environment).
+```bash
+
+```
+
 ### `23` - GNU Texinfo
 
 ### `24` - Bzip2
