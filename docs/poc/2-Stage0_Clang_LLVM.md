@@ -418,7 +418,7 @@ rm -rf /clang0-tools/share/{info,man,doc}/*
 # Strip off debugging symbols from binaries using `llvm-strip`.
 # A large number of files will be reported "The file was not recognized as a valid object file".
 # These warnings can be safely ignored. These warnings indicate that those files are scripts instead of binaries.
-find /clang0-tools/{,${HEIWA_TARGET}/}lib{,64}/ -maxdepth 1 -type f -exec llvm-strip --strip-debug {} \;
+find /clang0-tools/{,${HEIWA_TARGET}/}lib{,64}/ -maxdepth 1 -type f -exec strip --strip-debug {} \;
 find /clang0-tools/{,${HEIWA_TARGET}/}bin/ -maxdepth 1 -type f -exec /usr/bin/strip --strip-unneeded {} \;
 ```
 
