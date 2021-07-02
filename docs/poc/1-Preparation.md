@@ -1,6 +1,6 @@
 ## `I` Preparation
 
-> **Notes!**
+> **Notes!**  
 > Copy [`syscore/*`](./../../syscore/) to `${HEIWA}/sources/extra/.` after end of this stage.
 
 > #### * Beginning of as root!
