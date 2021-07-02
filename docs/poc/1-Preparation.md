@@ -5,9 +5,6 @@
 > 2. Use standard and the most stable **ext4** partition type.  
 > 3. Use pure Clang/LLVM toolchains.
 
-> **Additional Instruction**  
-> * Copy [`syscore/*`](./../../syscore/) to `${HEIWA}/sources/extra/.` at the end of this stage.
-
 > #### * Beginning of as root!
 ### `1` - Prepare a volume/partition
 ```bash
@@ -97,6 +94,9 @@ alias make="make -j\$(nproc) -l\$(nproc)"
 EOF
 source ~/.bashrc
 ```
+
+> **Additional Instruction**  
+> * Copy [`syscore/*`](./../../syscore/) to `${HEIWA}/sources/extra/.` now!
 
 <h2></h2>
 
