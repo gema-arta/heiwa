@@ -274,7 +274,7 @@ time { make PREFIX=/clang0-tools install; }
 > #### `12.0.0`
 > C language family frontend for LLVM.
 
-> **Required!** First build Clang/LLVM toolchain that will be used for bootstrapping Stage-1 Clang/LLVM toolchains without depends on `libgcc_s.so*` and `libstdc++.so*` later.
+> **Required!** Build Stage-0 Clang/LLVM toolchains, this will be used for bootstrapping Stage-1 Clang/LLVM toolchains without depends on `libgcc_s.so*` and `libstdc++.so*` later.
 ```bash
 # Exit from "${HEIWA}/sources/pkg/llvm-12.0.0.src" directory if already in.
 popd
@@ -359,7 +359,7 @@ time {
     popd && rm -rf build
 }
 
-# Set lld as default toolchain linker.
+# Set lld as default toolchain's linker.
 ln -sv lld /clang0-tools/bin/ld
 
 # Configure Stage-0 Clang to build binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" instead of "/lib/ld-musl-x86_64.so.1".
