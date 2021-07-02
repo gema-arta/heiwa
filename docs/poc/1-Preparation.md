@@ -1,7 +1,7 @@
 ## `I` Preparation
 
 > **Notes!**  
-> Copy [`syscore/*`](./../../syscore/) to `${HEIWA}/sources/extra/.` after end of this stage.
+> Copy [`syscore/*`](./../../syscore/) to `${HEIWA}/sources/extra/.` at the end of this stage.
 
 > #### * Beginning of as root!
 ### `1` - Prepare a volume/partition
