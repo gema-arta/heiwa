@@ -403,6 +403,25 @@ popd
 > #### ^ NOTE!
 > Don't delete ${LLVM_SRC} directory after [the last step](#9----clangllvm).
 
+### `10` - Cleaning Up
+> **This section is optional!**
+
+> If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
+```bash
+# The libtool .la files are only useful when linking with static libraries. Remove those files.
+# They are unneeded, and potentially harmful, when using dynamic shared libraries, specially when using non-autotools build systems.
+find /clang0-tools/{{,${HEIWA_TARGET}/}lib{,64},libexec}/ -name \*.la -exec rm -rfv {} \;
+
+# Remove the documentation.
+rm -rf /clang0-tools/share/{info,man,doc}/*
+
+# Strip off debugging symbols from binaries using `llvm-strip`.
+# A large number of files will be reported "The file was not recognized as a valid object file".
+# These warnings can be safely ignored. These warnings indicate that those files are scripts instead of binaries.
+find /clang0-tools/{,${HEIWA_TARGET}/}lib{,64}/ -maxdepth 1 -type f -exec llvm-strip --strip-debug {} \;
+find /clang0-tools/{,${HEIWA_TARGET}/}bin/ -maxdepth 1 -type f -exec /usr/bin/strip --strip-unneeded {} \;
+```
+
 <h2></h2>
 
 Continue to [Stage-1 Clang/LLVM Toolchains](./3-Stage1_Clang_LLVM.md).
