@@ -616,40 +616,11 @@ time { make; }
 time { make BINDIR=/clang1-tools/bin install; }
 ```
 
-### `21` - Perl
-> #### `5.34.0` or newer
-> The Perl package contains the Practical Extraction and Report Language.
+### `21` - libffi 
+### `22` - Python3
+### `23` - Texinfo
 
-> **Required!** To build required packages in the next stage (chroot environment). 
-```bash
-# Decompress and copy perl-cross sources.
-pushd ../ && \
-    tar xzf perl-cross-1.3.6.tar.gz && \
-popd && \
-cp -rfv ../perl-cross-1.3.6/*       ./     && \
-cp -rfv ../perl-cross-1.3.6/utils/* utils/ && \
-rm -rf  ../perl-cross-1.3.6
-
-# Configure source.
-./configure \
-    --prefix=/clang1-tools   \
-    --build="$TARGET_TRUPLE" \
-    --target="$TARGET_TRUPLE"
-    
-# Build.
-time { make; }
-
-# Only a few of the utilities and libraries need to be installed.
-install -vm755 -t /clang1-tools/bin/ perl cpan/podlators/scripts/pod2man
-mkdir -pv /clang1-tools/lib/perl5/5.34
-cp -av lib/* /clang1-tools/lib/perl5/5.34
-```
-
-### `22` - libffi 
-### `23` - Python3
-### `24` - Texinfo
-
-### `25` - Bzip2
+### `24` - Bzip2
 > #### `1.0.8` or newer
 > The Bzip2 package contains programs for compressing and decompressing files. Compressing text files with bzip2 yields a much better compression percentage than with the traditional gzip.
 
@@ -675,7 +646,7 @@ time { make PREFIX=/clang1-tools install; }
 rm -fv /clang1-tools/lib/libbz2.a
 ```
 
-### `26` - libuv
+### `25` - libuv
 > #### `1.41.0` or newer
 > The libuv package is a multi-platform support library with a focus on asynchronous I/O.
 
@@ -699,7 +670,7 @@ time { make; }
 time { make install && unset LDFLAGS; }
 ```
 
-### `27` - Cmake
+### `26` - Cmake
 > #### `3.20.5` or newer
 > The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
 
@@ -723,7 +694,7 @@ time { make; }
 time { make install; }
 ```
 
-### `28` - Cleaning Up and Changing Ownership
+### `27` - Cleaning Up and Changing Ownership
 > **This section is optional!**
 
 > If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
