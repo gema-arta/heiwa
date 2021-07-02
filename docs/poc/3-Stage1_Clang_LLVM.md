@@ -250,7 +250,7 @@ rm -fv /clang1-tools/lib/libz.a
 > #### `12.0.0`
 > C language family frontend for LLVM.
 
-> **Required!** As default toolchain. This will build Stage-1 Clang/LLVM toolchains with `libgcc_s.so*` and `libstdc++.so*` free.
+> **Required!** As default toolchains. This will build Stage-1 Clang/LLVM toolchains with `libgcc_s.so*` and `libstdc++.so*` free.
 ```bash
 # Exit from "${HEIWA}/sources/pkg/llvm-12.0.0.src" directory if already in.
 popd
@@ -340,7 +340,7 @@ time {
     popd && rm -rf build
 }
 
-# Since Binutils won't be used, create a symlink to LLVM tools and set lld as default toolchain linker.
+# Since Binutils won't be used, create a symlink to LLVM tools and set lld as default toolchain's linker.
 for B in as ar ranlib readelf nm objcopy objdump size strip; do
     ln -sv llvm-${B} /clang1-tools/bin/${B}
 done; ln -sv lld /clang1-tools/bin/ld
