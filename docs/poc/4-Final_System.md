@@ -21,14 +21,14 @@ fi
 # A bind mount is a special type of mount that allows you to create a mirror of a directory or mount point to some other location.
 # In some host systems, "/dev/shm" is a symbolic link to "/run/shm". The "/run" tmpfs was mounted above so in this case only a directory needs to be created.
 if [[ -n "$HEIWA" ]]; then
-    mount -Rv /dev        "${HEIWA}/dev"     && \
-    mount -Rv /dev/pts    "${HEIWA}/dev/pts" && \
-    mount -vt proc  proc  "${HEIWA}/proc"    && \
-    mount -vt sysfs sysfs "${HEIWA}/sys"     && \
-    mount -vt tmpfs tmpfs "${HEIWA}/run"     && \
-    mount -vt tmpfs tmpfs "${HEIWA}/tmp"     && \
+    mount -Rv /dev        ${HEIWA}/dev     && \
+    mount -Rv /dev/pts    ${HEIWA}/dev/pts && \
+    mount -vt proc  proc  ${HEIWA}/proc    && \
+    mount -vt sysfs sysfs ${HEIWA}/sys     && \
+    mount -vt tmpfs tmpfs ${HEIWA}/run     && \
+    mount -vt tmpfs tmpfs ${HEIWA}/tmp     && \
     if [[ -h "${HEIWA}/dev/shm" ]]; then
-        mkdir -pv "${HEIWA}/$(readlink ${HEIWA}/dev/shm)"
+        mkdir -pv ${HEIWA}/$(readlink ${HEIWA}/dev/shm)
     fi
 fi
 ```
@@ -36,7 +36,7 @@ fi
 ### `2` - Entering the Chroot Environment
 > Now that all the packages which are required to build the rest of the needed tools are on the system.
 ```bash
-# Term variable is set to `xterm` for better compability, instead of ${TERM} that will broken if using `rxvt-unicode`.
+# Term variable is set to `xterm` for better compability, instead of "$TERM" that will broken if using `rxvt-unicode`.
 if [[ -n "$HEIWA" ]]; then
     chroot "$HEIWA" /clang1-tools/usr/bin/env -i                                 \
     HOME="/root" TERM="xterm" PS1='(heiwa chroot) \u: \w \$ '                    \
@@ -75,6 +75,7 @@ chmod -v 1777 /{var/,}tmp
 # Some programs use hard-wired paths to programs which do not exist yet.
 # In order to satisfy these programs, create a number of symbolic links which will be replaced by real files throughout the course of this chapter after the software has been installed.
 ln -sv /clang1-tools/bin/{bash,cat,echo,ln,pwd,rm,stty} /bin
+ln -sv /clang1-tools/bin/perl                           /usr/bin
 ln -sv /clang1-tools/usr/bin/{env,install,dd}           /usr/bin
 ln -sv /clang1-tools/lib/libc++.so{,.1}                 /usr/lib
 ln -sv /clang1-tools/lib/libc++abi.so{,.1}              /usr/lib
