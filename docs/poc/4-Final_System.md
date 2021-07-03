@@ -462,7 +462,7 @@ ln -sv flex /usr/bin/lex
 > #### `6.7` or newer
 > The OpenBSD M4 package contains a macro processor.
 
-> **Required!** After Flex.
+> **Required!** Before `GNU Autoconf`.
 ```bash
 # Configure source.
 ./configure --prefix=/usr --enable-m4
