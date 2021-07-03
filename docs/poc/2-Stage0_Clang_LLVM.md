@@ -1,4 +1,4 @@
-## `II` Stage-0 Clang/LLVM (ft. GNU) Cross-Compile Toolchain
+## `II` Stage-0 Clang/LLVM (ft. GNU) Cross Toolchain
 
 > **Compilation Instruction!**
 > ```bash
