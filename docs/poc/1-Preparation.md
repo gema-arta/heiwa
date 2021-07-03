@@ -24,10 +24,10 @@ mount -vo noatime,discard /dev/sdaX "$HEIWA"
 # Create directories to build clang with GCC libraries and the final toolchain without GCC libraries.
 # As root, link them to host's root directory.
 if [[ -n "$HEIWA" ]]; then
-    mkdir -pv "${HEIWA}/"clang{0,1}-tools
-    ln -sv "${HEIWA}/clang0-tools" /
-    ln -sv "${HEIWA}/clang1-tools" /
-    mkdir -pv "${HEIWA}/sources/"{extra,pkgs}
+    mkdir -pv ${HEIWA}/clang{0,1}-tools
+    ln -sv ${HEIWA}/clang0-tools" /
+    ln -sv ${HEIWA}/clang1-tools" /
+    mkdir -pv ${HEIWA}/sources/{extra,pkgs}
 fi
 ```
 
@@ -40,11 +40,11 @@ passwd heiwa
 
 # Setting up directory permission.
 # Warning! This is danger, so check its variables before `chown`.
-# echo {"$HEIWA",}/clang{0,1}-tools
+# echo {${HEIWA},}/clang{0,1}-tools
 if [[ -n "$HEIWA" ]]; then
-    chmod -vR a+wt "${HEIWA}/sources"
-    chown -Rv heiwa "${HEIWA}/sources"
-    chown -Rv heiwa {"$HEIWA",}/clang{0,1}-tools
+    chmod -vR a+wt ${HEIWA}/sources
+    chown -Rv heiwa ${HEIWA}/sources
+    chown -Rv heiwa {${HEIWA},}/clang{0,1}-tools
 fi
 ```
 > #### * End of as root!
@@ -62,26 +62,26 @@ COMMON_FLAGS="${COMMON_FLAGS}" CFLAGS="${COMMON_FLAGS}" \
 CXXFLAGS="${COMMON_FLAGS}" /bin/bash
 EOF
 
-export HEIWA="/media/Heiwa"
+export HEIWA="${HEIWA:-/media/Heiwa}"
 cat > ~/.bashrc << EOF
 set +h
 umask 022
 HEIWA="${HEIWA}"
 LC_ALL="POSIX"
 PATH="/clang0-tools/bin:/clang0-tools/usr/bin:/clang1-tools/bin:/clang1-tools/usr/bin:/bin:/usr/bin"
-export HEIWA LC_ALL PATH
+LLVM_SRC="\${HEIWA}/sources/llvm"
+export HEIWA LC_ALL PATH LLVM_SRC
 # CFLAGS and CXXFLAGS must not be set during the building of Stage-0 Clang/LLVM.
 unset CFLAGS CXXFLAGS
-export LLVM_SRC="\${HEIWA}/sources/llvm"
 EOF
 source ~/.bash_profile
 
 export HEIWA_TARGET="x86_64-heiwa-linux-musl"
-export TARGET_TRUPLE="x86_64-pc-linux-musl"
 export HEIWA_ARCH="x86"
 export HEIWA_CPU="x86-64"
 export HEIWA_HOST="$(echo "$MACHTYPE" | \
     sed "s/$(echo "$MACHTYPE" | cut -d- -f2)/cross/")"
+export TARGET_TRUPLE="x86_64-pc-linux-musl"
 
 cat >> ~/.bashrc << EOF
 export HEIWA_HOST="${HEIWA_HOST}"
