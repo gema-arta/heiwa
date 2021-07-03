@@ -139,6 +139,26 @@ touch /var/log/{btmp,lastlog,faillog,wtmp}
 chgrp -v utmp /var/log/lastlog
 chmod -v 664  /var/log/lastlog
 chmod -v 600  /var/log/btmp
+
+# Apply some persistent environment variables.
+cat > ~/.bash_profile << "EOF"
+# Stage-1 Clang/LLVM environment.
+TRUPLE="x86_64-pc-linux-musl"
+CC="${TRUPLE}-clang"
+CXX="${TRUPLE}-clang++"
+AR="llvm-ar"
+AS="llvm-as"
+RANLIB="llvm-ranlib"
+LD="ld.lld"
+STRIP="llvm-strip"
+COMMON_FLAGS="-march=native -Oz -pipe"
+CFLAGS="${COMMON_FLAGS}"
+CXXFLAGS="${COMMON_FLAGS}"
+export TRUPLE CC CXX AR AS RANLIB LD STRIP COMMON_FLAGS CFLAGS CXXFLAGS
+# Make's multiple jobs based on CPU core/threads.
+alias make="make -j$(nproc) -l$(nproc)"
+EOF
+source ~/.bash_profile
 ```
 
 <br>
@@ -161,25 +181,6 @@ chmod -v 600  /var/log/btmp
 
 > **Required!** First, before musl libc.
 ```bash
-# Apply some persistent environment variables.
-cat > ~/.bash_profile << "EOF"
-# Stage-1 Clang/LLVM environment.
-TRUPLE="x86_64-pc-linux-musl"
-CC="${TRUPLE}-clang"
-CXX="${TRUPLE}-clang++"
-AR="llvm-ar"
-AS="llvm-as"
-RANLIB="llvm-ranlib"
-LD="ld.lld"
-STRIP="llvm-strip"
-COMMON_FLAGS="-march=native -Oz -pipe"
-CFLAGS="${COMMON_FLAGS}"
-CXXFLAGS="${COMMON_FLAGS}"
-export TRUPLE CC CXX AR AS RANLIB LD STRIP COMMON_FLAGS CFLAGS CXXFLAGS
-# Make's multiple jobs based on CPU core/threads.
-alias make="make -j$(nproc) -l$(nproc)"
-EOF
-source ~/.bash_profile
 
 # Apply patch to fix "swab.h" under musl libc.
 patch -Np1 -i \
