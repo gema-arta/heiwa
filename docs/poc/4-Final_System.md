@@ -380,10 +380,10 @@ rm -fv /usr/lib/libz.a
 > **Required!** Before Toybox.
 ```bash
 # Build.
-time { make CFLAGS="$CFLAGS Wall -fPIC" all; }
+time { make CFLAGS="$CFLAGS -Wall -fPIC" all-dynamic; }
 
 # Install.
-time { make PREFIX=/usr install; }
+time { make PREFIX=/usr install-dynamic; }
 ```
 
 ### `11` - NetBSD libedit
