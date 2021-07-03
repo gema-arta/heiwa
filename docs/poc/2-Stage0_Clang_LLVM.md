@@ -162,25 +162,16 @@ esac
 
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build && \
-AR=ar LDFLAGS="-Wl,-rpath,/clang0-tools/lib" \
-../configure \
-    --prefix=/clang0-tools        \
-    --build=${HEIWA_HOST}         \
-    --host=${HEIWA_HOST}          \
-    --target=${HEIWA_TARGET}      \
-    --disable-multilib            \
-    --with-sysroot=/clang0-tools  \
-    --disable-nls                 \
-    --enable-shared               \
-    --enable-languages=c,c++      \
-    --enable-threads=posix        \
-    --enable-clocale=generic      \
-    --enable-libstdcxx-time       \
-    --enable-fully-dynamic-string \
-    --disable-symvers             \
-    --disable-libsanitizer        \
-    --disable-lto-plugin          \
-    --disable-libssp
+AR=ar        LDFLAGS="-Wl,-rpath,/clang0-tools/lib" \
+../configure                 --prefix=/clang0-tools \
+    --build=${HEIWA_HOST}      --host=${HEIWA_HOST} \
+    --target=${HEIWA_TARGET}     --disable-multilib \
+    --with-sysroot=/clang0-tools       -disable-nls \
+    --enable-shared        --enable-languages=c,c++ \
+    --enable-threads=posix --enable-clocale=generic \
+    --enable-libstdcxx-time  --disable-libsanitizer \
+    --disable-symvers --enable-fully-dynamic-string \
+    --disable-lto-plugin  --disable-libssp
 
 # Build.
 time { make AS_FOR_TARGET=${HEIWA_TARGET}-as LD_FOR_TARGET=${HEIWA_TARGET}-ld; }
