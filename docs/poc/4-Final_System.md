@@ -497,7 +497,6 @@ time { make install; }
 # Configure source.
 ./configure \
     --prefix=/usr     \
-    --bindir=/bin     \
     --disable-static  \
     --sysconfdir=/etc \
     --docdir=/usr/share/doc/attr-2.5.1
