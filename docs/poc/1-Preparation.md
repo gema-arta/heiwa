@@ -3,7 +3,7 @@
 > **Announcement**  
 > 1. Currently only focus on **x86_64** architecture, build with native CPU optimization.  
 > 2. Use standard and the most stable **ext4** partition type.  
-> 3. Use pure Clang/LLVM toolchains.
+> 3. Use pure Clang/LLVM toolchain.
 
 > #### * Beginning of as root!
 ### `1` - Prepare a volume/partition
@@ -21,7 +21,7 @@ mount -vo noatime,discard /dev/sdaX "$HEIWA"
 
 ### `2` - Creating sources and toolchains directory
 ```bash
-# Create directories to build clang with GCC libraries and the final toolchains without GCC libraries.
+# Create directories to build clang with GCC libraries and the final toolchain without GCC libraries.
 # As root, link them to host's root directory.
 if [[ -n "$HEIWA" ]]; then
     mkdir -pv "${HEIWA}/"clang{0,1}-tools
@@ -100,4 +100,4 @@ source ~/.bashrc
 
 <h2></h2>
 
-Continue to [Stage-0 Clang/LLVM (ft. GNU) Cross-Compile Toolchains](./2-Stage0_Clang_LLVM.md).
+Continue to [Stage-0 Clang/LLVM (ft. GNU) Cross-Compile Toolchain](./2-Stage0_Clang_LLVM.md).
