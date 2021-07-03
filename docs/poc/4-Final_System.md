@@ -211,7 +211,7 @@ cp -rv usr/include /usr/.
 > **Required!** Second, after Linux API Headers.
 ```bash
 # Apply patches (from Void Linux and Alpine Linux).
-for P in {epoll_cp,isascii,mo_lookup,reallocarray,handle-aux-at_base}.patch; do
+for P in {epoll_cp,isascii,mo_lookup,handle-aux-at_base}.patch; do
     patch -Np1 -i ../../extra/musl/patches/${P}
 done; unset P
 
