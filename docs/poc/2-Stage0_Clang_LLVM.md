@@ -26,7 +26,7 @@
 > #### Xanmod-CacULE, `5.12.x` or newer
 > The Linux API Headers expose the kernel's API for use by musl libc.
 
-> **Required!** As mentioned in description above.
+> **Required!** As mentioned in the description above.
 ```bash
 # Make sure there are no stale files embedded in the package.
 time { make mrproper; }
@@ -68,7 +68,7 @@ time { make configure-host && make; }
 time { make install; }
 ```
 
-### `3` -  GCC <kbd>static</kbd>
+### `3` - GCC <kbd>static</kbd>
 > #### `10.3.1_git20210424` (from Alpine Linux)
 > The GCC package contains the GNU compiler collection, which includes the C and C++ compilers.
 
@@ -107,7 +107,7 @@ time { make install-gcc install-target-libgcc; }
 > #### `1.2.2` or newer
 > The musl package contains the main C library. This library provides the basic routines for allocating memory, searching directories, opening and closing files, reading and writing files, string handling, pattern matching, arithmetic, and so on.
 
-> **Required!**
+> **Required!** As mentioned in the description above.
 ```bash
 # Configure source.
 ./configure CROSS_COMPILE=${HEIWA_TARGET}- \
