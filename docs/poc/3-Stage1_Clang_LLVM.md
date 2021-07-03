@@ -16,7 +16,7 @@
 > #### `1.2.2` or newer
 > The musl package contains the main C library. This library provides the basic routines for allocating memory, searching directories, opening and closing files, reading and writing files, string handling, pattern matching, arithmetic, and so on.
 
-> **Required!**
+> **Required!** As mentioned in the description above.
 ```bash
 # Set default compiler to Stage-0 Clang/LLVM.
 CC="clang" CXX="clang++"
