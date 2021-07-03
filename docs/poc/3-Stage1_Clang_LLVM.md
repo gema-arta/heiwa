@@ -18,7 +18,8 @@
 
 > **Required!** As mentioned in the description above.
 ```bash
-# Set default compiler to Stage-0 Clang/LLVM.
+# Set default compiler to Stage-0 Clang/LLVM and enable optimization since Stage-0 Clang/LLVM was built.
+sed -i '/unset CFLAGS CXXFLAGS/d' ~/.bashrc
 CC="clang" CXX="clang++"; export CC CXX
 
 # Configure source.
@@ -363,7 +364,6 @@ export PATH="/clang1-tools/bin:/clang1-tools/usr/bin:/bin:/usr/bin"
 
 # Configure new Stage-1 Clang/LLVM environment.
 sed -i "s|PATH=.*|PATH=\"${PATH}\"|" ~/.bashrc
-sed -i '/unset CFLAGS CXXFLAGS/d' ~/.bashrc
 cat >> ~/.bashrc << "EOF"
 # Stage-1 Clang/LLVM environment.
 CC="${TARGET_TRUPLE}-clang"
