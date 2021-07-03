@@ -399,10 +399,11 @@ rm -fv /usr/lib/libz.a
 > **Required!** Before NetBSD libedit and Toybox.
 ```bash
 # Build.
-time { make CFLAGS="$CFLAGS -Wall -fPIC" all-dynamic; }
+time { make CFLAGS="$CFLAGS -Wall -fPIC"; }
 
-# Install.
+# Install and create symlinks to "libtinfo".
 time { make PREFIX=/usr install-dynamic; }
+ln -sv /usr/lib/
 ```
 
 ### `12` - NetBSD libedit
