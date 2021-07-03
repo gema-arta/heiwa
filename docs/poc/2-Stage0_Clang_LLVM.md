@@ -84,7 +84,7 @@ tar xf ../gmp-6.2.1.tar.xz  && mv -v gmp-6.2.1 gmp
 tar xf ../mpfr-4.1.0.tar.xz && mv -v mpfr-4.1.0 mpfr
 tar xzf ../mpc-1.2.1.tar.gz && mv -v mpc-1.2.1 mpc
 
-# Create a dedicated directory and configure source. Aestheticaly compile flags command layout style :v
+# Create a dedicated directory and configure source. Aesthetically compiler flags layout style :v
 mkdir -v build && cd build && \
    CFLAGS="-g0 -O0" CXXFLAGS="-g0 -O0" ../configure \
     --prefix=/clang0-tools    --build=${HEIWA_HOST} \
