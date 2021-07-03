@@ -396,7 +396,7 @@ rm -fv /usr/lib/libz.a
 # Build.
 time { make CFLAGS="$CFLAGS -Wall -fPIC"; }
 
-# Install and create symlinks to "libtinfo".
+# Install and create symlinks as `libtinfo`.
 time { make PREFIX=/usr install; }
 ln -sv libterminfo.a  /usr/lib/libtinfo.a
 ln -sv libterminfo.so /usr/lib/libtinfo.so
@@ -422,7 +422,7 @@ time { make; }
 # Install.
 time { make install; }
 
-# Create some symlinks and fake headers to replace "readline".
+# Create symlinks and fake headers to replace "readline".
 for L in history readline; do
     ln -sv libedit.a  /usr/lib/lib${L}.a
     ln -sv libedit.so /usr/lib/lib${L}.so
@@ -476,7 +476,7 @@ time { make PREFIX=/ install && unset CFFGPT; }
 
 > **Required!** Before OpenBSD M4.
 ```bash
-# Configure source. Flex expect gcc to build.
+# Configure source. Flex still expect gcc to configure.
 ln -sv "$CC" /clang1-tools/bin/gcc     && \
 ac_cv_func_malloc_0_nonnull=yes           \
 ac_cv_func_realloc_0_nonnull=yes          \
