@@ -637,9 +637,8 @@ rm -rf ../perl-cross-1.3.5
 # Build.
 time { make; }
 
-# Only install a few programs and libraries.
-install -vm755 -t /clang1-tools/bin/ perl cpan/podlators/scripts/pod2man
-install -vD lib/* /llvmtools/lib/perl5/5.32.1
+# Install.
+time { make install; }
 ```
 
 ### `22` - libffi
