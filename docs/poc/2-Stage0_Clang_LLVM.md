@@ -54,8 +54,7 @@ cp -rv usr/include /clang0-tools/${HEIWA_TARGET}/.
 > **Required!** to build GCC in current stage.
 ```bash
 # Create a dedicated directory and configure source.
-mkdir -v build && cd build && \
-../configure \
+mkdir -v build && cd build && ../configure            \
     --prefix=/clang0-tools --target=${HEIWA_TARGET}   \
     --with-sysroot=/clang0-tools/${HEIWA_TARGET}      \
     --disable-nls --disable-multilib --disable-werror \
