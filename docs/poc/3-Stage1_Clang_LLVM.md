@@ -627,11 +627,9 @@ time { make BINDIR=/clang1-tools/bin install; }
 > **Required!** To build required packages in the next stage (chroot environment). 
 ```bash
 # Copy `perl-cross` over the source.
-pushd ../ && \
-    tar xzf perl-cross-1.3.5.tar.gz       && \
-popd && \
-cp -rf ../perl-cross-1.3.5/*       ./     && \
-cp -rf ../perl-cross-1.3.5/utils/* utils/ && \
+pushd ../ && tar xzf perl-cross-1.3.5.tar.gz && popd && \
+cp -rf ../perl-cross-1.3.5/*       ./                && \
+cp -rf ../perl-cross-1.3.5/utils/* utils/            && \
 rm -rf ../perl-cross-1.3.5
 
 # Configure source.
