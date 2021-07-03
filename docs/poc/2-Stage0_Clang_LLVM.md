@@ -254,23 +254,7 @@ install -vm755 -t /clang0-tools/lib/ libexecinfo.a libexecinfo.so.1
 ln -sv libexecinfo.so.1 /clang0-tools/lib/libexecinfo.so
 ```
 
-### `8` - Toybox (File)
-> #### `0.8.5`
-> The Toybox's `file` command is for determining the type of a given file or files.
-
-> **Optional?** Maybe needed for troubleshooting.
-```bash
-# Copy Toybox's .config file.
-cp -v ../../extra/toybox/files/.config.file.nlns .config
-
-# Build.
-time { make CC="${HEIWA_TARGET}-gcc"; }
-
-# Install.
-time { make PREFIX=/clang0-tools install; }
-```
-
-### `9` -  Clang/LLVM
+### `8` -  Clang/LLVM
 > #### `12.0.0`
 > C language family frontend for LLVM.
 
@@ -403,7 +387,7 @@ popd
 > #### ^ NOTE!
 > Don't delete ${LLVM_SRC} directory after [the last step](#9----clangllvm).
 
-### `10` - Cleaning Up
+### `9` - Cleaning Up
 > **This section is optional!**
 
 > If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
