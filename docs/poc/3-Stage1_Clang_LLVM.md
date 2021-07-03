@@ -614,7 +614,35 @@ time { make; }
 time { make BINDIR=/clang1-tools/bin install; }
 ```
 
-### `21` - libffi
+### `21` - Perl (cross)
+> #### `5.32.1`
+> The Perl package contains the Practical Extraction and Report Language.
+
+> **Required!** To build required packages in the next stage (chroot environment). 
+```bash
+# Copy `perl-cross` over source.
+pushd ../ && \
+    tar xzf perl-cross-1.3.5.tar.gz       && \
+popd && \
+cp -rf ../perl-cross-1.3.5/*       ./     && \
+cp -rf ../perl-cross-1.3.5/utils/* utils/ && \
+rm -rf ../perl-cross-1.3.5
+
+# Configure source.
+./configure \
+    --prefix=/clang1-tools   \
+    --build="$TARGET_TRUPLE" \
+    --target="$TARGET_TRUPLE"
+
+# Build.
+time { make }
+
+# Only install a few programs and libraries.
+install -vm755 -t /clang1-tools/bin/ perl cpan/podlators/scripts/pod2man
+install -vD lib/* /llvmtools/lib/perl5/5.32.1
+```
+
+### `22` - libffi
 > #### `3.3` or newer
 > The libffi library provides a portable, high level programming interface to various calling conventions. This allows a programmer to call any function specified by a call interface description at run time.
 
@@ -640,7 +668,7 @@ time { make; }
 time { make install; }
 ```
 
-### `22` - Python3
+### `23` - Python3
 > #### `3.9.6` or newer
 > The Python 3 package contains the Python development environment. It is useful for object-oriented programming, writing scripts, prototyping large programs, or developing entire applications.
 
@@ -673,7 +701,7 @@ time { make; }
 time { make install; }
 ```
 
-### `23` - GNU Texinfo
+### `24` - GNU Texinfo
 > #### `6.7` or newer
 > The Texinfo package contains programs for reading, writing, and converting info pages.
 
@@ -692,7 +720,7 @@ time { make; }
 time { make install; }
 ```
 
-### `24` - Bzip2
+### `25` - Bzip2
 > #### `1.0.8` or newer
 > The Bzip2 package contains programs for compressing and decompressing files. Compressing text files with bzip2 yields a much better compression percentage than with the traditional gzip.
 
@@ -718,7 +746,7 @@ time { make PREFIX=/clang1-tools install; }
 rm -fv /clang1-tools/lib/libbz2.a
 ```
 
-### `25` - libuv
+### `26` - libuv
 > #### `1.41.0` or newer
 > The libuv package is a multi-platform support library with a focus on asynchronous I/O.
 
@@ -742,7 +770,7 @@ time { make; }
 time { make install && unset LDFLAGS; }
 ```
 
-### `26` - Cmake
+### `27` - Cmake
 > #### `3.20.5` or newer
 > The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
 
@@ -766,7 +794,7 @@ time { make; }
 time { make install; }
 ```
 
-### `27` - Cleaning Up and Changing Ownership
+### `28` - Cleaning Up and Changing Ownership
 > **This section is optional!**
 
 > If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
