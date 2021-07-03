@@ -96,7 +96,7 @@ cp -rv usr/include /clang1-tools/.
 
 > *No need to re-decompress package.*
 
-> **Required!**
+> **Required!** As mentioned in the description above.
 ```bash
 # Set default compiler to new symlink from Stage-0 Clang/LLVM.
 CC="${HEIWA_TARGET}-clang" CXX="${HEIWA_TARGET}-clang++"
@@ -133,7 +133,7 @@ time { make -C build install && rm -rf build && popd; }
 
 > *No need to re-decompress package.*
 
-> **Required!**
+> **Required!** As mentioned in the description above.
 ```bash
 # Configure source.
 pushd ${LLVM_SRC}/projects/libcxxabi/ && \
@@ -163,7 +163,7 @@ time {
 
 > *No need to re-decompress package.*
 
-> **Required!**
+> **Required!** As mentioned in the description above.
 ```bash
 # Deletes atomic detection for Linux, to build libcxx with "libatomic.so*" free (provided by GCC).
 sed -i '/check_library_exists(atomic __atomic_fetch_add_8 "" LIBCXX_HAS_ATOMIC_LIB)/d' \
