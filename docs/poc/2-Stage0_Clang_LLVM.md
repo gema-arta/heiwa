@@ -176,7 +176,10 @@ AR=ar        LDFLAGS="-Wl,-rpath,/clang0-tools/lib" \
     --disable-lto-plugin --disable-libssp
 
 # Build.
-time { make AS_FOR_TARGET=${HEIWA_TARGET}-as LD_FOR_TARGET=${HEIWA_TARGET}-ld; }
+time {
+    make AS_FOR_TARGET=${HEIWA_TARGET}-as \
+    LD_FOR_TARGET=${HEIWA_TARGET}-ld
+}
 
 # Install.
 time { make install; }
@@ -209,10 +212,10 @@ readelf -l a.out | grep Requesting
 > **Required!** To build Stage-0 Clang/LLVM and for most programs that depends on `-ltinfo` or `-lterminfo` linker's flags.
 ```bash
 # Build.
-time { make V=1 CC=${HEIWA_TARGET}-gcc CFLAGS="-Wall -fPIC" all-dynamic; }
+time { make CC=${HEIWA_TARGET}-gcc CFLAGS="-Wall -fPIC" all-dynamic; }
 
 # Install.
-time { make V=1 PREFIX=/ DESTDIR=/clang0-tools install-dynamic; }
+time { make PREFIX=/ DESTDIR=/clang0-tools install-dynamic; }
 ```
 
 ### `7` - libexecinfo
@@ -227,7 +230,10 @@ patch -Np1 -i ../../extra/libexecinfo/patches/20-define-gnu-source.patch
 patch -Np1 -i ../../extra/libexecinfo/patches/30-linux-makefile.patch
 
 # Build.
-time { make CC=${HEIWA_TARGET}-gcc AR=${HEIWA_TARGET}-ar CFLAGS="-fno-omit-frame-pointer"; }
+time {
+    make CC=${HEIWA_TARGET}-gcc AR=${HEIWA_TARGET}-ar \
+    CFLAGS="-fno-omit-frame-pointer"
+}
 
 # Install.
 install -vm755 -t /clang0-tools/include/ execinfo.h stacktraverse.h
