@@ -174,7 +174,7 @@ AR=ar LDFLAGS="-Wl,-rpath,/clang0-tools/lib" \
     --prefix=/clang0-tools        \
     --build=${HEIWA_HOST}         \
     --host=${HEIWA_HOST}          \
-    --target="$HEIWA_TARGET"      \
+    --target=${HEIWA_TARGET}      \
     --disable-multilib            \
     --with-sysroot=/clang0-tools  \
     --disable-nls                 \
