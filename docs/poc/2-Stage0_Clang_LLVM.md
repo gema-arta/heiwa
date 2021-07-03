@@ -12,7 +12,7 @@
 > heiwa@localh3art /media/Heiwa/sources/pkgs $ rm -rf target-package
 > ```
 
-> **Build Notes**
+> #### Build Notes
 > 1. Using GNU `bash` as current shell and symlink it to `sh`.
 > 2. Using GNU `gawk` as `awk` implementation (symlinked).
 > 3. Using GNU `bison` as `yacc` replacements (wrapped).
