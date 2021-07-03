@@ -354,9 +354,8 @@ done; unset B; ln -sv lld /clang1-tools/bin/ld
 # Configure Stage-1 Clang to build binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" instead of "/lib/ld-musl-x86_64.so.1".
 ln -sv clang-12 /clang1-tools/bin/x86_64-pc-linux-musl-clang
 ln -sv clang-12 /clang1-tools/bin/x86_64-pc-linux-musl-clang++
-cat > /clang1-tools/bin/x86_64-pc-linux-musl.cfg << "EOF"
--Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1
-EOF
+echo "-Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1" \
+> /clang1-tools/bin/x86_64-pc-linux-musl.cfg
 
 # Set the new PATH since "/clang0-tools" won't be used anymore and configure new Stage-1 Clang/LLVM environment.
 PATH="/clang1-tools/bin:/clang1-tools/usr/bin:/bin:/usr/bin"
