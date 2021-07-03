@@ -679,7 +679,6 @@ time { make install; }
 ```bash
 # Apply patches (from Void Linux).
 patch -Np1 -i ../../extra/python3/patches/musl-find_library.patch
-patch -Np1 -i ../../extra/python3/patches/tweak-MULTIARCH-for-powerpc-linux-musl.patch
 
 # Make sure to use installed `libffi`, not built-in.
 rm -rfv Modules/_ctypes/{darwin,libffi}*
