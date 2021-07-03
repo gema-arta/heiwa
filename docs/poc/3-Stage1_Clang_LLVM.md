@@ -311,12 +311,12 @@ cmake -B build \
     -DLLVM_INCLUDE_DOCS=OFF                                     \
     -DLLVM_INCLUDE_EXAMPLES=OFF                                 \
     -DLLVM_INCLUDE_BENCHMARKS=OFF                               \
-    -DCOMPILER_RT_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"  \
     -DCOMPILER_RT_BUILD_SANITIZERS=OFF                          \
     -DCOMPILER_RT_BUILD_XRAY=OFF                                \
     -DCOMPILER_RT_BUILD_PROFILE=OFF                             \
     -DCOMPILER_RT_BUILD_LIBFUZZER=OFF                           \
     -DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON                       \
+    -DCOMPILER_RT_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"  \
     -DCLANG_DEFAULT_CXX_STDLIB=libc++                           \
     -DCLANG_DEFAULT_UNWINDLIB=libunwind                         \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                           \
