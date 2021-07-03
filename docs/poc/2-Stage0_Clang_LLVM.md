@@ -190,9 +190,7 @@ AR=ar LDFLAGS="-Wl,-rpath,/clang0-tools/lib" \
     --disable-libssp
 
 # Build.
-time {
-    make AS_FOR_TARGET="${HEIWA_TARGET}-as" LD_FOR_TARGET="${HEIWA_TARGET}-ld"
-}
+time { make AS_FOR_TARGET="${HEIWA_TARGET}-as" LD_FOR_TARGET="${HEIWA_TARGET}-ld"; }
 
 # Install.
 time { make install; }
@@ -404,7 +402,7 @@ rm -rf /clang0-tools/share/{info,man,doc}/*
 # These warnings can be safely ignored. These warnings indicate that those files are scripts instead of binaries.
 find /clang0-tools/{,"${HEIWA_TARGET}/"}lib{,64}/ -maxdepth 1 -type f -exec "${HEIWA_TARGET}-strip" --strip-debug {} \;
 find /clang0-tools/{,"${HEIWA_TARGET}/"}bin/ -maxdepth 1 -type f -exec /usr/bin/strip --strip-unneeded {} \;
-find "/clang0-tools/libexec/gcc/${HEIWA_TARGET}/"*/ -type f -exec "${HEIWA_TARGET}-strip" --strip-unneeded {} \;
+find /clang0-tools/libexec/gcc/"$HEIWA_TARGET"/*/ -type f -exec "${HEIWA_TARGET}-strip" --strip-unneeded {} \;
 ```
 
 <h2></h2>
