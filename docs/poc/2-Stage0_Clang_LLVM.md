@@ -190,14 +190,14 @@ AR=ar LDFLAGS="-Wl,-rpath,/clang0-tools/lib" \
     --disable-libssp
 
 # Build.
-time { make AS_FOR_TARGET="${HEIWA_TARGET}-as" LD_FOR_TARGET="${HEIWA_TARGET}-ld"; }
+time { make AS_FOR_TARGET=${HEIWA_TARGET}-as LD_FOR_TARGET=${HEIWA_TARGET}-ld; }
 
 # Install.
 time { make install; }
 
 # Adjust GCC to produce programs and libraries that will use musl libc in "/clang0-tools/".
 export SPECFILE="$(dirname $(${HEIWA_TARGET}-gcc -print-libgcc-file-name))/specs"
-"${HEIWA_TARGET}-gcc" -dumpspecs > specs
+${HEIWA_TARGET}-gcc -dumpspecs > specs
 sed -i 's|/lib/ld-musl-x86_64.so.1|/clang0-tools/lib/ld-musl-x86_64.so.1|g' specs
 
 # Check specs file.
@@ -208,7 +208,7 @@ mv -v specs "$SPECFILE" && unset SPECFILE
 
 # Quick test.
 echo "int main(){}" > dummy.c
-"${HEIWA_TARGET}-gcc" dummy.c
+${HEIWA_TARGET}-gcc dummy.c
 readelf -l a.out | grep Requesting
 
 # | The output should be:
@@ -223,7 +223,7 @@ readelf -l a.out | grep Requesting
 > **Required!** To build Stage-0 Clang/LLVM and for most programs that depends on `-ltinfo` or `-lterminfo` linker's flags.
 ```bash
 # Build.
-time { make CC="${HEIWA_TARGET}-gcc" CFLAGS="-Wall -fPIC" all-dynamic; }
+time { make CC=${HEIWA_TARGET}-gcc CFLAGS="-Wall -fPIC" all-dynamic; }
 
 # Install.
 time { make PREFIX=/ DESTDIR=/clang0-tools install-dynamic; }
@@ -242,8 +242,8 @@ patch -Np1 -i ../../extra/libexecinfo/patches/30-linux-makefile.patch
 
 # Build.
 time {
-    make CC="${HEIWA_TARGET}-gcc" AR="${HEIWA_TARGET}-ar" \
-    CFLAGS="-fno-omit-frame-pointer"
+    make CC=${HEIWA_TARGET}-gcc AR=${HEIWA_TARGET}-ar \
+    CFLAGS="$COMMON_FLAGS -fno-omit-frame-pointer"
 }
 
 # Install.
@@ -265,13 +265,13 @@ popd
 mv -v llvm-12.0.0.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 
 # Decompress clang, lld, compiler-rt, libcxx, libcxxabi, and libunwind to correct directories.
-pushd "${LLVM_SRC}/projects/" && \
+pushd ${LLVM_SRC}/projects/ && \
     tar xf ../../pkgs/compiler-rt-12.0.0.src.tar.xz && mv -v compiler-rt-12.0.0.src compiler-rt
     tar xf ../../pkgs/libcxx-12.0.0.src.tar.xz      && mv -v libcxx-12.0.0.src libcxx
     tar xf ../../pkgs/libcxxabi-12.0.0.src.tar.xz   && mv -v libcxxabi-12.0.0.src libcxxabi
     tar xf ../../pkgs/libunwind-12.0.0.src.tar.xz   && mv -v libunwind-12.0.0.src libunwind
 popd
-pushd "${LLVM_SRC}/tools/" && \
+pushd ${LLVM_SRC}/tools/ && \
     tar xf ../../pkgs/clang-12.0.0.src.tar.xz && mv -v clang-12.0.0.src clang
     tar xf ../../pkgs/lld-12.0.0.src.tar.xz   && mv -v lld-12.0.0.src lld
 popd
@@ -346,15 +346,15 @@ time {
 ln -sv lld /clang0-tools/bin/ld
 
 # Configure Stage-0 Clang to build binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" instead of "/lib/ld-musl-x86_64.so.1".
-ln -sv clang-12 "/clang0-tools/bin/${HEIWA_TARGET}-clang"   && \
-ln -sv clang-12 "/clang0-tools/bin/${HEIWA_TARGET}-clang++" && \
-cat > "/clang0-tools/bin/${HEIWA_TARGET}.cfg" << "EOF"
+ln -sv clang-12 /clang0-tools/bin/${HEIWA_TARGET}-clang   && \
+ln -sv clang-12 /clang0-tools/bin/${HEIWA_TARGET}-clang++ && \
+cat > /clang0-tools/bin/${HEIWA_TARGET}.cfg << "EOF"
 -Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1
 EOF
 
 # Configure cross GCC of "/clang0-tools" to match the same output as Clang.
 export SPECFILE="$(dirname $(${HEIWA_TARGET}-gcc -print-libgcc-file-name))/specs"
-"${HEIWA_TARGET}-gcc" -dumpspecs > specs 
+${HEIWA_TARGET}-gcc -dumpspecs > specs 
 sed -i 's|/lib/ld-musl-x86_64.so.1|/clang1-tools\/lib\/ld-musl-x86_64.so.1|g' specs
 
 # Check specs file.
@@ -365,7 +365,7 @@ mv -v specs "$SPECFILE" && unset SPECFILE CFLAGS CXXFLAGS
 
 # Quick test.
 echo "int main(){}" > dummy.c
-"${HEIWA_TARGET}-gcc" dummy.c -v -Wl,--verbose &> dummy.log
+${HEIWA_TARGET}-gcc dummy.c -v -Wl,--verbose &> dummy.log
 readelf -l a.out | grep ": /clang1-tools"
 
 # | The output should be:
@@ -393,7 +393,7 @@ popd
 ```bash
 # The libtool .la files are only useful when linking with static libraries. Remove those files.
 # They are unneeded, and potentially harmful, when using dynamic shared libraries, specially when using non-autotools build systems.
-find /clang0-tools/{{,"${HEIWA_TARGET}/"}lib{,64},libexec}/ -name \*.la -exec rm -rfv {} \;
+find /clang0-tools/{{,${HEIWA_TARGET}/}lib{,64},libexec}/ -name \*.la -exec rm -rfv {} \;
 
 # Remove the documentation.
 rm -rf /clang0-tools/share/{info,man,doc}/*
@@ -401,9 +401,9 @@ rm -rf /clang0-tools/share/{info,man,doc}/*
 # Strip off debugging symbols from binaries using GNU `strip`.
 # A large number of files will be reported "file format not recognized".
 # These warnings can be safely ignored. These warnings indicate that those files are scripts instead of binaries.
-find /clang0-tools/{,"${HEIWA_TARGET}/"}lib{,64}/ -maxdepth 1 -type f -exec "${HEIWA_TARGET}-strip" --strip-debug {} \;
-find /clang0-tools/{,"${HEIWA_TARGET}/"}bin/ -maxdepth 1 -type f -exec /usr/bin/strip --strip-unneeded {} \;
-find /clang0-tools/libexec/gcc/"$HEIWA_TARGET"/*/ -type f -exec "${HEIWA_TARGET}-strip" --strip-unneeded {} \;
+find /clang0-tools/{,${HEIWA_TARGET}/}lib{,64}/ -maxdepth 1 -type f -exec ${HEIWA_TARGET}-strip --strip-debug {} \;
+find /clang0-tools/{,${HEIWA_TARGET}/}bin/ -maxdepth 1 -type f -exec /usr/bin/strip --strip-unneeded {} \;
+find /clang0-tools/libexec/gcc/$HEIWA_TARGET/*/ -type f -exec ${HEIWA_TARGET}-strip --strip-unneeded {} \;
 ```
 
 <h2></h2>
