@@ -449,25 +449,7 @@ time { make; }
 time { make PREFIX=/ install && unset CFFGPT; }
 ```
 
-### `13` - OpenBSD Yacc
-> #### `6.6` or newer
-> The OpenBSD Yacc package contains a parser generator.
-
-> **Required!** Before OpenBSD M4.
-```bash
-# Configure source.
-./configure \
-    --prefix=/usr --enable-yacc \
-    --mandir=/usr/share/man/man1
-
-# Build.
-time { make; }
-
-# Install.
-time { make BINDIR=/usr/bin install; }
-```
-
-### `14` - Flex
+### `13` - Flex
 > #### `2.6.4` or newer
 > The Flex package contains a utility for generating programs that recognize patterns in text.
 
@@ -490,7 +472,7 @@ time { make install; }
 ln -sv flex /usr/bin/lex
 ```
 
-### `15` - OpenBSD M4
+### `14` - OpenBSD M4
 > #### `6.7` or newer
 > The OpenBSD M4 package contains a macro processor.
 
@@ -506,7 +488,7 @@ time { make -j1; }
 time { make install; }
 ```
 
-### `16` - Attr
+### `15` - Attr
 > #### `2.5.1` or newer
 > The Attr package contains utilities to administer the extended attributes on filesystem objects.
 
@@ -527,7 +509,7 @@ time { make; }
 time { make install; }
 ```
 
-### `17` - ACL
+### `16` - ACL
 > #### `2.3.1` or newer
 > The ACL package contains utilities to administer Access Control Lists, which are used to define more fine-grained discretionary access rights for files and directories.
 
@@ -547,7 +529,7 @@ time { make; }
 time { make install; }
 ```
 
-### `18` - Red Hat libcap-ng
+### `17` - Red Hat libcap-ng
 > #### `0.8.2` or newer
 > The Red Hat libcap-ng package implements the user-space interfaces to the POSIX 1003.1e capabilities available in Linux kernels. These capabilities are a partitioning of the all powerful root privilege into a set of distinct privileges. The library is intended to make programming with POSIX capabilities much easier than the traditional libcap library. It includes utilities that can analyse all currently running applications and print out any capabilities and whether or not it has an open ended bounding set.
 
@@ -573,7 +555,7 @@ time { make; }
 time { make install; }
 ```
 
-### `19` - Shadow
+### `18` - Shadow
 > #### `4.8.1` or newer
 > The Shadow package contains programs for handling passwords in a secure way.
 
@@ -623,52 +605,7 @@ sed -i 's|yes|no|' /etc/default/useradd
 passwd root
 ```
 
-### `20` - libuv
-> #### `1.41.0` or newer
-> The libuv package is a multi-platform support library with a focus on asynchronous I/O.
-
-> **Required!** Before Cmake.
-```bash
-# Generate configure script.
-./autogen.sh
-
-# Configure source.
-./configure \
-    --prefix=/usr \
-    --disable-static
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
-```
-
-### `21` - Cmake
-> #### `3.20.5` or newer
-> The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
-
-> **Required!** Before Clang/LLVM.
-```bash
-# Disable applications using cmake from attempting to install files in "/usr/lib64".
-sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
-
-# Configure source.
-./bootstrap \
-    --prefix=/usr          \
-    --system-zlib          \
-    --mandir=/share/man    \
-    --parallel=$(nproc)    \
-    --docdir=/share/doc/cmake-3.20.5
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
-```
-
-### `22` - LLVM libunwind
+### `19` - LLVM libunwind
 > #### `12.0.0`
 > C++ runtime stack unwinder from LLVM.
 
