@@ -240,7 +240,8 @@ cat > /etc/ld-musl-x86_64.path << "EOF"
 /usr/local/lib
 EOF
 
-# Install fully-featured musl ldconfig. (https://code.foxkit.us/smaeul/packages/-/commit/c631e4fc5ab64a9ad668ed5f753348ce8eae5219?view=parallel)
+# Install fully-featured musl ldconfig.
+# https://code.foxkit.us/smaeul/packages/-/commit/c631e4fc5ab64a9ad668ed5f753348ce8eae5219?view=parallel
 install -vm755 -t /sbin/ ../../extra/musl/files/ldconfig
 
 # Install `musl-legacy-compat` (from Void Linux).
