@@ -517,7 +517,6 @@ time { make install; }
 # Configure source.
 ./configure \
     --prefix=/usr         \
-    --bindir=/bin         \
     --disable-static      \
     --docdir=/usr/share/doc/acl-2.3.1
 
