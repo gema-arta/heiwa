@@ -43,8 +43,8 @@ find usr/include -name '.*' -exec rm -rfv {} \;
 rm -fv usr/include/Makefile
 
 # Install.
-mkdir -pv "/clang0-tools/${HEIWA_TARGET}" && \
-cp -rv usr/include "/clang0-tools/${HEIWA_TARGET}/."
+mkdir -pv /clang0-tools/${HEIWA_TARGET} && \
+cp -rv usr/include /clang0-tools/${HEIWA_TARGET}/.
 ```
 
 ### `2` - GNU Binutils
@@ -57,8 +57,8 @@ cp -rv usr/include "/clang0-tools/${HEIWA_TARGET}/."
 mkdir -v build && cd build && \
 ../configure \
     --prefix=/clang0-tools                         \
-    --target="$HEIWA_TARGET"                       \
-    --with-sysroot="/clang0-tools/${HEIWA_TARGET}" \
+    --target=${HEIWA_TARGET}                       \
+    --with-sysroot=/clang0-tools/${HEIWA_TARGET}   \
     --disable-nls                                  \
     --disable-multilib                             \
     --disable-werror                               \
@@ -84,9 +84,9 @@ tar xf ../gmp-6.2.1.tar.xz  && mv -v gmp-6.2.1 gmp
 tar xf ../mpfr-4.1.0.tar.xz && mv -v mpfr-4.1.0 mpfr
 tar xzf ../mpc-1.2.1.tar.gz && mv -v mpc-1.2.1 mpc
 
-# Create a dedicated directory and configure source.
+# Create a dedicated directory and configure source. Aestheticaly compile flags command layout style :v
 mkdir -v build && cd build && \
-CFLAGS="-g0 -O0" CXXFLAGS="-g0 -O0" ../configure    \
+   CFLAGS="-g0 -O0" CXXFLAGS="-g0 -O0" ../configure \
     --prefix=/clang0-tools    --build="$HEIWA_HOST" \
     --host="$HEIWA_HOST"   --target="$HEIWA_TARGET" \
     --with-sysroot="/clang0-tools/${HEIWA_TARGET}"  \
