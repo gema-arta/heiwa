@@ -403,7 +403,12 @@ time { make CFLAGS="$CFLAGS -Wall -fPIC"; }
 
 # Install and create symlinks to "libtinfo".
 time { make PREFIX=/usr install; }
-ln -sv /usr/lib/
+ln -sv libterminfo.a  /usr/lib/libtinfo.a
+ln -sv libterminfo.so /usr/lib/libtinfo.so
+
+# Remove man colission with `attr`.
+rm -fv /usr/share/man/man3/attr_get.3
+rm -fv /usr/share/man/man3/attr_set.3
 ```
 
 ### `12` - NetBSD libedit
