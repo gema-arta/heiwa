@@ -428,11 +428,12 @@ time { make; }
 time { make install; }
 
 # Create some symlinks and fake headers to replace "readline".
-ln -sv libedit.so /usr/lib/libreadline.so
+for L in history readline; do
+    ln -sv libedit.a  /usr/lib/lib${L}.a
+    ln -sv libedit.so /usr/lib/lib${L}.so
+done; unset L
 ln -sv libedit.pc /usr/lib/pkgconfig/readline.pc
 mkdir -v /usr/include/readline
-touch /usr/include/readline/history.h
-touch /usr/include/readline/tilde.h
 ln -sv ../editline/readline.h /usr/include/readline/readline.h
 ```
 
