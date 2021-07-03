@@ -330,7 +330,8 @@ southamerica etcetera backward factory"
 
 # Build.
 time {
-    make CFLAGS="$CFLAGS -DHAVE_STDINT_H=1" TZDIR="/usr/share/zoneinfo" && \
+    make CFLAGS="$CFLAGS -DHAVE_STDINT_H=1" \
+    TZDIR="/usr/share/zoneinfo" && \
     make -C posixtz-0.5 posixtz
 }
 
