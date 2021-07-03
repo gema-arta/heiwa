@@ -1,4 +1,4 @@
-## `II` Stage-0 Clang/LLVM (ft. GNU) Cross-Compile Toolchains
+## `II` Stage-0 Clang/LLVM (ft. GNU) Cross-Compile Toolchain
 
 > **Compilation Instruction!**
 > ```bash
@@ -256,7 +256,7 @@ ln -sv libexecinfo.so.1 /clang0-tools/lib/libexecinfo.so
 > #### `12.0.0`
 > C language family frontend for LLVM.
 
-> **Required!** Build Stage-0 Clang/LLVM toolchains, this will be used for bootstrapping Stage-1 Clang/LLVM toolchains without depends on `libgcc_s.so*` and `libstdc++.so*` later.
+> **Required!** Build Stage-0 Clang/LLVM toolchain, this will be used for bootstrapping Stage-1 Clang/LLVM toolchain without depends on `libgcc_s.so*` and `libstdc++.so*` later.
 ```bash
 # Exit from "${HEIWA}/sources/pkg/llvm-12.0.0.src" directory if already in.
 popd
@@ -408,4 +408,4 @@ find /clang0-tools/libexec/gcc/"$HEIWA_TARGET"/*/ -type f -exec "${HEIWA_TARGET}
 
 <h2></h2>
 
-Continue to [Stage-1 Clang/LLVM Toolchains](./3-Stage1_Clang_LLVM.md).
+Continue to [Stage-1 Clang/LLVM Toolchain](./3-Stage1_Clang_LLVM.md).
