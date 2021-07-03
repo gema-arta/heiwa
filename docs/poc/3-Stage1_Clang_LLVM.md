@@ -80,7 +80,7 @@ time {
 
 # @owl4ce don't know,
 # why when HOSTCC is default in "LLVM=1" and/or using `clang` is failed to compile "scripts/basic/fixdep.c",
-# but successful using `TARGET_TRIPLET-COMPILER`.
+# but successful using `${TARGET_TRIPLET}-compiler`.
 
 # Remove unnecessary files.
 find usr/include -name '.*' -exec rm -rfv {} \;
