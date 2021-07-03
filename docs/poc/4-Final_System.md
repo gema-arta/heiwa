@@ -402,7 +402,7 @@ rm -fv /usr/lib/libz.a
 time { make CFLAGS="$CFLAGS -Wall -fPIC"; }
 
 # Install and create symlinks to "libtinfo".
-time { make PREFIX=/usr install-dynamic; }
+time { make PREFIX=/usr install; }
 ln -sv /usr/lib/
 ```
 
