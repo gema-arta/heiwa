@@ -533,7 +533,7 @@ time { make install; }
 
 > **Required!** Before Shadow.
 ```bash
-# Apply patches to remove error codes.
+# Apply patch to remove error codes.
 patch -Np1 -i ../../extra/libcap-ng/patches/apply-disable.patch
 
 # Configure source.
