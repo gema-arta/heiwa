@@ -338,7 +338,7 @@ patch -Np1 -i ../../extra/tzdata/patches/0002-fix-implicit-declaration-warnings-
 export timezones="africa antarctica asia australasia europe northamerica
 southamerica etcetera backward factory"
 
-# Build. Ignore "pkg-config: No such file or directory" when building `posixtz`.
+# Build. Ignore "pkg-config: No such file or directory" while building `posixtz`.
 time {
     make CC="$CC" CFLAGS="$CFLAGS -DHAVE_STDINT_H=1" \
     TZDIR="/usr/share/zoneinfo" && \
@@ -371,11 +371,15 @@ popd && rm -rf tzdata; unset timezones
 
 > **Required!** Before Toybox.
 ```bash
+# Apply patch (from OpenMandriva) to fix `Z_SOLO` while building perl.
+patch -Np1 -i ../../extra/zlib-ng/patches/0001-Fix-Z_SOLO-mode.patch
+
 # Configure source.
 cmake -B build \
      -DCMAKE_BUILD_TYPE=Release     \
      -DCMAKE_INSTALL_PREFIX="/usr"  \
      -DWITH_NATIVE_INSTRUCTIONS=YES \
+     -DWITH_SANITIZERS=ON           \
      -DZLIB_COMPAT=ON
 
 # Build.
