@@ -336,8 +336,7 @@ time {
 }
 
 # Install.
-install -vm755 -t /usr/bin/ tzselect posixtz-0.5/posixtz 
-install -vm755 -t /usr/sbin/ zic zdump
+install -vm755 -t /usr/bin/ tzselect posixtz-0.5/posixtz zic zdump
 install -vm644 -t /usr/share/man/man8/ zic.8 zdump.8
 
 # Install zoneinfo. Ignore all warnings.
