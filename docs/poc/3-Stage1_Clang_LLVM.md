@@ -615,7 +615,7 @@ time { make BINDIR=/clang1-tools/bin install; }
 ```
 
 ### `21` - Perl (cross)
-> #### `5.32.1`
+> #### `5.32.1` and `1.3.5` for cross
 > The Perl package contains the Practical Extraction and Report Language.
 
 > **Required!** To build required packages in the next stage (chroot environment). 
