@@ -372,16 +372,17 @@ popd && rm -rf tzdata; unset timezones
 > **Required!** Before Toybox.
 ```bash
 # Configure source.
-./configure \
-    --prefix=/usr \
-    --zlib-compat \
-    --native
+cmake -B build \
+     -DCMAKE_BUILD_TYPE=Release    \
+     -DCMAKE_INSTALL_PREFIX="/usr" \
+     -DWITH_NATIVE_INSTRUCTIONS    \
+     -DZLIB_COMPAT=ON
 
 # Build.
-time { make; }
+time { make -C build; }
 
 # Install.
-time { make install; }
+time { make -C build install; }
 
 # Remove useless static library.
 rm -fv /usr/lib/libz.a
