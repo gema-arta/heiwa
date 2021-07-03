@@ -373,9 +373,9 @@ popd && rm -rf tzdata; unset timezones
 ```bash
 # Configure source.
 cmake -B build \
-     -DCMAKE_BUILD_TYPE=Release    \
-     -DCMAKE_INSTALL_PREFIX="/usr" \
-     -DWITH_NATIVE_INSTRUCTIONS    \
+     -DCMAKE_BUILD_TYPE=Release     \
+     -DCMAKE_INSTALL_PREFIX="/usr"  \
+     -DWITH_NATIVE_INSTRUCTIONS=YES \
      -DZLIB_COMPAT=ON
 
 # Build.
