@@ -57,7 +57,7 @@ su - heiwa
 
 cat > ~/.bash_profile << "EOF"
 export COMMON_FLAGS="-march=native -Oz -pipe"
-exec env -i HOME="$HOME" TERM="$TERM" PS1='\u:\w\n\$ ' \
+exec env -i HOME="$HOME" TERM="$TERM" PS1='\u: \w\n\$ ' \
 COMMON_FLAGS="${COMMON_FLAGS}" CFLAGS="${COMMON_FLAGS}" \
 CXXFLAGS="${COMMON_FLAGS}" /bin/bash
 EOF
