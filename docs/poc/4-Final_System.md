@@ -453,7 +453,7 @@ time { make PREFIX=/ install && unset CFFGPT; }
 > #### `2.6.4` or newer
 > The Flex package contains a utility for generating programs that recognize patterns in text.
 
-> **Required!** After OpenBSD Yacc; before OpenBSD M4.
+> **Required!** Before OpenBSD M4.
 ```bash
 # Configure source.
 HELP2MAN=/clang1-t/bin/true \
@@ -476,7 +476,7 @@ ln -sv flex /usr/bin/lex
 > #### `6.7` or newer
 > The OpenBSD M4 package contains a macro processor.
 
-> **Required!** After OpenBSD Yacc and Flex.
+> **Required!** After Flex.
 ```bash
 # Configure source.
 ./configure --prefix=/usr --enable-m4
