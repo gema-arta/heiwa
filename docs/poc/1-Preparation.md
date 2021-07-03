@@ -100,4 +100,4 @@ source ~/.bashrc
 
 <h2></h2>
 
-Continue to [Stage-0 Clang/LLVM (ft. GNU) Cross-Compile Toolchain](./2-Stage0_Clang_LLVM.md).
+Continue to [Stage-0 Clang/LLVM (ft. GNU) Cross Toolchain](./2-Stage0_Clang_LLVM.md).
