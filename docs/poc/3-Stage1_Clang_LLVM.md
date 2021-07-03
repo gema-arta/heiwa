@@ -648,7 +648,7 @@ time { make install; }
 > #### `3.3` or newer
 > The libffi library provides a portable, high level programming interface to various calling conventions. This allows a programmer to call any function specified by a call interface description at run time.
 
-> **Required!** By Python3 for the current and next stage (chroot environment).
+> **Required!** By Python for the current and next stage (chroot environment).
 ```bash
 # Apply patches (from Void Linux) to fix some issues.
 patch -Np1 -i ../../extra/libffi/patches/libffi-race-condition.patch
@@ -670,15 +670,15 @@ time { make; }
 time { make install; }
 ```
 
-### `23` - Python3
+### `23` - Python
 > #### `3.9.6` or newer
-> The Python 3 package contains the Python development environment. It is useful for object-oriented programming, writing scripts, prototyping large programs, or developing entire applications.
+> The Python package contains the Python development environment. It is useful for object-oriented programming, writing scripts, prototyping large programs, or developing entire applications.
 
 > **Required!** To build Clang/LLVM and other required packages in the next stage (chroot environment).
 ```bash
 # Apply patches (from Void Linux).
-patch -Np1 -i ../../extra/python3/patches/musl-find_library.patch
-patch -Np1 -i ../../extra/python3/patches/tweak-MULTIARCH-for-powerpc-linux-musl.patch
+patch -Np1 -i ../../extra/python/patches/musl-find_library.patch
+patch -Np1 -i ../../extra/python/patches/tweak-MULTIARCH-for-powerpc-linux-musl.patch
 
 # Make sure to use installed `libffi`, not built-in.
 rm -rfv Modules/_ctypes/{darwin,libffi}*
@@ -692,8 +692,7 @@ ax_cv_c_float_words_bigendian=no \
     --prefix=/clang1-tools   \
     --build=${TARGET_TRUPLE} \
     --host=${TARGET_TRUPLE}  \
-    --enable-shared          \
-    --without-ensurepip 
+    --enable-shared --without-ensurepip
 
 # Build.
 time { make; }
