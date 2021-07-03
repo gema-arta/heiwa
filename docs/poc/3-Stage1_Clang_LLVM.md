@@ -98,8 +98,7 @@ cp -rv usr/include /clang1-tools/.
 > **Required!** As mentioned in the description above.
 ```bash
 # Set default compiler to new symlink from Stage-0 Clang/LLVM.
-CC="${HEIWA_TARGET}-clang" CXX="${HEIWA_TARGET}-clang++"
-export CC CXX
+CC="${HEIWA_TARGET}-clang" CXX="${HEIWA_TARGET}-clang++"; export CC CXX
 
 # Configure source.
 pushd ${LLVM_SRC}/projects/libunwind/ && \
@@ -134,6 +133,9 @@ time { make -C build install && rm -rf build && popd; }
 
 > **Required!** As mentioned in the description above.
 ```bash
+# Set default compiler to new symlink from Stage-0 Clang/LLVM.
+CC="${HEIWA_TARGET}-clang" CXX="${HEIWA_TARGET}-clang++"; export CC CXX
+
 # Configure source.
 pushd ${LLVM_SRC}/projects/libcxxabi/ && \
     cmake -B build \
@@ -164,6 +166,9 @@ time {
 
 > **Required!** As mentioned in the description above.
 ```bash
+# Set default compiler to new symlink from Stage-0 Clang/LLVM.
+CC="${HEIWA_TARGET}-clang" CXX="${HEIWA_TARGET}-clang++"; export CC CXX
+
 # Deletes atomic detection for Linux, to build libcxx with "libatomic.so*" free (provided by GCC).
 sed -i '/check_library_exists(atomic __atomic_fetch_add_8 "" LIBCXX_HAS_ATOMIC_LIB)/d' \
 ${LLVM_SRC}/projects/libcxx/cmake/config-ix.cmake
