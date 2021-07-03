@@ -303,6 +303,7 @@ cmake -B build \
     -DLLVM_INCLUDE_DOCS=OFF                                                                 \
     -DLLVM_INCLUDE_EXAMPLES=OFF                                                             \
     -DLLVM_INCLUDE_BENCHMARKS=OFF                                                           \
+    -DLLVM_ENABLE_LIBCXX=ON                                                                 \
     -DCOMPILER_RT_BUILD_SANITIZERS=OFF                                                      \
     -DCOMPILER_RT_BUILD_XRAY=OFF                                                            \
     -DCOMPILER_RT_BUILD_PROFILE=OFF                                                         \
@@ -312,7 +313,6 @@ cmake -B build \
     -DCLANG_DEFAULT_UNWINDLIB=libunwind                                                     \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                                                       \
     -DLIBCXX_HAS_MUSL_LIBC=ON                                                               \
-    -DLLVM_ENABLE_LIBCXX=ON                                                                 \
     -DICONV_LIBRARY_PATH="/clang0-tools/lib/libc.so"                                        \
     -DDEFAULT_SYSROOT="/clang0-tools"                                                       \
     -DCLANG_DEFAULT_LINKER="/clang0-tools/bin/ld.lld"                                       \
