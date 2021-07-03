@@ -436,7 +436,7 @@ ln -sv ../editline/readline.h /usr/include/readline/readline.h
 > #### `2.6.4` or newer
 > The Flex package contains a utility for generating programs that recognize patterns in text.
 
-> **Required!** Before OpenBSD M4.
+> **Required!** Before `OpenBSD M4`, `IProute2`, `Kbd`, `Kmod`.
 ```bash
 # Configure source. Flex still expect gcc to configure.
 ln -sv "$CC" /clang1-tools/bin/gcc     && \
