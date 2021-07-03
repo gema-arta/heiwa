@@ -73,7 +73,7 @@ time { make configure-host && make; }
 time { make install; }
 ```
 
-### `3` -  GCC (static)
+### `3` -  GCC <kbd>static</kbd>
 > #### `10.3.1_git20210424` (from Alpine Linux)
 > The GCC package contains the GNU compiler collection, which includes the C and C++ compilers.
 
@@ -146,7 +146,7 @@ cat > /clang0-tools/etc/ld-musl-x86_64.path << "EOF"
 EOF
 ```
 
-### `5` - GCC (final)
+### `5` - GCC <kbd>final</kbd>
 > #### `10.3.1_git20210424` (from Alpine Linux)
 > The GCC package contains the GNU compiler collection, which includes the C and C++ compilers.
 
