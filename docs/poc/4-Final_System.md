@@ -209,9 +209,10 @@ cp -rv usr/include /usr/.
 
 > **Required!** Second, after Linux API Headers.
 ```bash
-# Apply patch (from Void Linux).
-# To prevent crash with a NULL pointer dereference when dcngettext() is called with NULL msgid[12] arguments.
-patch -Np1 -i ../../extra/musl/patches/mo_lookup.patch
+# Apply patches (from Void Linux and Alpine Linux).
+for P in {epoll_cp,isascii,mo_lookup,reallocarray,handle-aux-at_base}.patch; do
+    patch -Np1 -i ../../extra/musl/patches/${P}
+done; unset P
 
 # Configure source.
 LDFLAGS="-Wl,-soname,libc.musl-x86_64.so.1" \
@@ -240,7 +241,7 @@ EOF
 # Install fully-featured musl ldconfig. (https://code.foxkit.us/smaeul/packages/-/commit/c631e4fc5ab64a9ad668ed5f753348ce8eae5219?view=parallel)
 install -vm755 -t /sbin/ ../../extra/musl/files/ldconfig
 
-# Install musl-legacy-compat (from Void Linux).
+# Install `musl-legacy-compat` (from Void Linux).
 for B in {cdefs,queue,tree}.h; do
     install -vm644 -t /usr/include/sys/ \
     ../../extra/musl/files/musl-legacy-compat/${B}
