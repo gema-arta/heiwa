@@ -330,9 +330,9 @@ southamerica etcetera backward factory"
 
 # Build.
 time {
-    make CFLAGS="$CFLAGS -DHAVE_STDINT_H=1" \
+    make CC="$CC" CFLAGS="$CFLAGS -DHAVE_STDINT_H=1" \
     TZDIR="/usr/share/zoneinfo" && \
-    make -C posixtz-0.5 posixtz
+    make -C posixtz-0.5 CC="$CC" posixtz
 }
 
 # Install timezone data.
