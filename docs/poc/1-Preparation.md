@@ -25,8 +25,8 @@ mount -vo noatime,discard /dev/sdaX "$HEIWA"
 # As root, link them to host's root directory.
 if [[ -n "$HEIWA" ]]; then
     mkdir -pv ${HEIWA}/clang{0,1}-tools
-    ln -sv ${HEIWA}/clang0-tools" /
-    ln -sv ${HEIWA}/clang1-tools" /
+    ln -sv ${HEIWA}/clang0-tools /
+    ln -sv ${HEIWA}/clang1-tools /
     mkdir -pv ${HEIWA}/sources/{extra,pkgs}
 fi
 ```
