@@ -471,7 +471,7 @@ time { make PREFIX=/clang1-tools install && unset CFFGPT; }
 > #### `3.7` or newer
 > The GNU Diffutils package contains programs that show the differences between files or directories.
 
-> **Required!** For most build systems that depends on GNU implementation style.
+> **Required!** For the current and next stage (chroot environment) that most build systems depends on GNU implementation style.
 ```bash
 # Configure source.
 ./configure \
@@ -490,7 +490,7 @@ time { make install; }
 > #### `5.1.0` or newer
 > The GNU AWK (gawk) package contains programs for manipulating text files.
 
-> **Required!** For most build systems that depends on GNU implementation style.
+> **Required!** For the current and next stage (chroot environment) that most build systems depends on GNU implementation style.
 ```bash
 # Ensure some unneeded files are not installed.
 sed -i 's|extras||' Makefile.in
@@ -703,7 +703,7 @@ time { make install; }
 > #### `6.7` or newer
 > The Texinfo package contains programs for reading, writing, and converting info pages.
 
-> **Required!** For the next stage (chroot environment).
+> **Required!** For the next stage (chroot environment). Nothing is GNU-free.
 ```bash
 # Configure source.
 ./configure \
