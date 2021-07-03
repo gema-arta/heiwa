@@ -706,7 +706,7 @@ time { make install; }
 > #### `6.7` or newer
 > The Texinfo package contains programs for reading, writing, and converting info pages.
 
-> **Required!** For the next stage (chroot environment). Nothing is GNU-free.
+> **Required!** For the most packages next stage (chroot environment). Nothing is GNU-free.
 ```bash
 # Configure source.
 ./configure \
