@@ -192,7 +192,7 @@ time { make -C build; }
 time { make -C build install && rm -rf build && popd; }
 ```
 > #### ^ NOTE!
-> Now, you can safely remove ${LLVM_SRC} directory after [above step](#5---llvms-libcxx).
+> Now, you can safely remove ${LLVM_SRC} directory after the [above step](#5---llvms-libcxx).
 
 ### `6` - NetBSD Curses
 > #### `0.3.2` or newer
