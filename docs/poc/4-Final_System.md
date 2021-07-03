@@ -179,7 +179,7 @@ source ~/.bash_profile
 > #### Xanmod-CacULE, `5.12.x` or newer
 > The Linux API Headers expose the kernel's API for use by musl libc.
 
-> **Required!** First, before musl libc.
+> **Required!** As mentioned in the description above.
 ```bash
 
 # Apply patch to fix "swab.h" under musl libc.
@@ -208,7 +208,7 @@ cp -rv usr/include /usr/.
 > #### `20210611` or newer
 > The Iana-Etc package provides data for network services and protocols.
 
-> **Required!**
+> **Required!** Before `Perl`.
 ```bash
 # Only need to copy these files into correct place.
 cp -fv services protocols /etc/
@@ -218,7 +218,7 @@ cp -fv services protocols /etc/
 > #### `1.2.2` or newer
 > The musl package contains the main C library. This library provides the basic routines for allocating memory, searching directories, opening and closing files, reading and writing files, string handling, pattern matching, arithmetic, and so on.
 
-> **Required!** Second, after Linux API Headers.
+> **Required!** As mentioned in the description above.
 ```bash
 # Apply patches (from Void Linux and Alpine Linux).
 for P in {epoll_cp,isascii,mo_lookup,handle-aux-at_base}.patch; do
@@ -364,7 +364,7 @@ popd && rm -rf tzdata; unset timezones
 > #### `2.0.5` or newer
 > The Zlib-ng package contains zlib data compression library for the next generation systems.
 
-> **Required!** Basic libraries.
+> **Required!** Before `Kmod`, `Perl`, and `Util-linux`.
 ```bash
 # Apply patch (from OpenMandriva) to fix `Z_SOLO` while building perl.
 patch -Np1 -i ../../extra/zlib-ng/patches/0001-Fix-Z_SOLO-mode.patch
@@ -391,7 +391,7 @@ rm -fv /usr/lib/libz.a
 > #### `0.3.2` or newer
 > The NetBSD Curses package contains libraries for terminal-independent handling of character screens.
 
-> **Required!** Basic libraries.
+> **Required!** Before `GNU Bash`, `NetBSD libedit`, `GNU Texinfo`, `Util-linux`.
 ```bash
 # Build.
 time { make CFLAGS="$CFLAGS -Wall -fPIC"; }
@@ -410,7 +410,7 @@ rm -fv /usr/share/man/man3/attr_set.3
 > #### `20210522-3.1` or newer
 > The NetBSD libedit pacakage contains library providing line editing, history, and tokenisation functions.
 
-> **Required!** Basic libraries.
+> **Required!** Before `GNU Bash`, `GNU AWK`.
 ```bash
 # Configure source.
 CFLAGS="$CFLAGS -D__STDC_ISO_10646__" \
