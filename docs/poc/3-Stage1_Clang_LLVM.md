@@ -616,8 +616,9 @@ install -vm755 -t /clang1-tools/bin/ msgfmt msgmerge xgettext
 # Build.
 time { make; }
 
-# Install.
+# Install and create symlink as `byacc`.
 time { make BINDIR=/clang1-tools/bin install; }
+ln -sv yacc /clang1-tools/bin/byacc
 ```
 
 ### `21` - Perl (cross)
