@@ -356,7 +356,14 @@ popd && rm -rf tzdata; unset timezones
 ```
 
 ### `9` - Iana-Etc
->
+> #### `20210611` or newer
+> The Iana-Etc package provides data for network services and protocols.
+
+> **Required!**
+```bash
+# Only need to copy these files into correct place.
+cp -fv services protocols /etc/
+```
 
 ### `10` - Zlib-ng
 > #### `2.0.5` or newer
