@@ -61,8 +61,7 @@ mkdir -v build && cd build && ../configure           \
     --enable-deterministic-archives --disable-werror \
     --disable-compressed-debug-sections
 
-# Checks the host's environment and makes sure all the necessary tools are available to compile Binutils.
-# Then build.
+# Checks the host's environment and makes sure all the necessary tools are available to compile Binutils. Then build.
 time { make configure-host && make; }
 
 # Install.
