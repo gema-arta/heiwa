@@ -364,7 +364,7 @@ popd && rm -rf tzdata; unset timezones
 > #### `2.0.5` or newer
 > The Zlib-ng package contains zlib data compression library for the next generation systems.
 
-> **Required!** Before Toybox.
+> **Required!** Basic libraries.
 ```bash
 # Apply patch (from OpenMandriva) to fix `Z_SOLO` while building perl.
 patch -Np1 -i ../../extra/zlib-ng/patches/0001-Fix-Z_SOLO-mode.patch
@@ -391,7 +391,7 @@ rm -fv /usr/lib/libz.a
 > #### `0.3.2` or newer
 > The NetBSD Curses package contains libraries for terminal-independent handling of character screens.
 
-> **Required!** Before NetBSD libedit and Toybox.
+> **Required!** Basic libraries.
 ```bash
 # Build.
 time { make CFLAGS="$CFLAGS -Wall -fPIC"; }
@@ -410,7 +410,7 @@ rm -fv /usr/share/man/man3/attr_set.3
 > #### `20210522-3.1` or newer
 > The NetBSD libedit pacakage contains library providing line editing, history, and tokenisation functions.
 
-> **Required!** After NetBSD Curses; before Toybox.
+> **Required!** Basic libraries.
 ```bash
 # Configure source.
 CFLAGS="$CFLAGS -D__STDC_ISO_10646__" \
@@ -432,45 +432,7 @@ mkdir -v /usr/include/readline
 ln -sv ../editline/readline.h /usr/include/readline/readline.h
 ```
 
-### `13` - Toybox (Bc, File, Grep, Inetutils, Psmisc, Sed)
-> #### `0.8.5`
-> The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
-
-> **Required!** After Zlib-ng, NetBSD Curses, and NetBSD libedit.
-```bash
-# Copy Toybox's .config file.
-cp -v ../../extra/toybox/files/.config.bc_file_grep_inetutils_psmisc_sed.nlns .config
-
-# Make sure to enable zlib.
-grep -i "libz" .config
-
-export CFFGPT="bc file egrep grep fgrep dnsdomainname ifconfig hostname ping telnet tftp
-traceroute killall sed"
-
-# Checks 14 commands, and make sure is enabled (=y).
-# Pipe to " | wc -l" at the right of "done" to checks total of commands.
-for X in ${CFFGPT}; do
-    grep -v '#' .config | grep -i "_${X}=" || echo "* $X not CONFIGURED"
-done
-
-# Build.
-time { make; }
-
-# Checks compiled 14 commands.
-./toybox | tr ' ' '\n'i | grep -xE $(echo $CFFGPT | tr ' ' '|'i) | wc -l
-
-# Checks commands that not configured but compiled.
-# `ping6` and `traceroute6` (inetutils)
-./toybox | tr ' ' '\n'i | grep -vxE $(echo $CFFGPT | tr ' ' '|'i)
-
-# So, totally is 16 commands.
-./toybox | wc -w
-
-# Install.
-time { make PREFIX=/ install && unset CFFGPT; }
-```
-
-### `14` - Flex
+### `13` - Flex
 > #### `2.6.4` or newer
 > The Flex package contains a utility for generating programs that recognize patterns in text.
 
@@ -496,7 +458,7 @@ time { make install; }
 ln -sv flex /usr/bin/lex
 ```
 
-### `15` - OpenBSD M4
+### `14` - OpenBSD M4
 > #### `6.7` or newer
 > The OpenBSD M4 package contains a macro processor.
 
@@ -512,7 +474,7 @@ time { make -j1; }
 time { make install; }
 ```
 
-### `16` - Attr
+### `15` - Attr
 > #### `2.5.1` or newer
 > The Attr package contains utilities to administer the extended attributes on filesystem objects.
 
@@ -532,7 +494,7 @@ time { make; }
 time { make install; }
 ```
 
-### `17` - ACL
+### `16` - ACL
 > #### `2.3.1` or newer
 > The ACL package contains utilities to administer Access Control Lists, which are used to define more fine-grained discretionary access rights for files and directories.
 
@@ -551,7 +513,7 @@ time { make; }
 time { make install; }
 ```
 
-### `18` - libcap
+### `17` - libcap
 > #### `2.51` or newer
 > The libcap package implements the user-space interfaces to the POSIX 1003.1e capabilities available in Linux kernels. These capabilities are a partitioning of the all powerful root privilege into a set of distinct privileges.
 
@@ -567,7 +529,7 @@ time { make prefix=/usr lib=lib; }
 time { make prefix=/usr lib=lib install; }
 ```
 
-### `19` - Shadow
+### `18` - Shadow
 > #### `4.8.1` or newer
 > The Shadow package contains programs for handling passwords in a secure way.
 
@@ -617,7 +579,7 @@ sed -i 's|yes|no|' /etc/default/useradd
 passwd root
 ```
 
-### `20` - LLVM libunwind
+### `19` - LLVM libunwind
 > #### `12.0.0`
 > C++ runtime stack unwinder from LLVM.
 
@@ -626,6 +588,43 @@ passwd root
 ```
 
 <!--
+    ### `` - Toybox (Bc, File, Grep, Inetutils, Psmisc, Sed)
+    > #### `0.8.5`
+    > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
+    
+    > **Required!** After Zlib-ng, NetBSD Curses, and NetBSD libedit.
+    ```bash
+    # Copy Toybox's .config file.
+    cp -v ../../extra/toybox/files/.config.bc_file_grep_inetutils_psmisc_sed.nlns .config
+    
+    # Make sure to enable zlib.
+    grep -i "libz" .config
+    
+    export CFFGPT="bc file egrep grep fgrep dnsdomainname ifconfig hostname ping telnet tftp
+    traceroute killall sed"
+    
+    # Checks 14 commands, and make sure is enabled (=y).
+    # Pipe to " | wc -l" at the right of "done" to checks total of commands.
+    for X in ${CFFGPT}; do
+        grep -v '#' .config | grep -i "_${X}=" || echo "* $X not CONFIGURED"
+    done
+    
+    # Build.
+    time { make; }
+    
+    # Checks compiled 14 commands.
+    ./toybox | tr ' ' '\n'i | grep -xE $(echo $CFFGPT | tr ' ' '|'i) | wc -l
+    
+    # Checks commands that not configured but compiled.
+    # `ping6` and `traceroute6` (inetutils)
+    ./toybox | tr ' ' '\n'i | grep -vxE $(echo $CFFGPT | tr ' ' '|'i)
+    
+    # So, totally is 16 commands.
+    ./toybox | wc -w
+    
+    # Install.
+    time { make PREFIX=/ install && unset CFFGPT; }
+    ```
     ### `` - Red Hat libcap-ng
     > #### `0.8.2` or newer
     > The Red Hat libcap-ng package implements the user-space interfaces to the POSIX 1003.1e capabilities available in Linux kernels. These capabilities are a partitioning of the all powerful root privilege into a set of distinct privileges. The library is intended to make programming with POSIX capabilities much easier than the traditional libcap library. It includes utilities that can analyse all currently running applications and print out any capabilities and whether or not it has an open ended bounding set.
