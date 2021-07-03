@@ -164,7 +164,7 @@ esac
 # Create a dedicated directory and configure source.
 # Aesthetically compiler flags layout style ..
 mkdir -v build && cd build && \
-AR=ar        LDFLAGS="-Wl,-rpath,/clang0-tools/lib" \
+AR="ar"      LDFLAGS="-Wl,-rpath,/clang0-tools/lib" \
 ../configure                 --prefix=/clang0-tools \
     --build=${HEIWA_HOST}      --host=${HEIWA_HOST} \
     --target=${HEIWA_TARGET}     --disable-multilib \
