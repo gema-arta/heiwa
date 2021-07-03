@@ -386,7 +386,32 @@ time { make CFLAGS="$CFLAGS Wall -fPIC" all; }
 time { make PREFIX=/usr install; }
 ```
 
-### `11` - Toybox (Bc, File, Grep, Inetutils, Psmisc, Sed)
+### `11` - NetBSD libedit
+> #### `20210522-3.1` or newer
+> The NetBSD libedit pacakage contains library providing line editing, history, and tokenisation functions.
+
+> **Required!** After NetBSD Curses.
+```bash
+# Configure source.
+CFLAGS="$CFLAGS -D__STDC_ISO_10646__" \
+./configure --prefix=/usr --disable-static
+
+# Build.
+time { make V=1; }
+
+# Install.
+time { make install; }
+
+# Create some symlinks and fake headers to replace "readline".
+ln -sv libedit.so /usr/lib/libreadline.so
+ln -sv libedit.pc /usr/lib/pkgconfig/readline.pc
+mkdir -v /usr/include/readline
+touch /usr/include/readline/history.h
+touch /usr/include/readline/tilde.h
+ln -sv ../editline/readline.h /usr/include/readline/readline.h
+```
+
+### `12` - Toybox (Bc, File, Grep, Inetutils, Psmisc, Sed)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
@@ -422,31 +447,6 @@ time { make; }
 
 # Install.
 time { make PREFIX=/ install && unset CFFGPT; }
-```
-
-### `12` - NetBSD libedit
-> #### `20210522-3.1` or newer
-> The NetBSD libedit pacakage contains library providing line editing, history, and tokenisation functions.
-
-> **Required!** After NetBSD Curses.
-```bash
-# Configure source.
-CFLAGS="$CFLAGS -D__STDC_ISO_10646__" \
-./configure --prefix=/usr --disable-static
-
-# Build.
-time { make V=1; }
-
-# Install.
-time { make install; }
-
-# Create some symlinks and fake headers to replace "readline".
-ln -sv libedit.so /usr/lib/libreadline.so
-ln -sv libedit.pc /usr/lib/pkgconfig/readline.pc
-mkdir -v /usr/include/readline
-touch /usr/include/readline/history.h
-touch /usr/include/readline/tilde.h
-ln -sv ../editline/readline.h /usr/include/readline/readline.h
 ```
 
 ### `13` - OpenBSD Yacc
