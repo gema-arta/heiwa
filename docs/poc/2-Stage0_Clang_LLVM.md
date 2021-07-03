@@ -109,8 +109,7 @@ time { make install-gcc install-target-libgcc; }
 > **Required!**
 ```bash
 # Configure source.
-./configure \
-    CROSS_COMPILE=${HEIWA_TARGET}- \
+./configure CROSS_COMPILE=${HEIWA_TARGET}- \
     --prefix=/ --target=${HEIWA_TARGET}
 
 # Build.
