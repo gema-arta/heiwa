@@ -204,7 +204,17 @@ rm -fv usr/include/Makefile
 cp -rv usr/include /usr/.
 ```
 
-### `6` - musl
+### `6` - Iana-Etc
+> #### `20210611` or newer
+> The Iana-Etc package provides data for network services and protocols.
+
+> **Required!**
+```bash
+# Only need to copy these files into correct place.
+cp -fv services protocols /etc/
+```
+
+### `7` - musl
 > #### `1.2.2` or newer
 > The musl package contains the main C library. This library provides the basic routines for allocating memory, searching directories, opening and closing files, reading and writing files, string handling, pattern matching, arithmetic, and so on.
 
@@ -252,7 +262,7 @@ done; unset B; install -vm644 -t /usr/include/ \
 ../../extra/musl/files/musl-legacy-compat/error.h
 ```
 
-### `7` - Adjusting Toolchains
+### `8` - Adjusting Toolchains
 > **Required!**
 ```bash
 # Re-configure Stage-1 Clang/LLVM to use "/usr".
@@ -307,7 +317,7 @@ grep -o -- -L/lib dummy.log
 rm -fv dummy.c a.out dummy.log
 ```
 
-### `8` - TimeZone Database
+### `9` - TimeZone Database
 > #### `2021a` and `0.5` for posixtz
 > The TZDb package contains code and data that represent the history of local time for many representative locations around the globe. It is updated periodically to reflect changes made by political bodies to time zone boundaries, UTC offsets, and daylight-saving rules.
 
@@ -353,16 +363,6 @@ cp -v /usr/share/zoneinfo/<xxx> /etc/localtime
 
 # Back to "/sources/pkgs" directory.
 popd && rm -rf tzdata; unset timezones
-```
-
-### `9` - Iana-Etc
-> #### `20210611` or newer
-> The Iana-Etc package provides data for network services and protocols.
-
-> **Required!**
-```bash
-# Only need to copy these files into correct place.
-cp -fv services protocols /etc/
 ```
 
 ### `10` - Zlib-ng
