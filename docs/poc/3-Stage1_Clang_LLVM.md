@@ -649,7 +649,7 @@ time { make install; }
 > #### `3.3` or newer
 > The libffi library provides a portable, high level programming interface to various calling conventions. This allows a programmer to call any function specified by a call interface description at run time.
 
-> **Required!** By Python3 for the current and next stage (chroot environment).
+> **Required!** By Python3 in the current stage.
 ```bash
 # Apply patches (from Void Linux) to fix some issues.
 patch -Np1 -i ../../extra/libffi/patches/libffi-race-condition.patch
