@@ -328,7 +328,7 @@ patch -Np1 -i ../../extra/tzdata/patches/0002-fix-implicit-declaration-warnings-
 export timezones="africa antarctica asia australasia europe northamerica
 southamerica etcetera backward factory"
 
-# Build.
+# Build. Ignore "pkg-config" 
 time {
     make CC="$CC" CFLAGS="$CFLAGS -DHAVE_STDINT_H=1" \
     TZDIR="/usr/share/zoneinfo" && \
