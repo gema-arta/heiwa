@@ -79,8 +79,7 @@ ln -sv /clang1-tools/bin/perl                           /usr/bin
 ln -sv /clang1-tools/usr/bin/{env,install,dd}           /usr/bin
 ln -sv /clang1-tools/lib/libc++.so{,.1}                 /usr/lib
 ln -sv /clang1-tools/lib/libc++abi.so{,.1}              /usr/lib
-ln -sv /clang1-tools/lib/libunwind.so{,.1}              /usr/lib
-ln -sv /clang1-tools/lib/libunwind.a                    /usr/lib
+ln -sv /clang1-tools/lib/libunwind.{a,so{,.1}}          /usr/lib
 ln -sv bash                                             /bin/sh
 
 # Historically, Linux maintains a list of the mounted file systems in the file "/etc/mtab".
