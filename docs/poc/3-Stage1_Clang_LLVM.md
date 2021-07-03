@@ -692,7 +692,8 @@ ax_cv_c_float_words_bigendian=no \
     --prefix=/clang1-tools   \
     --build=${TARGET_TRUPLE} \
     --host=${TARGET_TRUPLE}  \
-    --enable-shared --without-ensurepip
+    --enable-shared          \
+    --without-ensurepip
 
 # Build.
 time { make; }
