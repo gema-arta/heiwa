@@ -677,7 +677,7 @@ time { make install; }
 
 > **Required!** To build Clang/LLVM and other required packages in the next stage (chroot environment).
 ```bash
-# Apply patches (from Void Linux).
+# Apply patch (from Void Linux) to allow compile under musl libc.
 patch -Np1 -i ../../extra/python3/patches/musl-find_library.patch
 
 # Make sure to use installed `libffi`, not built-in.
