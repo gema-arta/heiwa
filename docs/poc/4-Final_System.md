@@ -527,30 +527,20 @@ time { make; }
 time { make install; }
 ```
 
-### `17` - Red Hat libcap-ng
-> #### `0.8.2` or newer
-> The Red Hat libcap-ng package implements the user-space interfaces to the POSIX 1003.1e capabilities available in Linux kernels. These capabilities are a partitioning of the all powerful root privilege into a set of distinct privileges. The library is intended to make programming with POSIX capabilities much easier than the traditional libcap library. It includes utilities that can analyse all currently running applications and print out any capabilities and whether or not it has an open ended bounding set.
+### `17` - libcap
+> #### `2.51` or newer
+> The libcap package implements the user-space interfaces to the POSIX 1003.1e capabilities available in Linux kernels. These capabilities are a partitioning of the all powerful root privilege into a set of distinct privileges.
 
 > **Required!** Before Shadow.
 ```bash
-# Apply patch to remove error codes.
-patch -Np1 -i ../../extra/libcap-ng/patches/apply-disable.patch
-
-# Configure source.
-./configure \
-    --prefix=/usr             \
-    --sysconfdir=/etc         \
-    --mandir=/usr/share/man   \
-    --infodir=/usr/share/info \
-    --without-python          \
-    --without-python3         \
-    --disable-static
+# Prevent static libraries from being installed.
+sed -i '/install -m.*STA/d' libcap/Makefile
 
 # Build.
-time { make; }
+time { make prefix=/usr lib=lib; }
 
 # Install.
-time { make install; }
+time { make prefix=/usr lib=lib install; }
 ```
 
 ### `18` - Shadow
@@ -612,6 +602,32 @@ passwd root
 ```
 
 <!--
+    ### `` - Red Hat libcap-ng
+    > #### `0.8.2` or newer
+    > The Red Hat libcap-ng package implements the user-space interfaces to the POSIX 1003.1e capabilities available in Linux kernels. These capabilities are a partitioning of the all powerful root privilege into a set of distinct privileges. The library is intended to make programming with POSIX capabilities much easier than the traditional libcap library. It includes utilities that can analyse all currently running applications and print out any capabilities and whether or not it has an open ended bounding set.
+    
+    > **Required!** Before Shadow.
+    ```bash
+    # Apply patch to remove error codes.
+    patch -Np1 -i ../../extra/libcap-ng/patches/apply-disable.patch
+    
+    # Configure source.
+    ./configure \
+        --prefix=/usr             \
+        --sysconfdir=/etc         \
+        --mandir=/usr/share/man   \
+        --infodir=/usr/share/info \
+        --without-python          \
+        --without-python3         \
+        --disable-static
+    
+    # Build.
+    time { make; }
+    
+    # Install.
+    time { make install; }
+    ```
+
     ### `` - Bzip2
     > #### `1.0.8` or newer
     > The Bzip2 package contains programs for compressing and decompressing files. Compressing text files with bzip2 yields a much better compression percentage than with the traditional gzip.
