@@ -336,13 +336,12 @@ time {
 }
 
 # Install.
-install -vm444 -t /usr/share/zoneinfo/ iso3166.tab zone1970.tab zone.tab
-install -vm755 -t /usr/bin/ tzselect
+install -vm755 -t /usr/bin/ tzselect posixtz-0.5/posixtz 
 install -vm755 -t /usr/sbin/ zic zdump
 install -vm644 -t /usr/share/man/man8/ zic.8 zdump.8
-install -vm755 -t /usr/bin/ posixtz-0.5/posixtz 
 
 # Install zoneinfo. Ignore all warnings.
+install -vm444 -t /usr/share/zoneinfo/ iso3166.tab zone1970.tab zone.tab
 zic -y ./yearistype -d /usr/share/zoneinfo ${timezones}
 zic -y ./yearistype -d /usr/share/zoneinfo/right -L leapseconds ${timezones}
 zic -y ./yearistype -d /usr/share/zoneinfo -p America/New_York
