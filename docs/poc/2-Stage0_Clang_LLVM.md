@@ -173,7 +173,7 @@ AR=ar        LDFLAGS="-Wl,-rpath,/clang0-tools/lib" \
     --enable-threads=posix --enable-clocale=generic \
     --enable-libstdcxx-time  --disable-libsanitizer \
     --disable-symvers --enable-fully-dynamic-string \
-    --disable-lto-plugin  --disable-libssp
+    --disable-lto-plugin --disable-libssp
 
 # Build.
 time { make AS_FOR_TARGET=${HEIWA_TARGET}-as LD_FOR_TARGET=${HEIWA_TARGET}-ld; }
