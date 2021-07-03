@@ -59,7 +59,7 @@ mkdir -v build && cd build && \
     --prefix=/clang0-tools --target=${HEIWA_TARGET} \
     --with-sysroot=/clang0-tools/${HEIWA_TARGET}    \
     --enable-deterministic-archives   --disable-nls \
-    --disable-multilib --disable-werror             \
+    --disable-multilib             --disable-werror \
     --disable-compressed-debug-sections
 
 # Checks the host's environment and makes sure all the necessary tools are available to compile Binutils. Then build.
