@@ -143,7 +143,7 @@ chmod -v 600  /var/log/btmp
 
 <br>
 
-> **Compilation Instruction!**
+> #### Compilation Instruction!
 > ```bash
 > (heiwa chroot) root: /sources/pkgs # tar xf target-package.tar.xz
 > (heiwa chroot) root: /sources/pkgs # tar xzf target-package.tar.gz
