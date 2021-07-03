@@ -239,7 +239,7 @@ ln -sv libexecinfo.so.1 /clang1-tools/lib/libexecinfo.so
 > #### `2.0.5` or newer
 > The Zlib-ng package contains zlib data compression library for the next generation systems.
 
-> **Required!** By Pigz and optionally enabled to build Stage-1 Clang/LLVM.
+> **Required!** By Pigz in the current stage and optionally enabled to build Stage-1 Clang/LLVM.
 ```bash
 # Configure source.
 ./configure --prefix=/clang1-tools --zlib-compat --native
