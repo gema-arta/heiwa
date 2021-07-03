@@ -375,7 +375,7 @@ grep "lib.*/crt[1in].*succeeded" dummy.log | cut -d ' ' -f 4-5
 # Back to "${HEIWA}/sources/pkg" directory.
 popd
 ```
-> #### ^ NOTE!
+> #### ^ Read Me Here!
 > Don't delete "$LLVM_SRC" directory after [the last step](#9----clangllvm).
 
 ### `9` - Cleaning Up
