@@ -290,6 +290,11 @@ cmake -B build \
     -DCMAKE_INSTALL_PREFIX="/clang0-tools"                                                  \
     -DCMAKE_C_COMPILER="${HEIWA_TARGET}-gcc"                                                \
     -DCMAKE_CXX_COMPILER="${HEIWA_TARGET}-g++"                                              \
+    -DLLVM_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"                                     \
+    -DLLVM_HOST_TRIPLE="x86_64-pc-linux-musl"                                               \
+    -DLLVM_TARGET_ARCH="X86"                                                                \
+    -DLLVM_TARGETS_TO_BUILD="X86"                                                           \
+    -DCOMPILER_RT_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"                              \
     -DLLVM_BUILD_TESTS=OFF                                                                  \
     -DLLVM_ENABLE_LIBEDIT=OFF                                                               \
     -DLLVM_ENABLE_LIBXML2=OFF                                                               \
@@ -298,11 +303,6 @@ cmake -B build \
     -DLLVM_INCLUDE_DOCS=OFF                                                                 \
     -DLLVM_INCLUDE_EXAMPLES=OFF                                                             \
     -DLLVM_INCLUDE_BENCHMARKS=OFF                                                           \
-    -DLLVM_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"                                     \
-    -DLLVM_HOST_TRIPLE="x86_64-pc-linux-musl"                                               \
-    -DLLVM_TARGET_ARCH="X86"                                                                \
-    -DLLVM_TARGETS_TO_BUILD="X86"                                                           \
-    -DCOMPILER_RT_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"                              \
     -DCOMPILER_RT_BUILD_SANITIZERS=OFF                                                      \
     -DCOMPILER_RT_BUILD_XRAY=OFF                                                            \
     -DCOMPILER_RT_BUILD_PROFILE=OFF                                                         \
