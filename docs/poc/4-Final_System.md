@@ -391,7 +391,7 @@ rm -fv /usr/lib/libz.a
 > #### `0.3.2` or newer
 > The NetBSD Curses package contains libraries for terminal-independent handling of character screens.
 
-> **Required!** Before `GNU Bash`, `NetBSD libedit`, `GNU Texinfo`, `Util-linux`.
+> **Required!** Before `GNU Bash`, `NetBSD libedit`, `GNU Texinfo`, and `Util-linux`.
 ```bash
 # Build.
 time { make CFLAGS="$CFLAGS -Wall -fPIC"; }
@@ -410,7 +410,7 @@ rm -fv /usr/share/man/man3/attr_set.3
 > #### `20210522-3.1` or newer
 > The NetBSD libedit pacakage contains library providing line editing, history, and tokenisation functions.
 
-> **Required!** Before `GNU Bash`, `GNU AWK`.
+> **Required!** Before `GNU Bash` and `GNU AWK`.
 ```bash
 # Configure source.
 CFLAGS="$CFLAGS -D__STDC_ISO_10646__" \
@@ -436,7 +436,7 @@ ln -sv ../editline/readline.h /usr/include/readline/readline.h
 > #### `2.6.4` or newer
 > The Flex package contains a utility for generating programs that recognize patterns in text.
 
-> **Required!** Before `OpenBSD M4`, `IProute2`, `Kbd`, `Kmod`.
+> **Required!** Before `OpenBSD M4`, `IProute2`, `Kbd`, and `Kmod`.
 ```bash
 # Configure source. Flex still expect gcc to configure.
 ln -sv "$CC" /clang1-tools/bin/gcc     && \
@@ -478,7 +478,7 @@ time { make install; }
 > #### `2.5.1` or newer
 > The Attr package contains utilities to administer the extended attributes on filesystem objects.
 
-> **Required!** Before ACL.
+> **Required!** Before `ACL` and `libcap`.
 ```bash
 # Configure source.
 ./configure \
@@ -498,7 +498,7 @@ time { make install; }
 > #### `2.3.1` or newer
 > The ACL package contains utilities to administer Access Control Lists, which are used to define more fine-grained discretionary access rights for files and directories.
 
-> **Required!** After Attr; before Shadow.
+> **Required!**
 ```bash
 # Configure source.
 ./configure \
@@ -517,7 +517,7 @@ time { make install; }
 > #### `2.51` or newer
 > The libcap package implements the user-space interfaces to the POSIX 1003.1e capabilities available in Linux kernels. These capabilities are a partitioning of the all powerful root privilege into a set of distinct privileges.
 
-> **Required!** Before Shadow.
+> **Required!** Before `IPRoute2` and `Shadow`.
 ```bash
 # Prevent static libraries from being installed.
 sed -i '/install -m.*STA/d' libcap/Makefile
