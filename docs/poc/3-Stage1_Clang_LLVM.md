@@ -238,8 +238,7 @@ ln -sv libexecinfo.so.1 /clang1-tools/lib/libexecinfo.so
 > **Required!** By Pigz and optionally enabled to build Stage-1 Clang/LLVM.
 ```bash
 # Configure source.
-./configure \
-    --prefix=/clang1-tools \
+./configure --prefix=/clang1-tools \
     --zlib-compat --native
 
 # Build.
