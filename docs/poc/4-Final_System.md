@@ -482,6 +482,8 @@ time { make PREFIX=/ install && unset CFFGPT; }
 > **Required!** Before OpenBSD M4.
 ```bash
 # Configure source.
+ac_cv_func_malloc_0_nonnull=yes \
+ac_cv_func_realloc_0_nonnull=yes \
 HELP2MAN=/clang1-t/bin/true \
 ./configure \
     --prefix=/usr --disable-static \
