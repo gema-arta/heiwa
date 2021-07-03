@@ -635,7 +635,7 @@ rm -rf ../perl-cross-1.3.5
     --target="$TARGET_TRUPLE"
 
 # Build.
-time { make }
+time { make; }
 
 # Only install a few programs and libraries.
 install -vm755 -t /clang1-tools/bin/ perl cpan/podlators/scripts/pod2man
