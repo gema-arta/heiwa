@@ -207,7 +207,7 @@ time { make CC="${HEIWA_TARGET}-clang" CFLAGS="$COMMON_FLAGS -Wall -fPIC" all-dy
 time { make PREFIX=/ DESTDIR=/clang1-tools install-dynamic; }
 ```
 
-### `7` - libexecinfo (standalone)
+### `7` - libexecinfo <kbd>standalone</kbd>
 > #### `1.1` or newer
 > The libexecinfo package contains backtrace facility that usually found in GNU libc (glibc).
 
