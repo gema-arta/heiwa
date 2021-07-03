@@ -1,4 +1,4 @@
-## `III` Stage-1 Clang/LLVM Toolchains
+## `III` Stage-1 Clang/LLVM Toolchain
 
 > **Compilation Instruction!**
 > ```bash
@@ -46,7 +46,7 @@ EOF
 
 # Quick test for Stage-0 Clang/LLVM.
 echo "int main(){}" > dummy.c
-"${HEIWA_TARGET}-clang" dummy.c -v -Wl,--verbose &> dummy.log
+${HEIWA_TARGET}-clang dummy.c -v -Wl,--verbose &> dummy.log
 readelf -l a.out | grep ": /clang1-tools"
 
 # | The output should be:
@@ -74,8 +74,8 @@ time { make mrproper; }
 # The recommended make target `headers_install` cannot be used, because it requires rsync, which may not be available.
 # The headers are first placed in "./usr/", then copied to the needed location.
 time {
-    make ARCH="$HEIWA_ARCH" LLVM=1 HOSTCC="${HEIWA_TARGET}-clang" headers_check && \
-    make ARCH="$HEIWA_ARCH" LLVM=1 HOSTCC="${HEIWA_TARGET}-clang" headers
+    make ARCH=${HEIWA_ARCH} LLVM=1 HOSTCC=${HEIWA_TARGET}-clang headers_check && \
+    make ARCH=${HEIWA_ARCH} LLVM=1 HOSTCC=${HEIWA_TARGET}-clang headers
 }
 
 # @owl4ce don't know,
@@ -103,7 +103,7 @@ CC="${HEIWA_TARGET}-clang" CXX="${HEIWA_TARGET}-clang++"
 export CC CXX
 
 # Configure source.
-pushd "${LLVM_SRC}/projects/libunwind/" && \
+pushd ${LLVM_SRC}/projects/libunwind/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools"           \
         -DLIBUNWIND_ENABLE_SHARED=ON                     \
@@ -136,7 +136,7 @@ time { make -C build install && rm -rf build && popd; }
 > **Required!**
 ```bash
 # Configure source.
-pushd "${LLVM_SRC}/projects/libcxxabi/" && \
+pushd ${LLVM_SRC}/projects/libcxxabi/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools"                            \
         -DLIBCXXABI_ENABLE_STATIC=ON                                      \
@@ -167,10 +167,10 @@ time {
 ```bash
 # Deletes atomic detection for Linux, to build libcxx with "libatomic.so*" free (provided by GCC).
 sed -i '/check_library_exists(atomic __atomic_fetch_add_8 "" LIBCXX_HAS_ATOMIC_LIB)/d' \
-"${LLVM_SRC}/projects/libcxx/cmake/config-ix.cmake"
+${LLVM_SRC}/projects/libcxx/cmake/config-ix.cmake
 
 # Configure source.
-pushd "${LLVM_SRC}/projects/libcxx/" && \
+pushd ${LLVM_SRC}/projects/libcxx/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools"                 \
         -DLIBCXX_ENABLE_SHARED=ON                              \
@@ -201,7 +201,7 @@ time { make -C build install && rm -rf build && popd; }
 > **Required!** To build Stage-1 Clang/LLVM and for most programs that depends on `-ltinfo` or `-lterminfo` linker's flags.
 ```bash
 # Build.
-time { make CC="${HEIWA_TARGET}-clang" CFLAGS="$COMMON_FLAGS -Wall -fPIC" all-dynamic; }
+time { make CC=${HEIWA_TARGET}-clang CFLAGS="$COMMON_FLAGS -Wall -fPIC" all-dynamic; }
 
 # Install.
 time { make PREFIX=/ DESTDIR=/clang1-tools install-dynamic; }
@@ -252,19 +252,19 @@ rm -fv /clang1-tools/lib/libz.a
 > #### `12.0.0`
 > C language family frontend for LLVM.
 
-> **Required!** As default toolchains. This will build Stage-1 Clang/LLVM toolchains with `libgcc_s.so*` and `libstdc++.so*` free.
+> **Required!** As default toolchain. This will build Stage-1 Clang/LLVM toolchain with `libgcc_s.so*` and `libstdc++.so*` free.
 ```bash
 # Exit from "${HEIWA}/sources/pkg/llvm-12.0.0.src" directory if already in.
 popd
 
-# Rename the LLVM source directory to ${LLVM_SRC}, then enters.
+# Rename the LLVM source directory to "$LLVM_SRC", then enters.
 mv -v llvm-12.0.0.src "$LLVM_SRC" && cd "$LLVM_SRC"
 
 # Decompress clang, lld, and compiler-rt to correct directories.
-pushd "${LLVM_SRC}/projects/" && \
+pushd ${LLVM_SRC}/projects" && \
     tar xf ../../pkgs/compiler-rt-12.0.0.src.tar.xz && mv -v compiler-rt-12.0.0.src compiler-rt
 popd
-pushd "${LLVM_SRC}/tools/" && \
+pushd ${LLVM_SRC}/tools/ && \
     tar xf ../../pkgs/clang-12.0.0.src.tar.xz && mv -v clang-12.0.0.src clang
     tar xf ../../pkgs/lld-12.0.0.src.tar.xz   && mv -v lld-12.0.0.src lld
 popd
@@ -283,27 +283,30 @@ CXX="${HEIWA_TARGET}-clang++" CXXFLAGS="-g -g1"
 export CC CXX CFLAGS CXXFLAGS
 
 # Update host/target triple detection.
-cp -v ../extra/llvm/files/config.guess cmake/
+cp -fv ../extra/llvm/files/config.guess cmake/.
 
 # Configure source.
 cmake -B build \
     -DCMAKE_BUILD_TYPE=Release                                  \
     -DCMAKE_INSTALL_PREFIX="/clang1-tools"                      \
+    -DLLVM_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"         \
+    -DLLVM_HOST_TRIPLE="x86_64-pc-linux-musl"                   \
+    -DLLVM_TARGET_ARCH="X86"                                    \
+    -DLLVM_TARGETS_TO_BUILD="X86"                               \
     -DLLVM_LINK_LLVM_DYLIB=ON                                   \
     -DLLVM_BUILD_LLVM_DYLIB=ON                                  \
     -DLLVM_BUILD_TESTS=OFF                                      \
     -DLLVM_ENABLE_LIBEDIT=OFF                                   \
     -DLLVM_ENABLE_LIBXML2=OFF                                   \
     -DLLVM_ENABLE_LIBCXX=ON                                     \
+    -DLLVM_ENABLE_LLD=ON                                        \
+    -DLLVM_ENABLE_RTTI=ON                                       \
+    -DLLVM_ENABLE_ZLIB=ON                                       \
     -DLLVM_INCLUDE_GO_TESTS=OFF                                 \
     -DLLVM_INCLUDE_TESTS=OFF                                    \
     -DLLVM_INCLUDE_DOCS=OFF                                     \
     -DLLVM_INCLUDE_EXAMPLES=OFF                                 \
     -DLLVM_INCLUDE_BENCHMARKS=OFF                               \
-    -DLLVM_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"         \
-    -DLLVM_HOST_TRIPLE="x86_64-pc-linux-musl"                   \
-    -DLLVM_TARGET_ARCH="X86"                                    \
-    -DLLVM_TARGETS_TO_BUILD="X86"                               \
     -DCOMPILER_RT_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"  \
     -DCOMPILER_RT_BUILD_SANITIZERS=OFF                          \
     -DCOMPILER_RT_BUILD_XRAY=OFF                                \
@@ -315,15 +318,12 @@ cmake -B build \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                           \
     -DCLANG_DEFAULT_LINKER="/clang1-tools/bin/ld.lld"           \
     -DDEFAULT_SYSROOT="/clang1-tools"                           \
-    -DLLVM_ENABLE_LLD=ON                                        \
-    -DLLVM_ENABLE_RTTI=ON                                       \
-    -DLLVM_ENABLE_ZLIB=ON                                       \
     -DBacktrace_INCLUDE_DIR="/clang1-tools/include"             \
     -DBacktrace_LIBRARY="/clang1-tools/lib/libexecinfo.so"      \
-    -DCMAKE_CXX_COMPILER_AR="/clang0-tools/bin/llvm-ar"         \
     -DCMAKE_C_COMPILER_AR="/clang0-tools/bin/llvm-ar"           \
-    -DCMAKE_CXX_COMPILER_RANLIB="/clang0-tools/bin/llvm-ranlib" \
+    -DCMAKE_CXX_COMPILER_AR="/clang0-tools/bin/llvm-ar"         \
     -DCMAKE_C_COMPILER_RANLIB="/clang0-tools/bin/llvm-ranlib"   \
+    -DCMAKE_CXX_COMPILER_RANLIB="/clang0-tools/bin/llvm-ranlib" \
     -DCMAKE_INSTALL_OLDINCLUDEDIR="/clang1-tools/include"       \
     -DCMAKE_LINKER="/clang0-tools/bin/ld.lld"                   \
     -DCMAKE_NM="/clang0-tools/bin/llvm-nm"                      \
@@ -345,11 +345,11 @@ time {
 # Since Binutils won't be used, create a symlink to LLVM tools and set lld as default toolchain's linker.
 for B in as ar ranlib readelf nm objcopy objdump size strip; do
     ln -sv llvm-${B} /clang1-tools/bin/${B}
-done; ln -sv lld /clang1-tools/bin/ld
+done; unset B; ln -sv lld /clang1-tools/bin/ld
 
 # Configure Stage-1 Clang to build binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" instead of "/lib/ld-musl-x86_64.so.1".
-ln -sv clang-12 /clang1-tools/bin/x86_64-pc-linux-musl-clang   && \
-ln -sv clang-12 /clang1-tools/bin/x86_64-pc-linux-musl-clang++ && \
+ln -sv clang-12 /clang1-tools/bin/x86_64-pc-linux-musl-clang
+ln -sv clang-12 /clang1-tools/bin/x86_64-pc-linux-musl-clang++
 cat > /clang1-tools/bin/x86_64-pc-linux-musl.cfg << "EOF"
 -Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1
 EOF
@@ -374,7 +374,7 @@ EOF
 source ~/.bash_profile
 
 # Back to "${HEIWA}/sources/pkg" directory.
-cd "${HEIWA}/sources/pkgs/"
+cd ${HEIWA}/sources/pkgs/
 ```
 
 ### `10` - OpenBSD M4
@@ -418,8 +418,8 @@ EOF
 # Configure source.
 ./configure \
     --prefix=/clang1-tools   \
-    --build="$TARGET_TRUPLE" \
-    --host="$TARGET_TRUPLE"  \
+    --build=${TARGET_TRUPLE} \
+    --host=${TARGET_TRUPLE}  \
     --without-bash-malloc    \
     --cache-file=config.cache
 
@@ -478,8 +478,8 @@ time { make PREFIX=/clang1-tools install && unset CFFGPT; }
 # Configure source.
 ./configure \
     --prefix=/clang1-tools   \
-    --build="$TARGET_TRUPLE" \
-    --host="$TARGET_TRUPLE"
+    --build=${TARGET_TRUPLE} \
+    --host=${TARGET_TRUPLE}
 
 # Build.
 time { make; }
@@ -500,8 +500,8 @@ sed -i 's|extras||' Makefile.in
 # Configure source.
 ./configure \
     --prefix=/clang1-tools   \
-    --build="$TARGET_TRUPLE" \
-    --host="$TARGET_TRUPLE"
+    --build=${TARGET_TRUPLE} \
+    --host=${TARGET_TRUPLE}
 
 # Build.
 time { make; }
@@ -535,8 +535,8 @@ ln -sv unpigz /clang1-tools/bin/gunzip
 # Configure source.
 ./configure \
     --prefix=/clang1-tools   \
-    --build="$TARGET_TRUPLE" \
-    --host="$TARGET_TRUPLE"  \
+    --build=${TARGET_TRUPLE} \
+    --host=${TARGET_TRUPLE}  \
     --without-guile
 
 # Build.
@@ -548,15 +548,15 @@ time { make install; }
 
 ### `17` - GNU Patch
 > #### `2.7.6` or newer
-> The GNU Patch package contains a program for modifying or creating files by applying a "patch" file typically created by the diff program.
+> The GNU Patch package contains a program for modifying or creating files by applying a patch file typically created by the diff program.
 
-> **Required!** For the current and next stage (chroot environment). The GNU implementation of "patch" is can handle offset lines, which is powerful feature.
+> **Required!** For the current and next stage (chroot environment). The GNU implementation of `patch` is can handle offset lines, which is powerful feature.
 ```bash
 # Configure source.
 ./configure \
     --prefix=/clang1-tools   \
-    --build="$TARGET_TRUPLE" \
-    --host="$TARGET_TRUPLE"
+    --build=${TARGET_TRUPLE} \
+    --host=${TARGET_TRUPLE}
 
 # Build.
 time { make; }
@@ -574,8 +574,8 @@ time { make install; }
 # Configure source.
 ./configure \
     --prefix=/clang1-tools   \
-    --build="$TARGET_TRUPLE" \
-    --host="$TARGET_TRUPLE"  \
+    --build=${TARGET_TRUPLE} \
+    --host=${TARGET_TRUPLE}  \
     --disable-static
 
 # Build.
@@ -633,8 +633,8 @@ rm -rf ../perl-cross-1.3.5
 # Configure source.
 ./configure \
     --prefix=/clang1-tools   \
-    --build="$TARGET_TRUPLE" \
-    --target="$TARGET_TRUPLE"
+    --build=${TARGET_TRUPLE} \
+    --target=${TARGET_TRUPLE}
 
 # Build.
 time { make; }
@@ -656,8 +656,8 @@ patch -Np1 -i ../../extra/libffi/patches/no-toolexeclibdir.patch
 # Configure source.
 ./configure \
     --prefix=/clang1-tools       \
-    --build="$TARGET_TRUPLE"     \
-    --host="$TARGET_TRUPLE"      \
+    --build=${TARGET_TRUPLE}     \
+    --host=${TARGET_TRUPLE}      \
     --disable-static --with-pic  \
     --disable-multi-os-directory \
     --with-gcc-arch=native
@@ -689,8 +689,8 @@ sed -i '/def add_multiarch_paths/a \        return' setup.py
 ax_cv_c_float_words_bigendian=no \
 ./configure \
     --prefix=/clang1-tools   \
-    --build="$TARGET_TRUPLE" \
-    --host="$TARGET_TRUPLE"  \
+    --build=${TARGET_TRUPLE} \
+    --host=${TARGET_TRUPLE}  \
     --enable-shared          \
     --without-ensurepip 
 
@@ -710,8 +710,8 @@ time { make install; }
 # Configure source.
 ./configure \
     --prefix=/clang1-tools   \
-    --build="$TARGET_TRUPLE" \
-    --host="$TARGET_TRUPLE"
+    --build=${TARGET_TRUPLE} \
+    --host=${TARGET_TRUPLE}
 
 # Build.
 time { make; }
@@ -755,9 +755,9 @@ NOCONFIGURE=1 ./autogen.sh
 
 # Configure source.
 ./configure \
-    --build="$TARGET_TRUPLE" \
-    --host="$TARGET_TRUPLE"  \
     --prefix=/clang1-tools   \
+    --build=${TARGET_TRUPLE} \
+    --host=${TARGET_TRUPLE}  \
     --disable-static
 
 # Build.
@@ -814,8 +814,8 @@ exit
 
 # Change the ownership of the "${HEIWA}/clang1-tools" directory to root by running the following command.
 # Warning! This is danger, so check its variables before `chown`.
-# echo "${HEIWA}/clang1-tools"
-[[ -n "$HEIWA" ]] && chown -R root:root "${HEIWA}/clang1-tools"
+# echo ${HEIWA}/clang1-tools
+[[ -n "$HEIWA" ]] && chown -R root:root ${HEIWA}/clang1-tools
 ```
 > #### * End of as privileged user!
 
