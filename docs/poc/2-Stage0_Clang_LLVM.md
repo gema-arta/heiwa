@@ -1,6 +1,6 @@
 ## `II` Stage-0 Clang/LLVM (ft. GNU) Cross-Toolchain
 
-> **Compilation Instruction!**
+> #### Compilation Instruction!
 > ```bash
 > heiwa@localh3art /media/Heiwa/sources/pkgs $ tar xf target-package.tar.xz
 > heiwa@localh3art /media/Heiwa/sources/pkgs $ tar xzf target-package.tar.gz
@@ -294,7 +294,6 @@ cmake -B build \
     -DLLVM_HOST_TRIPLE="x86_64-pc-linux-musl"                                               \
     -DLLVM_TARGET_ARCH="X86"                                                                \
     -DLLVM_TARGETS_TO_BUILD="X86"                                                           \
-    -DCOMPILER_RT_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"                              \
     -DLLVM_BUILD_TESTS=OFF                                                                  \
     -DLLVM_ENABLE_LIBEDIT=OFF                                                               \
     -DLLVM_ENABLE_LIBXML2=OFF                                                               \
@@ -309,6 +308,7 @@ cmake -B build \
     -DCOMPILER_RT_BUILD_PROFILE=OFF                                                         \
     -DCOMPILER_RT_BUILD_LIBFUZZER=OFF                                                       \
     -DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON                                                   \
+    -DCOMPILER_RT_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"                              \
     -DCLANG_DEFAULT_CXX_STDLIB=libc++                                                       \
     -DCLANG_DEFAULT_UNWINDLIB=libunwind                                                     \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                                                       \
