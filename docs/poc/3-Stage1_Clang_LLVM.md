@@ -748,7 +748,7 @@ rm -fv /clang1-tools/lib/libbz2.a
 > #### `1.41.0` or newer
 > The libuv package is a multi-platform support library with a focus on asynchronous I/O.
 
-> **Required!** By Cmake.
+> **Required!** By Cmake in the current stage.
 ```bash
 # Generate configure script.
 export LDFLAGS="-pthread"
