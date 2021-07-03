@@ -95,7 +95,7 @@ EOF
 source ~/.bashrc
 ```
 
-> **Additional Instruction**  
+> #### After Preparation
 > Copy [`syscore/*`](./../../syscore/) to `${HEIWA}/sources/extra/.` now!
 
 <h2></h2>
