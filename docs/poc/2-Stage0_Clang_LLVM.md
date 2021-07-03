@@ -311,10 +311,10 @@ cmake -B build \
     -DCLANG_DEFAULT_CXX_STDLIB=libc++                                                       \
     -DCLANG_DEFAULT_UNWINDLIB=libunwind                                                     \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                                                       \
-    -DICONV_LIBRARY_PATH="/clang0-tools/lib/libc.so"                                        \
-    -DDEFAULT_SYSROOT="/clang0-tools"                                                       \
     -DLIBCXX_HAS_MUSL_LIBC=ON                                                               \
     -DLLVM_ENABLE_LIBCXX=ON                                                                 \
+    -DICONV_LIBRARY_PATH="/clang0-tools/lib/libc.so"                                        \
+    -DDEFAULT_SYSROOT="/clang0-tools"                                                       \
     -DCLANG_DEFAULT_LINKER="/clang0-tools/bin/ld.lld"                                       \
     -DBacktrace_HEADER="/clang0-tools/include/execinfo.h"                                   \
     -DCMAKE_EXE_LINKER_FLAGS="-Wl,-dynamic-linker /clang0-tools/lib/ld-musl-x86_64.so.1"    \
