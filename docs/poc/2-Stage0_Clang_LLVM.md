@@ -26,7 +26,7 @@
 > #### Xanmod-CacULE, `5.12.x` or newer
 > The Linux API Headers expose the kernel's API for use by musl libc.
 
-> **Required!**
+> **Required!** As mentioned in description above.
 ```bash
 # Make sure there are no stale files embedded in the package.
 time { make mrproper; }
