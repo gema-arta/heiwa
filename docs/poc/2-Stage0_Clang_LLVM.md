@@ -225,9 +225,9 @@ time { make PREFIX=/ DESTDIR=/clang0-tools install-dynamic; }
 > **Required!** To build Stage-0 Clang/LLVM, since using musl libc.
 ```bash
 # Apply patches (from Alpine Linux).
-patch -Np1 -i ../../extra/libexecinfo/patches/10-execinfo.patch
-patch -Np1 -i ../../extra/libexecinfo/patches/20-define-gnu-source.patch
-patch -Np1 -i ../../extra/libexecinfo/patches/30-linux-makefile.patch
+for P in {10-execinfo,20-define-gnu-source,30-linux-makefile}.patch; do
+    patch -Np1 -i ../../extra/libexecinfo/patches/${P}
+done; unset P
 
 # Build.
 time {
