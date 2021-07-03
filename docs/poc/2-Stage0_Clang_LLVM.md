@@ -87,8 +87,8 @@ tar xzf ../mpc-1.2.1.tar.gz && mv -v mpc-1.2.1 mpc
 # Create a dedicated directory and configure source. Aestheticaly compile flags command layout style :v
 mkdir -v build && cd build && \
    CFLAGS="-g0 -O0" CXXFLAGS="-g0 -O0" ../configure \
-    --prefix=/clang0-tools    --build="$HEIWA_HOST" \
-    --host=${HEIWA_HOST}   --target="$HEIWA_TARGET" \
+    --prefix=/clang0-tools    --build=${HEIWA_HOST} \
+    --host=${HEIWA_HOST}   --target=${HEIWA_TARGET} \
     --with-sysroot=/clang0-tools/${HEIWA_TARGET}    \
     --disable-nls                     --with-newlib \
     --disable-libitm               --disable-libvtv \
@@ -115,9 +115,9 @@ time { make install-gcc install-target-libgcc; }
 ```bash
 # Configure source.
 ./configure \
-    CROSS_COMPILE="${HEIWA_TARGET}-" \
-    --prefix=/                       \
-    --target="$HEIWA_TARGET"
+    CROSS_COMPILE=${HEIWA_TARGET}- \
+    --prefix=/                     \
+    --target=${HEIWA_TARGET}
 
 # Build.
 time { make; }
@@ -172,8 +172,8 @@ mkdir -v build && cd build && \
 AR=ar LDFLAGS="-Wl,-rpath,/clang0-tools/lib" \
 ../configure \
     --prefix=/clang0-tools        \
-    --build="$HEIWA_HOST"         \
-    --host="$HEIWA_HOST"          \
+    --build=${HEIWA_HOST}         \
+    --host=${HEIWA_HOST}          \
     --target="$HEIWA_TARGET"      \
     --disable-multilib            \
     --with-sysroot=/clang0-tools  \
