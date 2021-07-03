@@ -54,11 +54,11 @@ cp -rv usr/include /clang0-tools/${HEIWA_TARGET}/.
 > **Required!** to build GCC in current stage.
 ```bash
 # Create a dedicated directory and configure source.
-mkdir -v build && cd build && ../configure            \
-    --prefix=/clang0-tools --target=${HEIWA_TARGET}   \
-    --with-sysroot=/clang0-tools/${HEIWA_TARGET}      \
-    --disable-nls --disable-multilib --disable-werror \
-    --enable-deterministic-archives                   \
+mkdir -v build && cd build && ../configure           \
+    --prefix=/clang0-tools --target=${HEIWA_TARGET}  \
+    --with-sysroot=/clang0-tools/${HEIWA_TARGET}     \
+    --disable-nls --disable-multilib                 \
+    --enable-deterministic-archives --disable-werror \
     --disable-compressed-debug-sections
 
 # Checks the host's environment and makes sure all the necessary tools are available to compile Binutils.
