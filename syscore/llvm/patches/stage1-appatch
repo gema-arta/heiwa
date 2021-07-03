@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Stage-1 Clang/LLVM.
 
-pushd "${LLVM_SRC}/projects/" && \
+pushd ${LLVM_SRC}/projects/ && \
     for P in \
         compiler-rt-aarch64-ucontext.patch \
         compiler-rt-sanitizer-ppc64-musl.patch \
@@ -11,7 +11,7 @@ pushd "${LLVM_SRC}/projects/" && \
     done; unset P
 popd
 
-pushd "${LLVM_SRC}/tools/" && \
+pushd ${LLVM_SRC}/tools/ && \
     for P in \
         clang-001-fix-unwind-chain-inclusion.patch \
         clang-002-add-musl-triples.patch \
@@ -21,7 +21,7 @@ pushd "${LLVM_SRC}/tools/" && \
     done; unset P
 popd
 
-pushd "${LLVM_SRC}/../" && \
+pushd ${LLVM_SRC}/../ && \
     for P in \
         llvm-001-musl.patch \
         llvm-002-musl-ppc64-elfv2.patch \
@@ -29,6 +29,6 @@ pushd "${LLVM_SRC}/../" && \
         llvm-004-override-opt.patch \
         llvm-005-ppc-bigpic.patch \
         llvm-006-aarch64-mf_exec.patch
-    do patch  -Np1 -i ./extra/llvm/patches/${P}
+    do patch -Np1 -i ./extra/llvm/patches/${P}
     done; unset P
 popd
