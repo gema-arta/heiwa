@@ -113,8 +113,7 @@ time { make install-gcc install-target-libgcc; }
 # Configure source.
 ./configure \
     CROSS_COMPILE=${HEIWA_TARGET}- \
-    --prefix=/                     \
-    --target=${HEIWA_TARGET}
+    --prefix=/ --target=${HEIWA_TARGET}
 
 # Build.
 time { make; }
