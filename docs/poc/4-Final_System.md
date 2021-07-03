@@ -419,10 +419,10 @@ rm -fv /usr/share/man/man3/attr_set.3
 ```bash
 # Configure source.
 CFLAGS="$CFLAGS -D__STDC_ISO_10646__" \
-./configure --prefix=/usr --disable-static
+./configure --prefix=/usr
 
 # Build.
-time { make V=1; }
+time { make; }
 
 # Install.
 time { make install; }
