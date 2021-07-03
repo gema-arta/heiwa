@@ -390,7 +390,7 @@ time { make PREFIX=/usr install; }
 > #### `20210522-3.1` or newer
 > The NetBSD libedit pacakage contains library providing line editing, history, and tokenisation functions.
 
-> **Required!** After NetBSD Curses.
+> **Required!** After NetBSD Curses; before Toybox.
 ```bash
 # Configure source.
 CFLAGS="$CFLAGS -D__STDC_ISO_10646__" \
@@ -415,7 +415,7 @@ ln -sv ../editline/readline.h /usr/include/readline/readline.h
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
-> **Required!** After Zlib-ng and NetBSD Curses.
+> **Required!** After Zlib-ng, NetBSD Curses, and NetBSD libedit.
 ```bash
 # Copy Toybox's .config file.
 cp -v ../../extra/toybox/files/.config.bc_file_grep_inetutils_psmisc_sed.nlns .config
