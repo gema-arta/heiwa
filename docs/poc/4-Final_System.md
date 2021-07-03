@@ -277,11 +277,6 @@ sed -i 's|CC=".*"|CC="x86_64-heiwa-linux-musl-clang"|'     ~/.bash_profile
 sed -i 's|CXX=".*"|CXX="x86_64-heiwa-linux-musl-clang++"|' ~/.bash_profile
 source ~/.bash_profile
 
-# Symlink Clang to be used as GCC tools.
-ln -sv x86_64-heiwa-linux-musl-clang   /clang1-tools/bin/gcc
-ln -sv gcc                             /clang1-tools/bin/cc
-ln -sv x86_64-heiwa-linux-musl-clang++ /clang1-tools/bin/g++
-
 # Quick test.
 echo "int main(){}" > dummy.c
 "$CC" dummy.c -v -Wl,--verbose &> dummy.log
@@ -481,13 +476,14 @@ time { make PREFIX=/ install && unset CFFGPT; }
 
 > **Required!** Before OpenBSD M4.
 ```bash
-# Configure source.
-ac_cv_func_malloc_0_nonnull=yes \
-ac_cv_func_realloc_0_nonnull=yes \
-HELP2MAN=/clang1-t/bin/true \
-./configure \
-    --prefix=/usr --disable-static \
-    --docdir=/usr/share/doc/flex-2.6.4
+# Configure source. Flex expect gcc to build.
+ln -sv "$CC" /clang1-tools/bin/gcc     && \
+ac_cv_func_malloc_0_nonnull=yes           \
+ac_cv_func_realloc_0_nonnull=yes          \
+HELP2MAN=/clang1-t/bin/true ./configure   \
+    --prefix=/usr --disable-static        \
+    --docdir=/usr/share/doc/flex-2.6.4 && \
+unlink /clang1-tools/bin/gcc
 
 # Build.
 time { make; }
