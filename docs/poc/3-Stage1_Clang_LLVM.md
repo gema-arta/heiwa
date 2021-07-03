@@ -359,7 +359,7 @@ cat > /clang1-tools/bin/x86_64-pc-linux-musl.cfg << "EOF"
 EOF
 
 # Set the new PATH since "/clang0-tools" won't be used anymore and configure new Stage-1 Clang/LLVM environment.
-export PATH="/clang1-tools/bin:/clang1-tools/usr/bin:/bin:/usr/bin"
+PATH="/clang1-tools/bin:/clang1-tools/usr/bin:/bin:/usr/bin"
 sed -i "s|PATH=.*|PATH=\"${PATH}\"|" ~/.bashrc
 sed -i '/unset CFLAGS CXXFLAGS/d' ~/.bashrc
 cat >> ~/.bashrc << "EOF"
