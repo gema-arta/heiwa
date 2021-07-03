@@ -227,10 +227,7 @@ patch -Np1 -i ../../extra/libexecinfo/patches/20-define-gnu-source.patch
 patch -Np1 -i ../../extra/libexecinfo/patches/30-linux-makefile.patch
 
 # Build.
-time {
-    make CC=${HEIWA_TARGET}-gcc AR=${HEIWA_TARGET}-ar \
-    CFLAGS="-fno-omit-frame-pointer"
-}
+time { make CC=${HEIWA_TARGET}-gcc AR=${HEIWA_TARGET}-ar CFLAGS="-fno-omit-frame-pointer"; }
 
 # Install.
 install -vm755 -t /clang0-tools/include/ execinfo.h stacktraverse.h
