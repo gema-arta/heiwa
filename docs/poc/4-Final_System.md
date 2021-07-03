@@ -218,10 +218,11 @@ done; unset P
 # Configure source.
 LDFLAGS="-Wl,-soname,libc.musl-x86_64.so.1" \
 ./configure \
-    --prefix=/usr        \
-    --sysconfdir=/etc    \
-    --localstatedir=/var \
-    --disable-gcc-wrapper
+    --prefix=/usr         \
+    --sysconfdir=/etc     \
+    --localstatedir=/var  \
+    --disable-gcc-wrapper \
+    --enable-optimize=speed
 
 # Build.
 time { make; }
