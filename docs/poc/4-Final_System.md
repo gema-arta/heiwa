@@ -613,7 +613,7 @@ pushd ${LLVM_SRC}/projects/libunwind/ && \
 time { make -C build; }
 
 # Install.
-time { make -C build install && rm -rf projects/libunwind && popd; }
+time { make -C build install && popd && rm -rf projects/libunwind ; }
 ```
 
 <!--
