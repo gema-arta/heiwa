@@ -612,7 +612,7 @@ pushd ${LLVM_SRC}/projects/libunwind/ && \
 # Build.
 time { make -C build; }
 
-# Install and remove the source.
+# Install and remove the `libunwind` source.
 time { make -C build install && popd && rm -rf projects/libunwind; }
 ```
 
@@ -643,7 +643,7 @@ pushd ${LLVM_SRC}/projects/libcxxabi/ && \
 # Build.
 time { make -C build; }
 
-# Install. But don't remove the source, `libcxx` requires `libcxxabi` source.
+# Install. But don't remove the `libcxxabi` source, `libcxx` requires `libcxxabi` source.
 time { make -C build install && cp -v include/*.h /usr/include/. && popd; }
 ```
 
