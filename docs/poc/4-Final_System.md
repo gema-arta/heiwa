@@ -689,12 +689,12 @@ for P in {10-execinfo,20-define-gnu-source,30-linux-makefile}.patch; do
 done; unset P
 
 # Build.
-time { make CFLAGS="$CFLAGS -fno-omit-frame-pointer"; }
+time { make CC="$CC" AR="$AR" CFLAGS="$CFLAGS -fno-omit-frame-pointer"; }
 
 # Install.
-install -vm755 -t /clang1-tools/include/ execinfo.h stacktraverse.h
-install -vm755 -t /clang1-tools/lib/ libexecinfo.a libexecinfo.so.1
-ln -sv libexecinfo.so.1 /clang1-tools/lib/libexecinfo.so
+install -vm755 -t /usr/include/ execinfo.h stacktraverse.h
+install -vm755 -t /usr/lib/ libexecinfo.a libexecinfo.so.1
+ln -sv libexecinfo.so.1 /usr/lib/libexecinfo.so
 ```
 
 
