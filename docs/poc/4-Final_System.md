@@ -602,26 +602,18 @@ popd
 # Configure source.
 pushd ${LLVM_SRC}/projects/libunwind/ && \
     cmake -B build \
-        -DCMAKE_INSTALL_PREFIX="/clang1-tools"           \
-        -DLIBUNWIND_ENABLE_SHARED=ON                     \
-        -DCMAKE_C_FLAGS="-fPIC"                          \
-        -DCMAKE_CXX_FLAGS="-fPIC"                        \
-        -DCMAKE_AR="/clang0-tools/bin/llvm-ar"           \
-        -DCMAKE_LINKER="/clang0-tools/bin/ld.lld"        \
-        -DCMAKE_NM="/clang0-tools/bin/llvm-nm"           \
-        -DCMAKE_OBJCOPY="/clang0-tools/bin/llvm-objcopy" \
-        -DCMAKE_OBJDUMP="/clang0-tools/bin/llvm-objdump" \
-        -DCMAKE_RANLIB="/clang0-tools/bin/llvm-ranlib"   \
-        -DCMAKE_READELF="/clang0-tools/bin/llvm-readelf" \
-        -DCMAKE_STRIP="/clang0-tools/bin/llvm-strip"     \
-        -DLIBUNWIND_USE_COMPILER_RT=ON                   \
+        -DCMAKE_INSTALL_PREFIX="/usr"  \
+        -DLIBUNWIND_ENABLE_SHARED=ON   \
+        -DCMAKE_C_FLAGS="-fPIC"        \
+        -DCMAKE_CXX_FLAGS="-fPIC"      \
+        -DLIBUNWIND_USE_COMPILER_RT=ON \
         -DLLVM_PATH="$LLVM_SRC"
 
 # Build.
 time { make -C build; }
 
 # Install.
-time { make -C build install && rm -rf build && popd; }
+time { make -C build install && rm -rf projects/libunwind && popd; }
 ```
 
 <!--
