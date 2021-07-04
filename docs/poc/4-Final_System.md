@@ -535,7 +535,7 @@ time { make CC="$CC" SBINDIR=/sbin prefix=/usr lib=lib install; }
 > #### `4.8.1` or newer
 > The Shadow package contains programs for handling passwords in a secure way.
 
-> **Required!**
+> **Required!** Currently, without cracklib.
 ```bash
 # Disable the installation of the groups program and its man pages, as Coreutils (replaced by Toybox) provides a better version.
 # Also, prevent the installation of manual pages.
