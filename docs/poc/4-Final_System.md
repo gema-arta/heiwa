@@ -588,7 +588,7 @@ passwd root
 
 > *No need to decompress any package firstly. It will be done in this step.*
 
-> **Required!** As mentioned in the description above.
+> **Required!** Before `LLVM libcxxabi`.
 ```bash
 # Decompress LLVM source.
 tar xf llvm-12.0.0.src.tar.xz && mv -v llvm-12.0.0.src "$LLVM_SRC"
@@ -622,7 +622,7 @@ time { make -C build install && popd && rm -rf ${LLVM_SRC}/projects/libunwind; }
 
 > *No need to decompress any package firstly. It will be done in this step.*
 
-> **Required!** As mentioned in the description above.
+> **Required!** Before `LLVM libcxx`.
 ```bash
 # Decompress `libcxxabi` to correct directories.
 pushd ${LLVM_SRC}/projects/ && \
@@ -653,7 +653,7 @@ time { make -C build install && cp -v include/*.h /usr/include/. && popd; }
 
 > *No need to decompress any package firstly. It will be done in this step.*
 
-> **Required!** As mentioned in the description above.
+> **Required!** Before `Clang/LLVM`.
 ```bash
 # Configure source.
 pushd ${LLVM_SRC}/projects/libcxx/ && \
