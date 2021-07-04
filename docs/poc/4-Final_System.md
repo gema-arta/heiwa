@@ -525,10 +525,10 @@ time { make install; }
 sed -i '/install -m.*STA/d' libcap/Makefile
 
 # Build.
-time { make prefix=/usr lib=lib; }
+time { make CC="$CC" SBINDIR=/sbin prefix=/usr lib=lib; }
 
 # Install.
-time { make prefix=/usr lib=lib install; }
+time { make CC="$CC" SBINDIR=/sbin prefix=/usr lib=lib install; }
 ```
 
 ### `18` - Shadow
