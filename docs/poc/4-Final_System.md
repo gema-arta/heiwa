@@ -593,7 +593,7 @@ passwd root
 # Decompress LLVM source.
 tar xf llvm-12.0.0.src.tar.xz && mv -v llvm-12.0.0.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 
-# Decompress libunwind to correct directories. Requires libcxx.
+# Decompress `libunwind` to correct directories. Requires `libcxx`.
 pushd ${LLVM_SRC}/projects/ && \
     tar xf ../../pkgs/libunwind-12.0.0.src.tar.xz && mv -v libunwind-12.0.0.src libunwind
     tar xf ../../pkgs/libcxx-12.0.0.src.tar.xz    && mv -v libcxx-12.0.0.src libcxx
@@ -612,8 +612,39 @@ pushd ${LLVM_SRC}/projects/libunwind/ && \
 # Build.
 time { make -C build; }
 
-# Install.
+# Install and remove the source.
 time { make -C build install && popd && rm -rf projects/libunwind; }
+```
+
+### `20` - LLVM libcxxabi
+> #### `12.0.0`
+> Low level support for a standard C++ library from LLVM.
+
+> *No need to re-decompress package.*
+
+> **Required!** As mentioned in the description above.
+```bash
+# Decompress `libcxxabi` to correct directories.
+pushd ${LLVM_SRC}/projects/ && \
+    tar xf ../../pkgs/libcxxabi-12.0.0.src.tar.xz && mv -v libcxxabi-12.0.0.src libcxxabi
+popd
+
+# Configure source.
+pushd ${LLVM_SRC}/projects/libcxxabi/ && \
+    cmake -B build \
+        -DCMAKE_INSTALL_PREFIX="/usr/"                                    \
+        -DLIBCXXABI_ENABLE_STATIC=ON                                      \
+        -DLIBCXXABI_USE_COMPILER_RT=ON                                    \
+        -DLIBCXXABI_USE_LLVM_UNWINDER=ON                                  \
+        -DLIBCXXABI_LIBUNWIND_PATH="/usr/lib"                             \
+        -DLIBCXXABI_LIBCXX_INCLUDES="${LLVM_SRC}/projects/libcxx/include" \
+        -DLLVM_PATH="$LLVM_SRC"
+
+# Build.
+time { make -C build; }
+
+# Install. But don't remove the source, `libcxx` requires `libcxxabi` source.
+time { make -C build install && cp -v include/*.h /usr/include/. && popd; }
 ```
 
 <!--
