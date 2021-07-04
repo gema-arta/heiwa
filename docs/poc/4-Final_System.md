@@ -591,7 +591,7 @@ passwd root
 > **Required!** As mentioned in the description above.
 ```bash
 # Decompress LLVM source.
-tar xf llvm-12.0.0.src.tar.xz && mv -v llvm-12.0.0.src "$LLVM_SRC" && pushd "$LLVM_SRC"
+tar xf llvm-12.0.0.src.tar.xz && mv -v llvm-12.0.0.src "$LLVM_SRC"
 
 # Decompress `libunwind` to correct directories. Requires `libcxx`.
 pushd ${LLVM_SRC}/projects/ && \
