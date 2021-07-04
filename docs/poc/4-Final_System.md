@@ -154,7 +154,8 @@ STRIP="llvm-strip"
 COMMON_FLAGS="-march=native -Oz -pipe"
 CFLAGS="${COMMON_FLAGS}"
 CXXFLAGS="${COMMON_FLAGS}"
-export TRUPLE CC CXX AR AS RANLIB LD STRIP COMMON_FLAGS CFLAGS CXXFLAGS
+LLVM_SRC="/sources/llvm"
+export TRUPLE CC CXX AR AS RANLIB LD STRIP COMMON_FLAGS CFLAGS CXXFLAGS LLVM_SRC
 # Make's multiple jobs based on CPU core/threads.
 alias make="make -j$(nproc) -l$(nproc)"
 EOF
@@ -585,8 +586,42 @@ passwd root
 > #### `12.0.0`
 > C++ runtime stack unwinder from LLVM.
 
-> **Required!**
+> *No need to decompress any package firstly. It will be done in this step.*
+
+> **Required!** As mentioned in the description above.
 ```bash
+# Decompress LLVM source.
+tar xf llvm-12.0.0.src.tar.xz && mv -v llvm-12.0.0.src "$LLVM_SRC" && pushd "$LLVM_SRC"
+
+# Decompress libunwind to correct directories. Requires libcxx.
+pushd ${LLVM_SRC}/projects/ && \
+    tar xf ../../pkgs/libunwind-12.0.0.src.tar.xz && mv -v libunwind-12.0.0.src libunwind
+    tar xf ../../pkgs/libcxx-12.0.0.src.tar.xz    && mv -v libcxx-12.0.0.src libcxx
+popd
+
+# Configure source.
+pushd ${LLVM_SRC}/projects/libunwind/ && \
+    cmake -B build \
+        -DCMAKE_INSTALL_PREFIX="/clang1-tools"           \
+        -DLIBUNWIND_ENABLE_SHARED=ON                     \
+        -DCMAKE_C_FLAGS="-fPIC"                          \
+        -DCMAKE_CXX_FLAGS="-fPIC"                        \
+        -DCMAKE_AR="/clang0-tools/bin/llvm-ar"           \
+        -DCMAKE_LINKER="/clang0-tools/bin/ld.lld"        \
+        -DCMAKE_NM="/clang0-tools/bin/llvm-nm"           \
+        -DCMAKE_OBJCOPY="/clang0-tools/bin/llvm-objcopy" \
+        -DCMAKE_OBJDUMP="/clang0-tools/bin/llvm-objdump" \
+        -DCMAKE_RANLIB="/clang0-tools/bin/llvm-ranlib"   \
+        -DCMAKE_READELF="/clang0-tools/bin/llvm-readelf" \
+        -DCMAKE_STRIP="/clang0-tools/bin/llvm-strip"     \
+        -DLIBUNWIND_USE_COMPILER_RT=ON                   \
+        -DLLVM_PATH="$LLVM_SRC"
+
+# Build.
+time { make -C build; }
+
+# Install.
+time { make -C build install && rm -rf build && popd; }
 ```
 
 <!--
