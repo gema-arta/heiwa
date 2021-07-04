@@ -620,7 +620,7 @@ time { make -C build install && popd && rm -rf projects/libunwind; }
 > #### `12.0.0`
 > Low level support for a standard C++ library from LLVM.
 
-> *No need to re-decompress package.*
+> *No need to decompress any package firstly. It will be done in this step.*
 
 > **Required!** As mentioned in the description above.
 ```bash
@@ -645,6 +645,36 @@ time { make -C build; }
 
 # Install. But don't remove the `libcxxabi` source, `libcxx` requires it.
 time { make -C build install && cp -v include/*.h /usr/include/. && popd; }
+```
+
+### `21` - LLVM libcxx
+> #### `12.0.0`
+> New implementation of the C++ standard library, targeting C++11 from LLVM.
+
+> *No need to decompress any package firstly. It will be done in this step.*
+
+> **Required!** As mentioned in the description above.
+```bash
+# Configure source.
+pushd ${LLVM_SRC}/projects/libcxx/ && \
+    cmake -B build \
+        -DCMAKE_INSTALL_PREFIX="/usr"                 \
+        -DLIBCXX_ENABLE_SHARED=ON                     \
+        -DLIBCXX_ENABLE_STATIC=ON                     \
+        -DLIBCXX_HAS_MUSL_LIBC=ON                     \
+        -DLIBCXX_USE_COMPILER_RT=ON                   \
+        -DLIBCXX_INSTALL_HEADERS=ON                   \
+        -DLIBCXX_CXX_ABI=libcxxabi                    \
+        -DLIBCXXABI_USE_LLVM_UNWINDER=ON              \
+        -DLIBCXX_CXX_ABI_INCLUDE_PATHS="/usr/include" \
+        -DLIBCXX_CXX_ABI_LIBRARY_PATH="/usr/lib"      \
+        -DLLVM_PATH="$LLVM_SRC"
+
+# Build.
+time { make -C build; }
+
+# Install.
+time { make -C build install && rm -rf build && popd; }
 ```
 
 <!--
