@@ -643,7 +643,7 @@ pushd ${LLVM_SRC}/projects/libcxxabi/ && \
 # Build.
 time { make -C build; }
 
-# Install. But don't remove the `libcxxabi` source, `libcxx` requires `libcxxabi` source.
+# Install. But don't remove the `libcxxabi` source, `libcxx` requires it.
 time { make -C build install && cp -v include/*.h /usr/include/. && popd; }
 ```
 
