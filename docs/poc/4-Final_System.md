@@ -677,6 +677,27 @@ time { make -C build; }
 time { make -C build install && popd && rm -rf ${LLVM_SRC}/projects/libcxx{,abi}; }
 ```
 
+### `22` - libexecinfo
+> #### `1.1` or newer
+> The libexecinfo package contains backtrace facility that usually found in GNU libc (glibc).
+
+> **Required!** Before `Clang/LLVM`.
+```bash
+# Apply patches (from Alpine Linux).
+for P in {10-execinfo,20-define-gnu-source,30-linux-makefile}.patch; do
+    patch -Np1 -i ../../extra/libexecinfo/patches/${P}
+done; unset P
+
+# Build.
+time { make CFLAGS="$CFLAGS -fno-omit-frame-pointer"; }
+
+# Install.
+install -vm755 -t /clang1-tools/include/ execinfo.h stacktraverse.h
+install -vm755 -t /clang1-tools/lib/ libexecinfo.a libexecinfo.so.1
+ln -sv libexecinfo.so.1 /clang1-tools/lib/libexecinfo.so
+```
+
+
 <!--
     ### `` - Toybox (Bc, File, Grep, Inetutils, Psmisc, Sed)
     > #### `0.8.5`
