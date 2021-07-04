@@ -697,6 +697,133 @@ install -vm755 -t /usr/lib/ libexecinfo.a libexecinfo.so.1
 ln -sv libexecinfo.so.1 /usr/lib/libexecinfo.so
 ```
 
+### `23` - Clang/LLVM
+> #### `12.0.0`
+> C language family frontend for LLVM.
+
+> *No need to decompress any package firstly. It will be done in this step.*
+
+> **Required!**
+```bash
+# Decompress clang, lld, and compiler-rt to correct directories.
+pushd ${LLVM_SRC}/projects/ && \
+    tar xf ../../pkgs/compiler-rt-12.0.0.src.tar.xz && mv -v compiler-rt-12.0.0.src compiler-rt
+popd
+pushd ${LLVM_SRC}/tools/ && \
+    tar xf ../../pkgs/clang-12.0.0.src.tar.xz && mv -v clang-12.0.0.src clang
+    tar xf ../../pkgs/lld-12.0.0.src.tar.xz   && mv -v lld-12.0.0.src lld
+popd
+
+# Apply patches (from Void Linux).
+../extra/llvm/patches/stage1-appatch
+
+# Disable sanitizers for musl, fixing "early build failure".
+sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
+projects/compiler-rt/cmake/config-ix.cmake
+
+# Set default compiler to new symlink from Stage-0 Clang/LLVM.
+# Sets C and C++ compiler's build flags to reduce debug symbols.
+CFLAGS="-g -g1 CXXFLAGS="-g -g1"
+export CFLAGS CXXFLAGS
+
+# Update host/target triple detection.
+cp -fv ../extra/llvm/files/config.guess cmake/.
+
+# Configure source.
+cmake -B build \
+    -DCMAKE_BUILD_TYPE=Release                                  \
+    -DCMAKE_INSTALL_PREFIX="/usr"                               \
+    -DLLVM_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"         \
+    -DLLVM_HOST_TRIPLE="x86_64-pc-linux-musl"                   \
+    -DLLVM_TARGET_ARCH="X86"                                    \
+    -DLLVM_TARGETS_TO_BUILD="host;BPF;AMDGPU;X86"               \
+    -DLLVM_LINK_LLVM_DYLIB=ON                                   \
+    -DLLVM_BUILD_LLVM_DYLIB=ON                                  \
+    -DLLVM_BUILD_TESTS=OFF                                      \
+    -DLLVM_ENABLE_LIBEDIT=OFF                                   \
+    -DLLVM_ENABLE_LIBXML2=OFF                                   \
+    -DLLVM_ENABLE_LIBCXX=ON                                     \
+    -DLLVM_ENABLE_LLD=ON                                        \
+    -DLLVM_ENABLE_RTTI=ON                                       \
+    -DLLVM_ENABLE_ZLIB=ON                                       \
+    -DLLVM_INCLUDE_GO_TESTS=OFF                                 \
+    -DLLVM_INCLUDE_TESTS=OFF                                    \
+    -DLLVM_INCLUDE_DOCS=OFF                                     \
+    -DLLVM_INCLUDE_EXAMPLES=OFF                                 \
+    -DLLVM_INCLUDE_BENCHMARKS=OFF                               \
+    -DCOMPILER_RT_BUILD_SANITIZERS=OFF                          \
+    -DCOMPILER_RT_BUILD_XRAY=OFF                                \
+    -DCOMPILER_RT_BUILD_PROFILE=OFF                             \
+    -DCOMPILER_RT_BUILD_LIBFUZZER=OFF                           \
+    -DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON                       \
+    -DCOMPILER_RT_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"  \
+    -DCLANG_DEFAULT_CXX_STDLIB=libc++                           \
+    -DCLANG_DEFAULT_UNWINDLIB=libunwind                         \
+    -DCLANG_DEFAULT_RTLIB=compiler-rt                           \
+    -DCLANG_DEFAULT_LINKER="/usr/bin/ld.lld"                    \
+    -DDEFAULT_SYSROOT="/clang1-tools"                           \
+    -DBacktrace_INCLUDE_DIR="/usr/include"                      \
+    -DBacktrace_LIBRARY="/usr/lib/libexecinfo.so"               \
+    -DCMAKE_AR="/clang1-tools/bin/llvm-ar"                      \
+    -DCMAKE_RANLIB="/clang1-tools/bin/llvm-ranlib"              \
+    -DCMAKE_INSTALL_OLDINCLUDEDIR="/usr/include"                \
+    -DCMAKE_LINKER="/clang1-tools/bin/ld.lld"                   \
+    -DCMAKE_NM="/clang1-tools/bin/llvm-nm"                      \
+    -DCMAKE_OBJCOPY="/clang1-tools/bin/llvm-objcopy"            \
+    -DCMAKE_OBJDUMP="/clang1-tools/bin/llvm-objdump"            \
+    -DCMAKE_READELF="/clang1-tools/bin/llvm-readelf"            \
+    -DCMAKE_STRIP="/clang1-tools/bin/llvm-strip"                \
+    -DICONV_LIBRARY_PATH="/usr/lib/libc.so"                     \
+    -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON                         \
+    -DLLVM_INSTALL_CCTOOLS_SYMLINKS=ON                          \
+    -DLLVM_INSTALL_UTILS=ON                                     \
+    -DLLVM_ENABLE_BINDINGS=OFF                                  \
+    -DLLVM_ENABLE_IDE=OFF                                       \
+    -DLLVM_ENABLE_UNWIND_TABLES=OFF                             \
+    -DDEFAULT_SYSROOT="/usr"
+
+# Build.
+time { make -C build; }
+
+# Install.
+time {
+    pushd build/ && \
+        cmake -DCMAKE_INSTALL_PREFIX="/clang1-tools" -P cmake_install.cmake && \
+    popd && rm -rf build
+}
+
+# Since Binutils won't be used, create a symlink to LLVM tools and set lld as default toolchain's linker.
+for B in as ar ranlib readelf nm objcopy objdump size strip; do
+    ln -sv llvm-${B} /clang1-tools/bin/${B}
+done; unset B; ln -sv lld /clang1-tools/bin/ld
+
+# Configure Stage-1 Clang to build binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" instead of "/lib/ld-musl-x86_64.so.1".
+ln -sv clang-12 /clang1-tools/bin/x86_64-pc-linux-musl-clang
+ln -sv clang-12 /clang1-tools/bin/x86_64-pc-linux-musl-clang++
+cat > /clang1-tools/bin/x86_64-pc-linux-musl.cfg << "EOF"
+-Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1"
+EOF
+
+# Set the new PATH since "/clang0-tools" won't be used anymore and configure new Stage-1 Clang/LLVM environment.
+PATH="/clang1-tools/bin:/clang1-tools/usr/bin:/bin:/usr/bin"
+sed -i "s|PATH=.*|PATH=\"${PATH}\"|" ~/.bashrc
+sed -i '/unset CFLAGS CXXFLAGS/d' ~/.bashrc
+cat >> ~/.bashrc << "EOF"
+# Stage-1 Clang/LLVM environment.
+CC="${TARGET_TRUPLE}-clang"
+CXX="${TARGET_TRUPLE}-clang++"
+AR="llvm-ar"
+AS="llvm-as"
+RANLIB="llvm-ranlib"
+LD="ld.lld"
+STRIP="llvm-strip"
+export CC CXX AR AS RANLIB LD STRIP
+EOF
+source ~/.bash_profile
+
+# Back to "${HEIWA}/sources/pkg" directory.
+cd ${HEIWA}/sources/pkgs/
+```
 
 <!--
     ### `` - Toybox (Bc, File, Grep, Inetutils, Psmisc, Sed)
