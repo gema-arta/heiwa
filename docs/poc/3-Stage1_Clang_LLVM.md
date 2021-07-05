@@ -352,7 +352,7 @@ cat > /clang1-tools/bin/${TARGET_TRUPLE}.cfg << "EOF"
 -Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1"
 EOF
 
-# Set the new PATH since "/clang0-tools" won't be used anymore and configure the new Stage-1 Clang/LLVM environment.
+# Set the new PATH since "/clang0-tools" won't be used anymore and its time to enable optimization.
 PATH="/clang1-tools/bin:/clang1-tools/usr/bin:/bin:/usr/bin"
 sed -i "s|PATH=.*|PATH=\"${PATH}\"|" ~/.bashrc
 sed -i '/unset CFLAGS CXXFLAGS/d' ~/.bashrc
