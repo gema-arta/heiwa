@@ -764,7 +764,7 @@ cmake -B build \
     -DCLANG_DEFAULT_UNWINDLIB=libunwind                         \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                           \
     -DCLANG_DEFAULT_LINKER="/usr/bin/ld.lld"                    \
-    -DDEFAULT_SYSROOT="/usr"
+    -DDEFAULT_SYSROOT="/usr"                                    \
     -DBacktrace_INCLUDE_DIR="/usr/include"                      \
     -DBacktrace_LIBRARY="/usr/lib/libexecinfo.so"               \
     -DCMAKE_AR="/clang1-tools/bin/llvm-ar"                      \
