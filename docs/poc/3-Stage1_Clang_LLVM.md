@@ -258,7 +258,7 @@ rm -fv /clang1-tools/lib/libz.a
 > #### `12.0.0`
 > C language family frontend for LLVM.
 
-> **Required!** Build Stage-1 Clang/LLVM toolchain with `libgcc_s.so*` and `libstdc++.so*` free.
+> **Required!** Build Stage-1 Clang/LLVM toolchain with `libgcc_s.so*` and `libstdc++.so*` free (which is provided by GCC).
 ```bash
 # Exit from the LLVM source directory if already entered after decompressing.
 popd
