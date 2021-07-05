@@ -251,7 +251,7 @@ install -vm755 -t /clang0-tools/lib/ libexecinfo.{a,so{.1,}}
 
 > **Required!** Build Stage-0 Clang/LLVM toolchain with `libgcc_s.so*` and `libstdc++.so*` dependencies (provided by GCC).
 ```bash
-# Exit from the LLVM source directory if already in after decompressing.
+# Exit from the LLVM source directory if already entered after decompressing.
 popd
 
 # Rename the LLVM source directory to "$LLVM_SRC", then enters.
