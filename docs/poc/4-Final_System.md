@@ -791,7 +791,7 @@ time { make -C build; }
 time {
     pushd build/ && \
         cmake -DCMAKE_INSTALL_PREFIX="/clang1-tools" -P cmake_install.cmake && \
-    popd && rm -rf build
+    popd
 }
 
 # Since Binutils won't be used, create a symlink to LLVM tools and set lld as default toolchain's linker.
