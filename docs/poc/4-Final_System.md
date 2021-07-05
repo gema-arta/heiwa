@@ -193,13 +193,13 @@ patch -Np1 -i \
 ../../extra/linux-headers/patches/include-uapi-linux-swab-Fix-potentially-missing-__always_inline.patch
 
 # Make sure there are no stale files embedded in the package.
-time { make LLVM=1 LLVM_IAS=1 HOSTCC="$CC" mrproper; }
+time { make LLVM=1 LLVM_IAS=1 HOSTCC={$CC} mrproper; }
 
 # The recommended make target `headers_install` cannot be used, because it requires rsync, which may not be available.
 # The headers are first placed in "./usr/", then copied to the needed location.
 time {
-    make LLVM=1 LLVM_IAS=1 HOSTCC="$CC" headers_check && \
-    make LLVM=1 LLVM_IAS=1 HOSTCC="$CC" headers
+    make LLVM=1 LLVM_IAS=1 HOSTCC=${CC} headers_check && \
+    make LLVM=1 LLVM_IAS=1 HOSTCC=${CC} headers
 }
 
 # Remove unnecessary files.
