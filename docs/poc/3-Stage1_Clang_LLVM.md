@@ -106,7 +106,6 @@ export CC CXX
 pushd ${LLVM_SRC}/projects/libunwind/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools"           \
-        -DLIBUNWIND_ENABLE_SHARED=ON                     \
         -DCMAKE_C_FLAGS="-fPIC"                          \
         -DCMAKE_CXX_FLAGS="-fPIC"                        \
         -DCMAKE_AR="/clang0-tools/bin/llvm-ar"           \
@@ -117,6 +116,7 @@ pushd ${LLVM_SRC}/projects/libunwind/ && \
         -DCMAKE_RANLIB="/clang0-tools/bin/llvm-ranlib"   \
         -DCMAKE_READELF="/clang0-tools/bin/llvm-readelf" \
         -DCMAKE_STRIP="/clang0-tools/bin/llvm-strip"     \
+        -DLIBUNWIND_ENABLE_SHARED=ON                     \
         -DLIBUNWIND_USE_COMPILER_RT=ON                   \
         -DLLVM_PATH="$LLVM_SRC"
 
