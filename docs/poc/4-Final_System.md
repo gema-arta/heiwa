@@ -725,7 +725,7 @@ install -vm755 -t /clang1-tools/lib/ libexecinfo.{a,so{.1,}}
 # Enter to the LLVM source directory.
 pushd "$LLVM_SRC"
 
-# Decompress clang, lld, and compiler-rt to correct directories.
+# Decompress `clang`, `lld`, and `compiler-rt` to the correct directories.
 pushd ${LLVM_SRC}/projects/ && \
     tar xf ../../pkgs/compiler-rt-12.0.0.src.tar.xz && mv -v compiler-rt-12.0.0.src compiler-rt
 popd
