@@ -61,7 +61,7 @@ source ~/.bashrc
 
 # Quick test for the new triplet of Stage-0 Clang/LLVM.
 echo "int main(){}" > dummy.c
-${HEIWA_TARGET}-clang dummy.c -v -Wl,--verbose &> dummy.log
+$CC dummy.c -v -Wl,--verbose &> dummy.log
 readelf -l a.out | grep ": /clang1-tools"
 
 # | The output should be:
