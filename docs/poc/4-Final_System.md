@@ -621,7 +621,10 @@ pushd ${LLVM_SRC}/projects/libunwind/ && \
 time { make -C build; }
 
 # Install and remove the `libunwind` source.
-time { make -C build install && popd && rm -rf ${LLVM_SRC}/projects/libunwind; }
+time {
+    make -C build install && \
+    popd && rm -rf ${LLVM_SRC}/projects/libunwind
+}
 ```
 
 ### `20` - LLVM libcxxabi
