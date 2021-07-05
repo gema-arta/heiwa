@@ -207,7 +207,7 @@ find usr/include -name '.*' -exec rm -rfv {} \;
 rm -fv usr/include/Makefile
 
 # Install.
-cp -rv usr/include /usr/.
+cp -rfv usr/include /usr/.
 ```
 
 ### `6` - Iana-Etc
