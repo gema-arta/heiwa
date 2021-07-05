@@ -819,7 +819,7 @@ time {
 
 # Install above utilities, and the man files (from NetBSD).
 install -vm755 -t /usr/bin/ get{conf,ent} iconv
-install -vm644 -t /usr/share/man/man1/ ../../extra/musl/files/musl-utils/get{conf,ent}.1
+install -vm644 -t /usr/share/man/man1/ ../extra/musl/files/musl-utils/get{conf,ent}.1
 
 # Quick test.
 echo "int main(){}" > dummy.c
