@@ -61,7 +61,7 @@ source ~/.bashrc
 
 # Quick test for the new triplet of Stage-0 Clang/LLVM.
 echo "int main(){}" > dummy.c
-$CC dummy.c -v -Wl,--verbose &> dummy.log
+${CC} dummy.c -v -Wl,--verbose &> dummy.log
 readelf -l a.out | grep ": /clang1-tools"
 
 # | The output should be:
@@ -89,8 +89,8 @@ time { make mrproper; }
 # The recommended make target `headers_install` cannot be used, because it requires rsync, which may not be available.
 # The headers are first placed in "./usr/", then copied to the needed location.
 time {
-    make ARCH=${HEIWA_ARCH} LLVM=1 HOSTCC=${HEIWA_TARGET}-clang headers_check && \
-    make ARCH=${HEIWA_ARCH} LLVM=1 HOSTCC=${HEIWA_TARGET}-clang headers
+    make ARCH=${HEIWA_ARCH} LLVM=1 HOSTCC=${CC} headers_check && \
+    make ARCH=${HEIWA_ARCH} LLVM=1 HOSTCC=${CC} headers
 }
 
 # @owl4ce don't know,
