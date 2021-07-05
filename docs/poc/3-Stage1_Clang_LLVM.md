@@ -340,7 +340,7 @@ cmake -B build \
 # Build.
 time { make -C build; }
 
-# Install.
+# Install and remove the build directory.
 time {
     pushd build/ && \
         cmake -DCMAKE_INSTALL_PREFIX="/clang1-tools" -P cmake_install.cmake && \
