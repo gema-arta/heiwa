@@ -202,7 +202,7 @@ mv -v specs "$SPECFILE" && unset SPECFILE
 # Quick test.
 echo "int main(){}" > dummy.c
 ${HEIWA_TARGET}-gcc dummy.c
-readelf -l a.out | grep Requesting
+readelf -l a.out | grep "Requesting"
 
 # | The output should be:
 # |-----------------------
