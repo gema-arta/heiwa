@@ -180,7 +180,10 @@ AR="ar"      LDFLAGS="-Wl,-rpath,/clang0-tools/lib" \
     --disable-lto-plugin --disable-libssp
 
 # Build.
-time { make AS_FOR_TARGET=${HEIWA_TARGET}-as LD_FOR_TARGET=${HEIWA_TARGET}-ld; }
+time {
+    make AS_FOR_TARGET=${HEIWA_TARGET}-as \
+    LD_FOR_TARGET=${HEIWA_TARGET}-ld
+}
 
 # Install.
 time { make install; }
