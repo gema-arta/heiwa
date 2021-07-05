@@ -706,7 +706,7 @@ for P in {10-execinfo,20-define-gnu-source,30-linux-makefile}.patch; do
 done; unset P
 
 # Build.
-time { make CC="$CC" AR="$AR" CFLAGS="$CFLAGS -fno-omit-frame-pointer"; }
+time { make CC=${CC} AR=${AR} CFLAGS="$CFLAGS -fno-omit-frame-pointer"; }
 
 # Install.
 install -vm755 -t /usr/include/ execinfo.h stacktraverse.h
