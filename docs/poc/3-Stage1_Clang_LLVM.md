@@ -18,7 +18,7 @@
 
 > **Required!** As mentioned in the description above.
 ```bash
-# Set default compiler to Stage-0 Clang/LLVM.
+# Set default compiler to Stage-0 Clang/LLVM (not the new triplet).
 CC="clang" CXX="clang++"
 export CC CXX
 
