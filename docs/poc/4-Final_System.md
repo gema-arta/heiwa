@@ -705,6 +705,9 @@ ln -sv libexecinfo.so.1 /usr/lib/libexecinfo.so
 
 > **Required!**
 ```bash
+# Enters LLVM source directory
+pushd "$LLVM_SRC"
+
 # Decompress clang, lld, and compiler-rt to correct directories.
 pushd ${LLVM_SRC}/projects/ && \
     tar xf ../../pkgs/compiler-rt-12.0.0.src.tar.xz && mv -v compiler-rt-12.0.0.src compiler-rt
