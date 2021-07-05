@@ -245,7 +245,7 @@ time { make; }
 # Install.
 time { make install; }
 
-# Create a ldd symlink to use to print shared object dependencies.
+# Create a `ldd` symlink to use to print shared object dependencies.
 ln -sv ../usr/lib/libc.so /bin/ldd
 
 # Configure PATH for dynamic linker.
