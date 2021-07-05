@@ -271,7 +271,7 @@ done; unset B; install -vm644 -t /usr/include/ \
 ### `8` - Adjusting Toolchains
 > **Required!**
 ```bash
-# Re-configure Stage-1 Clang/LLVM to use "/usr".
+# Configure Stage-1 Clang/LLVM with new triplet to produce binaries with "lib/ld-musl-x86_64.so.1".
 ln -sv clang-12 /clang1-tools/bin/x86_64-heiwa-linux-musl-clang
 ln -sv clang-12 /clang1-tools/bin/x86_64-heiwa-linux-musl-clang++
 cat > /clang1-tools/bin/x86_64-heiwa-linux-musl.cfg << "EOF"
