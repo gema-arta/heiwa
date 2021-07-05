@@ -335,7 +335,8 @@ time {
         cmake -DCMAKE_INSTALL_PREFIX="/clang0-tools" -P cmake_install.cmake && \
     popd && rm -rf build && unset CFLAGS CXXFLAGS
 }
-
+```
+```bash
 # Set `lld` as default toolchain linker.
 ln -sv lld /clang0-tools/bin/ld
 
