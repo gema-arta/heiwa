@@ -315,7 +315,7 @@ grep -o -- -L/lib dummy.log
 # |-L/usr/lib
 
 # Clean up.
-rm -fv dummy.{c,log} a.out 
+rm -fv dummy.{c,log} a.out
 ```
 
 ### `9` - TimeZone Database
