@@ -348,7 +348,7 @@ EOF
 # Configure cross GCC of "/clang0-tools" to match the same output as Clang.
 export SPECFILE="$(dirname $(${HEIWA_TARGET}-gcc -print-libgcc-file-name))/specs"
 ${HEIWA_TARGET}-gcc -dumpspecs > specs 
-sed -i 's|/lib/ld-musl-x86_64.so.1|/clang1-tools\/lib\/ld-musl-x86_64.so.1|g' specs
+sed -i 's|/lib/ld-musl-x86_64.so.1|/clang1-tools/lib/ld-musl-x86_64.so.1|g' specs
 
 # Check specs file.
 grep --color=auto "/clang1-tools/lib/ld-musl-x86_64.so.1" specs
