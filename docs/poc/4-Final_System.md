@@ -855,6 +855,44 @@ grep -o -- -L/usr/lib dummy.log
 popd
 ```
 
+### `24` - Perl
+> #### `5.32.1`
+> The Perl package contains the Practical Extraction and Report Language.
+
+> **Required!** Before `GNU Autoconf`.
+```bash
+# Ensure to build perl with the libraries installed on the system.
+rm -rf cpan/Compress-Raw-Zlib/zlib-src
+rm -rf cpan/Compress-Raw-Bzip2/bzip2-src
+sed -i '/\(bzip2\|zlib\)-src/d' MANIFEST
+BUILD_ZLIB=False BUILD_BZIP2=0
+export BUILD_ZLIB BUILD_BZIP2
+ 
+ # Apply patches (from Alpine Linux) to fix "locale.c" error in programs like `rxvt-unicode`, and change stack size.
+ patch -Np1 -i ../../extra/perl/patches/musl-locale.patch
+ patch -Np1 -i ../../extra/perl/patches/musl-stack-size.patch
+ 
+# Configure source.
+./Configure -des \
+    -Dprefix=/usr -Dvendorprefix=/usr -Dccdlflags="-rdynamic" \
+    -Dcccdlflags="-fPIC" -Dcccdlflags="-fPIC" -Dcf_by="Heiwa" \
+    -Dprivlib=/usr/lib/perl5/5.32.1/core_perl                 \
+    -Darchlib=/usr/lib/perl5/5.32.1/core_perl                 \
+    -Dsitelib=/usr/lib/perl5/5.32.1/site_perl                 \
+    -Dsitearch=/usr/lib/perl5/5.32.1/site_perl                \
+    -Dvendorlib=/usr/lib/perl5/5.32.1/vendor_perl             \
+    -Dvendorarch=/usr/lib/perl5/5.32.1/vendor_perl            \
+    -Doptimize="$CFLAGS -DNO_POSIX_2008_LOCALE -D_GNU_SOURCE" \
+    -Dusethreads -Duseshrplib -Dman1ext=1 -Dman3ext=3pm       \
+    -Dman1dir=/usr/share/man/man1 -Dman3dir=/usr/share/man/man3
+
+# Build.
+time { make; }
+
+# Install and unset Perl specific exported variables.
+time { make install && unset BUILD_ZLIB BUILD_BZIP2; }
+```
+
 <!--
     ### `` - Toybox (Bc, File, Grep, Inetutils, Psmisc, Sed)
     > #### `0.8.5`
