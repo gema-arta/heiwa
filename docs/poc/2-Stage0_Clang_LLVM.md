@@ -276,11 +276,6 @@ popd
 sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
 projects/compiler-rt/cmake/config-ix.cmake
 
-# Fix missing header for lld, [ https://bugs.llvm.org/show_bug.cgi?id=49228 ].
-#mkdir -pv tools/lld/include/mach-o && \
-#cp -fv projects/libunwind/include/mach-o/compact_unwind_encoding.h \
-#tools/lld/include/mach-o
-
 # Update host/target triplet detection.
 cp -fv ../extra/llvm/files/config.guess cmake/.
 
