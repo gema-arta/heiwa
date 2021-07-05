@@ -295,6 +295,15 @@ cp -fv ../extra/llvm/files/config.guess cmake/.
 cmake -B build \
     -DCMAKE_BUILD_TYPE=Release                                  \
     -DCMAKE_INSTALL_PREFIX="/clang1-tools"                      \
+    -DCMAKE_AR="/clang0-tools/bin/llvm-ar"                      \
+    -DCMAKE_RANLIB="/clang0-tools/bin/llvm-ranlib"              \
+    -DCMAKE_INSTALL_OLDINCLUDEDIR="/clang1-tools/include"       \
+    -DCMAKE_LINKER="/clang0-tools/bin/ld.lld"                   \
+    -DCMAKE_NM="/clang0-tools/bin/llvm-nm"                      \
+    -DCMAKE_OBJCOPY="/clang0-tools/bin/llvm-objcopy"            \
+    -DCMAKE_OBJDUMP="/clang0-tools/bin/llvm-objdump"            \
+    -DCMAKE_READELF="/clang0-tools/bin/llvm-readelf"            \
+    -DCMAKE_STRIP="/clang0-tools/bin/llvm-strip"                \
     -DLLVM_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"         \
     -DLLVM_HOST_TRIPLE="x86_64-pc-linux-musl"                   \
     -DLLVM_TARGET_ARCH="X86"                                    \
@@ -326,15 +335,6 @@ cmake -B build \
     -DDEFAULT_SYSROOT="/clang1-tools"                           \
     -DBacktrace_INCLUDE_DIR="/clang1-tools/include"             \
     -DBacktrace_LIBRARY="/clang1-tools/lib/libexecinfo.so"      \
-    -DCMAKE_AR="/clang0-tools/bin/llvm-ar"                      \
-    -DCMAKE_RANLIB="/clang0-tools/bin/llvm-ranlib"              \
-    -DCMAKE_INSTALL_OLDINCLUDEDIR="/clang1-tools/include"       \
-    -DCMAKE_LINKER="/clang0-tools/bin/ld.lld"                   \
-    -DCMAKE_NM="/clang0-tools/bin/llvm-nm"                      \
-    -DCMAKE_OBJCOPY="/clang0-tools/bin/llvm-objcopy"            \
-    -DCMAKE_OBJDUMP="/clang0-tools/bin/llvm-objdump"            \
-    -DCMAKE_READELF="/clang0-tools/bin/llvm-readelf"            \
-    -DCMAKE_STRIP="/clang0-tools/bin/llvm-strip"                \
     -DICONV_LIBRARY_PATH="/clang1-tools/lib/libc.so"
 
 # Build.
