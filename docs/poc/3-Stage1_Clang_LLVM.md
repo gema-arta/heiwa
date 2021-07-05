@@ -501,7 +501,7 @@ time { make install; }
 > **Required!** As default ".gz" files de/compressor for the current and next stage (chroot environment).
 ```bash
 # Build.
-time { make CC="$CC" CFLAGS="$CFLAGS"; }
+time { make CC=${CC} CFLAGS="$CFLAGS"; }
 
 # Install and create symlinks as `gzip` tools.
 ln -sv pigz unpigz; ln -sv pigz gzip; ln -sv unpigz gunzip
