@@ -150,12 +150,17 @@ AR="llvm-ar"
 AS="llvm-as"
 RANLIB="llvm-ranlib"
 LD="ld.lld"
+NM="llvm-nm"
+OBJCOPY="llvm-objcopy"
+OBJDUMP="llvm-objdump"
+READELF="llvm-readelf"
+SIZE="llvm-size"
 STRIP="llvm-strip"
 COMMON_FLAGS="-march=native -Oz -pipe"
 CFLAGS="${COMMON_FLAGS}"
 CXXFLAGS="${COMMON_FLAGS}"
 LLVM_SRC="/sources/llvm"
-export TRUPLE CC CXX AR AS RANLIB LD STRIP COMMON_FLAGS CFLAGS CXXFLAGS LLVM_SRC
+export TRUPLE CC CXX AR AS RANLIB LD NM OBJCOPY OBJDUMP READELF SIZE STRIP COMMON_FLAGS CFLAGS CXXFLAGS LLVM_SRC
 # Make's multiple jobs based on CPU core/threads.
 alias make="make -j$(nproc) -l$(nproc)"
 EOF
