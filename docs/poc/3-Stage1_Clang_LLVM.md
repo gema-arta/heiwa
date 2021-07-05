@@ -326,10 +326,8 @@ cmake -B build \
     -DDEFAULT_SYSROOT="/clang1-tools"                           \
     -DBacktrace_INCLUDE_DIR="/clang1-tools/include"             \
     -DBacktrace_LIBRARY="/clang1-tools/lib/libexecinfo.so"      \
-    -DCMAKE_C_COMPILER_AR="/clang0-tools/bin/llvm-ar"           \
-    -DCMAKE_CXX_COMPILER_AR="/clang0-tools/bin/llvm-ar"         \
-    -DCMAKE_C_COMPILER_RANLIB="/clang0-tools/bin/llvm-ranlib"   \
-    -DCMAKE_CXX_COMPILER_RANLIB="/clang0-tools/bin/llvm-ranlib" \
+    -DCMAKE_AR="/clang0-tools/bin/llvm-ar"                      \
+    -DCMAKE_RANLIB="/clang0-tools/bin/llvm-ranlib"              \
     -DCMAKE_INSTALL_OLDINCLUDEDIR="/clang1-tools/include"       \
     -DCMAKE_LINKER="/clang0-tools/bin/ld.lld"                   \
     -DCMAKE_NM="/clang0-tools/bin/llvm-nm"                      \
