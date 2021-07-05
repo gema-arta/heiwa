@@ -19,7 +19,8 @@
 > **Required!** As mentioned in the description above.
 ```bash
 # Set default compiler to Stage-0 Clang/LLVM (not the new triplet).
-CC="clang" CXX="clang++" AR="llvm-ar" RANLIB="llvm-ranlib"
+CC="clang" CXX="clang++" 
+AR="llvm-ar" RANLIB="llvm-ranlib"
 export CC CXX AR RANLIB
 
 # Configure source.
