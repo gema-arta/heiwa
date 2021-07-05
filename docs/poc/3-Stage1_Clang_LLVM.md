@@ -731,7 +731,7 @@ rm -fv /clang1-tools/lib/libbz2.a
 
 > **Required!** By Cmake in the current stage.
 ```bash
-# Enable `pthread` and generate configure script.
+# Enable `pthread` and generate the configure script.
 export LDFLAGS="-pthread"
 NOCONFIGURE=1 ./autogen.sh
 
