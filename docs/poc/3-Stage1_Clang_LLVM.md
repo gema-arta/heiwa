@@ -109,7 +109,6 @@ pushd ${LLVM_SRC}/projects/libunwind/ && \
         -DCMAKE_C_FLAGS="-fPIC"                          \
         -DCMAKE_CXX_FLAGS="-fPIC"                        \
         -DCMAKE_AR="/clang0-tools/bin/llvm-ar"           \
-        -DCMAKE_AS="/clang0-tools/bin/llvm-as"           \
         -DCMAKE_RANLIB="/clang0-tools/bin/llvm-ranlib"   \
         -DCMAKE_LINKER="/clang0-tools/bin/ld.lld"        \
         -DCMAKE_NM="/clang0-tools/bin/llvm-nm"           \
