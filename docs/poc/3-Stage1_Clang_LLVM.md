@@ -355,7 +355,7 @@ EOF
 # Set the new PATH since "/clang0-tools" won't be used anymore and its time to enable optimization.
 PATH="/clang1-tools/bin:/clang1-tools/usr/bin:/bin:/usr/bin"
 sed -i "s|PATH=.*|PATH=\"${PATH}\"|" ~/.bashrc
-sed -i '/unset CFLAGS CXXFLAGS/d' ~/.bashrc
+sed -i '/unset CFLAGS CXXFLAGS/d'    ~/.bashrc
 source ~/.bash_profile
 
 # Back to "${HEIWA}/sources/pkg" directory.
