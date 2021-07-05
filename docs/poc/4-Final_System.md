@@ -812,9 +812,9 @@ ln -sv lld /usr/bin/ld
 
 # Build useful utilities for BSD-compability.
 time {
-    ${CC} ${CFLAGS} -fpie ../../extra/musl/files/musl-utils/getconf.c -o getconf && \
-    ${CC} ${CFLAGS} -fpie ../../extra/musl/files/musl-utils/getent.c -o getent   && \
-    ${CC} ${CFLAGS} -fpie ../../extra/musl/files/musl-utils/iconv.c -o iconv
+    cc ${CFLAGS} -fpie ../../extra/musl/files/musl-utils/getconf.c -o getconf && \
+    cc ${CFLAGS} -fpie ../../extra/musl/files/musl-utils/getent.c -o getent   && \
+    cc ${CFLAGS} -fpie ../../extra/musl/files/musl-utils/iconv.c -o iconv
 }
 
 # Install above utilities, and the man files (from NetBSD).
