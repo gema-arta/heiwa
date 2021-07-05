@@ -116,18 +116,21 @@ cp -rfv usr/include /clang1-tools/.
 # Configure source.
 pushd ${LLVM_SRC}/projects/libunwind/ && \
     cmake -B build \
-        -DCMAKE_INSTALL_PREFIX="/clang1-tools"           \
-        -DCMAKE_C_FLAGS="-fPIC"                          \
-        -DCMAKE_CXX_FLAGS="-fPIC"                        \
-        -DLIBUNWIND_ENABLE_SHARED=ON                     \
-        -DLIBUNWIND_USE_COMPILER_RT=ON                   \
+        -DCMAKE_INSTALL_PREFIX="/clang1-tools" \
+        -DCMAKE_C_FLAGS="-fPIC"                \
+        -DCMAKE_CXX_FLAGS="-fPIC"              \
+        -DLIBUNWIND_ENABLE_SHARED=ON           \
+        -DLIBUNWIND_USE_COMPILER_RT=ON         \
         -DLLVM_PATH="$LLVM_SRC"
 
 # Build.
 time { make -C build; }
 
 # Install and remove the build directory.
-time { make -C build install && rm -rf build && popd; }
+time {
+    make -C build install && \
+    rm -rf build && popd
+}
 ```
 
 ### `4` - LLVM libcxxabi
