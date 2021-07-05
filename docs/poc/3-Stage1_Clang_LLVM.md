@@ -334,6 +334,7 @@ cmake -B build \
     -DCMAKE_LINKER="/clang0-tools/bin/ld.lld"                   \
     -DCMAKE_NM="/clang0-tools/bin/llvm-nm"                      \
     -DCMAKE_OBJCOPY="/clang0-tools/bin/llvm-objcopy"            \
+    -DCMAKE_OBJDUMP="/clang0-tools/bin/llvm-objdump"            \
     -DCMAKE_READELF="/clang0-tools/bin/llvm-readelf"            \
     -DCMAKE_STRIP="/clang0-tools/bin/llvm-strip"                \
     -DICONV_LIBRARY_PATH="/clang1-tools/lib/libc.so"
