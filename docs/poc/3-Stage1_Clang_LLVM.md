@@ -360,7 +360,7 @@ EOF
 
 # Set the new PATH since "/clang0-tools" won't be used anymore and the Stage-1 Clang default triplet (pc),
 # also its time to enable optimization.
-sed -i 's|/clang0-tools/bin:/clang0-tools/usr/bin:||' ~/.bashrc
+sed -i 's|/clang0-tools/usr/bin:/clang0-tools/bin:||' ~/.bashrc
 sed -i '/unset CFLAGS CXXFLAGS/d'                     ~/.bashrc
 sed -i 's|CC=.*|CC="${TARGET_TRUPLE}-clang"|'         ~/.bashrc
 sed -i 's|CXX=.*|CXX="${TARGET_TRUPLE}-clang++"|'     ~/.bashrc
