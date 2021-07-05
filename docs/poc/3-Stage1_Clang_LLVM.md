@@ -716,7 +716,7 @@ sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
 time { make -f Makefile-libbz2_so CC=${CC} AR=${AR} RANLIB=${RANLIB} && make clean; }
 
 # Build.
-time { make CC=${CC} AR="$AR" RANLIB="$RANLIB"; }
+time { make CC=${CC} AR=${AR} RANLIB=${RANLIB}; }
 
 # Install.
 time { make PREFIX=/clang1-tools install; }
