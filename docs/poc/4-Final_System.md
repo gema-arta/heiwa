@@ -801,12 +801,8 @@ time { make -C build; }
 time {
     pushd build/ && \
         cmake -DCMAKE_INSTALL_PREFIX="/usr" -P cmake_install.cmake && \
-    popd; source ~/.bash_profile
+    popd
 }
-
-# Set clang and lld as default toolchain's compiler and linker.
-ln -sv clang /usr/bin/cc
-ln -sv lld /usr/bin/ld
 
 # Create a symlink required by the FHS for "historical" reasons.
 ln -sv ../usr/bin/clang /lib/cpp
