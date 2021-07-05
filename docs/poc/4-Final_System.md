@@ -860,7 +860,38 @@ grep -o -- -L/usr/lib dummy.log
 cd /sources/pkgs/
 ```
 
-### `24` - Perl
+### `24` - Bzip2
+> #### `1.0.8` or newer
+> The Bzip2 package contains programs for compressing and decompressing files. Compressing text files with bzip2 yields a much better compression percentage than with the traditional gzip.
+
+> **Required!** Before libexecinfo.
+```bash
+# Apply patches to fix docs installation and library soname.
+patch -Np1 -i ../../extra/bzip2/patches/install_docs-1.patch
+patch -Np1 -i ../../extra/bzip2/patches/soname.patch
+
+# Fix the makefile to ensures installation of symlinks are relative and the man pages are installed into correct location.
+sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
+sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
+
+# Prepare.
+time { make -f Makefile-libbz2_so && make clean; }
+
+# Build.
+time { make; }
+
+# Install (also shared libraries) and fix the symlinks.
+time { make PREFIX=/usr install; }
+ln -sv libbz2.so.1.0 libbz2.so
+install -vm755 -t /usr/lib/ libbz2.so*
+mv -fv bzip2-shared bzip2; ln -sv bzip2 bunzip2; ln -sv bzip2 bzcat
+install -vm755 /usr/bin/ b{un,}zip2 bzcat
+
+# Remove useless static library.
+rm -fv /usr/lib/libbz2.a
+```
+
+### `25` - Perl
 > #### `5.32.1`
 > The Perl package contains the Practical Extraction and Report Language.
 
@@ -960,39 +991,6 @@ time { make install && unset BUILD_ZLIB BUILD_BZIP2; }
     
     # Install.
     time { make install; }
-    ```
-
-    ### `` - Bzip2
-    > #### `1.0.8` or newer
-    > The Bzip2 package contains programs for compressing and decompressing files. Compressing text files with bzip2 yields a much better compression percentage than with the traditional gzip.
-
-    > **Required!** Before libexecinfo.
-    ```bash
-    # Apply patches to fix docs installation and library soname.
-    patch -Np1 -i ../../extra/bzip2/patches/install_docs-1.patch
-    patch -Np1 -i ../../extra/bzip2/patches/soname.patch
-
-    # The following command ensures installation of symbolic links are relative, and ensure the man pages are installed into the correct location.
-    sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
-    sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
-
-    # Prepare.
-    time { make -f Makefile-libbz2_so && make clean; }
-
-    # Build.
-    time { make; }
-
-    # Install (also shared libraries) and fix the symlinks.
-    time { make PREFIX=/usr install; }
-    cp -av libbz2.so* /usr/lib/
-    ln -sv libbz2.so.1.0 /usr/lib/libbz2.so
-    rm -fv /usr/bin/{bunzip2,bzcat,bzip2}
-    install -vm755 bzip2-shared /usr/bin/bzip2
-    ln -sv bzip2 /usr/bin/bunzip2
-    ln -sv bzip2 /usr/bin/bzcat
-
-    # Remove useless static library.
-    rm -fv /usr/lib/libbz2.a
     ```
 
     ### `` - Argp-standalone
