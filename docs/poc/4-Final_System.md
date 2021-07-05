@@ -885,7 +885,7 @@ time { make PREFIX=/usr install; }
 ln -sv libbz2.so.1.0 libbz2.so
 install -vm755 -t /usr/lib/ libbz2.so*
 mv -fv bzip2-shared bzip2; ln -sv bzip2 bunzip2; ln -sv bzip2 bzcat
-install -vm755 /usr/bin/ b{un,}zip2 bzcat
+install -vm755 -t /usr/bin/ b{un,}zip2 bzcat
 
 # Remove useless static library.
 rm -fv /usr/lib/libbz2.a
