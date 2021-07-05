@@ -128,7 +128,7 @@ time { make DESTDIR=/clang0-tools install; }
 mkdir -v /clang0-tools/usr && \
 ln -sv ../include /clang0-tools/usr/include
 
-# Fix a wrong object symlink.
+# Fix a wrong shared object symlink.
 ln -sfv libc.so /clang0-tools/lib/ld-musl-x86_64.so.1
 
 # Create a ldd symlink to use to print shared object dependencies.
