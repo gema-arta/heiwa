@@ -705,7 +705,7 @@ ln -sv libexecinfo.so.1 /usr/lib/libexecinfo.so
 
 > **Required!**
 ```bash
-# Enters LLVM source directory
+# Enter to LLVM source directory.
 pushd "$LLVM_SRC"
 
 # Decompress clang, lld, and compiler-rt to correct directories.
@@ -841,8 +841,8 @@ grep -o -- -L/usr/lib dummy.log
 # |-----------------------
 # |-L/usr/lib
 
-# Clean up.
-rm -fv dummy.c a.out dummy.log
+# Clean up and back to "/sources/pkg" directory.
+rm -fv dummy.c a.out dummy.log; popd
 ```
 
 <!--
