@@ -171,7 +171,7 @@ time {
 
 > **Required!** As mentioned in the description above.
 ```bash
-# Deletes atomic detection for Linux, to build libcxx with "libatomic.so*" free (which is provided by GCC).
+# Deletes atomic detection for Linux to build `libcxx` with "libatomic.so*" free (which is provided by GCC).
 sed -i '/check_library_exists(atomic __atomic_fetch_add_8 "" LIBCXX_HAS_ATOMIC_LIB)/d' \
 ${LLVM_SRC}/projects/libcxx/cmake/config-ix.cmake
 
