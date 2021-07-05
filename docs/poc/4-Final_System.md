@@ -410,8 +410,7 @@ time {
 }
 
 # Remove man colission with `attr`.
-rm -fv /usr/share/man/man3/attr_get.3
-rm -fv /usr/share/man/man3/attr_set.3
+rm -fv /usr/share/man/man3/attr_{g,s}et.3
 ```
 
 ### `12` - NetBSD libedit
