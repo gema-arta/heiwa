@@ -249,7 +249,7 @@ install -vm755 -t /clang0-tools/lib/ libexecinfo.{a,so{.1,}}
 > #### `12.0.0`
 > C language family frontend for LLVM.
 
-> **Required!** Build Stage-0 Clang/LLVM toolchain with `libgcc_s.so*` and `libstdc++.so*` dependencies.
+> **Required!** Build Stage-0 Clang/LLVM toolchain with `libgcc_s.so*` and `libstdc++.so*` dependencies (provided by GCC).
 ```bash
 # Exit from the LLVM source directory if already in after decompressing.
 popd
