@@ -318,12 +318,12 @@ cmake -B build \
     -DCLANG_DEFAULT_CXX_STDLIB=libc++                                                       \
     -DCLANG_DEFAULT_UNWINDLIB=libunwind                                                     \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                                                       \
-    -DLIBCXX_HAS_MUSL_LIBC=ON                                                               \
-    -DICONV_LIBRARY_PATH="/clang0-tools/lib/libc.so"                                        \
-    -DDEFAULT_SYSROOT="/clang0-tools"                                                       \
     -DCLANG_DEFAULT_LINKER="/clang0-tools/bin/ld.lld"                                       \
-    -DBacktrace_HEADER="/clang0-tools/include/execinfo.h"                                   \
-    -DBacktrace_LIBRARY="/clang0-tools/lib/libexecinfo.so.1"
+    -DDEFAULT_SYSROOT="/clang0-tools"                                                       \
+    -DBacktrace_INCLUDE_DIR="/clang0-tools/usr/include"                                     \
+    -DBacktrace_LIBRARY="/clang0-tools/lib/libexecinfo.so"                                  \
+    -DICONV_LIBRARY_PATH="/clang0-tools/lib/libc.so"                                        \
+    -DLIBCXX_HAS_MUSL_LIBC=ON 
 
 # Build.
 time { make -C build; }
