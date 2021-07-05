@@ -189,7 +189,7 @@ time {
 # Install.
 time { make install; }
 
-# Adjust GCC to produce programs and libraries that will use musl libc in "/clang0-tools/".
+# Adjust current GCC to produce programs and libraries that will use musl libc in "/clang0-tools/".
 export SPECFILE="$(dirname $(${HEIWA_TARGET}-gcc -print-libgcc-file-name))/specs"
 ${HEIWA_TARGET}-gcc -dumpspecs > specs
 sed -i 's|/lib/ld-musl-x86_64.so.1|/clang0-tools/lib/ld-musl-x86_64.so.1|g' specs
