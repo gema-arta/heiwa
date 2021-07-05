@@ -807,7 +807,7 @@ time {
     clang $CFLAGS -fpie ../../extra/musl/files/iconv.c -o iconv
 }
 
-# Install above utilities, and the man files.
+# Install above utilities, and the man files (from NetBSD).
 install -vm755 -t /usr/bin/ get{conf,ent} iconv
 install -vm644 -t /usr/share/man/man1/ ../../extra/musl/files/get{conf,ent}.1
 
