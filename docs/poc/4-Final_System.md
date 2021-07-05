@@ -439,7 +439,7 @@ ln -sv ../editline/readline.h /usr/include/readline/readline.h
 
 > **Required!** Before `OpenBSD M4`, `IProute2`, `Kbd`, and `Kmod`.
 ```bash
-# Configure source. Flex still expect gcc to configure.
+# Configure source. Flex still expect `gcc` to configure.
 ln -sv "$CC" /clang1-tools/bin/gcc     && \
 ac_cv_func_malloc_0_nonnull=yes           \
 ac_cv_func_realloc_0_nonnull=yes          \
