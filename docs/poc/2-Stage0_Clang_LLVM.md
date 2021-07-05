@@ -112,8 +112,8 @@ time { make install-gcc install-target-libgcc; }
 > **Required!** As mentioned in the description above.
 ```bash
 # Configure source.
-./configure CROSS_COMPILE=${HEIWA_TARGET}-      \
-    --prefix=/ --target=${HEIWA_TARGET}         \
+./configure CROSS_COMPILE=${HEIWA_TARGET}- \
+    --prefix=/ --target=${HEIWA_TARGET}    \
     --enable-optimize=speed
 
 # Build.
