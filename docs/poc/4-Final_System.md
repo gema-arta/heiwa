@@ -687,7 +687,7 @@ pushd ${LLVM_SRC}/projects/libcxx/ && \
 # Build.
 time { make -C build; }
 
-# Install and remove the `libcxx`, also `libcxxabi` source.
+# Install and remove the `libcxx` also `libcxxabi` source.
 time {
     make -C build install && popd && \
     rm -rf ${LLVM_SRC}/projects/libcxx{,abi}
