@@ -897,7 +897,7 @@ rm -fv /usr/lib/libbz2.a
 
 > **Required!** Before `GNU Autoconf`.
 ```bash
-# Ensure to build perl with the libraries installed on the system.
+# Ensure to build with Perl with the libraries installed on the system.
 rm -rf cpan/Compress-Raw-Zlib/zlib-src
 rm -rf cpan/Compress-Raw-Bzip2/bzip2-src
 sed -i '/\(bzip2\|zlib\)-src/d' MANIFEST
