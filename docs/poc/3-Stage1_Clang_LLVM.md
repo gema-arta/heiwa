@@ -100,14 +100,12 @@ cp -rfv usr/include /clang1-tools/.
 
 > **Required!** As mentioned in the description above.
 ```bash
-# Set default compiler to the new triplet from Stage-0 Clang/LLVM.
-CC="${HEIWA_TARGET}-clang" CXX="${HEIWA_TARGET}-clang++"
-export CC CXX
-
 # Configure source.
 pushd ${LLVM_SRC}/projects/libunwind/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools"           \
+        -DCMAKE_C_COMPILER="${HEIWA_TARGET}-clang"       \
+        -DCMAKE_CXX_COMPILER="${HEIWA_TARGET}-clang++"   \
         -DCMAKE_C_FLAGS="-fPIC"                          \
         -DCMAKE_CXX_FLAGS="-fPIC"                        \
         -DCMAKE_AR="/clang0-tools/bin/llvm-ar"           \
@@ -137,14 +135,12 @@ time { make -C build install && rm -rf build && popd; }
 
 > **Required!** As mentioned in the description above.
 ```bash
-# Set default compiler to the new triplet from Stage-0 Clang/LLVM.
-CC="${HEIWA_TARGET}-clang" CXX="${HEIWA_TARGET}-clang++"
-export CC CXX
-
 # Configure source.
 pushd ${LLVM_SRC}/projects/libcxxabi/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools"                            \
+        -DCMAKE_C_COMPILER="${HEIWA_TARGET}-clang"                        \
+        -DCMAKE_CXX_COMPILER="${HEIWA_TARGET}-clang++"                    \
         -DLIBCXXABI_ENABLE_STATIC=ON                                      \
         -DLIBCXXABI_USE_COMPILER_RT=ON                                    \
         -DLIBCXXABI_USE_LLVM_UNWINDER=ON                                  \
@@ -171,10 +167,6 @@ time {
 
 > **Required!** As mentioned in the description above.
 ```bash
-# Set default compiler to the new triplet from Stage-0 Clang/LLVM.
-CC="${HEIWA_TARGET}-clang" CXX="${HEIWA_TARGET}-clang++"
-export CC CXX
-
 # Deletes atomic detection for Linux, to build libcxx with "libatomic.so*" free (which is provided by GCC).
 sed -i '/check_library_exists(atomic __atomic_fetch_add_8 "" LIBCXX_HAS_ATOMIC_LIB)/d' \
 ${LLVM_SRC}/projects/libcxx/cmake/config-ix.cmake
@@ -183,6 +175,8 @@ ${LLVM_SRC}/projects/libcxx/cmake/config-ix.cmake
 pushd ${LLVM_SRC}/projects/libcxx/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools"                 \
+        -DCMAKE_C_COMPILER="${HEIWA_TARGET}-clang"             \
+        -DCMAKE_CXX_COMPILER="${HEIWA_TARGET}-clang++"         \
         -DCMAKE_CXX_FLAGS="-isystem /clang1-tools/include"     \
         -DLIBCXX_ENABLE_SHARED=ON                              \
         -DLIBCXX_ENABLE_STATIC=ON                              \
