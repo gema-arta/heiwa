@@ -503,7 +503,7 @@ time { make install; }
 # Build.
 time { make CC="$CC" CFLAGS="$CFLAGS"; }
 
-# Install and make symlink as `gzip` tools.
+# Install and create symlink as `gzip` tools.
 ln -sv pigz unpigz; ln -sv pigz gzip; ln -sv unpigz gunzip
 install -vm755 -t /clang1-tools/bin/ pigz unpigz gzip gunzip
 ```
