@@ -782,7 +782,7 @@ cmake -B build \
     -DLLVM_INSTALL_UTILS=ON                                     \
     -DLLVM_ENABLE_BINDINGS=OFF                                  \
     -DLLVM_ENABLE_IDE=OFF                                       \
-    -DLLVM_ENABLE_UNWIND_TABLES=OFF                             \
+    -DLLVM_ENABLE_UNWIND_TABLES=OFF
 
 # Build.
 time { make -C build; }
