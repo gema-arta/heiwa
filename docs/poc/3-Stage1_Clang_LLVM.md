@@ -181,6 +181,7 @@ ${LLVM_SRC}/projects/libcxx/cmake/config-ix.cmake
 pushd ${LLVM_SRC}/projects/libcxx/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools"                 \
+        -DCMAKE_CXX_FLAGS="-isystem /clang1-tools/include"     \
         -DLIBCXX_ENABLE_SHARED=ON                              \
         -DLIBCXX_ENABLE_STATIC=ON                              \
         -DLIBCXX_HAS_MUSL_LIBC=ON                              \
@@ -190,7 +191,6 @@ pushd ${LLVM_SRC}/projects/libcxx/ && \
         -DLIBCXXABI_USE_LLVM_UNWINDER=ON                       \
         -DLIBCXX_CXX_ABI_INCLUDE_PATHS="/clang1-tools/include" \
         -DLIBCXX_CXX_ABI_LIBRARY_PATH="/clang1-tools/lib"      \
-        -DCMAKE_CXX_FLAGS="-isystem /clang1-tools/include"     \
         -DLLVM_PATH="$LLVM_SRC"
 
 # Build.
