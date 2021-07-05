@@ -747,8 +747,8 @@ cmake -B build \
     -DCMAKE_STRIP="/clang1-tools/bin/llvm-strip"                \
     -DLLVM_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"         \
     -DLLVM_HOST_TRIPLE="x86_64-pc-linux-musl"                   \
-    -DLLVM_TARGET_ARCH="X86"                                    \
     -DLLVM_TARGETS_TO_BUILD="host;BPF;AMDGPU;X86"               \
+    -DLLVM_TARGET_ARCH="X86"                                    \
     -DLLVM_LINK_LLVM_DYLIB=ON                                   \
     -DLLVM_BUILD_LLVM_DYLIB=ON                                  \
     -DLLVM_BUILD_TESTS=OFF                                      \
