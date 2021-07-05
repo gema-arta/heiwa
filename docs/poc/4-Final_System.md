@@ -809,9 +809,9 @@ ln -sv ../usr/bin/clang /lib/cpp
 
 # Build useful utilities for BSD-compability.
 time {
-    cc $CFLAGS -fpie ../../extra/musl/files/musl-utils/getconf.c -o getconf && \
-    cc $CFLAGS -fpie ../../extra/musl/files/musl-utils/getent.c -o getent   && \
-    cc $CFLAGS -fpie ../../extra/musl/files/musl-utils/iconv.c -o iconv
+    ${CC} ${CFLAGS} -fpie ../../extra/musl/files/musl-utils/getconf.c -o getconf && \
+    ${CC} ${CFLAGS} -fpie ../../extra/musl/files/musl-utils/getent.c -o getent   && \
+    ${CC} ${CFLAGS} -fpie ../../extra/musl/files/musl-utils/iconv.c -o iconv
 }
 
 # Install above utilities, and the man files (from NetBSD).
