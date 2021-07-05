@@ -60,8 +60,8 @@ cat > /clang1-tools/etc/ld-musl-x86_64.path << "EOF"
 EOF
 
 # Set toolchain to the new tripet from Stage-0 Clang/LLVM.
-sed -i "s|CC=.*|CC=\"\${HEIWA_TARGET}-clang\"|"     ~/.bashrc
-sed -i "s|CXX=.*|CXX=\"\${HEIWA_TARGET}-clang++\"|" ~/.bashrc
+sed -i 's|CC=.*|CC="${HEIWA_TARGET}-clang"|'     ~/.bashrc
+sed -i 's|CXX=.*|CXX="${HEIWA_TARGET}-clang++"|' ~/.bashrc
 source ~/.bashrc
 
 # Quick test for the new triplet of Stage-0 Clang/LLVM.
@@ -353,7 +353,7 @@ cat > /clang1-tools/bin/${TARGET_TRUPLE}.cfg << "EOF"
 EOF
 
 # Set the new PATH since "/clang0-tools" won't be used anymore and its time to enable optimization.
-sed -i "s|/clang0-tools/bin:/clang0-tools/usr/bin:||" ~/.bashrc
+sed -i 's|/clang0-tools/bin:/clang0-tools/usr/bin:||' ~/.bashrc
 sed -i '/unset CFLAGS CXXFLAGS/d'                     ~/.bashrc
 source ~/.bash_profile
 
