@@ -285,8 +285,8 @@ source ~/.bash_profile
 
 # Quick test.
 echo "int main(){}" > dummy.c
-"$CC" dummy.c -v -Wl,--verbose &> dummy.log
-llvm-readelf -l a.out | grep ": /lib"
+${CC} dummy.c -v -Wl,--verbose &> dummy.log
+${READELF} -l a.out | grep ": /lib"
 
 # | The output should be:
 # |-----------------------
