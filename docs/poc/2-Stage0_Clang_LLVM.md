@@ -335,9 +335,6 @@ time {
     popd && rm -rf build && unset CFLAGS CXXFLAGS
 }
 
-# Set `lld` as default toolchain linker.
-ln -sv lld /clang0-tools/bin/ld
-
 # Configure Stage-0 Clang with new triplet to produce binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" later.
 ln -sv clang-12 /clang0-tools/bin/${HEIWA_TARGET}-clang
 ln -sv clang-12 /clang0-tools/bin/${HEIWA_TARGET}-clang++
