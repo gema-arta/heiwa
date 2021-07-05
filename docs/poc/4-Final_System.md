@@ -857,7 +857,7 @@ grep -o -- -L/usr/lib dummy.log
 # |-L/usr/lib
 
 # Back to "/sources/pkgs" directory.
-cd /sources/pkgs
+cd /sources/pkgs/
 ```
 
 ### `24` - Perl
