@@ -44,7 +44,8 @@ mkdir -v /clang1-tools/etc && \
 cat > /clang1-tools/etc/ld-musl-x86_64.path << "EOF"
 /clang1-tools/lib
 EOF
-
+```
+```bash
 # Quick test for the new triplet of Stage-0 Clang/LLVM.
 echo "int main(){}" > dummy.c
 ${HEIWA_TARGET}-clang dummy.c -v -Wl,--verbose &> dummy.log
