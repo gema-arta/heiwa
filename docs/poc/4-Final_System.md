@@ -875,10 +875,10 @@ sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
 sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
 
 # Prepare.
-time { make -f Makefile-libbz2_so && make clean; }
+time { make CFLAGS="$CFLAGS -fPIC" -f Makefile-libbz2_so && make clean; }
 
 # Build.
-time { make; }
+time { make CFLAGS="$CFLAGS -fPIC"; }
 
 # Install (also shared libraries) and fix the symlinks.
 time { make PREFIX=/usr install; }
