@@ -132,7 +132,7 @@ ln -sv ../include /clang0-tools/usr/include
 ln -sfv libc.so /clang0-tools/lib/ld-musl-x86_64.so.1
 
 # Create a `ldd` symlink to use to print shared object dependencies.
-ln -sv ../lib/ld-musl-x86_64.so.1 /clang0-tools/bin/ldd
+ln -sv ../lib/libc.so /clang0-tools/bin/ldd
 
 # Configure PATH for dynamic linker.
 mkdir -v /clang0-tools/etc && \
