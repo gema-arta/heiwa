@@ -260,10 +260,10 @@ rm -fv /clang1-tools/lib/libz.a
 
 > **Required!** As default toolchain. This will build Stage-1 Clang/LLVM toolchain with `libgcc_s.so*` and `libstdc++.so*` free.
 ```bash
-# Exit from "${HEIWA}/sources/pkg/llvm-12.0.0.src" directory if already in.
+# Exit from the LLVM source directory if already entered after decompressing.
 popd
 
-# Rename the LLVM source directory to "$LLVM_SRC", then enters.
+# Rename the LLVM source directory to "$LLVM_SRC", then enter.
 mv -v llvm-12.0.0.src "$LLVM_SRC" && cd "$LLVM_SRC"
 
 # Decompress clang, lld, and compiler-rt to correct directories.
