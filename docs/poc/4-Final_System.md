@@ -736,6 +736,15 @@ cp -fv ../extra/llvm/files/config.guess cmake/.
 cmake -B build \
     -DCMAKE_BUILD_TYPE=Release                                  \
     -DCMAKE_INSTALL_PREFIX="/usr"                               \
+    -DCMAKE_AR="/clang1-tools/bin/llvm-ar"                      \
+    -DCMAKE_RANLIB="/clang1-tools/bin/llvm-ranlib"              \
+    -DCMAKE_INSTALL_OLDINCLUDEDIR="/usr/include"                \
+    -DCMAKE_LINKER="/clang1-tools/bin/ld.lld"                   \
+    -DCMAKE_NM="/clang1-tools/bin/llvm-nm"                      \
+    -DCMAKE_OBJCOPY="/clang1-tools/bin/llvm-objcopy"            \
+    -DCMAKE_OBJDUMP="/clang1-tools/bin/llvm-objdump"            \
+    -DCMAKE_READELF="/clang1-tools/bin/llvm-readelf"            \
+    -DCMAKE_STRIP="/clang1-tools/bin/llvm-strip"                \
     -DLLVM_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"         \
     -DLLVM_HOST_TRIPLE="x86_64-pc-linux-musl"                   \
     -DLLVM_TARGET_ARCH="X86"                                    \
@@ -767,15 +776,6 @@ cmake -B build \
     -DDEFAULT_SYSROOT="/usr"                                    \
     -DBacktrace_INCLUDE_DIR="/usr/include"                      \
     -DBacktrace_LIBRARY="/usr/lib/libexecinfo.so"               \
-    -DCMAKE_AR="/clang1-tools/bin/llvm-ar"                      \
-    -DCMAKE_RANLIB="/clang1-tools/bin/llvm-ranlib"              \
-    -DCMAKE_INSTALL_OLDINCLUDEDIR="/usr/include"                \
-    -DCMAKE_LINKER="/clang1-tools/bin/ld.lld"                   \
-    -DCMAKE_NM="/clang1-tools/bin/llvm-nm"                      \
-    -DCMAKE_OBJCOPY="/clang1-tools/bin/llvm-objcopy"            \
-    -DCMAKE_OBJDUMP="/clang1-tools/bin/llvm-objdump"            \
-    -DCMAKE_READELF="/clang1-tools/bin/llvm-readelf"            \
-    -DCMAKE_STRIP="/clang1-tools/bin/llvm-strip"                \
     -DICONV_LIBRARY_PATH="/usr/lib/libc.so"                     \
     -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON                         \
     -DLLVM_INSTALL_CCTOOLS_SYMLINKS=ON                          \
