@@ -834,9 +834,9 @@ grep "ld.lld:.*crt[1in].o" dummy.log
 
 # | The output should be:
 # |-----------------------
-# |ld.lld: /usr/lib/Scrt1.o
-# |ld.lld: /usr/lib/crti.o
-# |ld.lld: /usr/lib/crtn.o
+# |ld.lld: /usr/bin/../lib/Scrt1.o
+# |ld.lld: /usr/bin/../lib/crti.o
+# |ld.lld: /usr/bin/../lib/crtn.o
 
 grep -B1 "^ /usr/include" dummy.log
 
