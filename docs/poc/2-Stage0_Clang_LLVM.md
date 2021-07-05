@@ -44,7 +44,7 @@ find usr/include -name '.*' -exec rm -rfv {} \;
 rm -fv usr/include/Makefile
 
 # Install.
-mkdir -pv /clang0-tools/${HEIWA_TARGET} && \
+mkdir -v /clang0-tools/${HEIWA_TARGET} && \
 cp -rv usr/include /clang0-tools/${HEIWA_TARGET}/.
 ```
 
@@ -125,7 +125,7 @@ time { make DESTDIR=/clang0-tools install; }
 
 # GCC will looking for system headers in "/clang0-tools/usr/include/*".
 # Create the directory, then symlink it.
-mkdir -pv /clang0-tools/usr && \
+mkdir -v /clang0-tools/usr && \
 ln -sv ../include /clang0-tools/usr/include
 
 # Fix a wrong object symlink.
