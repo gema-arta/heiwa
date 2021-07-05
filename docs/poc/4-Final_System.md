@@ -803,9 +803,9 @@ ln -sv ../usr/bin/clang /lib/cpp
 
 # Build useful utilities for BSD-compability.
 time {
-    clang $CFLAGS -fpie ../../extra/musl/files/musl-utils/getconf.c -o getconf && \
-    clang $CFLAGS -fpie ../../extra/musl/files/musl-utils/getent.c -o getent   && \
-    clang $CFLAGS -fpie ../../extra/musl/files/musl-utils/iconv.c -o iconv
+    cc $CFLAGS -fpie ../../extra/musl/files/musl-utils/getconf.c -o getconf && \
+    cc $CFLAGS -fpie ../../extra/musl/files/musl-utils/getent.c -o getent   && \
+    cc $CFLAGS -fpie ../../extra/musl/files/musl-utils/iconv.c -o iconv
 }
 
 # Install above utilities, and the man files (from NetBSD).
@@ -814,7 +814,7 @@ install -vm644 -t /usr/share/man/man1/ ../../extra/musl/files/musl-utils/get{con
 
 # Quick test.
 echo "int main(){}" > dummy.c
-clang dummy.c -v -Wl,--verbose &> dummy.log
+cc dummy.c -v -Wl,--verbose &> dummy.log
 readelf -l a.out | grep ": /lib"
 
 # | The output should be:
