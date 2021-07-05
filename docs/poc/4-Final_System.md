@@ -744,7 +744,7 @@ projects/compiler-rt/cmake/config-ix.cmake
 # Fix missing header for lld, [ https://bugs.llvm.org/show_bug.cgi?id=49228 ].
 tar xf ../pkgs/libunwind-12.0.0.src.tar.xz && \
 mkdir -pv tools/lld/include/mach-o         && \
-cp -fv projects/libunwind/include/mach-o/compact_unwind_encoding.h \
+cp -fv libunwind-12.0.0.src/libunwind/include/mach-o/compact_unwind_encoding.h \
 tools/lld/include/mach-o/. && rm -rf libunwind-12.0.0.src
 
 # Update host/target triplet detection.
