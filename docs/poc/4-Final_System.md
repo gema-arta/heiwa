@@ -268,7 +268,7 @@ done; unset B; install -vm644 -t /usr/include/ \
 ../../extra/musl/files/musl-legacy-compat/error.h
 ```
 
-### `8` - Adjusting Toolchains
+### `8` - Adjusting Toolchain
 > **Required!**
 ```bash
 # Configure Stage-1 Clang with new triplet to produce binaries with "lib/ld-musl-x86_64.so.1" and libraries from "/usr/*".
@@ -804,8 +804,11 @@ time {
     popd
 }
 
-# Create a symlink required by the FHS for "historical" reasons.
+# Create a symlink required by the FHS for "historical" reasons, and
+# set `clang` and `lld` as default toolchain compiler and linker.
 ln -sv ../usr/bin/clang /lib/cpp
+ln -sv clang /usr/bin/cc
+ln -sv lld /usr/bin/ld
 
 # Build useful utilities for BSD-compability.
 time {
@@ -820,8 +823,8 @@ install -vm644 -t /usr/share/man/man1/ ../../extra/musl/files/musl-utils/get{con
 
 # Quick test.
 echo "int main(){}" > dummy.c
-${CC} dummy.c -v -Wl,--verbose &> dummy.log
-${READELF} -l a.out | grep ": /lib"
+cc dummy.c -v -Wl,--verbose &> dummy.log
+readelf -l a.out | grep ": /lib"
 
 # | The output should be:
 # |-----------------------
