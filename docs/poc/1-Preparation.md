@@ -68,7 +68,7 @@ umask 022
 unalias grep
 HEIWA="${HEIWA:-/media/Heiwa}"
 LC_ALL="POSIX"
-PATH="/clang0-tools/bin:/clang0-tools/usr/bin:/clang1-tools/bin:/clang1-tools/usr/bin:/bin:/usr/bin"
+PATH="/clang0-tools/usr/bin:/clang0-tools/bin:/clang1-tools/usr/bin:/clang1-tools/bin:/usr/bin:/bin"
 LLVM_SRC="\${HEIWA}/sources/llvm"
 export HEIWA LC_ALL PATH LLVM_SRC
 # CFLAGS and CXXFLAGS must not be set during the building of Stage-0 Clang/LLVM.
