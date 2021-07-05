@@ -402,10 +402,10 @@ rm -fv /usr/lib/libz.a
 # Build.
 time { make CFLAGS="$CFLAGS -Wall -fPIC"; }
 
-# Install and create symlinks as `libtinfo`.
+# Install and create symlinks as `libtinfo` libraries.
 time {
-    make PREFIX=/usr install
-    ln -sv libterminfo.a  /usr/lib/libtinfo.a
+    make PREFIX=/usr install                  && \
+    ln -sv libterminfo.a  /usr/lib/libtinfo.a && \
     ln -sv libterminfo.so /usr/lib/libtinfo.so
 }
 
