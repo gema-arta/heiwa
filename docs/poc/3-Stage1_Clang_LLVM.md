@@ -27,8 +27,12 @@ AR="llvm-ar"
 AS="llvm-as"
 RANLIB="llvm-ranlib"
 LD="ld.lld"
+NM="llvm-nm"
+OBJCOPY="llvm-objcopy"
+OBJDUMP="llvm-objdump"
+READELF="llvm-readelf"
 STRIP="llvm-strip"
-export CC CXX AR AS RANLIB LD STRIP
+export CC CXX AR AS RANLIB LD NM OBJCOPY OBJDUMP READELF STRIP
 EOF
 source ~/.bashrc
 
@@ -291,14 +295,6 @@ cmake -B build \
     -DCMAKE_BUILD_TYPE=Release                                  \
     -DCMAKE_INSTALL_PREFIX="/clang1-tools"                      \
     -DCMAKE_INSTALL_OLDINCLUDEDIR="/clang1-tools/include"       \
-    -DCMAKE_AR="/clang0-tools/bin/llvm-ar"                      \
-    -DCMAKE_RANLIB="/clang0-tools/bin/llvm-ranlib"              \
-    -DCMAKE_LINKER="/clang0-tools/bin/ld.lld"                   \
-    -DCMAKE_NM="/clang0-tools/bin/llvm-nm"                      \
-    -DCMAKE_OBJCOPY="/clang0-tools/bin/llvm-objcopy"            \
-    -DCMAKE_OBJDUMP="/clang0-tools/bin/llvm-objdump"            \
-    -DCMAKE_READELF="/clang0-tools/bin/llvm-readelf"            \
-    -DCMAKE_STRIP="/clang0-tools/bin/llvm-strip"                \
     -DLLVM_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"         \
     -DLLVM_HOST_TRIPLE="x86_64-pc-linux-musl"                   \
     -DLLVM_TARGETS_TO_BUILD="X86"                               \
