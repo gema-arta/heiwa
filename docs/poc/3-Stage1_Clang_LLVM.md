@@ -283,12 +283,6 @@ popd
 sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
 projects/compiler-rt/cmake/config-ix.cmake
 
-# Set default compiler to the new triplet from Stage-0 Clang/LLVM,
-# and C and C++ compiler's build flags to reduce debug symbols.
-CC="${HEIWA_TARGET}-clang" CFLAGS="-g -g1"
-CXX="${HEIWA_TARGET}-clang++" CXXFLAGS="-g -g1"
-export CC CXX CFLAGS CXXFLAGS
-
 # Update host/target triplet detection.
 cp -fv ../extra/llvm/files/config.guess cmake/.
 
