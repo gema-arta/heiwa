@@ -45,7 +45,7 @@ rm -fv usr/include/Makefile
 
 # Install.
 mkdir -v /clang0-tools/${HEIWA_TARGET} && \
-cp -rv usr/include /clang0-tools/${HEIWA_TARGET}/.
+cp -rfv usr/include /clang0-tools/${HEIWA_TARGET}/.
 ```
 
 ### `2` - GNU Binutils
