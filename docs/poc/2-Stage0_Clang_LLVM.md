@@ -252,7 +252,7 @@ ln -sv libexecinfo.so.1 /clang0-tools/lib/libexecinfo.so
 
 > **Required!** Build Stage-0 Clang/LLVM toolchain, this will be used for bootstrapping Stage-1 Clang/LLVM toolchain without depends on `libgcc_s.so*` and `libstdc++.so*` later.
 ```bash
-# Exit from "${HEIWA}/sources/pkg/llvm-12.0.0.src" directory if already in.
+# Exit from the LLVM source directory if already in after decompressing.
 popd
 
 # Rename the LLVM source directory to "$LLVM_SRC", then enters.
