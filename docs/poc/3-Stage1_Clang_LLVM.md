@@ -351,6 +351,10 @@ time {
     popd && rm -rf build
 }
 
+# Set `clang` and `lld` as default toolchain compiler and linker.
+ln -sv clang /clang1-tools/bin/cc
+ln -sv lld   /clang1-tools/bin/ld
+
 # Configure Stage-1 Clang with default triplet (pc) to produce binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1".
 ln -sv clang   /clang1-tools/bin/${TARGET_TRUPLE}-clang
 ln -sv clang++ /clang1-tools/bin/${TARGET_TRUPLE}-clang++
