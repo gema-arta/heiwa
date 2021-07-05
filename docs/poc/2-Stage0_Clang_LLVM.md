@@ -364,7 +364,7 @@ grep "lib.*/crt[1in].*succeeded" dummy.log | cut -d ' ' -f 4-5
 # |/media/Heiwa/clang0-tools/bin/../../clang0-tools/lib/../lib/crti.o succeeded
 # |/media/Heiwa/clang0-tools/bin/../../clang0-tools/lib/../lib/crtn.o succeeded
 
-# Back to "${HEIWA}/sources/pkg" directory.
+# Back to "${HEIWA}/sources/pkgs" directory.
 popd
 ```
 > #### ^ Read Me Here!
