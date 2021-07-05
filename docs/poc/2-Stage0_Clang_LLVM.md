@@ -188,7 +188,7 @@ time {
 # Install.
 time { make install; }
 
-# Adjust current GCC to produce binaries with use musl libc in "/clang0-tools/".
+# Adjust current GCC to produce binaries with musl libc in "/clang0-tools/lib/ld-musl-x86_64.so.1".
 export SPECFILE="$(dirname $(${HEIWA_TARGET}-gcc -print-libgcc-file-name))/specs"
 ${HEIWA_TARGET}-gcc -dumpspecs > specs
 sed -i 's|/lib/ld-musl-x86_64.so.1|/clang0-tools/lib/ld-musl-x86_64.so.1|g' specs
@@ -338,8 +338,7 @@ time {
 # Set `lld` as default toolchain linker.
 ln -sv lld /clang0-tools/bin/ld
 
-# Configure Stage-0 Clang with new triplet,
-# and build binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" instead of "/lib/ld-musl-x86_64.so.1".
+# Configure Stage-0 Clang with new triplet to produce binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1"
 ln -sv clang-12 /clang0-tools/bin/${HEIWA_TARGET}-clang
 ln -sv clang-12 /clang0-tools/bin/${HEIWA_TARGET}-clang++
 cat > /clang0-tools/bin/${HEIWA_TARGET}.cfg << "EOF"
