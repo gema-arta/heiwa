@@ -347,7 +347,7 @@ time {
     popd && rm -rf build
 }
 
-# Since Binutils won't be used, create symlinks to LLVM tools and set `lld` as default toolchain linker.
+# Since Binutils won't be used, create symlinks to LLVM tools.
 for B in as ar ranlib readelf nm objcopy objdump size strip; do
     ln -sv llvm-${B} /clang1-tools/bin/${B}
 done; unset B; ln -sv lld /clang1-tools/bin/ld
