@@ -267,7 +267,7 @@ popd
 # Rename the LLVM source directory to "$LLVM_SRC", then enter.
 mv -v llvm-12.0.0.src "$LLVM_SRC" && cd "$LLVM_SRC"
 
-# Decompress `clang`, `lld`, and `compiler-rt` to correct directories.
+# Decompress `clang`, `lld`, and `compiler-rt` to the correct directories.
 pushd ${LLVM_SRC}/projects/ && \
     tar xf ../../pkgs/compiler-rt-12.0.0.src.tar.xz && mv -v compiler-rt-12.0.0.src compiler-rt
 popd
