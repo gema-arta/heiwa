@@ -281,10 +281,6 @@ projects/compiler-rt/cmake/config-ix.cmake
 #cp -fv projects/libunwind/include/mach-o/compact_unwind_encoding.h \
 #tools/lld/include/mach-o
 
-# Sets C and C++ compiler's build flags to reduce debug symbols.
-CFLAGS="-g -g1" CXXFLAGS="-g -g1"
-export CFLAGS CXXFLAGS
-
 # Update host/target triplet detection.
 cp -fv ../extra/llvm/files/config.guess cmake/.
 
@@ -328,11 +324,11 @@ cmake -B build \
 # Build.
 time { make -C build; }
 
-# Install and remove the build directory, also unset compiler's build flags.
+# Install and remove the build directory.
 time {
     pushd build/ && \
         cmake -DCMAKE_INSTALL_PREFIX="/clang0-tools" -P cmake_install.cmake && \
-    popd && rm -rf build && unset CFLAGS CXXFLAGS
+    popd && rm -rf build
 }
 
 # Configure Stage-0 Clang with new triplet to produce binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" later.
