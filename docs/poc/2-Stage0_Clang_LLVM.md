@@ -294,6 +294,8 @@ cmake -B build \
     -DCMAKE_INSTALL_PREFIX="/clang0-tools"                                                  \
     -DCMAKE_C_COMPILER="${HEIWA_TARGET}-gcc"                                                \
     -DCMAKE_CXX_COMPILER="${HEIWA_TARGET}-g++"                                              \
+    -DCMAKE_EXE_LINKER_FLAGS="-Wl,-dynamic-linker /clang0-tools/lib/ld-musl-x86_64.so.1"    \
+    -DCMAKE_SHARED_LINKER_FLAGS="-Wl,-dynamic-linker /clang0-tools/lib/ld-musl-x86_64.so.1" \
     -DLLVM_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"                                     \
     -DLLVM_HOST_TRIPLE="x86_64-pc-linux-musl"                                               \
     -DLLVM_TARGET_ARCH="X86"                                                                \
@@ -321,8 +323,6 @@ cmake -B build \
     -DDEFAULT_SYSROOT="/clang0-tools"                                                       \
     -DCLANG_DEFAULT_LINKER="/clang0-tools/bin/ld.lld"                                       \
     -DBacktrace_HEADER="/clang0-tools/include/execinfo.h"                                   \
-    -DCMAKE_EXE_LINKER_FLAGS="-Wl,-dynamic-linker /clang0-tools/lib/ld-musl-x86_64.so.1"    \
-    -DCMAKE_SHARED_LINKER_FLAGS="-Wl,-dynamic-linker /clang0-tools/lib/ld-musl-x86_64.so.1" \
     -DBacktrace_LIBRARY="/clang0-tools/lib/libexecinfo.so.1"
 
 # Build.
