@@ -131,7 +131,7 @@ ln -sv ../include /clang0-tools/usr/include
 # Fix a wrong shared object symlink.
 ln -sfv libc.so /clang0-tools/lib/ld-musl-x86_64.so.1
 
-# Create a ldd symlink to use to print shared object dependencies.
+# Create a `ldd` symlink to use to print shared object dependencies.
 ln -sv ../lib/ld-musl-x86_64.so.1 /clang0-tools/bin/ldd
 
 # Configure PATH for dynamic linker.
