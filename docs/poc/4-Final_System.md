@@ -457,12 +457,14 @@ unlink /clang1-tools/bin/gcc
 # Build.
 time { make; }
 
-# Install.
-time { make install; }
+# Install and create symlink as `lex`.
+time {
+    make install && \
+    ln -sv flex /usr/bin/lex
+}
 
 # A few programs do not know about `flex` yet and try to run its predecessor, `lex`.
 # To support those programs, create a symbolic link named `lex` that runs `flex` in `lex` emulation mode.
-ln -sv flex /usr/bin/lex
 ```
 
 ### `14` - OpenBSD M4
