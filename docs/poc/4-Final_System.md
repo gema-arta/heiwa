@@ -807,8 +807,8 @@ time {
 # Create a symlink required by the FHS for "historical" reasons, and
 # set `clang` and `lld` as default toolchain compiler and linker.
 ln -sv ../usr/bin/clang /lib/cpp
-ln -sv clang /usr/bin/cc
-ln -sv lld /usr/bin/ld
+ln -sv clang            /usr/bin/cc
+ln -sv lld              /usr/bin/ld
 
 # Build useful utilities for BSD-compability.
 time {
