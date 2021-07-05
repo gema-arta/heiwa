@@ -303,12 +303,12 @@ cmake -B build \
     -DLLVM_BUILD_TESTS=OFF                                                                  \
     -DLLVM_ENABLE_LIBEDIT=OFF                                                               \
     -DLLVM_ENABLE_LIBXML2=OFF                                                               \
+    -DLLVM_ENABLE_LIBCXX=ON                                                                 \
     -DLLVM_INCLUDE_GO_TESTS=OFF                                                             \
     -DLLVM_INCLUDE_TESTS=OFF                                                                \
     -DLLVM_INCLUDE_DOCS=OFF                                                                 \
     -DLLVM_INCLUDE_EXAMPLES=OFF                                                             \
     -DLLVM_INCLUDE_BENCHMARKS=OFF                                                           \
-    -DLLVM_ENABLE_LIBCXX=ON                                                                 \
     -DCOMPILER_RT_BUILD_SANITIZERS=OFF                                                      \
     -DCOMPILER_RT_BUILD_XRAY=OFF                                                            \
     -DCOMPILER_RT_BUILD_PROFILE=OFF                                                         \
