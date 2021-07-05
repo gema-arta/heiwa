@@ -272,8 +272,8 @@ done; unset B; install -vm644 -t /usr/include/ \
 > **Required!**
 ```bash
 # Configure Stage-1 Clang with new triplet to produce binaries with "lib/ld-musl-x86_64.so.1" and libraries from "/usr/*".
-ln -sv clang-12 /clang1-tools/bin/x86_64-heiwa-linux-musl-clang
-ln -sv clang-12 /clang1-tools/bin/x86_64-heiwa-linux-musl-clang++
+ln -sv clang   /clang1-tools/bin/x86_64-heiwa-linux-musl-clang
+ln -sv clang++ /clang1-tools/bin/x86_64-heiwa-linux-musl-clang++
 cat > /clang1-tools/bin/x86_64-heiwa-linux-musl.cfg << "EOF"
 --sysroot=/usr -Wl,-dynamic-linker /lib/ld-musl-x86_64.so.1
 EOF
