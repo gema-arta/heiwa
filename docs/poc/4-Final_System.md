@@ -622,8 +622,8 @@ time { make -C build; }
 
 # Install and remove the `libunwind` source.
 time {
-    make -C build install && \
-    popd && rm -rf ${LLVM_SRC}/projects/libunwind
+    make -C build install && popd && \
+    rm -rf ${LLVM_SRC}/projects/libunwind
 }
 ```
 
