@@ -901,7 +901,7 @@ rm -fv /usr/lib/libbz2.a
 rm -rf cpan/Compress-Raw-Zlib/zlib-src
 rm -rf cpan/Compress-Raw-Bzip2/bzip2-src
 sed -i '/\(bzip2\|zlib\)-src/d' MANIFEST
-BUILD_ZLIB=False BUILD_BZIP2=0
+BUILD_ZLIB=0 BUILD_BZIP2=0
 export BUILD_ZLIB BUILD_BZIP2
  
 # Apply patches (from Alpine Linux) to fix "locale.c" error in programs like `rxvt-unicode`, and change stack size.
