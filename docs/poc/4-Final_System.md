@@ -632,7 +632,7 @@ popd
 # Configure source.
 pushd ${LLVM_SRC}/projects/libcxxabi/ && \
     cmake -B build \
-        -DCMAKE_INSTALL_PREFIX="/usr/"                                    \
+        -DCMAKE_INSTALL_PREFIX="/usr"                                     \
         -DLIBCXXABI_ENABLE_STATIC=ON                                      \
         -DLIBCXXABI_USE_COMPILER_RT=ON                                    \
         -DLIBCXXABI_USE_LLVM_UNWINDER=ON                                  \
