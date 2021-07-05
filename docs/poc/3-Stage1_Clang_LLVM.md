@@ -23,7 +23,7 @@ CC="clang" CXX="clang++"
 export CC CXX
 
 # Configure source.
-./configure --prefix=/
+./configure --prefix=/ --enable-optimize=speed
 
 # Build.
 time { make; }
