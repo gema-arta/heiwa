@@ -338,17 +338,13 @@ time {
 # Set `lld` as default toolchain linker.
 ln -sv lld /clang0-tools/bin/ld
 
-# Configure Stage-0 Clang to build binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" instead of "/lib/ld-musl-x86_64.so.1".
+# Configure Stage-0 Clang to new triplet and,
+# build binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" instead of "/lib/ld-musl-x86_64.so.1".
 ln -sv clang-12 /clang0-tools/bin/${HEIWA_TARGET}-clang
 ln -sv clang-12 /clang0-tools/bin/${HEIWA_TARGET}-clang++
 cat > /clang0-tools/bin/${HEIWA_TARGET}.cfg << "EOF"
 -Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1
 EOF
-
-# Configure cross GCC of "/clang0-tools" to match the same output as Clang.
-export SPECFILE="$(dirname $(${HEIWA_TARGET}-gcc -print-libgcc-file-name))/specs"
-${HEIWA_TARGET}-gcc -dumpspecs > specs 
-sed -i 's|/lib/ld-musl-x86_64.so.1|/clang1-tools/lib/ld-musl-x86_64.so.1|g' specs
 
 # Check specs file.
 grep --color=auto "/clang1-tools/lib/ld-musl-x86_64.so.1" specs
