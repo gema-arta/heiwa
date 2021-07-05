@@ -333,7 +333,13 @@ cmake -B build \
     -DDEFAULT_SYSROOT="/clang1-tools"                           \
     -DBacktrace_INCLUDE_DIR="/clang1-tools/include"             \
     -DBacktrace_LIBRARY="/clang1-tools/lib/libexecinfo.so"      \
-    -DICONV_LIBRARY_PATH="/clang1-tools/lib/libc.so"
+    -DICONV_LIBRARY_PATH="/clang1-tools/lib/libc.so"            \
+    -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON                         \
+    -DLLVM_INSTALL_CCTOOLS_SYMLINKS=ON                          \
+    -DLLVM_INSTALL_UTILS=ON                                     \
+    -DLLVM_ENABLE_BINDINGS=OFF                                  \
+    -DLLVM_ENABLE_IDE=OFF                                       \
+    -DLLVM_ENABLE_UNWIND_TABLES=OFF
 
 # Build.
 time { make -C build; }
