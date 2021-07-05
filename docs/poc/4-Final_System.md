@@ -795,8 +795,8 @@ time {
 }
 
 # Set clang and lld as default toolchain's compiler and linker.
-ln -sv clang /clang0-tools/bin/cc
-ln -sv lld /clang0-tools/bin/ld
+ln -sv clang /usr/bin/cc
+ln -sv lld /usr/bin/ld
 
 # Create a symlink required by the FHS for "historical" reasons.
 ln -sv ../usr/bin/clang /lib/cpp
