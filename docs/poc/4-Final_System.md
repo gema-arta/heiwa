@@ -791,7 +791,7 @@ time { make -C build; }
 time {
     pushd build/ && \
         cmake -DCMAKE_INSTALL_PREFIX="/usr" -P cmake_install.cmake && \
-    popd
+    popd; source ~/.bash_profile
 }
 
 # Set lld as default toolchain's linker.
