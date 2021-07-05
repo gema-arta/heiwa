@@ -300,6 +300,7 @@ grep "ld.lld:.*crt[1in]" dummy.log
 # |ld.lld: /usr/lib/crti.o
 # |ld.lld: /usr/lib/crtn.o
 
+# Check the headers path.
 grep -B1 "^ /usr/include" dummy.log
 
 # | The output should be:
@@ -307,6 +308,7 @@ grep -B1 "^ /usr/include" dummy.log
 # |#include <...> search starts here:
 # | /usr/include
 
+# Check the dynamic linker libraries path.
 grep -o -- -L/usr/lib dummy.log && \
 grep -o -- -L/lib dummy.log
 
@@ -838,7 +840,7 @@ grep "ld.lld:.*crt[1in].o" dummy.log
 # |ld.lld: /usr/bin/../lib/crti.o
 # |ld.lld: /usr/bin/../lib/crtn.o
 
-# Headers path test.
+# Check the headers path.
 grep -B1 "^ /usr/include" dummy.log
 
 # | The output should be:
@@ -846,7 +848,7 @@ grep -B1 "^ /usr/include" dummy.log
 # |#include <...> search starts here:
 # | /usr/include
 
-# Dynamic linker test.
+# Check the dynamic linker libraries path.
 grep -o -- -L/usr/lib dummy.log
 
 # | The output should be:
