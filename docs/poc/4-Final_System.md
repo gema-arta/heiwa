@@ -279,8 +279,8 @@ cat > /clang1-tools/bin/x86_64-heiwa-linux-musl.cfg << "EOF"
 EOF
 
 # Set the new toolchain configuration.
-sed -i 's|CC=".*"|CC="x86_64-heiwa-linux-musl-clang"|'     ~/.bash_profile
-sed -i 's|CXX=".*"|CXX="x86_64-heiwa-linux-musl-clang++"|' ~/.bash_profile
+sed -i 's|CC=.*|CC="x86_64-heiwa-linux-musl-clang"|'     ~/.bash_profile
+sed -i 's|CXX=.*|CXX="x86_64-heiwa-linux-musl-clang++"|' ~/.bash_profile
 source ~/.bash_profile
 
 # Quick test.
