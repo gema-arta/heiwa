@@ -603,9 +603,9 @@ popd
 pushd ${LLVM_SRC}/projects/libunwind/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/usr"  \
-        -DLIBUNWIND_ENABLE_SHARED=ON   \
         -DCMAKE_C_FLAGS="-fPIC"        \
         -DCMAKE_CXX_FLAGS="-fPIC"      \
+        -DLIBUNWIND_ENABLE_SHARED=ON   \
         -DLIBUNWIND_USE_COMPILER_RT=ON \
         -DLLVM_PATH="$LLVM_SRC"
 
