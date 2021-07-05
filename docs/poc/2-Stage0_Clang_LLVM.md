@@ -329,7 +329,7 @@ cmake -B build \
 # Build.
 time { make -C build; }
 
-# Install and remove the build directory.
+# Install and remove the build directory, also unset compiler's build flags.
 time {
     pushd build/ && \
         cmake -DCMAKE_INSTALL_PREFIX="/clang0-tools" -P cmake_install.cmake && \
@@ -339,7 +339,7 @@ time {
 # Set `lld` as default toolchain linker.
 ln -sv lld /clang0-tools/bin/ld
 
-# Configure Stage-0 Clang to new triplet and,
+# Configure Stage-0 Clang with new triplet and,
 # build binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" instead of "/lib/ld-musl-x86_64.so.1".
 ln -sv clang-12 /clang0-tools/bin/${HEIWA_TARGET}-clang
 ln -sv clang-12 /clang0-tools/bin/${HEIWA_TARGET}-clang++
