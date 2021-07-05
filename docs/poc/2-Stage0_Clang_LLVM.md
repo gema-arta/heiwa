@@ -254,7 +254,7 @@ install -vm755 -t /clang0-tools/lib/ libexecinfo.{a,so{.1,}}
 # Exit from the LLVM source directory if already entered after decompressing.
 popd
 
-# Rename the LLVM source directory to "$LLVM_SRC", then enters.
+# Rename the LLVM source directory to "$LLVM_SRC", then enter.
 mv -v llvm-12.0.0.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 
 # Decompress clang, lld, compiler-rt, libcxx, libcxxabi, and libunwind to correct directories.
