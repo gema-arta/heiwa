@@ -709,9 +709,9 @@ done; unset P
 time { make CC=${CC} AR=${AR} CFLAGS="$CFLAGS -fno-omit-frame-pointer"; }
 
 # Install.
-install -vm755 -t /usr/include/ execinfo.h stacktraverse.h
-install -vm755 -t /usr/lib/ libexecinfo.a libexecinfo.so.1
-ln -sv libexecinfo.so.1 /usr/lib/libexecinfo.so
+ln -sv libexecinfo.so{.1,}
+install -vm755 -t /clang1-tools/include/ execinfo.h stacktraverse.h
+install -vm755 -t /clang1-tools/lib/ libexecinfo.{a,so{.1,}}
 ```
 
 ### `23` - Clang/LLVM
