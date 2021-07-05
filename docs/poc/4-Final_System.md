@@ -723,7 +723,7 @@ projects/compiler-rt/cmake/config-ix.cmake
 
 # Set default compiler to new symlink from Stage-0 Clang/LLVM.
 # Sets C and C++ compiler's build flags to reduce debug symbols.
-CFLAGS="-g -g1 CXXFLAGS="-g -g1"
+CFLAGS="-g -g1" CXXFLAGS="-g -g1"
 export CFLAGS CXXFLAGS
 
 # Update host/target triple detection.
