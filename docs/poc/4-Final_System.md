@@ -140,7 +140,7 @@ chgrp -v utmp /var/log/lastlog
 chmod -v 664  /var/log/lastlog
 chmod -v 600  /var/log/btmp
 
-# Apply toolchain persistent environment variables, set the C and C++ compiler to the Stage-1 Clang default triplet (pc).
+# Apply toolchain persistent environment variables, set compiler to the Stage-1 Clang default triplet (pc).
 cat > ~/.bash_profile << "EOF"
 # Stage-1 Clang/LLVM environment.
 CC="x86_64-pc-linux-musl-clang"
