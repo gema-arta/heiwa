@@ -745,7 +745,7 @@ NOCONFIGURE=1 ./autogen.sh
 # Build.
 time { make; }
 
-# Install.
+# Install and unset linker flags.
 time { make install && unset LDFLAGS; }
 ```
 
