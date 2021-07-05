@@ -790,7 +790,7 @@ time { make -C build; }
 # Install.
 time {
     pushd build/ && \
-        cmake -DCMAKE_INSTALL_PREFIX="/clang1-tools" -P cmake_install.cmake && \
+        cmake -DCMAKE_INSTALL_PREFIX="/usr" -P cmake_install.cmake && \
     popd
 }
 
