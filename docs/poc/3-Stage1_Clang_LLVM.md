@@ -186,9 +186,9 @@ pushd ${LLVM_SRC}/projects/libcxx/ && \
         -DLIBCXX_USE_COMPILER_RT=ON                            \
         -DLIBCXX_INSTALL_HEADERS=ON                            \
         -DLIBCXX_CXX_ABI=libcxxabi                             \
-        -DLIBCXXABI_USE_LLVM_UNWINDER=ON                       \
         -DLIBCXX_CXX_ABI_INCLUDE_PATHS="/clang1-tools/include" \
         -DLIBCXX_CXX_ABI_LIBRARY_PATH="/clang1-tools/lib"      \
+        -DLIBCXXABI_USE_LLVM_UNWINDER=ON                       \
         -DLLVM_PATH="$LLVM_SRC"
 
 # Build.
