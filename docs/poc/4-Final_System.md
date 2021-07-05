@@ -801,7 +801,7 @@ time { make -C build; }
 time {
     pushd build/ && \
         cmake -DCMAKE_INSTALL_PREFIX="/usr" -P cmake_install.cmake && \
-    popd
+    popd && rm -rf build
 }
 
 # Create a symlink required by the FHS for "historical" reasons, and
