@@ -352,9 +352,9 @@ for B in as ar ranlib readelf nm objcopy objdump size strip; do
     ln -sv llvm-${B} /clang1-tools/bin/${B}
 done; unset B; ln -sv lld /clang1-tools/bin/ld
 
-# Configure Stage-1 Clang with new triplet to produce binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1".
-ln -sv clang-12 /clang1-tools/bin/x86_64-pc-linux-musl-clang
-ln -sv clang-12 /clang1-tools/bin/x86_64-pc-linux-musl-clang++
+# Configure Stage-1 Clang with default triplet to produce binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1".
+ln -sv clang-12 /clang1-tools/bin/${TARGET_TRUPLE}-clang
+ln -sv clang-12 /clang1-tools/bin/${TARGET_TRUPLE}-clang++
 cat > /clang1-tools/bin/x86_64-pc-linux-musl.cfg << "EOF"
 -Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1"
 EOF
