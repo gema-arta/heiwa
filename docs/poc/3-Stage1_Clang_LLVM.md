@@ -103,16 +103,6 @@ cp -rfv usr/include /clang1-tools/.
 pushd ${LLVM_SRC}/projects/libunwind/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools"           \
-        -DCMAKE_C_COMPILER="${HEIWA_TARGET}-clang"       \
-        -DCMAKE_CXX_COMPILER="${HEIWA_TARGET}-clang++"   \
-        -DCMAKE_AR="/clang0-tools/bin/llvm-ar"           \
-        -DCMAKE_RANLIB="/clang0-tools/bin/llvm-ranlib"   \
-        -DCMAKE_LINKER="/clang0-tools/bin/ld.lld"        \
-        -DCMAKE_NM="/clang0-tools/bin/llvm-nm"           \
-        -DCMAKE_OBJCOPY="/clang0-tools/bin/llvm-objcopy" \
-        -DCMAKE_OBJDUMP="/clang0-tools/bin/llvm-objdump" \
-        -DCMAKE_READELF="/clang0-tools/bin/llvm-readelf" \
-        -DCMAKE_STRIP="/clang0-tools/bin/llvm-strip"     \
         -DCMAKE_C_FLAGS="-fPIC"                          \
         -DCMAKE_CXX_FLAGS="-fPIC"                        \
         -DLIBUNWIND_ENABLE_SHARED=ON                     \
@@ -138,8 +128,6 @@ time { make -C build install && rm -rf build && popd; }
 pushd ${LLVM_SRC}/projects/libcxxabi/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools"                            \
-        -DCMAKE_C_COMPILER="${HEIWA_TARGET}-clang"                        \
-        -DCMAKE_CXX_COMPILER="${HEIWA_TARGET}-clang++"                    \
         -DLIBCXXABI_ENABLE_STATIC=ON                                      \
         -DLIBCXXABI_USE_COMPILER_RT=ON                                    \
         -DLIBCXXABI_USE_LLVM_UNWINDER=ON                                  \
@@ -174,8 +162,6 @@ ${LLVM_SRC}/projects/libcxx/cmake/config-ix.cmake
 pushd ${LLVM_SRC}/projects/libcxx/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools"                 \
-        -DCMAKE_C_COMPILER="${HEIWA_TARGET}-clang"             \
-        -DCMAKE_CXX_COMPILER="${HEIWA_TARGET}-clang++"         \
         -DCMAKE_CXX_FLAGS="-isystem /clang1-tools/include"     \
         -DLIBCXX_ENABLE_SHARED=ON                              \
         -DLIBCXX_ENABLE_STATIC=ON                              \
@@ -204,7 +190,7 @@ time { make -C build install && rm -rf build && popd; }
 > **Required!** To build Stage-1 Clang/LLVM and for the most programs that depends on `-ltinfo` or `-lterminfo` linker's flags.
 ```bash
 # Build.
-time { make CC=${HEIWA_TARGET}-clang CFLAGS="-Wall -fPIC" all-dynamic; }
+time { make CFLAGS="-Wall -fPIC" all-dynamic; }
 
 # Install.
 time { make PREFIX=/clang1-tools install-dynamic; }
@@ -222,7 +208,7 @@ for P in {10-execinfo,20-define-gnu-source,30-linux-makefile}.patch; do
 done; unset P
 
 # Build.
-time { make CC=${HEIWA_TARGET}-clang AR=llvm-ar CFLAGS="$COMMON_FLAGS -fno-omit-frame-pointer"; }
+time { make CC="$CC" AR="$AR" CFLAGS="-fno-omit-frame-pointer"; }
 
 # Install.
 ln -sv libexecinfo.so.1 libexecinfo.so
