@@ -213,7 +213,7 @@ readelf -l a.out | grep Requesting
 > #### `0.3.2` or newer
 > The NetBSD Curses package contains libraries for terminal-independent handling of character screens.
 
-> **Required!** To build Stage-0 Clang/LLVM and for most programs that depends on `-ltinfo` or `-lterminfo` linker's flags.
+> **Required!** To build Stage-0 Clang/LLVM.
 ```bash
 # Build.
 time { make CC=${HEIWA_TARGET}-gcc CFLAGS="-Wall -fPIC" all-dynamic; }
