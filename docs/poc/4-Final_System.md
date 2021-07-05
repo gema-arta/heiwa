@@ -679,16 +679,19 @@ pushd ${LLVM_SRC}/projects/libcxx/ && \
         -DLIBCXX_USE_COMPILER_RT=ON                   \
         -DLIBCXX_INSTALL_HEADERS=ON                   \
         -DLIBCXX_CXX_ABI=libcxxabi                    \
-        -DLIBCXXABI_USE_LLVM_UNWINDER=ON              \
         -DLIBCXX_CXX_ABI_INCLUDE_PATHS="/usr/include" \
         -DLIBCXX_CXX_ABI_LIBRARY_PATH="/usr/lib"      \
+        -DLIBCXXABI_USE_LLVM_UNWINDER=ON              \
         -DLLVM_PATH="$LLVM_SRC"
 
 # Build.
 time { make -C build; }
 
 # Install and remove the `libcxx` with `libcxxabi` source.
-time { make -C build install && popd && rm -rf ${LLVM_SRC}/projects/libcxx{,abi}; }
+time {
+    make -C build install && popd && \
+    rm -rf ${LLVM_SRC}/projects/libcxx{,abi}
+}
 ```
 
 ### `22` - libexecinfo
