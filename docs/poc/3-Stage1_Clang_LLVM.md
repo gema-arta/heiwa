@@ -56,7 +56,7 @@ EOF
 
 # Set the toolchain to new tripet from Stage-0 Clang/LLVM.
 sed -i "s|CC=.*|CC=\"\${HEIWA_TARGET}-clang\"|"   ~/.bashrc
-sed -i "s|CXX=.*|CXX=\"${HEIWA_TARGET}-clang++\"|" ~/.bashrc
+sed -i "s|CXX=.*|CXX=\"\${HEIWA_TARGET}-clang++\"|" ~/.bashrc
 source ~/.bashrc
 
 # Quick test for the new triplet of Stage-0 Clang/LLVM.
