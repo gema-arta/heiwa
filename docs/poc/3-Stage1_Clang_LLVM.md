@@ -232,7 +232,7 @@ for P in {10-execinfo,20-define-gnu-source,30-linux-makefile}.patch; do
 done; unset P
 
 # Build.
-time { make CC="$CC" AR="$AR" CFLAGS="-fno-omit-frame-pointer"; }
+time { make CC=${CC} AR=${AR} CFLAGS="-fno-omit-frame-pointer"; }
 
 # Install.
 ln -sv libexecinfo.so.1 libexecinfo.so
