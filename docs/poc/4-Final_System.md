@@ -635,7 +635,7 @@ time {
 
 > **Required!** Before `LLVM libcxx`.
 ```bash
-# Decompress `libcxxabi` to correct directories.
+# Decompress `libcxxabi` to the correct directories.
 pushd ${LLVM_SRC}/projects/ && \
     tar xf ../../pkgs/libcxxabi-12.0.0.src.tar.xz && mv -v libcxxabi-12.0.0.src libcxxabi
 popd
