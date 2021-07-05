@@ -240,8 +240,8 @@ time {
 }
 
 # Install.
-install -vm755 -t /clang0-tools/include/ execinfo.h stacktraverse.h
 ln -sv libexecinfo.so.1 libexecinfo.so
+install -vm755 -t /clang0-tools/include/ execinfo.h stacktraverse.h
 install -vm755 -t /clang0-tools/lib/ libexecinfo.{a,so{.1,}}
 ```
 
