@@ -797,32 +797,52 @@ time {
 # Set lld as default toolchain's linker.
 ln -sv lld /clang0-tools/bin/ld
 
-# Configure Stage-1 Clang to build binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" instead of "/lib/ld-musl-x86_64.so.1".
-ln -sv clang-12 /clang1-tools/bin/x86_64-pc-linux-musl-clang
-ln -sv clang-12 /clang1-tools/bin/x86_64-pc-linux-musl-clang++
-cat > /clang1-tools/bin/x86_64-pc-linux-musl.cfg << "EOF"
--Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1"
-EOF
+# Create a symlink required by the FHS for "historical" reasons.
+ln -sv ../usr/bin/clang /lib/cpp
 
-# Set the new PATH since "/clang0-tools" won't be used anymore and configure new Stage-1 Clang/LLVM environment.
-PATH="/clang1-tools/bin:/clang1-tools/usr/bin:/bin:/usr/bin"
-sed -i "s|PATH=.*|PATH=\"${PATH}\"|" ~/.bashrc
-sed -i '/unset CFLAGS CXXFLAGS/d' ~/.bashrc
-cat >> ~/.bashrc << "EOF"
-# Stage-1 Clang/LLVM environment.
-CC="${TARGET_TRUPLE}-clang"
-CXX="${TARGET_TRUPLE}-clang++"
-AR="llvm-ar"
-AS="llvm-as"
-RANLIB="llvm-ranlib"
-LD="ld.lld"
-STRIP="llvm-strip"
-export CC CXX AR AS RANLIB LD STRIP
-EOF
-source ~/.bash_profile
+# Build useful utilities for BSD-compability.
+time {
+    clang $CFLAGS -fpie ../../extra/musl/files/getconf.c -o getconf && \
+    clang $CFLAGS -fpie ../../extra/musl/files/getent.c -o getent   && \
+    clang $CFLAGS -fpie ../../extra/musl/files/iconv.c -o iconv
+}
 
-# Back to "${HEIWA}/sources/pkg" directory.
-cd ${HEIWA}/sources/pkgs/
+# Install above utilities, and the man files.
+install -vm755 -t /usr/bin/ get{conf,ent} iconv
+install -vm644 -t /usr/share/man/man1/ ../../extra/musl/files/get{conf,ent}.1
+
+# Quick test.
+echo "int main(){}" > dummy.c
+clang dummy.c -v -Wl,--verbose &> dummy.log
+readelf -l a.out | grep ": /lib"
+
+# | The output should be:
+# |-----------------------
+# |      [Requesting program interpreter: /lib/ld-musl-x86_64.so.1]
+
+grep "ld.lld:.*crt[1in].o" dummy.log
+
+# | The output should be:
+# |-----------------------
+# |ld.lld: /usr/lib/Scrt1.o
+# |ld.lld: /usr/lib/crti.o
+# |ld.lld: /usr/lib/crtn.o
+
+grep -B1 "^ /usr/include" dummy.log
+
+# | The output should be:
+# |-----------------------
+# |#include <...> search starts here:
+# | /usr/include
+
+grep -o -- -L/usr/lib dummy.log
+
+# | The output should be:
+# |-----------------------
+# |-L/usr/lib
+
+# Clean up.
+rm -fv dummy.c a.out dummy.log
 ```
 
 <!--
