@@ -18,7 +18,7 @@
 
 > **Required!** As mentioned in the description above.
 ```bash
-# Set toolchain to Stage-0 Clang/LLVM (not the new triplet).
+# Set the toolchain to Stage-0 Clang/LLVM (not the new triplet).
 CC="clang" RANLIB="llvm-ranlib"
 CXX="clang++" AR="llvm-ar"
 export CC CXX AR RANLIB
