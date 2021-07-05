@@ -44,7 +44,7 @@ cat > /clang1-tools/etc/ld-musl-x86_64.path << "EOF"
 /clang1-tools/lib
 EOF
 
-# Quick test for Stage-0 Clang/LLVM.
+# Quick test for the new triplet of Stage-0 Clang/LLVM.
 echo "int main(){}" > dummy.c
 ${HEIWA_TARGET}-clang dummy.c -v -Wl,--verbose &> dummy.log
 readelf -l a.out | grep ": /clang1-tools"
