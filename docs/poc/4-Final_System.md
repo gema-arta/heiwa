@@ -403,9 +403,11 @@ rm -fv /usr/lib/libz.a
 time { make CFLAGS="$CFLAGS -Wall -fPIC"; }
 
 # Install and create symlinks as `libtinfo`.
-time { make PREFIX=/usr install; }
-ln -sv libterminfo.a  /usr/lib/libtinfo.a
-ln -sv libterminfo.so /usr/lib/libtinfo.so
+time {
+    make PREFIX=/usr install
+    ln -sv libterminfo.a  /usr/lib/libtinfo.a
+    ln -sv libterminfo.so /usr/lib/libtinfo.so
+}
 
 # Remove man colission with `attr`.
 rm -fv /usr/share/man/man3/attr_get.3
