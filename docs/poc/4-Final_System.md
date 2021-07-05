@@ -747,12 +747,7 @@ mkdir -pv tools/lld/include/mach-o         && \
 cp -fv projects/libunwind/include/mach-o/compact_unwind_encoding.h \
 tools/lld/include/mach-o/. && rm -rf libunwind-12.0.0.src
 
-# Set default compiler to new symlink from Stage-0 Clang/LLVM.
-# Sets C and C++ compiler's build flags to reduce debug symbols.
-CFLAGS="$CFLAGS -g -g1" CXXFLAGS="$CXXFLAGS -g -g1"
-export CFLAGS CXXFLAGS
-
-# Update host/target triple detection.
+# Update host/target triplet detection.
 cp -fv ../extra/llvm/files/config.guess cmake/.
 
 # Configure source.
@@ -760,14 +755,6 @@ cmake -B build \
     -DCMAKE_BUILD_TYPE=Release                                  \
     -DCMAKE_INSTALL_PREFIX="/usr"                               \
     -DCMAKE_INSTALL_OLDINCLUDEDIR="/usr/include"                \
-    -DCMAKE_AR="/clang1-tools/bin/llvm-ar"                      \
-    -DCMAKE_RANLIB="/clang1-tools/bin/llvm-ranlib"              \
-    -DCMAKE_LINKER="/clang1-tools/bin/ld.lld"                   \
-    -DCMAKE_NM="/clang1-tools/bin/llvm-nm"                      \
-    -DCMAKE_OBJCOPY="/clang1-tools/bin/llvm-objcopy"            \
-    -DCMAKE_OBJDUMP="/clang1-tools/bin/llvm-objdump"            \
-    -DCMAKE_READELF="/clang1-tools/bin/llvm-readelf"            \
-    -DCMAKE_STRIP="/clang1-tools/bin/llvm-strip"                \
     -DLLVM_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"         \
     -DLLVM_HOST_TRIPLE="x86_64-pc-linux-musl"                   \
     -DLLVM_TARGETS_TO_BUILD="host;BPF;AMDGPU;X86"               \
