@@ -18,10 +18,19 @@
 
 > **Required!** As mentioned in the description above.
 ```bash
-# Set the toolchain to Stage-0 Clang/LLVM (not the new triplet).
-CC="clang" RANLIB="llvm-ranlib"
-CXX="clang++" AR="llvm-ar"
-export CC CXX AR RANLIB
+# Apply some persistent environment variables, but currently don't set the C and C++ compiler to the new triplet.
+cat >> ~/.bashrc << "EOF"
+# Stage-1 Clang/LLVM environment.
+CC="clang"
+CXX="clang++"
+AR="llvm-ar"
+AS="llvm-as"
+RANLIB="llvm-ranlib"
+LD="ld.lld"
+STRIP="llvm-strip"
+export CC CXX AR AS RANLIB LD STRIP
+EOF
+source ~/.bashrc
 
 # Configure source.
 ./configure --prefix=/ --enable-optimize=speed
@@ -44,6 +53,11 @@ mkdir -v /clang1-tools/etc && \
 cat > /clang1-tools/etc/ld-musl-x86_64.path << "EOF"
 /clang1-tools/lib
 EOF
+
+# Set the toolchain to new tripet from Stage-0 Clang/LLVM.
+sed -i "s|CC=.*|CC=\"\${HEIWA_TARGET}-clang\"|"   ~/.bashrc
+sed -i "s|CXX=.*|CXX=\"${HEIWA_TARGET}-clang++\"|" ~/.bashrc
+source ~/.bashrc
 
 # Quick test for the new triplet of Stage-0 Clang/LLVM.
 echo "int main(){}" > dummy.c
@@ -344,17 +358,6 @@ EOF
 PATH="/clang1-tools/bin:/clang1-tools/usr/bin:/bin:/usr/bin"
 sed -i "s|PATH=.*|PATH=\"${PATH}\"|" ~/.bashrc
 sed -i '/unset CFLAGS CXXFLAGS/d' ~/.bashrc
-cat >> ~/.bashrc << "EOF"
-# Stage-1 Clang/LLVM environment.
-CC="${TARGET_TRUPLE}-clang"
-CXX="${TARGET_TRUPLE}-clang++"
-AR="llvm-ar"
-AS="llvm-as"
-RANLIB="llvm-ranlib"
-LD="ld.lld"
-STRIP="llvm-strip"
-export CC CXX AR AS RANLIB LD STRIP
-EOF
 source ~/.bash_profile
 
 # Back to "${HEIWA}/sources/pkg" directory.
