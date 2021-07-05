@@ -919,7 +919,7 @@ patch -Np1 -i ../../extra/perl/patches/musl-stack-size.patch
     -Dvendorlib=/usr/lib/perl5/5.32.1/vendor_perl                \
     -Dvendorarch=/usr/lib/perl5/5.32.1/vendor_perl               \
     -Doptimize="$CFLAGS -DNO_POSIX_2008_LOCALE -D_GNU_SOURCE"    \
-    -Dcf_by="Heiwa/Linux" -Dmyuname="Heiwa" -Dmyhostname="Heiwa" \
+    -Dcf_by="Heiwa/Linux" -Dmyuname="heiwa" -Dmyhostname="heiwa" \
     -Dusethreads -Duseshrplib -Dman1ext=1 -Dman3ext=3pm          \
     -Dman1dir=/usr/share/man/man1 -Dman3dir=/usr/share/man/man3
 
