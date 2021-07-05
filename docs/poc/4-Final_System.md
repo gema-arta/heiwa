@@ -736,9 +736,9 @@ cp -fv ../extra/llvm/files/config.guess cmake/.
 cmake -B build \
     -DCMAKE_BUILD_TYPE=Release                                  \
     -DCMAKE_INSTALL_PREFIX="/usr"                               \
-    -DCMAKE_INSTALL_OLDINCLUDEDIR="/usr/include"                \
     -DCMAKE_AR="/clang1-tools/bin/llvm-ar"                      \
     -DCMAKE_RANLIB="/clang1-tools/bin/llvm-ranlib"              \
+    -DCMAKE_INSTALL_OLDINCLUDEDIR="/usr/include"                \
     -DCMAKE_LINKER="/clang1-tools/bin/ld.lld"                   \
     -DCMAKE_NM="/clang1-tools/bin/llvm-nm"                      \
     -DCMAKE_OBJCOPY="/clang1-tools/bin/llvm-objcopy"            \
