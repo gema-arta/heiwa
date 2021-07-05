@@ -761,7 +761,7 @@ cmake -B build \
     -DCLANG_DEFAULT_UNWINDLIB=libunwind                         \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                           \
     -DCLANG_DEFAULT_LINKER="/usr/bin/ld.lld"                    \
-    -DDEFAULT_SYSROOT="/clang1-tools"                           \
+    -DDEFAULT_SYSROOT="/usr"
     -DBacktrace_INCLUDE_DIR="/usr/include"                      \
     -DBacktrace_LIBRARY="/usr/lib/libexecinfo.so"               \
     -DCMAKE_AR="/clang1-tools/bin/llvm-ar"                      \
@@ -780,7 +780,6 @@ cmake -B build \
     -DLLVM_ENABLE_BINDINGS=OFF                                  \
     -DLLVM_ENABLE_IDE=OFF                                       \
     -DLLVM_ENABLE_UNWIND_TABLES=OFF                             \
-    -DDEFAULT_SYSROOT="/usr"
 
 # Build.
 time { make -C build; }
