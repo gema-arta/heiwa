@@ -205,7 +205,7 @@ time { make -C build install && rm -rf build && popd; }
 > **Required!** To build Stage-1 Clang/LLVM and for the most programs that depends on `-ltinfo` or `-lterminfo` linker's flags.
 ```bash
 # Build.
-time { make CC=${HEIWA_TARGET}-clang CFLAGS="$COMMON_FLAGS -Wall -fPIC" all-dynamic; }
+time { make CC=${HEIWA_TARGET}-clang CFLAGS="-Wall -fPIC" all-dynamic; }
 
 # Install.
 time { make PREFIX=/clang1-tools install-dynamic; }
