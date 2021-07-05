@@ -87,7 +87,7 @@ find usr/include -name '.*' -exec rm -rfv {} \;
 rm -fv usr/include/Makefile
 
 # Install.
-cp -rv usr/include /clang1-tools/.
+cp -rfv usr/include /clang1-tools/.
 ```
 
 ### `3` - LLVM libunwind
