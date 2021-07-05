@@ -18,7 +18,7 @@
 
 > **Required!** As mentioned in the description above.
 ```bash
-# Apply some persistent environment variables, but currently don't set the C and C++ compiler to the new triplet.
+# Apply some persistent environment variables, but currently don't set the compiler to the new triplet.
 cat >> ~/.bashrc << "EOF"
 # Stage-1 Clang/LLVM environment.
 CC="clang"
@@ -59,7 +59,7 @@ cat > /clang1-tools/etc/ld-musl-x86_64.path << "EOF"
 /clang1-tools/lib
 EOF
 
-# Set toolchain to the new triplet from Stage-0 Clang/LLVM.
+# Set compiler to the new triplet from Stage-0 Clang/LLVM.
 sed -i 's|CC=.*|CC="${HEIWA_TARGET}-clang"|'     ~/.bashrc
 sed -i 's|CXX=.*|CXX="${HEIWA_TARGET}-clang++"|' ~/.bashrc
 source ~/.bashrc
@@ -358,9 +358,11 @@ cat > /clang1-tools/bin/${TARGET_TRUPLE}.cfg << "EOF"
 -Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1
 EOF
 
-# Set the new PATH since "/clang0-tools" won't be used anymore and its time to enable optimization.
+# Set the new PATH since "/clang0-tools" won't be used anymore and the Stage-1 Clang, also its time to enable optimization.
 sed -i 's|/clang0-tools/bin:/clang0-tools/usr/bin:||' ~/.bashrc
 sed -i '/unset CFLAGS CXXFLAGS/d'                     ~/.bashrc
+sed -i 's|CC=.*|CC="${TARGET_TRUPLE}-clang"|'         ~/.bashrc
+sed -i 's|CXX=.*|CXX="${TARGET_TRUPLE}-clang++"|'     ~/.bashrc
 source ~/.bash_profile
 
 # Back to "${HEIWA}/sources/pkgs" directory.
