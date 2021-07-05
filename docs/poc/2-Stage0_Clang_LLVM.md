@@ -219,7 +219,7 @@ readelf -l a.out | grep Requesting
 time { make CC=${HEIWA_TARGET}-gcc CFLAGS="-Wall -fPIC" all-dynamic; }
 
 # Install.
-time { make PREFIX=/ DESTDIR=/clang0-tools install-dynamic; }
+time { make PREFIX=/clang0-tools install-dynamic; }
 ```
 
 ### `7` - libexecinfo
