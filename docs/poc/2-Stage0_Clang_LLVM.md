@@ -335,7 +335,7 @@ time {
     popd && rm -rf build
 }
 
-# Set lld as default toolchain's linker.
+# Set lld as default toolchain linker.
 ln -sv lld /clang0-tools/bin/ld
 
 # Configure Stage-0 Clang to build binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" instead of "/lib/ld-musl-x86_64.so.1".
