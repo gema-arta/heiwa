@@ -722,7 +722,7 @@ install -vm755 -t /clang1-tools/lib/ libexecinfo.{a,so{.1,}}
 
 > **Required!**
 ```bash
-# Enter to LLVM source directory.
+# Enter to the LLVM source directory.
 pushd "$LLVM_SRC"
 
 # Decompress clang, lld, and compiler-rt to correct directories.
