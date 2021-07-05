@@ -333,7 +333,7 @@ time { make -C build; }
 time {
     pushd build/ && \
         cmake -DCMAKE_INSTALL_PREFIX="/clang0-tools" -P cmake_install.cmake && \
-    popd && rm -rf build
+    popd && rm -rf build; unset CFLAGS CXXFLAGS
 }
 
 # Set `lld` as default toolchain linker.
@@ -346,12 +346,6 @@ ln -sv clang-12 /clang0-tools/bin/${HEIWA_TARGET}-clang++
 cat > /clang0-tools/bin/${HEIWA_TARGET}.cfg << "EOF"
 -Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1
 EOF
-
-# Check specs file.
-grep --color=auto "/clang1-tools/lib/ld-musl-x86_64.so.1" specs
-
-# Install specs file.
-mv -v specs "$SPECFILE" && unset SPECFILE CFLAGS CXXFLAGS
 
 # Quick test.
 echo "int main(){}" > dummy.c
