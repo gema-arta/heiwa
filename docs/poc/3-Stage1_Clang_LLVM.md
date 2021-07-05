@@ -123,7 +123,7 @@ pushd ${LLVM_SRC}/projects/libunwind/ && \
 # Build.
 time { make -C build; }
 
-# Install.
+# Install and remove the build directory.
 time { make -C build install && rm -rf build && popd; }
 ```
 
