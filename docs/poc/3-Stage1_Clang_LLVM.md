@@ -288,7 +288,7 @@ CC="${HEIWA_TARGET}-clang" CFLAGS="-g -g1"
 CXX="${HEIWA_TARGET}-clang++" CXXFLAGS="-g -g1"
 export CC CXX CFLAGS CXXFLAGS
 
-# Update host/target triple detection.
+# Update host/target triplet detection.
 cp -fv ../extra/llvm/files/config.guess cmake/.
 
 # Configure source.
