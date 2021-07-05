@@ -911,7 +911,7 @@ patch -Np1 -i ../../extra/perl/patches/musl-stack-size.patch
 # Configure source.
 ./Configure -des \
     -Dprefix=/usr -Dvendorprefix=/usr -Dccdlflags="-rdynamic" \
-    -Dcccdlflags="-fPIC" -Dcccdlflags="-fPIC" -Dcf_by="Heiwa" \
+    -Dcccdlflags="-fPIC" -Dcccdlflags="-fPIC" -Duselargefiles \
     -Dprivlib=/usr/lib/perl5/5.32.1/core_perl                 \
     -Darchlib=/usr/lib/perl5/5.32.1/core_perl                 \
     -Dsitelib=/usr/lib/perl5/5.32.1/site_perl                 \
@@ -919,6 +919,7 @@ patch -Np1 -i ../../extra/perl/patches/musl-stack-size.patch
     -Dvendorlib=/usr/lib/perl5/5.32.1/vendor_perl             \
     -Dvendorarch=/usr/lib/perl5/5.32.1/vendor_perl            \
     -Doptimize="$CFLAGS -DNO_POSIX_2008_LOCALE -D_GNU_SOURCE" \
+    -Dcf_by="Heiwa" -Dmyuname="Heiwa" -Dmyhostname="Heiwa"    \
     -Dusethreads -Duseshrplib -Dman1ext=1 -Dman3ext=3pm       \
     -Dman1dir=/usr/share/man/man1 -Dman3dir=/usr/share/man/man3
 
