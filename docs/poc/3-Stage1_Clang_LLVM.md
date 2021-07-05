@@ -31,8 +31,9 @@ NM="llvm-nm"
 OBJCOPY="llvm-objcopy"
 OBJDUMP="llvm-objdump"
 READELF="llvm-readelf"
+SIZE="llvm-size"
 STRIP="llvm-strip"
-export CC CXX AR AS RANLIB LD NM OBJCOPY OBJDUMP READELF STRIP
+export CC CXX AR AS RANLIB LD NM OBJCOPY OBJDUMP READELF SIZE STRIP
 EOF
 source ~/.bashrc
 
@@ -343,11 +344,6 @@ time {
         cmake -DCMAKE_INSTALL_PREFIX="/clang1-tools" -P cmake_install.cmake && \
     popd && rm -rf build
 }
-
-# Since Binutils won't be used, create symlinks to LLVM tools.
-for B in ar as ranlib readelf nm objcopy objdump size strip; do
-    ln -sv llvm-${B} /clang1-tools/bin/${B}
-done; unset B; ln -sv lld /clang1-tools/bin/ld
 
 # Configure Stage-1 Clang with default triplet (pc) to produce binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1".
 ln -sv clang-12 /clang1-tools/bin/${TARGET_TRUPLE}-clang
