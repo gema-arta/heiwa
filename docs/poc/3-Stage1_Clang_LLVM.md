@@ -153,7 +153,7 @@ pushd ${LLVM_SRC}/projects/libcxxabi/ && \
 # Build.
 time { make -C build; }
 
-# Install.
+# Install and remove the build directory.
 time {
     make -C build install                     && \
     cp -v include/*.h /clang1-tools/include/. && \
