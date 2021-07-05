@@ -358,7 +358,8 @@ cat > /clang1-tools/bin/${TARGET_TRUPLE}.cfg << "EOF"
 -Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1
 EOF
 
-# Set the new PATH since "/clang0-tools" won't be used anymore and the Stage-1 Clang, also its time to enable optimization.
+# Set the new PATH since "/clang0-tools" won't be used anymore and the Stage-1 Clang default triplet (pc),
+# also its time to enable optimization.
 sed -i 's|/clang0-tools/bin:/clang0-tools/usr/bin:||' ~/.bashrc
 sed -i '/unset CFLAGS CXXFLAGS/d'                     ~/.bashrc
 sed -i 's|CC=.*|CC="${TARGET_TRUPLE}-clang"|'         ~/.bashrc
