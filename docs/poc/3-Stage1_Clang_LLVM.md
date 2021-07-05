@@ -98,7 +98,7 @@ cp -rfv usr/include /clang1-tools/.
 
 > **Required!** As mentioned in the description above.
 ```bash
-# Set default compiler to new symlink from Stage-0 Clang/LLVM.
+# Set default compiler to the new triplet from Stage-0 Clang/LLVM.
 CC="${HEIWA_TARGET}-clang" CXX="${HEIWA_TARGET}-clang++"
 export CC CXX
 
@@ -135,7 +135,7 @@ time { make -C build install && rm -rf build && popd; }
 
 > **Required!** As mentioned in the description above.
 ```bash
-# Set default compiler to new symlink from Stage-0 Clang/LLVM.
+# Set default compiler to the new triplet from Stage-0 Clang/LLVM.
 CC="${HEIWA_TARGET}-clang" CXX="${HEIWA_TARGET}-clang++"
 export CC CXX
 
@@ -169,7 +169,7 @@ time {
 
 > **Required!** As mentioned in the description above.
 ```bash
-# Set default compiler to new symlink from Stage-0 Clang/LLVM.
+# Set default compiler to the new triplet from Stage-0 Clang/LLVM.
 CC="${HEIWA_TARGET}-clang" CXX="${HEIWA_TARGET}-clang++"
 export CC CXX
 
