@@ -802,14 +802,14 @@ ln -sv ../usr/bin/clang /lib/cpp
 
 # Build useful utilities for BSD-compability.
 time {
-    clang $CFLAGS -fpie ../../extra/musl/files/getconf.c -o getconf && \
-    clang $CFLAGS -fpie ../../extra/musl/files/getent.c -o getent   && \
-    clang $CFLAGS -fpie ../../extra/musl/files/iconv.c -o iconv
+    clang $CFLAGS -fpie ../../extra/musl/files/musl-utils/getconf.c -o getconf && \
+    clang $CFLAGS -fpie ../../extra/musl/files/musl-utils/getent.c -o getent   && \
+    clang $CFLAGS -fpie ../../extra/musl/files/musl-utils/iconv.c -o iconv
 }
 
 # Install above utilities, and the man files (from NetBSD).
 install -vm755 -t /usr/bin/ get{conf,ent} iconv
-install -vm644 -t /usr/share/man/man1/ ../../extra/musl/files/get{conf,ent}.1
+install -vm644 -t /usr/share/man/man1/ ../../extra/musl/files/musl-utils/get{conf,ent}.1
 
 # Quick test.
 echo "int main(){}" > dummy.c
