@@ -358,7 +358,7 @@ sed -i "s|PATH=.*|PATH=\"${PATH}\"|" ~/.bashrc
 sed -i '/unset CFLAGS CXXFLAGS/d'    ~/.bashrc
 source ~/.bash_profile
 
-# Back to "${HEIWA}/sources/pkg" directory.
+# Back to "${HEIWA}/sources/pkgs" directory.
 cd ${HEIWA}/sources/pkgs/
 ```
 
