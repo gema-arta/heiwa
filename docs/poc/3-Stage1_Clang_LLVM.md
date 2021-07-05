@@ -106,8 +106,6 @@ pushd ${LLVM_SRC}/projects/libunwind/ && \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools"           \
         -DCMAKE_C_COMPILER="${HEIWA_TARGET}-clang"       \
         -DCMAKE_CXX_COMPILER="${HEIWA_TARGET}-clang++"   \
-        -DCMAKE_C_FLAGS="-fPIC"                          \
-        -DCMAKE_CXX_FLAGS="-fPIC"                        \
         -DCMAKE_AR="/clang0-tools/bin/llvm-ar"           \
         -DCMAKE_RANLIB="/clang0-tools/bin/llvm-ranlib"   \
         -DCMAKE_LINKER="/clang0-tools/bin/ld.lld"        \
@@ -116,6 +114,8 @@ pushd ${LLVM_SRC}/projects/libunwind/ && \
         -DCMAKE_OBJDUMP="/clang0-tools/bin/llvm-objdump" \
         -DCMAKE_READELF="/clang0-tools/bin/llvm-readelf" \
         -DCMAKE_STRIP="/clang0-tools/bin/llvm-strip"     \
+        -DCMAKE_C_FLAGS="-fPIC"                          \
+        -DCMAKE_CXX_FLAGS="-fPIC"                        \
         -DLIBUNWIND_ENABLE_SHARED=ON                     \
         -DLIBUNWIND_USE_COMPILER_RT=ON                   \
         -DLLVM_PATH="$LLVM_SRC"
