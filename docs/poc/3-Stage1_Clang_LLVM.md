@@ -722,13 +722,14 @@ sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
 sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
 
 # Prepare.
+export CFLAGS="$CFLAGS -fPIC"
 time { make -f Makefile-libbz2_so && make clean; }
 
 # Build.
 time { make; }
 
-# Install.
-time { make PREFIX=/clang1-tools install; }
+# Install and rollback compiler flags.
+time { make PREFIX=/clang1-tools install && export CFLAGS="${COMMON_FLAGS}"; }
 
 # Remove an useless static library.
 rm -fv /clang1-tools/lib/libbz2.a
