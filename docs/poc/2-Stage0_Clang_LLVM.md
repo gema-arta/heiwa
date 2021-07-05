@@ -285,7 +285,7 @@ projects/compiler-rt/cmake/config-ix.cmake
 CFLAGS="-g -g1" CXXFLAGS="-g -g1"
 export CFLAGS CXXFLAGS
 
-# Update host/target triple detection.
+# Update host/target triplet detection.
 cp -fv ../extra/llvm/files/config.guess cmake/.
 
 # Configure source.
