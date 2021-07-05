@@ -598,10 +598,10 @@ passwd root
 
 > **Required!** Before `LLVM libcxxabi`.
 ```bash
-# Decompress LLVM source.
+# Decompress the LLVM source, and rename.
 tar xf llvm-12.0.0.src.tar.xz && mv -v llvm-12.0.0.src "$LLVM_SRC"
 
-# Decompress `libunwind` to correct directories. Requires `libcxx`.
+# Decompress `libunwind` to the correct directories. Requires `libcxx`.
 pushd ${LLVM_SRC}/projects/ && \
     tar xf ../../pkgs/libunwind-12.0.0.src.tar.xz && mv -v libunwind-12.0.0.src libunwind
     tar xf ../../pkgs/libcxx-12.0.0.src.tar.xz    && mv -v libcxx-12.0.0.src libcxx
