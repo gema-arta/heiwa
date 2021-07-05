@@ -797,7 +797,7 @@ cmake -B build \
 # Build.
 time { make -C build; }
 
-# Install.
+# Install and remove the build directory.
 time {
     pushd build/ && \
         cmake -DCMAKE_INSTALL_PREFIX="/usr" -P cmake_install.cmake && \
