@@ -212,7 +212,7 @@ time { make -C build install && rm -rf build && popd; }
 time { make CC=${HEIWA_TARGET}-clang CFLAGS="$COMMON_FLAGS -Wall -fPIC" all-dynamic; }
 
 # Install.
-time { make PREFIX=/ DESTDIR=/clang1-tools install-dynamic; }
+time { make PREFIX=/clang1-tools install-dynamic; }
 ```
 
 ### `7` - libexecinfo
@@ -230,9 +230,9 @@ done; unset P
 time { make CC=${HEIWA_TARGET}-clang AR=llvm-ar CFLAGS="$COMMON_FLAGS -fno-omit-frame-pointer"; }
 
 # Install.
+ln -sv libexecinfo.so.1 libexecinfo.so
 install -vm755 -t /clang1-tools/include/ execinfo.h stacktraverse.h
-install -vm755 -t /clang1-tools/lib/ libexecinfo.a libexecinfo.so.1
-ln -sv libexecinfo.so.1 /clang1-tools/lib/libexecinfo.so
+install -vm755 -t /clang1-tools/lib/ libexecinfo.{a,so{.1,}}
 ```
 
 ### `8` - Zlib-ng
