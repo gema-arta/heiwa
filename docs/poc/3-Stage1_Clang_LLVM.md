@@ -58,7 +58,7 @@ cat > /clang1-tools/etc/ld-musl-x86_64.path << "EOF"
 /clang1-tools/lib
 EOF
 
-# Set the toolchain to new tripet from Stage-0 Clang/LLVM.
+# Set toolchain to the new tripet from Stage-0 Clang/LLVM.
 sed -i "s|CC=.*|CC=\"\${HEIWA_TARGET}-clang\"|"     ~/.bashrc
 sed -i "s|CXX=.*|CXX=\"\${HEIWA_TARGET}-clang++\"|" ~/.bashrc
 source ~/.bashrc
