@@ -18,11 +18,8 @@
 
 > **Required!** As mentioned in the description above.
 ```bash
-# Set default compiler to Stage-0 Clang/LLVM (not the new triplet).
-CC="clang" CXX="clang++"
-export CC CXX
-
-# Configure source.
+# Configure source with Stage-0 Clang/LLVM (not the new triplet).
+CC="clang" CXX="clang++" \
 ./configure --prefix=/ --enable-optimize=speed
 
 # Build.
