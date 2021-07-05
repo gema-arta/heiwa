@@ -842,7 +842,7 @@ grep -o -- -L/usr/lib dummy.log
 # |-----------------------
 # |-L/usr/lib
 
-# Clean up and back to "/sources/pkg" directory.
+# Clean up and back to "/sources/pkgs" directory.
 rm -fv dummy.c a.out dummy.log; popd
 ```
 
