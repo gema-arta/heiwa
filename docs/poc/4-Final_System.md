@@ -873,10 +873,10 @@ sed -i '/\(bzip2\|zlib\)-src/d' MANIFEST
 BUILD_ZLIB=False BUILD_BZIP2=0
 export BUILD_ZLIB BUILD_BZIP2
  
- # Apply patches (from Alpine Linux) to fix "locale.c" error in programs like `rxvt-unicode`, and change stack size.
- patch -Np1 -i ../../extra/perl/patches/musl-locale.patch
- patch -Np1 -i ../../extra/perl/patches/musl-stack-size.patch
- 
+# Apply patches (from Alpine Linux) to fix "locale.c" error in programs like `rxvt-unicode`, and change stack size.
+patch -Np1 -i ../../extra/perl/patches/musl-locale.patch
+patch -Np1 -i ../../extra/perl/patches/musl-stack-size.patch
+
 # Configure source.
 ./Configure -des \
     -Dprefix=/usr -Dvendorprefix=/usr -Dccdlflags="-rdynamic" \
