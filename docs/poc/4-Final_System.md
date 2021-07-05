@@ -820,8 +820,8 @@ install -vm644 -t /usr/share/man/man1/ ../../extra/musl/files/musl-utils/get{con
 
 # Quick test.
 echo "int main(){}" > dummy.c
-cc dummy.c -v -Wl,--verbose &> dummy.log
-readelf -l a.out | grep ": /lib"
+${CC} dummy.c -v -Wl,--verbose &> dummy.log
+${READELF} -l a.out | grep ": /lib"
 
 # | The output should be:
 # |-----------------------
