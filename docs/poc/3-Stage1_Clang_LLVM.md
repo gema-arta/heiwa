@@ -31,10 +31,10 @@ time { make; }
 # Install.
 time { make DESTDIR=/clang1-tools install; }
 
-# Fix a wrong object symlink.
+# Fix a wrong shared object symlink.
 ln -sfv libc.so /clang1-tools/lib/ld-musl-x86_64.so.1
 
-# Create a ldd symlink to use to print shared object dependencies.
+# Create a `ldd` symlink to use to print shared object dependencies.
 mkdir -v /clang1-tools/bin && \
 ln -sv ../lib/libc.so /clang1-tools/bin/ldd
 
