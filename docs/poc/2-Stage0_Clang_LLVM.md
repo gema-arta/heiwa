@@ -331,8 +331,8 @@ time {
 }
 
 # Configure Stage-0 Clang with new triplet to produce binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" later.
-ln -sv clang-12 /clang0-tools/bin/${HEIWA_TARGET}-clang
-ln -sv clang-12 /clang0-tools/bin/${HEIWA_TARGET}-clang++
+ln -sv clang   /clang0-tools/bin/${HEIWA_TARGET}-clang
+ln -sv clang++ /clang0-tools/bin/${HEIWA_TARGET}-clang++
 cat > /clang0-tools/bin/${HEIWA_TARGET}.cfg << "EOF"
 -Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1
 EOF
