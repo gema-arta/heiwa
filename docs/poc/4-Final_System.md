@@ -864,7 +864,7 @@ cd /sources/pkgs/
 > #### `1.0.8` or newer
 > The Bzip2 package contains programs for compressing and decompressing files. Compressing text files with bzip2 yields a much better compression percentage than with the traditional gzip.
 
-> **Required!** Before libexecinfo.
+> **Required!** Before `Perl`.
 ```bash
 # Apply patches to fix docs installation and library soname.
 patch -Np1 -i ../../extra/bzip2/patches/install_docs-1.patch
