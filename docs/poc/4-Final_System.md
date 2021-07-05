@@ -140,12 +140,11 @@ chgrp -v utmp /var/log/lastlog
 chmod -v 664  /var/log/lastlog
 chmod -v 600  /var/log/btmp
 
-# Apply some persistent environment variables.
+# Apply toolchain persistent environment variables, set the C and C++ compiler to the Stage-1 Clang/LLVM default triplet (pc).
 cat > ~/.bash_profile << "EOF"
 # Stage-1 Clang/LLVM environment.
-TRUPLE="x86_64-pc-linux-musl"
-CC="${TRUPLE}-clang"
-CXX="${TRUPLE}-clang++"
+CC="x86_64-pc-linux-musl-clang"
+CXX="x86_64-pc-linux-musl-clang++"
 AR="llvm-ar"
 AS="llvm-as"
 RANLIB="llvm-ranlib"
@@ -160,7 +159,7 @@ COMMON_FLAGS="-march=native -Oz -pipe"
 CFLAGS="${COMMON_FLAGS}"
 CXXFLAGS="${COMMON_FLAGS}"
 LLVM_SRC="/sources/llvm"
-export TRUPLE CC CXX AR AS RANLIB LD NM OBJCOPY OBJDUMP READELF SIZE STRIP COMMON_FLAGS CFLAGS CXXFLAGS LLVM_SRC
+export CC CXX AR AS RANLIB LD NM OBJCOPY OBJDUMP READELF SIZE STRIP COMMON_FLAGS CFLAGS CXXFLAGS LLVM_SRC
 # Make's multiple jobs based on CPU core/threads.
 alias make="make -j$(nproc) -l$(nproc)"
 EOF
@@ -278,12 +277,12 @@ cat > /clang1-tools/bin/x86_64-heiwa-linux-musl.cfg << "EOF"
 --sysroot=/usr -Wl,-dynamic-linker /lib/ld-musl-x86_64.so.1
 EOF
 
-# Set the new toolchain configuration.
+# Set toolchain to the new triplet from Stage-1 Clang/LLVM.
 sed -i 's|CC=.*|CC="x86_64-heiwa-linux-musl-clang"|'     ~/.bash_profile
 sed -i 's|CXX=.*|CXX="x86_64-heiwa-linux-musl-clang++"|' ~/.bash_profile
 source ~/.bash_profile
 
-# Quick test.
+# Quick test for the new triplet of Stage-1 Clang/LLVM.
 echo "int main(){}" > dummy.c
 ${CC} dummy.c -v -Wl,--verbose &> dummy.log
 ${READELF} -l a.out | grep ": /lib"
@@ -309,8 +308,7 @@ grep -B1 "^ /usr/include" dummy.log
 # | /usr/include
 
 # Check the dynamic linker libraries path.
-grep -o -- -L/usr/lib dummy.log && \
-grep -o -- -L/lib dummy.log
+grep -o -- -L/usr/lib dummy.log && grep -o -- -L/lib dummy.log
 
 # | The output should be:
 # |-----------------------
@@ -402,7 +400,7 @@ rm -fv /usr/lib/libz.a
 > **Required!** Before `GNU Bash`, `NetBSD libedit`, `GNU Texinfo`, and `Util-linux`.
 ```bash
 # Build.
-time { make CFLAGS="$CFLAGS -Wall -fPIC"; }
+time { make CFLAGS="$CFLAGS -fPIC"; }
 
 # Install and create symlinks as `libtinfo` libraries.
 time {
@@ -725,7 +723,7 @@ install -vm755 -t /clang1-tools/lib/ libexecinfo.{a,so{.1,}}
 > **Required!**
 ```bash
 # Enter to the LLVM source directory.
-pushd "$LLVM_SRC"
+cd "$LLVM_SRC"
 
 # Decompress `clang`, `lld`, and `compiler-rt` to the correct directories.
 pushd ${LLVM_SRC}/projects/ && \
@@ -807,10 +805,13 @@ time {
 }
 
 # Create a symlink required by the FHS for "historical" reasons, and
-# set `clang` and `lld` as default toolchain compiler and linker.
-ln -sv ../usr/bin/clang /lib/cpp
-ln -sv clang            /usr/bin/cc
-ln -sv lld              /usr/bin/ld
+# set `clang`, `clang++`, and `lld` as default toolchain compiler and linker.
+ln -sv ../usr/bin/clang          /lib/cpp
+ln -sv clang                     /usr/bin/cc
+ln -sv lld                       /usr/bin/ld
+sed -i 's|CC=.*|CC="clang"|'     ~/.bash_profile
+sed -i 's|CXX=.*|CXX="clang++"|' ~/.bash_profile
+source ~/.bash_profile
 
 # Build useful utilities for BSD-compability.
 time {
@@ -856,7 +857,7 @@ grep -o -- -L/usr/lib dummy.log
 # |-L/usr/lib
 
 # Back to "/sources/pkgs" directory.
-popd
+cd /sources/pkgs
 ```
 
 ### `24` - Perl
