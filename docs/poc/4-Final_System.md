@@ -889,7 +889,7 @@ export BUILD_ZLIB BUILD_BZIP2
 # Build.
 time { make; }
 
-# Install and unset Perl specific exported variables.
+# Install and unset Perl specifics exported variables.
 time { make install && unset BUILD_ZLIB BUILD_BZIP2; }
 ```
 
