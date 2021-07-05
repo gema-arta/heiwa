@@ -339,8 +339,8 @@ time {
 # Set `lld` as default toolchain linker.
 ln -sv lld /clang0-tools/bin/ld
 
-# Configure Stage-0 Clang with new triplet and,
-# build binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" instead of "/lib/ld-musl-x86_64.so.1".
+# Configure Stage-0 Clang with new triplet,
+# and build binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" instead of "/lib/ld-musl-x86_64.so.1".
 ln -sv clang-12 /clang0-tools/bin/${HEIWA_TARGET}-clang
 ln -sv clang-12 /clang0-tools/bin/${HEIWA_TARGET}-clang++
 cat > /clang0-tools/bin/${HEIWA_TARGET}.cfg << "EOF"
