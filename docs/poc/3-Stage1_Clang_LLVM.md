@@ -156,8 +156,7 @@ time { make -C build; }
 
 # Install.
 time {
-    make -C build install && \
-    cp -v include/*.h /clang1-tools/include/. && \
+    make -C build install && cp -v include/*.h /clang1-tools/include/. && \
     rm -rf build && popd
 }
 ```
