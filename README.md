@@ -4,11 +4,11 @@
 <br>
 
 ## Roadmap
-> Always W.I.P, since this is hobbyst.
 - [x] Specifies the packages to be used.
 - [ ] Create a Proof-of-Concept (similiar to LFS books).
 - [ ] Create a fast, flexible, and futuristic package manager **(**「管理」, "management"  **)**.
 - [ ] Build an auto build systems.
 - [ ] Packaging, make it usable but with the aim of not being big.
+> Always W.I.P, since this is hobbyist.
 
 See [docs](./docs).
