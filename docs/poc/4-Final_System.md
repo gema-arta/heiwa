@@ -389,7 +389,7 @@ time { make -C build; }
 # Install.
 time { make -C build install; }
 
-# Remove useless static library.
+# Remove an useless static library.
 rm -fv /usr/lib/libz.a
 ```
 
@@ -887,7 +887,7 @@ install -vm755 -t /usr/lib/ libbz2.so*
 cp -fv bzip2-shared bzip2; ln -sv bzip2 bunzip2; ln -sv bzip2 bzcat
 install -vm755 -t /usr/bin/ b{un,}zip2 bzcat
 
-# Remove useless static library.
+# Remove an useless static library.
 rm -fv /usr/lib/libbz2.a
 ```
 
