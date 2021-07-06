@@ -951,6 +951,45 @@ time { make MANSUFFIX=ssl install; }
 mv -v /usr/share/doc/openssl /usr/share/doc/openssl-1.1.1k
 ```
 
+### `27` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man(-DB?), Procps-ng, Psmisc, Sed, Sysklogd, and Tar)
+> #### `0.8.5`
+> The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
+
+> **Required!** For the current and next stage (chroot environment).
+```bash
+# Copy Toybox's .config file.
+cp -v ../../extra/toybox/files/.config.coreutils_file_findutils_grep_sed_tar.nlns .config
+
+export CFFGPT="base64 base32 basename cat chgrp chmod chown chroot cksum comm cp cut date
+dd df dirname du echo env expand expr factor false fmt fold groups head hostid id install
+link ln logname ls md5sum mkdir mkfifo mknod mktemp mv nice nl nohup nproc od paste printenv
+printf pwd readlink realpath rm rmdir seq sha1sum shred sleep sort split stat stty sync tac
+tail tee test timeout touch tr true truncate tty uname uniq unlink wc who whoami yes file
+find xargs egrep grep fgrep sed tar"
+
+# Checks 87 commands, and make sure is enabled (=y).
+# Pipe to " | wc -l" at the right of "done" to checks total of commands.
+for X in ${CFFGPT}; do
+    grep -v '#' .config | grep -i "_${X}=" || echo "* $X not CONFIGURED"
+done
+
+# Build.
+time { make; }
+
+# Checks compiled 87 commands.
+./toybox | tr ' ' '\n'i | grep -xE $(echo $CFFGPT | tr ' ' '|'i) | wc -l
+
+# Checks commands that not configured but compiled.
+# `[` (coreutils)
+./toybox | tr ' ' '\n'i | grep -vxE $(echo $CFFGPT | tr ' ' '|'i)
+
+# So, totally is 88 commands.
+./toybox | wc -w
+
+# Install.
+time { make PREFIX=/clang1-tools install && unset CFFGPT; }
+```
+
 ### `28` - GNU Autoconf
 > #### `2.71` or newer
 > The GNU Autoconf package contains programs for producing shell scripts that can automatically configure source code.
