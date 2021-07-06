@@ -192,7 +192,7 @@ patch -Np1 -i \
 ../../extra/linux-headers/patches/include-uapi-linux-swab-Fix-potentially-missing-__always_inline.patch
 
 # Make sure there are no stale files embedded in the package.
-time { make LLVM=1 LLVM_IAS=1 HOSTCC={$CC} mrproper; }
+time { make LLVM=1 LLVM_IAS=1 HOSTCC=${CC} mrproper; }
 
 # The recommended make target `headers_install` cannot be used, because it requires rsync, which may not be available.
 # The headers are first placed in "./usr/", then copied to the needed location.
@@ -402,7 +402,7 @@ rm -fv /usr/lib/libz.a
 # Build.
 time { make CFLAGS="$CFLAGS -fPIC"; }
 
-# Install and create symlinks as `libtinfo` libraries.
+# Install and create symlinks as `libtinfo` libraries (which actually replace GNU Ncurses).
 time {
     make PREFIX=/usr install                  && \
     ln -sv libterminfo.a  /usr/lib/libtinfo.a && \
@@ -544,7 +544,7 @@ time { make CC=${CC} SBINDIR=/sbin prefix=/usr lib=lib install; }
 > #### `4.8.1` or newer
 > The Shadow package contains programs for handling passwords in a secure way.
 
-> **Required!** Currently, without cracklib.
+> **Required!** Currently build without `cracklib` support.
 ```bash
 # Disable the installation of the groups program and its man pages, as Coreutils (replaced by Toybox) provides a better version.
 # Also, prevent the installation of manual pages.
@@ -961,7 +961,7 @@ mv -fv /usr/share/doc/openssl /usr/share/doc/openssl-1.1.1k
 cp -v ../../extra/toybox/files/.config.bc_coreutils_file_findutils_grep_inetutils_man_procps_psmisc_sed_sysklogd_tar .config
 
 # Make sure to enable `libcrypto` and `libz`.
-grep -iE "libcrypto|libz" .config
+grep -iE --color=auto "libcrypto|libz" .config
 
 export CFFGPT="bc base64 base32 basename cat chgrp chmod chown chroot cksum comm cp cut
 date dd df dirname du echo env expand expr factor false fmt fold groups head hostid id
