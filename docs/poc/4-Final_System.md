@@ -996,6 +996,8 @@ time { make; }
 time { make PREFIX=/ install && unset CFFGPT; }
 ```
 
+<h2 align="center">Belows are Failed!</h2>
+
 ### `28` - GNU Autoconf
 > #### `2.71` or newer
 > The GNU Autoconf package contains programs for producing shell scripts that can automatically configure source code.
@@ -1031,4 +1033,4 @@ time { make install; }
 
 <br>
 
-<h2 align="center">WIP<h2>
+<h2 align="center">W.I.P<h2>
