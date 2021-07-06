@@ -1031,7 +1031,7 @@ time { make; }
 time { make install; }
 ```
 
-<h2>WIP<h2>
+<h2 align="center">WIP<h2>
 
 <!--
     ### `` - Argp-standalone
