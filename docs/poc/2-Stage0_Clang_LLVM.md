@@ -215,7 +215,7 @@ readelf -l a.out | grep "Requesting"
 > **Required!** To build Stage-0 Clang/LLVM.
 ```bash
 # Build.
-time { make CC=${HEIWA_TARGET}-gcc CFLAGS="-Wall -fPIC" all-dynamic; }
+time { make CC=${HEIWA_TARGET}-gcc CFLAGS="-fPIC" all-dynamic; }
 
 # Install.
 time { make PREFIX=/clang0-tools install-dynamic; }
