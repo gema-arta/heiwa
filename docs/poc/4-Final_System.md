@@ -474,7 +474,7 @@ time {
 > **Required!** Before `GNU Autoconf`.
 ```bash
 # Configure source.
-./configure --prefix=/usr --enable-m4
+M4=/usr/bin/m4 ./configure --prefix=/usr --enable-m4
 
 # Build. Fails when using multiple jobs.
 time { make -j1; }
