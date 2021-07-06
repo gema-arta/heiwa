@@ -40,7 +40,7 @@ fi
 if [[ -n "$HEIWA" ]]; then
     chroot "$HEIWA" /clang1-tools/usr/bin/env -i                                 \
     HOME="/root" TERM="xterm" PS1='(heiwa chroot) \u: \w \$ '                    \
-    PATH="/usr/sbin:/usr/bin:/sbin:/bin::/clang1-tools/usr/bin:/clang1-tools/bin" \
+    PATH="/usr/sbin:/usr/bin:/sbin:/bin:/clang1-tools/usr/bin:/clang1-tools/bin" \
     /clang1-tools/bin/bash --login +h
 fi
 
