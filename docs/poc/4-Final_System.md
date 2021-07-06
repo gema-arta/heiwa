@@ -1032,30 +1032,3 @@ time { make install; }
 ```
 
 <h2 align="center">WIP<h2>
-
-<!--
-    ### `` - Argp-standalone
-    > #### `1.4.1` or newer
-    > The Argp-standalone package contains hierarchial argument parsing library broken out from glibc.
-
-    > **Required!** Since using musl libc.
-    ```bash
-    # Apply patch to enable `-fgnu89-inline` compile flag (from Adélie Linux).
-    patch -Np1 -i ../../extra/argp-standalone/patches/gnu89-inline.patch
-
-    # Configure source.
-    CFLAGS="$CFLAGS -fPIC" \
-    ./configure \
-        --prefix=/usr      \
-        --disable-static   \
-        --sysconfdir=/etc  \
-        --localstatedir=/var
-
-    # Build.
-    time { make; }
-
-    # Install.
-    install -vm644 -t /usr/lib/  libargp.a
-    install -vm644 -t /usr/include/ argp.h
-    ```
--->
