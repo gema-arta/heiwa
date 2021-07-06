@@ -927,6 +927,38 @@ time { make; }
 time { make install && unset BUILD_ZLIB BUILD_BZIP2; }
 ```
 
+### `26` - GNU Autoconf
+> #### `2.71` or newer
+> The GNU Autoconf package contains programs for producing shell scripts that can automatically configure source code.
+
+> **Required!** Before `GNU Automake`.
+```bash
+# Configure source.
+./configure --prefix=/usr
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `27` - GNU Automake
+> #### `1.16.3` or newer
+> The GNU Automake package contains programs for generating Makefiles for use with Autoconf.
+
+> **Required!** Before `Argp-standalone`.
+```bash
+# Configure source.
+./configure --prefix=/usr --docdir=/usr/share/doc/automake-1.16.3
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
 <!--
     ### `` - Toybox (Bc, File, Grep, Inetutils, Psmisc, Sed)
     > #### `0.8.5`
