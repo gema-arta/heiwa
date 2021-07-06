@@ -142,7 +142,7 @@ chmod -v 600  /var/log/btmp
 
 # Apply toolchain persistent environment variables, set the compiler to Stage-1 Clang default triplet (pc).
 cat > ~/.bash_profile << "EOF"
-# Stage-1 Clang/LLVM environment.
+# Clang/LLVM environment.
 CC="x86_64-pc-linux-musl-clang"
 CXX="x86_64-pc-linux-musl-clang++"
 AR="llvm-ar"
