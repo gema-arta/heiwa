@@ -975,19 +975,19 @@ pidof pkill pmap ps pwdx sysctl top uptime vmstat w watch killall sed klogd tar"
 # Checks 115 commands, and make sure is enabled (=y).
 # Pipe to " | wc -l" at the right of "done" to checks total of commands.
 for X in ${CFFGPT}; do
-    grep -v '#' .config | grep -i "_${X}=" || echo "* $X not CONFIGURED"
+    grep -v '#' .config | grep -i --color=auto "_${X}=" || echo "* $X not CONFIGURED"
 done
 
 # Build.
 time { make; }
 
 # Checks compiled 115 commands.
-./toybox | tr ' ' '\n'i | grep -xE $(echo $CFFGPT | tr ' ' '|'i) | wc -l
+./toybox | tr ' ' '\n'i | grep -xE --color=auto $(echo $CFFGPT | tr ' ' '|'i) | wc -l
 
 # Checks commands that not configured but compiled.
 # `[` (coreutils)
 # `ping6` and `traceroute6` (inetutils)
-./toybox | tr ' ' '\n'i | grep -vxE $(echo $CFFGPT | tr ' ' '|'i)
+./toybox | tr ' ' '\n'i | grep -vxE --color=auto $(echo $CFFGPT | tr ' ' '|'i)
 
 # So, totally is 118 commands.
 ./toybox | wc -w
