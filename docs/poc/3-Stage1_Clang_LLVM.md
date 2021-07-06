@@ -728,6 +728,7 @@ time { make CFLAGS="$CFLAGS -fPIC" -f Makefile-libbz2_so && make clean; }
 # Build.
 time { make CFLAGS="$CFLAGS -fPIC"; }
 
+# Install.
 time { make PREFIX=/clang1-tools install; }
 
 # Remove an useless static library.
