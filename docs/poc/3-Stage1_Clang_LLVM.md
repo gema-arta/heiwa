@@ -442,18 +442,18 @@ find xargs egrep grep fgrep sed tar"
 # Checks 87 commands, and make sure is enabled (=y).
 # Pipe to " | wc -l" at the right of "done" to checks total of commands.
 for X in ${CFFGPT}; do
-    grep -v '#' .config | grep -i "_${X}=" || echo "* $X not CONFIGURED"
+    grep -v '#' .config | grep -i --color=auto "_${X}=" || echo "* $X not CONFIGURED"
 done
 
 # Build.
 time { make; }
 
 # Checks compiled 87 commands.
-./toybox | tr ' ' '\n'i | grep -xE $(echo $CFFGPT | tr ' ' '|'i) | wc -l
+./toybox | tr ' ' '\n'i | grep -xE --color=auto $(echo $CFFGPT | tr ' ' '|'i) | wc -l
 
 # Checks commands that not configured but compiled.
 # `[` (coreutils)
-./toybox | tr ' ' '\n'i | grep -vxE $(echo $CFFGPT | tr ' ' '|'i)
+./toybox | tr ' ' '\n'i | grep -vxE --color=auto $(echo $CFFGPT | tr ' ' '|'i)
 
 # So, totally is 88 commands.
 ./toybox | wc -w
