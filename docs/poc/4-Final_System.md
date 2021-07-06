@@ -409,7 +409,7 @@ time {
     ln -sv libterminfo.so /usr/lib/libtinfo.so
 }
 
-# Remove man colission with `attr`.
+# Remove the man pages that colission with `attr`.
 rm -fv /usr/share/man/man3/attr_{g,s}et.3
 ```
 
