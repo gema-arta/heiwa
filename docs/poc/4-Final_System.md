@@ -429,7 +429,7 @@ time { make; }
 # Install.
 time { make install; }
 
-# Create symlinks and fake headers to replace "readline".
+# Create symlinks and fake headers to replace GNU `readline`.
 for L in history readline; do
     ln -sv libedit.a  /usr/lib/lib${L}.a
     ln -sv libedit.so /usr/lib/lib${L}.so
