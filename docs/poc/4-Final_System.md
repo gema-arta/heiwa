@@ -958,7 +958,8 @@ mv -fv /usr/share/doc/openssl /usr/share/doc/openssl-1.1.1k
 > **Required!**
 ```bash
 # Copy Toybox's .config file.
-cp -v ../../extra/toybox/files/.config.bc_coreutils_file_findutils_grep_inetutils_man_procps_psmisc_sed_sysklogd_tar .config
+cp -v ../../extra/toybox/files/.config.bc_coreutils_file_findutils_grep_inetutils_man_procps_psmisc_sed_sysklogd_tar \
+.config
 
 # Make sure to enable `libcrypto` and `libz`.
 grep -iE --color=auto "libcrypto|libz" .config
