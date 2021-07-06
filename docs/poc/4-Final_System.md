@@ -895,7 +895,7 @@ rm -fv /usr/lib/libbz2.a
 > #### `5.32.1`
 > The Perl package contains the Practical Extraction and Report Language.
 
-> **Required!** Before `GNU Autoconf`.
+> **Required!** Before `OpenSSL`.
 ```bash
 # Ensure to build with Perl with the libraries installed on the system.
 BUILD_ZLIB=0 BUILD_BZIP2=0
@@ -927,7 +927,35 @@ time { make; }
 time { make install && unset BUILD_ZLIB BUILD_BZIP2; }
 ```
 
-### `26` - GNU Autoconf
+### `26` - OpenSSL
+> #### `1.1.1k` or newer
+> The OpenSSL package contains management tools and libraries relating to cryptography. These are useful for providing cryptographic functions to other packages, such as OpenSSH, email applications, and web browsers (for accessing HTTPS sites).
+
+> **Required!** Before `Toybox`.
+```bash
+# Configure source.
+./Configure linux-x86_64       \
+    --prefix=/usr              \
+    --libdir=lib               \
+    --openssldir=/etc/ssl      \
+    shared no-ssl3-method      \
+    enable-ec_nistp_64_gcc_128 \
+    ${CFLAGS} -Wa,--noexecstack
+
+# Unset exported target and extraconfig variables.
+unset TARGET EXTRA_CONFIG
+
+# Build.
+time { make; }
+
+# Install.
+time { make MANSUFFIX=ssl install; }
+
+# Add the version to the documentation directory name, to be consistent with other packages.
+mv -v /usr/share/doc/openssl /usr/share/doc/openssl-1.1.1k
+```
+
+### `28` - GNU Autoconf
 > #### `2.71` or newer
 > The GNU Autoconf package contains programs for producing shell scripts that can automatically configure source code.
 
@@ -943,7 +971,7 @@ time { make; }
 time { make install; }
 ```
 
-### `27` - GNU Automake
+### `29` - GNU Automake
 > #### `1.16.3` or newer
 > The GNU Automake package contains programs for generating Makefiles for use with Autoconf.
 
