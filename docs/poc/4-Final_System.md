@@ -942,9 +942,6 @@ time { make install && unset BUILD_ZLIB BUILD_BZIP2; }
     enable-ec_nistp_64_gcc_128 \
     ${CFLAGS} -Wa,--noexecstack
 
-# Unset exported target and extraconfig variables.
-unset TARGET EXTRA_CONFIG
-
 # Build.
 time { make; }
 
