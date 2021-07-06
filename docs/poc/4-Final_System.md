@@ -1003,9 +1003,7 @@ time { make PREFIX=/ install && unset CFFGPT; }
 > **Required!** Before `GNU Automake`.
 ```bash
 # Configure source.
-M4=/usr/bin/m4
-HELP2MAN=/bin/true
-export M4 HELP2MAN
+M4=/usr/bin/m4 HELP2MAN=/bin/true \
 ./configure --prefix=/usr
 
 # Build.
