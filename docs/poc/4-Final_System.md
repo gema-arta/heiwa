@@ -474,7 +474,7 @@ time {
 > **Required!** Before `GNU Autoconf`.
 ```bash
 # Configure source.
-M4=/usr/bin/m4 ./configure --prefix=/usr --enable-m4
+./configure --prefix=/usr --enable-m4
 
 # Build. Fails when using multiple jobs.
 time { make -j1; }
@@ -1003,7 +1003,8 @@ time { make PREFIX=/ install && unset CFFGPT; }
 > **Required!** Before `GNU Automake`.
 ```bash
 # Configure source.
-./configure --prefix=/usr
+M4=/usr/bin/m4 \
+/configure --prefix=/usr
 
 # Build.
 time { make; }
