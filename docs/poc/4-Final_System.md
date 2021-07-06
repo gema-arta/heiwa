@@ -1004,7 +1004,7 @@ time { make PREFIX=/ install && unset CFFGPT; }
 ```bash
 # Configure source.
 M4=/usr/bin/m4 \
-/configure --prefix=/usr
+./configure --prefix=/usr
 
 # Build.
 time { make; }
