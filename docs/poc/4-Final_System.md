@@ -951,7 +951,7 @@ time { make MANSUFFIX=ssl install; }
 mv -v /usr/share/doc/openssl /usr/share/doc/openssl-1.1.1k
 ```
 
-### `27` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man, Procps-ng, Psmisc, Sed, Sysklogd, and Tar)
+### `27` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man, Procps-ng, Psmisc, Sed, Sysklogd, Tar)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
