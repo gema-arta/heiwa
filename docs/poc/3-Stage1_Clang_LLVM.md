@@ -216,7 +216,7 @@ time {
 > **Required!** To build Stage-1 Clang/LLVM and for the most programs that depends on `-ltinfo` or `-lterminfo` linker's flags.
 ```bash
 # Build.
-time { make CFLAGS="-Wall -fPIC" all-dynamic; }
+time { make CFLAGS="-fPIC" all-dynamic; }
 
 # Install.
 time { make PREFIX=/clang1-tools install-dynamic; }
