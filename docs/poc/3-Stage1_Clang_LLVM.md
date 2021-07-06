@@ -18,7 +18,8 @@
 
 > **Required!** As mentioned in the description above.
 ```bash
-# Apply some persistent environment variables, but currently don't set the compiler to the new triplet.
+# Apply some persistent environment variables,
+# but currently don't set the compiler to the new triplet.
 cat >> ~/.bashrc << "EOF"
 # Stage-1 Clang/LLVM environment.
 CC="clang"
