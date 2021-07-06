@@ -948,7 +948,7 @@ time { make; }
 time { make MANSUFFIX=ssl install; }
 
 # Add the version to the documentation directory name, to be consistent with other packages.
-mv -v /usr/share/doc/openssl /usr/share/doc/openssl-1.1.1k
+mv -fv /usr/share/doc/openssl /usr/share/doc/openssl-1.1.1k
 ```
 
 ### `27` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man, Procps-ng, Psmisc, Sed, Sysklogd, Tar)
