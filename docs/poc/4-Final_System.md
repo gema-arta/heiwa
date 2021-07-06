@@ -955,7 +955,7 @@ mv -v /usr/share/doc/openssl /usr/share/doc/openssl-1.1.1k
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
-> **Required!** For the current and next stage (chroot environment).
+> **Required!**
 ```bash
 # Copy Toybox's .config file.
 cp -v ../../extra/toybox/files/.config.bc_coreutils_file_findutils_grep_inetutils_man_procps_psmisc_sed_sysklogd_tar .config
