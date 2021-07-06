@@ -423,7 +423,7 @@ time { make; }
 time { make install; }
 ```
 
-### `12` - Toybox (Coreutils, File, Findutils, Grep, Sed, and Tar)
+### `12` - Toybox (Coreutils, File, Findutils, Grep, Sed, Tar)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
