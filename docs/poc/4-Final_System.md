@@ -984,69 +984,6 @@ time { make install; }
 ```
 
 <!--
-    ### `` - Toybox (Bc, File, Grep, Inetutils, Psmisc, Sed)
-    > #### `0.8.5`
-    > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
-    
-    > **Required!** After Zlib-ng, NetBSD Curses, and NetBSD libedit.
-    ```bash
-    # Copy Toybox's .config file.
-    cp -v ../../extra/toybox/files/.config.bc_file_grep_inetutils_psmisc_sed.nlns .config
-    
-    # Make sure to enable zlib.
-    grep -i "libz" .config
-    
-    export CFFGPT="bc file egrep grep fgrep dnsdomainname ifconfig hostname ping telnet tftp
-    traceroute killall sed"
-    
-    # Checks 14 commands, and make sure is enabled (=y).
-    # Pipe to " | wc -l" at the right of "done" to checks total of commands.
-    for X in ${CFFGPT}; do
-        grep -v '#' .config | grep -i "_${X}=" || echo "* $X not CONFIGURED"
-    done
-    
-    # Build.
-    time { make; }
-    
-    # Checks compiled 14 commands.
-    ./toybox | tr ' ' '\n'i | grep -xE $(echo $CFFGPT | tr ' ' '|'i) | wc -l
-    
-    # Checks commands that not configured but compiled.
-    # `ping6` and `traceroute6` (inetutils)
-    ./toybox | tr ' ' '\n'i | grep -vxE $(echo $CFFGPT | tr ' ' '|'i)
-    
-    # So, totally is 16 commands.
-    ./toybox | wc -w
-    
-    # Install.
-    time { make PREFIX=/ install && unset CFFGPT; }
-    ```
-    ### `` - Red Hat libcap-ng
-    > #### `0.8.2` or newer
-    > The Red Hat libcap-ng package implements the user-space interfaces to the POSIX 1003.1e capabilities available in Linux kernels. These capabilities are a partitioning of the all powerful root privilege into a set of distinct privileges. The library is intended to make programming with POSIX capabilities much easier than the traditional libcap library. It includes utilities that can analyse all currently running applications and print out any capabilities and whether or not it has an open ended bounding set.
-    
-    > **Required!** Before Shadow.
-    ```bash
-    # Apply patch to remove error codes.
-    patch -Np1 -i ../../extra/libcap-ng/patches/apply-disable.patch
-    
-    # Configure source.
-    ./configure \
-        --prefix=/usr             \
-        --sysconfdir=/etc         \
-        --mandir=/usr/share/man   \
-        --infodir=/usr/share/info \
-        --without-python          \
-        --without-python3         \
-        --disable-static
-    
-    # Build.
-    time { make; }
-    
-    # Install.
-    time { make install; }
-    ```
-
     ### `` - Argp-standalone
     > #### `1.4.1` or newer
     > The Argp-standalone package contains hierarchial argument parsing library broken out from glibc.
