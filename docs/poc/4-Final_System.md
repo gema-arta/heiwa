@@ -895,7 +895,7 @@ rm -fv /usr/lib/libbz2.a
 > #### `5.32.1`
 > The Perl package contains the Practical Extraction and Report Language.
 
-> **Required!** Before `OpenSSL`.
+> **Required!** Before `OpenSSL` and `GNU Autoconf`.
 ```bash
 # Ensure to build with Perl with the libraries installed on the system.
 BUILD_ZLIB=0 BUILD_BZIP2=0
