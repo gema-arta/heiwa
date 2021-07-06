@@ -21,7 +21,7 @@
 # Apply toolchain persistent environment variables,
 # but currently don't set the compiler to the new triplet.
 cat >> ~/.bashrc << "EOF"
-# Clang/LLVM environment.
+# Stage-1 Clang/LLVM environment.
 CC="clang"
 CXX="clang++"
 AR="llvm-ar"
