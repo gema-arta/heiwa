@@ -1166,11 +1166,7 @@ time { make; }
 time { make install; }
 ```
 
-<h2 align="center">Belows are Failed!</h2>
-
-> Untested ..
-
-### `??` - Pigz
+### `36` - Pigz
 > #### `2.6` or newer
 > The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
 
@@ -1183,6 +1179,10 @@ time { make CC=${CC} CFLAGS="$CFLAGS"; }
 ln -sfv pigz unpigz; ln -sv pigz gzip; ln -sv unpigz gunzip
 install -vm755 -t /usr/bin/ pigz unpigz gzip gunzip
 ```
+
+<h2 align="center">Belows are Failed!</h2>
+
+> Untested ..
 
 ### `??` - GNU Make
 > #### `4.3` or newer
