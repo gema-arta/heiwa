@@ -1092,8 +1092,8 @@ time { make && make -C contrib/pzstd; }
 
 # Install
 time {
-    make prefix=/usr install && \
-    make prefix=/usr -C contrib/pzstd install
+    make PREFIX=/usr install && \
+    make -C contrib/pzstd PREFIX=/usr install
 }
 
 # Remove the static library.
