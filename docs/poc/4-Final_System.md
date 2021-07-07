@@ -996,7 +996,7 @@ time { make install && unset BUILD_ZLIB BUILD_BZIP2; }
 > #### `1.1.1k` or newer
 > The OpenSSL package contains management tools and libraries relating to cryptography. These are useful for providing cryptographic functions to other packages, such as OpenSSH, email applications, and web browsers (for accessing HTTPS sites).
 
-> **Required!** Before `Toybox`.
+> **Required!** Before `Toybox` and `Kmod`.
 ```bash
 # Configure source.
 ./Configure linux-x86_64       \
