@@ -867,11 +867,9 @@ cd /sources/pkgs/
 > **Required!** Before `Kmod`.
 ```bash
 # Configure source.
-./configure \
-    --prefix=/usr                         \
-    --sysconfdir=/etc                     \
-    --localstatedir=/var                  \
-    --docdir=/usr/share/doc/pkgconf-1.7.3 \
+./configure --prefix=/usr \
+    --sysconfdir=/etc --localstatedir=/var \
+    --docdir=/usr/share/doc/pkgconf-1.7.4  \
     --with-pkg-config-dir=/usr/local/lib/pkgconfig:/usr/local/share/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig:/opt/qt5/lib/pkgconfig
 
 # Build.
