@@ -1090,7 +1090,7 @@ time { make install; }
 # Build zstd and pzstd (parallel zstandard).
 time { make && make -C contrib/pzstd; }
 
-# Install
+# Install.
 time {
     make PREFIX=/usr install && \
     make -C contrib/pzstd PREFIX=/usr install
