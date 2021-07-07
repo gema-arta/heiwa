@@ -1129,6 +1129,10 @@ time {
 }
 ```
 
+<h2 align="center">Belows are Failed!</h2>
+
+> Untested ..
+
 ### `34` - GNU Diffutils
 > #### `3.7` or newer
 > The GNU Diffutils package contains programs that show the differences between files or directories.
@@ -1209,8 +1213,6 @@ time { make; }
 # Install.
 time { make install; }
 ```
-
-<h2 align="center">Belows are Failed!</h2>
 
 > Since using `OpenBSD M4`, resolving issue ..
 
