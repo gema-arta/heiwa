@@ -886,7 +886,7 @@ time {
 > #### `0.3.2` or newer
 > The Gettext-tiny package contains utilities for internationalization and localization. These allow programs to be compiled with NLS (Native Language Support), enabling them to output messages in the user's native language. A lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
 
-> **Required!** Before `GNU Automake`, `Kmod`.
+> **Required!** Before `GNU Automake` and `Kmod`.
 ```bash
 # Apply patches to fix some issues and respect compiler flags.
 for P in {line-length,flip-macro-logic,respect-cflags}.patch; do
@@ -904,7 +904,7 @@ time { make LIBINTL=MUSL prefix=/usr install; }
 > #### `6.6` or newer
 > The OpenBSD Yacc package contains a parser generator.
 
-> **Required!** Before `Kmod`, `Kbd`.
+> **Required!** Before `Kmod` and `Kbd`.
 ```bash
 # Configure source.
 ./configure \
