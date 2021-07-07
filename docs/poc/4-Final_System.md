@@ -1140,6 +1140,8 @@ time {
 > **Required!**
 ```bash
 # Configure source.
+ac_cv_header_sys_cdefs_h=no \
+ac_cv_lib_error_at_line=no  \
 ./configure --prefix=/usr
 
 # Build.
@@ -1205,6 +1207,8 @@ time { make install; }
 > **Required!**
 ```bash
 # Configure source.
+ac_cv_header_sys_cdefs_h=no \
+ac_cv_lib_error_at_line=no  \
 ./configure --prefix=/usr
 
 # Build.
