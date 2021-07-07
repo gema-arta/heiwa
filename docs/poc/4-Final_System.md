@@ -1112,7 +1112,7 @@ rm -fv /usr/lib/libzstd.a
     --sysconfdir=/etc      \
     --with-rootlibdir=/lib \
     --with-xz --with-zstd  \
-    --with-zlib
+    --with-zlib --with-openssl
 
 # Build.
 time { make; }
