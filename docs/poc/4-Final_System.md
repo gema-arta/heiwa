@@ -1096,8 +1096,8 @@ time {
     make -C contrib/pzstd PREFIX=/usr install
 }
 
-# Remove the static library.
-rm -v /usr/lib/libzstd.a
+# Remove an useless static library.
+rm -fv /usr/lib/libzstd.a
 ```
 
 ### `33` - Kmod
