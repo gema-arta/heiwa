@@ -861,9 +861,11 @@ cd /sources/pkgs/
 ```
 
 ### `24` - Pkgconf
-> #### 0.29.2
+> #### `1.7.4` or newer
 > The Pkgconf package contains a tool for passing the include path and/or library paths to build tools during the configure and make phases of package installations.
-```sh
+
+> **Required!** Before `Kmod`.
+```bash
 # Configure source.
 ./configure \
     --prefix=/usr                         \
