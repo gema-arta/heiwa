@@ -1180,7 +1180,7 @@ ln -sfv pigz unpigz; ln -sv pigz gzip; ln -sv unpigz gunzip
 install -vm755 -t /usr/bin/ pigz unpigz gzip gunzip
 ```
 
-<h2 align="center">Belows are Failed!</h2>
+<h2 align="center">Belows are failed or untested!</h2>
 
 > Untested ..
 
