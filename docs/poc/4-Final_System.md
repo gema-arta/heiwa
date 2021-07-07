@@ -1218,13 +1218,29 @@ time { make; }
 time { make install; }
 ```
 
+### `??` - GNU libtool
+> #### `2.4.6` or newer
+> The GNU libtool package contains the GNU generic library support script. It wraps the complexity of using shared libraries in a consistent, portable interface.
+
+> **Required!** Before `musl-fts`, `musl-obstack`, `musl-rpmatch`, and `Argp-standalone`.
+```bash
+# Configure source.
+./configure --prefix=/usr
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
 > Since using `OpenBSD M4`, resolving issue ..
 
 ### `??` - GNU Autoconf
 > #### `2.71` or newer
 > The GNU Autoconf package contains programs for producing shell scripts that can automatically configure source code.
 
-> **Required!** Before `GNU Automake`.
+> **Required!** Before `GNU Automake` and `Argp-standalone`.
 ```bash
 # Configure source.
 M4=/usr/bin/m4 HELP2MAN=/bin/true \
@@ -1241,7 +1257,7 @@ time { make install; }
 > #### `1.16.3` or newer
 > The GNU Automake package contains programs for generating Makefiles for use with Autoconf.
 
-> **Required!** Before `Argp-standalone`.
+> **Required!** Before `musl-fts`, `musl-obstack`, `musl-rpmatch`, and `Argp-standalone`.
 ```bash
 # Configure source.
 ./configure --prefix=/usr --docdir=/usr/share/doc/automake-1.16.3
@@ -1251,6 +1267,84 @@ time { make; }
 
 # Install.
 time { make install; }
+```
+
+### `??` - musl-fts
+> #### `1.2.7` or newer
+> The musl-fts package contains implementation of fts(3) for musl libc.
+
+> **Required!** Before `Elfutils - libelf`.
+```bash
+# Prepare.
+sed -i '/pkgconfig_DATA/i pkgconfigdir=/usr/lib/pkgconfig' Makefile.am
+./bootstrap.sh
+
+# Configure source.
+CFLAGS="$CFLAGS -fPIC"    \
+./configure --prefix=/usr \
+    --sysconfdir=/etc     \
+    --localstatedir=/var
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `??` - musl-obstack
+> #### `1.1` or newer
+> The musl-obstack package contains a standalone library to implement GNU libc obstack.
+
+> **Required!** Before `Elfutils - libelf`.
+```bash
+# Prepare.
+sed -i '/pkgconfig_DATA/i pkgconfigdir=/usr/lib/pkgconfig' Makefile.am
+./bootstrap.sh
+
+# Configure source.
+CFLAGS="$CFLAGS -fPIC"    \
+./configure --prefix=/usr \
+    --sysconfdir=/etc     \
+    --localstatedir=/var
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `??` - musl-rpmatch
+> #### `1.2.7` or newer
+> The musl-rpmatch package contains implementation of rpmatch(3) for musl libc.
+
+> **Required!**
+```sh
+# Prepare.
+./bootstrap.sh
+
+# Configure source.
+CFLAGS="$CFLAGS -fPIC"    \
+./configure --prefix=/usr \
+    --enable-shared       \
+    --enable-static       \
+    --sysconfdir=/etc     \
+    --localstatedir=/var
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `??` - Elfutils - libelf
+> #### `0.185` or newer
+> The Libelf package contains library for handling ELF (Executable and Linkable Format) files.
+
+> **Required!** Before `Iproute2`.
+```bash
 ```
 
 <br>
