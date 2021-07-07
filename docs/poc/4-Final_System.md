@@ -1066,7 +1066,7 @@ time { make PREFIX=/ install && unset CFFGPT; }
 > #### `5.2.5`
 > The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
 
-> **Required!** Before `Kmod`.
+> **Required!** Before `Kmod` and `Eudev`.
 ```bash
 # Configure source.
 ./configure \
