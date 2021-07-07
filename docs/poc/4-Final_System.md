@@ -1180,7 +1180,7 @@ time { make install; }
 time { make CC=${CC} CFLAGS="$CFLAGS"; }
 
 # Install and create symlinks as `gzip` tools.
-ln -sv pigz unpigz; ln -sv pigz gzip; ln -sv unpigz gunzip
+ln -sfv pigz unpigz; ln -sv pigz gzip; ln -sv unpigz gunzip
 install -vm755 -t /usr/bin/ pigz unpigz gzip gunzip
 ```
 
