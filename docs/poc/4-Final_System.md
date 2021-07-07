@@ -862,7 +862,7 @@ cd /sources/pkgs/
 
 ### `24` - Gettext-tiny
 > #### `0.3.2` or newer
-> The Gettext-tiny package provides lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
+> The Gettext-tiny package contains utilities for internationalization and localization. These allow programs to be compiled with NLS (Native Language Support), enabling them to output messages in the user's native language. A lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
 
 > **Required!** Before `GNU Automake`, `Kmod`.
 ```bash
