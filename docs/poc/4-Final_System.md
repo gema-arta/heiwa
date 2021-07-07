@@ -860,7 +860,29 @@ grep -o -- -L/usr/lib dummy.log
 cd /sources/pkgs/
 ```
 
-### `24` - Gettext-tiny
+### `24` - Pkgconf
+> #### 0.29.2
+> The Pkgconf package contains a tool for passing the include path and/or library paths to build tools during the configure and make phases of package installations.
+```sh
+# Configure source.
+./configure \
+    --prefix=/usr                         \
+    --sysconfdir=/etc                     \
+    --localstatedir=/var                  \
+    --docdir=/usr/share/doc/pkgconf-1.7.3 \
+    --with-pkg-config-dir=/usr/local/lib/pkgconfig:/usr/local/share/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig:/opt/qt5/lib/pkgconfig
+
+# Build.
+time { make; }
+
+# Install and create symlink as `pkg-config`.
+time {
+    make install && \
+    ln -sf pkgconf /usr/bin/pkg-config
+}
+```
+
+### `25` - Gettext-tiny
 > #### `0.3.2` or newer
 > The Gettext-tiny package contains utilities for internationalization and localization. These allow programs to be compiled with NLS (Native Language Support), enabling them to output messages in the user's native language. A lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
 
@@ -878,7 +900,7 @@ time { make LIBINTL=MUSL prefix=/usr; }
 time { make LIBINTL=MUSL prefix=/usr install; }
 ```
 
-### `25` - OpenBSD Yacc
+### `26` - OpenBSD Yacc
 > #### `6.6` or newer
 > The OpenBSD Yacc package contains a parser generator.
 
@@ -899,7 +921,7 @@ time {
 }
 ```
 
-### `26` - Bzip2
+### `27` - Bzip2
 > #### `1.0.8` or newer
 > The Bzip2 package contains programs for compressing and decompressing files. Compressing text files with bzip2 yields a much better compression percentage than with the traditional gzip.
 
@@ -930,7 +952,7 @@ install -vm755 -t /usr/bin/ b{un,}zip2 bzcat
 rm -fv /usr/lib/libbz2.a
 ```
 
-### `27` - Perl
+### `28` - Perl
 > #### `5.32.1`
 > The Perl package contains the Practical Extraction and Report Language.
 
@@ -966,7 +988,7 @@ time { make; }
 time { make install && unset BUILD_ZLIB BUILD_BZIP2; }
 ```
 
-### `28` - OpenSSL
+### `29` - OpenSSL
 > #### `1.1.1k` or newer
 > The OpenSSL package contains management tools and libraries relating to cryptography. These are useful for providing cryptographic functions to other packages, such as OpenSSH, email applications, and web browsers (for accessing HTTPS sites).
 
@@ -990,7 +1012,7 @@ time { make MANSUFFIX=ssl install; }
 mv -fv /usr/share/doc/openssl /usr/share/doc/openssl-1.1.1k
 ```
 
-### `29` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man, Procps-ng, Psmisc, Sed, Sysklogd, Tar)
+### `30` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man, Procps-ng, Psmisc, Sed, Sysklogd, Tar)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
