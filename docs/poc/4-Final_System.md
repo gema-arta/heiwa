@@ -882,7 +882,7 @@ time { make LIBINTL=MUSL prefix=/usr install; }
 > #### `6.6` or newer
 > The OpenBSD Yacc package contains a parser generator.
 
-> **Required!** Before `Kbd`.
+> **Required!** Before `Kmod`, `Kbd`.
 ```bash
 # Configure source.
 ./configure \
