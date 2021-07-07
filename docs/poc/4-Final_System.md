@@ -947,7 +947,7 @@ time {
     ln -sv libbz2.so.1.0 libbz2.so          && \
     install -vm755 -t /usr/lib/ libbz2.so*  && \
     cp -fv bzip2-shared bzip2               && \
-    ln -sv bzip2 bunzip2 bzcat              && \
+    ln -sv bzip2 bunzip2 bzcat              
     install -vm755 -t /usr/bin/ b{un,}zip2 bzcat
 }
 
