@@ -1058,6 +1058,72 @@ time { make; }
 time { make PREFIX=/ install && unset CFFGPT; }
 ```
 
+### `31` -  Xz
+> #### `5.2.5`
+> The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
+
+> **Required!** Before `Kmod`.
+```bash
+# Configure source.
+./configure \
+    --prefix=/usr --disable-static \
+    --docdir=/usr/share/doc/xz-5.2.5
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `32` - Zstd
+> #### `1.5.0` or newer
+> The Zstd (Zstandard) package contains real-time compression algorithm, providing high compression ratios. It offers a very wide range of compression / speed trade-offs, while being backed by a very fast decoder.
+
+> **Required!**  Before `Kmod`.
+```bash
+# Build zstd and pzstd (parallel zstandard).
+time { make && make -C contrib/pzstd; }
+
+# Install
+time {
+    make prefix=/usr install && \
+    make prefix=/usr -C contrib/pzstd install
+}
+
+# Remove the static library.
+rm -v /usr/lib/libzstd.a
+```
+
+### `33` - Kmod
+> #### `29` or newer
+> The Kmod package contains libraries and utilities for loading kernel modules
+
+> **Required!** Before `Eudev`.
+```bash
+# Configure source.
+./configure --prefix=/usr  \
+    --bindir=/bin          \
+    --sysconfdir=/etc      \
+    --with-rootlibdir=/lib \
+    --with-xz --with-zstd  \
+    --with-zlib
+
+# Build.
+time { make; }
+
+# Install the package and create symlinks for compatibility with Module-Init-Tools (the package that previously handled Linux kernel modules).
+time {
+    make install
+    for B in depmod insmod modprobe rmmod; do
+        ln -sv ../bin/kmod /sbin/${B}
+    done; unset B
+    for B in lsmod modinfo; do
+        ln -sv kmod /bin/${B}
+    done; unset B
+}
+```
+
 <h2 align="center">Belows are Failed!</h2>
 
 > Since using `OpenBSD M4`, resolving issue ..
