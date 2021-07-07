@@ -1119,7 +1119,7 @@ time { make; }
 
 # Install the package and create symlinks for compatibility with Module-Init-Tools (the package that previously handled Linux kernel modules).
 time {
-    make install
+    make install && \
     for B in {dep,ins,rm}mod modprobe; do
         ln -sv ../bin/kmod /sbin/${B}
     done; unset B
