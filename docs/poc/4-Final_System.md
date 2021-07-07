@@ -1147,10 +1147,6 @@ time { make; }
 time { make install; }
 ```
 
-<h2 align="center">Belows are Failed!</h2>
-
-> Untested ..
-
 ### `35` - GNU AWK
 > #### `5.1.0` or newer
 > The GNU AWK (gawk) package contains programs for manipulating text files.
@@ -1169,6 +1165,10 @@ time { make; }
 # Install.
 time { make install; }
 ```
+
+<h2 align="center">Belows are Failed!</h2>
+
+> Untested ..
 
 ### `??` - Pigz
 > #### `2.6` or newer
