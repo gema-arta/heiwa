@@ -875,7 +875,7 @@ done; unset P
 time { make LIBINTL=MUSL prefix=/usr; }
 
 # Install.
-time { make LIBINTL=MUSL DESTDIR=/ prefix=/usr install; }
+time { make LIBINTL=MUSL prefix=/usr install; }
 ```
 
 ### `25` - OpenBSD Yacc
