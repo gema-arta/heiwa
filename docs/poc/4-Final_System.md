@@ -860,7 +860,46 @@ grep -o -- -L/usr/lib dummy.log
 cd /sources/pkgs/
 ```
 
-### `24` - Bzip2
+### `24` - Gettext-tiny
+> #### `0.3.2` or newer
+> The Gettext-tiny package provides lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
+
+> **Required!** Before `GNU Automake`.
+```bash
+# Apply patches to fix some issues and respect compiler flags.
+for P in {line-length,flip-macro-logic,respect-cflags}.patch; do
+    patch -Np1 -i ../../extra/gettext-tiny/patches/${P}
+done; unset P
+
+# Build.
+time { make LIBINTL=MUSL prefix=/usr; }
+
+# Install.
+time { make LIBINTL=MUSL DESTDIR=/ prefix=/usr install; }
+```
+
+### `25` - OpenBSD Yacc
+> #### `6.6` or newer
+> The OpenBSD Yacc package contains a parser generator.
+
+> **Required!** Before `Kbd`.
+```bash
+# Configure source.
+./configure \
+    --prefix=/usr --enable-yacc \
+    --mandir=/usr/share/man/man1
+
+# Build.
+time { make; }
+
+# Install and create symlink as `byacc`.
+time {
+    make BINDIR=/usr/bin install && \
+    ln -sv yacc /usr/bin/byacc
+}
+```
+
+### `26` - Bzip2
 > #### `1.0.8` or newer
 > The Bzip2 package contains programs for compressing and decompressing files. Compressing text files with bzip2 yields a much better compression percentage than with the traditional gzip.
 
@@ -891,7 +930,7 @@ install -vm755 -t /usr/bin/ b{un,}zip2 bzcat
 rm -fv /usr/lib/libbz2.a
 ```
 
-### `25` - Perl
+### `27` - Perl
 > #### `5.32.1`
 > The Perl package contains the Practical Extraction and Report Language.
 
@@ -927,7 +966,7 @@ time { make; }
 time { make install && unset BUILD_ZLIB BUILD_BZIP2; }
 ```
 
-### `26` - OpenSSL
+### `28` - OpenSSL
 > #### `1.1.1k` or newer
 > The OpenSSL package contains management tools and libraries relating to cryptography. These are useful for providing cryptographic functions to other packages, such as OpenSSH, email applications, and web browsers (for accessing HTTPS sites).
 
@@ -951,7 +990,7 @@ time { make MANSUFFIX=ssl install; }
 mv -fv /usr/share/doc/openssl /usr/share/doc/openssl-1.1.1k
 ```
 
-### `27` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man, Procps-ng, Psmisc, Sed, Sysklogd, Tar)
+### `29` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man, Procps-ng, Psmisc, Sed, Sysklogd, Tar)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
@@ -1001,7 +1040,7 @@ time { make PREFIX=/ install && unset CFFGPT; }
 
 > Since using `OpenBSD M4`, resolving issue ..
 
-### `28` - GNU Autoconf
+### `??` - GNU Autoconf
 > #### `2.71` or newer
 > The GNU Autoconf package contains programs for producing shell scripts that can automatically configure source code.
 
@@ -1018,7 +1057,7 @@ time { make; }
 time { make install; }
 ```
 
-### `29` - GNU Automake
+### `??` - GNU Automake
 > #### `1.16.3` or newer
 > The GNU Automake package contains programs for generating Makefiles for use with Autoconf.
 
