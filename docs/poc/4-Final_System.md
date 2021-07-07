@@ -864,7 +864,7 @@ cd /sources/pkgs/
 > #### `0.3.2` or newer
 > The Gettext-tiny package provides lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
 
-> **Required!** Before `GNU Automake`.
+> **Required!** Before `GNU Automake`, `Kmod`.
 ```bash
 # Apply patches to fix some issues and respect compiler flags.
 for P in {line-length,flip-macro-logic,respect-cflags}.patch; do
