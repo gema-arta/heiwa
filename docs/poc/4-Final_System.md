@@ -1129,6 +1129,87 @@ time {
 }
 ```
 
+### `34` - GNU Diffutils
+> #### `3.7` or newer
+> The GNU Diffutils package contains programs that show the differences between files or directories.
+
+> **Required!**
+```bash
+# Configure source.
+./configure --prefix=/usr
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `35` - GNU AWK
+> #### `5.1.0` or newer
+> The GNU AWK (gawk) package contains programs for manipulating text files.
+
+> **Required!**
+```bash
+# Ensure some unneeded files are not installed.
+sed -i 's|extras||' Makefile.in
+
+# Configure source.
+./configure --prefix=/usr
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `??` - Pigz
+> #### `2.6` or newer
+> The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
+
+> **Required!**
+```bash
+# Build.
+time { make CC=${CC} CFLAGS="$CFLAGS"; }
+
+# Install and create symlinks as `gzip` tools.
+ln -sv pigz unpigz; ln -sv pigz gzip; ln -sv unpigz gunzip
+install -vm755 -t /usr/bin/ pigz unpigz gzip gunzip
+```
+
+### `??` - GNU Make
+> #### `4.3` or newer
+> The GNU Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
+ 
+> **Required!**
+```bash
+# Configure source.
+./configure --prefix=/usr
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `??` - GNU Patch
+> #### `2.7.6` or newer
+> The GNU Patch package contains a program for modifying or creating files by applying a patch file typically created by the diff program.
+
+> **Required!**
+```bash
+# Configure source.
+./configure --prefix=/usr
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
 <h2 align="center">Belows are Failed!</h2>
 
 > Since using `OpenBSD M4`, resolving issue ..
