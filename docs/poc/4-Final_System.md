@@ -1070,8 +1070,9 @@ time { make PREFIX=/ install && unset CFFGPT; }
 ```bash
 # Configure source.
 ./configure \
-    --prefix=/usr --disable-static \
-    --docdir=/usr/share/doc/xz-5.2.5
+    --prefix=/usr \
+    --disable-doc \
+    --disable-static
 
 # Build.
 time { make; }
