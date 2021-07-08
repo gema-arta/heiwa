@@ -1184,6 +1184,55 @@ install -vm755 -t /usr/bin/ pigz unpigz gzip gunzip
 
 > Untested ..
 
+### `??` - KBD
+> #### `2.4.0` or newer
+> The Kbd package contains key-table files, console fonts, and keyboard utilities.
+
+> **Required!**
+```bash
+# The behaviour of the backspace and delete keys is not consistent across the keymaps in the Kbd package.
+# The following patch fixes this issue for i386 keymaps.
+patch -Np1 -i ../../extra/kbd/patches/kbd-2.4.0-backspace-1.patch
+
+# After patching, the backspace key generates the character with code 127, and the delete key generates a well-known escape sequence.
+
+# Remove the redundant resizecons program (it requires the defunct svgalib to provide the video mode files - for normal use setfont sizes the console appropriately) together with its manpage.
+sed -i '/RESIZECONS_PROGS=/s/yes/no/' configure
+sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in
+
+# Rename keymap files with the same names.
+# This is needed because when only name of keymap is specified loadkeys loads the first keymap it can find, which is bad.
+# This should be removed when upstream adopts the change.
+mv -fv data/keymaps/i386/qwertz/cz{,-qwertz}.map
+mv -fv data/keymaps/i386/olpc/es{,-olpc}.map
+mv -fv data/keymaps/i386/olpc/pt{,-olpc}.map
+mv -fv data/keymaps/i386/fgGIod/trf{,-fgGIod}.map
+mv -fv data/keymaps/i386/colemak/{en-latin9,colemak}.map
+
+# 7-bit maps are obsolete, so are non-euro maps.
+pushd data/keymaps/i386/ && \
+    cp -fv qwerty/pt-latin9.map qwerty/pt.map        && \
+    cp -fv qwerty/sv-latin1.map qwerty/se-latin1.map && \
+    mv -fv azerty/fr.map azerty/fr-old.map           && \
+    cp -fv azerty/fr-latin9.map azerty/fr.map        && \
+    cp -fv azerty/fr-latin9.map azerty/fr-latin0.map && \
+popd
+
+# Configure source.
+./configure --prefix=/usr --disable-vlock
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+
+# Remove keymaps for `sun`, `amiga` and `atari`.
+for K in sun amiga atari; do
+    rm -rv /usr/share/keymaps/${f}
+done; unset K
+```
+
 ### `??` - GNU Make
 > #### `4.3` or newer
 > The GNU Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
