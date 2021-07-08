@@ -1266,7 +1266,7 @@ mkdir -pv /var/lib/hwclock
 # musl needs this for switch_root(8).
 export CFLAGS="$CFLAGS -D_DIRENT_HAVE_D_TYPE"
 
-# Generate configure script.
+# Gener configure script.
 NOCONFIGURE=1 ./autogen.sh
 
 # Configure source.
