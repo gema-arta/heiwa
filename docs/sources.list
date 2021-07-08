@@ -49,6 +49,3 @@ https://www.openssl.org/source/openssl-1.1.1k.tar.gz
 https://github.com/facebook/zstd/releases/download/v1.5.0/zstd-1.5.0.tar.gz
 https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-29.tar.xz
 https://sourceware.org/ftp/elfutils/0.185/elfutils-0.185.tar.bz2
-
-https://ftp.gnu.org/gnu/autoconf/autoconf-2.71.tar.xz
-https://ftp.gnu.org/gnu/automake/automake-1.16.3.tar.xz
