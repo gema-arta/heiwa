@@ -1221,6 +1221,8 @@ time { make install; }
 > **Required!** Before `GNU Bash`.
 ```bash
 # Configure source.
+ac_cv_header_sys_cdefs_h=no \
+ac_cv_lib_error_at_line=no  \
 ./configure --prefix=/usr --disable-static
 
 # Build.
@@ -1228,6 +1230,25 @@ time { make; }
 
 # Install.
 time { make install; }
+```
+
+### `40` - GNU Bash
+> #### `5.1` (with patch level 8) or newer
+> The GNU Bash package contains the Bourne-Again SHell.
+
+> **Required!**
+```bash
+# Configure source.
+./configure --prefix=/usr               \
+    --docdir=/usr/share/doc/bash-5.1    \
+    --without-bash-malloc --with-curses \
+    --with-installed-readline
+
+# Build.
+time { make; }
+
+# Install.
+time { make install && mv -fv /usr/bin/bash /bin/.; }
 ```
 
 <h2 align="center">Belows are failed or untested!</h2>
