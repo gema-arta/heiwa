@@ -84,7 +84,7 @@ grep "ld.lld:.*crt[1in].o" dummy.log
 ```
 
 ### `2` - Linux API Headers
-> #### Xanmod-CacULE, `5.12.x` or newer
+> #### Xanmod-CacULE, `5.13.x` or newer
 > The Linux API Headers expose the kernel's API for use by musl libc.
 
 > **Required!** As mentioned in the description above.
