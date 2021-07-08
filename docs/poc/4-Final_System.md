@@ -1250,49 +1250,6 @@ time { make; }
 time { make install && mv -fv /usr/bin/bash /bin/.; }
 ```
 
-### `60` - Util-linux
-> #### `2.37` or newer
-> The Util-linux package contains miscellaneous utility programs.
-
-> **Required!** Before `E2fsprogs` and `Eudev`.
-```bash
-# Apply patch (from Void Linux) to allow compile under musl libc.
-patch -Np0 -i ../../extra/util-linux/patches/fix-musl.patch
-
-# The FHS recommends using the /var/lib/hwclock directory instead of the usual /etc directory as the location for the adjtime file. 
-mkdir -pv /var/lib/hwclock
-
-# musl needs this for switch_root(8).
-export CFLAGS="$CFLAGS -D_DIRENT_HAVE_D_TYPE"
-
-# Generate configure script.
-NOCONFIGURE=1 ./autogen.sh
-
-# Configure source.
-./configure \
-    ADJTIME_PATH=/var/lib/hwclock/adjtime   \
-    --libdir=/usr/lib                       \
-    --docdir=/usr/share/doc/util-linux-2.37 \
-    --disable-chfn-chsh                     \
-    --disable-login                         \
-    --disable-nologin                       \
-    --disable-su                            \
-    --disable-setpriv                       \
-    --disable-runuser                       \
-    --disable-pylibmount                    \
-    --disable-static                        \
-    --without-python                        \
-    --without-systemd                       \
-    --without-systemdsystemunitdir          \
-    runstatedir=/run
-
-# Build.
-time { make; }
-
-# Install.
-time { make install && export CFLAGS="${COMMON_FLAGS}"; }
-```
-
 <h2 align="center">Belows are failed or untested!</h2>
 
 > Untested ..
@@ -1344,6 +1301,49 @@ time { make install; }
 for K in sun amiga atari; do
     rm -rv /usr/share/keymaps/${f}
 done; unset K
+```
+
+### `??` - Util-linux
+> #### `2.37` or newer
+> The Util-linux package contains miscellaneous utility programs.
+
+> **Required!** Before `E2fsprogs` and `Eudev`.
+```bash
+# Apply patch (from Void Linux) to allow compile under musl libc.
+patch -Np0 -i ../../extra/util-linux/patches/fix-musl.patch
+
+# The FHS recommends using the /var/lib/hwclock directory instead of the usual /etc directory as the location for the adjtime file. 
+mkdir -pv /var/lib/hwclock
+
+# musl needs this for switch_root(8).
+export CFLAGS="$CFLAGS -D_DIRENT_HAVE_D_TYPE"
+
+# Generate configure script.
+NOCONFIGURE=1 ./autogen.sh
+
+# Configure source.
+./configure \
+    ADJTIME_PATH=/var/lib/hwclock/adjtime   \
+    --libdir=/usr/lib                       \
+    --docdir=/usr/share/doc/util-linux-2.37 \
+    --disable-chfn-chsh                     \
+    --disable-login                         \
+    --disable-nologin                       \
+    --disable-su                            \
+    --disable-setpriv                       \
+    --disable-runuser                       \
+    --disable-pylibmount                    \
+    --disable-static                        \
+    --without-python                        \
+    --without-systemd                       \
+    --without-systemdsystemunitdir          \
+    runstatedir=/run
+
+# Build.
+time { make; }
+
+# Install.
+time { make install && export CFLAGS="${COMMON_FLAGS}"; }
 ```
 
 ### `??` - GNU libtool
