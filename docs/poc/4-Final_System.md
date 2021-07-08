@@ -1215,7 +1215,7 @@ time { make install; }
 ```
 
 ### `39` - GNU Texinfo
-> #### `6.7` or newer
+> #### `6.8` or newer
 > The Texinfo package contains programs for reading, writing, and converting info pages.
 
 > **Required!** For the most packages next stage (chroot environment). Nothing is GNU-free.
