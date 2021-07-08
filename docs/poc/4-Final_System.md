@@ -1110,7 +1110,6 @@ rm -fv /usr/lib/libzstd.a
 ./configure --prefix=/usr  \
     --bindir=/bin          \
     --sysconfdir=/etc      \
-    --with-rootlibdir=/lib \
     --with-xz --with-zstd  \
     --with-zlib --with-openssl
 
