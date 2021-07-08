@@ -1231,6 +1231,10 @@ time { make; }
 time { make install; }
 ```
 
+<h2 align="center">Belows are failed or untested!</h2>
+
+> Failed, since using `NetBSD libedit`. Resolving issue ..
+
 ### `40` - GNU Bash
 > #### `5.1` (with patch level 8) or newer
 > The GNU Bash package contains the Bourne-Again SHell.
@@ -1248,8 +1252,6 @@ time { make; }
 # Install.
 time { make install && mv -fv /usr/bin/bash /bin/.; }
 ```
-
-<h2 align="center">Belows are failed or untested!</h2>
 
 > Untested ..
 
@@ -1361,7 +1363,7 @@ time { make; }
 time { make install; }
 ```
 
-> Since using `OpenBSD M4`, resolving issue ..
+> Failed, since using `OpenBSD M4`. Resolving issue ..
 
 ### `??` - GNU Autoconf
 > #### `2.71` or newer
