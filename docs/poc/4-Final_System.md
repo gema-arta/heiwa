@@ -1218,7 +1218,7 @@ time { make install; }
 > #### `6.8` or newer
 > The Texinfo package contains programs for reading, writing, and converting info pages.
 
-> **Required!** For the most packages next stage (chroot environment). Nothing is GNU-free.
+> **Required!** Before `GNU Bash`.
 ```bash
 # Configure source.
 ./configure --prefix=/usr --disable-static
@@ -1229,6 +1229,7 @@ time { make; }
 # Install.
 time { make install; }
 ```
+
 <h2 align="center">Belows are failed or untested!</h2>
 
 > Untested ..
