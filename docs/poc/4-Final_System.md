@@ -1180,6 +1180,40 @@ ln -sfv pigz unpigz; ln -sv pigz gzip; ln -sv unpigz gunzip
 install -vm755 -t /usr/bin/ pigz unpigz gzip gunzip
 ```
 
+### `37` - GNU Make
+> #### `4.3` or newer
+> The GNU Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
+ 
+> **Required!**
+```bash
+# Configure source.
+./configure --prefix=/usr
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `38` - GNU Patch
+> #### `2.7.6` or newer
+> The GNU Patch package contains a program for modifying or creating files by applying a patch file typically created by the diff program.
+
+> **Required!**
+```bash
+# Configure source.
+ac_cv_header_sys_cdefs_h=no \
+ac_cv_lib_error_at_line=no  \
+./configure --prefix=/usr
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
 <h2 align="center">Belows are failed or untested!</h2>
 
 > Untested ..
@@ -1231,40 +1265,6 @@ time { make install; }
 for K in sun amiga atari; do
     rm -rv /usr/share/keymaps/${f}
 done; unset K
-```
-
-### `??` - GNU Make
-> #### `4.3` or newer
-> The GNU Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
- 
-> **Required!**
-```bash
-# Configure source.
-./configure --prefix=/usr
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
-```
-
-### `??` - GNU Patch
-> #### `2.7.6` or newer
-> The GNU Patch package contains a program for modifying or creating files by applying a patch file typically created by the diff program.
-
-> **Required!**
-```bash
-# Configure source.
-ac_cv_header_sys_cdefs_h=no \
-ac_cv_lib_error_at_line=no  \
-./configure --prefix=/usr
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
 ```
 
 ### `??` - GNU libtool
