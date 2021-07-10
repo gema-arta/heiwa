@@ -34,7 +34,7 @@ time { make mrproper; }
 
 # The recommended make target `headers_install` cannot be used, because it requires rsync, which may not be available.
 # The headers are first placed in "./usr/", then copied to the needed location.
-time{
+time {
     make ARCH=${HEIWA_ARCH} headers_check && \
     make ARCH=${HEIWA_ARCH} headers
 }
