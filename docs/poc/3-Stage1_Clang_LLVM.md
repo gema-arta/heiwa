@@ -651,7 +651,8 @@ patch -Np1 -i ../../extra/libffi/patches/no-toolexeclibdir.patch
     --prefix=/clang1-tools       \
     --build=${TARGET_TRUPLE}     \
     --host=${TARGET_TRUPLE}      \
-    --disable-static --with-pic  \
+    --disable-static             \
+    --with-pic                   \
     --disable-multi-os-directory \
     --with-gcc-arch=native
 
