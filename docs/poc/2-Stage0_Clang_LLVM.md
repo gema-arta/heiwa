@@ -270,7 +270,7 @@ popd
 mv -fv llvm-12.0.1.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 
 # Decompress `clang`, `lld`, `compiler-rt`, `libcxx`, `libcxxabi`, and `libunwind` to the correct directories.
-# `libunwind` requires `libcxx`.
+# `libunwind`, `libcxxabi`, and `libcxx` are used to build Stage-1 Clang/LLVM toolchain later.
 pushd ${LLVM_SRC}/projects/ && \
     tar xf ../../pkgs/compiler-rt-12.0.1.src.tar.xz && mv -fv compiler-rt-12.0.1.src compiler-rt
     tar xf ../../pkgs/libcxx-12.0.1.src.tar.xz      && mv -fv libcxx-12.0.1.src libcxx
