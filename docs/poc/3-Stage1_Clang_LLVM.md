@@ -310,7 +310,7 @@ cmake -B build \
     -DCLANG_DEFAULT_CXX_STDLIB=libc++                           \
     -DCLANG_DEFAULT_UNWINDLIB=libunwind                         \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                           \
-    -DCLANG_DEFAULT_LINKER="/clang1-tools/bin/ld.lld"           \
+    -DCLANG_DEFAULT_LINKER=ld.lld                               \
     -DDEFAULT_SYSROOT="/clang1-tools"                           \
     -DBacktrace_INCLUDE_DIR="/clang1-tools/include"             \
     -DBacktrace_LIBRARY="/clang1-tools/lib/libexecinfo.so"      \
