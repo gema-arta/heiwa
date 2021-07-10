@@ -245,7 +245,7 @@ time { make PREFIX=/clang0-tools install-dynamic; }
 ```
 
 ### `7` - libexecinfo
-> #### `1.1` or newer
+> #### `1.1` or newer (from Heiwa/Linux fork)
 > The libexecinfo package contains backtrace facility that usually found in GNU libc (glibc).
 
 > **Required!** To build Stage-0 Clang/LLVM, since using musl libc.
