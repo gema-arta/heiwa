@@ -520,7 +520,26 @@ time { make; }
 time { make install; }
 ```
 
-### `17` - OpenBSD Yacc
+### `17` - GNU Texinfo
+> #### `6.8` or newer
+> The Texinfo package contains programs for reading, writing, and converting info pages.
+
+> **Required!** For the most packages next stage (chroot environment). Nothing is GNU-free.
+```bash
+# Configure source.
+./configure \
+    --prefix=/clang1-tools   \
+    --build=${TARGET_TRUPLE} \
+    --host=${TARGET_TRUPLE}
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `18` - OpenBSD Yacc
 > #### `6.6` or newer
 > The OpenBSD Yacc package contains a parser generator.
 
@@ -541,7 +560,7 @@ time {
 }
 ```
 
-### `18` - Perl (cross)
+### `19` - Perl (cross)
 > #### `5.32.1` and `1.3.5` for cross
 > The Perl package contains the Practical Extraction and Report Language.
 
@@ -566,7 +585,7 @@ time { make; }
 time { make install; }
 ```
 
-### `19` - Pigz
+### `20` - Pigz
 > #### `2.6` or newer
 > The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
 
@@ -580,7 +599,7 @@ ln -sfv pigz unpigz; ln -sv pigz gzip; ln -sv unpigz gunzip
 install -vm755 -t /clang1-tools/bin/ pigz unpigz gzip gunzip
 ```
 
-### `20` - libffi
+### `21` - libffi
 > #### `3.3` or newer
 > The libffi library provides a portable, high level programming interface to various calling conventions. This allows a programmer to call any function specified by a call interface description at run time.
 
@@ -607,7 +626,7 @@ time { make; }
 time { make install; }
 ```
 
-### `21` - Python3
+### `22` - Python3
 > #### `3.9.6` or newer
 > The Python3 package contains the Python development environment. It is useful for object-oriented programming, writing scripts, prototyping large programs, or developing entire applications.
 
@@ -630,25 +649,6 @@ ax_cv_c_float_words_bigendian=no \
     --host=${TARGET_TRUPLE}  \
     --enable-shared          \
     --without-ensurepip
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
-```
-
-### `22` - GNU Texinfo
-> #### `6.8` or newer
-> The Texinfo package contains programs for reading, writing, and converting info pages.
-
-> **Required!** For the most packages next stage (chroot environment). Nothing is GNU-free.
-```bash
-# Configure source.
-./configure \
-    --prefix=/clang1-tools   \
-    --build=${TARGET_TRUPLE} \
-    --host=${TARGET_TRUPLE}
 
 # Build.
 time { make; }
