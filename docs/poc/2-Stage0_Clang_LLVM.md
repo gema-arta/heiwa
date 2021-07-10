@@ -301,8 +301,8 @@ cmake -B build \
     -DCMAKE_CXX_FLAGS="-g0"                                                                 \
     -DCMAKE_EXE_LINKER_FLAGS="-Wl,-dynamic-linker /clang0-tools/lib/ld-musl-x86_64.so.1"    \
     -DCMAKE_SHARED_LINKER_FLAGS="-Wl,-dynamic-linker /clang0-tools/lib/ld-musl-x86_64.so.1" \
-    -DLLVM_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"                                     \
-    -DLLVM_HOST_TRIPLE="x86_64-pc-linux-musl"                                               \
+    -DLLVM_DEFAULT_TARGET_TRIPLE="$TARGET_TRUPLE"                                           \
+    -DLLVM_HOST_TRIPLE="$TARGET_TRUPLE"                                                     \
     -DLLVM_TARGETS_TO_BUILD="X86"                                                           \
     -DLLVM_TARGET_ARCH="X86"                                                                \
     -DLLVM_BUILD_TESTS=OFF                                                                  \
@@ -319,7 +319,7 @@ cmake -B build \
     -DCOMPILER_RT_BUILD_PROFILE=OFF                                                         \
     -DCOMPILER_RT_BUILD_LIBFUZZER=OFF                                                       \
     -DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON                                                   \
-    -DCOMPILER_RT_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"                              \
+    -DCOMPILER_RT_DEFAULT_TARGET_TRIPLE="$TARGET_TRUPLE"                                    \
     -DCLANG_DEFAULT_CXX_STDLIB=libc++                                                       \
     -DCLANG_DEFAULT_UNWINDLIB=libunwind                                                     \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                                                       \
