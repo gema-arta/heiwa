@@ -26,15 +26,15 @@ CC="clang"
 CXX="clang++"
 AR="llvm-ar"
 AS="llvm-as"
-RANLIB="llvm-ranlib"
 LD="ld.lld"
 NM="llvm-nm"
 OBJCOPY="llvm-objcopy"
 OBJDUMP="llvm-objdump"
+RANLIB="llvm-ranlib"
 READELF="llvm-readelf"
 SIZE="llvm-size"
 STRIP="llvm-strip"
-export CC CXX AR AS RANLIB LD NM OBJCOPY OBJDUMP READELF SIZE STRIP
+export CC CXX AR AS LD NM OBJCOPY OBJDUMP RANLIB READELF SIZE STRIP
 EOF
 source ~/.bashrc
 
