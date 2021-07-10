@@ -351,7 +351,42 @@ source ~/.bash_profile
 cd ${HEIWA}/sources/pkgs/
 ```
 
-### `10` - GNU Bash
+### `10` - Gettext-tiny
+> #### `0.3.2` or newer
+> The Gettext-tiny package contains utilities for internationalization and localization. These allow programs to be compiled with NLS (Native Language Support), enabling them to output messages in the user's native language. A lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
+
+> **Required!** To allow programs compiled with NLS (Native Language Support) in the next stage (chroot environment).
+```bash
+# Build.
+time { make LIBINTL=MUSL prefix=/clang1-tools; }
+
+# Only install `msgfmt`, `msgmerge` and `xgettext`.
+install -vm755 -t /clang1-tools/bin/ msgfmt msgmerge xgettext 
+```
+
+### `11` - GNU AWK
+> #### `5.1.0` or newer
+> The GNU AWK (gawk) package contains programs for manipulating text files.
+
+> **Required!** For the current and next stage (chroot environment) that most build systems depends on GNU implementation style.
+```bash
+# Ensure some unneeded files are not installed.
+sed -i 's|extras||' Makefile.in
+
+# Configure source.
+./configure \
+    --prefix=/clang1-tools   \
+    --build=${TARGET_TRUPLE} \
+    --host=${TARGET_TRUPLE}
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `12` - GNU Bash
 > #### `5.1` (with patch level 8) or newer
 > The GNU Bash package contains the Bourne-Again SHell.
 
@@ -388,7 +423,7 @@ time { make; }
 time { make install; }
 ```
 
-### `11` - Toybox (Coreutils, File, Findutils, Grep, Sed, Tar)
+### `13` - Toybox (Coreutils, File, Findutils, Grep, Sed, Tar)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
@@ -427,7 +462,7 @@ time { make; }
 time { make PREFIX=/clang1-tools install && unset CFFGPT; }
 ```
 
-### `12` - GNU Diffutils
+### `14` - GNU Diffutils
 > #### `3.7` or newer
 > The GNU Diffutils package contains programs that show the differences between files or directories.
 
@@ -444,42 +479,6 @@ time { make; }
 
 # Install.
 time { make install; }
-```
-
-### `13` - GNU AWK
-> #### `5.1.0` or newer
-> The GNU AWK (gawk) package contains programs for manipulating text files.
-
-> **Required!** For the current and next stage (chroot environment) that most build systems depends on GNU implementation style.
-```bash
-# Ensure some unneeded files are not installed.
-sed -i 's|extras||' Makefile.in
-
-# Configure source.
-./configure \
-    --prefix=/clang1-tools   \
-    --build=${TARGET_TRUPLE} \
-    --host=${TARGET_TRUPLE}
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
-```
-
-### `14` - Pigz
-> #### `2.6` or newer
-> The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
-
-> **Required!** As default ".gz" files de/compressor for the current and next stage (chroot environment).
-```bash
-# Build.
-time { make CC=${CC} CFLAGS="$CFLAGS"; }
-
-# Install and create symlinks as `gzip` tools.
-ln -sfv pigz unpigz; ln -sv pigz gzip; ln -sv unpigz gunzip
-install -vm755 -t /clang1-tools/bin/ pigz unpigz gzip gunzip
 ```
 
 ### `15` - GNU Make
@@ -521,40 +520,7 @@ time { make; }
 time { make install; }
 ```
 
-### `17` - Xz
-> #### `5.2.5` or newer
-> The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
-
-> **Required!** As default ".xz" and ".lzma" files de/compressor for the current and next stage (chroot environment).
-```bash
-# Configure source.
-./configure \
-    --prefix=/clang1-tools   \
-    --build=${TARGET_TRUPLE} \
-    --host=${TARGET_TRUPLE}  \
-    --disable-static
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
-```
-
-### `18` - Gettext-tiny
-> #### `0.3.2` or newer
-> The Gettext-tiny package contains utilities for internationalization and localization. These allow programs to be compiled with NLS (Native Language Support), enabling them to output messages in the user's native language. A lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
-
-> **Required!** To allow programs compiled with NLS (Native Language Support) in the next stage (chroot environment).
-```bash
-# Build.
-time { make LIBINTL=MUSL prefix=/clang1-tools; }
-
-# Only install `msgfmt`, `msgmerge` and `xgettext`.
-install -vm755 -t /clang1-tools/bin/ msgfmt msgmerge xgettext 
-```
-
-### `19` - OpenBSD Yacc
+### `17` - OpenBSD Yacc
 > #### `6.6` or newer
 > The OpenBSD Yacc package contains a parser generator.
 
@@ -575,7 +541,7 @@ time {
 }
 ```
 
-### `20` - Perl (cross)
+### `18` - Perl (cross)
 > #### `5.32.1` and `1.3.5` for cross
 > The Perl package contains the Practical Extraction and Report Language.
 
@@ -600,7 +566,21 @@ time { make; }
 time { make install; }
 ```
 
-### `21` - libffi
+### `19` - Pigz
+> #### `2.6` or newer
+> The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
+
+> **Required!** As default ".gz" files de/compressor for the current and next stage (chroot environment).
+```bash
+# Build.
+time { make CC=${CC} CFLAGS="$CFLAGS"; }
+
+# Install and create symlinks as `gzip` tools.
+ln -sfv pigz unpigz; ln -sv pigz gzip; ln -sv unpigz gunzip
+install -vm755 -t /clang1-tools/bin/ pigz unpigz gzip gunzip
+```
+
+### `20` - libffi
 > #### `3.3` or newer
 > The libffi library provides a portable, high level programming interface to various calling conventions. This allows a programmer to call any function specified by a call interface description at run time.
 
@@ -627,7 +607,7 @@ time { make; }
 time { make install; }
 ```
 
-### `22` - Python3
+### `21` - Python3
 > #### `3.9.6` or newer
 > The Python3 package contains the Python development environment. It is useful for object-oriented programming, writing scripts, prototyping large programs, or developing entire applications.
 
@@ -658,7 +638,7 @@ time { make; }
 time { make install; }
 ```
 
-### `23` - GNU Texinfo
+### `22` - GNU Texinfo
 > #### `6.8` or newer
 > The Texinfo package contains programs for reading, writing, and converting info pages.
 
@@ -677,7 +657,7 @@ time { make; }
 time { make install; }
 ```
 
-### `24` - libuv
+### `23` - libuv
 > #### `1.41.0` or newer
 > The libuv package is a multi-platform support library with a focus on asynchronous I/O.
 
@@ -701,7 +681,7 @@ time { make; }
 time { make install && unset LDFLAGS; }
 ```
 
-### `25` - Cmake
+### `24` - Cmake
 > #### `3.20.5` or newer
 > The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
 
@@ -717,6 +697,27 @@ sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
     --parallel=$(nproc)              \
     --docdir=/share/doc/cmake-3.20.5 \
     -- -DCMAKE_USE_OPENSSL=OFF
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+
+### `25` - Xz
+> #### `5.2.5` or newer
+> The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
+
+> **Required!** As default ".xz" and ".lzma" files de/compressor for the current and next stage (chroot environment).
+```bash
+# Configure source.
+./configure \
+    --prefix=/clang1-tools   \
+    --build=${TARGET_TRUPLE} \
+    --host=${TARGET_TRUPLE}  \
+    --disable-static
 
 # Build.
 time { make; }
