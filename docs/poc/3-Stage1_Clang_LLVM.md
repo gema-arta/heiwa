@@ -163,7 +163,7 @@ time { make -C build; }
 
 # Install and remove the build directory.
 time {
-    make -C build install                     && \
+    make -C build install                      && \
     cp -fv include/*.h /clang1-tools/include/. && \
     rm -rf build && popd
 }
