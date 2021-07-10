@@ -250,16 +250,8 @@ time { make PREFIX=/clang0-tools install-dynamic; }
 
 > **Required!** To build Stage-0 Clang/LLVM, since using musl libc.
 ```bash
-# Apply patches (from Alpine Linux).
-for P in {10-execinfo,20-define-gnu-source,30-linux-makefile}.patch; do
-    patch -Np1 -i ../../extra/libexecinfo/patches/${P}
-done; unset P
-
 # Build.
-time {
-    make CC=${HEIWA_TARGET}-gcc AR=${HEIWA_TARGET}-ar \
-    CFLAGS="-fno-omit-frame-pointer"
-}
+time { make CC=${HEIWA_TARGET}-gcc AR=${HEIWA_TARGET}-ar; }
 
 # Install.
 ln -sv libexecinfo.so{.1,}
