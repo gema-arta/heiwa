@@ -271,15 +271,15 @@ rm -fv /clang1-tools/lib/libz.a
 popd
 
 # Rename the LLVM source directory to "$LLVM_SRC", then enter.
-mv -v llvm-12.0.0.src "$LLVM_SRC" && cd "$LLVM_SRC"
+mv -fv llvm-12.0.0.src "$LLVM_SRC" && cd "$LLVM_SRC"
 
 # Decompress `clang`, `lld`, and `compiler-rt` to the correct directories.
 pushd ${LLVM_SRC}/projects/ && \
-    tar xf ../../pkgs/compiler-rt-12.0.0.src.tar.xz && mv -v compiler-rt-12.0.0.src compiler-rt
+    tar xf ../../pkgs/compiler-rt-12.0.0.src.tar.xz && mv -fv compiler-rt-12.0.0.src compiler-rt
 popd
 pushd ${LLVM_SRC}/tools/ && \
-    tar xf ../../pkgs/clang-12.0.0.src.tar.xz && mv -v clang-12.0.0.src clang
-    tar xf ../../pkgs/lld-12.0.0.src.tar.xz   && mv -v lld-12.0.0.src lld
+    tar xf ../../pkgs/clang-12.0.0.src.tar.xz && mv -fv clang-12.0.0.src clang
+    tar xf ../../pkgs/lld-12.0.0.src.tar.xz   && mv -fv lld-12.0.0.src lld
 popd
 
 # Apply patches (from Void Linux).
