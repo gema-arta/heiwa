@@ -174,7 +174,8 @@ tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc-1.2.1 mpc
 
 # On x86_64 hosts, set the default directory name for 64-bit libraries to "lib".
 case $(uname -m) in
-    x86_64) sed -e '/m64=/s/lib64/lib/' -i.orig gcc/config/i386/t-linux64
+    x86_64) sed -e '/m64=/s/lib64/lib/' \
+            -i.orig gcc/config/i386/t-linux64
     ;;
 esac
 
