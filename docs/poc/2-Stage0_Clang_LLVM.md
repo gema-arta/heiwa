@@ -34,7 +34,7 @@ time { make mrproper; }
 
 # The recommended make target `headers_install` cannot be used, because it requires rsync, which may not be available.
 # The headers are first placed in "./usr/", then copied to the needed location.
-time {
+time{
     make ARCH=${HEIWA_ARCH} headers_check && \
     make ARCH=${HEIWA_ARCH} headers
 }
@@ -55,12 +55,15 @@ cp -rfv usr/include /clang0-tools/${HEIWA_TARGET}/.
 > **Required!** To build GCC in current stage.
 ```bash
 # Create a dedicated directory and configure source.
-# Aesthetically compiler flags layout style ..
-mkdir -v build && cd build &&          ../configure \
-    --prefix=/clang0-tools --target=${HEIWA_TARGET} \
-    --with-sysroot=/clang0-tools/${HEIWA_TARGET}    \
-    --enable-deterministic-archives   --disable-nls \
-    --disable-multilib             --disable-werror \
+mkdir -v build && cd build
+../configure \
+    --prefix=/clang0-tools                       \
+    --target=${HEIWA_TARGET}                     \
+    --with-sysroot=/clang0-tools/${HEIWA_TARGET} \
+    --enable-deterministic-archives              \
+    --disable-nls                                \
+    --disable-multilib                           \
+    --disable-werror                             \
     --disable-compressed-debug-sections
 
 # Checks the host's environment and makes sure all the necessary tools are available to compile Binutils. Then build.
@@ -77,26 +80,36 @@ time { make install; }
 > **Required!** This build of GCC is mainly done so that the C library can be built next.
 ```bash
 # GCC requires the GMP, MPFR, and MPC packages to either be present on the host or to be present in source form within the GCC source tree.
-tar xf ../gmp-6.2.1.tar.xz  && mv -v gmp-6.2.1 gmp
-tar xf ../mpfr-4.1.0.tar.xz && mv -v mpfr-4.1.0 mpfr
-tar xzf ../mpc-1.2.1.tar.gz && mv -v mpc-1.2.1 mpc
+tar xf ../gmp-6.2.1.tar.xz  && mv -fv gmp-6.2.1 gmp
+tar xf ../mpfr-4.1.0.tar.xz && mv -fv mpfr-4.1.0 mpfr
+tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc-1.2.1 mpc
 
 # Create a dedicated directory and configure source.
-# Aesthetically compiler flags layout style ..
-mkdir -v build && cd build && \
-   CFLAGS="-g0 -O0" CXXFLAGS="-g0 -O0" ../configure \
-    --prefix=/clang0-tools    --build=${HEIWA_HOST} \
-    --host=${HEIWA_HOST}   --target=${HEIWA_TARGET} \
-    --with-sysroot=/clang0-tools/${HEIWA_TARGET}    \
-    --disable-nls                     --with-newlib \
-    --disable-libitm               --disable-libvtv \
-    --disable-libssp               --disable-shared \
-    --disable-libgomp             --without-headers \
-    --disable-threads            --disable-multilib \
-    --disable-libatomic         --disable-libstdcxx \
-    --enable-languages=c      --disable-libquadmath \
-    --disable-libsanitizer --with-arch=${HEIWA_CPU} \
-    --disable-decimal-float --enable-clocale=generic
+mkdir -v build && cd build
+CFLAGS="-g0 -O0" CXXFLAGS="-g0 -O0" ../configure \
+    --prefix=/clang0-tools                       \
+    --build=${HEIWA_HOST}                        \
+    --host=${HEIWA_HOST}                         \
+    --target=${HEIWA_TARGET}                     \
+    --with-sysroot=/clang0-tools/${HEIWA_TARGET} \
+    --disable-nls                                \
+    --disable-shared                             \
+    --without-headers                            \
+    --with-newlib                                \
+    --disable-decimal-float                      \
+    --disable-libgomp                            \
+    --disable-libssp                             \
+    --disable-libatomic                          \
+    --disable-libquadmath                        \
+    --disable-threads                            \
+    --disable-libitm                             \
+    --disable-libsanitizer                       \
+    --disable-libstdcxx                          \
+    --disable-libvtv                             \
+    --enable-languages=c                         \
+    --enable-clocale=generic                     \
+    --disable-multilib                           \
+    --with-arch=${HEIWA_CPU}
 
 # Build only the minimum.
 time { make all-gcc all-target-libgcc; }
@@ -112,8 +125,10 @@ time { make install-gcc install-target-libgcc; }
 > **Required!** As mentioned in the description above.
 ```bash
 # Configure source.
-./configure CROSS_COMPILE=${HEIWA_TARGET}- \
-    --prefix=/ --target=${HEIWA_TARGET}    \
+./configure \
+    CROSS_COMPILE=${HEIWA_TARGET}- \
+    --prefix=/                     \
+    --target=${HEIWA_TARGET}       \
     --enable-optimize=speed
 
 # Build.
@@ -150,33 +165,40 @@ EOF
 > **Required!** This second build of GCC will produce the final cross compiler which will use the previously built C library.
 ```bash
 # GCC requires the GMP, MPFR, and MPC packages to either be present on the host or to be present in source form within the GCC source tree.
-tar xf ../gmp-6.2.1.tar.xz  && mv -v gmp-6.2.1 gmp
-tar xf ../mpfr-4.1.0.tar.xz && mv -v mpfr-4.1.0 mpfr
-tar xzf ../mpc-1.2.1.tar.gz && mv -v mpc-1.2.1 mpc
+tar xf ../gmp-6.2.1.tar.xz  && mv -fv gmp-6.2.1 gmp
+tar xf ../mpfr-4.1.0.tar.xz && mv -fv mpfr-4.1.0 mpfr
+tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc-1.2.1 mpc
 
 # Apply patches (from Alpine Linux).
 ../../extra/gcc/patches/appatch
 
 # On x86_64 hosts, set the default directory name for 64-bit libraries to "lib".
 case $(uname -m) in
-    x86_64) sed -e '/m64=/s/lib64/lib/' \
-            -i.orig gcc/config/i386/t-linux64
+    x86_64) sed -e '/m64=/s/lib64/lib/' -i.orig gcc/config/i386/t-linux64
     ;;
 esac
 
 # Create a dedicated directory and configure source.
-# Aesthetically compiler flags layout style ..
-mkdir -v build && cd build && \
-AR="ar"      LDFLAGS="-Wl,-rpath,/clang0-tools/lib" \
-../configure                 --prefix=/clang0-tools \
-    --build=${HEIWA_HOST}      --host=${HEIWA_HOST} \
-    --target=${HEIWA_TARGET}     --disable-multilib \
-    --with-sysroot=/clang0-tools       -disable-nls \
-    --enable-shared        --enable-languages=c,c++ \
-    --enable-threads=posix --enable-clocale=generic \
-    --enable-libstdcxx-time  --disable-libsanitizer \
-    --disable-symvers --enable-fully-dynamic-string \
-    --disable-lto-plugin --disable-libssp
+mkdir -v build && cd build
+LDFLAGS="-Wl,-rpath,/clang0-tools/lib" \
+../configure \
+    --prefix=/clang0-tools        \
+    --build=${HEIWA_HOST}         \
+    --host=${HEIWA_HOST}          \
+    --target=${HEIWA_TARGET}      \
+    --with-sysroot=/clang0-tools  \
+    --disable-nls                 \
+    --enable-languages=c,c++      \
+    --enable-clocale=generic      \
+    --enable-libstdcxx-time       \
+    --enable-threads=posix        \
+    --enable-fully-dynamic-string \
+    --enable-shared               \
+    --disable-multilib            \
+    --disable-libsanitizer        \
+    --disable-symvers             \
+    --disable-lto-plugin          \
+    --disable-libssp
 
 # Build.
 time {
@@ -195,7 +217,7 @@ sed -i 's|/lib/ld-musl-x86_64.so.1|/clang0-tools/lib/ld-musl-x86_64.so.1|g' spec
 # Check specs file.
 grep --color=auto "/clang0-tools/lib/ld-musl-x86_64.so.1" specs
 
-# Install specs file.
+# Install specs file if correct.
 mv -fv specs "$SPECFILE" && unset SPECFILE
 
 # Quick test.
@@ -245,7 +267,7 @@ install -vm755 -t /clang0-tools/lib/ libexecinfo.{a,so{.1,}}
 ```
 
 ### `8` -  Clang/LLVM
-> #### `12.0.0`
+> #### `12.x.x` or newer
 > C language family frontend for LLVM.
 
 > **Required!** Build Stage-0 Clang/LLVM toolchain with `libgcc_s.so*` and `libstdc++.so*` dependencies (provided by GCC).
@@ -254,24 +276,24 @@ install -vm755 -t /clang0-tools/lib/ libexecinfo.{a,so{.1,}}
 popd
 
 # Rename the LLVM source directory to "$LLVM_SRC", then enter.
-mv -v llvm-12.0.0.src "$LLVM_SRC" && pushd "$LLVM_SRC"
+mv -fv llvm-12.0.0.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 
 # Decompress `clang`, `lld`, `compiler-rt`, `libcxx`, `libcxxabi`, and `libunwind` to the correct directories.
 pushd ${LLVM_SRC}/projects/ && \
-    tar xf ../../pkgs/compiler-rt-12.0.0.src.tar.xz && mv -v compiler-rt-12.0.0.src compiler-rt
-    tar xf ../../pkgs/libcxx-12.0.0.src.tar.xz      && mv -v libcxx-12.0.0.src libcxx
-    tar xf ../../pkgs/libcxxabi-12.0.0.src.tar.xz   && mv -v libcxxabi-12.0.0.src libcxxabi
-    tar xf ../../pkgs/libunwind-12.0.0.src.tar.xz   && mv -v libunwind-12.0.0.src libunwind
+    tar xf ../../pkgs/compiler-rt-12.0.0.src.tar.xz && mv -fv compiler-rt-12.0.0.src compiler-rt
+    tar xf ../../pkgs/libcxx-12.0.0.src.tar.xz      && mv -fv libcxx-12.0.0.src libcxx
+    tar xf ../../pkgs/libcxxabi-12.0.0.src.tar.xz   && mv -fv libcxxabi-12.0.0.src libcxxabi
+    tar xf ../../pkgs/libunwind-12.0.0.src.tar.xz   && mv -fv libunwind-12.0.0.src libunwind
 popd
 pushd ${LLVM_SRC}/tools/ && \
-    tar xf ../../pkgs/clang-12.0.0.src.tar.xz && mv -v clang-12.0.0.src clang
-    tar xf ../../pkgs/lld-12.0.0.src.tar.xz   && mv -v lld-12.0.0.src lld
+    tar xf ../../pkgs/clang-12.0.0.src.tar.xz && mv -fv clang-12.0.0.src clang
+    tar xf ../../pkgs/lld-12.0.0.src.tar.xz   && mv -fv lld-12.0.0.src lld
 popd
 
 # Apply patches (from Void Linux).
 ../extra/llvm/patches/stage0-appatch
 
-# Disable sanitizers for musl, fixing "early build failure".
+# Disable sanitizers for musl libc, fixing "early build failure".
 sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
 projects/compiler-rt/cmake/config-ix.cmake
 
