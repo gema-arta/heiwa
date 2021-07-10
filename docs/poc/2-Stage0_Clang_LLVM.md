@@ -254,9 +254,7 @@ time { make PREFIX=/clang0-tools install-dynamic; }
 time { make CC=${HEIWA_TARGET}-gcc AR=${HEIWA_TARGET}-ar; }
 
 # Install.
-ln -sv libexecinfo.so{.1,}
-install -vm755 -t /clang1-tools/include/ {execinfo,stacktraverse}.h
-install -vm755 -t /clang0-tools/lib/ libexecinfo.{a,so{.1,}}
+time { make PREFIX=/clang0-tools install; }
 ```
 
 ### `8` -  Clang/LLVM
