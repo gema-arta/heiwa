@@ -150,9 +150,9 @@ ln -sv ../lib/libc.so /clang0-tools/bin/ldd
 
 # Configure PATH for dynamic linker.
 mkdir -v /clang0-tools/etc && \
-cat > /clang0-tools/etc/ld-musl-x86_64.path << "EOF"
+cat > /clang0-tools/etc/ld-musl-x86_64.path << EOF
 /clang0-tools/lib
-/clang0-tools/x86_64-heiwa-linux-musl/lib
+/clang0-tools/${HEIWA_TARGET}/lib
 /usr/lib
 /lib
 EOF
