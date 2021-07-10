@@ -180,8 +180,8 @@ esac
 
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build
-LDFLAGS="-Wl,-rpath,/clang0-tools/lib" \
-../configure \
+LDFLAGS="-Wl,-rpath,/clang0-tools/lib"   \
+CFLAGS="-g0" CXXFLAGS="-g0" ../configure \
     --prefix=/clang0-tools        \
     --build=${HEIWA_HOST}         \
     --host=${HEIWA_HOST}          \
