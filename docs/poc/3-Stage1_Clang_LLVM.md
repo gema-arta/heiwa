@@ -19,7 +19,7 @@
 > **Required!** As mentioned in the description above.
 ```bash
 # Apply toolchain persistent environment variables,
-# but currently don't set the compiler to the new triplet.
+# but currently don't set the compiler to the new triplet (use libc from Stage-0).
 cat >> ~/.bashrc << "EOF"
 # Stage-1 Clang/LLVM environment.
 CC="clang"
