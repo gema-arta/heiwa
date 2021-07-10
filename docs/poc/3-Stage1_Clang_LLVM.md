@@ -95,8 +95,8 @@ time { make mrproper; }
 # The recommended make target `headers_install` cannot be used, because it requires rsync, which may not be available.
 # The headers are first placed in "./usr/", then copied to the needed location.
 time {
-    make ARCH=${HEIWA_ARCH} LLVM=1 CC=${CC} HOSTCC=${CC} headers_check && \
-    make ARCH=${HEIWA_ARCH} LLVM=1 CC=${CC} HOSTCC=${CC} headers
+    make ARCH=${HEIWA_ARCH} LLVM=1 CC=${CC} CXX=${CXX} HOSTCC=${CC} headers_check && \
+    make ARCH=${HEIWA_ARCH} LLVM=1 CC=${CC} CXX=${CXX} HOSTCC=${CC} headers
 }
 
 # @owl4ce don't know,
