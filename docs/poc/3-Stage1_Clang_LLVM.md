@@ -132,11 +132,8 @@ pushd ${LLVM_SRC}/projects/libunwind/ && \
 # Build.
 time { make -C build; }
 
-# Install and remove the build directory.
-time {
-    make -C build install && \
-    rm -rf build && popd
-}
+# Install.
+time { make -C build install && popd; }
 ```
 
 ### `4` - LLVM libcxxabi
@@ -161,11 +158,10 @@ pushd ${LLVM_SRC}/projects/libcxxabi/ && \
 # Build.
 time { make -C build; }
 
-# Install and remove the build directory.
+# Install.
 time {
     make -C build install                      && \
-    cp -fv include/*.h /clang1-tools/include/. && \
-    rm -rf build && popd
+    cp -fv include/*.h /clang1-tools/include/. && popd
 }
 ```
 
@@ -201,10 +197,7 @@ pushd ${LLVM_SRC}/projects/libcxx/ && \
 time { make -C build; }
 
 # Install and remove the build directory.
-time {
-    make -C build install && \
-    rm -rf build && popd
-}
+time { make -C build install && popd; }
 ```
 > #### ^ Read Me Here!
 > Now, you can safely remove the `$LLVM_SRC` directory after the [above step](#5---llvm-libcxx).
