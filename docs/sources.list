@@ -16,7 +16,6 @@ https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.0/libcxxabi-
 https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.0/libunwind-12.0.0.src.tar.xz
 https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.0/lld-12.0.0.src.tar.xz
 https://github.com/zlib-ng/zlib-ng/archive/refs/tags/2.0.5.tar.gz
-https://github.com/ibara/m4/releases/download/om4-6.7/om4-6.7.tar.gz
 https://ftp.gnu.org/gnu/bash/bash-5.1.8.tar.gz
 https://ftp.gnu.org/gnu/diffutils/diffutils-3.7.tar.xz
 https://ftp.gnu.org/gnu/gawk/gawk-5.1.0.tar.xz
@@ -39,6 +38,7 @@ https://www.iana.org/time-zones/repository/releases/tzdata2021a.tar.gz
 https://www.iana.org/time-zones/repository/releases/tzcode2021a.tar.gz
 https://dev.alpinelinux.org/archive/posixtz/posixtz-0.5.tar.xz
 https://thrysoee.dk/editline/libedit-20210522-3.1.tar.gz
+https://ftp.gnu.org/gnu/m4/m4-1.4.19.tar.xz
 https://github.com/westes/flex/releases/download/v2.6.4/flex-2.6.4.tar.gz
 https://download.savannah.gnu.org/releases/attr/attr-2.5.1.tar.xz
 https://download.savannah.gnu.org/releases/acl/acl-2.3.1.tar.xz
