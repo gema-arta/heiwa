@@ -371,23 +371,7 @@ source ~/.bash_profile
 cd ${HEIWA}/sources/pkgs/
 ```
 
-### `10` - OpenBSD M4
-> #### `6.7` or newer
-> The OpenBSD M4 package contains a macro processor.
-
-> **Required!** As default front end to any language (e.g: C, ratfor, fortran, lex, and yacc).
-```bash
-# Configure source.
-./configure --prefix=/clang1-tools --enable-m4
-
-# Build. Fails when using multiple jobs.
-time { make -j1; }
-
-# Install.
-time { make install; }
-```
-
-### `11` - GNU Bash
+### `10` - GNU Bash
 > #### `5.1` (with patch level 8) or newer
 > The GNU Bash package contains the Bourne-Again SHell.
 
@@ -424,7 +408,7 @@ time { make; }
 time { make install; }
 ```
 
-### `12` - Toybox (Coreutils, File, Findutils, Grep, Sed, Tar)
+### `11` - Toybox (Coreutils, File, Findutils, Grep, Sed, Tar)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
@@ -463,7 +447,7 @@ time { make; }
 time { make PREFIX=/clang1-tools install && unset CFFGPT; }
 ```
 
-### `13` - GNU Diffutils
+### `12` - GNU Diffutils
 > #### `3.7` or newer
 > The GNU Diffutils package contains programs that show the differences between files or directories.
 
@@ -482,7 +466,7 @@ time { make; }
 time { make install; }
 ```
 
-### `14` - GNU AWK
+### `13` - GNU AWK
 > #### `5.1.0` or newer
 > The GNU AWK (gawk) package contains programs for manipulating text files.
 
@@ -504,7 +488,7 @@ time { make; }
 time { make install; }
 ```
 
-### `15` - Pigz
+### `14` - Pigz
 > #### `2.6` or newer
 > The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
 
@@ -518,7 +502,7 @@ ln -sfv pigz unpigz; ln -sv pigz gzip; ln -sv unpigz gunzip
 install -vm755 -t /clang1-tools/bin/ pigz unpigz gzip gunzip
 ```
 
-### `16` - GNU Make
+### `15` - GNU Make
 > #### `4.3` or newer
 > The GNU Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
  
@@ -538,7 +522,7 @@ time { make; }
 time { make install; }
 ```
 
-### `17` - GNU Patch
+### `16` - GNU Patch
 > #### `2.7.6` or newer
 > The GNU Patch package contains a program for modifying or creating files by applying a patch file typically created by the diff program.
 
@@ -557,7 +541,7 @@ time { make; }
 time { make install; }
 ```
 
-### `18` - Xz
+### `17` - Xz
 > #### `5.2.5` or newer
 > The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
 
@@ -577,7 +561,7 @@ time { make; }
 time { make install; }
 ```
 
-### `19` - Gettext-tiny
+### `18` - Gettext-tiny
 > #### `0.3.2` or newer
 > The Gettext-tiny package contains utilities for internationalization and localization. These allow programs to be compiled with NLS (Native Language Support), enabling them to output messages in the user's native language. A lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
 
@@ -590,7 +574,7 @@ time { make LIBINTL=MUSL prefix=/clang1-tools; }
 install -vm755 -t /clang1-tools/bin/ msgfmt msgmerge xgettext 
 ```
 
-### `20` - OpenBSD Yacc
+### `19` - OpenBSD Yacc
 > #### `6.6` or newer
 > The OpenBSD Yacc package contains a parser generator.
 
@@ -611,7 +595,7 @@ time {
 }
 ```
 
-### `21` - Perl (cross)
+### `20` - Perl (cross)
 > #### `5.32.1` and `1.3.5` for cross
 > The Perl package contains the Practical Extraction and Report Language.
 
@@ -636,7 +620,7 @@ time { make; }
 time { make install; }
 ```
 
-### `22` - libffi
+### `21` - libffi
 > #### `3.3` or newer
 > The libffi library provides a portable, high level programming interface to various calling conventions. This allows a programmer to call any function specified by a call interface description at run time.
 
@@ -663,7 +647,7 @@ time { make; }
 time { make install; }
 ```
 
-### `23` - Python3
+### `22` - Python3
 > #### `3.9.6` or newer
 > The Python3 package contains the Python development environment. It is useful for object-oriented programming, writing scripts, prototyping large programs, or developing entire applications.
 
@@ -694,7 +678,7 @@ time { make; }
 time { make install; }
 ```
 
-### `24` - GNU Texinfo
+### `23` - GNU Texinfo
 > #### `6.8` or newer
 > The Texinfo package contains programs for reading, writing, and converting info pages.
 
@@ -713,7 +697,7 @@ time { make; }
 time { make install; }
 ```
 
-### `25` - Bzip2
+### `24` - Bzip2
 > #### `1.0.8` or newer
 > The Bzip2 package contains programs for compressing and decompressing files. Compressing text files with bzip2 yields a much better compression percentage than with the traditional gzip.
 
@@ -736,7 +720,7 @@ time { make PREFIX=/clang1-tools install; }
 rm -fv /clang1-tools/lib/libbz2.a
 ```
 
-### `26` - libuv
+### `25` - libuv
 > #### `1.41.0` or newer
 > The libuv package is a multi-platform support library with a focus on asynchronous I/O.
 
@@ -760,7 +744,7 @@ time { make; }
 time { make install && unset LDFLAGS; }
 ```
 
-### `27` - Cmake
+### `26` - Cmake
 > #### `3.20.5` or newer
 > The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
 
@@ -784,7 +768,7 @@ time { make; }
 time { make install; }
 ```
 
-### `28` - Cleaning Up and Changing Ownership
+### `27` - Cleaning Up and Changing Ownership
 > **This section is optional!**
 
 > If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
