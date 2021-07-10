@@ -677,30 +677,7 @@ time { make; }
 time { make install; }
 ```
 
-### `24` - Bzip2
-> #### `1.0.8` or newer
-> The Bzip2 package contains programs for compressing and decompressing files. Compressing text files with bzip2 yields a much better compression percentage than with the traditional gzip.
-
-> **Required!** As default ".bz*" files de/compressor for the next stage (chroot environment).
-```bash
-# Fix the makefile to ensures installation of symlinks are relative and the man pages are installed into correct location.
-sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
-sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
-
-# Prepare.
-time { make CFLAGS="$CFLAGS -fPIC" -f Makefile-libbz2_so && make clean; }
-
-# Build.
-time { make CFLAGS="$CFLAGS -fPIC"; }
-
-# Install.
-time { make PREFIX=/clang1-tools install; }
-
-# Remove an useless static library.
-rm -fv /clang1-tools/lib/libbz2.a
-```
-
-### `25` - libuv
+### `24` - libuv
 > #### `1.41.0` or newer
 > The libuv package is a multi-platform support library with a focus on asynchronous I/O.
 
@@ -724,7 +701,7 @@ time { make; }
 time { make install && unset LDFLAGS; }
 ```
 
-### `26` - Cmake
+### `25` - Cmake
 > #### `3.20.5` or newer
 > The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
 
@@ -748,7 +725,7 @@ time { make; }
 time { make install; }
 ```
 
-### `27` - Cleaning Up and Changing Ownership
+### `26` - Cleaning Up and Changing Ownership
 > **This section is optional!**
 
 > If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
