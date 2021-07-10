@@ -309,7 +309,10 @@ cmake -B build \
     -DLLVM_BUILD_TESTS=OFF                                                                  \
     -DLLVM_ENABLE_LIBEDIT=OFF                                                               \
     -DLLVM_ENABLE_LIBXML2=OFF                                                               \
-    -DLLVM_ENABLE_LIBCXX=ON                                                                 \
+    -DLLVM_ENABLE_LIBCXX=OFF                                                                \
+    -DLLVM_ENABLE_LLD=ON                                                                    \
+    -DLLVM_ENABLE_RTTI=ON                                                                   \
+    -DLLVM_ENABLE_ZLIB=OFF                                                                  \
     -DLLVM_INCLUDE_GO_TESTS=OFF                                                             \
     -DLLVM_INCLUDE_TESTS=OFF                                                                \
     -DLLVM_INCLUDE_DOCS=OFF                                                                 \
@@ -329,7 +332,6 @@ cmake -B build \
     -DBacktrace_INCLUDE_DIR="/clang0-tools/include"                                         \
     -DBacktrace_LIBRARY="/clang0-tools/lib/libexecinfo.so"                                  \
     -DICONV_LIBRARY_PATH="/clang0-tools/lib/libc.so"                                        \
-    -DLIBCXX_HAS_MUSL_LIBC=ON 
 
 # Build.
 time { make -C build; }
