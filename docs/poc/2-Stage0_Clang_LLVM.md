@@ -366,7 +366,7 @@ EOF
 popd
 ```
 > #### ^ Read Me Here!
-> Don't delete the `$LLVM_SRC` directory after [the last step](#9----clangllvm).
+> Don't delete the `$LLVM_SRC` directory after [the last step](#8----clangllvm).
 
 ### `9` - Cleaning Up
 > #### This section is optional!
