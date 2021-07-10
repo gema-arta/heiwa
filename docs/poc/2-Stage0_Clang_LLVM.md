@@ -311,6 +311,8 @@ cmake -B build \
     -DCMAKE_INSTALL_PREFIX="/clang0-tools"                                                  \
     -DCMAKE_C_COMPILER="${HEIWA_TARGET}-gcc"                                                \
     -DCMAKE_CXX_COMPILER="${HEIWA_TARGET}-g++"                                              \
+    -DCMAKE_C_FLAGS="-g0"                                                                   \
+    -DCMAKE_CXX_FLAGS="-g0"                                                                 \
     -DCMAKE_EXE_LINKER_FLAGS="-Wl,-dynamic-linker /clang0-tools/lib/ld-musl-x86_64.so.1"    \
     -DCMAKE_SHARED_LINKER_FLAGS="-Wl,-dynamic-linker /clang0-tools/lib/ld-musl-x86_64.so.1" \
     -DLLVM_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"                                     \
