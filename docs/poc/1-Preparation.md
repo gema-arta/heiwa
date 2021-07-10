@@ -58,14 +58,14 @@ su - heiwa
 cat > ~/.bash_profile << "EOF"
 export COMMON_FLAGS="-march=native -Oz -pipe"
 exec env -i HOME="$HOME" TERM="$TERM" PS1='\u: \w\n\$ ' \
-COMMON_FLAGS="${COMMON_FLAGS}" CFLAGS="${COMMON_FLAGS}" \
-CXXFLAGS="${COMMON_FLAGS}" /bin/bash
+CFLAGS="$COMMON_FLAGS" CXXFLAGS="$COMMON_FLAGS" \
+COMMON_FLAGS="$COMMON_FLAGS" /bin/bash
 EOF
 
 cat > ~/.bashrc << EOF
 set +h
 umask 022
-unalias grep
+unalias grep 2>/dev/null
 HEIWA="${HEIWA:-/media/Heiwa}"
 LC_ALL="POSIX"
 PATH="/clang0-tools/usr/bin:/clang0-tools/bin:/clang1-tools/usr/bin:/clang1-tools/bin:/usr/bin:/bin"
