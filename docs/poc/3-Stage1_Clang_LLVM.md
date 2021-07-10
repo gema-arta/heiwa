@@ -257,15 +257,15 @@ rm -fv /clang1-tools/lib/libz.a
 popd
 
 # Rename the LLVM source directory to "$LLVM_SRC", then enter.
-mv -fv llvm-12.0.0.src "$LLVM_SRC" && cd "$LLVM_SRC"
+mv -fv llvm-12.0.1.src "$LLVM_SRC" && cd "$LLVM_SRC"
 
 # Decompress `clang`, `lld`, and `compiler-rt` to the correct directories.
 pushd ${LLVM_SRC}/projects/ && \
-    tar xf ../../pkgs/compiler-rt-12.0.0.src.tar.xz && mv -fv compiler-rt-12.0.0.src compiler-rt
+    tar xf ../../pkgs/compiler-rt-12.0.1.src.tar.xz && mv -fv compiler-rt-12.0.1.src compiler-rt
 popd
 pushd ${LLVM_SRC}/tools/ && \
-    tar xf ../../pkgs/clang-12.0.0.src.tar.xz && mv -fv clang-12.0.0.src clang
-    tar xf ../../pkgs/lld-12.0.0.src.tar.xz   && mv -fv lld-12.0.0.src lld
+    tar xf ../../pkgs/clang-12.0.1.src.tar.xz && mv -fv clang-12.0.1.src clang
+    tar xf ../../pkgs/lld-12.0.1.src.tar.xz   && mv -fv lld-12.0.1.src lld
 popd
 
 # Apply patches (from Void Linux).
@@ -275,11 +275,11 @@ popd
 sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
 projects/compiler-rt/cmake/config-ix.cmake
 
-# Fix missing header for `lld` (llvm-12.0.0), [ https://bugs.llvm.org/show_bug.cgi?id=49228 ].
-tar xf ../pkgs/libunwind-12.0.0.src.tar.xz && \
+# Fix missing header for `lld` (llvm-12.0.1), [ https://bugs.llvm.org/show_bug.cgi?id=49228 ].
+tar xf ../pkgs/libunwind-12.0.1.src.tar.xz && \
 mkdir -pv tools/lld/include/mach-o         && \
-cp -fv libunwind-12.0.0.src/include/mach-o/compact_unwind_encoding.h \
-tools/lld/include/mach-o/. && rm -rf libunwind-12.0.0.src
+cp -fv libunwind-12.0.1.src/include/mach-o/compact_unwind_encoding.h \
+tools/lld/include/mach-o/. && rm -rf libunwind-12.0.1.src
 
 # Update host/target triplet detection.
 cp -fv ../extra/llvm/files/config.guess cmake/.
