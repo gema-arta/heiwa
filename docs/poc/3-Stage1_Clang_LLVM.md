@@ -164,7 +164,7 @@ time { make -C build; }
 # Install and remove the build directory.
 time {
     make -C build install                     && \
-    cp -v include/*.h /clang1-tools/include/. && \
+    cp -fv include/*.h /clang1-tools/include/. && \
     rm -rf build && popd
 }
 ```
@@ -189,8 +189,8 @@ pushd ${LLVM_SRC}/projects/libcxx/ && \
         -DLIBCXX_ENABLE_SHARED=ON                              \
         -DLIBCXX_ENABLE_STATIC=ON                              \
         -DLIBCXX_HAS_MUSL_LIBC=ON                              \
-        -DLIBCXX_USE_COMPILER_RT=ON                            \
         -DLIBCXX_INSTALL_HEADERS=ON                            \
+        -DLIBCXX_USE_COMPILER_RT=ON                            \
         -DLIBCXX_CXX_ABI=libcxxabi                             \
         -DLIBCXX_CXX_ABI_INCLUDE_PATHS="/clang1-tools/include" \
         -DLIBCXX_CXX_ABI_LIBRARY_PATH="/clang1-tools/lib"      \
@@ -207,7 +207,7 @@ time {
 }
 ```
 > #### ^ Read Me Here!
-> Now, you can safely remove the `$LLVM_SRC` directory after the [above step](#5---llvms-libcxx).
+> Now, you can safely remove the `$LLVM_SRC` directory after the [above step](#5---llvm-libcxx).
 
 ### `6` - NetBSD Curses
 > #### `0.3.2` or newer
