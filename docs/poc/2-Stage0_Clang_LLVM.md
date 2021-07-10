@@ -267,18 +267,18 @@ time { make PREFIX=/clang0-tools install; }
 popd
 
 # Rename the LLVM source directory to "$LLVM_SRC", then enter.
-mv -fv llvm-12.0.0.src "$LLVM_SRC" && pushd "$LLVM_SRC"
+mv -fv llvm-12.0.1.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 
 # Decompress `clang`, `lld`, `compiler-rt`, `libcxx`, `libcxxabi`, and `libunwind` to the correct directories.
 pushd ${LLVM_SRC}/projects/ && \
-    tar xf ../../pkgs/compiler-rt-12.0.0.src.tar.xz && mv -fv compiler-rt-12.0.0.src compiler-rt
-    tar xf ../../pkgs/libcxx-12.0.0.src.tar.xz      && mv -fv libcxx-12.0.0.src libcxx
-    tar xf ../../pkgs/libcxxabi-12.0.0.src.tar.xz   && mv -fv libcxxabi-12.0.0.src libcxxabi
-    tar xf ../../pkgs/libunwind-12.0.0.src.tar.xz   && mv -fv libunwind-12.0.0.src libunwind
+    tar xf ../../pkgs/compiler-rt-12.0.1.src.tar.xz && mv -fv compiler-rt-12.0.1.src compiler-rt
+    tar xf ../../pkgs/libcxx-12.0.1.src.tar.xz      && mv -fv libcxx-12.0.1.src libcxx
+    tar xf ../../pkgs/libcxxabi-12.0.1.src.tar.xz   && mv -fv libcxxabi-12.0.1.src libcxxabi
+    tar xf ../../pkgs/libunwind-12.0.1.src.tar.xz   && mv -fv libunwind-12.0.1.src libunwind
 popd
 pushd ${LLVM_SRC}/tools/ && \
-    tar xf ../../pkgs/clang-12.0.0.src.tar.xz && mv -fv clang-12.0.0.src clang
-    tar xf ../../pkgs/lld-12.0.0.src.tar.xz   && mv -fv lld-12.0.0.src lld
+    tar xf ../../pkgs/clang-12.0.1.src.tar.xz && mv -fv clang-12.0.1.src clang
+    tar xf ../../pkgs/lld-12.0.1.src.tar.xz   && mv -fv lld-12.0.1.src lld
 popd
 
 # Apply patches (from Void Linux).
@@ -288,7 +288,7 @@ popd
 sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
 projects/compiler-rt/cmake/config-ix.cmake
 
-# Fix missing header for `lld` (llvm-12.0.0), [ https://bugs.llvm.org/show_bug.cgi?id=49228 ].
+# Fix missing header for `lld` (llvm-12.0.1), [ https://bugs.llvm.org/show_bug.cgi?id=49228 ].
 mkdir -pv tools/lld/include/mach-o && \
 cp -fv projects/libunwind/include/mach-o/compact_unwind_encoding.h \
 tools/lld/include/mach-o/.
