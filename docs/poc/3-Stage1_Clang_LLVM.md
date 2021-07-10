@@ -112,7 +112,7 @@ cp -rfv usr/include /clang1-tools/.
 ```
 
 ### `3` - LLVM libunwind
-> #### `12.0.0`
+> #### `12.x.x` or newer
 > C++ runtime stack unwinder from LLVM.
 
 > *No need to re-decompress package.*
@@ -140,7 +140,7 @@ time {
 ```
 
 ### `4` - LLVM libcxxabi
-> #### `12.0.0`
+> #### `12.x.x` or newer
 > Low level support for a standard C++ library from LLVM.
 
 > *No need to re-decompress package.*
@@ -170,7 +170,7 @@ time {
 ```
 
 ### `5` - LLVM libcxx
-> #### `12.0.0`
+> #### `12.x.x` or newer
 > New implementation of the C++ standard library, targeting C++11 from LLVM.
 
 > *No need to re-decompress package.*
@@ -262,7 +262,7 @@ rm -fv /clang1-tools/lib/libz.a
 ```
 
 ### `9` - Clang/LLVM
-> #### `12.0.0`
+> #### `12.x.x` or newer
 > C language family frontend for LLVM.
 
 > **Required!** Build Stage-1 Clang/LLVM toolchain with `libgcc_s.so*` and `libstdc++.so*` free (which is provided by GCC).
