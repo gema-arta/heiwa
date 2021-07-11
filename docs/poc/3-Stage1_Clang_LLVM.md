@@ -441,7 +441,7 @@ time { make install; }
 
 > **Required!** For the current and next stage (chroot environment).
 ```bash
-# Copy Toybox's .config file.
+# Copy the Toybox .config file.
 cp -v ../../extra/toybox/files/.config.toolchain.nlns .config
 
 export CFFGPT="base64 base32 basename cat chgrp chmod chown chroot cksum comm cp cut date
