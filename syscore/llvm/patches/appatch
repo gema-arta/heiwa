@@ -45,6 +45,7 @@ case $1 in
                     libcxx-ppc.patch \
                     libcxx-ssp-nonshared.patch
                 do patch -Np1 -i ../../extra/llvm/patches/${P}
-            popd; unset P
+                done; unset P
+            popd
     ;;
 esac
