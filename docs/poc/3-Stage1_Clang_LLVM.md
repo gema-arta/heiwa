@@ -288,7 +288,6 @@ cmake -B build \
     -DLLVM_TARGETS_TO_BUILD="X86"                               \
     -DLLVM_TARGET_ARCH="X86"                                    \
     -DLLVM_LINK_LLVM_DYLIB=ON                                   \
-    -DLLVM_BUILD_LLVM_DYLIB=ON                                  \
     -DLLVM_BUILD_TESTS=OFF                                      \
     -DLLVM_ENABLE_LIBEDIT=OFF                                   \
     -DLLVM_ENABLE_LIBXML2=OFF                                   \
