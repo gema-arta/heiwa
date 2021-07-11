@@ -22,7 +22,7 @@ The purpose of this stage is to build a temporary Clang/LLVM toolchain with GCC 
 > 
 > **Run below to check!**
 > ```bash
-> file $(command -v {sh,awk,yacc,lex})
+> file $(command -v {g{cc,++}sh,awk,yacc,lex})
 > ```
 
 ### `1` - Linux API Headers
