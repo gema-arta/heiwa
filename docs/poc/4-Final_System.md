@@ -349,7 +349,7 @@ time {
     make -C posixtz-0.5 CC=${CC} posixtz
 }
 
-# Install the utilities and man pages.
+# Install utilities and the man pages.
 install -vm755 -t /usr/bin/ tzselect zic zdump posixtz-0.5/posixtz
 install -vm644 -t /usr/share/man/man8/ {zic,zdump}.8
 
