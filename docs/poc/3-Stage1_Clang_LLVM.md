@@ -289,7 +289,7 @@ cp -fv ../extra/llvm/files/config.guess cmake/.
 ```bash
 # Configure source.
 cmake -B build \
-    -DCMAKE_BUILD_TYPE=Release                                  \
+    -DCMAKE_BUILD_TYPE=Release -Wno-dev                         \
     -DCMAKE_INSTALL_PREFIX="/clang1-tools"                      \
     -DCMAKE_INSTALL_OLDINCLUDEDIR="/clang1-tools/include"       \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$TARGET_TRUPLE"               \
