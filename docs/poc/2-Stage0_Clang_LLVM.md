@@ -275,7 +275,8 @@ pushd ${LLVM_SRC}/tools/ && \
     tar xf ../../pkgs/clang-12.0.1.src.tar.xz && mv -fv clang-12.0.1.src clang
     tar xf ../../pkgs/lld-12.0.1.src.tar.xz   && mv -fv lld-12.0.1.src lld
 popd
-
+```
+```bash
 # Apply patches (from Void Linux).
 ../extra/llvm/patches/appatch
 
