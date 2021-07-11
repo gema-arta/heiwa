@@ -198,6 +198,10 @@ time { make -C build; }
 # Install and remove the build directory.
 time { make -C build install && popd; }
 ```
+```bash
+# Back to "${HEIWA}/sources/pkgs" directory.
+popd
+```
 
 ### `6` - NetBSD Curses
 > #### `0.3.2` or newer
