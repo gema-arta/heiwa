@@ -327,11 +327,11 @@ cmake -B build \
 # Build.
 time { make -C build; }
 
-# Install and remove the build directory.
+# Install.
 time {
     pushd build/ && \
         cmake -DCMAKE_INSTALL_PREFIX="/clang0-tools" -P cmake_install.cmake && \
-    popd && rm -rf build
+    popd
 }
 ```
 ```bash
