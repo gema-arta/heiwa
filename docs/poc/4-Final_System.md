@@ -406,7 +406,7 @@ time { make CFLAGS="$CFLAGS -fPIC"; }
 
 # Install and create symlinks as `libtinfo` libraries (which actually replace GNU Ncurses).
 time {
-    make PREFIX=/usr install
+    make PREFIX=/usr install && \
     ln -sv libterminfo.a  /usr/lib/libtinfo.a
     ln -sv libterminfo.so /usr/lib/libtinfo.so
 }
@@ -478,10 +478,7 @@ unlink /clang1-tools/bin/gcc
 time { make; }
 
 # Install and create symlink as `lex`.
-time {
-    make install && \
-    ln -sv flex /usr/bin/lex
-}
+time { make install && ln -sv flex /usr/bin/lex; }
 
 # A few programs do not know about `flex` yet and try to run its predecessor, `lex`.
 # To support those programs, create a symbolic link named `lex` that runs `flex` in `lex` emulation mode.
@@ -494,12 +491,11 @@ time {
 > **Required!** Before `ACL` and `libcap`.
 ```bash
 # Configure source.
-./configure \
-    --prefix=/usr     \
-    --bindir=/bin     \
-    --disable-static  \
-    --sysconfdir=/etc \
-    --docdir=/usr/share/doc/attr-2.5.1
+./configure --prefix=/usr     \
+            --bindir=/bin     \
+            --disable-static  \
+            --sysconfdir=/etc \
+            --docdir=/usr/share/doc/attr-2.5.1
 
 # Build.
 time { make; }
@@ -515,11 +511,10 @@ time { make install; }
 > **Required!**
 ```bash
 # Configure source.
-./configure \
-    --prefix=/usr         \
-    --bindir=/bin         \
-    --disable-static      \
-    --docdir=/usr/share/doc/acl-2.3.1
+./configure --prefix=/usr         \
+            --bindir=/bin         \
+            --disable-static      \
+            --docdir=/usr/share/doc/acl-2.3.1
 
 # Build.
 time { make; }
@@ -576,7 +571,8 @@ time { make; }
 
 # Install.
 time { make install; }
-
+```
+```bash
 # This package contains utilities to add, modify, and delete users and groups; set and change their passwords; and perform other administrative tasks.
 # For a full explanation of what password shadowing means, see the doc/HOWTO file within the unpacked source tree.
 # If using Shadow support, keep in mind that programs which need to verify passwords (display managers, FTP programs, pop3 daemons, etc.) must be Shadow-compliant.
