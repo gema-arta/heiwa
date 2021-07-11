@@ -1045,10 +1045,9 @@ time { make PREFIX=/ install; unset CFFGPT; }
 > **Required!** Before `Kmod` and `Eudev`.
 ```bash
 # Configure source.
-./configure \
-    --prefix=/usr \
-    --disable-doc \
-    --disable-static
+./configure --prefix=/usr \
+            --disable-doc \
+            --disable-static
 
 # Build.
 time { make; }
@@ -1071,9 +1070,6 @@ time {
     make PREFIX=/usr install && \
     make -C contrib/pzstd PREFIX=/usr install
 }
-
-# Remove an useless static library.
-rm -fv /usr/lib/libzstd.a
 ```
 
 ### `30` - Kmod
@@ -1083,18 +1079,18 @@ rm -fv /usr/lib/libzstd.a
 > **Required!** Before `Eudev`.
 ```bash
 # Configure source.
-./configure --prefix=/usr  \
-    --bindir=/bin          \
-    --sysconfdir=/etc      \
-    --with-xz --with-zstd  \
-    --with-zlib --with-openssl
+./configure --prefix=/usr          \
+            --bindir=/bin          \
+            --sysconfdir=/etc      \
+            --with-xz --with-zstd  \
+            --with-zlib --with-openssl
 
 # Build.
 time { make; }
 
 # Install the package and create symlinks for compatibility with Module-Init-Tools (the package that previously handled Linux kernel modules).
 time {
-    make install && \
+    make install
     for B in {dep,ins,rm}mod modprobe; do
         ln -sv ../bin/kmod /sbin/${B}
     done; unset B
@@ -1218,9 +1214,9 @@ time { make install; }
 > **Required!**
 ```bash
 # Configure source.
-./configure --prefix=/usr            \
-    --docdir=/usr/share/doc/bash-5.1 \
-    --without-bash-malloc --with-curses
+./configure --prefix=/usr                    \
+            --docdir=/usr/share/doc/bash-5.1 \
+            --without-bash-malloc --with-curses
 
 # Build.
 time { make; }
