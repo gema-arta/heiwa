@@ -130,7 +130,7 @@ mv -fv llvm-12.0.1.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 pushd ${LLVM_SRC}/projects/ && \
     tar xf ../../pkgs/libunwind-12.0.1.src.tar.xz && mv -fv libunwind-12.0.1.src libunwind
     tar xf ../../pkgs/libcxxabi-12.0.1.src.tar.xz && mv -fv libcxxabi-12.0.1.src libcxxabi
-    tar xf ../../pkgs/libcxx-12.0.1.src.tar.xz && mv -fv libcxx-12.0.1.src libcxx
+    tar xf ../../pkgs/libcxx-12.0.1.src.tar.xz    && mv -fv libcxx-12.0.1.src libcxx
 popd
 
 # Apply patches (from Void Linux).
