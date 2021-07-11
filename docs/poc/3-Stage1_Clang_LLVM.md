@@ -471,7 +471,7 @@ time { make; }
 ./toybox | wc -w
 
 # Install.
-time { make PREFIX=/clang1-tools install && unset CFFGPT; }
+time { make PREFIX=/clang1-tools install && unset X CFFGPT; }
 ```
 
 ### `12` - GNU Diffutils
