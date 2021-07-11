@@ -53,18 +53,19 @@ time {
     mkdir -v /clang1-tools/bin && \
     ln -sv ../lib/libc.so /clang1-tools/bin/ldd
 }
-
-# Configure PATH for dynamic linker.
-mkdir -v /clang1-tools/etc && \
-cat > /clang1-tools/etc/ld-musl-x86_64.path << "EOF"
-/clang1-tools/lib
-EOF
 ```
 ```bash
 # Set compiler to the new triplet from Stage-0 Clang/LLVM to use current libc.
 sed -i 's|CC=.*|CC="${HEIWA_TARGET}-clang"|'     ~/.bashrc
 sed -i 's|CXX=.*|CXX="${HEIWA_TARGET}-clang++"|' ~/.bashrc
 source ~/.bashrc
+```
+```bash
+# Configure PATH for dynamic linker.
+mkdir -v /clang1-tools/etc && \
+cat > /clang1-tools/etc/ld-musl-x86_64.path << "EOF"
+/clang1-tools/lib
+EOF
 
 # Quick test for the new triplet of Stage-0 Clang/LLVM.
 echo "int main(){}" > dummy.c
