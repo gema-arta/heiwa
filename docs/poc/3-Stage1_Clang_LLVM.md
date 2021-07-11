@@ -135,6 +135,13 @@ popd
 
 # Apply patches (from Void Linux).
 ../extra/llvm/patches/appatch L_LLVM
+
+# Deletes atomic detection for Linux to build `libcxx` with "libatomic.so*" free (which is provided by GCC).
+sed -i '/check_library_exists(atomic __atomic_fetch_add_8 "" LIBCXX_HAS_ATOMIC_LIB)/d' \
+${LLVM_SRC}/projects/libcxx/cmake/config-ix.cmake
+
+# Update config.guess for better platform detection.
+cp -fv ../extra/llvm/files/config.guess cmake/.
 ```
 ```bash
 # Configure `libunwind` source.
@@ -175,10 +182,6 @@ time {
 }
 ```
 ```bash
-# Deletes atomic detection for Linux to build `libcxx` with "libatomic.so*" free (which is provided by GCC).
-sed -i '/check_library_exists(atomic __atomic_fetch_add_8 "" LIBCXX_HAS_ATOMIC_LIB)/d' \
-${LLVM_SRC}/projects/libcxx/cmake/config-ix.cmake
-
 # Configure `libcxx` source.
 pushd ${LLVM_SRC}/projects/libcxx/ && \
     cmake -B build \
