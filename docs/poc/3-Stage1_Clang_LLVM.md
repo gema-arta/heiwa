@@ -195,7 +195,7 @@ pushd ${LLVM_SRC}/projects/libcxx/ && \
 # Build.
 time { make -C build; }
 
-# Install and remove the build directory.
+# Install.
 time { make -C build install && popd; }
 ```
 ```bash
