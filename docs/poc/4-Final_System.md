@@ -232,29 +232,30 @@ done; unset P
 
 # Configure source.
 LDFLAGS="-Wl,-soname,libc.musl-x86_64.so.1" \
-./configure \
-    --prefix=/usr         \
-    --sysconfdir=/etc     \
-    --localstatedir=/var  \
-    --disable-gcc-wrapper \
-    --enable-optimize=speed
+./configure --prefix=/usr         \
+            --sysconfdir=/etc     \
+            --localstatedir=/var  \
+            --disable-gcc-wrapper \
+            --enable-optimize=speed
 
 # Build.
 time { make; }
 
-# Install.
-time { make install; }
-
-# Create a `ldd` symlink to use to print shared object dependencies.
-ln -sv ../usr/lib/libc.so /bin/ldd
-
+# Install and create a `ldd` symlink to use to print shared object dependencies.
+time {
+    make install
+    ln -sv ../usr/lib/libc.so /bin/ldd
+}
+```
+```bash
 # Configure PATH for dynamic linker.
 cat > /etc/ld-musl-x86_64.path << "EOF"
 /lib
 /usr/lib
 /usr/local/lib
 EOF
-
+```
+```bash
 # Install fully-featured musl ldconfig.
 # [ https://code.foxkit.us/smaeul/packages/-/commit/c631e4fc5ab64a9ad668ed5f753348ce8eae5219?view=parallel ]
 install -vm755 -t /sbin/ ../../extra/musl/files/ldconfig
@@ -270,7 +271,7 @@ done; unset B; install -vm644 -t /usr/include/ \
 ### `8` - Adjusting Toolchain
 > **Required!**
 ```bash
-# Configure Stage-1 Clang with new triplet to produce binaries with "lib/ld-musl-x86_64.so.1" and libraries from "/usr/*".
+# Configure Stage-1 Clang/LLVM with new triplet to produce binaries with "lib/ld-musl-x86_64.so.1" and libraries from "/usr/*".
 ln -sv clang   /clang1-tools/bin/x86_64-heiwa-linux-musl-clang
 ln -sv clang++ /clang1-tools/bin/x86_64-heiwa-linux-musl-clang++
 cat > /clang1-tools/bin/x86_64-heiwa-linux-musl.cfg << "EOF"
@@ -281,7 +282,8 @@ EOF
 sed -i 's|CC=.*|CC="x86_64-heiwa-linux-musl-clang"|'     ~/.bash_profile
 sed -i 's|CXX=.*|CXX="x86_64-heiwa-linux-musl-clang++"|' ~/.bash_profile
 source ~/.bash_profile
-
+```
+```bash
 # Quick test for the new triplet of Stage-1 Clang/LLVM.
 echo "int main(){}" > dummy.c
 ${CC} dummy.c -v -Wl,--verbose &> dummy.log
@@ -335,33 +337,36 @@ mkdir -v tzdata && pushd tzdata   && \
 # Apply patches (from Alpine Linux).
 patch -Np1 -i ../../extra/tzdata/patches/0001-posixtz-ensure-the-file-offset-we-pass-to-lseek-is-o.patch
 patch -Np1 -i ../../extra/tzdata/patches/0002-fix-implicit-declaration-warnings-by-including-strin.patch
-
+```
+```bash
 export timezones="africa antarctica asia australasia europe northamerica
 southamerica etcetera backward factory"
 
-# Build. Ignore "pkg-config: No such file or directory" while building `posixtz`.
+# Build. -> Ignore "pkg-config: No such file or directory" while building `posixtz` <-
 time {
     make CC=${CC} CFLAGS="$CFLAGS -DHAVE_STDINT_H=1" \
     TZDIR="/usr/share/zoneinfo" && \
     make -C posixtz-0.5 CC=${CC} posixtz
 }
 
-# Install.
-install -vm755 -t /usr/bin/ tzselect posixtz-0.5/posixtz zic zdump
-install -vm644 -t /usr/share/man/man8/ zic.8 zdump.8
+# Install the utilities and man pages.
+install -vm755 -t /usr/bin/ tzselect zic zdump posixtz-0.5/posixtz
+install -vm644 -t /usr/share/man/man8/ {zic,zdump}.8
 
-# Install zoneinfo. Ignore all warnings.
-install -vm444 -t /usr/share/zoneinfo/ iso3166.tab zone1970.tab zone.tab
+# Install zoneinfo. -> Ignore all warnings <-
+install -vm444 -t /usr/share/zoneinfo/ {iso3166,zone{1970,}}.tab
 zic -y ./yearistype -d /usr/share/zoneinfo ${timezones}
 zic -y ./yearistype -d /usr/share/zoneinfo/right -L leapseconds ${timezones}
 zic -y ./yearistype -d /usr/share/zoneinfo -p America/New_York
-
+```
+```bash
 # Configure timezone.
 # Use `tzselect` to determine <xxx>.
 tzselect
 
 cp -v /usr/share/zoneinfo/<xxx> /etc/localtime
-
+```
+```bash
 # Back to "/sources/pkgs" directory.
 popd && rm -rf tzdata; unset timezones
 ```
