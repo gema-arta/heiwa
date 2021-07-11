@@ -13,7 +13,7 @@
 > ```
 
 ### `0` - Setting Up Clang/LLVM Environment Variables
-> Apply persistent toolchain environment variables, but currently don't set the compiler to the new triplet. Mean to use libc from Stage-0 Clang/LLVM firstly, in case to build musl libc in this stage.
+> Apply persistent toolchain environment variables, but currently don't set the compiler to the new triplet of Stage-0 Clang/LLVM. Meaning to use libc from Stage-0 Clang/LLVM firstly, in case to build musl libc in this stage.
 ```bash
 cat >> ~/.bashrc << "EOF"
 # Stage-1 Clang/LLVM environment.
