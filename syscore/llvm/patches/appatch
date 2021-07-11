@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Stage-1 Clang/LLVM.
+# Configured by owl4ce
 
 case $1 in
     C_LLVM) pushd ${LLVM_SRC}/projects/ && \
