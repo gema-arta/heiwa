@@ -209,7 +209,7 @@ time { make -C build install && popd; }
 popd
 ```
 
-### `6` - NetBSD Curses
+### `4` - NetBSD Curses
 > #### `0.3.2` or newer
 > The NetBSD Curses package contains libraries for terminal-independent handling of character screens.
 
@@ -222,7 +222,7 @@ time { make CFLAGS="-fPIC" all-dynamic; }
 time { make PREFIX=/clang1-tools install-dynamic; }
 ```
 
-### `7` - libexecinfo
+### `5` - libexecinfo
 > #### `1.1` or newer (from Heiwa/Linux fork)
 > The libexecinfo package contains backtrace facility that usually found in GNU libc (glibc).
 
@@ -235,7 +235,7 @@ time { make; }
 time { make PREFIX=/clang1-tools install; }
 ```
 
-### `8` - Zlib-ng
+### `6` - Zlib-ng
 > #### `2.0.5` or newer
 > The Zlib-ng package contains zlib data compression library for the next generation systems.
 
@@ -254,7 +254,7 @@ time { make install; }
 rm -fv /clang1-tools/lib/libz.a
 ```
 
-### `9` - Clang/LLVM
+### `7` - Clang/LLVM
 > #### `12.x.x` or newer
 > C language family frontend for LLVM.
 
@@ -357,7 +357,7 @@ source ~/.bash_profile
 cd ${HEIWA}/sources/pkgs/
 ```
 
-### `10` - Gettext-tiny
+### `8` - Gettext-tiny
 > #### `0.3.2` or newer
 > The Gettext-tiny package contains utilities for internationalization and localization. These allow programs to be compiled with NLS (Native Language Support), enabling them to output messages in the user's native language. A lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
 
@@ -370,7 +370,7 @@ time { make LIBINTL=MUSL prefix=/clang1-tools; }
 install -vm755 -t /clang1-tools/bin/ msgfmt msgmerge xgettext 
 ```
 
-### `11` - GNU AWK
+### `9` - GNU AWK
 > #### `5.1.0` or newer
 > The GNU AWK (gawk) package contains programs for manipulating text files.
 
@@ -392,7 +392,7 @@ time { make; }
 time { make install; }
 ```
 
-### `12` - GNU Bash
+### `10` - GNU Bash
 > #### `5.1` (with patch level 8) or newer
 > The GNU Bash package contains the Bourne-Again SHell.
 
@@ -429,7 +429,7 @@ time { make; }
 time { make install; }
 ```
 
-### `13` - Toybox (Coreutils, File, Findutils, Grep, Sed, Tar)
+### `11` - Toybox (Coreutils, File, Findutils, Grep, Sed, Tar)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
@@ -468,7 +468,7 @@ time { make; }
 time { make PREFIX=/clang1-tools install && unset CFFGPT; }
 ```
 
-### `14` - GNU Diffutils
+### `12` - GNU Diffutils
 > #### `3.7` or newer
 > The GNU Diffutils package contains programs that show the differences between files or directories.
 
@@ -487,7 +487,7 @@ time { make; }
 time { make install; }
 ```
 
-### `15` - GNU Make
+### `13` - GNU Make
 > #### `4.3` or newer
 > The GNU Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
  
@@ -507,7 +507,7 @@ time { make; }
 time { make install; }
 ```
 
-### `16` - GNU Patch
+### `14` - GNU Patch
 > #### `2.7.6` or newer
 > The GNU Patch package contains a program for modifying or creating files by applying a patch file typically created by the diff program.
 
@@ -526,7 +526,7 @@ time { make; }
 time { make install; }
 ```
 
-### `17` - GNU Texinfo
+### `15` - GNU Texinfo
 > #### `6.8` or newer
 > The Texinfo package contains programs for reading, writing, and converting info pages.
 
@@ -545,7 +545,7 @@ time { make; }
 time { make install; }
 ```
 
-### `18` - OpenBSD Yacc
+### `16` - OpenBSD Yacc
 > #### `6.6` or newer
 > The OpenBSD Yacc package contains a parser generator.
 
@@ -566,7 +566,7 @@ time {
 }
 ```
 
-### `19` - Perl (cross)
+### `17` - Perl (cross)
 > #### `5.32.1` and `1.3.5` for cross
 > The Perl package contains the Practical Extraction and Report Language.
 
@@ -591,7 +591,7 @@ time { make; }
 time { make install; }
 ```
 
-### `20` - Pigz
+### `18` - Pigz
 > #### `2.6` or newer
 > The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
 
@@ -605,7 +605,7 @@ ln -sfv pigz unpigz; ln -sv pigz gzip; ln -sv unpigz gunzip
 install -vm755 -t /clang1-tools/bin/ pigz unpigz gzip gunzip
 ```
 
-### `21` - libffi
+### `19` - libffi
 > #### `3.3` or newer
 > The libffi library provides a portable, high level programming interface to various calling conventions. This allows a programmer to call any function specified by a call interface description at run time.
 
@@ -632,7 +632,7 @@ time { make; }
 time { make install; }
 ```
 
-### `22` - Python3
+### `20` - Python3
 > #### `3.9.6` or newer
 > The Python3 package contains the Python development environment. It is useful for object-oriented programming, writing scripts, prototyping large programs, or developing entire applications.
 
@@ -663,7 +663,7 @@ time { make; }
 time { make install; }
 ```
 
-### `23` - libuv
+### `21` - libuv
 > #### `1.41.0` or newer
 > The libuv package is a multi-platform support library with a focus on asynchronous I/O.
 
@@ -687,7 +687,7 @@ time { make; }
 time { make install && unset LDFLAGS; }
 ```
 
-### `24` - Cmake
+### `22` - Cmake
 > #### `3.20.5` or newer
 > The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
 
@@ -712,7 +712,7 @@ time { make install; }
 ```
 
 
-### `25` - Xz
+### `23` - Xz
 > #### `5.2.5` or newer
 > The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
 
@@ -732,7 +732,7 @@ time { make; }
 time { make install; }
 ```
 
-### `26` - Cleaning Up and Changing Ownership
+### `24` - Cleaning Up and Changing Ownership
 > **This section is optional!**
 
 > If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
