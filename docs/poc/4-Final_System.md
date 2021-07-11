@@ -633,11 +633,11 @@ cp -fv ../extra/llvm/files/config.guess cmake/.
 # Configure `libunwind` source.
 pushd ${LLVM_SRC}/projects/libunwind/ && \
     cmake -B build \
-        -DCMAKE_INSTALL_PREFIX="/usr"  \
-        -DCMAKE_C_FLAGS="-g0 -fPIC"    \
-        -DCMAKE_CXX_FLAGS="-g0 -fPIC"  \
-        -DLIBUNWIND_ENABLE_SHARED=ON   \
-        -DLIBUNWIND_USE_COMPILER_RT=ON \
+        -DCMAKE_INSTALL_PREFIX="/usr"           \
+        -DCMAKE_C_FLAGS="$CFLAGS -g0 -fPIC"     \
+        -DCMAKE_CXX_FLAGS="$CXXFLAGS -g0 -fPIC" \
+        -DLIBUNWIND_ENABLE_SHARED=ON            \
+        -DLIBUNWIND_USE_COMPILER_RT=ON          \
         -DLLVM_PATH="$LLVM_SRC"
 
 # Build.
@@ -651,7 +651,7 @@ time { make -C build install && popd; }
 pushd ${LLVM_SRC}/projects/libcxxabi/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/usr"                                     \
-        -DCMAKE_CXX_FLAGS="-g0"                                           \
+        -DCMAKE_CXX_FLAGS="$CXXFLAGS -g0"                                 \
         -DLIBCXXABI_ENABLE_STATIC=ON                                      \
         -DLIBCXXABI_USE_COMPILER_RT=ON                                    \
         -DLIBCXXABI_USE_LLVM_UNWINDER=ON                                  \
@@ -673,7 +673,7 @@ time {
 pushd ${LLVM_SRC}/projects/libcxx/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/usr"                 \
-        -DCMAKE_CXX_FLAGS="-g0"                       \
+        -DCMAKE_CXX_FLAGS="$CXXFLAGS -g0"             \
         -DLIBCXX_ENABLE_SHARED=ON                     \
         -DLIBCXX_ENABLE_STATIC=ON                     \
         -DLIBCXX_HAS_MUSL_LIBC=ON                     \
@@ -700,43 +700,42 @@ popd
 > #### `12.x.x` or newer
 > C language family frontend for LLVM.
 
-> *No need to decompress any package firstly. It will be done in this step.*
-
-> **Required!**
+> **Required!** As mentioned in the description above.
 ```bash
-# Enter to the LLVM source directory.
-cd "$LLVM_SRC"
+# Exit from the LLVM source directory if already entered after decompressing.
+popd
+```
+```bash
+# Rename the LLVM source directory to "$LLVM_SRC", then enter.
+mv -fv llvm-12.0.1.src "$LLVM_SRC" && cd "$LLVM_SRC"
 
 # Decompress `clang`, `lld`, and `compiler-rt` to the correct directories.
 pushd ${LLVM_SRC}/projects/ && \
-    tar xf ../../pkgs/compiler-rt-12.0.0.src.tar.xz && mv -v compiler-rt-12.0.0.src compiler-rt
+    tar xf ../../pkgs/compiler-rt-12.0.1.src.tar.xz && mv -fv compiler-rt-12.0.1.src compiler-rt
 popd
 pushd ${LLVM_SRC}/tools/ && \
-    tar xf ../../pkgs/clang-12.0.0.src.tar.xz && mv -v clang-12.0.0.src clang
-    tar xf ../../pkgs/lld-12.0.0.src.tar.xz   && mv -v lld-12.0.0.src lld
+    tar xf ../../pkgs/clang-12.0.1.src.tar.xz && mv -fv clang-12.0.1.src clang
+    tar xf ../../pkgs/lld-12.0.1.src.tar.xz   && mv -fv lld-12.0.1.src lld
 popd
 
 # Apply patches (from Void Linux).
-../extra/llvm/patches/stage1-appatch
+../extra/llvm/patches/appatch C_LLVM
 
-# Disable sanitizers for musl, fixing "early build failure".
+# Disable sanitizers for musl, it's broken since it duplicates some libc bits.
 sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
 projects/compiler-rt/cmake/config-ix.cmake
 
-# Fix missing header for `lld` (llvm-12.0.0), [ https://bugs.llvm.org/show_bug.cgi?id=49228 ].
-tar xf ../pkgs/libunwind-12.0.0.src.tar.xz && \
-mkdir -pv tools/lld/include/mach-o         && \
-cp -fv libunwind-12.0.0.src/include/mach-o/compact_unwind_encoding.h \
-tools/lld/include/mach-o/. && rm -rf libunwind-12.0.0.src
-
-# Update host/target triplet detection.
+# Update config.guess for better platform detection.
 cp -fv ../extra/llvm/files/config.guess cmake/.
-
+```
+```bash
 # Configure source.
 cmake -B build \
-    -DCMAKE_BUILD_TYPE=Release                                  \
+    -DCMAKE_BUILD_TYPE=Release -Wno-dev                         \
     -DCMAKE_INSTALL_PREFIX="/usr"                               \
     -DCMAKE_INSTALL_OLDINCLUDEDIR="/usr/include"                \
+    -DCMAKE_C_FLAGS="$CFGLAGS -g0"                              \
+    -DCMAKE_CXX_FLAGS="$CXXFLAGS -g0"                           \
     -DLLVM_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"         \
     -DLLVM_HOST_TRIPLE="x86_64-pc-linux-musl"                   \
     -DLLVM_TARGETS_TO_BUILD="host;BPF;AMDGPU;X86"               \
@@ -744,7 +743,7 @@ cmake -B build \
     -DLLVM_LINK_LLVM_DYLIB=ON                                   \
     -DLLVM_BUILD_LLVM_DYLIB=ON                                  \
     -DLLVM_BUILD_TESTS=OFF                                      \
-    -DLLVM_ENABLE_LIBEDIT=OFF                                   \
+    -DLLVM_ENABLE_LIBEDIT=ON                                    \
     -DLLVM_ENABLE_LIBXML2=OFF                                   \
     -DLLVM_ENABLE_LIBCXX=ON                                     \
     -DLLVM_ENABLE_LLD=ON                                        \
@@ -764,7 +763,7 @@ cmake -B build \
     -DCLANG_DEFAULT_CXX_STDLIB=libc++                           \
     -DCLANG_DEFAULT_UNWINDLIB=libunwind                         \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                           \
-    -DCLANG_DEFAULT_LINKER="/usr/bin/ld.lld"                    \
+    -DCLANG_DEFAULT_LINKER=ld.lld                               \
     -DDEFAULT_SYSROOT="/usr"                                    \
     -DBacktrace_INCLUDE_DIR="/usr/include"                      \
     -DBacktrace_LIBRARY="/usr/lib/libexecinfo.so"               \
@@ -779,13 +778,14 @@ cmake -B build \
 # Build.
 time { make -C build; }
 
-# Install and remove the build directory.
+# Install.
 time {
     pushd build/ && \
         cmake -DCMAKE_INSTALL_PREFIX="/usr" -P cmake_install.cmake && \
-    popd && rm -rf build
+    popd
 }
-
+```
+```bash
 # Create a symlink required by the FHS for "historical" reasons, and
 # set `clang`, `clang++`, and `lld` as default toolchain compiler and linker.
 ln -sv ../usr/bin/clang          /lib/cpp
@@ -794,7 +794,8 @@ ln -sv lld                       /usr/bin/ld
 sed -i 's|CC=.*|CC="clang"|'     ~/.bash_profile
 sed -i 's|CXX=.*|CXX="clang++"|' ~/.bash_profile
 source ~/.bash_profile
-
+```
+```bash
 # Build useful utilities for BSD-compability.
 time {
     cc ${CFLAGS} -fpie ../extra/musl/files/musl-utils/getconf.c -o getconf && \
@@ -805,7 +806,8 @@ time {
 # Install above utilities, and the man files (from NetBSD).
 install -vm755 -t /usr/bin/ get{conf,ent} iconv
 install -vm644 -t /usr/share/man/man1/ ../extra/musl/files/musl-utils/get{conf,ent}.1
-
+```
+```bash
 # Quick test.
 echo "int main(){}" > dummy.c
 cc dummy.c -v -Wl,--verbose &> dummy.log
@@ -837,7 +839,8 @@ grep -o -- -L/usr/lib dummy.log
 # | The output should be:
 # |-----------------------
 # |-L/usr/lib
-
+```
+```bash
 # Back to "/sources/pkgs" directory.
 cd /sources/pkgs/
 ```
