@@ -1,7 +1,7 @@
 ## `IV` Final System
 
 > #### * Beginning of as root!
-### `1` - Preparing Virtual Kernel File Systems
+### `0` - Preparing Virtual Kernel File Systems
 > Various file systems exported by the kernel are used to communicate to and from the kernel itself. These file systems are virtual in that no disk space is used for them. The content of the file systems resides in memory.
 ```bash
 # When the kernel boots the system, it requires the presence of a few device nodes, in particular the console and null devices.
@@ -33,7 +33,7 @@ if [[ -n "$HEIWA" ]]; then
 fi
 ```
 
-### `2` - Entering the Chroot Environment
+### `1` - Entering the Chroot Environment
 > Now that all the packages which are required to build the rest of the needed tools are on the system.
 ```bash
 # Term variable is set to `xterm` for better compability, instead of "$TERM" that will broken if using `rxvt-unicode`.
@@ -50,7 +50,7 @@ fi
 > #### * End of as root!
 
 > #### * Beginning of as root in a chroot env!
-### `3` - Creating Directories
+### `2` - Creating Directories
 > Its time to create the full structure file system.
 ```bash
 mkdir -pv /{{,s}bin,boot,etc,home,lib/firmware,media,mnt,opt,root,var/tmp}
@@ -70,7 +70,7 @@ chmod -v 0700 /root
 chmod -v 1777 /{var/,}tmp
 ```
 
-### `4` - Creating Essential Files and Symlinks
+### `3` - Creating Essential Files and Symlinks
 ```bash
 # Some programs use hard-wired paths to programs which do not exist yet.
 # In order to satisfy these programs, create a number of symbolic links which will be replaced by real files throughout the course of this chapter after the software has been installed.
@@ -139,8 +139,11 @@ touch /var/log/{btmp,lastlog,faillog,wtmp}
 chgrp -v utmp /var/log/lastlog
 chmod -v 664  /var/log/lastlog
 chmod -v 600  /var/log/btmp
+```
 
-# Apply toolchain persistent environment variables, set the compiler to Stage-1 Clang default triplet (pc).
+### `4` - Setting Up Clang/LLVM Environment Variables
+> Apply persistent toolchain environment variables, now set the compiler to Stage-1 Clang/LLVM default triplet (pc).
+```bash
 cat > ~/.bash_profile << "EOF"
 # Clang/LLVM environment.
 CC="x86_64-pc-linux-musl-clang"
