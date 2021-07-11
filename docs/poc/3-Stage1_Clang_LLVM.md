@@ -568,7 +568,7 @@ time { make; }
 
 # Install and create symlink as `byacc`.
 time {
-    make BINDIR=/clang1-tools/bin install && \
+    make BINDIR=/clang1-tools/bin install
     ln -sv yacc /clang1-tools/bin/byacc
 }
 ```
