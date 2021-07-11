@@ -1295,22 +1295,21 @@ export CFLAGS="$CFLAGS -D_DIRENT_HAVE_D_TYPE"
 NOCONFIGURE=1 ./autogen.sh
 
 # Configure source.
-./configure \
-    ADJTIME_PATH=/var/lib/hwclock/adjtime   \
-    --libdir=/usr/lib                       \
-    --docdir=/usr/share/doc/util-linux-2.37 \
-    --disable-chfn-chsh                     \
-    --disable-login                         \
-    --disable-nologin                       \
-    --disable-su                            \
-    --disable-setpriv                       \
-    --disable-runuser                       \
-    --disable-pylibmount                    \
-    --disable-static                        \
-    --without-python                        \
-    --without-systemd                       \
-    --without-systemdsystemunitdir          \
-    runstatedir=/run
+./configure ADJTIME_PATH=/var/lib/hwclock/adjtime   \
+            --libdir=/usr/lib                       \
+            --docdir=/usr/share/doc/util-linux-2.37 \
+            --disable-chfn-chsh                     \
+            --disable-login                         \
+            --disable-nologin                       \
+            --disable-su                            \
+            --disable-setpriv                       \
+            --disable-runuser                       \
+            --disable-pylibmount                    \
+            --disable-static                        \
+            --without-python                        \
+            --without-systemd                       \
+            --without-systemdsystemunitdir          \
+            runstatedir=/run
 
 # Build.
 time { make; }
@@ -1361,7 +1360,8 @@ time { make install; }
 > **Required!** Before `musl-fts`, `musl-obstack`, `musl-rpmatch`, and `Argp-standalone`.
 ```bash
 # Configure source.
-./configure --prefix=/usr --docdir=/usr/share/doc/automake-1.16.3
+./configure --prefix=/usr \
+            --docdir=/usr/share/doc/automake-1.16.3
 
 # Build.
 time { make; }
@@ -1381,10 +1381,10 @@ sed -i '/pkgconfig_DATA/i pkgconfigdir=/usr/lib/pkgconfig' Makefile.am
 ./bootstrap.sh
 
 # Configure source.
-CFLAGS="$CFLAGS -fPIC"    \
-./configure --prefix=/usr \
-    --sysconfdir=/etc     \
-    --localstatedir=/var
+CFLAGS="$CFLAGS -fPIC"        \
+./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --localstatedir=/var
 
 # Build.
 time { make; }
@@ -1404,10 +1404,10 @@ sed -i '/pkgconfig_DATA/i pkgconfigdir=/usr/lib/pkgconfig' Makefile.am
 ./bootstrap.sh
 
 # Configure source.
-CFLAGS="$CFLAGS -fPIC"    \
-./configure --prefix=/usr \
-    --sysconfdir=/etc     \
-    --localstatedir=/var
+CFLAGS="$CFLAGS -fPIC"        \
+./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --localstatedir=/var
 
 # Build.
 time { make; }
@@ -1426,12 +1426,12 @@ time { make install; }
 ./bootstrap.sh
 
 # Configure source.
-CFLAGS="$CFLAGS -fPIC"    \
-./configure --prefix=/usr \
-    --enable-shared       \
-    --enable-static       \
-    --sysconfdir=/etc     \
-    --localstatedir=/var
+CFLAGS="$CFLAGS -fPIC"        \
+./configure --prefix=/usr     \
+            --enable-shared   \
+            --enable-static   \
+            --sysconfdir=/etc \
+            --localstatedir=/var
 
 # Build.
 time { make; }
