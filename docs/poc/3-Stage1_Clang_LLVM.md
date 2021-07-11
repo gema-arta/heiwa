@@ -760,12 +760,14 @@ find /clang1-tools/{,usr/}{,s}bin/ -maxdepth 1 -type f -exec /clang0-tools/bin/l
 exit
 ```
 > #### * End of as privileged user!
+> #### * Beginning of as root!
 ```bash
 # Change the ownership of the "${HEIWA}/clang1-tools" directory to root by running the following command.
 # Warning! This is danger, so check its variables before `chown`.
 # echo ${HEIWA}/clang1-tools
 [[ -n "$HEIWA" ]] && chown -R root:root ${HEIWA}/clang1-tools
 ```
+> #### * End of as root!
 
 <h2></h2>
 
