@@ -470,7 +470,7 @@ time {
 ```
 
 ### `14` - GNU M4
-> #### `6.7` or newer
+> #### `1.4.19` or newer
 > The GNU M4 package contains a macro processor.
 
 > **Required!** Before `GNU Autoconf`.
