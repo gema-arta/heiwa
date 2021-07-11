@@ -231,7 +231,7 @@ time { make PREFIX=/clang1-tools install-dynamic; }
 > **Required!** To build Stage-1 Clang/LLVM, since using musl libc.
 ```bash
 # Build.
-time { make; }
+time { make CFLAGS="-Oz -pipe"; }
 
 # Install.
 time { make PREFIX=/clang1-tools install; }
@@ -244,16 +244,14 @@ time { make PREFIX=/clang1-tools install; }
 > **Required!** By Pigz in the current stage and optionally enabled to build Stage-1 Clang/LLVM.
 ```bash
 # Configure source.
-./configure --prefix=/clang1-tools --zlib-compat --native
+CFLAGS="-Oz -pipe" ./configure \
+--prefix=/clang1-tools --zlib-compat --native
 
 # Build.
 time { make; }
 
 # Install.
 time { make install; }
-
-# Remove an useless static library.
-rm -fv /clang1-tools/lib/libz.a
 ```
 
 ### `7` - Clang/LLVM
