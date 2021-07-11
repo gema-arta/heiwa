@@ -351,7 +351,7 @@ cat > /clang1-tools/bin/${TARGET_TRUPLE}.cfg << "EOF"
 EOF
 
 # Set the new PATH since "/clang0-tools" won't be used anymore and the Stage-1 Clang default triplet (pc),
-# also its time to enable optimization.
+# also it's time to enable optimization as default.
 sed -i 's|/clang0-tools/usr/bin:/clang0-tools/bin:||' ~/.bashrc
 sed -i '/unset CFLAGS CXXFLAGS/d'                     ~/.bashrc
 sed -i 's|CC=.*|CC="${TARGET_TRUPLE}-clang"|'         ~/.bashrc
