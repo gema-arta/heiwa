@@ -344,14 +344,14 @@ time {
 }
 ```
 ```bash
-# Configure Stage-1 Clang with default triplet (pc) to produce binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1".
+# Configure Stage-1 Clang/LLVM with default triplet (pc) to produce binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1".
 ln -sv clang   /clang1-tools/bin/${TARGET_TRUPLE}-clang
 ln -sv clang++ /clang1-tools/bin/${TARGET_TRUPLE}-clang++
 cat > /clang1-tools/bin/${TARGET_TRUPLE}.cfg << "EOF"
 -Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1
 EOF
 
-# Set the new PATH since "/clang0-tools" won't be used anymore and the Stage-1 Clang default triplet (pc),
+# Set the new PATH since "/clang0-tools" won't be used anymore and the Stage-1 Clang/LLVM default triplet (pc),
 # also it's time to enable optimization as default.
 sed -i 's|/clang0-tools/usr/bin:/clang0-tools/bin:||' ~/.bashrc
 sed -i '/unset CFLAGS CXXFLAGS/d'                     ~/.bashrc
