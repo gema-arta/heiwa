@@ -262,7 +262,8 @@ time { make install; }
 ```bash
 # Exit from the LLVM source directory if already entered after decompressing.
 popd
-
+```
+```bash
 # Rename the LLVM source directory to "$LLVM_SRC", then enter.
 mv -fv llvm-12.0.1.src "$LLVM_SRC" && cd "$LLVM_SRC"
 
@@ -276,15 +277,16 @@ pushd ${LLVM_SRC}/tools/ && \
 popd
 
 # Apply patches (from Void Linux).
-../extra/llvm/patches/stage1-appatch
+../extra/llvm/patches/appatch C_LLVM
 
-# Disable sanitizers for musl, fixing "early build failure".
+# Disable sanitizers for musl, it's broken since it duplicates some libc bits.
 sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
 projects/compiler-rt/cmake/config-ix.cmake
 
-# Update host/target triplet detection.
+# Update config.guess for better platform detection.
 cp -fv ../extra/llvm/files/config.guess cmake/.
-
+```
+```bash
 # Configure source.
 cmake -B build \
     -DCMAKE_BUILD_TYPE=Release                                  \
