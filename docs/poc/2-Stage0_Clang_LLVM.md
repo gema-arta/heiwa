@@ -1,5 +1,5 @@
 ## `II` Stage-0 Clang/LLVM (ft. GNU) Cross-Toolchain
-The purpose of this stage is to build a temporary Clang/LLVM toolchain with GCC libraries which will be used to build Clang/LLVM without relying on GCC because if it build directly using host's GCC and Binutils it will fail or break. **-**[LLVM Reference](https://clang.llvm.org/docs/Toolchain.html) **-**[CLFS Reference](http://clfs.org/view/clfs-embedded/x86/)
+The purpose of this stage is to build a temporary Clang/LLVM toolchain with GCC libraries which will be used to build Clang/LLVM without relying on GCC because if it build directly using host's GCC and Binutils it will fail or break. **-**[LLVM Reference](https://clang.llvm.org/docs/Toolchain.html) **-**[CLFS Reference](http://clfs.org/view/clfs-embedded/x86/) **-**[musl faq](https://wiki.musl-libc.org/faq.html)
 
 > #### Compilation Instruction!
 > ```bash
@@ -135,16 +135,14 @@ time { make install-gcc install-target-libgcc; }
 # Build.
 time { make; }
 
-# Install and fix a wrong shared object symlink.
+# Install and fix a wrong shared object symlink, also create a `ldd` symlink to use to print shared object dependencies.
 time {
     make DESTDIR=/clang0-tools install
     ln -sfv libc.so /clang0-tools/lib/ld-musl-x86_64.so.1
+    ln -sv ../lib/libc.so /clang0-tools/bin/ldd
 }
 ```
 ```bash
-# Create a `ldd` symlink to use to print shared object dependencies.
-ln -sv ../lib/libc.so /clang0-tools/bin/ldd
-
 # Configure PATH for dynamic linker.
 mkdir -v /clang0-tools/etc && \
 cat > /clang0-tools/etc/ld-musl-x86_64.path << EOF
@@ -346,7 +344,8 @@ ln -sv clang++ /clang0-tools/bin/${HEIWA_TARGET}-clang++
 cat > /clang0-tools/bin/${HEIWA_TARGET}.cfg << "EOF"
 -Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1
 EOF
-
+```
+```bash
 # Back to "${HEIWA}/sources/pkgs" directory.
 popd
 ```
