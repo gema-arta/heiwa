@@ -393,9 +393,6 @@ time { make -C build; }
 
 # Install.
 time { make -C build install; }
-
-# Remove an useless static library.
-rm -fv /usr/lib/libz.a
 ```
 
 ### `11` - NetBSD Curses
