@@ -469,17 +469,19 @@ time {
 # To support those programs, create a symbolic link named `lex` that runs `flex` in `lex` emulation mode.
 ```
 
-### `14` - OpenBSD M4
+### `14` - GNU M4
 > #### `6.7` or newer
-> The OpenBSD M4 package contains a macro processor.
+> The GNU M4 package contains a macro processor.
 
 > **Required!** Before `GNU Autoconf`.
 ```bash
 # Configure source.
-./configure --prefix=/usr --enable-m4
+ac_cv_header_sys_cdefs_h=no \
+ac_cv_lib_error_at_line=no  \
+./configure --prefix=/usr
 
-# Build. Fails when using multiple jobs.
-time { make -j1; }
+# Build.
+time { make; }
 
 # Install.
 time { make install; }
