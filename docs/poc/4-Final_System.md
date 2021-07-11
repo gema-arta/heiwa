@@ -588,7 +588,20 @@ sed -i 's|yes|no|' /etc/default/useradd
 passwd root
 ```
 
-### `19` - LLVM libunwind, libcxxabi, and libcxx
+### `19` - libexecinfo
+> #### `1.1` or newer (from Heiwa/Linux fork)
+> The libexecinfo package contains backtrace facility that usually found in GNU libc (glibc).
+
+> **Required!** Before `Clang/LLVM`.
+```bash
+# Build.
+time { make; }
+
+# Install.
+time { make PREFIX=/usr install; }
+```
+
+### `20` - LLVM libunwind, libcxxabi, and libcxx
 > #### `12.x.x` or newer
 > 1. C++ runtime stack unwinder from LLVM;  
 > 2. Low level support for a standard C++ library from LLVM;  
@@ -683,20 +696,7 @@ time { make -C build install && popd; }
 popd
 ```
 
-### `22` - libexecinfo
-> #### `1.1` or newer (from Heiwa/Linux fork)
-> The libexecinfo package contains backtrace facility that usually found in GNU libc (glibc).
-
-> **Required!** Before `Clang/LLVM`.
-```bash
-# Build.
-time { make; }
-
-# Install.
-time { make PREFIX=/usr install; }
-```
-
-### `23` - Clang/LLVM
+### `21` - Clang/LLVM
 > #### `12.x.x` or newer
 > C language family frontend for LLVM.
 
