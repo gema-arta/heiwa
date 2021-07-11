@@ -285,7 +285,7 @@ cp -fv ../extra/llvm/files/config.guess cmake/.
 
 # Configure source.
 cmake -B build \
-    -DCMAKE_BUILD_TYPE=Release                                                              \
+    -DCMAKE_BUILD_TYPE=Release -Wno-dev                                                     \
     -DCMAKE_INSTALL_PREFIX="/clang0-tools"                                                  \
     -DCMAKE_C_COMPILER="${HEIWA_TARGET}-gcc"                                                \
     -DCMAKE_CXX_COMPILER="${HEIWA_TARGET}-g++"                                              \
