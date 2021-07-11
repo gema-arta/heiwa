@@ -671,7 +671,7 @@ time { make install; }
 ```
 
 ### `21` - libuv
-> #### `1.41.0` or newer
+> #### `1.41.1` or newer
 > The libuv package is a multi-platform support library with a focus on asynchronous I/O.
 
 > **Required!** By Cmake in the current stage.
