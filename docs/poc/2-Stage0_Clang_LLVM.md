@@ -275,8 +275,7 @@ pushd ${LLVM_SRC}/tools/ && \
     tar xf ../../pkgs/clang-12.0.1.src.tar.xz && mv -fv clang-12.0.1.src clang
     tar xf ../../pkgs/lld-12.0.1.src.tar.xz   && mv -fv lld-12.0.1.src lld
 popd
-```
-```bash
+
 # Apply patches (from Void Linux).
 ../extra/llvm/patches/appatch C_LLVM
 
@@ -286,7 +285,8 @@ projects/compiler-rt/cmake/config-ix.cmake
 
 # Update config.guess for better platform detection.
 cp -fv ../extra/llvm/files/config.guess cmake/.
-
+```
+```bash
 # Configure source.
 cmake -B build \
     -DCMAKE_BUILD_TYPE=Release -Wno-dev                                                     \
