@@ -15,9 +15,9 @@ The purpose of this stage is to build a temporary Clang/LLVM toolchain with GCC 
 
 > #### Build Notes
 > 0. Using GCC and Binutils as compiler toolchain.
-> 1. Using GNU `bash` as current shell and symlink it to `sh`.
-> 2. Using GNU `gawk` as `awk` implementation (symlinked).
-> 3. Using GNU `bison` as `yacc` replacements (wrapped).
+> 1. Using `bash` as current shell and symlink it to `sh`.
+> 2. Using `gawk` as `awk` implementation (symlinked).
+> 3. Using `bison` as `yacc` replacements (wrapped).
 > 4. Using `flex` as `lex` alternative lexical analyzers (symlinked).
 > 5. See more at [LFS Host System Requirements](https://linuxfromscratch.org/lfs/view/stable/chapter02/hostreqs.html).
 > 
