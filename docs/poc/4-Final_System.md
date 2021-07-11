@@ -509,9 +509,9 @@ time { make install; }
 > **Required!**
 ```bash
 # Configure source.
-./configure --prefix=/usr         \
-            --bindir=/bin         \
-            --disable-static      \
+./configure --prefix=/usr    \
+            --bindir=/bin    \
+            --disable-static \
             --docdir=/usr/share/doc/acl-2.3.1
 
 # Build.
@@ -852,10 +852,11 @@ cd /sources/pkgs/
 > **Required!** Before `Kmod`.
 ```bash
 # Configure source.
-./configure --prefix=/usr \
-    --sysconfdir=/etc --localstatedir=/var \
-    --docdir=/usr/share/doc/pkgconf-1.7.4  \
-    --with-pkg-config-dir=/usr/local/lib/pkgconfig:/usr/local/share/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig:/opt/qt5/lib/pkgconfig
+./configure --prefix=/usr                         \
+            --sysconfdir=/etc                     \
+            --localstatedir=/var                  \
+            --docdir=/usr/share/doc/pkgconf-1.7.4 \
+            --with-pkg-config-dir=/usr/local/lib/pkgconfig:/usr/local/share/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig:/opt/qt5/lib/pkgconfig
 
 # Build.
 time { make; }
