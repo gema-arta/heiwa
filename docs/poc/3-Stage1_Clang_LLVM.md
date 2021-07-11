@@ -702,7 +702,7 @@ time { make install && unset LDFLAGS; }
 # Disable applications that using Cmake from attempting to install files in "/usr/lib64".
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
 
-# Configure source using provided programs (built-in).
+# Configure source using provided libraries (built-in).
 ./bootstrap \
     --prefix=/clang1-tools           \
     --mandir=/share/man              \
