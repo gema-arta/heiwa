@@ -684,23 +684,16 @@ popd
 ```
 
 ### `22` - libexecinfo
-> #### `1.1` or newer
+> #### `1.1` or newer (from Heiwa/Linux fork)
 > The libexecinfo package contains backtrace facility that usually found in GNU libc (glibc).
 
 > **Required!** Before `Clang/LLVM`.
 ```bash
-# Apply patches (from Alpine Linux).
-for P in {10-execinfo,20-define-gnu-source,30-linux-makefile}.patch; do
-    patch -Np1 -i ../../extra/libexecinfo/patches/${P}
-done; unset P
-
 # Build.
-time { make CC=${CC} AR=${AR} CFLAGS="$CFLAGS -fno-omit-frame-pointer"; }
+time { make; }
 
 # Install.
-ln -sv libexecinfo.so{.1,}
-install -vm755 -t /usr/include/ {execinfo,stacktraverse}.h
-install -vm755 -t /usr/lib/ libexecinfo.{a,so{.1,}}
+time { make PREFIX=/usr install; }
 ```
 
 ### `23` - Clang/LLVM
