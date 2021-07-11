@@ -441,11 +441,29 @@ mkdir -v /usr/include/readline
 ln -sv ../editline/readline.h /usr/include/readline/readline.h
 ```
 
-### `13` - Flex
+### `13` - GNU M4
+> #### `1.4.19` or newer
+> The GNU M4 package contains a macro processor.
+
+> **Required!** Before `GNU Autoconf`.
+```bash
+# Configure source.
+ac_cv_header_sys_cdefs_h=no \
+ac_cv_lib_error_at_line=no  \
+./configure --prefix=/usr
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `14` - Flex
 > #### `2.6.4` or newer
 > The Flex package contains a utility for generating programs that recognize patterns in text.
 
-> **Required!** Before `OpenBSD M4`, `IProute2`, `Kbd`, and `Kmod`.
+> **Required!** Before `IProute2`, `Kbd`, and `Kmod`.
 ```bash
 # Configure source. Flex still expect `gcc` to configure.
 ln -sv ${CC} /clang1-tools/bin/gcc       && \
@@ -467,24 +485,6 @@ time {
 
 # A few programs do not know about `flex` yet and try to run its predecessor, `lex`.
 # To support those programs, create a symbolic link named `lex` that runs `flex` in `lex` emulation mode.
-```
-
-### `14` - GNU M4
-> #### `1.4.19` or newer
-> The GNU M4 package contains a macro processor.
-
-> **Required!** Before `GNU Autoconf`.
-```bash
-# Configure source.
-ac_cv_header_sys_cdefs_h=no \
-ac_cv_lib_error_at_line=no  \
-./configure --prefix=/usr
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
 ```
 
 ### `15` - Attr
