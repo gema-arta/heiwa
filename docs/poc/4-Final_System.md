@@ -697,7 +697,7 @@ time { make PREFIX=/usr install; }
 ```
 
 ### `23` - Clang/LLVM
-> #### `12.0.0`
+> #### `12.x.x` or newer
 > C language family frontend for LLVM.
 
 > *No need to decompress any package firstly. It will be done in this step.*
