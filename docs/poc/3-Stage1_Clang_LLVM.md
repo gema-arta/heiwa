@@ -113,7 +113,33 @@ cp -rfv usr/include /clang1-tools/.
 # but successful using `${TARGET_TRIPLET}-compiler`.
 ```
 
-### `3` - LLVM libunwind, libcxxabi, and libcxx
+### `3` - NetBSD Curses
+> #### `0.3.2` or newer
+> The NetBSD Curses package contains libraries for terminal-independent handling of character screens.
+
+> **Required!** To build Stage-1 Clang/LLVM and for the most programs that depends on `-ltinfo` or `-lterminfo` linker's flags.
+```bash
+# Build.
+time { make CFLAGS="-Oz -pipe -fPIC" all-dynamic; }
+
+# Install.
+time { make PREFIX=/clang1-tools install-dynamic; }
+```
+
+### `4` - libexecinfo
+> #### `1.1` or newer (from Heiwa/Linux fork)
+> The libexecinfo package contains backtrace facility that usually found in GNU libc (glibc).
+
+> **Required!** To build Stage-1 Clang/LLVM, since using musl libc.
+```bash
+# Build.
+time { make CFLAGS="-Oz -pipe"; }
+
+# Install.
+time { make PREFIX=/clang1-tools install; }
+```
+
+### `5` - LLVM libunwind, libcxxabi, and libcxx
 > #### `12.x.x` or newer
 > 1. C++ runtime stack unwinder from LLVM;  
 > 2. Low level support for a standard C++ library from LLVM;  
@@ -210,32 +236,6 @@ time { make -C build install && popd; }
 ```bash
 # Back to "${HEIWA}/sources/pkgs" directory.
 popd
-```
-
-### `4` - NetBSD Curses
-> #### `0.3.2` or newer
-> The NetBSD Curses package contains libraries for terminal-independent handling of character screens.
-
-> **Required!** To build Stage-1 Clang/LLVM and for the most programs that depends on `-ltinfo` or `-lterminfo` linker's flags.
-```bash
-# Build.
-time { make CFLAGS="-Oz -pipe -fPIC" all-dynamic; }
-
-# Install.
-time { make PREFIX=/clang1-tools install-dynamic; }
-```
-
-### `5` - libexecinfo
-> #### `1.1` or newer (from Heiwa/Linux fork)
-> The libexecinfo package contains backtrace facility that usually found in GNU libc (glibc).
-
-> **Required!** To build Stage-1 Clang/LLVM, since using musl libc.
-```bash
-# Build.
-time { make CFLAGS="-Oz -pipe"; }
-
-# Install.
-time { make PREFIX=/clang1-tools install; }
 ```
 
 ### `6` - Zlib-ng
