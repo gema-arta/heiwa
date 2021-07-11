@@ -861,10 +861,7 @@ cd /sources/pkgs/
 time { make; }
 
 # Install and create symlink as `pkg-config`.
-time {
-    make install && \
-    ln -sf pkgconf /usr/bin/pkg-config
-}
+time { make install && ln -sf pkgconf /usr/bin/pkg-config; }
 ```
 
 ### `23` - Gettext-tiny
