@@ -184,7 +184,7 @@ source ~/.bash_profile
 > ```
 
 ### `5` - Linux API Headers
-> #### Xanmod-CacULE, `5.13.x` or newer
+> #### `5.13.x` (CacULE) or newer
 > The Linux API Headers expose the kernel's API for use by musl libc.
 
 > **Required!** As mentioned in the description above.
