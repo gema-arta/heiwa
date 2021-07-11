@@ -54,14 +54,14 @@ cp -rfv usr/include /clang0-tools/${HEIWA_TARGET}/.
 ```bash
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build
-../configure \
-    --prefix=/clang0-tools                       \
-    --target=${HEIWA_TARGET}                     \
-    --with-sysroot=/clang0-tools/${HEIWA_TARGET} \
-    --enable-deterministic-archives              \
-    --disable-nls                                \
-    --disable-multilib                           \
-    --disable-werror                             \
+CFLAGS="-pipe -g0" CXXFLAGS="-pipe -g0" ../configure \
+    --prefix=/clang0-tools                           \
+    --target=${HEIWA_TARGET}                         \
+    --with-sysroot=/clang0-tools/${HEIWA_TARGET}     \
+    --enable-deterministic-archives                  \
+    --disable-nls                                    \
+    --disable-multilib                               \
+    --disable-werror                                 \
     --disable-compressed-debug-sections
 
 # Checks the host's environment and makes sure all the necessary tools are available to compile Binutils. Then build.
@@ -84,29 +84,29 @@ tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc-1.2.1 mpc
 
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build
-CFLAGS="-g0 -O0" CXXFLAGS="-g0 -O0" ../configure \
-    --prefix=/clang0-tools                       \
-    --build=${HEIWA_HOST}                        \
-    --host=${HEIWA_HOST}                         \
-    --target=${HEIWA_TARGET}                     \
-    --with-sysroot=/clang0-tools/${HEIWA_TARGET} \
-    --disable-nls                                \
-    --disable-shared                             \
-    --without-headers                            \
-    --with-newlib                                \
-    --disable-decimal-float                      \
-    --disable-libgomp                            \
-    --disable-libssp                             \
-    --disable-libatomic                          \
-    --disable-libquadmath                        \
-    --disable-threads                            \
-    --disable-libitm                             \
-    --disable-libsanitizer                       \
-    --disable-libstdcxx                          \
-    --disable-libvtv                             \
-    --enable-languages=c                         \
-    --enable-clocale=generic                     \
-    --disable-multilib                           \
+CFLAGS="-pipe -g0 -O0" CXXFLAGS="-pipe -g0 -O0" ../configure \
+    --prefix=/clang0-tools                                   \
+    --build=${HEIWA_HOST}                                    \
+    --host=${HEIWA_HOST}                                     \
+    --target=${HEIWA_TARGET}                                 \
+    --with-sysroot=/clang0-tools/${HEIWA_TARGET}             \
+    --disable-nls                                            \
+    --disable-shared                                         \
+    --without-headers                                        \
+    --with-newlib                                            \
+    --disable-decimal-float                                  \
+    --disable-libgomp                                        \
+    --disable-libssp                                         \
+    --disable-libatomic                                      \
+    --disable-libquadmath                                    \
+    --disable-threads                                        \
+    --disable-libitm                                         \
+    --disable-libsanitizer                                   \
+    --disable-libstdcxx                                      \
+    --disable-libvtv                                         \
+    --enable-languages=c                                     \
+    --enable-clocale=generic                                 \
+    --disable-multilib                                       \
     --with-arch=${HEIWA_CPU}
 
 # Build only the minimum.
@@ -123,10 +123,10 @@ time { make install-gcc install-target-libgcc; }
 > **Required!** As mentioned in the description above.
 ```bash
 # Configure source.
-./configure \
-    CROSS_COMPILE=${HEIWA_TARGET}- \
-    --prefix=/                     \
-    --target=${HEIWA_TARGET}       \
+CFLAGS="-pipe" CXXFLAGS="-pipe" ../configure \
+    CROSS_COMPILE=${HEIWA_TARGET}-           \
+    --prefix=/                               \
+    --target=${HEIWA_TARGET}                 \
     --enable-optimize=speed
 
 # Build.
@@ -177,24 +177,24 @@ esac
 
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build
-LDFLAGS="-Wl,-rpath,/clang0-tools/lib"   \
-CFLAGS="-g0" CXXFLAGS="-g0" ../configure \
-    --prefix=/clang0-tools        \
-    --build=${HEIWA_HOST}         \
-    --host=${HEIWA_HOST}          \
-    --target=${HEIWA_TARGET}      \
-    --with-sysroot=/clang0-tools  \
-    --disable-nls                 \
-    --enable-languages=c,c++      \
-    --enable-clocale=generic      \
-    --enable-libstdcxx-time       \
-    --enable-threads=posix        \
-    --enable-fully-dynamic-string \
-    --enable-shared               \
-    --disable-multilib            \
-    --disable-libsanitizer        \
-    --disable-symvers             \
-    --disable-lto-plugin          \
+LDFLAGS="-Wl,-rpath,/clang0-tools/lib"               \
+CFLAGS="-pipe -g0" CXXFLAGS="-pipe -g0" ../configure \
+    --prefix=/clang0-tools                           \
+    --build=${HEIWA_HOST}                            \
+    --host=${HEIWA_HOST}                             \
+    --target=${HEIWA_TARGET}                         \
+    --with-sysroot=/clang0-tools                     \
+    --disable-nls                                    \
+    --enable-languages=c,c++                         \
+    --enable-clocale=generic                         \
+    --enable-libstdcxx-time                          \
+    --enable-threads=posix                           \
+    --enable-fully-dynamic-string                    \
+    --enable-shared                                  \
+    --disable-multilib                               \
+    --disable-libsanitizer                           \
+    --disable-symvers                                \
+    --disable-lto-plugin                             \
     --disable-libssp
 
 # Build.
@@ -232,7 +232,7 @@ readelf -l a.out | grep "Requesting"
 > **Required!** To build Stage-0 Clang/LLVM.
 ```bash
 # Build.
-time { make CC=${HEIWA_TARGET}-gcc CFLAGS="-fPIC" all-dynamic; }
+time { make CC=${HEIWA_TARGET}-gcc CFLAGS="-pipe -fPIC" all-dynamic; }
 
 # Install.
 time { make PREFIX=/clang0-tools install-dynamic; }
@@ -245,7 +245,7 @@ time { make PREFIX=/clang0-tools install-dynamic; }
 > **Required!** To build Stage-0 Clang/LLVM, since using musl libc.
 ```bash
 # Build.
-time { make CC=${HEIWA_TARGET}-gcc AR=${HEIWA_TARGET}-ar; }
+time { make CC=${HEIWA_TARGET}-gcc AR=${HEIWA_TARGET}-ar CFLAGS="-pipe"; }
 
 # Install.
 time { make PREFIX=/clang0-tools install; }
@@ -289,8 +289,8 @@ cmake -B build \
     -DCMAKE_INSTALL_PREFIX="/clang0-tools"                                                  \
     -DCMAKE_C_COMPILER="${HEIWA_TARGET}-gcc"                                                \
     -DCMAKE_CXX_COMPILER="${HEIWA_TARGET}-g++"                                              \
-    -DCMAKE_C_FLAGS="-g0"                                                                   \
-    -DCMAKE_CXX_FLAGS="-g0"                                                                 \
+    -DCMAKE_C_FLAGS="-pipe -g0"                                                             \
+    -DCMAKE_CXX_FLAGS="-pipe -g0"                                                           \
     -DCMAKE_EXE_LINKER_FLAGS="-Wl,-dynamic-linker /clang0-tools/lib/ld-musl-x86_64.so.1"    \
     -DCMAKE_SHARED_LINKER_FLAGS="-Wl,-dynamic-linker /clang0-tools/lib/ld-musl-x86_64.so.1" \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$TARGET_TRUPLE"                                           \
