@@ -292,6 +292,8 @@ cmake -B build \
     -DCMAKE_BUILD_TYPE=Release -Wno-dev                         \
     -DCMAKE_INSTALL_PREFIX="/clang1-tools"                      \
     -DCMAKE_INSTALL_OLDINCLUDEDIR="/clang1-tools/include"       \
+    -DCMAKE_C_FLAGS="-Oz -pipe -g0"                             \
+    -DCMAKE_CXX_FLAGS="-Oz -pipe -g0"                           \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$TARGET_TRUPLE"               \
     -DLLVM_HOST_TRIPLE="$TARGET_TRUPLE"                         \
     -DLLVM_TARGETS_TO_BUILD="X86"                               \
