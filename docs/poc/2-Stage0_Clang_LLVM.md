@@ -14,6 +14,7 @@ The purpose of this stage is to build a temporary Clang/LLVM toolchain with GCC 
 > ```
 
 > #### Build Notes
+> 0. Using GCC and Binutils as compiler.
 > 1. Using GNU `bash` as current shell and symlink it to `sh`.
 > 2. Using GNU `gawk` as `awk` implementation (symlinked).
 > 3. Using GNU `bison` as `yacc` replacements (wrapped).
