@@ -472,7 +472,7 @@ time { make; }
 ./toybox | wc -w
 
 # Install.
-time { make PREFIX=/clang1-tools install ; unset X CFFGPT; }
+time { make PREFIX=/clang1-tools install; unset X CFFGPT; }
 ```
 
 ### `12` - GNU Diffutils
@@ -691,7 +691,7 @@ NOCONFIGURE=1 ./autogen.sh
 time { make; }
 
 # Install and unset linker flags.
-time { make install ; unset LDFLAGS; }
+time { make install; unset LDFLAGS; }
 ```
 
 ### `22` - Cmake
