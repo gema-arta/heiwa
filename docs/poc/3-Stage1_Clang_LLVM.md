@@ -12,14 +12,9 @@
 > heiwa@localh3art /media/Heiwa/sources/pkgs $ rm -rf target-package
 > ```
 
-### `1` - musl
-> #### `1.2.2` or newer
-> The musl package contains the main C library. This library provides the basic routines for allocating memory, searching directories, opening and closing files, reading and writing files, string handling, pattern matching, arithmetic, and so on.
-
-> **Required!** As mentioned in the description above.
+### `0` - Setting Up Clang/LLVM Environment Variables
+> Apply toolchain persistent environment variables, but currently don't set the compiler to the new triplet. Mean to use libc from Stage-0 Clang/LLVM firstly, in case to build musl libc in this stage.
 ```bash
-# Apply toolchain persistent environment variables,
-# but currently don't set the compiler to the new triplet (use libc from Stage-0).
 cat >> ~/.bashrc << "EOF"
 # Stage-1 Clang/LLVM environment.
 CC="clang"
@@ -37,29 +32,35 @@ STRIP="llvm-strip"
 export CC CXX AR AS LD NM OBJCOPY OBJDUMP RANLIB READELF SIZE STRIP
 EOF
 source ~/.bashrc
+```
 
+### `1` - musl
+> #### `1.2.2` or newer
+> The musl package contains the main C library. This library provides the basic routines for allocating memory, searching directories, opening and closing files, reading and writing files, string handling, pattern matching, arithmetic, and so on.
+
+> **Required!** As mentioned in the description above.
+```bash
 # Configure source.
 ./configure --prefix=/ --enable-optimize=speed
 
 # Build.
 time { make; }
 
-# Install.
-time { make DESTDIR=/clang1-tools install; }
-
-# Fix a wrong shared object symlink.
-ln -sfv libc.so /clang1-tools/lib/ld-musl-x86_64.so.1
-
-# Create a `ldd` symlink to use to print shared object dependencies.
-mkdir -v /clang1-tools/bin && \
-ln -sv ../lib/libc.so /clang1-tools/bin/ldd
+# Install and fix a wrong shared object symlink, also create a `ldd` symlink to use to print shared object dependencies.
+time {
+    make DESTDIR=/clang1-tools install
+    ln -sfv libc.so /clang1-tools/lib/ld-musl-x86_64.so.1
+    mkdir -v /clang1-tools/bin && \
+    ln -sv ../lib/libc.so /clang1-tools/bin/ldd
+}
 
 # Configure PATH for dynamic linker.
 mkdir -v /clang1-tools/etc && \
 cat > /clang1-tools/etc/ld-musl-x86_64.path << "EOF"
 /clang1-tools/lib
 EOF
-
+```
+```bash
 # Set compiler to the new triplet from Stage-0 Clang/LLVM to use current libc.
 sed -i 's|CC=.*|CC="${HEIWA_TARGET}-clang"|'     ~/.bashrc
 sed -i 's|CXX=.*|CXX="${HEIWA_TARGET}-clang++"|' ~/.bashrc
