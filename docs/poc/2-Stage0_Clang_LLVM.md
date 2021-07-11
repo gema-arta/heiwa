@@ -1,5 +1,5 @@
 ## `II` Stage-0 Clang/LLVM (ft. GNU) Cross-Toolchain
-The purpose of this stage is to build a temporary Clang/LLVM toolchain with GCC libraries which will be used to build Clang/LLVM without relying on GCC because if it build directly using host's GCC and Binutils it will fail or break. -[LLVM reference](https://clang.llvm.org/docs/Toolchain.html) -[CLFS](http://clfs.org/view/clfs-embedded/x86/)
+The purpose of this stage is to build a temporary Clang/LLVM toolchain with GCC libraries which will be used to build Clang/LLVM without relying on GCC because if it build directly using host's GCC and Binutils it will fail or break. **-**[LLVM reference](https://clang.llvm.org/docs/Toolchain.html) **-**[CLFS](http://clfs.org/view/clfs-embedded/x86/)
 
 > #### Compilation Instruction!
 > ```bash
@@ -135,17 +135,13 @@ time { make install-gcc install-target-libgcc; }
 # Build.
 time { make; }
 
-# Install.
-time { make DESTDIR=/clang0-tools install; }
-
-# GCC will looking for system headers in "/clang0-tools/usr/include/*".
-# Create the directory, then symlink it.
-mkdir -v /clang0-tools/usr && \
-ln -sv ../include /clang0-tools/usr/include
-
-# Fix a wrong shared object symlink.
-ln -sfv libc.so /clang0-tools/lib/ld-musl-x86_64.so.1
-
+# Install and fix a wrong shared object symlink.
+time {
+    make DESTDIR=/clang0-tools install
+    ln -sfv libc.so /clang0-tools/lib/ld-musl-x86_64.so.1
+}
+```
+```bash
 # Create a `ldd` symlink to use to print shared object dependencies.
 ln -sv ../lib/libc.so /clang0-tools/bin/ldd
 
@@ -157,6 +153,11 @@ cat > /clang0-tools/etc/ld-musl-x86_64.path << EOF
 /usr/lib
 /lib
 EOF
+
+# GCC will looking for system headers in "/clang0-tools/usr/include/*".
+# Create the directory, then symlink it.
+mkdir -v /clang0-tools/usr && \
+ln -sv ../include /clang0-tools/usr/include
 ```
 
 ### `5` - GCC <kbd>final</kbd>
@@ -175,8 +176,7 @@ tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc-1.2.1 mpc
 
 # On x86_64 hosts, set the default directory name for 64-bit libraries to "lib".
 case $(uname -m) in
-    x86_64) sed -e '/m64=/s/lib64/lib/' \
-            -i.orig gcc/config/i386/t-linux64
+    x86_64) sed -e '/m64=/s/lib64/lib/' -i.orig gcc/config/i386/t-linux64
     ;;
 esac
 
@@ -203,14 +203,12 @@ CFLAGS="-g0" CXXFLAGS="-g0" ../configure \
     --disable-libssp
 
 # Build.
-time {
-    make AS_FOR_TARGET=${HEIWA_TARGET}-as \
-    LD_FOR_TARGET=${HEIWA_TARGET}-ld
-}
+time { make AS_FOR_TARGET=${HEIWA_TARGET}-as LD_FOR_TARGET=${HEIWA_TARGET}-ld; }
 
 # Install.
 time { make install; }
-
+```
+```bash
 # Adjust current GCC to produce binaries with "/clang0-tools/lib/ld-musl-x86_64.so.1".
 export SPECFILE="$(dirname $(${HEIWA_TARGET}-gcc -print-libgcc-file-name))/specs"
 ${HEIWA_TARGET}-gcc -dumpspecs > specs
@@ -266,7 +264,8 @@ time { make PREFIX=/clang0-tools install; }
 ```bash
 # Exit from the LLVM source directory if already entered after decompressing.
 popd
-
+```
+```bash
 # Rename the LLVM source directory to "$LLVM_SRC", then enter.
 mv -fv llvm-12.0.1.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 
@@ -339,7 +338,8 @@ time {
         cmake -DCMAKE_INSTALL_PREFIX="/clang0-tools" -P cmake_install.cmake && \
     popd && rm -rf build
 }
-
+```
+```bash
 # Configure Stage-0 Clang with new triplet to produce binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" later.
 ln -sv clang   /clang0-tools/bin/${HEIWA_TARGET}-clang
 ln -sv clang++ /clang0-tools/bin/${HEIWA_TARGET}-clang++
@@ -350,8 +350,6 @@ EOF
 # Back to "${HEIWA}/sources/pkgs" directory.
 popd
 ```
-> #### ^ Read Me Here!
-> Don't delete the `$LLVM_SRC` directory after [the last step](#8----clangllvm).
 
 ### `9` - Cleaning Up
 > #### This section is optional!
