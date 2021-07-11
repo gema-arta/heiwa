@@ -276,6 +276,10 @@ popd
 # Apply patches (from Void Linux).
 ../extra/llvm/patches/appatch
 
+# Disable sanitizers for musl, fixing "early build failure".
+sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
+projects/compiler-rt/cmake/config-ix.cmake
+
 # Some sanitizer currently only on x86_64 stuff needs backtrace.
 sed -i 's|# Set common link flags.|list(APPEND SANITIZER_COMMON_LINK_LIBS execinfo)|' \
 ${LLVM_SRC}/projects/compiler-rt/CMakeLists.txt
