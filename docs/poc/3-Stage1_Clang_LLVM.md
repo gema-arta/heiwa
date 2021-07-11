@@ -1,4 +1,5 @@
 ## `III` Stage-1 Clang/LLVM Toolchain
+The purpose of this stage is to build a pure Clang/LLVM toolchain that will be used to build the "Final System" afterwards.
 
 > #### Compilation Instruction!
 > ```bash
