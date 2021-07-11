@@ -588,29 +588,41 @@ sed -i 's|yes|no|' /etc/default/useradd
 passwd root
 ```
 
-### `19` - LLVM libunwind
-> #### `12.0.0`
-> C++ runtime stack unwinder from LLVM.
+### `19` - LLVM libunwind, libcxxabi, and libcxx
+> #### `12.x.x` or newer
+> 1. C++ runtime stack unwinder from LLVM;  
+> 2. Low level support for a standard C++ library from LLVM;  
+> 3. New implementation of the C++ standard library, targeting C++11 from LLVM.
 
-> *No need to decompress any package firstly. It will be done in this step.*
-
-> **Required!** Before `LLVM libcxxabi`.
+> **Required!** As mentioned in the description above.
 ```bash
-# Decompress the LLVM source, and rename.
-tar xf llvm-12.0.0.src.tar.xz && mv -v llvm-12.0.0.src "$LLVM_SRC"
+# Exit from the LLVM source directory if already entered after decompressing.
+popd
+```
+```bash
+# Rename the LLVM source directory to "$LLVM_SRC", then enter.
+mv -fv llvm-12.0.1.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 
-# Decompress `libunwind` to the correct directories. Requires `libcxx`.
+# Decompress `libunwind`, `libcxxabi`, and `libcxx` to the correct directories.
 pushd ${LLVM_SRC}/projects/ && \
-    tar xf ../../pkgs/libunwind-12.0.0.src.tar.xz && mv -v libunwind-12.0.0.src libunwind
-    tar xf ../../pkgs/libcxx-12.0.0.src.tar.xz    && mv -v libcxx-12.0.0.src libcxx
+    tar xf ../../pkgs/libunwind-12.0.1.src.tar.xz && mv -fv libunwind-12.0.1.src libunwind
+    tar xf ../../pkgs/libcxxabi-12.0.1.src.tar.xz && mv -fv libcxxabi-12.0.1.src libcxxabi
+    tar xf ../../pkgs/libcxx-12.0.1.src.tar.xz    && mv -fv libcxx-12.0.1.src libcxx
 popd
 
-# Configure source.
+# Apply patches (from Void Linux).
+../extra/llvm/patches/appatch L_LLVM
+
+# Update config.guess for better platform detection.
+cp -fv ../extra/llvm/files/config.guess cmake/.
+```
+```bash
+# Configure `libunwind` source.
 pushd ${LLVM_SRC}/projects/libunwind/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/usr"  \
-        -DCMAKE_C_FLAGS="-fPIC"        \
-        -DCMAKE_CXX_FLAGS="-fPIC"      \
+        -DCMAKE_C_FLAGS="-g0 -fPIC"    \
+        -DCMAKE_CXX_FLAGS="-g0 -fPIC"  \
         -DLIBUNWIND_ENABLE_SHARED=ON   \
         -DLIBUNWIND_USE_COMPILER_RT=ON \
         -DLLVM_PATH="$LLVM_SRC"
@@ -618,30 +630,15 @@ pushd ${LLVM_SRC}/projects/libunwind/ && \
 # Build.
 time { make -C build; }
 
-# Install and remove the `libunwind` source.
-time {
-    make -C build install && popd && \
-    rm -rf ${LLVM_SRC}/projects/libunwind
-}
+# Install.
+time { make -C build install && popd; }
 ```
-
-### `20` - LLVM libcxxabi
-> #### `12.0.0`
-> Low level support for a standard C++ library from LLVM.
-
-> *No need to decompress any package firstly. It will be done in this step.*
-
-> **Required!** Before `LLVM libcxx`.
 ```bash
-# Decompress `libcxxabi` to the correct directories.
-pushd ${LLVM_SRC}/projects/ && \
-    tar xf ../../pkgs/libcxxabi-12.0.0.src.tar.xz && mv -v libcxxabi-12.0.0.src libcxxabi
-popd
-
-# Configure source.
+# Configure `libcxxabi` source.
 pushd ${LLVM_SRC}/projects/libcxxabi/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/usr"                                     \
+        -DCMAKE_CXX_FLAGS="-g0"                                           \
         -DLIBCXXABI_ENABLE_STATIC=ON                                      \
         -DLIBCXXABI_USE_COMPILER_RT=ON                                    \
         -DLIBCXXABI_USE_LLVM_UNWINDER=ON                                  \
@@ -652,25 +649,18 @@ pushd ${LLVM_SRC}/projects/libcxxabi/ && \
 # Build.
 time { make -C build; }
 
-# Install. But don't remove the `libcxxabi` source, `libcxx` requires it.
+# Install.
 time {
     make -C build install            && \
     cp -v include/*.h /usr/include/. && popd
 }
 ```
-
-### `21` - LLVM libcxx
-> #### `12.0.0`
-> New implementation of the C++ standard library, targeting C++11 from LLVM.
-
-> *No need to decompress any package firstly. It will be done in this step.*
-
-> **Required!** Before `Clang/LLVM`.
 ```bash
-# Configure source.
+# Configure `libcxx` source.
 pushd ${LLVM_SRC}/projects/libcxx/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/usr"                 \
+        -DCMAKE_CXX_FLAGS="-g0"                       \
         -DLIBCXX_ENABLE_SHARED=ON                     \
         -DLIBCXX_ENABLE_STATIC=ON                     \
         -DLIBCXX_HAS_MUSL_LIBC=ON                     \
@@ -685,11 +675,12 @@ pushd ${LLVM_SRC}/projects/libcxx/ && \
 # Build.
 time { make -C build; }
 
-# Install and remove the `libcxx` also `libcxxabi` source.
-time {
-    make -C build install && popd && \
-    rm -rf ${LLVM_SRC}/projects/libcxx{,abi}
-}
+# Install.
+time { make -C build install && popd; }
+```
+```bash
+# Back to "${HEIWA}/sources/pkgs" directory.
+popd
 ```
 
 ### `22` - libexecinfo
