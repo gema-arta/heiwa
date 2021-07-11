@@ -113,9 +113,9 @@ cp -rfv usr/include /clang1-tools/.
 
 ### `3` - LLVM libunwind, libcxxabi, and libcxx
 > #### `12.x.x` or newer
-> C++ runtime stack unwinder from LLVM.  
-> Low level support for a standard C++ library from LLVM.  
-> New implementation of the C++ standard library, targeting C++11 from LLVM.
+> 1. C++ runtime stack unwinder from LLVM;  
+> 2. Low level support for a standard C++ library from LLVM;  
+> 3. New implementation of the C++ standard library, targeting C++11 from LLVM.
 
 > **Required!** As mentioned in the description above.
 ```bash
