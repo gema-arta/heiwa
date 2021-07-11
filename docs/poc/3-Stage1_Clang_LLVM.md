@@ -335,13 +335,14 @@ cmake -B build \
 # Build.
 time { make -C build; }
 
-# Install and remove the build directory.
+# Install.
 time {
     pushd build/ && \
         cmake -DCMAKE_INSTALL_PREFIX="/clang1-tools" -P cmake_install.cmake && \
-    popd && rm -rf build
+    popd
 }
-
+```
+```bash
 # Configure Stage-1 Clang with default triplet (pc) to produce binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1".
 ln -sv clang   /clang1-tools/bin/${TARGET_TRUPLE}-clang
 ln -sv clang++ /clang1-tools/bin/${TARGET_TRUPLE}-clang++
@@ -356,7 +357,8 @@ sed -i '/unset CFLAGS CXXFLAGS/d'                     ~/.bashrc
 sed -i 's|CC=.*|CC="${TARGET_TRUPLE}-clang"|'         ~/.bashrc
 sed -i 's|CXX=.*|CXX="${TARGET_TRUPLE}-clang++"|'     ~/.bashrc
 source ~/.bash_profile
-
+```
+```bash
 # Back to "${HEIWA}/sources/pkgs" directory.
 cd ${HEIWA}/sources/pkgs/
 ```
