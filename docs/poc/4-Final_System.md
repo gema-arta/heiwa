@@ -1079,10 +1079,10 @@ time {
 > **Required!** Before `Eudev`.
 ```bash
 # Configure source.
-./configure --prefix=/usr          \
-            --bindir=/bin          \
-            --sysconfdir=/etc      \
-            --with-xz --with-zstd  \
+./configure --prefix=/usr         \
+            --bindir=/bin         \
+            --sysconfdir=/etc     \
+            --with-xz --with-zstd \
             --with-zlib --with-openssl
 
 # Build.
