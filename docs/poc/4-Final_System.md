@@ -169,8 +169,6 @@ EOF
 source ~/.bash_profile
 ```
 
-<br>
-
 > #### Compilation Instruction!
 > ```bash
 > (heiwa chroot) root: /sources/pkgs # tar xf target-package.tar.xz
