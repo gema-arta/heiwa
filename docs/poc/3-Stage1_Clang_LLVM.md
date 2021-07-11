@@ -86,7 +86,7 @@ grep "ld.lld:.*crt[1in].o" dummy.log
 ```
 
 ### `2` - Linux API Headers
-> #### Xanmod-CacULE, `5.13.x` or newer
+> #### `5.13.x` (CacULE) or newer
 > The Linux API Headers expose the kernel's API for use by musl libc.
 
 > **Required!** As mentioned in the description above.
@@ -101,16 +101,17 @@ time {
     make ARCH=${HEIWA_ARCH} LLVM=1 HOSTCC=${CC} headers
 }
 
-# @owl4ce don't know,
-# why when HOSTCC is default in "LLVM=1" and/or using `clang` is failed to compile "scripts/basic/fixdep.c",
-# but successful using `${TARGET_TRIPLET}-compiler`.
-
 # Remove unnecessary files.
 find usr/include -name '.*' -exec rm -rfv {} \;
 rm -fv usr/include/Makefile
 
 # Install.
 cp -rfv usr/include /clang1-tools/.
+```
+```bash
+# @owl4ce don't know,
+# why when HOSTCC is default in "LLVM=1" and/or using `clang` is failed to compile "scripts/basic/fixdep.c",
+# but successful using `${TARGET_TRIPLET}-compiler`.
 ```
 
 ### `3` - LLVM libunwind
