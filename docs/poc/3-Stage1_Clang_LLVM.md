@@ -111,15 +111,30 @@ cp -rfv usr/include /clang1-tools/.
 # but successful using `${TARGET_TRIPLET}-compiler`.
 ```
 
-### `3` - LLVM libunwind
+### `3` - LLVM libunwind, libcxxabi, and libcxx
 > #### `12.x.x` or newer
-> C++ runtime stack unwinder from LLVM.
-
-> *No need to re-decompress package.*
+> C++ runtime stack unwinder from LLVM.  
+> Low level support for a standard C++ library from LLVM.  
+> New implementation of the C++ standard library, targeting C++11 from LLVM.
 
 > **Required!** As mentioned in the description above.
 ```bash
-# Configure source.
+# Exit from the LLVM source directory if already entered after decompressing.
+popd
+```
+```bash
+# Rename the LLVM source directory to "$LLVM_SRC", then enter.
+mv -fv llvm-12.0.1.src "$LLVM_SRC" && pushd "$LLVM_SRC"
+
+# Decompress `libunwind`, `libcxxabi`, and `libcxx` to the correct directories.
+pushd ${LLVM_SRC}/projects/ && \
+    tar xf ../../pkgs/libunwind-12.0.1.src.tar.xz && mv -fv libunwind-12.0.1.src libunwind
+    tar xf ../../pkgs/libcxxabi-12.0.1.src.tar.xz && mv -fv libcxxabi-12.0.1.src libcxxabi
+    tar xf ../../pkgs/libcxx-12.0.1.src.tar.xz && mv -fv libcxx-12.0.1.src libcxx
+popd
+```
+```bash
+# Configure `libunwind` source.
 pushd ${LLVM_SRC}/projects/libunwind/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools" \
@@ -135,16 +150,8 @@ time { make -C build; }
 # Install.
 time { make -C build install && popd; }
 ```
-
-### `4` - LLVM libcxxabi
-> #### `12.x.x` or newer
-> Low level support for a standard C++ library from LLVM.
-
-> *No need to re-decompress package.*
-
-> **Required!** As mentioned in the description above.
 ```bash
-# Configure source.
+# Configure `libcxxabi` source.
 pushd ${LLVM_SRC}/projects/libcxxabi/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools"                            \
@@ -164,20 +171,12 @@ time {
     cp -fv include/*.h /clang1-tools/include/. && popd
 }
 ```
-
-### `5` - LLVM libcxx
-> #### `12.x.x` or newer
-> New implementation of the C++ standard library, targeting C++11 from LLVM.
-
-> *No need to re-decompress package.*
-
-> **Required!** As mentioned in the description above.
 ```bash
 # Deletes atomic detection for Linux to build `libcxx` with "libatomic.so*" free (which is provided by GCC).
 sed -i '/check_library_exists(atomic __atomic_fetch_add_8 "" LIBCXX_HAS_ATOMIC_LIB)/d' \
 ${LLVM_SRC}/projects/libcxx/cmake/config-ix.cmake
 
-# Configure source.
+# Configure `libcxx` source.
 pushd ${LLVM_SRC}/projects/libcxx/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools"                 \
@@ -199,8 +198,6 @@ time { make -C build; }
 # Install and remove the build directory.
 time { make -C build install && popd; }
 ```
-> #### ^ Read Me Here!
-> Now, you can safely remove the `$LLVM_SRC` directory after the [above step](#5---llvm-libcxx).
 
 ### `6` - NetBSD Curses
 > #### `0.3.2` or newer
