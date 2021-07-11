@@ -166,7 +166,7 @@ time { make -C build install && popd; }
 pushd ${LLVM_SRC}/projects/libcxxabi/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools"                            \
-        -DCMAKE_CXX_FLAGS="-0z -pipe -g0 -fPIC"                           \
+        -DCMAKE_CXX_FLAGS="-0z -pipe -g0"                                 \
         -DLIBCXXABI_ENABLE_STATIC=ON                                      \
         -DLIBCXXABI_USE_COMPILER_RT=ON                                    \
         -DLIBCXXABI_USE_LLVM_UNWINDER=ON                                  \
