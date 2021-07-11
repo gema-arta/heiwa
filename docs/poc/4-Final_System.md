@@ -401,7 +401,7 @@ time { make CFLAGS="$CFLAGS -fPIC"; }
 
 # Install and create symlinks as `libtinfo` libraries (which actually replace GNU Ncurses).
 time {
-    make PREFIX=/usr install && \
+    make PREFIX=/usr install
     ln -sv libterminfo.a  /usr/lib/libtinfo.a
     ln -sv libterminfo.so /usr/lib/libtinfo.so
 }
@@ -887,16 +887,16 @@ time { make LIBINTL=MUSL prefix=/usr install; }
 > **Required!** Before `Kmod` and `Kbd`.
 ```bash
 # Configure source.
-./configure \
-    --prefix=/usr --enable-yacc \
-    --mandir=/usr/share/man/man1
+./configure --prefix=/usr \
+            --enable-yacc \
+            --mandir=/usr/share/man/man1
 
 # Build.
 time { make; }
 
 # Install and create symlink as `byacc`.
 time {
-    make BINDIR=/usr/bin install && \
+    make BINDIR=/usr/bin install
     ln -sv yacc /usr/bin/byacc
 }
 ```
@@ -923,17 +923,14 @@ time { make CFLAGS="$CFLAGS -fPIC"; }
 
 # Install (also shared libraries) and fix the symlinks.
 time {
-    make PREFIX=/usr install                && \
-    ln -sv libbz2.so.1.0 libbz2.so          && \
-    install -vm755 -t /usr/lib/ libbz2.so*  && \
-    cp -fv bzip2-shared bzip2               && \
-    ln -sv bzip2 bunzip2                    && \
-    ln -sv bzip2 bzcat                      && \
+    make PREFIX=/usr install
+    ln -sv libbz2.so.1.0 libbz2.so
+    install -vm755 -t /usr/lib/ libbz2.so*
+    cp -fv bzip2-shared bzip2
+    ln -sv bzip2        bunzip2
+    ln -sv bzip2        bzcat
     install -vm755 -t /usr/bin/ b{un,}zip2 bzcat
 }
-
-# Remove an useless static library.
-rm -fv /usr/lib/libbz2.a
 ```
 
 ### `25` - Perl
@@ -969,7 +966,7 @@ patch -Np1 -i ../../extra/perl/patches/musl-stack-size.patch
 time { make; }
 
 # Install and unset Perl specifics exported variables.
-time { make install && unset BUILD_ZLIB BUILD_BZIP2; }
+time { make install; unset BUILD_ZLIB BUILD_BZIP2; }
 ```
 
 ### `26` - OpenSSL
@@ -1038,7 +1035,7 @@ time { make; }
 ./toybox | wc -w
 
 # Install.
-time { make PREFIX=/ install && unset CFFGPT; }
+time { make PREFIX=/ install; unset CFFGPT; }
 ```
 
 ### `28` -  Xz
