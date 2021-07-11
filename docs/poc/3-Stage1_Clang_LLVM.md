@@ -139,7 +139,24 @@ time { make CFLAGS="-Oz -pipe"; }
 time { make PREFIX=/clang1-tools install; }
 ```
 
-### `5` - LLVM libunwind, libcxxabi, and libcxx
+### `5` - Zlib-ng
+> #### `2.0.5` or newer
+> The Zlib-ng package contains zlib data compression library for the next generation systems.
+
+> **Required!** By Pigz in the current stage and optionally enabled to build Stage-1 Clang/LLVM.
+```bash
+# Configure source.
+CFLAGS="-Oz -pipe" ./configure \
+--prefix=/clang1-tools --zlib-compat --native
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `6` - LLVM libunwind, libcxxabi, and libcxx
 > #### `12.x.x` or newer
 > 1. C++ runtime stack unwinder from LLVM;  
 > 2. Low level support for a standard C++ library from LLVM;  
@@ -236,23 +253,6 @@ time { make -C build install && popd; }
 ```bash
 # Back to "${HEIWA}/sources/pkgs" directory.
 popd
-```
-
-### `6` - Zlib-ng
-> #### `2.0.5` or newer
-> The Zlib-ng package contains zlib data compression library for the next generation systems.
-
-> **Required!** By Pigz in the current stage and optionally enabled to build Stage-1 Clang/LLVM.
-```bash
-# Configure source.
-CFLAGS="-Oz -pipe" ./configure \
---prefix=/clang1-tools --zlib-compat --native
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
 ```
 
 ### `7` - Clang/LLVM
