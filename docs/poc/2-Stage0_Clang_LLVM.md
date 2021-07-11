@@ -280,7 +280,7 @@ popd
 sed -i 's|# Set common link flags.|list(APPEND SANITIZER_COMMON_LINK_LIBS execinfo)|' \
 ${LLVM_SRC}/projects/compiler-rt/CMakeLists.txt
 
-# Update host/target triplet detection.
+# Update config.guess for better platform detection.
 cp -fv ../extra/llvm/files/config.guess cmake/.
 
 # Configure source.
