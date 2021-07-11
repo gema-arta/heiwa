@@ -278,7 +278,7 @@ popd
 ```
 ```bash
 # Apply patches (from Void Linux).
-../extra/llvm/patches/appatch
+../extra/llvm/patches/appatch C_LLVM
 
 # Disable sanitizers for musl, it's broken since it duplicates some libc bits.
 sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
