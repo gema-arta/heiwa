@@ -1,4 +1,5 @@
 ## `II` Stage-0 Clang/LLVM (ft. GNU) Cross-Toolchain
+The purpose of this stage is to build a temporary Clang/LLVM toolchain with GCC libraries which will be used to build Clang/LLVM without relying on GCC because if it build directly using host's GCC and Binutils it will fail or break.
 
 > #### Compilation Instruction!
 > ```bash
