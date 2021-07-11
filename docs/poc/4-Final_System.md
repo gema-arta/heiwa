@@ -679,7 +679,7 @@ time { make -C build; }
 time { make -C build install && popd; }
 ```
 ```bash
-# Back to "${HEIWA}/sources/pkgs" directory.
+# Back to "/sources/pkgs" directory.
 popd
 ```
 
