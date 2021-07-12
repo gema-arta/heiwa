@@ -307,7 +307,7 @@ cmake -B build \
     -DLLVM_ENABLE_BINDINGS=OFF                                                              \
     -DLLVM_ENABLE_IDE=OFF                                                                   \
     -DLLVM_ENABLE_LIBCXX=ON                                                                 \
-    -DLLVM_ENABLE_LLD=ON                                                                    \
+    -DLLVM_ENABLE_LLD=OFF                                                                   \
     -DLLVM_ENABLE_UNWIND_TABLES=OFF                                                         \
     -DLLVM_ENABLE_LIBEDIT=OFF                                                               \
     -DLLVM_ENABLE_LIBXML2=OFF                                                               \
