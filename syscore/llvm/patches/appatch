@@ -20,7 +20,8 @@ pushd ${LLVM_SRC}/tools/ && \
         clang-004-ppc64-musl-elfv2.patch
     do patch -Np1 -i ../../extra/llvm/patches/${P}
     done; unset P
-    cp -rfv ../../projects/libunwind/include lld/.
+    [ -d ../projects/libunwind/include ] && \
+    cp -rfv ../projects/libunwind/include lld/.
 popd
 
 pushd ${LLVM_SRC}/../ && \
