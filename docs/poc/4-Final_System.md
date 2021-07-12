@@ -760,7 +760,7 @@ cmake -B build \
     -DCLANG_DEFAULT_CXX_STDLIB=libc++                          \
     -DCLANG_DEFAULT_UNWINDLIB=libunwind                        \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                          \
-    -DCLANG_DEFAULT_LINKER=ld.lld                              \
+    -DCLANG_DEFAULT_LINKER=lld                                 \
     -DDEFAULT_SYSROOT="/usr"                                   \
     -DBacktrace_INCLUDE_DIR="/usr/include"                     \
     -DBacktrace_LIBRARY="/usr/lib/libexecinfo.so"              \
