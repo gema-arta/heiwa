@@ -258,7 +258,7 @@ time { make PREFIX=/clang0-tools install; }
 > #### `12.x.x` or newer
 > C language family frontend for LLVM.
 
-> **Required!** Build Stage-0 Clang/LLVM toolchain with `libgcc_s.so*` and `libstdc++.so*` dependencies (provided by GCC).
+> **Required!** Build Stage-0 Clang/LLVM toolchain with `libgcc_s.so*` and `libstdc++.so*` dependencies since compiled with GCC.
 ```bash
 # Exit from the LLVM source directory if already entered after decompressing.
 popd
@@ -267,9 +267,12 @@ popd
 # Rename the LLVM source directory to "$LLVM_SRC", then enter.
 mv -fv llvm-12.0.1.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 
-# Decompress `clang`, `lld`, and `compiler-rt` to the correct directories.
+# Decompress `clang`, `lld`, `compiler-rt`, `libunwind`, `libcxxabi`, and `libcxx` to the correct directories.
 pushd ${LLVM_SRC}/projects/ && \
     tar xf ../../pkgs/compiler-rt-12.0.1.src.tar.xz && mv -fv compiler-rt-12.0.1.src compiler-rt
+    tar xf ../../pkgs/libunwind-12.0.1.src.tar.xz   && mv -fv libunwind-12.0.1.src libunwind
+    tar xf ../../pkgs/libcxxabi-12.0.1.src.tar.xz   && mv -fv libcxxabi-12.0.1.src libcxxabi
+    tar xf ../../pkgs/libcxx-12.0.1.src.tar.xz      && mv -fv libcxx-12.0.1.src libcxx
 popd
 pushd ${LLVM_SRC}/tools/ && \
     tar xf ../../pkgs/clang-12.0.1.src.tar.xz && mv -fv clang-12.0.1.src clang
@@ -277,7 +280,7 @@ pushd ${LLVM_SRC}/tools/ && \
 popd
 
 # Apply patches (from Void Linux).
-../extra/llvm/patches/appatch C_LLVM
+../extra/llvm/patches/appatch
 
 # Disable sanitizers for musl, it's broken since it duplicates some libc bits.
 sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
@@ -304,8 +307,8 @@ cmake -B build \
     -DLLVM_BUILD_TESTS=OFF                                                                  \
     -DLLVM_ENABLE_LIBEDIT=OFF                                                               \
     -DLLVM_ENABLE_LIBXML2=OFF                                                               \
-    -DLLVM_ENABLE_LIBCXX=OFF                                                                \
-    -DLLVM_ENABLE_LLD=OFF                                                                   \
+    -DLLVM_ENABLE_LIBCXX=ON                                                                 \
+    -DLLVM_ENABLE_LLD=ON                                                                    \
     -DLLVM_ENABLE_RTTI=OFF                                                                  \
     -DLLVM_ENABLE_ZLIB=OFF                                                                  \
     -DLLVM_INCLUDE_GO_TESTS=OFF                                                             \
@@ -319,10 +322,10 @@ cmake -B build \
     -DCOMPILER_RT_BUILD_LIBFUZZER=OFF                                                       \
     -DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON                                                   \
     -DCOMPILER_RT_DEFAULT_TARGET_TRIPLE="$TARGET_TRUPLE"                                    \
-    -DCLANG_DEFAULT_CXX_STDLIB=libstdc++                                                    \
-    -DCLANG_DEFAULT_UNWINDLIB=libgcc                                                        \
+    -DCLANG_DEFAULT_CXX_STDLIB=libc++                                                       \
+    -DCLANG_DEFAULT_UNWINDLIB=libunwind                                                     \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                                                       \
-    -DCLANG_DEFAULT_LINKER=lld                                                              \
+    -DCLANG_DEFAULT_LINKER="/clang0-tools/bin/ld.lld"                                       \
     -DDEFAULT_SYSROOT="/clang0-tools"                                                       \
     -DBacktrace_INCLUDE_DIR="/clang0-tools/include"                                         \
     -DBacktrace_LIBRARY="/clang0-tools/lib/libexecinfo.so"                                  \
@@ -374,4 +377,4 @@ find /clang0-tools/{,${HEIWA_TARGET}/}bin/ -maxdepth 1 -type f -exec /usr/bin/st
 
 <h2></h2>
 
-Continue to [Stage-1 Clang/LLVM Toolchain](./3-Stage1_Clang_LLVM.md).
+~Continue to [Stage-1 Clang/LLVM Toolchain](./3-Stage1_Clang_LLVM.md).~ (under developments)
