@@ -163,7 +163,7 @@ time { make install; }
 > - Low level support for a standard C++ library from LLVM;  
 > - New implementation of the C++ standard library, targeting C++11 from LLVM.
 
-> **Required!** Build Stage-1 Clang/LLVM self-hosted toolchain with GCC libraries free since compiled Clang/LLVM itself (from Stage-0).
+> **Required!** Build Stage-1 Clang/LLVM self-hosted toolchain with GCC libraries-free since compiled with Stage-0 Clang/LLVM itself.
 ```bash
 # Exit from the LLVM source directory if already entered after decompressing.
 popd
