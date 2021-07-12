@@ -10,6 +10,13 @@ pushd ${LLVM_SRC}/projects/ && \
         ppc32-compiler-rt.patch
     do patch -Np1 -i ../../extra/llvm/patches/${P}
     done; unset P
+    patch -Np1 -i ../../extra/llvm/patches/libunwind-ppc32.patch
+    for P in \
+        libcxx-ssp-nonshared.patch \
+        libcxx-ppc.patch \
+        libcxx-ssp-nonshared.patch
+    do patch -Np1 -i ../../extra/llvm/patches/${P}
+    done; unset P
 popd
 
 pushd ${LLVM_SRC}/tools/ && \
@@ -33,18 +40,5 @@ pushd ${LLVM_SRC}/../ && \
         llvm-005-ppc-bigpic.patch \
         llvm-006-aarch64-mf_exec.patch
     do patch -Np1 -i ./extra/llvm/patches/${P}
-    done; unset P
-popd
-
-pushd ${LLVM_SRC}/projects/libunwind/ && \
-    patch -Np1 -i ../../extra/llvm/patches/libunwind-ppc32.patch
-popd
-
-pushd ${LLVM_SRC}/projects/libcxx/ && \
-    for P in \
-        libcxx-ssp-nonshared.patch \
-        libcxx-ppc.patch \
-        libcxx-ssp-nonshared.patch
-    do patch -Np1 -i ../../extra/llvm/patches/${P}
     done; unset P
 popd
