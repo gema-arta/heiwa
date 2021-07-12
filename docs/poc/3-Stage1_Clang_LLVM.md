@@ -506,27 +506,7 @@ time { make; }
 time { make install; }
 ```
 
-### `15` - OpenBSD Yacc
-> #### `6.6` or newer
-> The OpenBSD Yacc package contains a parser generator.
-
-> **Required!** To build required packages in the next stage (chroot environment). 
-```bash
-# Configure source.
-./configure --prefix=/clang1-tools --enable-yacc \
-            --mandir=/clang1-tools/share/man/man1
-
-# Build.
-time { make; }
-
-# Install and create symlink as `byacc`.
-time {
-    make BINDIR=/clang1-tools/bin install
-    ln -sv yacc /clang1-tools/bin/byacc
-}
-```
-
-### `16` - Perl (cross)
+### `15` - Perl (cross)
 > #### `5.32.1` and `1.3.5` for cross
 > The Perl package contains the Practical Extraction and Report Language.
 
@@ -550,7 +530,7 @@ time { make; }
 time { make install; }
 ```
 
-### `17` - Pigz
+### `16` - Pigz
 > #### `2.6` or newer
 > The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
 
@@ -564,7 +544,7 @@ ln -sfv pigz unpigz; ln -sv pigz gzip; ln -sv unpigz gunzip
 install -vm755 -t /clang1-tools/bin/ pigz unpigz gzip gunzip
 ```
 
-### `18` - libffi
+### `17` - libffi
 > #### `3.3` or newer
 > The libffi library provides a portable, high level programming interface to various calling conventions. This allows a programmer to call any function specified by a call interface description at run time.
 
@@ -589,7 +569,7 @@ time { make; }
 time { make install; }
 ```
 
-### `19` - Python3
+### `18` - Python3
 > #### `3.9.6` or newer
 > The Python3 package contains the Python development environment. It is useful for object-oriented programming, writing scripts, prototyping large programs, or developing entire applications.
 
@@ -619,7 +599,7 @@ time { make; }
 time { make install; }
 ```
 
-### `20` - libuv
+### `19` - libuv
 > #### `1.41.1` or newer
 > The libuv package is a multi-platform support library with a focus on asynchronous I/O.
 
@@ -642,7 +622,7 @@ time { make; }
 time { make install; unset LDFLAGS; }
 ```
 
-### `21` - Cmake
+### `20` - Cmake
 > #### `3.20.5` or newer
 > The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
 
@@ -666,7 +646,7 @@ time { make install; }
 ```
 
 
-### `22` - Xz
+### `21` - Xz
 > #### `5.2.5` or newer
 > The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
 
@@ -685,7 +665,7 @@ time { make; }
 time { make install; }
 ```
 
-### `23` - Cleaning Up and Changing Ownership
+### `22` - Cleaning Up and Changing Ownership
 > **This section is optional!**
 
 > If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
