@@ -347,7 +347,7 @@ cd ${HEIWA}/sources/pkgs/
 time { make LIBINTL=MUSL prefix=/clang1-tools; }
 
 # Only install `msgfmt`, `msgmerge` and `xgettext`.
-install -vm755 -t /clang1-tools/bin/ msgfmt msgmerge xgettext 
+install -vm755 -t /clang1-tools/bin/ msg{fmt,merge} xgettext 
 ```
 
 ### `8` - GNU AWK
