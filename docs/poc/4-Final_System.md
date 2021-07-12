@@ -598,30 +598,44 @@ time { make; }
 time { make PREFIX=/usr install; }
 ```
 
-### `20` - LLVM libunwind, libcxxabi, and libcxx
+### `20` - Clang/LLVM + libunwind, libcxxabi, and libcxx
 > #### `12.x.x` or newer
-> 1. C++ runtime stack unwinder from LLVM;  
-> 2. Low level support for a standard C++ library from LLVM;  
-> 3. New implementation of the C++ standard library, targeting C++11 from LLVM.
+> - C language family frontend for LLVM;  
+> - C++ runtime stack unwinder from LLVM;  
+> - Low level support for a standard C++ library from LLVM;  
+> - New implementation of the C++ standard library, targeting C++11 from LLVM.
 
-> **Required!** As mentioned in the description above.
+> **Required!**
 ```bash
 # Exit from the LLVM source directory if already entered after decompressing.
 popd
 ```
 ```bash
 # Rename the LLVM source directory to "$LLVM_SRC", then enter.
-mv -fv llvm-12.0.1.src "$LLVM_SRC" && pushd "$LLVM_SRC"
+mv -fv llvm-12.0.1.src "$LLVM_SRC" && cd "$LLVM_SRC"
 
-# Decompress `libunwind`, `libcxxabi`, and `libcxx` to the correct directories.
+# Decompress `clang`, `lld`, `compiler-rt`, `libunwind`, `libcxxabi`, and `libcxx` to the correct directories.
 pushd ${LLVM_SRC}/projects/ && \
-    tar xf ../../pkgs/libunwind-12.0.1.src.tar.xz && mv -fv libunwind-12.0.1.src libunwind
-    tar xf ../../pkgs/libcxxabi-12.0.1.src.tar.xz && mv -fv libcxxabi-12.0.1.src libcxxabi
-    tar xf ../../pkgs/libcxx-12.0.1.src.tar.xz    && mv -fv libcxx-12.0.1.src libcxx
+    tar xf ../../pkgs/compiler-rt-12.0.1.src.tar.xz && mv -fv compiler-rt-12.0.1.src compiler-rt
+    tar xf ../../pkgs/libunwind-12.0.1.src.tar.xz   && mv -fv libunwind-12.0.1.src libunwind
+    tar xf ../../pkgs/libcxxabi-12.0.1.src.tar.xz   && mv -fv libcxxabi-12.0.1.src libcxxabi
+    tar xf ../../pkgs/libcxx-12.0.1.src.tar.xz      && mv -fv libcxx-12.0.1.src libcxx
+popd
+pushd ${LLVM_SRC}/tools/ && \
+    tar xf ../../pkgs/clang-12.0.1.src.tar.xz && mv -fv clang-12.0.1.src clang
+    tar xf ../../pkgs/lld-12.0.1.src.tar.xz   && mv -fv lld-12.0.1.src lld
 popd
 
 # Apply patches (from Void Linux).
-../extra/llvm/patches/appatch L_LLVM
+../extra/llvm/patches/appatch
+
+# Disable sanitizers for musl, it's broken since it duplicates some libc bits.
+sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
+projects/compiler-rt/cmake/config-ix.cmake
+
+# Deletes atomic detection for Linux to build `libcxx` with "libatomic.so*" free (which is provided by GCC).
+sed -i '/check_library_exists(atomic __atomic_fetch_add_8 "" LIBCXX_HAS_ATOMIC_LIB)/d' \
+projects/libcxx/cmake/config-ix.cmake
 
 # Update config.guess for better platform detection.
 cp -fv ../extra/llvm/files/config.guess cmake/.
@@ -689,44 +703,7 @@ time { make -C build; }
 time { make -C build install && popd; }
 ```
 ```bash
-# Back to "/sources/pkgs" directory.
-popd
-```
-
-### `21` - Clang/LLVM
-> #### `12.x.x` or newer
-> C language family frontend for LLVM.
-
-> **Required!** As mentioned in the description above.
-```bash
-# Exit from the LLVM source directory if already entered after decompressing.
-popd
-```
-```bash
-# Rename the LLVM source directory to "$LLVM_SRC", then enter.
-mv -fv llvm-12.0.1.src "$LLVM_SRC" && cd "$LLVM_SRC"
-
-# Decompress `clang`, `lld`, and `compiler-rt` to the correct directories.
-pushd ${LLVM_SRC}/projects/ && \
-    tar xf ../../pkgs/compiler-rt-12.0.1.src.tar.xz && mv -fv compiler-rt-12.0.1.src compiler-rt
-popd
-pushd ${LLVM_SRC}/tools/ && \
-    tar xf ../../pkgs/clang-12.0.1.src.tar.xz && mv -fv clang-12.0.1.src clang
-    tar xf ../../pkgs/lld-12.0.1.src.tar.xz   && mv -fv lld-12.0.1.src lld
-popd
-
-# Apply patches (from Void Linux).
-../extra/llvm/patches/appatch C_LLVM
-
-# Disable sanitizers for musl, it's broken since it duplicates some libc bits.
-sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
-projects/compiler-rt/cmake/config-ix.cmake
-
-# Update config.guess for better platform detection.
-cp -fv ../extra/llvm/files/config.guess cmake/.
-```
-```bash
-# Configure source.
+# Configure Clang/LLVM source.
 cmake -B build \
     -DCMAKE_BUILD_TYPE=Release -Wno-dev                        \
     -DCMAKE_INSTALL_PREFIX="/usr"                              \
@@ -738,12 +715,14 @@ cmake -B build \
     -DLLVM_TARGETS_TO_BUILD="host;BPF;AMDGPU;X86"              \
     -DLLVM_TARGET_ARCH="X86"                                   \
     -DLLVM_LINK_LLVM_DYLIB=ON                                  \
-    -DLLVM_BUILD_LLVM_DYLIB=ON                                 \
     -DLLVM_BUILD_TESTS=OFF                                     \
+    -DLLVM_ENABLE_BINDINGS=OFF                                 \
+    -DLLVM_ENABLE_IDE=OFF                                      \
     -DLLVM_ENABLE_LIBEDIT=ON                                   \
     -DLLVM_ENABLE_LIBXML2=OFF                                  \
     -DLLVM_ENABLE_LIBCXX=ON                                    \
     -DLLVM_ENABLE_LLD=ON                                       \
+    -DLLVM_ENABLE_UNWIND_TABLES=OFF                            \
     -DLLVM_ENABLE_RTTI=ON                                      \
     -DLLVM_ENABLE_ZLIB=ON                                      \
     -DLLVM_INCLUDE_GO_TESTS=OFF                                \
@@ -760,17 +739,14 @@ cmake -B build \
     -DCLANG_DEFAULT_CXX_STDLIB=libc++                          \
     -DCLANG_DEFAULT_UNWINDLIB=libunwind                        \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                          \
-    -DCLANG_DEFAULT_LINKER=lld                                 \
+    -DCLANG_DEFAULT_LINKER="/usr/bin/ld.ldd"                   \
     -DDEFAULT_SYSROOT="/usr"                                   \
     -DBacktrace_INCLUDE_DIR="/usr/include"                     \
     -DBacktrace_LIBRARY="/usr/lib/libexecinfo.so"              \
     -DICONV_LIBRARY_PATH="/usr/lib/libc.so"                    \
     -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON                        \
     -DLLVM_INSTALL_CCTOOLS_SYMLINKS=ON                         \
-    -DLLVM_INSTALL_UTILS=ON                                    \
-    -DLLVM_ENABLE_BINDINGS=OFF                                 \
-    -DLLVM_ENABLE_IDE=OFF                                      \
-    -DLLVM_ENABLE_UNWIND_TABLES=OFF
+    -DLLVM_INSTALL_UTILS=ON
 
 # Build.
 time { make -C build; }
