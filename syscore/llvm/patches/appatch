@@ -28,7 +28,7 @@ pushd ${LLVM_SRC}/tools/ && \
     do patch -Np1 -i ../../extra/llvm/patches/${P}
     done; unset P
     [ -d ../projects/libunwind/include ] && \
-    ln -sfv ../../../projects/libunwind/include/mach-o lld/include/.
+    cp -fv ../../../projects/libunwind/include/mach-o lld/include/.
 popd
 
 pushd ${LLVM_SRC}/../ && \
