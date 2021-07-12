@@ -158,10 +158,10 @@ time { make install; }
 
 ### `6` - Clang/LLVM + libunwind, libcxxabi, and libcxx
 > #### `12.x.x` or newer
-> 1. C language family frontend for LLVM;  
-> 2. C++ runtime stack unwinder from LLVM;  
-> 3. Low level support for a standard C++ library from LLVM;  
-> 4. New implementation of the C++ standard library, targeting C++11 from LLVM.
+> - C language family frontend for LLVM;  
+> - C++ runtime stack unwinder from LLVM;  
+> - Low level support for a standard C++ library from LLVM;  
+> - New implementation of the C++ standard library, targeting C++11 from LLVM.
 
 > **Required!** Build Stage-1 Clang/LLVM self-hosted toolchain with GCC libraries free since compiled Clang/LLVM itself (from Stage-0).
 ```bash
