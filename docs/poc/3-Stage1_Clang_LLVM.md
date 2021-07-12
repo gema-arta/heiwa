@@ -364,10 +364,9 @@ install -vm755 -t /clang1-tools/bin/ msg{fmt,merge} xgettext
 sed -i 's|extras||' Makefile.in
 
 # Configure source.
-./configure \
-    --prefix=/clang1-tools   \
-    --build=${TARGET_TRUPLE} \
-    --host=${TARGET_TRUPLE}
+./configure --prefix=/clang1-tools   \
+            --build=${TARGET_TRUPLE} \
+            --host=${TARGET_TRUPLE}
 
 # Build.
 time { make; }
@@ -399,12 +398,11 @@ gt_cv_int_divbyzero_sigfpe=yes
 EOF
 
 # Configure source.
-./configure \
-    --prefix=/clang1-tools   \
-    --build=${TARGET_TRUPLE} \
-    --host=${TARGET_TRUPLE}  \
-    --without-bash-malloc    \
-    --cache-file=config.cache
+./configure --prefix=/clang1-tools   \
+            --build=${TARGET_TRUPLE} \
+            --host=${TARGET_TRUPLE}  \
+            --without-bash-malloc    \
+            --cache-file=config.cache
 
 # Build.
 time { make; }
@@ -459,10 +457,9 @@ time { make PREFIX=/clang1-tools install; unset X CFFGPT; }
 > **Required!** For the current and next stage (chroot environment) that most build systems depends on GNU implementation style.
 ```bash
 # Configure source.
-./configure \
-    --prefix=/clang1-tools   \
-    --build=${TARGET_TRUPLE} \
-    --host=${TARGET_TRUPLE}
+./configure --prefix=/clang1-tools   \
+            --build=${TARGET_TRUPLE} \
+            --host=${TARGET_TRUPLE}
 
 # Build.
 time { make; }
@@ -478,11 +475,10 @@ time { make install; }
 > **Required!** For the current and next stage (chroot environment) that most build systems depends on GNU implementation style.
 ```bash
 # Configure source.
-./configure \
-    --prefix=/clang1-tools   \
-    --build=${TARGET_TRUPLE} \
-    --host=${TARGET_TRUPLE}  \
-    --without-guile
+./configure --prefix=/clang1-tools   \
+            --build=${TARGET_TRUPLE} \
+            --host=${TARGET_TRUPLE}  \
+            --without-guile
 
 # Build.
 time { make; }
@@ -498,10 +494,9 @@ time { make install; }
 > **Required!** For the current and next stage (chroot environment). The GNU implementation of `patch` is can handle offset lines, which is powerful feature.
 ```bash
 # Configure source.
-./configure \
-    --prefix=/clang1-tools   \
-    --build=${TARGET_TRUPLE} \
-    --host=${TARGET_TRUPLE}
+./configure --prefix=/clang1-tools   \
+            --build=${TARGET_TRUPLE} \
+            --host=${TARGET_TRUPLE}
 
 # Build.
 time { make; }
@@ -517,10 +512,9 @@ time { make install; }
 > **Required!** For the most packages next stage (chroot environment). Nothing is GNU-free.
 ```bash
 # Configure source.
-./configure \
-    --prefix=/clang1-tools   \
-    --build=${TARGET_TRUPLE} \
-    --host=${TARGET_TRUPLE}
+./configure --prefix=/clang1-tools   \
+            --build=${TARGET_TRUPLE} \
+            --host=${TARGET_TRUPLE}
 
 # Build.
 time { make; }
@@ -536,9 +530,8 @@ time { make install; }
 > **Required!** To build required packages in the next stage (chroot environment). 
 ```bash
 # Configure source.
-./configure \
-    --prefix=/clang1-tools --enable-yacc \
-    --mandir=/clang1-tools/share/man/man1
+./configure --prefix=/clang1-tools --enable-yacc \
+            --mandir=/clang1-tools/share/man/man1
 
 # Build.
 time { make; }
@@ -563,10 +556,9 @@ cp -rf ../perl-cross-1.3.5/utils/* utils/            && \
 rm -rf ../perl-cross-1.3.5
 
 # Configure source.
-./configure \
-    --prefix=/clang1-tools   \
-    --build=${TARGET_TRUPLE} \
-    --target=${TARGET_TRUPLE}
+./configure --prefix=/clang1-tools   \
+            --build=${TARGET_TRUPLE} \
+            --target=${TARGET_TRUPLE}
 
 # Build.
 time { make; }
@@ -600,14 +592,12 @@ patch -Np1 -i ../../extra/libffi/patches/libffi-race-condition.patch
 patch -Np1 -i ../../extra/libffi/patches/no-toolexeclibdir.patch
 
 # Configure source.
-./configure \
-    --prefix=/clang1-tools       \
-    --build=${TARGET_TRUPLE}     \
-    --host=${TARGET_TRUPLE}      \
-    --disable-static             \
-    --with-pic                   \
-    --disable-multi-os-directory \
-    --with-gcc-arch=native
+./configure --prefix=/clang1-tools       \
+            --build=${TARGET_TRUPLE}     \
+            --host=${TARGET_TRUPLE}      \
+            --disable-static --with-pic  \
+            --disable-multi-os-directory \
+            --with-gcc-arch=native
 
 # Build.
 time { make; }
@@ -632,13 +622,12 @@ rm -rfv Modules/_ctypes/{darwin,libffi}*
 sed -i '/def add_multiarch_paths/a \        return' setup.py
 
 # Configure source.
-ax_cv_c_float_words_bigendian=no \
-./configure \
-    --prefix=/clang1-tools   \
-    --build=${TARGET_TRUPLE} \
-    --host=${TARGET_TRUPLE}  \
-    --enable-shared          \
-    --without-ensurepip
+ax_cv_c_float_words_bigendian=no     \
+./configure --prefix=/clang1-tools   \
+            --build=${TARGET_TRUPLE} \
+            --host=${TARGET_TRUPLE}  \
+            --enable-shared          \
+            --without-ensurepip
 
 # Build.
 time { make; }
@@ -658,11 +647,10 @@ export LDFLAGS="-pthread"
 NOCONFIGURE=1 ./autogen.sh
 
 # Configure source.
-./configure \
-    --prefix=/clang1-tools   \
-    --build=${TARGET_TRUPLE} \
-    --host=${TARGET_TRUPLE}  \
-    --disable-static
+./configure --prefix=/clang1-tools   \
+            --build=${TARGET_TRUPLE} \
+            --host=${TARGET_TRUPLE}  \
+            --disable-static
 
 # Build.
 time { make; }
@@ -681,12 +669,11 @@ time { make install; unset LDFLAGS; }
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
 
 # Configure source using provided libraries (built-in).
-./bootstrap \
-    --prefix=/clang1-tools           \
-    --mandir=/share/man              \
-    --parallel=$(nproc)              \
-    --docdir=/share/doc/cmake-3.20.5 \
-    -- -DCMAKE_USE_OPENSSL=OFF
+./bootstrap --prefix=/clang1-tools           \
+            --mandir=/share/man              \
+            --parallel=$(nproc)              \
+            --docdir=/share/doc/cmake-3.20.5 \
+            -- -DCMAKE_USE_OPENSSL=OFF
 
 # Build.
 time { make; }
@@ -703,11 +690,10 @@ time { make install; }
 > **Required!** As default ".xz" and ".lzma" files de/compressor for the current and next stage (chroot environment).
 ```bash
 # Configure source.
-./configure \
-    --prefix=/clang1-tools   \
-    --build=${TARGET_TRUPLE} \
-    --host=${TARGET_TRUPLE}  \
-    --disable-static
+./configure --prefix=/clang1-tools   \
+            --build=${TARGET_TRUPLE} \
+            --host=${TARGET_TRUPLE}  \
+            --disable-static
 
 # Build.
 time { make; }
