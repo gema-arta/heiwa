@@ -698,6 +698,10 @@ time { make -C build; }
 time { make -C build install && popd; }
 ```
 ```bash
+# Deletes `libunwind`, `libcxxabi`, and `libcxx` source.
+rm -rf projects/lib{unwind,cxx{abi,}}
+```
+```bash
 # Configure Clang/LLVM source.
 cmake -B build \
     -DCMAKE_BUILD_TYPE=Release -Wno-dev                        \
