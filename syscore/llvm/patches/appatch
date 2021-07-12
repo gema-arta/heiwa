@@ -1,52 +1,49 @@
 #!/usr/bin/env bash
 # Configured by owl4ce
 
-case $1 in
-    C_LLVM) pushd ${LLVM_SRC}/projects/ && \
-                for P in \
-                    compiler-rt-aarch64-ucontext.patch \
-                    compiler-rt-sanitizer-ppc64-musl.patch \
-                    compiler-rt-size_t.patch \
-                    compiler-rt-xray-ppc64-musl.patch \
-                    ppc32-compiler-rt.patch
-                do patch -Np1 -i ../../extra/llvm/patches/${P}
-                done; unset P
-            popd
+pushd ${LLVM_SRC}/projects/ && \
+    for P in \
+        compiler-rt-aarch64-ucontext.patch \
+        compiler-rt-sanitizer-ppc64-musl.patch \
+        compiler-rt-size_t.patch \
+        compiler-rt-xray-ppc64-musl.patch \
+        ppc32-compiler-rt.patch
+    do patch -Np1 -i ../../extra/llvm/patches/${P}
+    done; unset P
+popd
 
-            pushd ${LLVM_SRC}/tools/ && \
-                for P in \
-                    clang-001-fix-unwind-chain-inclusion.patch \
-                    clang-002-add-musl-triples.patch \
-                    clang-003-ppc64-dynamic-linker-path.patch \
-                    clang-004-ppc64-musl-elfv2.patch
-                do patch -Np1 -i ../../extra/llvm/patches/${P}
-                done; unset P
-                cp -rfv ../../extra/llvm/files/include lld/.
-            popd
+pushd ${LLVM_SRC}/tools/ && \
+    for P in \
+        clang-001-fix-unwind-chain-inclusion.patch \
+        clang-002-add-musl-triples.patch \
+        clang-003-ppc64-dynamic-linker-path.patch \
+        clang-004-ppc64-musl-elfv2.patch
+    do patch -Np1 -i ../../extra/llvm/patches/${P}
+    done; unset P
+    cp -rfv ../../extra/llvm/files/include lld/.
+popd
 
-            pushd ${LLVM_SRC}/../ && \
-                for P in \
-                    llvm-001-musl.patch \
-                    llvm-002-musl-ppc64-elfv2.patch \
-                    llvm-003-ppc-secureplt.patch \
-                    llvm-004-override-opt.patch \
-                    llvm-005-ppc-bigpic.patch \
-                    llvm-006-aarch64-mf_exec.patch
-                do patch -Np1 -i ./extra/llvm/patches/${P}
-                done; unset P
-            popd
-    ;;
-    L_LLVM) pushd ${LLVM_SRC}/projects/libunwind/ && \
-                patch -Np1 -i libunwind-ppc32.patch
-            popd
+pushd ${LLVM_SRC}/../ && \
+    for P in \
+        llvm-001-musl.patch \
+        llvm-002-musl-ppc64-elfv2.patch \
+        llvm-003-ppc-secureplt.patch \
+        llvm-004-override-opt.patch \
+        llvm-005-ppc-bigpic.patch \
+        llvm-006-aarch64-mf_exec.patch
+    do patch -Np1 -i ./extra/llvm/patches/${P}
+    done; unset P
+popd
 
-            pushd ${LLVM_SRC}/projects/libcxx/ && \
-                for P in \
-                    libcxx-ssp-nonshared.patch \
-                    libcxx-ppc.patch \
-                    libcxx-ssp-nonshared.patch
-                do patch -Np1 -i ../../extra/llvm/patches/${P}
-                done; unset P
-            popd
-    ;;
-esac
+pushd ${LLVM_SRC}/projects/libunwind/ && \
+    patch -Np1 -i libunwind-ppc32.patch
+popd
+
+pushd ${LLVM_SRC}/projects/libcxx/ && \
+    for P in \
+        libcxx-ssp-nonshared.patch \
+        libcxx-ppc.patch \
+        libcxx-ssp-nonshared.patch
+    do patch -Np1 -i ../../extra/llvm/patches/${P}
+    done; unset P
+popd
