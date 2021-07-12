@@ -633,10 +633,6 @@ popd
 sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
 projects/compiler-rt/cmake/config-ix.cmake
 
-# Deletes atomic detection for Linux to build `libcxx` with "libatomic.so*" free (which is provided by GCC).
-sed -i '/check_library_exists(atomic __atomic_fetch_add_8 "" LIBCXX_HAS_ATOMIC_LIB)/d' \
-projects/libcxx/cmake/config-ix.cmake
-
 # Update config.guess for better platform detection.
 cp -fv ../extra/llvm/files/config.guess cmake/.
 ```
