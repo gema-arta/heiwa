@@ -556,10 +556,9 @@ sed -e 's|#ENCRYPT_METHOD DES|ENCRYPT_METHOD SHA512|' \
 sed -i 's|1000|999|' etc/useradd
 
 # Configure source.
-touch /usr/bin/passwd && \
-./configure \
-    --sysconfdir=/etc \
-    --with-group-name-max-length=32
+touch /usr/bin/passwd      && \
+./configure --sysconfdir=/etc \
+            --with-group-name-max-length=32
 
 # Build.
 time { make; }
