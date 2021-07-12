@@ -187,6 +187,10 @@ popd
 # Apply patches (from Void Linux).
 ../extra/llvm/patches/appatch
 
+# Disable sanitizers for musl, it's broken since it duplicates some libc bits.
+sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
+projects/compiler-rt/cmake/config-ix.cmake
+
 # Deletes atomic detection for Linux to build `libcxx` with "libatomic.so*" free (which is provided by GCC).
 sed -i '/check_library_exists(atomic __atomic_fetch_add_8 "" LIBCXX_HAS_ATOMIC_LIB)/d' \
 ${LLVM_SRC}/projects/libcxx/cmake/config-ix.cmake
