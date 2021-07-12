@@ -374,4 +374,4 @@ find /clang0-tools/{,${HEIWA_TARGET}/}bin/ -maxdepth 1 -type f -exec /usr/bin/st
 
 <h2></h2>
 
-~Continue to [Stage-1 Clang/LLVM Toolchain](./3-Stage1_Clang_LLVM.md).~ (DEVELOPMENT UNDER PROGRESS)
+Continue to [Stage-1 Clang/LLVM Toolchain](./3-Stage1_Clang_LLVM.md).
