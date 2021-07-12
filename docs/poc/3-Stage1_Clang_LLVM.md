@@ -343,6 +343,11 @@ cd ${HEIWA}/sources/pkgs/
 
 > **Required!** To allow programs compiled with NLS (Native Language Support) in the next stage (chroot environment).
 ```bash
+# Apply patches to fix some issues and respect compiler flags.
+for P in {line-length,flip-macro-logic,respect-cflags}.patch; do
+    patch -Np1 -i ../../extra/gettext-tiny/patches/${P}
+done; unset P
+
 # Build.
 time { make LIBINTL=MUSL prefix=/clang1-tools; }
 
