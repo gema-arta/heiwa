@@ -304,7 +304,7 @@ cmake -B build \
     -DICONV_LIBRARY_PATH="/clang1-tools/lib/libc.so"       \
     -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON                    \
     -DLLVM_INSTALL_CCTOOLS_SYMLINKS=ON                     \
-    -DLLVM_INSTALL_UTILS=ON                                \
+    -DLLVM_INSTALL_UTILS=ON
 
 # Build.
 time { make -C build; }
