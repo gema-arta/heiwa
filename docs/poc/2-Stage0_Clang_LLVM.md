@@ -319,7 +319,7 @@ cmake -B build \
     -DCOMPILER_RT_BUILD_LIBFUZZER=OFF                                                       \
     -DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON                                                   \
     -DCOMPILER_RT_DEFAULT_TARGET_TRIPLE="$TARGET_TRUPLE"                                    \
-    -DCLANG_DEFAULT_CXX_STDLIB=libc++                                                       \
+    -DCLANG_DEFAULT_CXX_STDLIB=libstdc++                                                    \
     -DCLANG_DEFAULT_UNWINDLIB=libgcc                                                        \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                                                       \
     -DCLANG_DEFAULT_LINKER=lld                                                              \
