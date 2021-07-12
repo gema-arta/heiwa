@@ -329,7 +329,8 @@ cmake -B build \
     -DDEFAULT_SYSROOT="/clang0-tools"                                                       \
     -DBacktrace_INCLUDE_DIR="/clang0-tools/include"                                         \
     -DBacktrace_LIBRARY="/clang0-tools/lib/libexecinfo.so"                                  \
-    -DICONV_LIBRARY_PATH="/clang0-tools/lib/libc.so"
+    -DICONV_LIBRARY_PATH="/clang0-tools/lib/libc.so"                                        \
+    -DLIBCXX_HAS_MUSL_LIBC=ON
 
 # Build.
 time { make -C build; }
