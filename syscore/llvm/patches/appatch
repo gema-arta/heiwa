@@ -21,6 +21,7 @@ case $1 in
                     clang-004-ppc64-musl-elfv2.patch
                 do patch -Np1 -i ../../extra/llvm/patches/${P}
                 done; unset P
+                cp -rfv ../../extra/llvm/files/include lld/.
             popd
 
             pushd ${LLVM_SRC}/../ && \
