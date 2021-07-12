@@ -156,11 +156,12 @@ time { make; }
 time { make install; }
 ```
 
-### `6` - LLVM libunwind, libcxxabi, and libcxx
+### `6` - Clang/LLVM + libunwind, libcxxabi, and libcxx
 > #### `12.x.x` or newer
-> 1. C++ runtime stack unwinder from LLVM;  
-> 2. Low level support for a standard C++ library from LLVM;  
-> 3. New implementation of the C++ standard library, targeting C++11 from LLVM.
+> 1. C language family frontend for LLVM;  
+> 2. C++ runtime stack unwinder from LLVM;  
+> 3. Low level support for a standard C++ library from LLVM;  
+> 4. New implementation of the C++ standard library, targeting C++11 from LLVM.
 
 > **Required!** As mentioned in the description above.
 ```bash
@@ -171,11 +172,16 @@ popd
 # Rename the LLVM source directory to "$LLVM_SRC", then enter.
 mv -fv llvm-12.0.1.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 
-# Decompress `libunwind`, `libcxxabi`, and `libcxx` to the correct directories.
+# Decompress `clang`, `lld`, `compiler-rt`, `libunwind`, `libcxxabi`, and `libcxx` to the correct directories.
 pushd ${LLVM_SRC}/projects/ && \
-    tar xf ../../pkgs/libunwind-12.0.1.src.tar.xz && mv -fv libunwind-12.0.1.src libunwind
-    tar xf ../../pkgs/libcxxabi-12.0.1.src.tar.xz && mv -fv libcxxabi-12.0.1.src libcxxabi
-    tar xf ../../pkgs/libcxx-12.0.1.src.tar.xz    && mv -fv libcxx-12.0.1.src libcxx
+    tar xf ../../pkgs/compiler-rt-12.0.1.src.tar.xz && mv -fv compiler-rt-12.0.1.src compiler-rt
+    tar xf ../../pkgs/libunwind-12.0.1.src.tar.xz   && mv -fv libunwind-12.0.1.src libunwind
+    tar xf ../../pkgs/libcxxabi-12.0.1.src.tar.xz   && mv -fv libcxxabi-12.0.1.src libcxxabi
+    tar xf ../../pkgs/libcxx-12.0.1.src.tar.xz      && mv -fv libcxx-12.0.1.src libcxx
+popd
+pushd ${LLVM_SRC}/tools/ && \
+    tar xf ../../pkgs/clang-12.0.1.src.tar.xz && mv -fv clang-12.0.1.src clang
+    tar xf ../../pkgs/lld-12.0.1.src.tar.xz   && mv -fv lld-12.0.1.src lld
 popd
 
 # Apply patches (from Void Linux).
@@ -251,44 +257,7 @@ time { make -C build; }
 time { make -C build install && popd; }
 ```
 ```bash
-# Back to "${HEIWA}/sources/pkgs" directory.
-popd
-```
-
-### `7` - Clang/LLVM
-> #### `12.x.x` or newer
-> C language family frontend for LLVM.
-
-> **Required!** Build Stage-1 Clang/LLVM toolchain with `libgcc_s.so*` and `libstdc++.so*` free (which is provided by GCC).
-```bash
-# Exit from the LLVM source directory if already entered after decompressing.
-popd
-```
-```bash
-# Rename the LLVM source directory to "$LLVM_SRC", then enter.
-mv -fv llvm-12.0.1.src "$LLVM_SRC" && cd "$LLVM_SRC"
-
-# Decompress `clang`, `lld`, and `compiler-rt` to the correct directories.
-pushd ${LLVM_SRC}/projects/ && \
-    tar xf ../../pkgs/compiler-rt-12.0.1.src.tar.xz && mv -fv compiler-rt-12.0.1.src compiler-rt
-popd
-pushd ${LLVM_SRC}/tools/ && \
-    tar xf ../../pkgs/clang-12.0.1.src.tar.xz && mv -fv clang-12.0.1.src clang
-    tar xf ../../pkgs/lld-12.0.1.src.tar.xz   && mv -fv lld-12.0.1.src lld
-popd
-
-# Apply patches (from Void Linux).
-../extra/llvm/patches/appatch C_LLVM
-
-# Disable sanitizers for musl, it's broken since it duplicates some libc bits.
-sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
-projects/compiler-rt/cmake/config-ix.cmake
-
-# Update config.guess for better platform detection.
-cp -fv ../extra/llvm/files/config.guess cmake/.
-```
-```bash
-# Configure source.
+# Configure Clang/LLVM source.
 cmake -B build \
     -DCMAKE_BUILD_TYPE=Release -Wno-dev                    \
     -DCMAKE_INSTALL_PREFIX="/clang1-tools"                 \
@@ -321,7 +290,7 @@ cmake -B build \
     -DCLANG_DEFAULT_CXX_STDLIB=libc++                      \
     -DCLANG_DEFAULT_UNWINDLIB=libunwind                    \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                      \
-    -DCLANG_DEFAULT_LINKER=lld                             \
+    -DCLANG_DEFAULT_LINKER="/clang1-tools/bin/ld.lld"      \
     -DDEFAULT_SYSROOT="/clang1-tools"                      \
     -DBacktrace_INCLUDE_DIR="/clang1-tools/include"        \
     -DBacktrace_LIBRARY="/clang1-tools/lib/libexecinfo.so" \
