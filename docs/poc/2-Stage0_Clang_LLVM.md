@@ -304,17 +304,19 @@ cmake -B build \
     -DLLVM_TARGETS_TO_BUILD="X86"                                                           \
     -DLLVM_TARGET_ARCH="X86"                                                                \
     -DLLVM_BUILD_TESTS=OFF                                                                  \
-    -DLLVM_ENABLE_LIBEDIT=OFF                                                               \
-    -DLLVM_ENABLE_LIBXML2=OFF                                                               \
+    -DLLVM_ENABLE_BINDINGS=OFF                                                              \
+    -DLLVM_ENABLE_IDE=OFF                                                                   \
     -DLLVM_ENABLE_LIBCXX=ON                                                                 \
     -DLLVM_ENABLE_LLD=ON                                                                    \
     -DLLVM_ENABLE_UNWIND_TABLES=OFF                                                         \
-    -DLLVM_ENABLE_ZLIB=OFF                                                                  \
+    -DLLVM_ENABLE_LIBEDIT=OFF                                                               \
+    -DLLVM_ENABLE_LIBXML2=OFF                                                               \
     -DLLVM_INCLUDE_GO_TESTS=OFF                                                             \
     -DLLVM_INCLUDE_TESTS=OFF                                                                \
     -DLLVM_INCLUDE_DOCS=OFF                                                                 \
     -DLLVM_INCLUDE_EXAMPLES=OFF                                                             \
     -DLLVM_INCLUDE_BENCHMARKS=OFF                                                           \
+    -DLIBCXX_HAS_MUSL_LIBC=ON                                                               \
     -DCOMPILER_RT_BUILD_SANITIZERS=OFF                                                      \
     -DCOMPILER_RT_BUILD_XRAY=OFF                                                            \
     -DCOMPILER_RT_BUILD_PROFILE=OFF                                                         \
@@ -328,8 +330,7 @@ cmake -B build \
     -DDEFAULT_SYSROOT="/clang0-tools"                                                       \
     -DBacktrace_INCLUDE_DIR="/clang0-tools/include"                                         \
     -DBacktrace_LIBRARY="/clang0-tools/lib/libexecinfo.so"                                  \
-    -DICONV_LIBRARY_PATH="/clang0-tools/lib/libc.so"                                        \
-    -DLIBCXX_HAS_MUSL_LIBC=ON
+    -DICONV_LIBRARY_PATH="/clang0-tools/lib/libc.so"
 
 # Build.
 time { make -C build; }
