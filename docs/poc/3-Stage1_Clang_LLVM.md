@@ -584,14 +584,14 @@ time { make install; }
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
 
 # Configure source using provided libraries (built-in), except for `zlib`.
-CFLAGS="$CFLAGS -I/clang1-tools/include"     \
-CXXFLAGS="$CXXFLAGS -I/clang1-tools/include" \
 ./bootstrap --prefix=/clang1-tools           \
             --mandir=/share/man              \
             --parallel=$(nproc)              \
             --docdir=/share/doc/cmake-3.20.5 \
-            --system-zlib                    \
-            -- -DCMAKE_USE_OPENSSL=OFF
+            --system-zlib --                 \
+            -DCMAKE_USE_OPENSSL=OFF          \
+            -DCMAKE_C_FLAGS="-I/clang1-tools/include" \
+            -DCMAKE_CXX_FLAGS="-I/clang1-tools/include"
 
 # Build.
 time { make; }
