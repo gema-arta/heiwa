@@ -380,7 +380,7 @@ cmake -B build \
      -DCMAKE_BUILD_TYPE=Release     \
      -DCMAKE_INSTALL_PREFIX="/usr"  \
      -DWITH_NATIVE_INSTRUCTIONS=YES \
-     -DWITH_SANITIZERS=ON           \
+     -DWITH_SANITIZER=ON            \
      -DZLIB_COMPAT=ON -Wno-dev
 
 # Build.
