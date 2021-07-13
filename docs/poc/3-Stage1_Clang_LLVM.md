@@ -404,7 +404,7 @@ time { make install; }
 cp -v ../../extra/toybox/files/.config.toolchain.nolibcrypto .config
 
 # Make sure to enable `libz`.
-grep --color=auto "libz" .config
+grep --color=auto "LIBZ" .config
 
 export CFFGPT="base64 base32 basename cat chgrp chmod chown chroot cksum comm cp cut date
 dd df dirname du echo env expand expr factor false fmt fold groups head hostid id install
