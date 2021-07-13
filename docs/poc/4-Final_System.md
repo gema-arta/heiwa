@@ -345,8 +345,8 @@ time {
 }
 
 # Install utilities and the man pages.
-install -vm755 -t /usr/bin/ tzselect zic zdump posixtz-0.5/posixtz
-install -vm644 -t /usr/share/man/man8/ {zic,zdump}.8
+install -vm755 -t /usr/bin/ tzselect z{ic,dump} posixtz-0.5/posixtz
+install -vm644 -t /usr/share/man/man8/ z{ic,dump}.8
 
 # Install zoneinfo. -> Ignore all warnings! <-
 install -vm444 -t /usr/share/zoneinfo/ {iso3166,zone{1970,}}.tab
