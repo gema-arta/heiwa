@@ -584,10 +584,10 @@ time { make install; }
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
 
 # Configure source using provided libraries (built-in).
-./bootstrap --prefix=/clang1-tools                    \
-            --mandir=/share/man                       \
-            --parallel=$(nproc)                       \
-            --docdir=/share/doc/cmake-3.20.5          \
+./bootstrap --prefix=/clang1-tools           \
+            --mandir=/share/man              \
+            --parallel=$(nproc)              \
+            --docdir=/share/doc/cmake-3.20.5 \
             -- -DCMAKE_USE_OPENSSL=OFF
 
 # Build.
