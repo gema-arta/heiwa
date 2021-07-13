@@ -401,7 +401,10 @@ time { make install; }
 > **Required!** For the current and next stage (chroot environment).
 ```bash
 # Copy the Toybox .config file.
-cp -v ../../extra/toybox/files/.config.toolchain.nlns .config
+cp -v ../../extra/toybox/files/.config.toolchain.nolibcrypto .config
+
+# Make sure to enable `libz`.
+grep -iE --color=auto "libz" .config
 
 export CFFGPT="base64 base32 basename cat chgrp chmod chown chroot cksum comm cp cut date
 dd df dirname du echo env expand expr factor false fmt fold groups head hostid id install
