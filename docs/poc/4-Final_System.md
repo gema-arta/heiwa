@@ -340,7 +340,7 @@ southamerica etcetera backward factory"
 # Build. -> Ignore "pkg-config: No such file or directory" while building `posixtz`! <-
 time {
     make CC=${CC} CFLAGS="$CFLAGS -DHAVE_STDINT_H=1" \
-    TZDIR="/usr/share/zoneinfo" && \
+    TZDIR="/usr/share/zoneinfo"                   && \
     make -C posixtz-0.5 CC=${CC} posixtz
 }
 
