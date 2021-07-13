@@ -565,7 +565,6 @@ ax_cv_c_float_words_bigendian=no     \
             --build=${TARGET_TRUPLE} \
             --host=${TARGET_TRUPLE}  \
             --enable-shared          \
-            --system-zlib            \
             --without-ensurepip
 
 # Build. -> Ignore all issues! <-
@@ -575,30 +574,7 @@ time { make; }
 time { make install; }
 ```
 
-### `18` - libuv
-> #### `1.41.1` or newer
-> The libuv package is a multi-platform support library with a focus on asynchronous I/O.
-
-> **Required!** By Cmake in the current stage.
-```bash
-# Enable `pthread` and generate the configure script.
-export LDFLAGS="-pthread"
-NOCONFIGURE=1 ./autogen.sh
-
-# Configure source.
-./configure --prefix=/clang1-tools   \
-            --build=${TARGET_TRUPLE} \
-            --host=${TARGET_TRUPLE}  \
-            --disable-static
-
-# Build.
-time { make; }
-
-# Install and unset linker flags.
-time { make install; unset LDFLAGS; }
-```
-
-### `19` - Cmake
+### `18` - Cmake
 > #### `3.20.5` or newer
 > The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
 
@@ -612,6 +588,7 @@ sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
             --mandir=/share/man              \
             --parallel=$(nproc)              \
             --docdir=/share/doc/cmake-3.20.5 \
+            --system-zlib                    \
             -- -DCMAKE_USE_OPENSSL=OFF
 
 # Build.
@@ -622,7 +599,7 @@ time { make install; }
 ```
 
 
-### `20` - Xz
+### `19` - Xz
 > #### `5.2.5` or newer
 > The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
 
@@ -641,7 +618,7 @@ time { make; }
 time { make install; }
 ```
 
-### `21` - Cleaning Up and Changing Ownership
+### `20` - Cleaning Up and Changing Ownership
 > **This section is optional!**
 
 > If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
