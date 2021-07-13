@@ -422,8 +422,8 @@ sed -i '/MV.*old/d' Makefile.in
 sed -i '/{OLDSUFF}/c:' support/shlib-install
 
 # Configure source.
-./configure --prefix=/usr    \
-            --with-curses    \
+./configure --prefix=/usr \
+            --with-curses \
             --docdir=/usr/share/doc/readline-8.1
 
 # Build. Force to link against with `libncursesw` library.
