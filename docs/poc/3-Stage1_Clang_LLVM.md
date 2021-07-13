@@ -565,6 +565,7 @@ ax_cv_c_float_words_bigendian=no     \
             --build=${TARGET_TRUPLE} \
             --host=${TARGET_TRUPLE}  \
             --enable-shared          \
+            --system-zlib            \
             --without-ensurepip
 
 # Build. -> Ignore all issues! <-
