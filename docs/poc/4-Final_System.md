@@ -437,7 +437,7 @@ time { make SHLIB_LIBS="-lncursesw" install; }
 > #### `1.4.19` or newer
 > The GNU M4 package contains a macro processor.
 
-> **Required!** Before `GNU Autoconf`.
+> **Required!** Before `Flex`, `Attr`, `Acl`, `GNU Autoconf`, and `GNU Automake`.
 ```bash
 # Configure source.
 ac_cv_header_sys_cdefs_h=no \
