@@ -213,7 +213,7 @@ cp -rfv usr/include /usr/.
 
 > **Required!** Before `Perl`.
 ```bash
-# Only need to copy these files into correct place.
+# Only need to install these files into correct place.
 install -vm644 -t /etc/ services protocols
 ```
 
