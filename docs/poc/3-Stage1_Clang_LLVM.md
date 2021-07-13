@@ -537,7 +537,7 @@ time { make install; }
 > **Required!** As default ".gz" files de/compressor for the current and next stage (chroot environment).
 ```bash
 # Make sure to use symlink instead of hardlink for `unpigz`.
-sed -i 's|ln -f|ln -sf|'              Makefile
+sed -i 's|ln -f|ln -sf|' Makefile
 
 # Build.
 time { make CC=${CC} CFLAGS+="$CFLAGS"; }
