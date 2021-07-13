@@ -418,7 +418,9 @@ rm -fv /usr/share/man/man3/attr_{g,s}et.3
 ```bash
 # Configure source.
 CFLAGS="$CFLAGS -D__STDC_ISO_10646__" \
-./configure --prefix=/usr
+./configure --prefix=/usr             \
+            --sysconfdir=/etc         \
+            --localstatedir=/var
 
 # Build.
 time { make; }
