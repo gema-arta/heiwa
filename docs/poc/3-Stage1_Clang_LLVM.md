@@ -547,32 +547,7 @@ ln -sv pigz gzip; ln -sv unpigz gunzip
 install -vm755 -t /clang1-tools/bin/ pigz unpigz gzip gunzip
 ```
 
-### `17` - libffi
-> #### `3.3` or newer
-> The libffi library provides a portable, high level programming interface to various calling conventions. This allows a programmer to call any function specified by a call interface description at run time.
-
-> **Required!** By Python3 in the current stage.
-```bash
-# Apply patches (from Void Linux) to fix some issues.
-patch -Np1 -i ../../extra/libffi/patches/libffi-race-condition.patch
-patch -Np1 -i ../../extra/libffi/patches/no-toolexeclibdir.patch
-
-# Configure source.
-./configure --prefix=/clang1-tools       \
-            --build=${TARGET_TRUPLE}     \
-            --host=${TARGET_TRUPLE}      \
-            --disable-static --with-pic  \
-            --disable-multi-os-directory \
-            --with-gcc-arch=native
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
-```
-
-### `18` - Python3
+### `17` - Python3
 > #### `3.9.6` or newer
 > The Python3 package contains the Python development environment. It is useful for object-oriented programming, writing scripts, prototyping large programs, or developing entire applications.
 
@@ -580,9 +555,6 @@ time { make install; }
 ```bash
 # Apply patch (from Void Linux) to allow compile under musl libc.
 patch -Np1 -i ../../extra/python3/patches/musl-find_library.patch
-
-# Make sure to use installed `libffi`, not built-in.
-rm -rfv Modules/_ctypes/{darwin,libffi}*
 
 # Prevent main script that uses hard-coded paths to the host "/usr/include" and "/usr/lib" directories.
 sed -i '/def add_multiarch_paths/a \        return' setup.py
@@ -602,7 +574,7 @@ time { make; }
 time { make install; }
 ```
 
-### `19` - libuv
+### `18` - libuv
 > #### `1.41.1` or newer
 > The libuv package is a multi-platform support library with a focus on asynchronous I/O.
 
@@ -625,7 +597,7 @@ time { make; }
 time { make install; unset LDFLAGS; }
 ```
 
-### `20` - Cmake
+### `19` - Cmake
 > #### `3.20.5` or newer
 > The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
 
@@ -649,7 +621,7 @@ time { make install; }
 ```
 
 
-### `21` - Xz
+### `20` - Xz
 > #### `5.2.5` or newer
 > The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
 
@@ -668,7 +640,7 @@ time { make; }
 time { make install; }
 ```
 
-### `22` - Cleaning Up and Changing Ownership
+### `21` - Cleaning Up and Changing Ownership
 > **This section is optional!**
 
 > If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
