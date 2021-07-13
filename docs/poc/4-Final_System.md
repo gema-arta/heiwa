@@ -433,25 +433,7 @@ time { make SHLIB_LIBS="-lncursesw"; }
 time { make SHLIB_LIBS="-lncursesw" install; }
 ```
 
-### `13` - GNU M4
-> #### `1.4.19` or newer
-> The GNU M4 package contains a macro processor.
-
-> **Required!** Before `GNU Autoconf`.
-```bash
-# Configure source.
-ac_cv_header_sys_cdefs_h=no \
-ac_cv_lib_error_at_line=no  \
-./configure --prefix=/usr
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
-```
-
-### `14` - Flex
+### `13` - Flex
 > #### `2.6.4` or newer
 > The Flex package contains a utility for generating programs that recognize patterns in text.
 
@@ -476,7 +458,7 @@ time { make install && ln -sv flex /usr/bin/lex; }
 # To support those programs, create a symbolic link named `lex` that runs `flex` in `lex` emulation mode.
 ```
 
-### `15` - Attr
+### `14` - Attr
 > #### `2.5.1` or newer
 > The Attr package contains utilities to administer the extended attributes on filesystem objects.
 
@@ -496,7 +478,7 @@ time { make; }
 time { make install; }
 ```
 
-### `16` - ACL
+### `15` - ACL
 > #### `2.3.1` or newer
 > The ACL package contains utilities to administer Access Control Lists, which are used to define more fine-grained discretionary access rights for files and directories.
 
@@ -515,7 +497,7 @@ time { make; }
 time { make install; }
 ```
 
-### `17` - libcap
+### `16` - libcap
 > #### `2.51` or newer
 > The libcap package implements the user-space interfaces to the POSIX 1003.1e capabilities available in Linux kernels. These capabilities are a partitioning of the all powerful root privilege into a set of distinct privileges.
 
@@ -531,7 +513,7 @@ time { make CC=${CC} SBINDIR=/sbin prefix=/usr lib=lib; }
 time { make CC=${CC} SBINDIR=/sbin prefix=/usr lib=lib install; }
 ```
 
-### `18` - Shadow
+### `17` - Shadow
 > #### `4.8.1` or newer
 > The Shadow package contains programs for handling passwords in a secure way.
 
@@ -581,7 +563,7 @@ sed -i 's|yes|no|' /etc/default/useradd
 passwd root
 ```
 
-### `19` - libexecinfo
+### `18` - libexecinfo
 > #### `1.1` or newer (from Heiwa/Linux fork)
 > The libexecinfo package contains backtrace facility that usually found in GNU libc (glibc).
 
@@ -594,7 +576,7 @@ time { make; }
 time { make PREFIX=/usr install; }
 ```
 
-### `20` - Clang/LLVM + libunwind, libcxxabi, and libcxx
+### `19` - Clang/LLVM + libunwind, libcxxabi, and libcxx
 > #### `12.x.x` or newer
 > - C language family frontend for LLVM;  
 > - C++ runtime stack unwinder from LLVM;  
@@ -814,7 +796,7 @@ grep -o -- -L/usr/lib dummy.log
 cd /sources/pkgs/
 ```
 
-### `21` - Pkgconf
+### `20` - Pkgconf
 > #### `1.7.4` or newer
 > The Pkgconf package contains a tool for passing the include path and/or library paths to build tools during the configure and make phases of package installations.
 
@@ -834,7 +816,7 @@ time { make; }
 time { make install && ln -sv pkgconf /usr/bin/pkg-config; }
 ```
 
-### `22` - Gettext-tiny
+### `21` - Gettext-tiny
 > #### `0.3.2` or newer
 > The Gettext-tiny package contains utilities for internationalization and localization. These allow programs to be compiled with NLS (Native Language Support), enabling them to output messages in the user's native language. A lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
 
@@ -852,7 +834,7 @@ time { make LIBINTL=MUSL prefix=/usr; }
 time { make LIBINTL=MUSL prefix=/usr install; }
 ```
 
-### `23` - OpenBSD Yacc
+### `22` - OpenBSD Yacc
 > #### `6.6` or newer
 > The OpenBSD Yacc package contains a parser generator.
 
@@ -873,7 +855,7 @@ time {
 }
 ```
 
-### `24` - Bzip2
+### `23` - Bzip2
 > #### `1.0.8` or newer
 > The Bzip2 package contains programs for compressing and decompressing files. Compressing text files with bzip2 yields a much better compression percentage than with the traditional gzip.
 
@@ -905,7 +887,7 @@ time {
 }
 ```
 
-### `25` - Perl
+### `24` - Perl
 > #### `5.32.1`
 > The Perl package contains the Practical Extraction and Report Language.
 
@@ -941,7 +923,7 @@ time { make; }
 time { make install; unset BUILD_ZLIB BUILD_BZIP2; }
 ```
 
-### `26` - OpenSSL
+### `25` - OpenSSL
 > #### `1.1.1k` or newer
 > The OpenSSL package contains management tools and libraries relating to cryptography. These are useful for providing cryptographic functions to other packages, such as OpenSSH, email applications, and web browsers (for accessing HTTPS sites).
 
@@ -965,7 +947,7 @@ time { make MANSUFFIX=ssl install; }
 mv -fv /usr/share/doc/openssl /usr/share/doc/openssl-1.1.1k
 ```
 
-### `27` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man, Procps-ng, Psmisc, Sed, Sysklogd, Tar)
+### `26` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man, Procps-ng, Psmisc, Sed, Sysklogd, Tar)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
@@ -1010,7 +992,59 @@ time { make; }
 time { make PREFIX=/ install; unset CFFGPT; }
 ```
 
-### `28` -  Xz
+### `27` - GNU M4
+> #### `1.4.19` or newer
+> The GNU M4 package contains a macro processor.
+
+> **Required!** Before `GNU Autoconf`.
+```bash
+# Configure source.
+ac_cv_header_sys_cdefs_h=no \
+ac_cv_lib_error_at_line=no  \
+./configure --prefix=/usr
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `28` - GNU Autoconf
+> #### `2.71` or newer
+> The GNU Autoconf package contains programs for producing shell scripts that can automatically configure source code.
+
+> **Required!** Before `GNU Automake` and `Argp-standalone`.
+```bash
+# Configure source.
+M4=/usr/bin/m4 HELP2MAN=/bin/true \
+./configure --prefix=/usr
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `29` - GNU Automake
+> #### `1.16.3` or newer
+> The GNU Automake package contains programs for generating Makefiles for use with Autoconf.
+
+> **Required!** Before `musl-fts`, `musl-obstack`, `musl-rpmatch`, and `Argp-standalone`.
+```bash
+# Configure source.
+./configure --prefix=/usr \
+            --docdir=/usr/share/doc/automake-1.16.3
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `30` -  Xz
 > #### `5.2.5`
 > The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
 
@@ -1028,7 +1062,7 @@ time { make; }
 time { make install; }
 ```
 
-### `29` - Zstd
+### `31` - Zstd
 > #### `1.5.0` or newer
 > The Zstd (Zstandard) package contains real-time compression algorithm, providing high compression ratios. It offers a very wide range of compression / speed trade-offs, while being backed by a very fast decoder.
 
@@ -1044,7 +1078,7 @@ time {
 }
 ```
 
-### `30` - Kmod
+### `32` - Kmod
 > #### `29` or newer
 > The Kmod package contains libraries and utilities for loading kernel modules
 
@@ -1072,7 +1106,7 @@ time {
 }
 ```
 
-### `31` - GNU Diffutils
+### `33` - GNU Diffutils
 > #### `3.7` or newer
 > The GNU Diffutils package contains programs that show the differences between files or directories.
 
@@ -1090,7 +1124,7 @@ time { make; }
 time { make install; }
 ```
 
-### `32` - GNU AWK
+### `34` - GNU AWK
 > #### `5.1.0` or newer
 > The GNU AWK (gawk) package contains programs for manipulating text files.
 
@@ -1109,7 +1143,7 @@ time { make; }
 time { make install; }
 ```
 
-### `33` - Pigz
+### `35` - Pigz
 > #### `2.6` or newer
 > The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
 
@@ -1123,7 +1157,7 @@ ln -sfv pigz unpigz; ln -sv pigz gzip; ln -sv unpigz gunzip
 install -vm755 -t /usr/bin/ pigz unpigz gzip gunzip
 ```
 
-### `34` - GNU Make
+### `36` - GNU Make
 > #### `4.3` or newer
 > The GNU Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
  
@@ -1139,7 +1173,7 @@ time { make; }
 time { make install; }
 ```
 
-### `35` - GNU Patch
+### `37` - GNU Patch
 > #### `2.7.6` or newer
 > The GNU Patch package contains a program for modifying or creating files by applying a patch file typically created by the diff program.
 
@@ -1157,7 +1191,7 @@ time { make; }
 time { make install; }
 ```
 
-### `36` - GNU Texinfo
+### `38` - GNU Texinfo
 > #### `6.8` or newer
 > The Texinfo package contains programs for reading, writing, and converting info pages.
 
@@ -1175,11 +1209,7 @@ time { make; }
 time { make install; }
 ```
 
-<h2 align="center">Belows are failed or untested!</h2>
-
-> Failed, since using `NetBSD libedit`. Resolving issue ..
-
-### `37` - GNU Bash
+### `39` - GNU Bash
 > #### `5.1` (with patch level 8) or newer
 > The GNU Bash package contains the Bourne-Again SHell.
 
@@ -1196,6 +1226,8 @@ time { make; }
 # Install.
 time { make install && mv -fv /usr/bin/bash /bin/.; }
 ```
+
+<h2 align="center">Belows are failed or untested!</h2>
 
 > Untested ..
 
@@ -1298,42 +1330,6 @@ time { make install && export CFLAGS="${COMMON_FLAGS}"; }
 ```bash
 # Configure source.
 ./configure --prefix=/usr
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
-```
-
-> Failed, since using `OpenBSD M4`. Resolving issue ..
-
-### `??` - GNU Autoconf
-> #### `2.71` or newer
-> The GNU Autoconf package contains programs for producing shell scripts that can automatically configure source code.
-
-> **Required!** Before `GNU Automake` and `Argp-standalone`.
-```bash
-# Configure source.
-M4=/usr/bin/m4 HELP2MAN=/bin/true \
-./configure --prefix=/usr
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
-```
-
-### `??` - GNU Automake
-> #### `1.16.3` or newer
-> The GNU Automake package contains programs for generating Makefiles for use with Autoconf.
-
-> **Required!** Before `musl-fts`, `musl-obstack`, `musl-rpmatch`, and `Argp-standalone`.
-```bash
-# Configure source.
-./configure --prefix=/usr \
-            --docdir=/usr/share/doc/automake-1.16.3
 
 # Build.
 time { make; }
