@@ -588,8 +588,8 @@ sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
             --mandir=/share/man              \
             --parallel=$(nproc)              \
             --docdir=/share/doc/cmake-3.20.5 \
-            --system-zlib --                 \
-            -DCMAKE_USE_OPENSSL=OFF          \
+            --system-zlib                    \
+            -- -DCMAKE_USE_OPENSSL=OFF          \
             -DCMAKE_C_FLAGS="-I/clang1-tools/include" \
             -DCMAKE_CXX_FLAGS="-I/clang1-tools/include"
 
