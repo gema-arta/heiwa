@@ -337,7 +337,7 @@ patch -Np1 -i ../../extra/tzdata/patches/0002-fix-implicit-declaration-warnings-
 export timezones="africa antarctica asia australasia europe northamerica
 southamerica etcetera backward factory"
 
-# Build. -> Ignore "pkg-config: No such file or directory" while building `posixtz` <-
+# Build. -> Ignore "pkg-config: No such file or directory" while building `posixtz`! <-
 time {
     make CC=${CC} CFLAGS="$CFLAGS -DHAVE_STDINT_H=1" \
     TZDIR="/usr/share/zoneinfo" && \
@@ -348,7 +348,7 @@ time {
 install -vm755 -t /usr/bin/ tzselect zic zdump posixtz-0.5/posixtz
 install -vm644 -t /usr/share/man/man8/ {zic,zdump}.8
 
-# Install zoneinfo. -> Ignore all warnings <-
+# Install zoneinfo. -> Ignore all warnings! <-
 install -vm444 -t /usr/share/zoneinfo/ {iso3166,zone{1970,}}.tab
 zic -y ./yearistype -d /usr/share/zoneinfo ${timezones}
 zic -y ./yearistype -d /usr/share/zoneinfo/right -L leapseconds ${timezones}
