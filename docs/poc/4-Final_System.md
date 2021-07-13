@@ -433,7 +433,25 @@ time { make SHLIB_LIBS="-lncursesw"; }
 time { make SHLIB_LIBS="-lncursesw" install; }
 ```
 
-### `13` - Flex
+### `13` - GNU M4
+> #### `1.4.19` or newer
+> The GNU M4 package contains a macro processor.
+
+> **Required!** Before `GNU Autoconf`.
+```bash
+# Configure source.
+ac_cv_header_sys_cdefs_h=no \
+ac_cv_lib_error_at_line=no  \
+./configure --prefix=/usr
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `14` - Flex
 > #### `2.6.4` or newer
 > The Flex package contains a utility for generating programs that recognize patterns in text.
 
@@ -458,7 +476,7 @@ time { make install && ln -sv flex /usr/bin/lex; }
 # To support those programs, create a symbolic link named `lex` that runs `flex` in `lex` emulation mode.
 ```
 
-### `14` - Attr
+### `15` - Attr
 > #### `2.5.1` or newer
 > The Attr package contains utilities to administer the extended attributes on filesystem objects.
 
@@ -478,7 +496,7 @@ time { make; }
 time { make install; }
 ```
 
-### `15` - ACL
+### `16` - ACL
 > #### `2.3.1` or newer
 > The ACL package contains utilities to administer Access Control Lists, which are used to define more fine-grained discretionary access rights for files and directories.
 
@@ -497,7 +515,7 @@ time { make; }
 time { make install; }
 ```
 
-### `16` - libcap
+### `17` - libcap
 > #### `2.51` or newer
 > The libcap package implements the user-space interfaces to the POSIX 1003.1e capabilities available in Linux kernels. These capabilities are a partitioning of the all powerful root privilege into a set of distinct privileges.
 
@@ -513,7 +531,7 @@ time { make CC=${CC} SBINDIR=/sbin prefix=/usr lib=lib; }
 time { make CC=${CC} SBINDIR=/sbin prefix=/usr lib=lib install; }
 ```
 
-### `17` - Shadow
+### `18` - Shadow
 > #### `4.8.1` or newer
 > The Shadow package contains programs for handling passwords in a secure way.
 
@@ -563,7 +581,7 @@ sed -i 's|yes|no|' /etc/default/useradd
 passwd root
 ```
 
-### `18` - libexecinfo
+### `19` - libexecinfo
 > #### `1.1` or newer (from Heiwa/Linux fork)
 > The libexecinfo package contains backtrace facility that usually found in GNU libc (glibc).
 
@@ -576,7 +594,7 @@ time { make; }
 time { make PREFIX=/usr install; }
 ```
 
-### `19` - Clang/LLVM + libunwind, libcxxabi, and libcxx
+### `20` - Clang/LLVM + libunwind, libcxxabi, and libcxx
 > #### `12.x.x` or newer
 > - C language family frontend for LLVM;  
 > - C++ runtime stack unwinder from LLVM;  
@@ -796,7 +814,7 @@ grep -o -- -L/usr/lib dummy.log
 cd /sources/pkgs/
 ```
 
-### `20` - Pkgconf
+### `21` - Pkgconf
 > #### `1.7.4` or newer
 > The Pkgconf package contains a tool for passing the include path and/or library paths to build tools during the configure and make phases of package installations.
 
@@ -816,7 +834,7 @@ time { make; }
 time { make install && ln -sv pkgconf /usr/bin/pkg-config; }
 ```
 
-### `21` - Gettext-tiny
+### `22` - Gettext-tiny
 > #### `0.3.2` or newer
 > The Gettext-tiny package contains utilities for internationalization and localization. These allow programs to be compiled with NLS (Native Language Support), enabling them to output messages in the user's native language. A lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
 
@@ -834,7 +852,7 @@ time { make LIBINTL=MUSL prefix=/usr; }
 time { make LIBINTL=MUSL prefix=/usr install; }
 ```
 
-### `22` - OpenBSD Yacc
+### `23` - OpenBSD Yacc
 > #### `6.6` or newer
 > The OpenBSD Yacc package contains a parser generator.
 
@@ -855,7 +873,7 @@ time {
 }
 ```
 
-### `23` - Bzip2
+### `24` - Bzip2
 > #### `1.0.8` or newer
 > The Bzip2 package contains programs for compressing and decompressing files. Compressing text files with bzip2 yields a much better compression percentage than with the traditional gzip.
 
@@ -887,7 +905,7 @@ time {
 }
 ```
 
-### `24` - Perl
+### `25` - Perl
 > #### `5.32.1`
 > The Perl package contains the Practical Extraction and Report Language.
 
@@ -923,7 +941,7 @@ time { make; }
 time { make install; unset BUILD_ZLIB BUILD_BZIP2; }
 ```
 
-### `25` - OpenSSL
+### `26` - OpenSSL
 > #### `1.1.1k` or newer
 > The OpenSSL package contains management tools and libraries relating to cryptography. These are useful for providing cryptographic functions to other packages, such as OpenSSH, email applications, and web browsers (for accessing HTTPS sites).
 
@@ -947,7 +965,7 @@ time { make MANSUFFIX=ssl install; }
 mv -fv /usr/share/doc/openssl /usr/share/doc/openssl-1.1.1k
 ```
 
-### `26` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man, Procps-ng, Psmisc, Sed, Sysklogd, Tar)
+### `27` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man, Procps-ng, Psmisc, Sed, Sysklogd, Tar)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
@@ -990,24 +1008,6 @@ time { make; }
 
 # Install.
 time { make PREFIX=/ install; unset CFFGPT; }
-```
-
-### `27` - GNU M4
-> #### `1.4.19` or newer
-> The GNU M4 package contains a macro processor.
-
-> **Required!** Before `GNU Autoconf`.
-```bash
-# Configure source.
-ac_cv_header_sys_cdefs_h=no \
-ac_cv_lib_error_at_line=no  \
-./configure --prefix=/usr
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
 ```
 
 ### `28` - GNU Autoconf
