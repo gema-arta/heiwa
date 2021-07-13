@@ -394,7 +394,7 @@ time { make -C build install; }
 > #### `0.3.2` or newer
 > The NetBSD Curses package contains libraries for terminal-independent handling of character screens.
 
-> **Required!** Before `GNU Bash`, `NetBSD libedit`, `GNU Texinfo`, and `Util-linux`.
+> **Required!** Before `GNU Bash`, `GNU Readline`, `GNU Texinfo`, and `Util-linux`.
 ```bash
 # Build.
 time { make CFLAGS="$CFLAGS -fPIC"; }
@@ -410,32 +410,27 @@ time {
 rm -fv /usr/share/man/man3/attr_{g,s}et.3
 ```
 
-### `12` - NetBSD libedit
-> #### `20210522-3.1` or newer
-> The NetBSD libedit pacakage contains library providing line editing, history, and tokenisation functions.
+### `12` - GNU Readline
+> #### `8.1` or newer
+> The GNU Readline pacakage contains library providing line editing, history, and tokenisation functions.
 
 > **Required!** Before `GNU Bash` and `GNU AWK`.
 ```bash
-# Configure source.
-CFLAGS="$CFLAGS -D__STDC_ISO_10646__" \
-./configure --prefix=/usr             \
-            --sysconfdir=/etc         \
-            --localstatedir=/var
+# Reinstalling Readline will cause the old libraries to be moved to <libraryname>.old. While this is normally not a problem, in some cases it can trigger a linking bug in ldconfig.
+# This can be avoided by issuing the following two seds.
+sed -i '/MV.*old/d' Makefile.in
+sed -i '/{OLDSUFF}/c:' support/shlib-install
 
-# Build.
-time { make; }
+# Configure source.
+./configure --prefix=/usr    \
+            --with-curses    \
+            --docdir=/usr/share/doc/readline-8.1
+
+# Build. Force to link against with `libncursesw` library.
+time { make SHLIB_LIBS="-lncursesw"; }
 
 # Install.
-time { make install; }
-
-# Create symlinks and fake headers to replace GNU `readline`.
-for L in history readline; do
-    ln -sv libedit.a  /usr/lib/lib${L}.a
-    ln -sv libedit.so /usr/lib/lib${L}.so
-done; unset L
-ln -sv libedit.pc /usr/lib/pkgconfig/readline.pc
-mkdir -v /usr/include/readline
-ln -sv ../editline/readline.h /usr/include/readline/readline.h
+time { make SHLIB_LIBS="-lncursesw" install; }
 ```
 
 ### `13` - GNU M4
@@ -724,7 +719,7 @@ cmake -B build \
     -DLLVM_ENABLE_UNWIND_TABLES=OFF                            \
     -DLLVM_ENABLE_RTTI=ON                                      \
     -DLLVM_ENABLE_ZLIB=ON                                      \
-    -DLLVM_ENABLE_LIBEDIT=ON                                   \
+    -DLLVM_ENABLE_LIBEDIT=OFF                                  \
     -DLLVM_ENABLE_LIBXML2=OFF                                  \
     -DLLVM_INCLUDE_GO_TESTS=OFF                                \
     -DLLVM_INCLUDE_TESTS=OFF                                   \
