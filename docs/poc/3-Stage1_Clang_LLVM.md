@@ -567,7 +567,7 @@ ax_cv_c_float_words_bigendian=no     \
             --enable-shared          \
             --without-ensurepip
 
-# Build.
+# Build. -> Ignore all issues! <-
 time { make; }
 
 # Install.
