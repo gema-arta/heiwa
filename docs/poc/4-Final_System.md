@@ -1288,7 +1288,20 @@ time { make install; }
 > **Required!** Before `Elfutils - libelf`.
 ```bash
 # Re-generate configure script.
-CFLAGS="$CFLAGS -fPIC" autoreconf -fvi
+autoreconf -fvi
+
+# Configure source.
+CFLAGS="$CFLAGS -fPIC"        \
+./configure --prefix=/usr     \
+            --disable-static  \
+            --sysconfdir=/etc \
+            --localstatedir=/var
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
 ```
 
 ### `44` - musl-fts
