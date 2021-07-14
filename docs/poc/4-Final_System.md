@@ -1122,7 +1122,7 @@ time { make install; }
 > **Required!**
 ```bash
 # Build.
-time { make CC=${CC} CFLAGS="$CFLAGS"; }
+time { make CC=${CC}; }
 
 # Install and create symlinks as `gzip` tools.
 ln -sfv pigz unpigz; ln -sv pigz gzip; ln -sv unpigz gunzip
