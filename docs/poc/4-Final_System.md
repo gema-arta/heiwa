@@ -1380,6 +1380,21 @@ time { make install; }
 
 > **Required!** Before `Iproute2`.
 ```bash
+# Configure source.
+CFLAGS="$CFLAGS -Wno-error -DFNM_EXTMATCH=0 -Wno-error -Wl,-z,stack-size=2097152" \
+./configure --prefix=/usr        \
+            --program-prefix=eu- \
+            --disable-debuginfod \
+            --disable-libdebuginfod
+
+# Build.
+time { make; }
+
+# Install.
+time {
+    make -C libelf install && \
+    install -vm644 -t /usr/lib/pkgconfig/ config/libelf.pc 
+}
 ```
 
 <h2 align="center">Belows are failed or untested!</h2>
