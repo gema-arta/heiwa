@@ -1121,11 +1121,14 @@ time { make install; }
 
 > **Required!**
 ```bash
+# Make sure to use symlink instead of hardlink for `unpigz`.
+sed -i 's|ln -f|ln -sf|' Makefile
+
 # Build.
 time { make CC=${CC}; }
 
 # Install and create symlinks as `gzip` tools.
-ln -sfv pigz unpigz; ln -sv pigz gzip; ln -sv unpigz gunzip
+ln -sv pigz gzip; ln -sv unpigz gunzip
 install -vm755 -t /usr/bin/ pigz unpigz gzip gunzip
 ```
 
