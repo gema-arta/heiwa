@@ -1283,7 +1283,7 @@ time { make install; }
 
 ### `43` - argp-standalone
 > #### `1.4.1` or newer (from Void Linux)
-> The argp-standalone package contains hierarchial argument parsing library broken out from GNU libc.
+> The argp-standalone package contains hierarchial argument parsing library broken out from GNU libc (glibc).
 
 > **Required!** Before `Elfutils - libelf`.
 ```bash
