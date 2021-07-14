@@ -1170,7 +1170,7 @@ time { make install; }
 > #### `6.8` or newer
 > The Texinfo package contains programs for reading, writing, and converting info pages.
 
-> **Required!** Before `GNU Bash`.
+> **Required!**
 ```bash
 # Configure source.
 ac_cv_header_sys_cdefs_h=no \
