@@ -1287,13 +1287,12 @@ time { make install; }
 
 > **Required!** Before `Elfutils - libelf`.
 ```bash
-# Re-generate configure script.
+# Generate configure script.
 autoreconf -fvi
 
 # Configure source.
 CFLAGS="$CFLAGS -fPIC"        \
 ./configure --prefix=/usr     \
-            --disable-static  \
             --sysconfdir=/etc \
             --localstatedir=/var
 
