@@ -1376,7 +1376,7 @@ time { make install; }
 
 ### `47` - Elfutils - libelf
 > #### `0.185` or newer
-> The Libelf package contains library for handling ELF (Executable and Linkable Format) files.
+> The Elfutils package contains library for handling ELF (Executable and Linkable Format) files.
 
 > **Required!** Before `Iproute2`.
 ```bash
