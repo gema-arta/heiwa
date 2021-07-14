@@ -1236,7 +1236,7 @@ time {
 > #### `2.4.6` or newer
 > The GNU libtool package contains the GNU generic library support script. It wraps the complexity of using shared libraries in a consistent, portable interface.
 
-> **Required!** Before `musl-fts`, `musl-obstack`, `musl-rpmatch`, and `Argp-standalone`.
+> **Required!** Before `musl-fts`, `musl-obstack`, `musl-rpmatch`, and `argp-standalone`.
 ```bash
 # Configure source.
 ./configure --prefix=/usr
@@ -1252,7 +1252,7 @@ time { make install; }
 > #### `2.71` or newer
 > The GNU Autoconf package contains programs for producing shell scripts that can automatically configure source code.
 
-> **Required!** Before `GNU Automake` and `Argp-standalone`.
+> **Required!** Before `GNU Automake` and `argp-standalone`.
 ```bash
 # Configure source.
 ./configure --prefix=/usr
@@ -1268,7 +1268,7 @@ time { make install; }
 > #### `1.16.3` or newer
 > The GNU Automake package contains programs for generating Makefiles for use with Autoconf.
 
-> **Required!** Before `musl-fts`, `musl-obstack`, `musl-rpmatch`, and `Argp-standalone`.
+> **Required!** Before `musl-fts`, `musl-obstack`, `musl-rpmatch`, and `argp-standalone`.
 ```bash
 # Configure source.
 ./configure --prefix=/usr \
@@ -1281,9 +1281,9 @@ time { make; }
 time { make install; }
 ```
 
-### `43` - Argp-standalone
+### `43` - argp-standalone
 > #### `1.4.1` or newer (from Void Linux)
-> The Argp-standalone package contains hierarchial argument parsing library broken out from GNU libc.
+> The argp-standalone package contains hierarchial argument parsing library broken out from GNU libc.
 
 > **Required!** Before `Elfutils - libelf`.
 ```bash
