@@ -1005,7 +1005,7 @@ mv -fv /usr/share/doc/openssl /usr/share/doc/openssl-1.1.1k
 
 > **Required!**
 ```bash
-# Copy Toybox's .config file.
+# Copy the Toybox .config file.
 cp -v ../../extra/toybox/files/.config.finalsys .config
 
 # Make sure to enable `libcrypto` and `libz`.
