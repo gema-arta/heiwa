@@ -1315,7 +1315,7 @@ time { make install; }
 ```
 
 ### `45` - musl-obstack
-> #### `1.1` or newer
+> #### `1.2.2` or newer
 > The musl-obstack package contains a standalone library to implement GNU libc obstack.
 
 > **Required!** Before `Elfutils - libelf`.
@@ -1338,7 +1338,7 @@ time { make install; }
 ```
 
 ### `46` - musl-rpmatch
-> #### `1.2.7` or newer
+> #### `1.1` or newer
 > The musl-rpmatch package contains implementation of rpmatch(3) for musl libc.
 
 > **Required!**
