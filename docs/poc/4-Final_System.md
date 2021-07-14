@@ -1009,7 +1009,7 @@ mv -fv /usr/share/doc/openssl /usr/share/doc/openssl-1.1.1k
 cp -v ../../extra/toybox/files/.config.finalsys .config
 
 # Make sure to enable `libcrypto` and `libz`.
-grep -iE --color=auto "libcrypto|libz" .config
+grep -E --color=auto "LIBCRYPTO|LIBZ" .config
 
 export CFFGPT="bc base64 base32 basename cat chgrp chmod chown chroot cksum comm cp cut
 date dd df dirname du echo env expand expr factor false fmt fold groups head hostid id
