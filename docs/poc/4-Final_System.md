@@ -911,6 +911,7 @@ time {
 
 > **Required!** Before `Perl`.
 ```bash
+# Configure source.
 ./configure --prefix=/usr    \
             --disable-static \
             --enable-libgdbm-compat
