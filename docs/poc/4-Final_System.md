@@ -923,9 +923,9 @@ time { make; }
 time { make install; }
 ```
 
-### `26` - GNU troff
+### `26` - GNU Troff
 > #### `1.22.4` or newer
-> The GNU troff (groff) package contains programs for processing and formatting text.
+> The GNU Troff (groff) package contains programs for processing and formatting text.
 
 > **Required!** Before `Perl`.
 ```bash
