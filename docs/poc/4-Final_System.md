@@ -1194,8 +1194,7 @@ time { make install; }
 ./configure --prefix=/usr                    \
             --docdir=/usr/share/doc/bash-5.1 \
             --without-bash-malloc            \
-            --with-installed-readline        \
-            --with-curses
+            --with-installed-readline
 
 # Build.
 time { make; }
