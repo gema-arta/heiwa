@@ -1300,7 +1300,8 @@ CFLAGS="$CFLAGS -fPIC"        \
 time { make; }
 
 # Install.
-time { make install; }
+install -vm644 -t /usr/lib/  libargp.a 
+install -vm644 -t /usr/include/ argp.h 
 ```
 
 ### `44` - musl-fts
