@@ -905,7 +905,24 @@ time {
 }
 ```
 
-### `25` - Perl
+### `25`- GDBM
+> #### `1.20` or newer
+> The GDBM package contains the GNU Database Manager. It is a library of database functions that use extensible hashing and works similar to the standard UNIX dbm. The library provides primitives for storing key/data pairs, searching and retrieving the data by its key and deleting a key along with its data.
+
+> **Required!** Before `Perl`.
+```bash
+./configure --prefix=/usr    \
+            --disable-static \
+            --enable-libgdbm-compat
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `26` - Perl
 > #### `5.32.1`
 > The Perl package contains the Practical Extraction and Report Language.
 
@@ -941,7 +958,7 @@ time { make; }
 time { make install; unset BUILD_ZLIB BUILD_BZIP2; }
 ```
 
-### `26` - OpenSSL
+### `27` - OpenSSL
 > #### `1.1.1k` or newer
 > The OpenSSL package contains management tools and libraries relating to cryptography. These are useful for providing cryptographic functions to other packages, such as OpenSSH, email applications, and web browsers (for accessing HTTPS sites).
 
@@ -965,7 +982,7 @@ time { make MANSUFFIX=ssl install; }
 mv -fv /usr/share/doc/openssl /usr/share/doc/openssl-1.1.1k
 ```
 
-### `27` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man, Procps-ng, Psmisc, Sed, Sysklogd, Tar)
+### `28` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man, Procps-ng, Psmisc, Sed, Sysklogd, Tar)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
@@ -1010,7 +1027,7 @@ time { make; }
 time { make PREFIX=/ install; unset CFFGPT; }
 ```
 
-### `28` - GNU Autoconf
+### `29` - GNU Autoconf
 > #### `2.71` or newer
 > The GNU Autoconf package contains programs for producing shell scripts that can automatically configure source code.
 
@@ -1027,7 +1044,7 @@ time { make; }
 time { make install; }
 ```
 
-### `29` - GNU Automake
+### `30` - GNU Automake
 > #### `1.16.3` or newer
 > The GNU Automake package contains programs for generating Makefiles for use with Autoconf.
 
@@ -1044,7 +1061,7 @@ time { make; }
 time { make install; }
 ```
 
-### `30` -  Xz
+### `31` -  Xz
 > #### `5.2.5`
 > The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
 
@@ -1062,7 +1079,7 @@ time { make; }
 time { make install; }
 ```
 
-### `31` - Zstd
+### `32` - Zstd
 > #### `1.5.0` or newer
 > The Zstd (Zstandard) package contains real-time compression algorithm, providing high compression ratios. It offers a very wide range of compression / speed trade-offs, while being backed by a very fast decoder.
 
@@ -1078,7 +1095,7 @@ time {
 }
 ```
 
-### `32` - Kmod
+### `33` - Kmod
 > #### `29` or newer
 > The Kmod package contains libraries and utilities for loading kernel modules
 
@@ -1106,7 +1123,7 @@ time {
 }
 ```
 
-### `33` - GNU Diffutils
+### `34` - GNU Diffutils
 > #### `3.7` or newer
 > The GNU Diffutils package contains programs that show the differences between files or directories.
 
@@ -1124,7 +1141,7 @@ time { make; }
 time { make install; }
 ```
 
-### `34` - GNU AWK
+### `35` - GNU AWK
 > #### `5.1.0` or newer
 > The GNU AWK (gawk) package contains programs for manipulating text files.
 
@@ -1143,7 +1160,7 @@ time { make; }
 time { make install; }
 ```
 
-### `35` - Pigz
+### `36` - Pigz
 > #### `2.6` or newer
 > The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
 
@@ -1157,7 +1174,7 @@ ln -sfv pigz unpigz; ln -sv pigz gzip; ln -sv unpigz gunzip
 install -vm755 -t /usr/bin/ pigz unpigz gzip gunzip
 ```
 
-### `36` - GNU Make
+### `37` - GNU Make
 > #### `4.3` or newer
 > The GNU Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
  
@@ -1173,7 +1190,7 @@ time { make; }
 time { make install; }
 ```
 
-### `37` - GNU Patch
+### `38` - GNU Patch
 > #### `2.7.6` or newer
 > The GNU Patch package contains a program for modifying or creating files by applying a patch file typically created by the diff program.
 
@@ -1191,7 +1208,7 @@ time { make; }
 time { make install; }
 ```
 
-### `38` - GNU Texinfo
+### `39` - GNU Texinfo
 > #### `6.8` or newer
 > The Texinfo package contains programs for reading, writing, and converting info pages.
 
@@ -1209,7 +1226,7 @@ time { make; }
 time { make install; }
 ```
 
-### `39` - GNU Bash
+### `40` - GNU Bash
 > #### `5.1` (with patch level 8) or newer
 > The GNU Bash package contains the Bourne-Again SHell.
 
