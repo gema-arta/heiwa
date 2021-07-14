@@ -1360,12 +1360,12 @@ time { make install; }
 ./bootstrap.sh
 
 # Configure source.
-CFLAGS="$CFLAGS -fPIC"        \
-./configure --prefix=/usr     \
-            --enable-shared   \
-            --enable-static   \
-            --sysconfdir=/etc \
-            --localstatedir=/var
+CFLAGS="$CFLAGS -fPIC"           \
+./configure --prefix=/usr        \
+            --sysconfdir=/etc    \
+            --localstatedir=/var \
+            --enable-shared      \
+            --enable-static
 
 # Build.
 time { make; }
