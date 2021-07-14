@@ -1051,7 +1051,6 @@ time { make install; }
 > **Required!** Before `GNU Automake` and `Argp-standalone`.
 ```bash
 # Configure source.
-M4=/usr/bin/m4 HELP2MAN=/bin/true \
 ./configure --prefix=/usr
 
 # Build.
