@@ -1044,7 +1044,128 @@ time { make; }
 time { make PREFIX=/ install; unset CFFGPT; }
 ```
 
-### `30` -  Xz
+### `30` - GNU Diffutils
+> #### `3.7` or newer
+> The GNU Diffutils package contains programs that show the differences between files or directories.
+
+> **Required!**
+```bash
+# Configure source.
+ac_cv_header_sys_cdefs_h=no \
+ac_cv_lib_error_at_line=no  \
+./configure --prefix=/usr
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `31` - GNU AWK
+> #### `5.1.0` or newer
+> The GNU AWK (gawk) package contains programs for manipulating text files.
+
+> **Required!**
+```bash
+# Ensure some unneeded files are not installed.
+sed -i 's|extras||' Makefile.in
+
+# Configure source.
+./configure --prefix=/usr
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `32` - Pigz
+> #### `2.6` or newer
+> The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
+
+> **Required!**
+```bash
+# Build.
+time { make CC=${CC} CFLAGS="$CFLAGS"; }
+
+# Install and create symlinks as `gzip` tools.
+ln -sfv pigz unpigz; ln -sv pigz gzip; ln -sv unpigz gunzip
+install -vm755 -t /usr/bin/ pigz unpigz gzip gunzip
+```
+
+### `33` - GNU Make
+> #### `4.3` or newer
+> The GNU Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
+ 
+> **Required!**
+```bash
+# Configure source.
+./configure --prefix=/usr
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `34` - GNU Patch
+> #### `2.7.6` or newer
+> The GNU Patch package contains a program for modifying or creating files by applying a patch file typically created by the diff program.
+
+> **Required!**
+```bash
+# Configure source.
+ac_cv_header_sys_cdefs_h=no \
+ac_cv_lib_error_at_line=no  \
+./configure --prefix=/usr
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `35` - GNU Texinfo
+> #### `6.8` or newer
+> The Texinfo package contains programs for reading, writing, and converting info pages.
+
+> **Required!** Before `GNU Bash`.
+```bash
+# Configure source.
+ac_cv_header_sys_cdefs_h=no \
+ac_cv_lib_error_at_line=no  \
+./configure --prefix=/usr
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `36` - GNU Bash
+> #### `5.1` (with patch level 8) or newer
+> The GNU Bash package contains the Bourne-Again SHell.
+
+> **Required!**
+```bash
+# Configure source.
+./configure --prefix=/usr                    \
+            --docdir=/usr/share/doc/bash-5.1 \
+            --without-bash-malloc --with-curses
+
+# Build.
+time { make; }
+
+# Install.
+time { make install && mv -fv /usr/bin/bash /bin/.; }
+```
+
+### `37` -  Xz
 > #### `5.2.5`
 > The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
 
@@ -1062,7 +1183,7 @@ time { make; }
 time { make install; }
 ```
 
-### `31` - Zstd
+### `38` - Zstd
 > #### `1.5.0` or newer
 > The Zstd (Zstandard) package contains real-time compression algorithm, providing high compression ratios. It offers a very wide range of compression / speed trade-offs, while being backed by a very fast decoder.
 
@@ -1078,7 +1199,7 @@ time {
 }
 ```
 
-### `32` - Kmod
+### `39` - Kmod
 > #### `29` or newer
 > The Kmod package contains libraries and utilities for loading kernel modules
 
@@ -1104,127 +1225,6 @@ time {
         ln -sv kmod /bin/${B}
     done; unset B
 }
-```
-
-### `33` - GNU Diffutils
-> #### `3.7` or newer
-> The GNU Diffutils package contains programs that show the differences between files or directories.
-
-> **Required!**
-```bash
-# Configure source.
-ac_cv_header_sys_cdefs_h=no \
-ac_cv_lib_error_at_line=no  \
-./configure --prefix=/usr
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
-```
-
-### `34` - GNU AWK
-> #### `5.1.0` or newer
-> The GNU AWK (gawk) package contains programs for manipulating text files.
-
-> **Required!**
-```bash
-# Ensure some unneeded files are not installed.
-sed -i 's|extras||' Makefile.in
-
-# Configure source.
-./configure --prefix=/usr
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
-```
-
-### `35` - Pigz
-> #### `2.6` or newer
-> The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
-
-> **Required!**
-```bash
-# Build.
-time { make CC=${CC} CFLAGS="$CFLAGS"; }
-
-# Install and create symlinks as `gzip` tools.
-ln -sfv pigz unpigz; ln -sv pigz gzip; ln -sv unpigz gunzip
-install -vm755 -t /usr/bin/ pigz unpigz gzip gunzip
-```
-
-### `36` - GNU Make
-> #### `4.3` or newer
-> The GNU Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
- 
-> **Required!**
-```bash
-# Configure source.
-./configure --prefix=/usr
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
-```
-
-### `37` - GNU Patch
-> #### `2.7.6` or newer
-> The GNU Patch package contains a program for modifying or creating files by applying a patch file typically created by the diff program.
-
-> **Required!**
-```bash
-# Configure source.
-ac_cv_header_sys_cdefs_h=no \
-ac_cv_lib_error_at_line=no  \
-./configure --prefix=/usr
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
-```
-
-### `38` - GNU Texinfo
-> #### `6.8` or newer
-> The Texinfo package contains programs for reading, writing, and converting info pages.
-
-> **Required!** Before `GNU Bash`.
-```bash
-# Configure source.
-ac_cv_header_sys_cdefs_h=no \
-ac_cv_lib_error_at_line=no  \
-./configure --prefix=/usr
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
-```
-
-### `39` - GNU Bash
-> #### `5.1` (with patch level 8) or newer
-> The GNU Bash package contains the Bourne-Again SHell.
-
-> **Required!**
-```bash
-# Configure source.
-./configure --prefix=/usr                    \
-            --docdir=/usr/share/doc/bash-5.1 \
-            --without-bash-malloc --with-curses
-
-# Build.
-time { make; }
-
-# Install.
-time { make install && mv -fv /usr/bin/bash /bin/.; }
 ```
 
 <h2 align="center">Belows are failed or untested!</h2>
