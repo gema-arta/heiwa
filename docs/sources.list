@@ -48,3 +48,7 @@ https://ftp.gnu.org/gnu/gdbm/gdbm-1.20.tar.gz
 https://ftp.gnu.org/gnu/groff/groff-1.22.4.tar.gz
 https://www.openssl.org/source/openssl-1.1.1k.tar.gz
 https://www.kernel.org/pub/linux/utils/kernel/kmod/kmod-29.tar.xz
+https://ftp.gnu.org/gnu/libtool/libtool-2.4.6.tar.xz
+https://ftp.gnu.org/gnu/autoconf/autoconf-2.71.tar.xz
+https://ftp.gnu.org/gnu/automake/automake-1.16.3.tar.xz
+https://github.com/ericonr/argp-standalone/archive/1.4.1.tar.gz
