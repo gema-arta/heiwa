@@ -1028,7 +1028,23 @@ time { make; }
 time { make PREFIX=/ install; unset CFFGPT; }
 ```
 
-### `29` - GNU Autoconf
+### `29` - GNU libtool
+> #### `2.4.6` or newer
+> The GNU libtool package contains the GNU generic library support script. It wraps the complexity of using shared libraries in a consistent, portable interface.
+
+> **Required!** Before `musl-fts`, `musl-obstack`, `musl-rpmatch`, and `Argp-standalone`.
+```bash
+# Configure source.
+./configure --prefix=/usr
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `30` - GNU Autoconf
 > #### `2.71` or newer
 > The GNU Autoconf package contains programs for producing shell scripts that can automatically configure source code.
 
@@ -1045,7 +1061,7 @@ time { make; }
 time { make install; }
 ```
 
-### `30` - GNU Automake
+### `31` - GNU Automake
 > #### `1.16.3` or newer
 > The GNU Automake package contains programs for generating Makefiles for use with Autoconf.
 
@@ -1062,7 +1078,7 @@ time { make; }
 time { make install; }
 ```
 
-### `31` -  Xz
+### `32` -  Xz
 > #### `5.2.5`
 > The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
 
@@ -1080,7 +1096,7 @@ time { make; }
 time { make install; }
 ```
 
-### `32` - Zstd
+### `33` - Zstd
 > #### `1.5.0` or newer
 > The Zstd (Zstandard) package contains real-time compression algorithm, providing high compression ratios. It offers a very wide range of compression / speed trade-offs, while being backed by a very fast decoder.
 
@@ -1096,7 +1112,7 @@ time {
 }
 ```
 
-### `33` - Kmod
+### `34` - Kmod
 > #### `29` or newer
 > The Kmod package contains libraries and utilities for loading kernel modules
 
@@ -1124,7 +1140,7 @@ time {
 }
 ```
 
-### `34` - GNU Diffutils
+### `35` - GNU Diffutils
 > #### `3.7` or newer
 > The GNU Diffutils package contains programs that show the differences between files or directories.
 
@@ -1142,7 +1158,7 @@ time { make; }
 time { make install; }
 ```
 
-### `35` - GNU AWK
+### `36` - GNU AWK
 > #### `5.1.0` or newer
 > The GNU AWK (gawk) package contains programs for manipulating text files.
 
@@ -1161,7 +1177,7 @@ time { make; }
 time { make install; }
 ```
 
-### `36` - Pigz
+### `37` - Pigz
 > #### `2.6` or newer
 > The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
 
@@ -1175,7 +1191,7 @@ ln -sfv pigz unpigz; ln -sv pigz gzip; ln -sv unpigz gunzip
 install -vm755 -t /usr/bin/ pigz unpigz gzip gunzip
 ```
 
-### `37` - GNU Make
+### `38` - GNU Make
 > #### `4.3` or newer
 > The GNU Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
  
@@ -1191,7 +1207,7 @@ time { make; }
 time { make install; }
 ```
 
-### `38` - GNU Patch
+### `39` - GNU Patch
 > #### `2.7.6` or newer
 > The GNU Patch package contains a program for modifying or creating files by applying a patch file typically created by the diff program.
 
@@ -1209,7 +1225,7 @@ time { make; }
 time { make install; }
 ```
 
-### `39` - GNU Texinfo
+### `40` - GNU Texinfo
 > #### `6.8` or newer
 > The Texinfo package contains programs for reading, writing, and converting info pages.
 
@@ -1227,7 +1243,7 @@ time { make; }
 time { make install; }
 ```
 
-### `40` - GNU Bash
+### `41` - GNU Bash
 > #### `5.1` (with patch level 8) or newer
 > The GNU Bash package contains the Bourne-Again SHell.
 
@@ -1338,22 +1354,6 @@ time { make; }
 
 # Install.
 time { make install && export CFLAGS="${COMMON_FLAGS}"; }
-```
-
-### `??` - GNU libtool
-> #### `2.4.6` or newer
-> The GNU libtool package contains the GNU generic library support script. It wraps the complexity of using shared libraries in a consistent, portable interface.
-
-> **Required!** Before `musl-fts`, `musl-obstack`, `musl-rpmatch`, and `Argp-standalone`.
-```bash
-# Configure source.
-./configure --prefix=/usr
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
 ```
 
 ### `??` - musl-fts
