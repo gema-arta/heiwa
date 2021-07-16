@@ -1493,16 +1493,14 @@ mkdir -v build && cd build
              --disable-libblkid  \
              --disable-libuuid   \
              --disable-uuidd     \
-             --disable-fsck
+             --disable-fsck      \
+             --disable-rpath
 
 # Build.
 time { make; }
 
-# Install.
-# Create required directory firstly, because current makefile don't create missing directories.
-mkdir -pv /usr/{include,share}/{et,ss}
-mkdir -pv /usr/include/{e2p,ext2fs}
-time { make install; }
+# Install (fixed dir installation).
+time { make MKDIR_P="install -d" install; }
 
 # This package installs a gzipped .info file but doesn't update the system-wide dir file.
 # Unzip this file and then update the system dir file using the following commands.
