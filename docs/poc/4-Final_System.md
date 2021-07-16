@@ -1381,7 +1381,7 @@ time { make install; }
 > **Required!** Before `Iproute2`.
 ```bash
 # Configure source.
-CFLAGS="$CFLAGS -Wno-error -DFNM_EXTMATCH=0 -Wno-error -Wl,-z,stack-size=2097152" \
+CFLAGS="$CFLAGS -Wno-error -DFNM_EXTMATCH=0 -Wl,-z,stack-size=2097152" \
 ac_cv_c99=yes ./configure --prefix=/usr        \
                           --program-prefix=eu- \
                           --disable-debuginfod \
