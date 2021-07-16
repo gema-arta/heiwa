@@ -1472,8 +1472,11 @@ CFLAGS="$CFLAGS -D_DIRENT_HAVE_D_TYPE"              \
 # Build.
 time { make; }
 
-# Install.
-time { make install; }
+# Install and fix permissions (add SUID).
+time {
+    make install
+    chmod -v u+s /usr/bin/{newgrp,chsh,chfn}
+}
 ```
 
 <h2 align="center">Belows are failed or untested!</h2>
