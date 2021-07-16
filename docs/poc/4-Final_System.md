@@ -1382,10 +1382,10 @@ time { make install; }
 ```bash
 # Configure source.
 CFLAGS="$CFLAGS -Wno-error -DFNM_EXTMATCH=0 -Wno-error -Wl,-z,stack-size=2097152" \
-./configure --prefix=/usr        \
-            --program-prefix=eu- \
-            --disable-debuginfod \
-            --disable-libdebuginfod
+ac_cv_c99=yes ./configure --prefix=/usr        \
+                          --program-prefix=eu- \
+                          --disable-debuginfod \
+                          --disable-libdebuginfod
 
 # Build.
 time { make; }
