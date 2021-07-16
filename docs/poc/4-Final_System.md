@@ -1472,7 +1472,7 @@ time { make install; }
 
 # Remove keymaps for `sun`, `amiga` and `atari`.
 for K in sun amiga atari; do
-    rm -rv /usr/share/keymaps/${f}
+    rm -rv /usr/share/keymaps/${K}
 done; unset K
 ```
 
