@@ -1486,7 +1486,7 @@ time {
 > **Required!**
 ```bash
 # Create a dedicated directory and configure source.
-mkdir -v build && cd build &&    \
+mkdir -v build && cd build
 ../configure --prefix=/usr       \
              --sysconfdir=/etc   \
              --enable-elf-shlibs \
