@@ -1427,11 +1427,7 @@ time { make CC=${CC} CCOPTS="$CFLAGS -D_GNU_SOURCE"; }
 time { make install; }
 ```
 
-<h2 align="center">Belows are failed or untested!</h2>
-
-> Untested ..
-
-### `??` - KBD
+### `49` - KBD
 > #### `2.4.0` or newer
 > The Kbd package contains key-table files, console fonts, and keyboard utilities.
 
@@ -1479,6 +1475,10 @@ for K in sun amiga atari; do
     rm -rv /usr/share/keymaps/${f}
 done; unset K
 ```
+
+<h2 align="center">Belows are failed or untested!</h2>
+
+> Untested ..
 
 ### `??` - Util-linux
 > #### `2.37` or newer
