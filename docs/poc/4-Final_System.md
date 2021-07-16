@@ -1466,7 +1466,7 @@ done; unset K
 # Apply patch (from Void Linux) to allow compile under musl libc.
 patch -Np1 -i ../../extra/util-linux/patches/fix-musl.patch
 
-# Fix `more.c` failed to build againts NetBSD Curses.
+# Fix `more.c` since fails to build againts NetBSD Curses.
 sed -i 's|, 0, 0|, 0, 0, 0, 0, 0, 0, 0, 0, 0|' text-utils/more.c
 
 # The FHS recommends using the "/var/lib/hwclock" directory instead of the usual "/etc" directory as the location for the adjtime file. 
