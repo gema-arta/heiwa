@@ -1483,7 +1483,7 @@ done; unset K
 > **Required!** Before `E2fsprogs` and `Eudev`.
 ```bash
 # Apply patch (from Void Linux) to allow compile under musl libc.
-patch -Np0 -i ../../extra/util-linux/patches/fix-musl.patch
+patch -Np1 -i ../../extra/util-linux/patches/fix-musl.patch
 
 # The FHS recommends using the /var/lib/hwclock directory instead of the usual /etc directory as the location for the adjtime file. 
 mkdir -pv /var/lib/hwclock
