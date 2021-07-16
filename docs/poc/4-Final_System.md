@@ -1485,7 +1485,7 @@ done; unset K
 # Apply patch (from Void Linux) to allow compile under musl libc.
 patch -Np1 -i ../../extra/util-linux/patches/fix-musl.patch
 
-# The FHS recommends using the /var/lib/hwclock directory instead of the usual /etc directory as the location for the adjtime file. 
+# The FHS recommends using the "/var/lib/hwclock" directory instead of the usual "/etc" directory as the location for the adjtime file. 
 mkdir -pv /var/lib/hwclock
 
 # Generate configure script.
