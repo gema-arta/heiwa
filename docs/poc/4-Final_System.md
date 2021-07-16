@@ -1380,12 +1380,20 @@ time { make install; }
 
 > **Required!** Before `Iproute2`.
 ```bash
+# Apply patch to allow build with clang under musl libc.
+patch -Np1 -i ../../extra/elfutils/patches/elfutils-musl-clang.patch
+
+# Re-generate configure script.
+autoreconf -fvi
+
 # Configure source.
-CFLAGS="$CFLAGS -Wno-error -DFNM_EXTMATCH=0 -Wl,-z,stack-size=2097152" \
-ac_cv_c99=yes ./configure --prefix=/usr        \
-                          --program-prefix=eu- \
-                          --disable-debuginfod \
-                          --disable-libdebuginfod
+CFLAGS="$CFLAGS -Wno-error -Wno-null-dereference -DFNM_EXTMATCH=0" \
+CXXFLAGS="$CXXFLAGS -Wno-error -Wl,-z,stack-size=2097152"          \
+./configure --prefix=/usr                                          \
+            --program-prefix=eu-                                   \
+            --disable-werror                                       \
+            --disable-debuginfod                                   \
+            --disable-libdebuginfod
 
 # Build.
 time { make; }
