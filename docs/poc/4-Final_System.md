@@ -1513,7 +1513,7 @@ CFLAGS="$CFLAGS -D_DIRENT_HAVE_D_TYPE"              \
 time { make; }
 
 # Install.
-time { make install && export CFLAGS="${COMMON_FLAGS}"; }
+time { make install; }
 ```
 
 <h2 align="center">Belows are failed or untested!</h2>
