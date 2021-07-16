@@ -1420,7 +1420,7 @@ rm -fv man/man8/arpd.8
 sed -i 's/.m_ipt.o//' tc/Makefile
 
 # Build.
-time { make; }
+time { make CC=${CC} CCOPTS="$CFLAGS -D_GNU_SOURCE"; }
 
 # Install.
 time { make install; }
