@@ -1513,6 +1513,79 @@ gunzip -v /usr/share/info/libext2fs.info.gz
 install-info --dir-file=/usr/share/info/dir /usr/share/info/libext2fs.info
 ```
 
+### `48` - OpenRC and additional services
+> #### `0.43.3` or newer
+> OpenRC is a dependency-based init system that works with the system-provided init program, normally /sbin/init.
+
+> **Required!**
+```bash
+# Build and install.
+time {
+    make LIBNAME=lib                 \
+         LIBDIR=/lib                 \
+         PKGCONFIGDIR=/lib/pkgconfig \
+         LIBEXECDIR=/lib/rc          \
+         MKBASHCOMP=yes              \
+         MKNET=no                    \
+         MKPREFIX=no                 \
+         MKSELINUX=no                \
+         MKSTATICLIBS=no             \
+         MKSYSVINIT=yes              \
+         MKZSHCOMP=yes               \
+         BRANDING=\"Heiwa/Linux\"    \
+         OS=Linux                    \
+         SH=/bin/sh DESTDIR=/ install
+}
+
+# Decompress opentmpfiles.
+tar xzf ../opentmpfiles-0.3.1.tar.gz && \
+pushd opentmpfiles-0.3.1/
+
+# Install opentmpfiles.
+time { make install; }
+for f in opentmpfiles-dev opentmpfiles-setup; do
+    install -vm644 openrc/${f}.confd /etc/conf.d/${f}
+    install -vm755 openrc/${f}.initd /etc/init.d/${f}
+done; popd
+
+# Decompress udev-gentoo-scripts.
+tar xzf ../udev-gentoo-scripts-34.tar.gz && \
+cd udev-gentoo-scripts-34/
+
+# Install udev-gentoo-scripts.
+time { make install; }
+```
+
+### `49` - Eudev
+> #### `3.2.10` or newer
+> The Eudev package contains programs for dynamic creation of device nodes.
+
+> **Required!**
+```bash
+# Configure source.
+./configure \
+    --prefix=/usr           \
+    --bindir=/sbin          \
+    --sbindir=/sbin         \
+    --sysconfdir=/etc       \
+    --libdir=/usr/lib       \
+    --libexecdir=/lib       \
+    --with-rootlibdir=/lib  \
+    --enable-manpages       \
+    --disable-static
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+
+# Information about hardware devices is maintained in the /etc/udev/hwdb.d and /usr/lib/udev/hwdb.d directories.
+# Eudev needs that information to be compiled into a binary database /etc/udev/hwdb.bin.
+# Create the initial database.
+udevadm hwdb --update
+```
+
 <h2 align="center">Belows are failed or untested!</h2>
 
 > Untested ..
