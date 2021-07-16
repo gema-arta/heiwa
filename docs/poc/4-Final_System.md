@@ -1500,7 +1500,12 @@ mkdir -v build && cd build
 time { make; }
 
 # Install (fixed dir installation).
-time { make MKDIR_P="install -d" install; }
+time {
+    make MKDIR_P="install -d" install install-libs
+    for B in e2fsck mke2fs {mkfs,fsck}.ext{2..4}; do
+        mv -fv /usr/sbin/${B} /sbin/.
+    done; unset B
+}
 
 # This package installs a gzipped .info file but doesn't update the system-wide dir file.
 # Unzip this file and then update the system dir file using the following commands.
