@@ -955,23 +955,7 @@ time { make; }
 time { make install; }
 ```
 
-### `28` - GNU Troff
-> #### `1.22.4` or newer
-> The GNU Troff (groff) package contains programs for processing and formatting text.
-
-> **Required!** Before `Perl`.
-```bash
-# Configure source.
-PAGE=A4 ./configure --prefix=/usr
-
-# Build. Fails using multiple jobs.
-time { make -j1; }
-
-# Install.
-time { make install; }
-```
-
-### `29` - Perl
+### `28` - Perl
 > #### `5.32.1`
 > The Perl package contains the Practical Extraction and Report Language.
 
@@ -1007,7 +991,7 @@ time { make; }
 time { make install; unset BUILD_ZLIB BUILD_BZIP2; }
 ```
 
-### `30` - OpenSSL
+### `29` - OpenSSL
 > #### `1.1.1k` or newer
 > The OpenSSL package contains management tools and libraries relating to cryptography. These are useful for providing cryptographic functions to other packages, such as OpenSSH, email applications, and web browsers (for accessing HTTPS sites).
 
@@ -1031,7 +1015,7 @@ time { make MANSUFFIX=ssl install; }
 mv -fv /usr/share/doc/openssl /usr/share/doc/openssl-1.1.1k
 ```
 
-### `31` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man, Procps-ng, Psmisc, Sed, Sysklogd, Tar)
+### `30` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man, Procps-ng, Psmisc, Sed, Sysklogd, Tar)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
@@ -1076,7 +1060,7 @@ time { make; }
 time { make PREFIX=/ install; unset CFFGPT; }
 ```
 
-### `32` - GNU Diffutils
+### `31` - GNU Diffutils
 > #### `3.7` or newer
 > The GNU Diffutils package contains programs that show the differences between files or directories.
 
@@ -1094,7 +1078,7 @@ time { make; }
 time { make install; }
 ```
 
-### `33` - GNU AWK
+### `32` - GNU AWK
 > #### `5.1.0` or newer
 > The GNU AWK (gawk) package contains programs for manipulating text files.
 
@@ -1113,7 +1097,7 @@ time { make; }
 time { make install; }
 ```
 
-### `34` - Pigz
+### `33` - Pigz
 > #### `2.6` or newer
 > The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
 
@@ -1130,7 +1114,7 @@ ln -sv pigz gzip; ln -sv unpigz gunzip
 install -vm755 -t /usr/bin/ pigz unpigz gzip gunzip
 ```
 
-### `35` - GNU Make
+### `34` - GNU Make
 > #### `4.3` or newer
 > The GNU Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
  
@@ -1146,7 +1130,7 @@ time { make; }
 time { make install; }
 ```
 
-### `36` - GNU Patch
+### `35` - GNU Patch
 > #### `2.7.6` or newer
 > The GNU Patch package contains a program for modifying or creating files by applying a patch file typically created by the diff program.
 
@@ -1164,7 +1148,7 @@ time { make; }
 time { make install; }
 ```
 
-### `37` - GNU Texinfo
+### `36` - GNU Texinfo
 > #### `6.8` or newer
 > The Texinfo package contains programs for reading, writing, and converting info pages.
 
@@ -1182,7 +1166,7 @@ time { make; }
 time { make install; }
 ```
 
-### `38` - GNU Bash
+### `37` - GNU Bash
 > #### `5.1` (with patch level 8) or newer
 > The GNU Bash package contains the Bourne-Again SHell.
 
@@ -1202,7 +1186,7 @@ time { make install && mv -fv /usr/bin/bash /bin/.; }
 ```
 
 
-### `39` - Kmod
+### `38` - Kmod
 > #### `29` or newer
 > The Kmod package contains libraries and utilities for loading kernel modules
 
@@ -1230,7 +1214,7 @@ time {
 }
 ```
 
-### `40` - GNU libtool
+### `39` - GNU libtool
 > #### `2.4.6` or newer
 > The GNU libtool package contains the GNU generic library support script. It wraps the complexity of using shared libraries in a consistent, portable interface.
 
@@ -1246,7 +1230,7 @@ time { make; }
 time { make install; }
 ```
 
-### `41` - GNU Autoconf
+### `40` - GNU Autoconf
 > #### `2.71` or newer
 > The GNU Autoconf package contains programs for producing shell scripts that can automatically configure source code.
 
@@ -1262,7 +1246,7 @@ time { make; }
 time { make install; }
 ```
 
-### `42` - GNU Automake
+### `41` - GNU Automake
 > #### `1.16.3` or newer
 > The GNU Automake package contains programs for generating Makefiles for use with Autoconf.
 
@@ -1279,7 +1263,7 @@ time { make; }
 time { make install; }
 ```
 
-### `43` - argp-standalone
+### `42` - argp-standalone
 > #### `1.4.1` or newer (from Void Linux)
 > The argp-standalone package contains hierarchial argument parsing library broken out from GNU libc (glibc).
 
@@ -1302,7 +1286,7 @@ install -vm644 -t /usr/lib/  libargp.a
 install -vm644 -t /usr/include/ argp.h 
 ```
 
-### `44` - musl-fts
+### `43` - musl-fts
 > #### `1.2.7` or newer
 > The musl-fts package contains implementation of fts(3) for musl libc.
 
@@ -1325,7 +1309,7 @@ time { make; }
 time { make install; }
 ```
 
-### `45` - musl-obstack
+### `44` - musl-obstack
 > #### `1.2.2` or newer
 > The musl-obstack package contains a standalone library to implement GNU libc obstack.
 
@@ -1348,7 +1332,7 @@ time { make; }
 time { make install; }
 ```
 
-### `46` - musl-rpmatch
+### `45` - musl-rpmatch
 > #### `1.1` or newer
 > The musl-rpmatch package contains implementation of rpmatch(3) for musl libc.
 
@@ -1372,7 +1356,7 @@ time { make; }
 time { make install; }
 ```
 
-### `47` - Elfutils - libelf
+### `46` - Elfutils - libelf
 > #### `0.185` or newer
 > The Elfutils package contains library for handling ELF (Executable and Linkable Format) files.
 
@@ -1402,7 +1386,7 @@ time {
 }
 ```
 
-### `48` - IPRoute2
+### `47` - IPRoute2
 > #### `5.13.0` or newer
 > The IPRoute2 package contains programs for basic and advanced IPV4-based networking.
 
@@ -1424,7 +1408,7 @@ time { make CC=${CC} CCOPTS="$CFLAGS -D_GNU_SOURCE"; }
 time { make install; }
 ```
 
-### `49` - KBD
+### `48` - KBD
 > #### `2.4.0` or newer
 > The Kbd package contains key-table files, console fonts, and keyboard utilities.
 
@@ -1473,7 +1457,7 @@ for K in sun amiga atari; do
 done; unset K
 ```
 
-### `50` - Util-linux
+### `49` - Util-linux
 > #### `2.37` or newer
 > The Util-linux package contains miscellaneous utility programs.
 
