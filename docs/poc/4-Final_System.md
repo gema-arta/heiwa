@@ -852,26 +852,21 @@ time { make LIBINTL=MUSL prefix=/usr; }
 time { make LIBINTL=MUSL prefix=/usr install; }
 ```
 
-### `23` - OpenBSD Yacc
-> #### `6.6` or newer
-> The OpenBSD Yacc package contains a parser generator.
+### `23` - GNU Bison
+> #### `3.7.6` or newer
+> The GNU Bison package contains a parser generator.
 
-> **Required!** Before `Kmod` and `Kbd`.
+> **Required!** Before `Kmod`, `Kbd`, and `Util-Linux`.
 ```bash
 # Configure source.
 ./configure --prefix=/usr \
-            --enable-yacc \
-            --mandir=/usr/share/man/man1
+            --docdir=/usr/share/doc/bison-3.7.6
 
 # Build.
 time { make; }
 
-# Install and create symlink as `byacc` nor `bison`.
-time {
-    make BINDIR=/usr/bin install
-    ln -sv yacc /usr/bin/byacc
-    ln -sv yacc /usr/bin/bison
-}
+# Install.
+time { make install; }
 ```
 
 ### `24` - Bzip2
