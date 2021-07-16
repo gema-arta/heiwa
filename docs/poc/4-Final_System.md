@@ -1391,7 +1391,6 @@ CFLAGS="$CFLAGS -Wno-error -Wno-null-dereference -DFNM_EXTMATCH=0" \
 CXXFLAGS="$CXXFLAGS -Wno-error -Wl,-z,stack-size=2097152"          \
 ./configure --prefix=/usr                                          \
             --program-prefix=eu-                                   \
-            --disable-werror                                       \
             --disable-debuginfod                                   \
             --disable-libdebuginfod
 
