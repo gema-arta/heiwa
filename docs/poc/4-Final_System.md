@@ -1218,7 +1218,7 @@ time {
 > #### `2.4.6` or newer
 > The GNU libtool package contains the GNU generic library support script. It wraps the complexity of using shared libraries in a consistent, portable interface.
 
-> **Required!** Before `musl-fts`, `musl-obstack`, `musl-rpmatch`, and `argp-standalone`.
+> **Required!** Before `musl-fts`, `musl-obstack`, and `argp-standalone`.
 ```bash
 # Configure source.
 ./configure --prefix=/usr
@@ -1250,7 +1250,7 @@ time { make install; }
 > #### `1.16.3` or newer
 > The GNU Automake package contains programs for generating Makefiles for use with Autoconf.
 
-> **Required!** Before `musl-fts`, `musl-obstack`, `musl-rpmatch`, and `argp-standalone`.
+> **Required!** Before `musl-fts`, `musl-obstack`, and `argp-standalone`.
 ```bash
 # Configure source.
 ./configure --prefix=/usr \
@@ -1332,31 +1332,7 @@ time { make; }
 time { make install; }
 ```
 
-### `45` - musl-rpmatch
-> #### `1.1` or newer
-> The musl-rpmatch package contains implementation of rpmatch(3) for musl libc.
-
-> **Required!**
-```sh
-# Prepare.
-./bootstrap.sh
-
-# Configure source.
-CFLAGS="$CFLAGS -fPIC"           \
-./configure --prefix=/usr        \
-            --sysconfdir=/etc    \
-            --localstatedir=/var \
-            --enable-shared      \
-            --enable-static
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
-```
-
-### `46` - Elfutils - libelf
+### `45` - Elfutils - libelf
 > #### `0.185` or newer
 > The Elfutils package contains library for handling ELF (Executable and Linkable Format) files.
 
@@ -1386,7 +1362,7 @@ time {
 }
 ```
 
-### `47` - IPRoute2
+### `46` - IPRoute2
 > #### `5.13.0` or newer
 > The IPRoute2 package contains programs for basic and advanced IPV4-based networking.
 
@@ -1408,7 +1384,7 @@ time { make CC=${CC} CCOPTS="$CFLAGS -D_GNU_SOURCE"; }
 time { make install; }
 ```
 
-### `48` - KBD
+### `45` - KBD
 > #### `2.4.0` or newer
 > The Kbd package contains key-table files, console fonts, and keyboard utilities.
 
@@ -1457,7 +1433,7 @@ for K in sun amiga atari; do
 done; unset K
 ```
 
-### `49` - Util-linux
+### `46` - Util-linux
 > #### `2.37` or newer
 > The Util-linux package contains miscellaneous utility programs.
 
