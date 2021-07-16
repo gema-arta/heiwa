@@ -866,10 +866,11 @@ time { make LIBINTL=MUSL prefix=/usr install; }
 # Build.
 time { make; }
 
-# Install and create symlink as `byacc`.
+# Install and create symlink as `byacc` nor `bison`.
 time {
     make BINDIR=/usr/bin install
     ln -sv yacc /usr/bin/byacc
+    ln -sv yacc /usr/bin/bison
 }
 ```
 
