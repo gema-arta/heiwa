@@ -455,7 +455,7 @@ time { make install; }
 > #### `2.6.4` or newer
 > The Flex package contains a utility for generating programs that recognize patterns in text.
 
-> **Required!** Before `IProute2`, `Kbd`, and `Kmod`.
+> **Required!** Before `IPRoute2`, `Kbd`, and `Kmod`.
 ```bash
 # Configure source. Flex still expect `gcc` to configure.
 ln -sv ${CC} /clang1-tools/bin/cc        && \
@@ -1378,7 +1378,7 @@ time { make install; }
 > #### `0.185` or newer
 > The Elfutils package contains library for handling ELF (Executable and Linkable Format) files.
 
-> **Required!** Before `Iproute2`.
+> **Required!** Before `IPRoute2`.
 ```bash
 # Apply patch to allow build with Clang under musl libc.
 patch -Np1 -i ../../extra/elfutils/patches/elfutils-musl-clang.patch
@@ -1402,6 +1402,28 @@ time {
     make -C libelf install && \
     install -vm644 -t /usr/lib/pkgconfig/ config/libelf.pc 
 }
+```
+
+### `48` - IPRoute2
+> #### `5.13.0` or newer
+> The IPRoute2 package contains programs for basic and advanced IPV4-based networking.
+
+> **Required!**
+```bash
+# The arpd program included in this package will not be built since it is dependent on Berkeley DB, which currently not installed. 
+# However, a directory for `arpd` and a man page will still be installed.
+# Prevent this by running the commands below.
+sed -i /ARPD/d Makefile
+rm -fv man/man8/arpd.8
+
+# Prevent build two module that require `iptables`.
+sed -i 's/.m_ipt.o//' tc/Makefile
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
 ```
 
 <h2 align="center">Belows are failed or untested!</h2>
