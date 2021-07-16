@@ -1519,6 +1519,10 @@ install-info --dir-file=/usr/share/info/dir /usr/share/info/libext2fs.info
 
 > **Required!**
 ```bash
+# Apply patches (from Alpine Linux).
+patch -Np1 -i ../../extra/openrc/0009-Support-early-loading-of-keymap-if-kdb-is-installed.patch
+patch -Np1 -i ../../extra/openrc/0014-time_t-64bit.patch
+
 # Build and install.
 time {
     make LIBNAME=lib                 \
