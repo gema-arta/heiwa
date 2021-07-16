@@ -1395,7 +1395,7 @@ CXXFLAGS="$CXXFLAGS -Wno-error -Wl,-z,stack-size=2097152"          \
             --disable-libdebuginfod
 
 # Build.
-time { make; }
+time { make -C lib && make -C libelf; }
 
 # Install.
 time {
