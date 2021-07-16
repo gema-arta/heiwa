@@ -859,7 +859,9 @@ time { make LIBINTL=MUSL prefix=/usr install; }
 > **Required!** Before `Kmod`, `Kbd`, and `Util-Linux`.
 ```bash
 # Configure source.
-./configure --prefix=/usr \
+ac_cv_header_sys_cdefs_h=no \
+ac_cv_lib_error_at_line=no  \
+./configure --prefix=/usr   \
             --docdir=/usr/share/doc/bison-3.7.6
 
 # Build.
