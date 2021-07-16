@@ -1480,7 +1480,35 @@ time {
 ```
 
 ### `47` - E2fsprogs
-> #### `` 
+> #### `1.46.2` or newer
+> The E2fsprogs package contains the utilities for handling the ext2 file system. It also supports the ext3 and ext4 journaling file systems.
+
+> **Required!**
+```bash
+# Create a dedicated directory and configure source.
+mkdir -v build && cd build &&    \
+../configure --prefix=/usr       \
+             --sysconfdir=/etc   \
+             --enable-elf-shlibs \
+             --disable-libblkid  \
+             --disable-libuuid   \
+             --disable-uuidd     \
+             --disable-fsck
+
+# Build.
+time { make; }
+
+# Install.
+# Create required directory firstly, because current makefile don't create missing directories.
+mkdir -pv /usr/{include,share}/{et,ss}
+mkdir -pv /usr/include/{e2p,ext2fs}
+time { make install; }
+
+# This package installs a gzipped .info file but doesn't update the system-wide dir file.
+# Unzip this file and then update the system dir file using the following commands.
+gunzip -v /usr/share/info/libext2fs.info.gz
+install-info --dir-file=/usr/share/info/dir /usr/share/info/libext2fs.info
+```
 
 <h2 align="center">Belows are failed or untested!</h2>
 
