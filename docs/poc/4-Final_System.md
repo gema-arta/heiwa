@@ -1380,7 +1380,7 @@ time { make install; }
 
 > **Required!** Before `Iproute2`.
 ```bash
-# Apply patch to allow build with clang under musl libc.
+# Apply patch to allow build with Clang under musl libc.
 patch -Np1 -i ../../extra/elfutils/patches/elfutils-musl-clang.patch
 
 # Re-generate configure script.
