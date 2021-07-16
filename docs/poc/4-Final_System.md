@@ -1500,9 +1500,7 @@ mkdir -v build && cd build
 time { make; }
 
 # Install (fixed dir installation).
-time {
-    make MKDIR_P="install -d" install install-libs
-}
+time { make MKDIR_P="install -d" install install-libs; }
 
 # This package installs a gzipped .info file but doesn't update the system-wide dir file.
 # Unzip this file and then update the system dir file using the following commands.
