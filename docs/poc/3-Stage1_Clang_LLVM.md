@@ -277,8 +277,8 @@ cmake -B build \
     -DCMAKE_CXX_FLAGS="-Oz -pipe -g0"                      \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$T_TRIPLET"              \
     -DLLVM_HOST_TRIPLE="$T_TRIPLET"                        \
-    -DLLVM_TARGETS_TO_BUILD="L_TARGET"                     \
-    -DLLVM_TARGET_ARCH="L_TARGET"                          \
+    -DLLVM_TARGETS_TO_BUILD="$L_TARGET"                    \
+    -DLLVM_TARGET_ARCH="$L_TARGET"                         \
     -DLLVM_LINK_LLVM_DYLIB=ON                              \
     -DLLVM_BUILD_TESTS=OFF                                 \
     -DLLVM_ENABLE_BINDINGS=OFF                             \
