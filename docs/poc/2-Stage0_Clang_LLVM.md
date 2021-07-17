@@ -301,8 +301,8 @@ cmake -B build \
     -DCMAKE_SHARED_LINKER_FLAGS="-Wl,-dynamic-linker /clang0-tools/lib/ld-musl-x86_64.so.1" \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$TARGET_TRUPLE"                                           \
     -DLLVM_HOST_TRIPLE="$TARGET_TRUPLE"                                                     \
-    -DLLVM_TARGETS_TO_BUILD="X86"                                                           \
-    -DLLVM_TARGET_ARCH="X86"                                                                \
+    -DLLVM_TARGETS_TO_BUILD="$L_ARCH"                                                           \
+    -DLLVM_TARGET_ARCH="$L_ARCH"                                                                \
     -DLLVM_BUILD_TESTS=OFF                                                                  \
     -DLLVM_ENABLE_BINDINGS=OFF                                                              \
     -DLLVM_ENABLE_IDE=OFF                                                                   \
