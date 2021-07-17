@@ -72,21 +72,22 @@ export HEIWA LC_ALL PATH LLVM_SRC
 EOF
 source ~/.bash_profile
 
-export HEIWA_TARGET="x86_64-heiwa-linux-musl"
-export HEIWA_ARCH="x86"
-export HEIWA_CPU="x86-64"
 export HEIWA_HOST="$(echo "$MACHTYPE" | \
             sed "s/$(echo "$MACHTYPE" | cut -d- -f2)/cross/")"
+export HEIWA_ARCH="x86"
+export HEIWA_CPU="x86-64"
 export LLVM_TARGET="X86"
+export HEIWA_TARGET_TRUPLE="x86_64-heiwa-linux-musl"
 export TARGET_TRUPLE="x86_64-pc-linux-musl"
 
 cat >> ~/.bashrc << EOF
 HEIWA_HOST="${HEIWA_HOST}"
-HEIWA_TARGET="${HEIWA_TARGET}"
 HEIWA_ARCH="${HEIWA_ARCH}"
 HEIWA_CPU="${HEIWA_CPU}"
 LLVM_TARGET="${LLVM_TARGET}"
+HEIWA_TARGET_TRUPLE="${HEIWA_TARGET}"
 TARGET_TRUPLE="${TARGET_TRUPLE}"
+export HEIWA_HOST HEIWA_ARCH HEIWA_CPU LLVM_TARGET HEIWA_TARGET_TRUPLE TARGET_TRUPLE
 EOF
 source ~/.bashrc
 ```
