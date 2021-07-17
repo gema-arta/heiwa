@@ -17,12 +17,14 @@ The purpose of this stage is to build a pure Clang/LLVM toolchain that will be u
 > Apply persistent toolchain environment variables, but currently don't set the compiler to the new triplet of Stage-0 Clang/LLVM. Meaning to use libc from Stage-0 Clang/LLVM firstly, in case to build musl libc in this stage.
 ```bash
 cat >> ~/.bashrc << "EOF"
-# Stage-1 Clang/LLVM environment.
+# Stage-1 Clang/LLVM Environment.
 CC="clang"
 CXX="clang++"
+LD="ld.lld"
+CC_LD="${LD}"
+CXX_LD="${LD}"
 AR="llvm-ar"
 AS="llvm-as"
-LD="ld.lld"
 NM="llvm-nm"
 OBJCOPY="llvm-objcopy"
 OBJDUMP="llvm-objdump"
@@ -30,7 +32,7 @@ RANLIB="llvm-ranlib"
 READELF="llvm-readelf"
 SIZE="llvm-size"
 STRIP="llvm-strip"
-export CC CXX AR AS LD NM OBJCOPY OBJDUMP RANLIB READELF SIZE STRIP
+export CC CXX LD CC_LD CXX_LD AR AS NM OBJCOPY OBJDUMP RANLIB READELF SIZE STRIP
 EOF
 source ~/.bashrc
 ```
