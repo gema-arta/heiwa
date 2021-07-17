@@ -82,6 +82,7 @@ export H_TRIPLET="$(echo "$T_TRIPLET" | \
     sed "s|$(echo "$T_TRIPLET" | cut -d- -f2)|heiwa|")"
 
 cat >> ~/.bashrc << EOF
+
 C_TRIPLET="${C_TRIPLET}"
 C_ARCH="${C_ARCH}"
 C_CPU="${C_CPU}"
