@@ -82,17 +82,11 @@ export H_TRIPLET="$(echo "$T_TRIPLET" | \
     sed "s|$(echo "$T_TRIPLET" | cut -d- -f2)|heiwa|")"
 
 cat >> ~/.bashrc << EOF
-# Cross Triplet (GCC)
 C_TRIPLET="${C_TRIPLET}"
-# Cross Arch (GCC)
 C_ARCH="${C_ARCH}"
-# Cross CPU (GCC)
 C_CPU="${C_CPU}"
-# LLVM Target
 L_TARGET="${L_TARGET}"
-# Target Triplet
 T_TRIPLET="${T_TRIPLET}"
-# Target Triplet (Heiwa)
 H_TRIPLET="${H_TRIPLET}"
 export C_TRIPLET C_ARCH C_CPU L_TARGET T_TRIPLET H_TRIPLET
 EOF
