@@ -61,8 +61,8 @@ time {
 ```
 ```bash
 # Set compiler to the new triplet from Stage-0 Clang/LLVM to use current libc.
-sed -i 's|CC=.*|CC="${HEIWA_TARGET}-clang"|'     ~/.bashrc
-sed -i 's|CXX=.*|CXX="${HEIWA_TARGET}-clang++"|' ~/.bashrc
+sed -i 's|CC=.*|CC="${H_TRIPLET}-clang"|'     ~/.bashrc
+sed -i 's|CXX=.*|CXX="${H_TRIPLET}-clang++"|' ~/.bashrc
 source ~/.bashrc
 ```
 ```bash
