@@ -72,7 +72,7 @@ export HEIWA LC_ALL PATH LLVM_SRC
 EOF
 source ~/.bash_profile
 
-export HEIWA_TARGET="$(uname -m)-heiwa-linux-musl"
+export HEIWA_TARGET="x86_64-heiwa-linux-musl"
 export HEIWA_ARCH="x86"
 export HEIWA_CPU="x86-64"
 export HEIWA_HOST="$(echo "$MACHTYPE" | \
