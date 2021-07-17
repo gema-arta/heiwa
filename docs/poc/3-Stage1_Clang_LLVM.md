@@ -380,26 +380,7 @@ time { make; }
 time { make install; }
 ```
 
-### `9` - GNU Bash
-> #### `5.1` (with patch level 8) or newer
-> The GNU Bash package contains the Bourne-Again SHell.
-
-> **Required!** As default shell for the next stage (chroot environment).
-```bash
-# Configure source.
-./configure --prefix=/clang1-tools \
-            --build=${T_TRIPLET}   \
-            --host=${T_TRIPLET}    \
-            --without-bash-malloc
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
-```
-
-### `10` - Toybox (Coreutils, File, Findutils, Grep, Sed, Tar)
+### `9` - Toybox (Coreutils, File, Findutils, Grep, Sed, Tar)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
@@ -441,7 +422,7 @@ time { make; }
 time { make PREFIX=/clang1-tools install; unset X CFFGPT; }
 ```
 
-### `11` - GNU Diffutils
+### `10` - GNU Diffutils
 > #### `3.7` or newer
 > The GNU Diffutils package contains programs that show the differences between files or directories.
 
@@ -459,7 +440,7 @@ time { make; }
 time { make install; }
 ```
 
-### `12` - GNU Make
+### `11` - GNU Make
 > #### `4.3` or newer
 > The GNU Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
  
@@ -478,7 +459,7 @@ time { make; }
 time { make install; }
 ```
 
-### `13` - GNU Patch
+### `12` - GNU Patch
 > #### `2.7.6` or newer
 > The GNU Patch package contains a program for modifying or creating files by applying a patch file typically created by the diff program.
 
@@ -496,7 +477,7 @@ time { make; }
 time { make install; }
 ```
 
-### `14` - GNU Texinfo
+### `13` - GNU Texinfo
 > #### `6.8` or newer
 > The Texinfo package contains programs for reading, writing, and converting info pages.
 
@@ -506,6 +487,25 @@ time { make install; }
 ./configure --prefix=/clang1-tools \
             --build=${T_TRIPLET}   \
             --host=${T_TRIPLET}
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `14` - GNU Bash
+> #### `5.1` (with patch level 8) or newer
+> The GNU Bash package contains the Bourne-Again SHell.
+
+> **Required!** As default shell for the next stage (chroot environment).
+```bash
+# Configure source.
+./configure --prefix=/clang1-tools \
+            --build=${T_TRIPLET}   \
+            --host=${T_TRIPLET}    \
+            --without-bash-malloc
 
 # Build.
 time { make; }
