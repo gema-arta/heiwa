@@ -553,8 +553,8 @@ time { make; }
 time { make install; }
 ```
 
-### `17` - Perl (cross)
-> #### `5.32.1` and `1.3.5` for cross
+### `17` - Perl (+ cross)
+> #### `5.32.1` (and `1.3.5` for cross)
 > The Perl package contains the Practical Extraction and Report Language.
 
 > **Required!** To build required packages in the next stage (chroot environment). 
