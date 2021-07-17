@@ -275,10 +275,10 @@ cmake -B build \
     -DCMAKE_INSTALL_OLDINCLUDEDIR="/clang1-tools/include"  \
     -DCMAKE_C_FLAGS="-Oz -pipe -g0"                        \
     -DCMAKE_CXX_FLAGS="-Oz -pipe -g0"                      \
-    -DLLVM_DEFAULT_TARGET_TRIPLE="$TARGET_TRUPLE"          \
-    -DLLVM_HOST_TRIPLE="$TARGET_TRUPLE"                    \
-    -DLLVM_TARGETS_TO_BUILD="X86"                          \
-    -DLLVM_TARGET_ARCH="X86"                               \
+    -DLLVM_DEFAULT_TARGET_TRIPLE="$T_TRIPLET"              \
+    -DLLVM_HOST_TRIPLE="$T_TRIPLET"                        \
+    -DLLVM_TARGETS_TO_BUILD="L_TARGET"                     \
+    -DLLVM_TARGET_ARCH="L_TARGET"                          \
     -DLLVM_LINK_LLVM_DYLIB=ON                              \
     -DLLVM_BUILD_TESTS=OFF                                 \
     -DLLVM_ENABLE_BINDINGS=OFF                             \
@@ -300,7 +300,7 @@ cmake -B build \
     -DCOMPILER_RT_BUILD_PROFILE=OFF                        \
     -DCOMPILER_RT_BUILD_LIBFUZZER=OFF                      \
     -DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON                  \
-    -DCOMPILER_RT_DEFAULT_TARGET_TRIPLE="$TARGET_TRUPLE"   \
+    -DCOMPILER_RT_DEFAULT_TARGET_TRIPLE="$T_TRIPLET"       \
     -DCLANG_DEFAULT_CXX_STDLIB=libc++                      \
     -DCLANG_DEFAULT_UNWINDLIB=libunwind                    \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                      \
@@ -325,9 +325,9 @@ time {
 ```
 ```bash
 # Configure Stage-1 Clang/LLVM with default triplet (pc) to produce binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1".
-ln -sv clang   /clang1-tools/bin/${TARGET_TRUPLE}-clang
-ln -sv clang++ /clang1-tools/bin/${TARGET_TRUPLE}-clang++
-cat > /clang1-tools/bin/${TARGET_TRUPLE}.cfg << "EOF"
+ln -sv clang   /clang1-tools/bin/${T_TRIPLET}-clang
+ln -sv clang++ /clang1-tools/bin/${T_TRIPLET}-clang++
+cat > /clang1-tools/bin/${T_TRIPLET}.cfg << "EOF"
 -Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1
 EOF
 
@@ -335,8 +335,8 @@ EOF
 # also it's time to enable optimization as default.
 sed -i 's|/clang0-tools/usr/bin:/clang0-tools/bin:||' ~/.bashrc
 sed -i '/unset CFLAGS CXXFLAGS/d'                     ~/.bashrc
-sed -i 's|CC=.*|CC="${TARGET_TRUPLE}-clang"|'         ~/.bashrc
-sed -i 's|CXX=.*|CXX="${TARGET_TRUPLE}-clang++"|'     ~/.bashrc
+sed -i 's|CC=.*|CC="${T_TRIPLET}-clang"|'         ~/.bashrc
+sed -i 's|CXX=.*|CXX="${T_TRIPLET}-clang++"|'     ~/.bashrc
 source ~/.bash_profile
 ```
 ```bash
@@ -368,8 +368,8 @@ sed -i 's|extras||' Makefile.in
 
 # Configure source.
 ./configure --prefix=/clang1-tools   \
-            --build=${TARGET_TRUPLE} \
-            --host=${TARGET_TRUPLE}
+            --build=${T_TRIPLET} \
+            --host=${T_TRIPLET}
 
 # Build.
 time { make; }
@@ -386,8 +386,8 @@ time { make install; }
 ```bash
 # Configure source.
 ./configure --prefix=/clang1-tools   \
-            --build=${TARGET_TRUPLE} \
-            --host=${TARGET_TRUPLE}  \
+            --build=${T_TRIPLET} \
+            --host=${T_TRIPLET}  \
             --without-bash-malloc
 
 # Build.
@@ -447,8 +447,8 @@ time { make PREFIX=/clang1-tools install; unset X CFFGPT; }
 ```bash
 # Configure source.
 ./configure --prefix=/clang1-tools   \
-            --build=${TARGET_TRUPLE} \
-            --host=${TARGET_TRUPLE}
+            --build=${T_TRIPLET} \
+            --host=${T_TRIPLET}
 
 # Build.
 time { make; }
@@ -465,8 +465,8 @@ time { make install; }
 ```bash
 # Configure source.
 ./configure --prefix=/clang1-tools   \
-            --build=${TARGET_TRUPLE} \
-            --host=${TARGET_TRUPLE}  \
+            --build=${T_TRIPLET} \
+            --host=${T_TRIPLET}  \
             --without-guile
 
 # Build.
@@ -484,8 +484,8 @@ time { make install; }
 ```bash
 # Configure source.
 ./configure --prefix=/clang1-tools   \
-            --build=${TARGET_TRUPLE} \
-            --host=${TARGET_TRUPLE}
+            --build=${T_TRIPLET} \
+            --host=${T_TRIPLET}
 
 # Build.
 time { make; }
@@ -502,8 +502,8 @@ time { make install; }
 ```bash
 # Configure source.
 ./configure --prefix=/clang1-tools   \
-            --build=${TARGET_TRUPLE} \
-            --host=${TARGET_TRUPLE}
+            --build=${T_TRIPLET} \
+            --host=${T_TRIPLET}
 
 # Build.
 time { make; }
@@ -526,8 +526,8 @@ rm -rf ../perl-cross-1.3.5
 
 # Configure source.
 ./configure --prefix=/clang1-tools   \
-            --build=${TARGET_TRUPLE} \
-            --target=${TARGET_TRUPLE}
+            --build=${T_TRIPLET} \
+            --target=${T_TRIPLET}
 
 # Build.
 time { make; }
@@ -568,8 +568,8 @@ sed -i '/def add_multiarch_paths/a \        return' setup.py
 # Configure source.
 ax_cv_c_float_words_bigendian=no     \
 ./configure --prefix=/clang1-tools   \
-            --build=${TARGET_TRUPLE} \
-            --host=${TARGET_TRUPLE}  \
+            --build=${T_TRIPLET} \
+            --host=${T_TRIPLET}  \
             --enable-shared          \
             --without-ensurepip
 
@@ -611,8 +611,8 @@ time { make install; }
 ```bash
 # Configure source.
 ./configure --prefix=/clang1-tools   \
-            --build=${TARGET_TRUPLE} \
-            --host=${TARGET_TRUPLE}  \
+            --build=${T_TRIPLET} \
+            --host=${T_TRIPLET}  \
             --disable-static
 
 # Build.
