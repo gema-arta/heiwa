@@ -210,8 +210,8 @@ cp -fv ../extra/llvm/files/config.guess cmake/.
 pushd ${LLVM_SRC}/projects/libunwind/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools"  \
-        -DCMAKE_C_FLAGS="-g0 -fPIC $CFLAGS"     \
-        -DCMAKE_CXX_FLAGS="-g0 -fPIC $CXXFLAGS" \
+        -DCMAKE_C_FLAGS="-fPIC -g0 $CFLAGS"     \
+        -DCMAKE_CXX_FLAGS="-fPIC -g0 $CXXFLAGS" \
         -DLIBUNWIND_ENABLE_SHARED=ON            \
         -DLIBUNWIND_USE_COMPILER_RT=ON          \
         -DLLVM_PATH="$LLVM_SRC"
@@ -249,7 +249,7 @@ time {
 pushd ${LLVM_SRC}/projects/libcxx/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools"                           \
-        -DCMAKE_CXX_FLAGS="-g0 -isystem /clang1-tools/include $CXXFLAGS" \
+        -DCMAKE_CXX_FLAGS="-isystem /clang1-tools/include -g0 $CXXFLAGS" \
         -DLIBCXX_ENABLE_SHARED=ON                                        \
         -DLIBCXX_ENABLE_STATIC=ON                                        \
         -DLIBCXX_HAS_MUSL_LIBC=ON                                        \
