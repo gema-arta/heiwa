@@ -368,8 +368,7 @@ find /clang0-tools/{{,${H_TRIPLET}/}lib{,64},libexec}/ -name \*.la -exec rm -rfv
 
 # Remove the documentation.
 rm -rf /clang0-tools/share/{info,man,doc}/*
-```
-```bash
+
 # Strip off debugging symbols from binaries using `llvm-strip`.
 # A large number of files will be reported "The file was not recognized as a valid object file".
 # These warnings can be safely ignored. These warnings indicate that those files are scripts instead of binaries.
