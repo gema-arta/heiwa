@@ -179,24 +179,25 @@ esac
 
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build
-LDFLAGS="-Wl,-rpath,/clang0-tools/lib"                       \
-CFLAGS="-Os -pipe -g0" CXXFLAGS="-Os -pipe -g0" ../configure \
-    --prefix=/clang0-tools                                   \
-    --build=${C_TRIPLET}                                     \
-    --host=${C_TRIPLET}                                      \
-    --target=${H_TRIPLET}                                    \
-    --with-sysroot=/clang0-tools                             \
-    --disable-nls                                            \
-    --enable-languages=c,c++                                 \
-    --enable-clocale=generic                                 \
-    --enable-libstdcxx-time                                  \
-    --enable-threads=posix                                   \
-    --enable-fully-dynamic-string                            \
-    --enable-shared                                          \
-    --disable-multilib                                       \
-    --disable-libsanitizer                                   \
-    --disable-symvers                                        \
-    --disable-lto-plugin                                     \
+
+CFLAGS="-Os -pipe -g0" CXXFLAGS="-Os -pipe -g0"     \
+LDFLAGS="-Wl,-rpath,/clang0-tools/lib" ../configure \
+    --prefix=/clang0-tools                          \
+    --build=${C_TRIPLET}                            \
+    --host=${C_TRIPLET}                             \
+    --target=${H_TRIPLET}                           \
+    --with-sysroot=/clang0-tools                    \
+    --disable-nls                                   \
+    --enable-languages=c,c++                        \
+    --enable-clocale=generic                        \
+    --enable-libstdcxx-time                         \
+    --enable-threads=posix                          \
+    --enable-fully-dynamic-string                   \
+    --enable-shared                                 \
+    --disable-multilib                              \
+    --disable-libsanitizer                          \
+    --disable-symvers                               \
+    --disable-lto-plugin                            \
     --disable-libssp
 
 # Build.
