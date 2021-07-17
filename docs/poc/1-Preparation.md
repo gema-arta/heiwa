@@ -56,10 +56,8 @@ fi
 su - heiwa
 
 cat > ~/.bash_profile << "EOF"
-export COMMON_FLAGS="-march=native -Oz -pipe"
 exec env -i HOME="$HOME" TERM="$TERM" PS1='\u: \w\n\$ ' \
-CFLAGS="$COMMON_FLAGS" CXXFLAGS="$COMMON_FLAGS" \
-COMMON_FLAGS="$COMMON_FLAGS" /bin/bash
+COMMON_FLAGS="-march=native -Oz -pipe" /bin/bash
 EOF
 
 cat > ~/.bashrc << EOF
@@ -76,21 +74,21 @@ unset CFLAGS CXXFLAGS
 EOF
 source ~/.bash_profile
 
-export HEIWA_TARGET="x86_64-heiwa-linux-musl"
+export HEIWA_TARGET="$(uname -m)-heiwa-linux-musl"
 export HEIWA_ARCH="x86"
 export HEIWA_CPU="x86-64"
 export HEIWA_HOST="$(echo "$MACHTYPE" | \
-    sed "s/$(echo "$MACHTYPE" | cut -d- -f2)/cross/")"
+            sed "s/$(echo "$MACHTYPE" | cut -d- -f2)/cross/")"
+export LLVM_TARGET="X86"
 export TARGET_TRUPLE="x86_64-pc-linux-musl"
 
 cat >> ~/.bashrc << EOF
-export HEIWA_HOST="${HEIWA_HOST}"
-export HEIWA_TARGET="${HEIWA_TARGET}"
-export HEIWA_ARCH="${HEIWA_ARCH}"
-export HEIWA_CPU="${HEIWA_CPU}"
-export TARGET_TRUPLE="${TARGET_TRUPLE}"
-# Make's multiple jobs based on CPU core/threads.
-alias make="make -j\$(nproc) -l\$(nproc)"
+HEIWA_HOST="${HEIWA_HOST}"
+HEIWA_TARGET="${HEIWA_TARGET}"
+HEIWA_ARCH="${HEIWA_ARCH}"
+HEIWA_CPU="${HEIWA_CPU}"
+LLVM_TARGET="${LLVM_TARGET}"
+TARGET_TRUPLE="${TARGET_TRUPLE}"
 EOF
 source ~/.bashrc
 ```
