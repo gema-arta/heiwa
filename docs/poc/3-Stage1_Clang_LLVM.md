@@ -101,7 +101,7 @@ time { make LLVM=1 mrproper; }
 
 # The recommended make target `headers_install` cannot be used, because it requires rsync, which may not be available.
 # The headers are first placed in "./usr/", then copied to the needed location.
-time { make ARCH=${HEIWA_ARCH} LLVM=1 HOSTCC=${CC} headers; }
+time { make ARCH=${C_ARCH} LLVM=1 HOSTCC=${CC} headers; }
 
 # Remove unnecessary files.
 find usr/include -name '.*' -exec rm -rfv {} \;
