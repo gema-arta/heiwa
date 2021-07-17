@@ -466,9 +466,9 @@ time { make install; }
 > **Required!** For the current and next stage (chroot environment) that most build systems depends on GNU implementation style.
 ```bash
 # Configure source.
-./configure --prefix=/clang1-tools   \
-            --build=${T_TRIPLET} \
-            --host=${T_TRIPLET}  \
+./configure --prefix=/clang1-tools \
+            --build=${T_TRIPLET}   \
+            --host=${T_TRIPLET}    \
             --without-guile
 
 # Build.
