@@ -7,7 +7,6 @@
 
 > #### * Beginning of as root!
 ### `1` - Prepare a volume/partition
-> Customize your own `/dev/sdX`!
 ```bash
 # Formatting.
 mkfs.ext4 -m 0 -L "Heiwa_Linux" /dev/sdaX
@@ -97,6 +96,8 @@ L_TARGET="${L_TARGET}"
 T_TRIPLET="${T_TRIPLET}"
 H_TRIPLET="${H_TRIPLET}"
 export C_TRIPLET C_ARCH C_CPU L_TARGET T_TRIPLET H_TRIPLET
+
+export MAKEFLAGS="-j\$(nproc) -l\$(nproc)"
 EOF
 source ~/.bashrc
 ```
