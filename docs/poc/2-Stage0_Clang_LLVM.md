@@ -215,7 +215,7 @@ sed -i 's|/lib/ld-musl-x86_64.so.1|/clang0-tools/lib/ld-musl-x86_64.so.1|g' spec
 # Check specs file.
 grep --color=auto "/clang0-tools/lib/ld-musl-x86_64.so.1" specs
 
-# Install specs file if correct.
+# Install specs file (if correct).
 mv -fv specs "$SPECFILE"; unset SPECFILE
 
 # Quick test.
@@ -258,7 +258,7 @@ time { make PREFIX=/clang0-tools install; }
 > #### `12.x.x` or newer
 > C language family frontend for LLVM.
 
-> **Required!** Build Stage-0 Clang/LLVM toolchain with `libgcc_s.so*` and `libstdc++.so*` dependencies since built with GNU tools.
+> **Required!** Build Stage-0 Clang/LLVM toolchain with `libgcc_s.so*` and `libstdc++.so*` dependencies since built with GCC toolchain.
 ```bash
 # Exit from the LLVM source directory if already entered after decompressing.
 popd
