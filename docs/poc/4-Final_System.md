@@ -378,7 +378,7 @@ popd && rm -rf tzdata; unset timezones
 
 > **Required!** Before `Kmod`, `Perl`, and `Util-linux`.
 ```bash
-# Apply patch (from OpenMandriva) to fix `Z_SOLO` while building perl.
+# Apply patch (from OpenMandriva) to fix `Z_SOLO` while building Perl.
 patch -Np1 -i ../../extra/zlib-ng/patches/0001-Fix-Z_SOLO-mode.patch
 
 # Configure source.
@@ -403,7 +403,7 @@ time { make -C build install; }
 > **Required!** Before `GNU Bash`, `GNU Readline`, `GNU Texinfo`, and `Util-linux`.
 ```bash
 # Build.
-time { make CFLAGS="$CFLAGS -fPIC"; }
+time { make CFLAGS="-fPIC $CFLAGS"; }
 
 # Install and create symlinks as `libtinfo` libraries (which actually replace GNU Ncurses).
 time {
