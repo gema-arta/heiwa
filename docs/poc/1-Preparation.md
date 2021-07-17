@@ -72,22 +72,23 @@ export HEIWA LC_ALL PATH LLVM_SRC
 EOF
 source ~/.bash_profile
 
-export HEIWA_HOST="$(echo "$MACHTYPE" | \
-            sed "s/$(echo "$MACHTYPE" | cut -d- -f2)/cross/")"
-export HEIWA_ARCH="x86"
-export HEIWA_CPU="x86-64"
-export LLVM_TARGET="X86"
-export HEIWA_TARGET_TRUPLE="x86_64-heiwa-linux-musl"
-export TARGET_TRUPLE="x86_64-pc-linux-musl"
+export C_TRIPLET="$(echo "$MACHTYPE" | \
+    sed "s|$(echo "$MACHTYPE" | cut -d- -f2)|cross|")"
+export C_ARCH="x86"
+export C_CPU="x86-64"
+export L_TARGET="X86"
+export T_TRIPLET="x86_64-pc-linux-musl"
+export H_TRIPLET="$(echo "$T_TRIPLET" | \
+    sed "s|$(echo "$T_TRIPLET" | cut -d- -f2)|heiwa|")"
 
 cat >> ~/.bashrc << EOF
-HEIWA_HOST="${HEIWA_HOST}"
-HEIWA_ARCH="${HEIWA_ARCH}"
-HEIWA_CPU="${HEIWA_CPU}"
-LLVM_TARGET="${LLVM_TARGET}"
-HEIWA_TARGET_TRUPLE="${HEIWA_TARGET}"
-TARGET_TRUPLE="${TARGET_TRUPLE}"
-export HEIWA_HOST HEIWA_ARCH HEIWA_CPU LLVM_TARGET HEIWA_TARGET_TRUPLE TARGET_TRUPLE
+C_TRIPLET="${C_TRIPLET}"
+C_ARCH="${C_ARCH}"
+C_CPU="${C_CPU}"
+L_TARGET="${L_TARGET}"
+T_TRIPLET="${T_TRIPLET}"
+H_TRIPLET="${H_TRIPLET}"
+export C_TRIPLET C_ARCH C_CPU L_TARGET T_TRIPLET H_TRIPLET
 EOF
 source ~/.bashrc
 ```
