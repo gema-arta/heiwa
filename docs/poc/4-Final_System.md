@@ -166,7 +166,7 @@ COMMON_FLAGS="-march=native -Oz -pipe"
 CFLAGS="${COMMON_FLAGS}"
 CXXFLAGS="${COMMON_FLAGS}"
 LDFLAGS="-Wl,-O2 -Wl,--as-needed"
-MAKEFLAGS="-j\$(nproc) -l\$(nproc)"
+MAKEFLAGS="-j$(nproc) -l$(nproc)"
 export COMMON_FLAGS CFLAGS CXXFLAGS LDFLAGS MAKEFLAGS
 EOF
 source ~/.bash_profile
