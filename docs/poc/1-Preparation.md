@@ -95,9 +95,8 @@ C_CPU="${C_CPU}"
 L_TARGET="${L_TARGET}"
 T_TRIPLET="${T_TRIPLET}"
 H_TRIPLET="${H_TRIPLET}"
-export C_TRIPLET C_ARCH C_CPU L_TARGET T_TRIPLET H_TRIPLET
-
-export MAKEFLAGS="-j\$(nproc) -l\$(nproc)"
+MAKEFLAGS="-j\$(nproc) -l\$(nproc)"
+export C_TRIPLET C_ARCH C_CPU L_TARGET T_TRIPLET H_TRIPLET MAKEFLAGS
 EOF
 source ~/.bashrc
 ```
