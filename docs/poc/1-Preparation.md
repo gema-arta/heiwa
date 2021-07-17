@@ -7,9 +7,9 @@
 
 > #### * Beginning of as root!
 ### `1` - Prepare a volume/partition
+> Customize your own "/dev/sdX"!
 ```bash
 # Formatting.
-# Customize your own "/dev/sdX"!
 mkfs.ext4 -m 0 -L "Heiwa_Linux" /dev/sdaX
 ```
 ```bash
