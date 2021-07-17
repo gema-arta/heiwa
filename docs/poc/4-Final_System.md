@@ -145,12 +145,14 @@ chmod -v 600  /var/log/btmp
 > Apply persistent toolchain environment variables, now set the compiler to Stage-1 Clang/LLVM default triplet (pc).
 ```bash
 cat > ~/.bash_profile << "EOF"
-# Clang/LLVM environment.
+# Clang/LLVM Environment.
 CC="x86_64-pc-linux-musl-clang"
 CXX="x86_64-pc-linux-musl-clang++"
+LD="ld.lld"
+CC_LD="${LD}"
+CXX_LD="${LD}"
 AR="llvm-ar"
 AS="llvm-as"
-LD="ld.lld"
 NM="llvm-nm"
 OBJCOPY="llvm-objcopy"
 OBJDUMP="llvm-objdump"
@@ -158,13 +160,14 @@ RANLIB="llvm-ranlib"
 READELF="llvm-readelf"
 SIZE="llvm-size"
 STRIP="llvm-strip"
+export CC CXX LD CC_LD CXX_LD AR AS NM OBJCOPY OBJDUMP RANLIB READELF SIZE STRIP
+
 COMMON_FLAGS="-march=native -Oz -pipe"
 CFLAGS="${COMMON_FLAGS}"
 CXXFLAGS="${COMMON_FLAGS}"
-LLVM_SRC="/sources/llvm"
-export CC CXX AR AS RANLIB LD NM OBJCOPY OBJDUMP READELF SIZE STRIP COMMON_FLAGS CFLAGS CXXFLAGS LLVM_SRC
-# Make's multiple jobs based on CPU core/threads.
-alias make="make -j$(nproc) -l$(nproc)"
+LDFLAGS="-Wl,-O2 -Wl,--as-needed"
+MAKEFLAGS="-j\$(nproc) -l\$(nproc)"
+export COMMON_FLAGS CFLAGS CXXFLAGS LDFLAGS MAKEFLAGS
 EOF
 source ~/.bash_profile
 ```
