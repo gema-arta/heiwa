@@ -49,8 +49,8 @@ source ~/.bashrc
 > **Required!** As mentioned in the description above.
 ```bash
 # Configure source.
-CFLAGS="-Oz -pipe" CXXFLAGS="-Oz -pipe" \
-./configure --prefix=/ --enable-optimize=speed
+./configure --prefix=/ \
+            --enable-optimize=speed
 
 # Build.
 time { make; }
@@ -127,7 +127,7 @@ cp -rfv usr/include /clang1-tools/.
 > **Required!** To build Stage-1 Clang/LLVM and for the most programs that depends on `-ltinfo` or `-lterminfo` linker's flags.
 ```bash
 # Build.
-time { make CFLAGS="-Oz -pipe -fPIC" all-dynamic; }
+time { make CFLAGS="-fPIC $CFLAGS" all-dynamic; }
 
 # Install.
 time { make PREFIX=/clang1-tools install-dynamic; }
@@ -140,7 +140,7 @@ time { make PREFIX=/clang1-tools install-dynamic; }
 > **Required!** To build Stage-1 Clang/LLVM, since using musl libc.
 ```bash
 # Build.
-time { make CFLAGS="-Oz -pipe"; }
+time { make; }
 
 # Install.
 time { make PREFIX=/clang1-tools install; }
@@ -153,8 +153,8 @@ time { make PREFIX=/clang1-tools install; }
 > **Required!** By Pigz in the current stage and optionally enabled to build Stage-1 Clang/LLVM.
 ```bash
 # Configure source.
-CFLAGS="-Oz -pipe" ./configure \
---prefix=/clang1-tools --zlib-compat --native
+./configure --prefix=/clang1-tools \
+            --zlib-compat --native
 
 # Build.
 time { make; }
