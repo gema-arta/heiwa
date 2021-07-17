@@ -19,7 +19,7 @@ The purpose of this stage is to build a temporary Clang/LLVM toolchain with GCC 
 > 2. Using `gawk` as `awk` implementation (symlinked).
 > 3. Using `bison` as `yacc` replacements (wrapped).
 > 4. Using `flex` as `lex` alternative lexical analyzers (symlinked).
-> 5. See more at [LFS Host System Requirements](https://linuxfromscratch.org/lfs/view/stable/chapter02/hostreqs.html).
+> 5. See more at "[LFS Host System Requirements](https://linuxfromscratch.org/lfs/view/stable/chapter02/hostreqs.html)".
 > 
 > ```bash
 > file $(command -v {g{cc,++},sh,awk,yacc,lex})
