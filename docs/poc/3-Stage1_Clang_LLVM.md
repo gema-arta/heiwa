@@ -359,28 +359,7 @@ time { make LIBINTL=MUSL prefix=/clang1-tools; }
 install -vm755 -t /clang1-tools/bin/ msg{fmt,merge} xgettext 
 ```
 
-### `8` - GNU AWK
-> #### `5.1.0` or newer
-> The GNU AWK (gawk) package contains programs for manipulating text files.
-
-> **Required!** For the current and next stage (chroot environment) that most build systems depends on GNU implementation style.
-```bash
-# Ensure some unneeded files are not installed.
-sed -i 's|extras||' Makefile.in
-
-# Configure source.
-./configure --prefix=/clang1-tools \
-            --build=${T_TRIPLET}   \
-            --host=${T_TRIPLET}
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
-```
-
-### `9` - Toybox (Coreutils, File, Findutils, Grep, Sed, Tar)
+### `8` - Toybox (Coreutils, File, Findutils, Grep, Sed, Tar)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
@@ -420,6 +399,27 @@ time { make; }
 
 # Install.
 time { make PREFIX=/clang1-tools install; unset X CFFGPT; }
+```
+
+### `9` - GNU AWK
+> #### `5.1.0` or newer
+> The GNU AWK (gawk) package contains programs for manipulating text files.
+
+> **Required!** For the current and next stage (chroot environment) that most build systems depends on GNU implementation style.
+```bash
+# Ensure some unneeded files are not installed.
+sed -i 's|extras||' Makefile.in
+
+# Configure source.
+./configure --prefix=/clang1-tools \
+            --build=${T_TRIPLET}   \
+            --host=${T_TRIPLET}
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
 ```
 
 ### `10` - GNU Diffutils
