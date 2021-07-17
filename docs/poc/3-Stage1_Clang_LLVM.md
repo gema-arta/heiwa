@@ -34,6 +34,10 @@ READELF="llvm-readelf"
 SIZE="llvm-size"
 STRIP="llvm-strip"
 export CC CXX LD CC_LD CXX_LD AR AS NM OBJCOPY OBJDUMP RANLIB READELF SIZE STRIP
+CFLAGS=
+CXXFLAGS=
+LDFLAGS="-Wl,-O2 -Wl,--as-needed"
+export CFLAGS CXXFLAGS LD_FLAGS
 EOF
 source ~/.bashrc
 ```
@@ -334,7 +338,6 @@ EOF
 # Set the new PATH since "/clang0-tools" won't be used anymore and the Stage-1 Clang/LLVM default triplet (pc),
 # also it's time to enable optimization as default.
 sed -i 's|/clang0-tools/usr/bin:/clang0-tools/bin:||' ~/.bashrc
-sed -i '/unset CFLAGS CXXFLAGS/d'                     ~/.bashrc
 sed -i 's|CC=.*|CC="${T_TRIPLET}-clang"|'         ~/.bashrc
 sed -i 's|CXX=.*|CXX="${T_TRIPLET}-clang++"|'     ~/.bashrc
 source ~/.bash_profile
