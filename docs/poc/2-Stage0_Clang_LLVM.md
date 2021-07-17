@@ -55,7 +55,7 @@ cp -rfv usr/include /clang0-tools/${H_TRIPLET}/.
 ```bash
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build
-CFLAGS="-Os -pipe -g0" CXXFLAGS="-Os -pipe -g0" ../configure \
+CFLAGS="-g0 -Os -pipe" CXXFLAGS="-g0 -Os -pipe" ../configure \
     --prefix=/clang0-tools                                   \
     --target=${H_TRIPLET}                                    \
     --with-sysroot=/clang0-tools/${H_TRIPLET}                \
@@ -85,29 +85,29 @@ tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc-1.2.1 mpc
 
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build
-CFLAGS="-Os -pipe -g0 -O0" CXXFLAGS="-Os -pipe -g0 -O0" ../configure \
-    --prefix=/clang0-tools                                           \
-    --build=${C_TRIPLET}                                             \
-    --host=${C_TRIPLET}                                              \
-    --target=${H_TRIPLET}                                            \
-    --with-sysroot=/clang0-tools/${H_TRIPLET}                        \
-    --disable-nls                                                    \
-    --disable-shared                                                 \
-    --without-headers                                                \
-    --with-newlib                                                    \
-    --disable-decimal-float                                          \
-    --disable-libgomp                                                \
-    --disable-libssp                                                 \
-    --disable-libatomic                                              \
-    --disable-libquadmath                                            \
-    --disable-threads                                                \
-    --disable-libitm                                                 \
-    --disable-libsanitizer                                           \
-    --disable-libstdcxx                                              \
-    --disable-libvtv                                                 \
-    --enable-languages=c                                             \
-    --enable-clocale=generic                                         \
-    --disable-multilib                                               \
+CFLAGS="-g0 -O0 -pipe" CXXFLAGS="-g0 -O0 -pipe" ../configure \
+    --prefix=/clang0-tools                                   \
+    --build=${C_TRIPLET}                                     \
+    --host=${C_TRIPLET}                                      \
+    --target=${H_TRIPLET}                                    \
+    --with-sysroot=/clang0-tools/${H_TRIPLET}                \
+    --disable-nls                                            \
+    --disable-shared                                         \
+    --without-headers                                        \
+    --with-newlib                                            \
+    --disable-decimal-float                                  \
+    --disable-libgomp                                        \
+    --disable-libssp                                         \
+    --disable-libatomic                                      \
+    --disable-libquadmath                                    \
+    --disable-threads                                        \
+    --disable-libitm                                         \
+    --disable-libsanitizer                                   \
+    --disable-libstdcxx                                      \
+    --disable-libvtv                                         \
+    --enable-languages=c                                     \
+    --enable-clocale=generic                                 \
+    --disable-multilib                                       \
     --with-arch=${C_CPU}
 
 # Build only the minimum.
@@ -180,7 +180,7 @@ esac
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build
 
-CFLAGS="-Os -pipe -g0" CXXFLAGS="-Os -pipe -g0"     \
+CFLAGS="-g0 -Os -pipe" CXXFLAGS="-g0 -Os -pipe"     \
 LDFLAGS="-Wl,-rpath,/clang0-tools/lib" ../configure \
     --prefix=/clang0-tools                          \
     --build=${C_TRIPLET}                            \
@@ -235,7 +235,7 @@ readelf -l a.out | grep "Requesting"
 > **Required!** To build Stage-0 Clang/LLVM.
 ```bash
 # Build.
-time { make CC=${H_TRIPLET}-gcc CFLAGS="-Os -pipe -fPIC" all-dynamic; }
+time { make CC=${H_TRIPLET}-gcc CFLAGS="-fPIC -Os -pipe" all-dynamic; }
 
 # Install.
 time { make PREFIX=/clang0-tools install-dynamic; }
@@ -296,8 +296,8 @@ cmake -B build \
     -DCMAKE_INSTALL_PREFIX="/clang0-tools"                                                  \
     -DCMAKE_C_COMPILER="${H_TRIPLET}-gcc"                                                   \
     -DCMAKE_CXX_COMPILER="${H_TRIPLET}-g++"                                                 \
-    -DCMAKE_C_FLAGS="-Os -pipe -g0"                                                         \
-    -DCMAKE_CXX_FLAGS="-Os -pipe -g0"                                                       \
+    -DCMAKE_C_FLAGS="-g0 -Os -pipe"                                                         \
+    -DCMAKE_CXX_FLAGS="-g0 -Os -pipe"                                                       \
     -DCMAKE_EXE_LINKER_FLAGS="-Wl,-dynamic-linker /clang0-tools/lib/ld-musl-x86_64.so.1"    \
     -DCMAKE_SHARED_LINKER_FLAGS="-Wl,-dynamic-linker /clang0-tools/lib/ld-musl-x86_64.so.1" \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$T_TRIPLET"                                               \
