@@ -54,12 +54,14 @@ fi
 ```bash
 # Login as privileged user.
 su - heiwa
-
+```
+```bash
 cat > ~/.bash_profile << "EOF"
 exec env -i HOME="$HOME" TERM="$TERM" \
 COMMON_FLAGS="-march=native -Oz -pipe" /bin/bash
 EOF
-
+```
+```bash
 cat > ~/.bashrc << EOF
 set +h
 umask 022
@@ -71,7 +73,8 @@ LLVM_SRC="\${HEIWA}/sources/llvm"
 export HEIWA LC_ALL PATH LLVM_SRC
 EOF
 source ~/.bash_profile
-
+```
+```bash
 export C_TRIPLET="$(echo "$MACHTYPE" | \
     sed "s|$(echo "$MACHTYPE" | cut -d- -f2)|cross|")"
 export C_ARCH="x86"
@@ -80,7 +83,8 @@ export L_TARGET="X86"
 export T_TRIPLET="x86_64-pc-linux-musl"
 export H_TRIPLET="$(echo "$T_TRIPLET" | \
     sed "s|$(echo "$T_TRIPLET" | cut -d- -f2)|heiwa|")"
-
+```
+```bash
 cat >> ~/.bashrc << EOF
 
 C_TRIPLET="${C_TRIPLET}"
