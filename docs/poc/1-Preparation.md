@@ -10,7 +10,8 @@
 ```bash
 # Formatting.
 mkfs.ext4 -m 0 -L "Heiwa_Linux" /dev/sdaX
-
+```
+```bash
 # Export mountpoint variable and create the directory if not exist.
 export HEIWA="/media/Heiwa"
 mkdir -pv "$HEIWA"
@@ -37,7 +38,8 @@ fi
 groupadd heiwa
 useradd -s /bin/bash -g heiwa -m -k /dev/null heiwa
 passwd heiwa
-
+```
+```bash
 # Setting up directory permission.
 # Warning! This is danger, so check its variables before `chown`.
 # echo {${HEIWA},}/clang{0,1}-tools
