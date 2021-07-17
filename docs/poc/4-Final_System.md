@@ -243,7 +243,10 @@ LDFLAGS="-Wl,-soname,libc.musl-x86_64.so.1" \
 time { make; }
 
 # Install and create a `ldd` symlink to use to print shared object dependencies.
-time { make install && ln -sv ../usr/lib/libc.so /bin/ldd;  }
+time {
+    make install
+    ln -sv ../usr/lib/libc.so /bin/ldd
+}
 ```
 ```bash
 # Configure PATH for dynamic linker.
