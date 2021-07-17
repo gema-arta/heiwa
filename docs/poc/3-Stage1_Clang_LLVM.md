@@ -369,8 +369,8 @@ install -vm755 -t /clang1-tools/bin/ msg{fmt,merge} xgettext
 sed -i 's|extras||' Makefile.in
 
 # Configure source.
-./configure --prefix=/clang1-tools   \
-            --build=${T_TRIPLET} \
+./configure --prefix=/clang1-tools \
+            --build=${T_TRIPLET}   \
             --host=${T_TRIPLET}
 
 # Build.
@@ -387,9 +387,9 @@ time { make install; }
 > **Required!** As default shell for the next stage (chroot environment).
 ```bash
 # Configure source.
-./configure --prefix=/clang1-tools   \
-            --build=${T_TRIPLET} \
-            --host=${T_TRIPLET}  \
+./configure --prefix=/clang1-tools \
+            --build=${T_TRIPLET}   \
+            --host=${T_TRIPLET}    \
             --without-bash-malloc
 
 # Build.
@@ -448,8 +448,8 @@ time { make PREFIX=/clang1-tools install; unset X CFFGPT; }
 > **Required!** For the current and next stage (chroot environment) that most build systems depends on GNU implementation style.
 ```bash
 # Configure source.
-./configure --prefix=/clang1-tools   \
-            --build=${T_TRIPLET} \
+./configure --prefix=/clang1-tools \
+            --build=${T_TRIPLET}   \
             --host=${T_TRIPLET}
 
 # Build.
@@ -485,8 +485,8 @@ time { make install; }
 > **Required!** For the current and next stage (chroot environment). The GNU implementation of `patch` is can handle offset lines, which is powerful feature.
 ```bash
 # Configure source.
-./configure --prefix=/clang1-tools   \
-            --build=${T_TRIPLET} \
+./configure --prefix=/clang1-tools \
+            --build=${T_TRIPLET}   \
             --host=${T_TRIPLET}
 
 # Build.
@@ -503,8 +503,8 @@ time { make install; }
 > **Required!** For the most packages next stage (chroot environment). Nothing is GNU-free.
 ```bash
 # Configure source.
-./configure --prefix=/clang1-tools   \
-            --build=${T_TRIPLET} \
+./configure --prefix=/clang1-tools \
+            --build=${T_TRIPLET}   \
             --host=${T_TRIPLET}
 
 # Build.
@@ -527,8 +527,8 @@ cp -rf ../perl-cross-1.3.5/utils/* utils/            && \
 rm -rf ../perl-cross-1.3.5
 
 # Configure source.
-./configure --prefix=/clang1-tools   \
-            --build=${T_TRIPLET} \
+./configure --prefix=/clang1-tools \
+            --build=${T_TRIPLET}   \
             --target=${T_TRIPLET}
 
 # Build.
@@ -568,11 +568,11 @@ patch -Np1 -i ../../extra/python3/patches/musl-find_library.patch
 sed -i '/def add_multiarch_paths/a \        return' setup.py
 
 # Configure source.
-ax_cv_c_float_words_bigendian=no     \
-./configure --prefix=/clang1-tools   \
-            --build=${T_TRIPLET} \
-            --host=${T_TRIPLET}  \
-            --enable-shared          \
+ax_cv_c_float_words_bigendian=no   \
+./configure --prefix=/clang1-tools \
+            --build=${T_TRIPLET}   \
+            --host=${T_TRIPLET}    \
+            --enable-shared        \
             --without-ensurepip
 
 # Build. -> Ignore all issues! <-
@@ -612,9 +612,9 @@ time { make install; }
 > **Required!** As default ".xz" and ".lzma" files de/compressor for the current and next stage (chroot environment).
 ```bash
 # Configure source.
-./configure --prefix=/clang1-tools   \
-            --build=${T_TRIPLET} \
-            --host=${T_TRIPLET}  \
+./configure --prefix=/clang1-tools \
+            --build=${T_TRIPLET}   \
+            --host=${T_TRIPLET}    \
             --disable-static
 
 # Build.
