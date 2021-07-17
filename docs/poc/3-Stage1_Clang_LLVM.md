@@ -177,7 +177,7 @@ popd
 ```
 ```bash
 # Rename the LLVM source directory to "$LLVM_SRC", then enter.
-mv -fv llvm-12.0.1.src "$LLVM_SRC" && cd "$LLVM_SRC"
+mv -fv llvm-12.0.1.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 
 # Decompress `clang`, `lld`, `compiler-rt`, `libunwind`, `libcxxabi`, and `libcxx` to the correct directories.
 pushd ${LLVM_SRC}/projects/ && \
@@ -337,13 +337,13 @@ EOF
 
 # Set the new PATH since "/clang0-tools" won't be used anymore and the Stage-1 Clang/LLVM default triplet (pc).
 sed -i 's|/clang0-tools/usr/bin:/clang0-tools/bin:||' ~/.bashrc
-sed -i 's|CC=.*|CC="${T_TRIPLET}-clang"|'         ~/.bashrc
-sed -i 's|CXX=.*|CXX="${T_TRIPLET}-clang++"|'     ~/.bashrc
-source ~/.bash_profile
+sed -i 's|CC=.*|CC="${T_TRIPLET}-clang"|'             ~/.bashrc
+sed -i 's|CXX=.*|CXX="${T_TRIPLET}-clang++"|'         ~/.bashrc
+source ~/.bashrc
 ```
 ```bash
 # Back to "${HEIWA}/sources/pkgs" directory.
-cd ${HEIWA}/sources/pkgs/
+popd
 ```
 
 ### `7` - Gettext-tiny
