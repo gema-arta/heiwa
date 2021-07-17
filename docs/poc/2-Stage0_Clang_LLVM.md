@@ -258,7 +258,7 @@ time { make PREFIX=/clang0-tools install; }
 > #### `12.x.x` or newer
 > C language family frontend for LLVM.
 
-> **Required!** Build Stage-0 Clang/LLVM toolchain with `libgcc_s.so*` and `libstdc++.so*` dependencies since built with GCC and Binutils.
+> **Required!** Build Stage-0 Clang/LLVM toolchain with `libgcc_s.so*` and `libstdc++.so*` dependencies since built with GNU tools.
 ```bash
 # Exit from the LLVM source directory if already entered after decompressing.
 popd
