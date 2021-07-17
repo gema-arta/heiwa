@@ -346,7 +346,43 @@ source ~/.bashrc
 popd
 ```
 
-### `7` - Gettext-tiny
+### `7` - Pigz
+> #### `2.6` or newer
+> The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
+
+> **Required!** As default ".gz" files de/compressor for the current and next stage (chroot environment).
+```bash
+# Make sure to use symlink instead of hardlink for `unpigz`.
+sed -i 's|ln -f|ln -sf|' Makefile
+
+# Build.
+time { make CC=${CC}; }
+
+# Install and create symlinks as `gzip` tools.
+ln -sv pigz gzip; ln -sv unpigz gunzip
+install -vm755 -t /clang1-tools/bin/ pigz unpigz gzip gunzip
+```
+
+### `8` - Xz
+> #### `5.2.5` or newer
+> The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
+
+> **Required!** As default ".xz" and ".lzma" files de/compressor for the current and next stage (chroot environment).
+```bash
+# Configure source.
+./configure --prefix=/clang1-tools \
+            --build=${T_TRIPLET}   \
+            --host=${T_TRIPLET}    \
+            --disable-static
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `9` - Gettext-tiny
 > #### `0.3.2` or newer
 > The Gettext-tiny package contains utilities for internationalization and localization. These allow programs to be compiled with NLS (Native Language Support), enabling them to output messages in the user's native language. A lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
 
@@ -359,7 +395,7 @@ time { make LIBINTL=MUSL prefix=/clang1-tools; }
 install -vm755 -t /clang1-tools/bin/ msg{fmt,merge} xgettext 
 ```
 
-### `8` - Toybox (Coreutils, File, Findutils, Grep, Sed, Tar)
+### `10` - Toybox (Coreutils, File, Findutils, Grep, Sed, Tar)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
@@ -404,7 +440,7 @@ time { make; }
 time { make PREFIX=/clang1-tools install; unset X CFFGPT; }
 ```
 
-### `9` - GNU AWK
+### `11` - GNU AWK
 > #### `5.1.0` or newer
 > The GNU AWK (gawk) package contains programs for manipulating text files.
 
@@ -425,7 +461,7 @@ time { make; }
 time { make install; }
 ```
 
-### `10` - GNU Diffutils
+### `12` - GNU Diffutils
 > #### `3.7` or newer
 > The GNU Diffutils package contains programs that show the differences between files or directories.
 
@@ -443,7 +479,7 @@ time { make; }
 time { make install; }
 ```
 
-### `11` - GNU Make
+### `13` - GNU Make
 > #### `4.3` or newer
 > The GNU Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
  
@@ -462,7 +498,7 @@ time { make; }
 time { make install; }
 ```
 
-### `12` - GNU Patch
+### `14` - GNU Patch
 > #### `2.7.6` or newer
 > The GNU Patch package contains a program for modifying or creating files by applying a patch file typically created by the diff program.
 
@@ -480,7 +516,7 @@ time { make; }
 time { make install; }
 ```
 
-### `13` - GNU Texinfo
+### `15` - GNU Texinfo
 > #### `6.8` or newer
 > The Texinfo package contains programs for reading, writing, and converting info pages.
 
@@ -498,7 +534,7 @@ time { make; }
 time { make install; }
 ```
 
-### `14` - GNU Bash
+### `16` - GNU Bash
 > #### `5.1` (with patch level 8) or newer
 > The GNU Bash package contains the Bourne-Again SHell.
 
@@ -517,7 +553,7 @@ time { make; }
 time { make install; }
 ```
 
-### `15` - Perl (cross)
+### `17` - Perl (cross)
 > #### `5.32.1` and `1.3.5` for cross
 > The Perl package contains the Practical Extraction and Report Language.
 
@@ -541,24 +577,7 @@ time { make; }
 time { make install; }
 ```
 
-### `16` - Pigz
-> #### `2.6` or newer
-> The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
-
-> **Required!** As default ".gz" files de/compressor for the current and next stage (chroot environment).
-```bash
-# Make sure to use symlink instead of hardlink for `unpigz`.
-sed -i 's|ln -f|ln -sf|' Makefile
-
-# Build.
-time { make CC=${CC}; }
-
-# Install and create symlinks as `gzip` tools.
-ln -sv pigz gzip; ln -sv unpigz gunzip
-install -vm755 -t /clang1-tools/bin/ pigz unpigz gzip gunzip
-```
-
-### `17` - Python3
+### `18` - Python3
 > #### `3.9.6` or newer
 > The Python3 package contains the Python development environment. It is useful for object-oriented programming, writing scripts, prototyping large programs, or developing entire applications.
 
@@ -585,7 +604,7 @@ time { make; }
 time { make install; }
 ```
 
-### `18` - Cmake
+### `19` - Cmake
 > #### `3.20.5` or newer
 > The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
 
@@ -600,25 +619,6 @@ sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
             --parallel=$(nproc)              \
             --docdir=/share/doc/cmake-3.20.5 \
             -- -DCMAKE_USE_OPENSSL=OFF
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
-```
-
-### `19` - Xz
-> #### `5.2.5` or newer
-> The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
-
-> **Required!** As default ".xz" and ".lzma" files de/compressor for the current and next stage (chroot environment).
-```bash
-# Configure source.
-./configure --prefix=/clang1-tools \
-            --build=${T_TRIPLET}   \
-            --host=${T_TRIPLET}    \
-            --disable-static
 
 # Build.
 time { make; }
