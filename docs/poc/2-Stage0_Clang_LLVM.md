@@ -36,15 +36,15 @@ time { make mrproper; }
 
 # The recommended make target `headers_install` cannot be used, because it requires rsync, which may not be available.
 # The headers are first placed in "./usr/", then copied to the needed location.
-time { make ARCH=${HEIWA_ARCH} headers; }
+time { make ARCH=${C_ARCH} headers; }
 
 # Remove unnecessary files.
 find usr/include -name '.*' -exec rm -rfv {} \;
 rm -fv usr/include/Makefile
 
 # Install.
-mkdir -v /clang0-tools/${HEIWA_TARGET} && \
-cp -rfv usr/include /clang0-tools/${HEIWA_TARGET}/.
+mkdir -v /clang0-tools/${H_TRIPLET} && \
+cp -rfv usr/include /clang0-tools/${H_TRIPLET}/.
 ```
 
 ### `2` - GNU Binutils
@@ -57,8 +57,8 @@ cp -rfv usr/include /clang0-tools/${HEIWA_TARGET}/.
 mkdir -v build && cd build
 CFLAGS="-Os -pipe -g0" CXXFLAGS="-Os -pipe -g0" ../configure \
     --prefix=/clang0-tools                                   \
-    --target=${HEIWA_TARGET}                                 \
-    --with-sysroot=/clang0-tools/${HEIWA_TARGET}             \
+    --target=${H_TRIPLET}                                    \
+    --with-sysroot=/clang0-tools/${H_TRIPLET}                \
     --enable-deterministic-archives                          \
     --disable-nls                                            \
     --disable-multilib                                       \
@@ -87,10 +87,10 @@ tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc-1.2.1 mpc
 mkdir -v build && cd build
 CFLAGS="-Os -pipe -g0 -O0" CXXFLAGS="-Os -pipe -g0 -O0" ../configure \
     --prefix=/clang0-tools                                           \
-    --build=${HEIWA_HOST}                                            \
-    --host=${HEIWA_HOST}                                             \
-    --target=${HEIWA_TARGET}                                         \
-    --with-sysroot=/clang0-tools/${HEIWA_TARGET}                     \
+    --build=${C_TRIPLET}                                             \
+    --host=${C_TRIPLET}                                              \
+    --target=${H_TRIPLET}                                            \
+    --with-sysroot=/clang0-tools/${H_TRIPLET}                        \
     --disable-nls                                                    \
     --disable-shared                                                 \
     --without-headers                                                \
@@ -108,7 +108,7 @@ CFLAGS="-Os -pipe -g0 -O0" CXXFLAGS="-Os -pipe -g0 -O0" ../configure \
     --enable-languages=c                                             \
     --enable-clocale=generic                                         \
     --disable-multilib                                               \
-    --with-arch=${HEIWA_CPU}
+    --with-arch=${C_CPU}
 
 # Build only the minimum.
 time { make all-gcc all-target-libgcc; }
@@ -125,9 +125,9 @@ time { make install-gcc install-target-libgcc; }
 ```bash
 # Configure source.
 CFLAGS="-Os -pipe" CXXFLAGS="-Os -pipe" ./configure \
-    CROSS_COMPILE=${HEIWA_TARGET}-                  \
+    CROSS_COMPILE=${H_TRIPLET}-                     \
     --prefix=/                                      \
-    --target=${HEIWA_TARGET}                        \
+    --target=${H_TRIPLET}                           \
     --enable-optimize=speed
 
 # Build.
@@ -145,7 +145,7 @@ time {
 mkdir -v /clang0-tools/etc && \
 cat > /clang0-tools/etc/ld-musl-x86_64.path << EOF
 /clang0-tools/lib
-/clang0-tools/${HEIWA_TARGET}/lib
+/clang0-tools/${H_TRIPLET}/lib
 /usr/lib
 /lib
 EOF
@@ -182,9 +182,9 @@ mkdir -v build && cd build
 LDFLAGS="-Wl,-rpath,/clang0-tools/lib"                       \
 CFLAGS="-Os -pipe -g0" CXXFLAGS="-Os -pipe -g0" ../configure \
     --prefix=/clang0-tools                                   \
-    --build=${HEIWA_HOST}                                    \
-    --host=${HEIWA_HOST}                                     \
-    --target=${HEIWA_TARGET}                                 \
+    --build=${C_TRIPLET}                                     \
+    --host=${C_TRIPLET}                                      \
+    --target=${H_TRIPLET}                                    \
     --with-sysroot=/clang0-tools                             \
     --disable-nls                                            \
     --enable-languages=c,c++                                 \
@@ -200,15 +200,15 @@ CFLAGS="-Os -pipe -g0" CXXFLAGS="-Os -pipe -g0" ../configure \
     --disable-libssp
 
 # Build.
-time { make AS_FOR_TARGET=${HEIWA_TARGET}-as LD_FOR_TARGET=${HEIWA_TARGET}-ld; }
+time { make AS_FOR_TARGET=${H_TRIPLET}-as LD_FOR_TARGET=${H_TRIPLET}-ld; }
 
 # Install.
 time { make install; }
 ```
 ```bash
 # Adjust current GCC to produce binaries with "/clang0-tools/lib/ld-musl-x86_64.so.1".
-export SPECFILE="$(dirname $(${HEIWA_TARGET}-gcc -print-libgcc-file-name))/specs"
-${HEIWA_TARGET}-gcc -dumpspecs > specs
+export SPECFILE="$(dirname $(${H_TRIPLET}-gcc -print-libgcc-file-name))/specs"
+${H_TRIPLET}-gcc -dumpspecs > specs
 sed -i 's|/lib/ld-musl-x86_64.so.1|/clang0-tools/lib/ld-musl-x86_64.so.1|g' specs
 
 # Check specs file.
@@ -219,7 +219,7 @@ mv -fv specs "$SPECFILE"; unset SPECFILE
 
 # Quick test.
 echo "int main(){}" > dummy.c
-${HEIWA_TARGET}-gcc dummy.c
+${H_TRIPLET}-gcc dummy.c
 readelf -l a.out | grep "Requesting"
 
 # | The output should be:
@@ -234,7 +234,7 @@ readelf -l a.out | grep "Requesting"
 > **Required!** To build Stage-0 Clang/LLVM.
 ```bash
 # Build.
-time { make CC=${HEIWA_TARGET}-gcc CFLAGS="-Os -pipe -fPIC" all-dynamic; }
+time { make CC=${H_TRIPLET}-gcc CFLAGS="-Os -pipe -fPIC" all-dynamic; }
 
 # Install.
 time { make PREFIX=/clang0-tools install-dynamic; }
@@ -247,7 +247,7 @@ time { make PREFIX=/clang0-tools install-dynamic; }
 > **Required!** To build Stage-0 Clang/LLVM, since using musl libc.
 ```bash
 # Build.
-time { make CC=${HEIWA_TARGET}-gcc AR=${HEIWA_TARGET}-ar CFLAGS="-Os -pipe"; }
+time { make CC=${H_TRIPLET}-gcc AR=${H_TRIPLET}-ar CFLAGS="-Os -pipe"; }
 
 # Install.
 time { make PREFIX=/clang0-tools install; }
@@ -293,8 +293,8 @@ cp -fv ../extra/llvm/files/config.guess cmake/.
 cmake -B build \
     -DCMAKE_BUILD_TYPE=Release -Wno-dev                                                     \
     -DCMAKE_INSTALL_PREFIX="/clang0-tools"                                                  \
-    -DCMAKE_C_COMPILER="${HEIWA_TARGET}-gcc"                                                \
-    -DCMAKE_CXX_COMPILER="${HEIWA_TARGET}-g++"                                              \
+    -DCMAKE_C_COMPILER="${H_TRIPLET}-gcc"                                                   \
+    -DCMAKE_CXX_COMPILER="${H_TRIPLET}-g++"                                                 \
     -DCMAKE_C_FLAGS="-Os -pipe -g0"                                                         \
     -DCMAKE_CXX_FLAGS="-Os -pipe -g0"                                                       \
     -DCMAKE_EXE_LINKER_FLAGS="-Wl,-dynamic-linker /clang0-tools/lib/ld-musl-x86_64.so.1"    \
@@ -344,9 +344,9 @@ time {
 ```
 ```bash
 # Configure Stage-0 Clang with new triplet to produce binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" later.
-ln -sv clang   /clang0-tools/bin/${HEIWA_TARGET}-clang
-ln -sv clang++ /clang0-tools/bin/${HEIWA_TARGET}-clang++
-cat > /clang0-tools/bin/${HEIWA_TARGET}.cfg << "EOF"
+ln -sv clang   /clang0-tools/bin/${H_TRIPLET}-clang
+ln -sv clang++ /clang0-tools/bin/${H_TRIPLET}-clang++
+cat > /clang0-tools/bin/${H_TRIPLET}.cfg << "EOF"
 -Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1
 EOF
 ```
@@ -363,7 +363,7 @@ popd
 # The libtool .la files are only useful when linking with static libraries.
 # They are unneeded, and potentially harmful, when using dynamic shared libraries, specially when using non-autotools build systems.
 # Remove those files.
-find /clang0-tools/{{,${HEIWA_TARGET}/}lib{,64},libexec}/ -name \*.la -exec rm -rfv {} \;
+find /clang0-tools/{{,${H_TRIPLET}/}lib{,64},libexec}/ -name \*.la -exec rm -rfv {} \;
 
 # Remove the documentation.
 rm -rf /clang0-tools/share/{info,man,doc}/*
@@ -371,9 +371,9 @@ rm -rf /clang0-tools/share/{info,man,doc}/*
 # Strip off debugging symbols from binaries using `llvm-strip`.
 # A large number of files will be reported "The file was not recognized as a valid object file".
 # These warnings can be safely ignored. These warnings indicate that those files are scripts instead of binaries.
-find /clang0-tools/{,${HEIWA_TARGET}/}lib{,64}/ -maxdepth 1 -type f -exec llvm-strip --strip-debug {} \;
-find /clang0-tools/libexec/gcc/${HEIWA_TARGET}/*/ -type f -exec llvm-strip --strip-unneeded {} \;
-find /clang0-tools/{,${HEIWA_TARGET}/}bin/ -maxdepth 1 -type f -exec /usr/bin/strip --strip-unneeded {} \;
+find /clang0-tools/{,${H_TRIPLET}/}lib{,64}/ -maxdepth 1 -type f -exec llvm-strip --strip-debug {} \;
+find /clang0-tools/libexec/gcc/${H_TRIPLET}/*/ -type f -exec llvm-strip --strip-unneeded {} \;
+find /clang0-tools/{,${H_TRIPLET}/}bin/ -maxdepth 1 -type f -exec /usr/bin/strip --strip-unneeded {} \;
 ```
 
 <h2></h2>
