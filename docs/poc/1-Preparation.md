@@ -56,7 +56,7 @@ fi
 su - heiwa
 
 cat > ~/.bash_profile << "EOF"
-exec env -i HOME="$HOME" TERM="$TERM" PS1='\u: \w\n\$ ' \
+exec env -i HOME="$HOME" TERM="$TERM" \
 COMMON_FLAGS="-march=native -Oz -pipe" /bin/bash
 EOF
 
