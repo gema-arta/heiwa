@@ -6,7 +6,7 @@
 ## Roadmap <img alt="" align="right" src="https://badges.pufler.dev/visits/heiwalinux/heiwa?style=flat-square&label=&color=000000&logo=GitHub&logoColor=white&labelColor=373e4d"/>
 - [x] Specifies the packages to be used, instead of mainstream GNU/Linux distribution.
 
-  <details align="center">
+  <details>
   <summary>&#9776; Details</summary>
   
     > |  ?  | Kernel and Userspace                               | Packages                  | Extended Description          |
