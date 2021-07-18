@@ -1691,10 +1691,28 @@ time { make PREFIX=/usr; }
 time { make PREFIX=/usr install; }
 ```
 
-<h2 align="center">Belows are failed or untested!</h2>
+### `56` - GNU Nano
+> #### `5.8` or newer
+> The Nano package contains a small, simple text editor which aims to replace Pico, the default editor in the Pine package.
 
-> Untested ..
+> **Optional!** For text editing (configuration).
+```bash
+# Configure source.
+./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --enable-utf8     \
+            --docdir=/usr/share/doc/nano-5.8
 
-<br>
+# Build.
+time { make; }
 
-<h2 align="center">W.I.P<h2>
+# Install.
+time { make install; }
+```
+
+### `57` - Stripping debug symbols
+> #### This section is optional!
+
+> If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by about 2 GB by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
+```bash
+```
