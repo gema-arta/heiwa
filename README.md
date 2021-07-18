@@ -7,7 +7,7 @@
 - [x] Specifies the packages to be used.
 > | Status - Function                         | Packages                  |
 > |-------------------------------------------|---------------------------|
-> | - [x] System configure build dependencies | Pkgconf                   |
+> - [x] System configure build dependencies | Pkgconf                   
 > | - [x] Native Language Support             | Gettext-tiny              |
 > | - [x] Low-level Toolchain                 | Clang/LLVM (pure)         |
 > | - [x] C Runtime Library                   | musl                      |
