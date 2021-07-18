@@ -1563,7 +1563,8 @@ time { make ${MAKE_ARGS}; }
 
 # Install and unset make args.
 time { make ${MAKE_ARGS} DESTDIR=/ install; unset MAKE_ARGS; }
-
+```
+```bash
 # Decompress opentmpfiles.
 tar xzf ../opentmpfiles-0.3.1.tar.gz && \
 pushd opentmpfiles-0.3.1/
@@ -1574,7 +1575,8 @@ for C in opentmpfiles-dev opentmpfiles-setup; do
     install -vm644 openrc/${C}.confd /etc/conf.d/${C}
     install -vm755 openrc/${C}.initd /etc/init.d/${C}
 done && popd; unset C
-
+```
+```bash
 # Decompress udev-gentoo-scripts.
 tar xzf ../udev-gentoo-scripts-34.tar.gz && \
 cd udev-gentoo-scripts-34/
