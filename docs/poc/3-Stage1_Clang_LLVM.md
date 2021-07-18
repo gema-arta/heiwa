@@ -663,4 +663,4 @@ exit
 
 <h2></h2>
 
-~Continue to [Final System](./4-Final_System.md).~ (under developments)
+Continue to [Final System](./4-Final_System.md).
