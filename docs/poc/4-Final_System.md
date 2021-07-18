@@ -1542,19 +1542,19 @@ patch -Np1 -i ../../extra/openrc/patches/0014-time_t-64bit.patch
 
 # Build.
 export MAKE_ARGS="
-     LIBNAME=lib                 \
-     LIBDIR=/lib                 \
-     PKGCONFIGDIR=/lib/pkgconfig \
-     LIBEXECDIR=/lib/rc          \
-     MKBASHCOMP=yes              \
-     MKNET=no                    \
-     MKPREFIX=no                 \
-     MKSELINUX=no                \
-     MKSTATICLIBS=no             \
-     MKSYSVINIT=yes              \
-     MKZSHCOMP=yes               \
-     BRANDING=Heiwa/Linux        \
-     OS=Linux                    \
+     LIBNAME=lib
+     LIBDIR=/lib
+     PKGCONFIGDIR=/lib/pkgconfig
+     LIBEXECDIR=/lib/rc
+     MKBASHCOMP=yes
+     MKNET=no
+     MKPREFIX=no
+     MKSELINUX=no
+     MKSTATICLIBS=no
+     MKSYSVINIT=yes
+     MKZSHCOMP=yes
+     BRANDING=Heiwa/Linux
+     OS=Linux
      SH=/bin/sh"
 
 time { make ${MAKE_ARGS}; }
