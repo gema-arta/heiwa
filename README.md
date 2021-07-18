@@ -7,16 +7,16 @@
 - [x] Specifies the packages to be used, instead of mainstream GNU/Linux distribution.
 > |  ?  | Kernel and Userspace                               | Packages                  | Extended Description          |
 > |:---:|----------------------------------------------------|:-------------------------:|-------------------------------|
-> | [x] | Low-level Standard Libraries and Toolchain         | Clang/LLVM                | Pure, Fast, and Modern.       |
-> | [x] | Linux Kernel Patchset                              | Xanmod                    | CacULE CPU Scheduler          |
-> | [x] | C Runtime Library                                  | musl                      | Clean, but not fast as Glibc. |
-> | [x] | Build System Tools                                 | GNU                       | Most packages depend.         |
-> | [x] | Native Language Support                            | Gettext-tiny              | Stub of bloated GNU Gettext.  |
-> | [x] | Curses (Terminal Control) Library                  | NetBSD Curses             | Smaller than GNU Ncurses.     |
-> | [x] | Line-editing and History-capabilities Library      | GNU Readline              | Best implementation.          |
-> | [x] | Deflate or Inflate Algorithm Compression Library   | Zlib-ng                   | Next generation.              |
-> | [x] | Unified Interface for Querying Installed Libraries | Pkgconf                   | No circular dependencies.     |
-> | [x] | `.gz` Data Compressor and Decompressor             | Pigz                      | Parallel support.             |
+> |  ✓  | Low-level Standard Libraries and Toolchain         | Clang/LLVM                | Pure, Fast, and Modern.       |
+> |  ✓  | Linux Kernel Patchset                              | Xanmod                    | CacULE CPU Scheduler          |
+> |  ✓  | C Runtime Library                                  | musl                      | Clean, but not fast as Glibc. |
+> |  ✓  | Build System Tools                                 | GNU                       | Most packages depend.         |
+> |  ✓  | Native Language Support                            | Gettext-tiny              | Stub of bloated GNU Gettext.  |
+> |  ✓  | Curses (Terminal Control) Library                  | NetBSD Curses             | Smaller than GNU Ncurses.     |
+> |  ✓  | Line-editing and History-capabilities Library      | GNU Readline              | Best implementation.          |
+> |  ✓  | Deflate or Inflate Algorithm Compression Library   | Zlib-ng                   | Next generation.              |
+> |  ✓  | Unified Interface for Querying Installed Libraries | Pkgconf                   | No circular dependencies.     |
+> |  ✓  | `.gz` Data Compressor and Decompressor             | Pigz                      | Parallel support.             |
 - [ ] Create a Proof-of-Concept (similiar to LFS books). *Under development, optimizing ..*
 - [ ] Create a fast, flexible, and futuristic package manager.
 - [ ] Build an auto build systems.
