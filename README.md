@@ -10,14 +10,14 @@
 > | [x] | Low-level Standard Libraries and Toolchain               | Clang/LLVM                | Pure, Fast, and Modern.       |
 > | [x] | Linux Kernel Patchset                                    | Xanmod                    | CacULE CPU Scheduler          |
 > | [x] | C Runtime Library                                        | musl                      | Clean, but not fast as Glibc. |
-> | [x] | Build System Tools                                       | GNU                       | Most packages depends on GNU. |
-> | [x] | Unified Query Interface Support for Library Dependencies | Pkgconf                   | No circular dependencies      |
+> | [x] | Build System Tools                                       | GNU                       | Most packages depend.         |
+> | [x] | Unified Query Interface Support for Library Dependencies | Pkgconf                   | No circular dependencies.     |
 > | [x] | Native Language Support                                  | Gettext-tiny              | Stub of Bloated Gettext (GNU) |
-> | [x] | Curses Library                                           | NetBSD Curses             | Smaller than GNU Ncurses      |
-> | [x] | Line-editing and History Capabilities Library            | GNU Readline              | Best                          |
+> | [x] | Curses Library                                           | NetBSD Curses             | Smaller than GNU Ncurses.     |
+> | [x] | Line-editing and History Capabilities Library            | GNU Readline              | Best.                         |
 > | [x] | Z Data Compression Library                               | Zlib-ng                   | Up-to-date, Next Generation.  |
 > | [x] | `.bz` Data Compressor and Decompressor                   | Bzip2                     |                               |
-> | [x] | `.gz` Data Compressor and Decompressor                   | Pigz                      | Parallel Support              |
+> | [x] | `.gz` Data Compressor and Decompressor                   | Pigz                      | Parallel support.             |
 > | [x] | `.xz` Data Compressor and Decompressor                   | Xz                        |                               |
 - [ ] Create a Proof-of-Concept (similiar to LFS books). *Under development, optimizing ..*
 - [ ] Create a fast, flexible, and futuristic package manager.
