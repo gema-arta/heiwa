@@ -121,6 +121,9 @@ EOF
 
 # Install Heiwa/Linux bashrc configuration.
 install -v -Dm644 /sources/extra/bash/files/bashrc /etc/bash/
+
+# Reload the environment.
+source /etc/profile
 ```
 
 ### `5` - Creating the `/etc/inputrc` File (GNU Readline)
