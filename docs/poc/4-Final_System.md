@@ -1587,7 +1587,24 @@ pushd udev-gentoo-scripts-34/
 time { make install && popd; }
 ```
 
-### `49` - Eudev
+### `49` - GNU Gperf
+> The Gperf package contains utility that generates a perfect hash function from a key set.
+> #### `3.1` or newer
+
+> **Required!** Before `Eudev`.
+```bash
+# Configure source.
+./configure --prefix=/usr \
+            --docdir=/usr/share/doc/gperf-3.1
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `50` - Eudev
 > #### `3.2.10` or newer
 > The Eudev package contains programs for dynamic creation of device nodes.
 
