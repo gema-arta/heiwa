@@ -5,7 +5,7 @@
 
 ## Roadmap <img alt="" align="right" src="https://badges.pufler.dev/visits/heiwalinux/heiwa?style=flat-square&label=&color=000000&logo=GitHub&logoColor=white&labelColor=373e4d"/>
 - [x] Specifies the packages to be used.
-> |  ?  | Function                                                 | Packages                  |
+> |  ?  | Kernel and Userspace                                     | Packages                  |
 > |-----|----------------------------------------------------------|---------------------------|
 > | [x] | Low-level Standard Libraries and Toolchain               | Clang/LLVM (pure)         |
 > | [x] | Linux Kernel Patchset                                    | Xanmod (CacULE scheduler) |
