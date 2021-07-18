@@ -14,7 +14,7 @@
 > |  ?  | Kernel and Userspace                               | Packages                  | Extended Description           |
 > |:---:|----------------------------------------------------|:-------------------------:|--------------------------------|
 > |  ✓  | Low-level Standard Libraries and Toolchain         | Clang/LLVM                | Pure, Fast, and Modern.        |
-> |  ✓  | Linux Kernel Patchset                              | Xanmod                    | CacULE CPU Scheduler           |
+> |  ✓  | Linux Kernel Patchset                              | Xanmod                    | and .. CacULE CPU Scheduler    |
 > |  ✓  | C Runtime Library                                  | musl                      | Clean, but not fast as Glibc.  |
 > |  ✓  | Build System Tools                                 | GNU                       | Most packages depend.          |
 > |  ✓  | Native Language Support                            | Gettext-tiny              | Stub of bloated GNU Gettext.   |
