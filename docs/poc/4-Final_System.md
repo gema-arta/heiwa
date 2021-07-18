@@ -1656,6 +1656,43 @@ time { make -C build; }
 time { make -C build install; }
 ```
 
+### `54` - cpio
+> #### `2.13` or newer
+> The cpio package contains tools for archiving.
+
+> **Required!** Befor `Linux`.
+```bash
+# Configure source.
+./configure --prefix=/usr   \
+            --bindir=/bin   \
+            --disable-mt    \
+            --disable-rpath \
+            --enable-largefile
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+
+# Remove unnecessary files.
+rm -fv /usr/lib/charset.alias
+rm -fv /usr/libexec/rmt # part of the tar pkg
+rm -fv /usr/share/man/*/rmt.*
+```
+
+### `55` - LZ4
+> #### `1.9.3` or newer
+> The LZ4 package contains library for lossless compression algorithm, providing compression speed > 500 MB/s per core, scalable with multi-cores CPU. It features an extremely fast decoder, with speed in multiple GB/s per core, typically reaching RAM speed limits on multi-core systems.
+
+> **Required!** Before `Linux`.
+```bash
+# Build.
+time { make PREFIX=/usr; }
+
+# Install.
+time { make PREFIX=/usr install; }
+```
 
 <h2 align="center">Belows are failed or untested!</h2>
 
