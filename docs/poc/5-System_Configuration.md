@@ -1,11 +1,11 @@
 ## `V` System Configuration
 The purpose of this stage is to configure the system to be bootable, and also to install the Linux Kernel and desired Bootloader (nor EFI Stub).
 
-### `1` - Resolv
+### `1` - Creating the `/etc/resolv.conf` File
 > The system will need some means of obtaining Domain Name Service (DNS) name resolution to resolve Internet domain names to IP addresses, and vice versa. This is best achieved by placing the IP address of the DNS server, available from the ISP or network administrator, into /etc/resolv.conf.
 
 > Using Google's DNS as default.
-```sh
+```bash
 cat > /etc/resolv.conf << "EOF"
 # Begin /etc/resolv.conf
 
@@ -16,10 +16,10 @@ nameserver 8.8.4.4
 EOF
 ```
 
-### `2` - Hostname (openrc) and hostfile
+### `2` - Customizing the `/etc/hosts` File (and openrc conf)
 > When booting, openrc will setup system's hostname from /etc/conf.d/hostname.
-```sh
-# First, define preferred default hostname.
+```bash
+# Firstly, define preferred default hostname.
 # Below will using host's name.
 export HOSTNAME="${HOSTNAME}"
 
@@ -38,9 +38,9 @@ cat > /etc/hosts << EOF
 EOF
 ```
 
-### `3` - NanoRC
-> Setup Nano text-editor default configuration.
-```sh
+### `3` - Customizing the `/etc/nanorc` File
+> Setup Nano text-editor default configuration (by owl4ce).
+```bash
 cat > /etc/nanorc << "EOF"
 # Begin /etc/nanorc
 
@@ -71,12 +71,12 @@ set numbercolor white
 EOF
 ```
 
-### `4` - Locales
-```sh
-# Determine locale that supported by musl-locales. Should output "UTF-8".
+### `4` - Configure Locales
+```bash
+# Determine locale that supported by `musl-locales`. Should output "UTF-8".
 LC_ALL=en_US.utf8 locale charmap
 
-# Once the proper locale settings have been determined, create the /etc/profile file.
+# Once the proper locale settings have been determined, create the "/etc/profile" file.
 cat > /etc/profile << "EOF"
 # Begin /etc/profile
 
@@ -119,15 +119,15 @@ fi
 # End /etc/profile
 EOF
 
-# Install Heiwa Linux bashrc configuration.
-install -v -Dm644 /sources/files/branding-heiwa/etc/bash/bashrc /etc/bash/
+# Install Heiwa/Linux `bashrc` configuration.
+install -v -Dm644 /sources/extra/bash/files/bashrc /etc/bash/
 ```
 
-### `5` - Readline's inputrc
+### `5` - Creating the `/etc/inputrc` File (GNU Readline)
 > The inputrc file is the configuration file for the readline library, which provides editing capabilities while the user is entering a line from the terminal. It works by translating keyboard inputs into specific actions. Readline is used by bash and most other shells as well as many other applications.
 
 > Most people do not need user-specific functionality so the command below creates a global /etc/inputrc used by everyone who logs in. If you later decide you need to override the defaults on a per user basis, you can create a .inputrc file in the user's home directory with the modified mappings.
-```sh
+```bash
 # Below is a generic global inputrc along with comments to explain what the various options do.
 # Note that comments cannot be on the same line as commands.
 cat > /etc/inputrc << "EOF"
@@ -175,13 +175,13 @@ set bell-style none
 EOF
 ```
 
-### `6` - Shells
+### `6` - Creating the `/etc/shells` File
 > The shells file contains a list of login shells on the system. Applications use this file to determine whether a shell is valid. For each shell a single line should be present, consisting of the shell's path relative to the root of the directory structure (/).
 
 > For example, this file is consulted by chsh to determine whether an unprivileged user may change the login shell for her own account. If the command name is not listed, the user will be denied the ability to change shells.
 
 > It is a requirement for applications such as GDM which does not populate the face browser if it can't find /etc/shells, or FTP daemons which traditionally disallow access to users with shells not included in this file.
-```sh
+```bash
 cat > /etc/shells << "EOF"
 # Begin /etc/shells
 
@@ -193,31 +193,37 @@ EOF
 ```
 
 ### `7` - Linux
-> #### 5.12.10-xanmod1-cacule
+> #### `5.13.x` (CacULE) or newer
 > The Linux package contains the Linux kernel.
-```sh
-# Make sure there are no stale files embedded in the package.
-time { make mrproper; }
 
-# Copy Heiwa Linux kernel configuration.
-cp -rv ../../files/linux-xanmod-cacule-heiwa/{.config,localversion,drivers} ./
+> **Required!**
+```bash
+# Apply patch to fix "swab.h" under musl libc while building Linux kernel.
+patch -Np1 -i \
+../../extra/linux-headers/patches/include-uapi-linux-swab-Fix-potentially-missing-__always_inline.patch
+
+# Make sure there are no stale files embedded in the package.
+time { make LLVM=1 LLVM_IAS=1 mrproper; }
+
+# Copy Heiwa/Linux kernel configuration.
+cp -rv /sources/extra/linux-xanmod-cacule/files/{.config,localversion,drivers} ./
 
 # Configure source.
-time { make menuconfig; }
+time { make LLVM=1 LLVM_IAS=1 menuconfig; }
 
 # Build.
-time { make; }
+time { make LLVM=1 LLVM_IAS=1; }
 
 # Install modules.
-time { make modules_install; }
+time { make LLVM=1 LLVM_IAS=1 modules_install; }
 
-# If the host system has a separate /boot partition, the files copied below should go there.
-# The easiest way to do that is to bind /boot on the host (outside chroot) to /media/Heiwa/boot before proceeding.
+# If the host system has a separate "/boot" partition, the files copied below should go there.
+# The easiest way to do that is to bind "/boot" on the host (outside chroot) to "${HEIWA}/boot" before proceeding.
 # As the root user in the host system.
 # mount -R /boot /media/Heiwa/boot
 
 # Export target kernel version to use on installation steps.
-export KVER="5.12.10-heiwa-x86_64"
+export KVER="5.13.1-heiwa-x86_64"
 
 # Install.
 # The path to the kernel image may vary depending on the platform being used.
@@ -235,15 +241,15 @@ cp -iv System.map /boot/System.map-${KVER}
 # It is a good idea to keep this file for future reference.
 cp -iv .config /boot/config-${KVER}
 
-# Unset exported kver variable.
+# Unset exported KVER variable.
 unset KVER
 
-# Create the modules-load.d and modprobe directories in the /etc.
+# Create the modules-load.d and modprobe directories in the "/etc".
 mkdir -pv /etc/mod{ules-load,probe}.d
 ```
 
-### `8` - Fstab and Sysctl
-> The /etc/fstab file is used by some programs to determine where file systems are to be mounted by default, in which order, and which must be checked (for integrity errors) prior to mounting.
+### `8` - Creating the `/etc/fstab` File
+> The "/etc/fstab" file is used by some programs to determine where file systems are to be mounted by default, in which order, and which must be checked (for integrity errors) prior to mounting.
 ```sh
 # If using GPT, preferred to use "PARTUUID=" instead of "/dev/" and/or "UUID=" that requires initramfs.
 cat > /etc/fstab << "EOF"
@@ -258,7 +264,10 @@ cat > /etc/fstab << "EOF"
 
 # End /etc/fstab
 EOF
+```
 
+### `9` - Tweaking sysctl
+```bash
 # Apply some sysctl tweaks.
 cat > /etc/sysctl.conf << "EOF"
 # Reduce Swappiness
@@ -277,9 +286,9 @@ net.ipv4.ping_group_range = 0 2147483647
 EOF
 ```
 
-### `9` - Setup bootloader or direct EFI
+### `10` - Setup bootloader or direct EFI
 > #### ^ EFI Stub
-```sh
+```bash
 # Use "blkid" to determine PARTUUID.
 blkid
 
@@ -290,11 +299,11 @@ export PU="8e110801-8f49-2b41-a458-631e2ce4df34"
 efibootmgr --create --part 1 --disk /dev/sda --label "HEIWA_heiwa-x86_64" --loader "\vmlinuz-5.12.10-heiwa-x86_64" \
 -u "root=PARTUUID=${PU} rootfstype=ext4 rootflags=discard rw,noatime loglevel=4"
 
-# Unset exported partuuid variable.
+# Unset exported PARTUUID variable.
 unset PU
 ```
 
-### `10` - Configure OpenRC Services
+### `11` - Configure OpenRC Services
 > Configure openrc services, so can normally boot up.
 ```sh
 # Remove login "No mail" and last login prompt.
@@ -352,11 +361,10 @@ sed -i 's|rc_need="net"|#rc_need="net"|' \
 /etc/conf.d/netmount
 ```
 
-### `11` - The End
+### `12` - The End
 > Release notes and logout.
 ```sh
-install -v -m644 /sources/files/branding-heiwa/etc/lsb-release /etc/
-install -v -m644 /sources/files/branding-heiwa/etc/os-release /etc/
+install -vm644 -t /etc/ /sources/extra/branding-heiwa/etc/{lsb,os}-release
 
 # Exits chroot environment.
 logout
