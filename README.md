@@ -24,7 +24,7 @@
 > |  ✓  | Line-editing and History-capabilities Library      | GNU Readline              | Best implementation.           |
 > |  ✓  | Deflate or Inflate Algorithm Compression Library   | Zlib-ng                   | Next generation.               |
 > |  ✓  | Unified Interface for Querying Installed Libraries | Pkgconf                   | No circular dependencies.      |
-> |  ✓  | Gzip Data Compressor and Decompressor              | Pigz                      | Parallel support.              |
+> |  ✓  | Gzip Data Compressor and Decompressor              | Pigz                      | Parallel threads support.      |
 > |  ✓  | Most Userspace Utility Programs                    | Toybox                    | No circular dependencies.      |
 > |  ✓  | Init and Service Manager                           | OpenRC                    | Sophisticated version of SysV. |
 > 
