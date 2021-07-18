@@ -12,8 +12,9 @@
 > | [x] | C Runtime Library                                        | musl                      | Clean, but not fast as Glibc  |
 > | [x] | Build System Tools                                       | GNU                       |                               |
 > | [x] | Unified Query Interface Support for Library Dependencies | Pkgconf                   |                               |
-> | [x] | Native Language Support                                  | Gettext-tiny              | Stub                          |
+> | [x] | Native Language Support                                  | Gettext-tiny              | Stub of Bloated Gettext (GNU) |
 > | [x] | Curses Library                                           | NetBSD Curses             |                               |
+> | [x] | Line-editing and History Capabilities Library            | GNU Readline              | Best                          |
 > | [x] | Z Data Compression Library                               | Zlib-ng                   |                               |
 > | [x] | `.bz` Data Compressor and Decompressor                   | Bzip2                     |                               |
 > | [x] | `.gz` Data Compressor and Decompressor                   | Pigz                      | Parallel Support              |
