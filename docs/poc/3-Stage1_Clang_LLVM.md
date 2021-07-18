@@ -120,20 +120,7 @@ cp -rfv usr/include /clang1-tools/.
 # it will fails to compile "scripts/basic/fixdep.c", but successful using `${TARGET_TRIPLET}-compiler`.
 ```
 
-### `3` - NetBSD Curses
-> #### `0.3.2` or newer
-> The NetBSD Curses package contains libraries for terminal-independent handling of character screens.
-
-> **Required!** To build Stage-1 Clang/LLVM and for the most programs that depends on `-ltinfo` or `-lterminfo` linker's flags.
-```bash
-# Build.
-time { make CFLAGS="-fPIC $CFLAGS" all-dynamic; }
-
-# Install.
-time { make PREFIX=/clang1-tools install-dynamic; }
-```
-
-### `4` - Zlib-ng
+### `3` - Zlib-ng
 > #### `2.0.5` or newer
 > The Zlib-ng package contains zlib data compression library for the next generation systems.
 
@@ -148,6 +135,19 @@ time { make; }
 
 # Install.
 time { make install; }
+```
+
+### `4` - NetBSD Curses
+> #### `0.3.2` or newer
+> The NetBSD Curses package contains libraries for terminal-independent handling of character screens.
+
+> **Required!** To build Stage-1 Clang/LLVM and for the most programs that depends on `-ltinfo` or `-lterminfo` linker's flags.
+```bash
+# Build.
+time { make CFLAGS="-fPIC $CFLAGS" all-dynamic; }
+
+# Install.
+time { make PREFIX=/clang1-tools install-dynamic; }
 ```
 
 ### `5` - libexecinfo
