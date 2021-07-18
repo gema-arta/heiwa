@@ -1713,7 +1713,7 @@ time { make install; }
 ### `57` - Cleaning Up
 > #### This section is optional!
 
-> If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by about 2 GB by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
+> If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
 ```bash
 # Strip off debugging symbols from binaries using `llvm-strip`.
 # A large number of files will be reported "The file was not recognized as a valid object file".
