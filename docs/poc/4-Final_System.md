@@ -1553,7 +1553,7 @@ export MAKE_ARGS="
      MKSTATICLIBS=no             \
      MKSYSVINIT=yes              \
      MKZSHCOMP=yes               \
-     BRANDING=\"Heiwa/Linux\"    \
+     BRANDING=Heiwa/Linux        \
      OS=Linux                    \
      SH=/bin/sh"
 
