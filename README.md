@@ -7,7 +7,7 @@
 - [x] Specifies the packages to be used, instead of mainstream GNU/Linux distribution.
 
   <details>
-  <summary>&#9776; Details</summary>
+  <summary>Details</summary>
   
     > |  ?  | Kernel and Userspace                               | Packages                  | Extended Description          |
     > |:---:|----------------------------------------------------|:-------------------------:|-------------------------------|
