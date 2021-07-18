@@ -1642,7 +1642,7 @@ udevadm hwdb --update
 > **Required!**
 ```bash
 # Apply patch (from Alpine Linux) to print all available locales.
-patch -Np1 -i ../../extra/musl-locales/patches/musl-locales/add-all-available-locales.patch
+patch -Np1 -i ../../extra/musl-locales/patches/add-all-available-locales.patch
 
 # Build.
 time {
