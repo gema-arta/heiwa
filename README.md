@@ -14,7 +14,7 @@
 > | [x] | Unified Query Interface Support for Library Dependencies | Pkgconf                   | No circular dependencies.     |
 > | [x] | Native Language Support                                  | Gettext-tiny              | Stub of Bloated Gettext (GNU) |
 > | [x] | Curses Library                                           | NetBSD Curses             | Smaller than GNU Ncurses.     |
-> | [x] | Line-editing and History Capabilities Library            | GNU Readline              | Best.                         |
+> | [x] | Line-editing and History-capabilities Library            | GNU Readline              | Best.                         |
 > | [x] | Z Data Compression Library                               | Zlib-ng                   | Next Generation.              |
 > | [x] | `.bz` Data Compressor and Decompressor                   | Bzip2                     |                               |
 > | [x] | `.gz` Data Compressor and Decompressor                   | Pigz                      | Parallel support.             |
