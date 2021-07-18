@@ -1614,13 +1614,12 @@ time { make install; }
 autoreconf -fvi
 
 # Configure source.
-./configure --prefix=/usr          \
-            --bindir=/sbin         \
-            --sbindir=/sbin        \
-            --libdir=/usr/lib      \
-            --sysconfdir=/etc      \
-            --with-rootlibdir=/lib \
-            --enable-manpages      \
+./configure --prefix=/usr              \
+            --bindir=/sbin             \
+            --sbindir=/sbin            \
+            --sysconfdir=/etc          \
+            --with-rootlibexecdir=/lib \
+            --enable-manpages          \
             --disable-static
 
 # Build.
