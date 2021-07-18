@@ -1710,9 +1710,17 @@ time { make; }
 time { make install; }
 ```
 
-### `57` - Stripping debug symbols
+### `57` - Cleaning Up
 > #### This section is optional!
 
 > If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by about 2 GB by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
 ```bash
+# Strip off debugging symbols from binaries using `llvm-strip`.
+# A large number of files will be reported "The file was not recognized as a valid object file".
+# These warnings can be safely ignored. These warnings indicate that those files are scripts instead of binaries.
+find /usr/lib -type f -name \*.a -exec llvm-strip --strip-debug {} \;
+
+find /lib /usr/lib -type f -name \*.so* ! -name \*dbg -exec llvm-strip --strip-unneeded {} \;
+
+/clang1-tools/bin/find /{,s}bin /usr/{{,s}bin,libexec} -type f -exec /clang1-tools/bin/llvm-strip --strip-all {} \;
 ```
