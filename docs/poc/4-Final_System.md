@@ -476,7 +476,10 @@ unlink /clang1-tools/bin/cc
 time { make; }
 
 # Install and create symlink as `lex`.
-time { make install && ln -sv flex /usr/bin/lex; }
+time {
+    make install 
+    ln -sv flex /usr/bin/lex
+}
 
 # A few programs do not know about `flex` yet and try to run its predecessor, `lex`.
 # To support those programs, create a symbolic link named `lex` that runs `flex` in `lex` emulation mode.
