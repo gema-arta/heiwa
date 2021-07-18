@@ -1401,7 +1401,7 @@ time { make CC=${CC} CCOPTS="-D_GNU_SOURCE $CFLAGS"; }
 time { make install; }
 ```
 
-### `45` - KBD
+### `47` - KBD
 > #### `2.4.0` or newer
 > The Kbd package contains key-table files, console fonts, and keyboard utilities.
 
@@ -1450,7 +1450,7 @@ for K in sun amiga atari; do
 done; unset K
 ```
 
-### `46` - Util-linux
+### `48` - Util-linux
 > #### `2.37` or newer
 > The Util-linux package contains miscellaneous utility programs.
 
@@ -1496,7 +1496,7 @@ time {
 }
 ```
 
-### `47` - E2fsprogs
+### `49` - E2fsprogs
 > #### `1.46.2` or newer
 > The E2fsprogs package contains the utilities for handling the ext2 file system. It also supports the ext3 and ext4 journaling file systems.
 
@@ -1530,7 +1530,7 @@ gunzip -v /usr/share/info/libext2fs.info.gz
 install-info --dir-file=/usr/share/info/dir /usr/share/info/libext2fs.info
 ```
 
-### `48` - OpenRC and additional services
+### `50` - OpenRC and additional services
 > #### `0.43.3` or newer
 > OpenRC is a dependency-based init system that works with the system-provided init program, normally /sbin/init.
 
@@ -1587,7 +1587,7 @@ pushd udev-gentoo-scripts-34/
 time { make install && popd; }
 ```
 
-### `49` - GNU perf
+### `51` - GNU perf
 > The GNU perf (gperf) package contains utility that generates a perfect hash function from a key set.
 > #### `3.1` or newer
 
@@ -1604,7 +1604,7 @@ time { make; }
 time { make install; }
 ```
 
-### `50` - Eudev
+### `52` - Eudev
 > #### `3.2.10` or newer
 > The Eudev package contains programs for dynamic creation of device nodes.
 
