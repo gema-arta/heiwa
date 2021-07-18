@@ -1669,7 +1669,7 @@ CFLAGS="-fcommon $CFLAGS"      \
             --disable-mt       \
             --disable-rpath    \
             --enable-largefile \
-            --with-rmt=/usr/libexec/rmt
+            --with-rmt=/bin/true
 
 # Build.
 time { make; }
