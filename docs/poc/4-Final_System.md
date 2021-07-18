@@ -1755,5 +1755,9 @@ fi
 # They are unneeded, and potentially harmful, when using dynamic shared libraries, specially when using also non-autotools build systems.
 # Remove those files.
 find /usr/lib /usr/libexec -name \*.la -exec rm -rfv {} \;
+
+# The clang0 and clang1 toolchains is still partially installed and not needed anymore.
+# Now safe to remove "/clang0-tools" and "/clang1-tools" directories as they're not required anymore.
+rm -rf /clang{0,1}-tools
 ```
 > #### * End of as root in a chroot env!
