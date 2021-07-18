@@ -590,7 +590,7 @@ patch -Np1 -i ../../extra/python3/patches/musl-find_library.patch
 # Prevent main script that uses hard-coded paths to the host "/usr/include" and "/usr/lib" directories.
 sed -i '/def add_multiarch_paths/a \        return' setup.py
 
-# Configure source.
+# Configure source using provided libraries (built-in).
 ax_cv_c_float_words_bigendian=no   \
 ./configure --prefix=/clang1-tools \
             --build=${T_TRIPLET}   \
