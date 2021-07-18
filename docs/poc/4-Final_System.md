@@ -1714,7 +1714,33 @@ time { make PREFIX=/usr; }
 time { make PREFIX=/usr install; }
 ```
 
-### `57` - GNU Nano
+### `57` - Python3
+> #### `3.9.6` or newer
+> The Python3 package contains the Python development environment. It is useful for object-oriented programming, writing scripts, prototyping large programs, or developing entire applications.
+
+> **Optional!** Currently not required, but useful for future stage.
+```bash
+# Apply patch (from Void Linux) to allow compile under musl libc.
+patch -Np1 -i ../../extra/python3/patches/musl-find_library.patch
+
+# Configure source.
+./configure --prefix=/usr          \
+            --enable-shared        \
+            --with-ensurepip=yes   \
+            --with-computed-gotos  \
+            --enable-ipv6          \
+            --with-lto             \
+            --enable-optimizations \
+            --enable-loadable-sqlite-extensions
+
+# Build. -> Ignore all issues! <-
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `58` - GNU Nano
 > #### `5.8` or newer
 > The Nano package contains a small, simple text editor which aims to replace Pico, the default editor in the Pine package.
 
@@ -1733,7 +1759,7 @@ time { make; }
 time { make install; }
 ```
 
-### `58` - Cleaning Up
+### `59` - Cleaning Up
 > #### This section is optional!
 
 > If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
