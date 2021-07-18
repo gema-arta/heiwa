@@ -816,6 +816,9 @@ grep -oE "\-L/usr/lib|\-L/lib" dummy.log
 # | The output should be:
 # |-----------------------
 # |-L/usr/lib
+
+# Clean up.
+rm -fv dummy.{c,log} a.out
 ```
 ```bash
 # Back to "/sources/pkgs" directory.
