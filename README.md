@@ -27,7 +27,7 @@
 > |  ✓  | Gzip Data Compressor and Decompressor              | Pigz                      | Parallel threads support.      |
 > |  ✓  | Most Userspace Utility Programs                    | Toybox                    | No circular dependencies.      |
 > |  ✓  | Init and Service Manager                           | OpenRC                    | Sophisticated version of SysV. |
-> |  ✓  | Default Text-editor                                | GNU Nano                  | I don't use *Vim :p            |
+> |  ✓  | Default Text-editor                                | GNU Nano                  | I don't use *Vim. :stuck_out_tongue_winking_eye: |
 > 
 > [See references.](https://wiki.musl-libc.org/alternatives.html)
 
