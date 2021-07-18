@@ -119,7 +119,7 @@ fi
 # End /etc/profile
 EOF
 
-# Install Heiwa/Linux `bashrc` configuration.
+# Install Heiwa/Linux bashrc configuration.
 install -v -Dm644 /sources/extra/bash/files/bashrc /etc/bash/
 ```
 
