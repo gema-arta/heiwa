@@ -1722,8 +1722,7 @@ find /usr/lib -type f -name \*.a -exec llvm-strip --strip-debug {} \;
 
 find /lib /usr/lib -type f -name \*.so* ! -name \*dbg -exec llvm-strip --strip-unneeded {} \;
 
-/clang1-tools/usr/bin/find /{,s}bin /usr/{{,s}bin,libexec} -type f \
--exec /clang1-tools/bin/llvm-strip --strip-all {} \;
+/clang1-tools/usr/bin/find /{,s}bin /usr/{{,s}bin,libexec} -type f -exec /clang1-tools/bin/llvm-strip --strip-all {} \;
 ```
 ```bash
 # Cleaning leftover files.
