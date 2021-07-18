@@ -18,7 +18,7 @@
 > | [x] | Z Data Compression Library                               | Zlib-ng                   | Next Generation.              |
 > | [x] | `.bz` Data Compressor and Decompressor                   | Bzip2                     |                               |
 > | [x] | `.gz` Data Compressor and Decompressor                   | Pigz                      | Parallel support.             |
-> | [x] | `.xz` Data Compressor and Decompressor                   | Xz                        |                               |
+> | [x] | `.xz` Data Compressor and Decompressor                   | Xz-Utils                  |                               |
 - [ ] Create a Proof-of-Concept (similiar to LFS books). *Under development, optimizing ..*
 - [ ] Create a fast, flexible, and futuristic package manager.
 - [ ] Build an auto build systems.
