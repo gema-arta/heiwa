@@ -822,64 +822,7 @@ grep -o -- -L/usr/lib dummy.log
 cd /sources/pkgs/
 ```
 
-### `21` - Pkgconf
-> #### `1.7.4` or newer
-> The Pkgconf package contains a tool for passing the include path and/or library paths to build tools during the configure and make phases of package installations.
-
-> **Required!** Before `Kmod`.
-```bash
-# Configure source.
-./configure --prefix=/usr                         \
-            --sysconfdir=/etc                     \
-            --localstatedir=/var                  \
-            --docdir=/usr/share/doc/pkgconf-1.7.4 \
-            --with-pkg-config-dir=/usr/local/lib/pkgconfig:/usr/local/share/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig:/opt/qt5/lib/pkgconfig
-
-# Build.
-time { make; }
-
-# Install and create symlink as `pkg-config`.
-time { make install && ln -sv pkgconf /usr/bin/pkg-config; }
-```
-
-### `22` - Gettext-tiny
-> #### `0.3.2` or newer
-> The Gettext-tiny package contains utilities for internationalization and localization. These allow programs to be compiled with NLS (Native Language Support), enabling them to output messages in the user's native language. A lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
-
-> **Required!** Before `GNU Automake` and `Kmod`.
-```bash
-# Apply patches to fix some issues and respect compiler flags.
-for P in {line-length,flip-macro-logic,respect-cflags}.patch; do
-    patch -Np1 -i ../../extra/gettext-tiny/patches/${P}
-done; unset P
-
-# Build.
-time { make LIBINTL=MUSL prefix=/usr; }
-
-# Install.
-time { make LIBINTL=MUSL prefix=/usr install; }
-```
-
-### `23` - GNU Bison
-> #### `3.7.6` or newer
-> The GNU Bison package contains a parser generator.
-
-> **Required!** Before `Kmod`, `Kbd`, and `Util-Linux`.
-```bash
-# Configure source.
-ac_cv_header_sys_cdefs_h=no \
-ac_cv_lib_error_at_line=no  \
-./configure --prefix=/usr   \
-            --docdir=/usr/share/doc/bison-3.7.6
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
-```
-
-### `24` - Bzip2
+### `21` - Bzip2
 > #### `1.0.8` or newer
 > The Bzip2 package contains programs for compressing and decompressing files. Compressing text files with bzip2 yields a much better compression percentage than with the traditional gzip.
 
@@ -911,7 +854,7 @@ time {
 }
 ```
 
-### `25` -  Xz
+### `22` -  Xz
 > #### `5.2.5`
 > The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
 
@@ -929,7 +872,7 @@ time { make; }
 time { make install; }
 ```
 
-### `26` - Zstd
+### `23` - Zstd
 > #### `1.5.0` or newer
 > The Zstd (Zstandard) package contains real-time compression algorithm, providing high compression ratios. It offers a very wide range of compression / speed trade-offs, while being backed by a very fast decoder.
 
@@ -943,6 +886,66 @@ time {
     make PREFIX=/usr install && \
     make -C contrib/pzstd PREFIX=/usr install
 }
+```
+
+### `24` - Pkgconf
+> #### `1.7.4` or newer
+> The Pkgconf package contains a tool for passing the include path and/or library paths to build tools during the configure and make phases of package installations.
+
+> **Required!** Before `Kmod`.
+```bash
+# Configure source.
+./configure --prefix=/usr                         \
+            --sysconfdir=/etc                     \
+            --localstatedir=/var                  \
+            --docdir=/usr/share/doc/pkgconf-1.7.4 \
+            --with-pkg-config-dir=/usr/local/lib/pkgconfig:/usr/local/share/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig:/opt/qt5/lib/pkgconfig
+
+# Build.
+time { make; }
+
+# Install and create symlink as `pkg-config`.
+time {
+    make install
+    ln -sv pkgconf /usr/bin/pkg-config
+}
+```
+
+### `25` - Gettext-tiny
+> #### `0.3.2` or newer
+> The Gettext-tiny package contains utilities for internationalization and localization. These allow programs to be compiled with NLS (Native Language Support), enabling them to output messages in the user's native language. A lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
+
+> **Required!** Before `GNU Automake` and `Kmod`.
+```bash
+# Apply patches to fix some issues and respect compiler flags.
+for P in {line-length,flip-macro-logic,respect-cflags}.patch; do
+    patch -Np1 -i ../../extra/gettext-tiny/patches/${P}
+done; unset P
+
+# Build.
+time { make LIBINTL=MUSL prefix=/usr; }
+
+# Install.
+time { make LIBINTL=MUSL prefix=/usr install; }
+```
+
+### `26` - GNU Bison
+> #### `3.7.6` or newer
+> The GNU Bison package contains a parser generator.
+
+> **Required!** Before `Kmod`, `Kbd`, and `Util-Linux`.
+```bash
+# Configure source.
+ac_cv_header_sys_cdefs_h=no \
+ac_cv_lib_error_at_line=no  \
+./configure --prefix=/usr   \
+            --docdir=/usr/share/doc/bison-3.7.6
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
 ```
 
 ### `27`- GDBM
