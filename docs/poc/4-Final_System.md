@@ -1676,11 +1676,6 @@ time { make; }
 
 # Install.
 time { make install; }
-
-# Remove unnecessary files.
-rm -fv /usr/lib/charset.alias
-rm -fv /usr/libexec/rmt
-rm -fv /usr/share/man/*/rmt.*
 ```
 
 ### `55` - LZ4
