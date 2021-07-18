@@ -7,7 +7,7 @@
 - [x] Specifies the packages to be used.
 > |  ?  | Kernel and Userspace                                     | Packages                  | Extended Description          |
 > |:---:|----------------------------------------------------------|:-------------------------:|:-----------------------------:|
-> | [x] | Low-level Default Libraries and Toolchain                | Clang/LLVM                | Pure, Fast, and Modern.       |
+> | [x] | Low-level Standard Libraries and Toolchain               | Clang/LLVM                | Pure, Fast, and Modern.       |
 > | [x] | Linux Kernel Patchset                                    | Xanmod                    | CacULE CPU Scheduler          |
 > | [x] | C Runtime Library                                        | musl                      | Clean, but not fast as Glibc. |
 > | [x] | Build System Tools                                       | GNU                       |                               |
