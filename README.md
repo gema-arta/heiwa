@@ -11,7 +11,7 @@
 > | [x] | Linux Kernel Patchset                              | Xanmod                    | CacULE CPU Scheduler          |
 > | [x] | C Runtime Library                                  | musl                      | Clean, but not fast as Glibc. |
 > | [x] | Build System Tools                                 | GNU                       | Most packages depend.         |
-> | [x] | Native Language Support                            | Gettext-tiny              | Stub of Bloated Gettext (GNU) |
+> | [x] | Native Language Support                            | Gettext-tiny              | Stub of bloated GNU Gettext.  |
 > | [x] | Curses (Terminal Control) Library                  | NetBSD Curses             | Smaller than GNU Ncurses.     |
 > | [x] | Line-editing and History-capabilities Library      | GNU Readline              | Best Implementation.          |
 > | [x] | Deflate or Inflate Algorithm Compression Library   | Zlib-ng                   | Next Generation.              |
