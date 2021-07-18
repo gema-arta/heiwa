@@ -1663,14 +1663,13 @@ time { make -C build install; }
 > **Required!** Before `Linux`.
 ```bash
 # Configure source.
-ac_cv_lib_error_at_line=no     \
-CFLAGS="-fcommon $CFLAGS"      \
-./configure --prefix=/usr      \
-            --bindir=/bin      \
-            --disable-mt       \
-            --disable-rpath    \
-            --enable-largefile \
-            --with-rmt=/bin/true
+ac_cv_lib_error_at_line=no  \
+CFLAGS="-fcommon $CFLAGS"   \
+./configure --prefix=/usr   \
+            --bindir=/bin   \
+            --disable-mt    \
+            --disable-rpath \
+            --enable-largefile
 
 # Build.
 time { make; }
