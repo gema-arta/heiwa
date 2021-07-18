@@ -1663,6 +1663,7 @@ time { make -C build install; }
 > **Required!** Before `Linux`.
 ```bash
 # Configure source.
+CFLAGS="-fcommon $CFLAGS"   \
 ./configure --prefix=/usr   \
             --bindir=/bin   \
             --disable-mt    \
