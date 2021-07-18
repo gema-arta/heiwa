@@ -16,7 +16,7 @@ nameserver 8.8.8.8
 EOF
 ```
 
-### `2` - Customizing the `/etc/hosts` File (and OpenRC's conf)
+### `2` - Customizing the `/etc/hosts` File and OpenRC's conf
 > When booting, OpenRC will set the system hostname from "/etc/conf.d/hostname".
 ```bash
 # Firstly, define preferred default hostname.
