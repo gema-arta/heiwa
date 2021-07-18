@@ -1650,7 +1650,7 @@ cmake -B build \
     -DCMAKE_INSTALL_PREFIX=/usr -Wno-dev 
 
 # Build.
-time { make -C build }
+time { make -C build; }
 
 # Install.
 time { make -C build install; }
