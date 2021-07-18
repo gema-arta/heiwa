@@ -19,7 +19,7 @@
 > |  ✓  | Deflate or Inflate Algorithm Compression Library   | Zlib-ng                   | Next generation.              |
 > |  ✓  | Unified Interface for Querying Installed Libraries | Pkgconf                   | No circular dependencies.     |
 > |  ✓  | `.gz` Data Compressor and Decompressor             | Pigz                      | Parallel support.             |
-> |  ✓  | Most Userspace Utility (portable)                  | Toybox                    | No circular dependencies.     |
+> |  ✓  | Most Userspace Utility Programs                   | Toybox                    | No circular dependencies.     |
 - [ ] Create a Proof-of-Concept (similiar to LFS books). *Under development, optimizing ..*
 - [ ] Create a fast, flexible, and futuristic package manager.
 - [ ] Build an auto build systems.
