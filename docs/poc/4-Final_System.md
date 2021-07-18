@@ -1618,6 +1618,7 @@ autoreconf -fvi
             --bindir=/sbin    \
             --sbindir=/sbin   \
             --sysconfdir=/etc \
+            --libexecdir=/lib \
             --enable-manpages \
             --disable-static
 
