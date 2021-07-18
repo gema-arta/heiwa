@@ -1645,13 +1645,13 @@ udevadm hwdb --update
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
 
 # Configure source using system installed libraries.
-./bootstrap --prefix=/user       \
-            --system-zlib        \
-            --system-bzip2       \
-            --system-liblzma     \
-            --system-zstd        \
-            --mandir=/share/man  \
-            --parallel=$(nproc)  \
+./bootstrap --prefix=/user      \
+            --system-zlib       \
+            --system-bzip2      \
+            --system-liblzma    \
+            --system-zstd       \
+            --mandir=/share/man \
+            --parallel=$(nproc) \
             --docdir=/share/doc/cmake-3.20.5
 
 # Build.
