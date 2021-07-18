@@ -311,7 +311,7 @@ grep -B1 "^ /usr/include" dummy.log
 # | /usr/include
 
 # Check the dynamic linker libraries path.
-grep -o -- -L/usr/lib dummy.log && grep -o -- -L/lib dummy.log
+grep -oE "\-L/usr/lib|\-L/lib" dummy.log
 
 # | The output should be:
 # |-----------------------
@@ -811,7 +811,7 @@ grep -B1 "^ /usr/include" dummy.log
 # | /usr/include
 
 # Check the dynamic linker libraries path.
-grep -o "\-L/usr/lib" dummy.log
+grep -oE "\-L/usr/lib|\-L/lib" dummy.log
 
 # | The output should be:
 # |-----------------------
