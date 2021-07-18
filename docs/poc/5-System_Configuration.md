@@ -23,10 +23,10 @@ EOF
 # Below will using host's name.
 export HOSTNAME="${HOSTNAME}"
 
-# Hostname
+# Hostname.
 sed -i "s|localhost|${HOSTNAME}|" /etc/conf.d/hostname
 
-# Hostfile
+# Hostfile.
 cat > /etc/hosts << EOF
 # Begin /etc/hosts
 
