@@ -9,6 +9,8 @@
   <details>
   <summary>Details</summary>
   
+    <br>
+  
     > |  ?  | Kernel and Userspace                               | Packages                  | Extended Description          |
     > |:---:|----------------------------------------------------|:-------------------------:|-------------------------------|
     > |  ✓  | Low-level Standard Libraries and Toolchain         | Clang/LLVM                | Pure, Fast, and Modern.       |
