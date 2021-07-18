@@ -1629,7 +1629,8 @@ time { make; }
 
 # Install.
 time { make install; }
-
+```
+```bash
 # Information about hardware devices is maintained in the /etc/udev/hwdb.d and /usr/lib/udev/hwdb.d directories.
 # Eudev needs that information to be compiled into a binary database /etc/udev/hwdb.bin.
 # Create the initial database.
