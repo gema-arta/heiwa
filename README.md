@@ -26,6 +26,8 @@
 > |  ✓  | Unified Interface for Querying Installed Libraries | Pkgconf                   | No circular dependencies.     |
 > |  ✓  | Gzip Data Compressor and Decompressor              | Pigz                      | Parallel support.             |
 > |  ✓  | Most Userspace Utility Programs                    | Toybox                    | No circular dependencies.     |
+> 
+> [See references.](https://wiki.musl-libc.org/alternatives.html)
 
 </details>
 
