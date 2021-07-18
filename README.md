@@ -11,7 +11,7 @@
 > | [x] | Linux Kernel Patchset                                    | Xanmod                    | CacULE CPU Scheduler          |
 > | [x] | C Runtime Library                                        | musl                      | Clean, but not fast as Glibc. |
 > | [x] | Build System Tools                                       | GNU                       |                               |
-> | [x] | Unified Query Interface Support for Library Dependencies | Pkgconf                   | No Circular Dependencies      |
+> | [x] | Unified Query Interface Support for Library Dependencies | Pkgconf                   | No circular dependencies      |
 > | [x] | Native Language Support                                  | Gettext-tiny              | Stub of Bloated Gettext (GNU) |
 > | [x] | Curses Library                                           | NetBSD Curses             | Smaller than GNU Ncurses      |
 > | [x] | Line-editing and History Capabilities Library            | GNU Readline              | Best                          |
