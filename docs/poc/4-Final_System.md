@@ -646,8 +646,8 @@ cp -fv ../extra/llvm/files/config.guess cmake/.
 pushd ${LLVM_SRC}/projects/libunwind/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/usr"           \
-        -DCMAKE_C_FLAGS="$CFLAGS -g0 -fPIC"     \
-        -DCMAKE_CXX_FLAGS="$CXXFLAGS -g0 -fPIC" \
+        -DCMAKE_C_FLAGS="-fPIC -g0 $CFLAGS"     \
+        -DCMAKE_CXX_FLAGS="-fPIC -g0 $CXXFLAGS" \
         -DLIBUNWIND_ENABLE_SHARED=ON            \
         -DLIBUNWIND_USE_COMPILER_RT=ON          \
         -DLLVM_PATH="$LLVM_SRC"
@@ -663,7 +663,7 @@ time { make -C build install && popd; }
 pushd ${LLVM_SRC}/projects/libcxxabi/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/usr"                                     \
-        -DCMAKE_CXX_FLAGS="$CXXFLAGS -g0"                                 \
+        -DCMAKE_CXX_FLAGS="-g0 $CXXFLAGS"                                 \
         -DLIBCXXABI_ENABLE_STATIC=ON                                      \
         -DLIBCXXABI_USE_COMPILER_RT=ON                                    \
         -DLIBCXXABI_USE_LLVM_UNWINDER=ON                                  \
@@ -685,7 +685,7 @@ time {
 pushd ${LLVM_SRC}/projects/libcxx/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/usr"                 \
-        -DCMAKE_CXX_FLAGS="$CXXFLAGS -g0"             \
+        -DCMAKE_CXX_FLAGS="-g0 $CXXFLAGS"             \
         -DLIBCXX_ENABLE_SHARED=ON                     \
         -DLIBCXX_ENABLE_STATIC=ON                     \
         -DLIBCXX_HAS_MUSL_LIBC=ON                     \
@@ -713,8 +713,8 @@ cmake -B build \
     -DCMAKE_BUILD_TYPE=Release -Wno-dev                        \
     -DCMAKE_INSTALL_PREFIX="/usr"                              \
     -DCMAKE_INSTALL_OLDINCLUDEDIR="/usr/include"               \
-    -DCMAKE_C_FLAGS="$CFGLAGS -g0"                             \
-    -DCMAKE_CXX_FLAGS="$CXXFLAGS -g0"                          \
+    -DCMAKE_C_FLAGS="-g0 $CFGLAGS"                             \
+    -DCMAKE_CXX_FLAGS="-g0 $CXXFLAGS"                          \
     -DLLVM_DEFAULT_TARGET_TRIPLE="x86_64-pc-linux-musl"        \
     -DLLVM_HOST_TRIPLE="x86_64-pc-linux-musl"                  \
     -DLLVM_TARGETS_TO_BUILD="host;BPF;AMDGPU;X86"              \
