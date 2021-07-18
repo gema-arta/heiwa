@@ -1760,4 +1760,7 @@ find /usr/lib /usr/libexec -name \*.la -exec rm -rfv {} \;
 # Now safe to remove "/clang0-tools" and "/clang1-tools" directories as they're not required anymore.
 rm -rf /clang{0,1}-tools
 ```
-> #### * End of as root in a chroot env!
+
+<h2></h2>
+
+Continue to [System Configuration](./5-System_Configuration.md).
