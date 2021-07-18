@@ -383,11 +383,11 @@ patch -Np1 -i ../../extra/zlib-ng/patches/0001-Fix-Z_SOLO-mode.patch
 
 # Configure source.
 cmake -B build \
-     -DCMAKE_BUILD_TYPE=Release     \
-     -DCMAKE_INSTALL_PREFIX="/usr"  \
-     -DWITH_NATIVE_INSTRUCTIONS=YES \
-     -DWITH_SANITIZER=ON            \
-     -DZLIB_COMPAT=ON -Wno-dev
+    -DCMAKE_BUILD_TYPE=Release     \
+    -DCMAKE_INSTALL_PREFIX="/usr"  \
+    -DWITH_NATIVE_INSTRUCTIONS=YES \
+    -DWITH_SANITIZER=ON            \
+    -DZLIB_COMPAT=ON -Wno-dev
 
 # Build.
 time { make -C build; }
