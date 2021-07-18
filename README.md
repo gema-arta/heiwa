@@ -10,7 +10,7 @@
 > | [x] | Low-level Standard Libraries and Toolchain               | Clang/LLVM                | Pure, Fast, and Modern.       |
 > | [x] | Linux Kernel Patchset                                    | Xanmod                    | CacULE CPU Scheduler          |
 > | [x] | C Runtime Library                                        | musl                      | Clean, but not fast as Glibc. |
-> | [x] | Build System Tools                                       | GNU                       |                               |
+> | [x] | Build System Tools                                       | GNU                       | Most packages depends on GNU. |
 > | [x] | Unified Query Interface Support for Library Dependencies | Pkgconf                   | No circular dependencies      |
 > | [x] | Native Language Support                                  | Gettext-tiny              | Stub of Bloated Gettext (GNU) |
 > | [x] | Curses Library                                           | NetBSD Curses             | Smaller than GNU Ncurses      |
