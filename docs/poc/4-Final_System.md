@@ -1561,8 +1561,8 @@ MAKE_ARGS="
 
 time { make ${MAKE_ARGS}; }
 
-# Install and unset make args.
-time { make ${MAKE_ARGS} DESTDIR=/ install; unset MAKE_ARGS; }
+# Install.
+time { make ${MAKE_ARGS} DESTDIR=/ install; }
 ```
 ```bash
 # Decompress opentmpfiles.
