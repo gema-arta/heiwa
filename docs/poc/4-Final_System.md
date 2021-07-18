@@ -345,7 +345,7 @@ southamerica etcetera backward factory"
 
 # Build. -> Ignore "pkg-config: No such file or directory" while building `posixtz`! <-
 time {
-    make CC=${CC} CFLAGS="$CFLAGS -DHAVE_STDINT_H=1" \
+    make CC=${CC} CFLAGS="-DHAVE_STDINT_H=1 $CFLAGS" \
     TZDIR="/usr/share/zoneinfo"                   && \
     make -C posixtz-0.5 CC=${CC} posixtz
 }
@@ -403,7 +403,7 @@ time { make -C build install; }
 > **Required!** Before `GNU Bash`, `GNU Readline`, `GNU Texinfo`, and `Util-linux`.
 ```bash
 # Build.
-time { make CFLAGS="-fPIC $CFLAGS"; }
+time { make CFLAGS="$CFLAGS -fPIC"; }
 
 # Install and create symlinks as `libtinfo` libraries (which actually replace GNU Ncurses).
 time {
