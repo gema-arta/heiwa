@@ -9,13 +9,13 @@
 > |:---:|----------------------------------------------------------|:-------------------------:|:-----------------------------:|
 > | [x] | Low-level Default Libraries and Toolchain                | Clang/LLVM                | Pure, Fast, and Modern.       |
 > | [x] | Linux Kernel Patchset                                    | Xanmod                    | CacULE CPU Scheduler          |
-> | [x] | C Runtime Library                                        | musl                      | Clean, but not fast as Glibc  |
+> | [x] | C Runtime Library                                        | musl                      | Clean, but not fast as Glibc. |
 > | [x] | Build System Tools                                       | GNU                       |                               |
-> | [x] | Unified Query Interface Support for Library Dependencies | Pkgconf                   |                               |
+> | [x] | Unified Query Interface Support for Library Dependencies | Pkgconf                   | No Circular Dependencies      |
 > | [x] | Native Language Support                                  | Gettext-tiny              | Stub of Bloated Gettext (GNU) |
-> | [x] | Curses Library                                           | NetBSD Curses             |                               |
+> | [x] | Curses Library                                           | NetBSD Curses             | Smaller than GNU Ncurses      |
 > | [x] | Line-editing and History Capabilities Library            | GNU Readline              | Best                          |
-> | [x] | Z Data Compression Library                               | Zlib-ng                   |                               |
+> | [x] | Z Data Compression Library                               | Zlib-ng                   | Up-to-date, Next Generation.  |
 > | [x] | `.bz` Data Compressor and Decompressor                   | Bzip2                     |                               |
 > | [x] | `.gz` Data Compressor and Decompressor                   | Pigz                      | Parallel Support              |
 > | [x] | `.xz` Data Compressor and Decompressor                   | Xz                        |                               |
