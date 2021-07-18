@@ -1663,11 +1663,13 @@ time { make -C build install; }
 > **Required!** Before `Linux`.
 ```bash
 # Configure source.
-CFLAGS="-fcommon $CFLAGS" \
-./configure --prefix=/usr \
-            --bindir=/bin \
-            --disable-mt  \
-            --disable-rpath
+CFLAGS="-fcommon $CFLAGS"      \
+./configure --prefix=/usr      \
+            --bindir=/bin      \
+            --disable-mt       \
+            --disable-rpath    \
+            --enable-largefile \
+            --with-rmt=/usr/libexec/rmt
 
 # Build.
 time { make; }
