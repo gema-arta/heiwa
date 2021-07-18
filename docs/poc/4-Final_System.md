@@ -1725,3 +1725,36 @@ find /lib /usr/lib -type f -name \*.so* ! -name \*dbg -exec llvm-strip --strip-u
 /clang1-tools/usr/bin/find /{,s}bin /usr/{{,s}bin,libexec} -type f \
 -exec /clang1-tools/bin/llvm-strip --strip-all {} \;
 ```
+```bash
+# Cleaning leftover files.
+rm -rfv /tmp/*
+```
+> #### * End of as root in a chroot env!
+
+> #### * Beginning of as root!
+```bash
+# Now log out and reenter the chroot environment with an updated chroot command.
+# From now on, use this updated chroot command any time you need to reenter the chroot environment after exiting.
+logout
+
+# From now on, use this updated chroot command any time you need to reenter the chroot environment after exiting.
+# Term variable is set to `xterm` for better compability, instead of "$TERM" that will broken if using `rxvt-unicode`.
+if [[ -n "$HEIWA" ]]; then
+    chroot "$HEIWA" /usr/bin/env -i      \
+    HOME="/root" TERM="xterm"            \
+    PS1='(heiwa chroot) \u: \w \$ '      \
+    PATH="/usr/sbin:/usr/bin:/sbin:/bin" \
+    /bin/bash --login
+fi
+```
+> #### * End of as root!
+
+> #### * Beginning of as root in a chroot env!
+```bash
+# There are also several files installed in the "/usr/lib" and "/usr/libexec" directories with a file name extension of .la. 
+# These are "libtool archive" files. As already said, they are only useful when linking with static libraries.
+# They are unneeded, and potentially harmful, when using dynamic shared libraries, specially when using also non-autotools build systems.
+# Remove those files.
+find /usr/lib /usr/libexec -name \*.la -exec rm -rfv {} \;
+```
+> #### * End of as root in a chroot env!
