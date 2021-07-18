@@ -13,7 +13,7 @@
 > |  ✓  | Build System Tools                                 | GNU                       | Most packages depend.         |
 > |  ✓  | Native Language Support                            | Gettext-tiny              | Stub of bloated GNU Gettext.  |
 > |  ✓  | Secure Socket Layer Library                        | OpenSSL                   | Full-featured and Robust.     |
-> |  ✓  | Command Line Interpreter (Shell)                   | Bash                      | Best implementation.          |
+> |  ✓  | Command Line (shell) Interpreter                   | Bash                      | Best implementation.          |
 > |  ✓  | Curses (Terminal Control) Library                  | NetBSD Curses             | Smaller than GNU Ncurses.     |
 > |  ✓  | Line-editing and History-capabilities Library      | GNU Readline              | Best implementation.          |
 > |  ✓  | Deflate or Inflate Algorithm Compression Library   | Zlib-ng                   | Next generation.              |
