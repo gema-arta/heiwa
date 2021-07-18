@@ -1593,6 +1593,9 @@ time { make install && popd; }
 
 > **Required!**
 ```bash
+# Generate configure script.
+autoreconf -fvi
+
 # Configure source.
 ./configure \
     --prefix=/usr           \
