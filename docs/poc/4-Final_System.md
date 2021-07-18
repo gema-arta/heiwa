@@ -1597,16 +1597,15 @@ time { make install && popd; }
 autoreconf -fvi
 
 # Configure source.
-./configure \
-    --prefix=/usr           \
-    --bindir=/sbin          \
-    --sbindir=/sbin         \
-    --sysconfdir=/etc       \
-    --libdir=/usr/lib       \
-    --libexecdir=/lib       \
-    --with-rootlibdir=/lib  \
-    --enable-manpages       \
-    --disable-static
+./configure --prefix=/usr          \
+            --bindir=/sbin         \
+            --sbindir=/sbin        \
+            --sysconfdir=/etc      \
+            --libdir=/usr/lib      \
+            --libexecdir=/lib      \
+            --with-rootlibdir=/lib \
+            --enable-manpages      \
+            --disable-static
 
 # Build.
 time { make; }
