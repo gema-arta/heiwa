@@ -1635,6 +1635,26 @@ time { make install; }
 udevadm hwdb --update
 ```
 
+### `53` - musl-locales
+> #### `?` (git)
+> The musl-locales package contains /usr/bin/locale implementation, which works on musl libc (with limitations in musl itself).
+```bash
+# Apply patch (from Alpine Linux) to print all available locales.
+patch -Np1 -i ../../extra/musl-locales/patches/musl-locales/add-all-available-locales.patch
+
+# Build.
+time {
+    cmake -B build \
+        -DCMAKE_BUILD_TYPE=None \
+        -DCMAKE_INSTALL_PREFIX=/usr && \
+    make -C build
+}
+
+# Install.
+time { make -C build install; }
+```
+
+
 <h2 align="center">Belows are failed or untested!</h2>
 
 > Untested ..
