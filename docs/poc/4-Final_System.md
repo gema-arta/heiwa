@@ -1637,7 +1637,9 @@ udevadm hwdb --update
 
 ### `53` - musl-locales
 > #### `?` (git)
-> The musl-locales package contains /usr/bin/locale implementation, which works on musl libc (with limitations in musl itself).
+> The musl-locales package contains `locale` implementation, which works on musl libc (with limitations in musl itself).
+
+> **Required!**
 ```bash
 # Apply patch (from Alpine Linux) to print all available locales.
 patch -Np1 -i ../../extra/musl-locales/patches/musl-locales/add-all-available-locales.patch
