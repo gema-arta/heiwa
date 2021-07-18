@@ -11,11 +11,11 @@
 > | [x] | Linux Kernel Patchset                              | Xanmod                    | CacULE CPU Scheduler          |
 > | [x] | C Runtime Library                                  | musl                      | Clean, but not fast as Glibc. |
 > | [x] | Build System Tools                                 | GNU                       | Most packages depend.         |
-> | [x] | Unified Interface for Querying Installed Libraries | Pkgconf                   | No circular dependencies.     |
 > | [x] | Native Language Support                            | Gettext-tiny              | Stub of Bloated Gettext (GNU) |
 > | [x] | Curses (Terminal Control) Library                  | NetBSD Curses             | Smaller than GNU Ncurses.     |
-> | [x] | Line-editing and History-capabilities Library      | GNU Readline              | Best.                         |
+> | [x] | Line-editing and History-capabilities Library      | GNU Readline              | Best Implementation.          |
 > | [x] | Z Data Compression Library                         | Zlib-ng                   | Next Generation.              |
+> | [x] | Unified Interface for Querying Installed Libraries | Pkgconf                   | No circular dependencies.     |
 > | [x] | `.bz` Data Compressor and Decompressor             | Bzip2                     |                               |
 > | [x] | `.gz` Data Compressor and Decompressor             | Pigz                      | Parallel support.             |
 > | [x] | `.xz` Data Compressor and Decompressor             | Xz-Utils                  |                               |
