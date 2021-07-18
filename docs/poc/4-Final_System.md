@@ -1723,7 +1723,7 @@ time { make PREFIX=/usr install; }
 # Apply patch (from Void Linux) to allow compile under musl libc.
 patch -Np1 -i ../../extra/python3/patches/musl-find_library.patch
 
-# Configure source.
+# Configure source using provided libraries (built-in).
 ./configure --prefix=/usr          \
             --enable-shared        \
             --with-ensurepip=yes   \
