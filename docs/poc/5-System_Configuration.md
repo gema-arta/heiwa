@@ -209,7 +209,7 @@ patch -Np1 -i \
 time { make LLVM=1 LLVM_IAS=1 mrproper; }
 
 # Copy Heiwa/Linux kernel configuration.
-cp -rv /sources/extra/linux-xanmod-cacule/files/{.config,localversion,drivers} ./
+cp -rfv /sources/extra/linux-xanmod-cacule/files/{.config,localversion,drivers} .
 
 # Configure source.
 time { make LLVM=1 LLVM_IAS=1 menuconfig; }
