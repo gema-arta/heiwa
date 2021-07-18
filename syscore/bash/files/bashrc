@@ -1,0 +1,21 @@
+# Begin /etc/bash/bashrc
+
+# Author: owl4ce
+# For Heiwa/Linux
+
+R="\[\033[1;31m\]"
+G="\[\033[1;32m\]"
+M="\[\033[1;35m\]"
+C="\[\033[1;36m\]"
+W="\[\033[1;37m\]"
+NC="\[\033[00m\]"
+
+if [ ! $EUID -eq 0 ]; then
+    UC="${R}"
+else
+    UC="${G}"
+fi
+
+PS1="${C}^ ${R}\u@${NC}\h ${M}[${NC} \w ${M}]${NC}\n${M}\$${NC} "
+
+# End /etc/bash/bashrc
