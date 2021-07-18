@@ -13,8 +13,8 @@
 > | [x] | Build System Tools                                 | GNU                       | Most packages depend.         |
 > | [x] | Native Language Support                            | Gettext-tiny              | Stub of bloated GNU Gettext.  |
 > | [x] | Curses (Terminal Control) Library                  | NetBSD Curses             | Smaller than GNU Ncurses.     |
-> | [x] | Line-editing and History-capabilities Library      | GNU Readline              | Best Implementation.          |
-> | [x] | Deflate or Inflate Algorithm Compression Library   | Zlib-ng                   | Next Generation.              |
+> | [x] | Line-editing and History-capabilities Library      | GNU Readline              | Best implementation.          |
+> | [x] | Deflate or Inflate Algorithm Compression Library   | Zlib-ng                   | Next generation.              |
 > | [x] | Unified Interface for Querying Installed Libraries | Pkgconf                   | No circular dependencies.     |
 > | [x] | `.gz` Data Compressor and Decompressor             | Pigz                      | Parallel support.             |
 - [ ] Create a Proof-of-Concept (similiar to LFS books). *Under development, optimizing ..*
