@@ -7,7 +7,7 @@
 - [x] Specifies the packages to be used.
 > |  ?  | Kernel and Userspace                                     | Packages                  |
 > |-----|----------------------------------------------------------|---------------------------|
-> | [x] | Low-level Standard Libraries and Toolchain               | Clang/LLVM (pure)         |
+> | [x] | Low-level Default Libraries and Toolchain                | Clang/LLVM (pure)         |
 > | [x] | Linux Kernel Patchset                                    | Xanmod (CacULE scheduler) |
 > | [x] | C Runtime Library                                        | musl                      |
 > | [x] | Build System Tools                                       | GNU                       |
