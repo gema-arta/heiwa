@@ -1660,7 +1660,7 @@ time { make -C build install; }
 > #### `2.13` or newer
 > The cpio package contains tools for archiving.
 
-> **Required!** Befor `Linux`.
+> **Required!** Before `Linux`.
 ```bash
 # Configure source.
 ./configure --prefix=/usr   \
