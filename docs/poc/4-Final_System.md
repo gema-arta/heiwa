@@ -1544,7 +1544,7 @@ patch -Np1 -i ../../extra/openrc/patches/0014-time_t-64bit.patch
 export MAKE_ARGS="
      LIBNAME=lib
      LIBDIR=/lib
-     PKGCONFIGDIR=/lib/pkgconfig
+     PKGCONFIGDIR=/usr/lib/pkgconfig
      LIBEXECDIR=/lib/rc
      MKBASHCOMP=yes
      MKNET=no
