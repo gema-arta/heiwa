@@ -1617,6 +1617,7 @@ autoreconf -fvi
 ./configure --prefix=/usr          \
             --bindir=/sbin         \
             --sbindir=/sbin        \
+            --libdir=/usr/lib      \
             --sysconfdir=/etc      \
             --with-rootlibdir=/lib \
             --enable-manpages      \
