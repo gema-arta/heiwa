@@ -1632,8 +1632,7 @@ time { make install; }
 ```
 ```bash
 # Information about hardware devices is maintained in the "/etc/udev/hwdb.d" and "/usr/lib/udev/hwdb.d" directories.
-# Eudev needs that information to be compiled into a binary database "/etc/udev/hwdb.bin".
-# Create the initial database.
+# Eudev needs that information to be compiled into a binary database "/etc/udev/hwdb.bin". Create the initial database.
 udevadm hwdb --update
 ```
 
@@ -1647,13 +1646,14 @@ udevadm hwdb --update
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
 
 # Configure source using system installed libraries.
-./bootstrap --prefix=/usr       \
-            --system-zlib       \
-            --system-bzip2      \
-            --system-liblzma    \
-            --system-zstd       \
-            --mandir=/share/man \
-            --parallel=$(nproc) \
+ax_cv_c_float_words_bigendian=no \
+./bootstrap --prefix=/usr        \
+            --system-zlib        \
+            --system-bzip2       \
+            --system-liblzma     \
+            --system-zstd        \
+            --mandir=/share/man  \
+            --parallel=$(nproc)  \
             --docdir=/share/doc/cmake-3.20.5
 
 # Build.
