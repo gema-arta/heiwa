@@ -15,7 +15,7 @@
 > | [x] | Native Language Support                                  | Gettext-tiny              | Stub of Bloated Gettext (GNU) |
 > | [x] | Curses Library                                           | NetBSD Curses             | Smaller than GNU Ncurses.     |
 > | [x] | Line-editing and History Capabilities Library            | GNU Readline              | Best.                         |
-> | [x] | Z Data Compression Library                               | Zlib-ng                   | Up-to-date, Next Generation.  |
+> | [x] | Z Data Compression Library                               | Zlib-ng                   | Next Generation.              |
 > | [x] | `.bz` Data Compressor and Decompressor                   | Bzip2                     |                               |
 > | [x] | `.gz` Data Compressor and Decompressor                   | Pigz                      | Parallel support.             |
 > | [x] | `.xz` Data Compressor and Decompressor                   | Xz                        |                               |
