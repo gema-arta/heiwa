@@ -39,7 +39,7 @@ EOF
 ```
 
 ### `3` - Customizing the `/etc/nanorc` File
-> Setup Nano text-editor default configuration (by owl4ce).
+> Setup the Nano text-editor default configuration (by owl4ce).
 ```bash
 cat > /etc/nanorc << "EOF"
 # Begin /etc/nanorc
