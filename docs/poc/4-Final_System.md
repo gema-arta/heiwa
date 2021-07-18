@@ -1663,6 +1663,8 @@ time { make -C build install; }
 > **Required!** Before `Linux`.
 ```bash
 # Configure source.
+ac_cv_header_sys_cdefs_h=no    \
+ac_cv_lib_error_at_line=no     \
 CFLAGS="-fcommon $CFLAGS"      \
 ./configure --prefix=/usr      \
             --bindir=/bin      \
