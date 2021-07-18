@@ -1724,13 +1724,14 @@ time { make PREFIX=/usr install; }
 patch -Np1 -i ../../extra/python3/patches/musl-find_library.patch
 
 # Configure source using provided libraries (built-in).
-./configure --prefix=/usr          \
-            --enable-shared        \
-            --with-ensurepip=yes   \
-            --with-computed-gotos  \
-            --enable-ipv6          \
-            --with-lto             \
-            --enable-optimizations \
+./configure --prefix=/usr                \
+            --enable-shared              \
+            --with-ensurepip=yes         \
+            --with-computed-gotos        \
+            --enable-ipv6                \
+            --with-lto                   \
+            --enable-optimizations       \
+            --with-dbmliborder=gdbm:ndbm \
             --enable-loadable-sqlite-extensions
 
 # Build. -> Ignore all issues! <-
