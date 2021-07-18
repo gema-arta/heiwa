@@ -1540,23 +1540,27 @@ install-info --dir-file=/usr/share/info/dir /usr/share/info/libext2fs.info
 patch -Np1 -i ../../extra/openrc/patches/0009-Support-early-loading-of-keymap-if-kdb-is-installed.patch
 patch -Np1 -i ../../extra/openrc/patches/0014-time_t-64bit.patch
 
-# Build and install.
-time {
-    make LIBNAME=lib                 \
-         LIBDIR=/lib                 \
-         PKGCONFIGDIR=/lib/pkgconfig \
-         LIBEXECDIR=/lib/rc          \
-         MKBASHCOMP=yes              \
-         MKNET=no                    \
-         MKPREFIX=no                 \
-         MKSELINUX=no                \
-         MKSTATICLIBS=no             \
-         MKSYSVINIT=yes              \
-         MKZSHCOMP=yes               \
-         BRANDING=\"Heiwa/Linux\"    \
-         OS=Linux                    \
-         SH=/bin/sh DESTDIR=/ install
-}
+# Build.
+export MAKE_ARGS="
+     LIBNAME=lib                 \
+     LIBDIR=/lib                 \
+     PKGCONFIGDIR=/lib/pkgconfig \
+     LIBEXECDIR=/lib/rc          \
+     MKBASHCOMP=yes              \
+     MKNET=no                    \
+     MKPREFIX=no                 \
+     MKSELINUX=no                \
+     MKSTATICLIBS=no             \
+     MKSYSVINIT=yes              \
+     MKZSHCOMP=yes               \
+     BRANDING=\"Heiwa/Linux\"    \
+     OS=Linux                    \
+     SH=/bin/sh"
+
+time { make ${MAKE_ARGS}; }
+
+# Install and unset make args.
+time { make ${MAKE_ARGS} DESTDIR=/ install; unset MAKE_ARGS; }
 
 # Decompress opentmpfiles.
 tar xzf ../opentmpfiles-0.3.1.tar.gz && \
