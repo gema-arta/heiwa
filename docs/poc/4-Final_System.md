@@ -1570,10 +1570,10 @@ pushd opentmpfiles-0.3.1/
 
 # Install opentmpfiles.
 time { make install; }
-for f in opentmpfiles-dev opentmpfiles-setup; do
-    install -vm644 openrc/${f}.confd /etc/conf.d/${f}
-    install -vm755 openrc/${f}.initd /etc/init.d/${f}
-done; popd
+for C in opentmpfiles-dev opentmpfiles-setup; do
+    install -vm644 openrc/${C}.confd /etc/conf.d/${C}
+    install -vm755 openrc/${C}.initd /etc/init.d/${C}
+done && popd; unset C
 
 # Decompress udev-gentoo-scripts.
 tar xzf ../udev-gentoo-scripts-34.tar.gz && \
