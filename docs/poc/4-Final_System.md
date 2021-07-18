@@ -840,10 +840,10 @@ sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
 sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
 
 # Prepare.
-time { make CFLAGS="$CFLAGS -fPIC" -f Makefile-libbz2_so && make clean; }
+time { make CFLAGS="-fPIC $CFLAGS" -f Makefile-libbz2_so && make clean; }
 
 # Build.
-time { make CFLAGS="$CFLAGS -fPIC"; }
+time { make CFLAGS="-fPIC $CFLAGS"; }
 
 # Install (also shared libraries) and fix the symlinks.
 time {
@@ -1010,7 +1010,7 @@ patch -Np1 -i ../../extra/perl/patches/musl-stack-size.patch
     -Dsitearch=/usr/lib/perl5/5.32.1/site_perl                   \
     -Dvendorlib=/usr/lib/perl5/5.32.1/vendor_perl                \
     -Dvendorarch=/usr/lib/perl5/5.32.1/vendor_perl               \
-    -Doptimize="$CFLAGS -DNO_POSIX_2008_LOCALE -D_GNU_SOURCE"    \
+    -Doptimize="-DNO_POSIX_2008_LOCALE -D_GNU_SOURCE $CFLAGS"    \
     -Dcf_by="Heiwa/Linux" -Dmyuname="heiwa" -Dmyhostname="heiwa" \
     -Dusethreads -Duseshrplib -Dman1ext=1 -Dman3ext=3pm          \
     -Dman1dir=/usr/share/man/man1 -Dman3dir=/usr/share/man/man3
@@ -1290,7 +1290,7 @@ time { make install; }
 autoreconf -fvi
 
 # Configure source.
-CFLAGS="$CFLAGS -fPIC"        \
+CFLAGS="-fPIC $CFLAGS"        \
 ./configure --prefix=/usr     \
             --sysconfdir=/etc \
             --localstatedir=/var
@@ -1314,7 +1314,7 @@ sed -i '/pkgconfig_DATA/i pkgconfigdir=/usr/lib/pkgconfig' Makefile.am
 ./bootstrap.sh
 
 # Configure source.
-CFLAGS="$CFLAGS -fPIC"        \
+CFLAGS="-fPIC $CFLAGS"        \
 ./configure --prefix=/usr     \
             --sysconfdir=/etc \
             --localstatedir=/var
@@ -1337,7 +1337,7 @@ sed -i '/pkgconfig_DATA/i pkgconfigdir=/usr/lib/pkgconfig' Makefile.am
 ./bootstrap.sh
 
 # Configure source.
-CFLAGS="$CFLAGS -fPIC"        \
+CFLAGS="-fPIC $CFLAGS"        \
 ./configure --prefix=/usr     \
             --sysconfdir=/etc \
             --localstatedir=/var
@@ -1362,8 +1362,8 @@ patch -Np1 -i ../../extra/elfutils/patches/elfutils-musl-clang.patch
 autoreconf -fvi
 
 # Configure source.
-CFLAGS="$CFLAGS -Wno-error -Wno-null-dereference -DFNM_EXTMATCH=0" \
-CXXFLAGS="$CXXFLAGS -Wno-error -Wl,-z,stack-size=2097152"          \
+CFLAGS="-Wno-error -Wno-null-dereference -DFNM_EXTMATCH=0 $CFLAGS" \
+CXXFLAGS="-Wno-error -Wl,-z,stack-size=2097152 $CXXFLAGS"          \
 ./configure --prefix=/usr                                          \
             --program-prefix=eu-                                   \
             --disable-debuginfod                                   \
@@ -1395,7 +1395,7 @@ rm -fv man/man8/arpd.8
 sed -i 's/.m_ipt.o//' tc/Makefile
 
 # Build.
-time { make CC=${CC} CCOPTS="$CFLAGS -D_GNU_SOURCE"; }
+time { make CC=${CC} CCOPTS="-D_GNU_SOURCE $CFLAGS"; }
 
 # Install.
 time { make install; }
@@ -1469,7 +1469,7 @@ mkdir -pv /var/lib/hwclock
 NOCONFIGURE=1 ./autogen.sh
 
 # Configure source. musl needs `-D_DIRENT_HAVE_D_TYPE` for switch_root(8).
-CFLAGS="$CFLAGS -D_DIRENT_HAVE_D_TYPE"              \
+CFLAGS="-D_DIRENT_HAVE_D_TYPE $CFLAGS"              \
 ./configure ADJTIME_PATH=/var/lib/hwclock/adjtime   \
             --libdir=/usr/lib                       \
             --docdir=/usr/share/doc/util-linux-2.37 \
