@@ -347,24 +347,7 @@ source ~/.bashrc
 popd
 ```
 
-### `7` - Pigz
-> #### `2.6` or newer
-> The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
-
-> **Required!** As default ".gz" files de/compressor for the current and next stage (chroot environment).
-```bash
-# Make sure to use symlink instead of hardlink for `unpigz`.
-sed -i 's|ln -f|ln -sf|' Makefile
-
-# Build.
-time { make CC=${CC}; }
-
-# Install and create symlinks as `gzip` tools.
-ln -sv pigz gzip; ln -sv unpigz gunzip
-install -vm755 -t /clang1-tools/bin/ pigz unpigz gzip gunzip
-```
-
-### `8` - Xz
+### `7` - Xz
 > #### `5.2.5` or newer
 > The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
 
@@ -381,6 +364,23 @@ time { make; }
 
 # Install.
 time { make install; }
+```
+
+### `8` - Pigz
+> #### `2.6` or newer
+> The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
+
+> **Required!** As default ".gz" files de/compressor for the current and next stage (chroot environment).
+```bash
+# Make sure to use symlink instead of hardlink for `unpigz`.
+sed -i 's|ln -f|ln -sf|' Makefile
+
+# Build.
+time { make CC=${CC}; }
+
+# Install and create symlinks as `gzip` tools.
+ln -sv pigz gzip; ln -sv unpigz gunzip
+install -vm755 -t /clang1-tools/bin/ pigz unpigz gzip gunzip
 ```
 
 ### `9` - Gettext-tiny
