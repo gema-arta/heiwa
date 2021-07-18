@@ -1647,7 +1647,7 @@ patch -Np1 -i ../../extra/musl-locales/patches/add-all-available-locales.patch
 # Configure source.
 cmake -B build \
     -DCMAKE_BUILD_TYPE=None \
-    -DCMAKE_INSTALL_PREFIX=/usr
+    -DCMAKE_INSTALL_PREFIX=/usr -Wno-dev 
 
 # Build.
 time { make -C build }
