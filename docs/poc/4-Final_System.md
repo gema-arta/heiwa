@@ -1645,7 +1645,7 @@ udevadm hwdb --update
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
 
 # Configure source using system installed libraries.
-./bootstrap --prefix=/user      \
+./bootstrap --prefix=/usr       \
             --system-zlib       \
             --system-bzip2      \
             --system-liblzma    \
