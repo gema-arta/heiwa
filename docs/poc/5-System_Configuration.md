@@ -199,7 +199,7 @@ EOF
 > #### `5.13.x` (CacULE) or newer
 > The Linux package contains the Linux kernel.
 
-> **Required!**
+> **Required!** If not, will you boot with the OpenBSD kernel?
 ```bash
 # Apply patch to fix "swab.h" under musl libc while building Linux kernel.
 patch -Np1 -i \
