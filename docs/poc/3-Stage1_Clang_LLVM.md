@@ -133,20 +133,7 @@ time { make CFLAGS="-fPIC $CFLAGS" all-dynamic; }
 time { make PREFIX=/clang1-tools install-dynamic; }
 ```
 
-### `4` - libexecinfo
-> #### `1.1` or newer (from Heiwa/Linux fork)
-> The libexecinfo package contains backtrace facility that usually found in GNU libc (glibc).
-
-> **Required!** To build Stage-1 Clang/LLVM, since using musl libc.
-```bash
-# Build.
-time { make; }
-
-# Install.
-time { make PREFIX=/clang1-tools install; }
-```
-
-### `5` - Zlib-ng
+### `4` - Zlib-ng
 > #### `2.0.5` or newer
 > The Zlib-ng package contains zlib data compression library for the next generation systems.
 
@@ -161,6 +148,19 @@ time { make; }
 
 # Install.
 time { make install; }
+```
+
+### `5` - libexecinfo
+> #### `1.1` or newer (from Heiwa/Linux fork)
+> The libexecinfo package contains backtrace facility that usually found in GNU libc (glibc).
+
+> **Required!** To build Stage-1 Clang/LLVM, since using musl libc.
+```bash
+# Build.
+time { make; }
+
+# Install.
+time { make PREFIX=/clang1-tools install; }
 ```
 
 ### `6` - Clang/LLVM + libunwind, libcxxabi, and libcxx
