@@ -1210,11 +1210,13 @@ time { make install && mv -fv /usr/bin/bash /bin/.; }
 > **Required!** Before `Eudev`.
 ```bash
 # Configure source.
-./configure --prefix=/usr         \
-            --bindir=/bin         \
-            --sysconfdir=/etc     \
-            --with-xz --with-zstd \
-            --with-zlib --with-openssl
+./configure --prefix=/usr     \
+            --bindir=/bin     \
+            --sysconfdir=/etc \
+            --with-zlib       \
+            --with-xz         \
+            --with-zstd       \
+            --with-openssl
 
 # Build.
 time { make; }
