@@ -811,7 +811,7 @@ grep -B1 "^ /usr/include" dummy.log
 # | /usr/include
 
 # Check the dynamic linker libraries path.
-grep -o -- -L/usr/lib dummy.log
+grep -o "\-L/usr/lib" dummy.log
 
 # | The output should be:
 # |-----------------------
@@ -1067,19 +1067,22 @@ pidof pkill pmap ps pwdx sysctl top uptime vmstat w watch killall sed klogd tar"
 # Checks 115 commands, and make sure is enabled (=y).
 # Pipe to " | wc -l" at the right of "done" to checks total of commands.
 for X in ${CFFGPT}; do
-    grep -v '#' .config | grep -i --color=auto "_${X}=" || echo "* $X not CONFIGURED"
+    grep -v '#' .config | grep -i --color=auto "_${X}=" \
+    || echo "* $X not CONFIGURED"
 done
 
 # Build.
 time { make; }
 
 # Checks compiled 115 commands.
-./toybox | tr ' ' '\n'i | grep -xE --color=auto $(echo $CFFGPT | tr ' ' '|'i) | wc -l
+./toybox | tr ' ' '\n'i \
+| grep -xE --color=auto $(echo $CFFGPT | tr ' ' '|'i) | wc -l
 
 # Checks commands that not configured but compiled.
 # `[` (coreutils)
 # `ping6` and `traceroute6` (inetutils)
-./toybox | tr ' ' '\n'i | grep -vxE --color=auto $(echo $CFFGPT | tr ' ' '|'i)
+./toybox | tr ' ' '\n'i \
+| grep -vxE --color=auto $(echo $CFFGPT | tr ' ' '|'i)
 
 # So, totally is 118 commands.
 ./toybox | wc -w
