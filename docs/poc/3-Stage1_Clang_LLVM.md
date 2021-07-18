@@ -330,8 +330,9 @@ time {
 ```
 ```bash
 # Configure Stage-1 Clang/LLVM with default triplet (pc) to produce binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1".
-ln -sv clang   /clang1-tools/bin/${T_TRIPLET}-clang
-ln -sv clang++ /clang1-tools/bin/${T_TRIPLET}-clang++
+ln -sv clang              /clang1-tools/bin/${T_TRIPLET}-clang
+ln -sv ${T_TRIPLET}-clang /clang1-tools/bin/cc
+ln -sv clang++            /clang1-tools/bin/${T_TRIPLET}-clang++
 cat > /clang1-tools/bin/${T_TRIPLET}.cfg << "EOF"
 -Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1
 EOF
