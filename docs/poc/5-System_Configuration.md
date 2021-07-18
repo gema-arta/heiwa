@@ -71,7 +71,7 @@ set numbercolor white
 EOF
 ```
 
-### `4` - Configure Locales and `/etc/profile` File
+### `4` - Configure Locales and `/etc/profile` File (branding)
 ```bash
 # Determine locale that supported by `musl-locales`. Should output "UTF-8".
 LC_ALL=en_US.utf8 locale charmap
