@@ -129,7 +129,7 @@ source /etc/profile
 ### `5` - Creating the `/etc/inputrc` File (GNU Readline)
 > The inputrc file is the configuration file for the readline library, which provides editing capabilities while the user is entering a line from the terminal. It works by translating keyboard inputs into specific actions. Readline is used by bash and most other shells as well as many other applications.
 
-> Most people do not need user-specific functionality so the command below creates a global /etc/inputrc used by everyone who logs in. If you later decide you need to override the defaults on a per user basis, you can create a .inputrc file in the user's home directory with the modified mappings.
+> Most people do not need user-specific functionality so the command below creates a global "/etc/inputrc" used by everyone who logs in. If you later decide you need to override the defaults on a per user basis, you can create a ".inputrc" file in the user's home directory with the modified mappings.
 ```bash
 # Below is a generic global inputrc along with comments to explain what the various options do.
 # Note that comments cannot be on the same line as commands.
