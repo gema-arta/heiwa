@@ -64,3 +64,5 @@ https://gitweb.gentoo.org/proj/udev-gentoo-scripts.git/snapshot/udev-gentoo-scri
 https://ftp.gnu.org/gnu/gperf/gperf-3.1.tar.gz
 https://gitweb.gentoo.org/proj/eudev.git/snapshot/eudev-3.2.10.tar.gz
 https://gitlab.com/rilian-la-te/musl-locales/-/archive/master/musl-locales-master.tar.gz
+https://ftp.gnu.org/gnu/cpio/cpio-2.13.tar.gz
+https://github.com/lz4/lz4/archive/refs/tags/v1.9.3.tar.gz
