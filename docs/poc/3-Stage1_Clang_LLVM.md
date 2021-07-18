@@ -116,8 +116,7 @@ rm -fv usr/include/Makefile
 cp -rfv usr/include /clang1-tools/.
 ```
 ```bash
-# @owl4ce don't know ..
-# why when HOSTCC is defaults since use "LLVM=1" (clang) it fails to compile "scripts/basic/fixdep.c",
+# @owl4ce don't know .. why when HOSTCC is defaults since use "LLVM=1" (clang) it fails to compile "scripts/basic/fixdep.c",
 # but successful using `${TARGET_TRIPLET}-compiler`.
 ```
 
