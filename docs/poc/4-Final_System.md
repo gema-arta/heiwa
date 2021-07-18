@@ -1646,14 +1646,13 @@ udevadm hwdb --update
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
 
 # Configure source using system installed libraries.
-ax_cv_c_float_words_bigendian=no \
-./bootstrap --prefix=/usr        \
-            --system-zlib        \
-            --system-bzip2       \
-            --system-liblzma     \
-            --system-zstd        \
-            --mandir=/share/man  \
-            --parallel=$(nproc)  \
+./bootstrap --prefix=/usr       \
+            --system-zlib       \
+            --system-bzip2      \
+            --system-liblzma    \
+            --system-zstd       \
+            --mandir=/share/man \
+            --parallel=$(nproc) \
             --docdir=/share/doc/cmake-3.20.5
 
 # Build.
@@ -1726,6 +1725,7 @@ time { make PREFIX=/usr install; }
 patch -Np1 -i ../../extra/python3/patches/musl-find_library.patch
 
 # Configure source using provided libraries (built-in).
+ax_cv_c_float_words_bigendian=no         \
 ./configure --prefix=/usr                \
             --enable-shared              \
             --with-ensurepip=yes         \
