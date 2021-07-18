@@ -1570,19 +1570,21 @@ tar xzf ../opentmpfiles-0.3.1.tar.gz && \
 pushd opentmpfiles-0.3.1/
 
 # Install opentmpfiles.
-time { make install; }
-for C in opentmpfiles-dev opentmpfiles-setup; do
-    install -vm644 openrc/${C}.confd /etc/conf.d/${C}
-    install -vm755 openrc/${C}.initd /etc/init.d/${C}
-done && popd; unset C
+time {
+    make install
+    for C in opentmpfiles-dev opentmpfiles-setup; do
+        install -vm644 openrc/${C}.confd /etc/conf.d/${C}
+        install -vm755 openrc/${C}.initd /etc/init.d/${C}
+    done && popd; unset C
+}
 ```
 ```bash
 # Decompress udev-gentoo-scripts.
 tar xzf ../udev-gentoo-scripts-34.tar.gz && \
-cd udev-gentoo-scripts-34/
+pushd udev-gentoo-scripts-34/
 
 # Install udev-gentoo-scripts.
-time { make install; }
+time { make install && popd; }
 ```
 
 ### `49` - Eudev
