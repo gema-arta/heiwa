@@ -1094,25 +1094,7 @@ time { make; }
 time { make PREFIX=/ install; unset CFFGPT; }
 ```
 
-### `32` - GNU Diffutils
-> #### `3.7` or newer
-> The GNU Diffutils package contains programs that show the differences between files or directories.
-
-> **Required!**
-```bash
-# Configure source.
-ac_cv_header_sys_cdefs_h=no \
-ac_cv_lib_error_at_line=no  \
-./configure --prefix=/usr
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
-```
-
-### `33` - GNU AWK
+### `32` - GNU AWK
 > #### `5.1.0` or newer
 > The GNU AWK (gawk) package contains programs for manipulating text files.
 
@@ -1122,6 +1104,24 @@ time { make install; }
 sed -i 's|extras||' Makefile.in
 
 # Configure source.
+./configure --prefix=/usr
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `33` - GNU Diffutils
+> #### `3.7` or newer
+> The GNU Diffutils package contains programs that show the differences between files or directories.
+
+> **Required!**
+```bash
+# Configure source.
+ac_cv_header_sys_cdefs_h=no \
+ac_cv_lib_error_at_line=no  \
 ./configure --prefix=/usr
 
 # Build.
