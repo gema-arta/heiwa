@@ -1644,13 +1644,13 @@ udevadm hwdb --update
 # Apply patch (from Alpine Linux) to print all available locales.
 patch -Np1 -i ../../extra/musl-locales/patches/add-all-available-locales.patch
 
+# Configure source.
+cmake -B build \
+    -DCMAKE_BUILD_TYPE=None \
+    -DCMAKE_INSTALL_PREFIX=/usr
+
 # Build.
-time {
-    cmake -B build \
-        -DCMAKE_BUILD_TYPE=None \
-        -DCMAKE_INSTALL_PREFIX=/usr && \
-    make -C build
-}
+time { make -C build }
 
 # Install.
 time { make -C build install; }
