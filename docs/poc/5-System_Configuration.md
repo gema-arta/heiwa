@@ -2,7 +2,7 @@
 The purpose of this stage is to configure the system to be bootable, and also to install the Linux Kernel and desired Bootloader (nor EFI Stub).
 
 ### `1` - Creating the `/etc/resolv.conf` File
-> The system will need some means of obtaining Domain Name Service (DNS) name resolution to resolve Internet domain names to IP addresses, and vice versa. This is best achieved by placing the IP address of the DNS server, available from the ISP or network administrator, into /etc/resolv.conf.
+> The system will need some means of obtaining Domain Name Service (DNS) name resolution to resolve Internet domain names to IP addresses, and vice versa. This is best achieved by placing the IP address of the DNS server, available from the ISP or network administrator, into "/etc/resolv.conf".
 
 > Using Cloudflare DNS as primary, Google as secondary.
 ```bash
@@ -17,7 +17,7 @@ EOF
 ```
 
 ### `2` - Customizing the `/etc/hosts` File (and OpenRC's conf)
-> When booting, openrc will setup system's hostname from /etc/conf.d/hostname.
+> When booting, OpenRC will set the system hostname from "/etc/conf.d/hostname".
 ```bash
 # Firstly, define preferred default hostname.
 # Below will using host's name.
