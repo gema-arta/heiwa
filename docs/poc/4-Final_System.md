@@ -888,7 +888,24 @@ time {
 }
 ```
 
-### `24` - Pkgconf
+### `24` - Pigz
+> #### `2.6` or newer
+> The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
+
+> **Required!**
+```bash
+# Make sure to use symlink instead of hardlink for `unpigz`.
+sed -i 's|ln -f|ln -sf|' Makefile
+
+# Build.
+time { make CC=${CC}; }
+
+# Install and create symlinks as `gzip` tools.
+ln -sv pigz gzip; ln -sv unpigz gunzip
+install -vm755 -t /usr/bin/ pigz unpigz gzip gunzip
+```
+
+### `25` - Pkgconf
 > #### `1.7.4` or newer
 > The Pkgconf package contains a tool for passing the include path and/or library paths to build tools during the configure and make phases of package installations.
 
@@ -911,7 +928,7 @@ time {
 }
 ```
 
-### `25` - Gettext-tiny
+### `26` - Gettext-tiny
 > #### `0.3.2` or newer
 > The Gettext-tiny package contains utilities for internationalization and localization. These allow programs to be compiled with NLS (Native Language Support), enabling them to output messages in the user's native language. A lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
 
@@ -929,7 +946,7 @@ time { make LIBINTL=MUSL prefix=/usr; }
 time { make LIBINTL=MUSL prefix=/usr install; }
 ```
 
-### `26` - GNU Bison
+### `27` - GNU Bison
 > #### `3.7.6` or newer
 > The GNU Bison package contains a parser generator.
 
@@ -948,7 +965,7 @@ time { make; }
 time { make install; }
 ```
 
-### `27`- GDBM
+### `28`- GDBM
 > #### `1.20` or newer
 > The GDBM package contains the GNU Database Manager. It is a library of database functions that use extensible hashing and works similar to the standard UNIX dbm. The library provides primitives for storing key/data pairs, searching and retrieving the data by its key and deleting a key along with its data.
 
@@ -966,7 +983,7 @@ time { make; }
 time { make install; }
 ```
 
-### `28` - Perl
+### `29` - Perl
 > #### `5.32.1`
 > The Perl package contains the Practical Extraction and Report Language.
 
@@ -1002,7 +1019,7 @@ time { make; }
 time { make install; unset BUILD_ZLIB BUILD_BZIP2; }
 ```
 
-### `29` - OpenSSL
+### `30` - OpenSSL
 > #### `1.1.1k` or newer
 > The OpenSSL package contains management tools and libraries relating to cryptography. These are useful for providing cryptographic functions to other packages, such as OpenSSH, email applications, and web browsers (for accessing HTTPS sites).
 
@@ -1026,7 +1043,7 @@ time { make MANSUFFIX=ssl install; }
 mv -fv /usr/share/doc/openssl /usr/share/doc/openssl-1.1.1k
 ```
 
-### `30` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man, Procps, Psmisc, Sed, Sysklogd, Tar)
+### `31` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man, Procps, Psmisc, Sed, Sysklogd, Tar)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
@@ -1071,7 +1088,7 @@ time { make; }
 time { make PREFIX=/ install; unset CFFGPT; }
 ```
 
-### `31` - GNU Diffutils
+### `32` - GNU Diffutils
 > #### `3.7` or newer
 > The GNU Diffutils package contains programs that show the differences between files or directories.
 
@@ -1089,7 +1106,7 @@ time { make; }
 time { make install; }
 ```
 
-### `32` - GNU AWK
+### `33` - GNU AWK
 > #### `5.1.0` or newer
 > The GNU AWK (gawk) package contains programs for manipulating text files.
 
@@ -1106,23 +1123,6 @@ time { make; }
 
 # Install.
 time { make install; }
-```
-
-### `33` - Pigz
-> #### `2.6` or newer
-> The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
-
-> **Required!**
-```bash
-# Make sure to use symlink instead of hardlink for `unpigz`.
-sed -i 's|ln -f|ln -sf|' Makefile
-
-# Build.
-time { make CC=${CC}; }
-
-# Install and create symlinks as `gzip` tools.
-ln -sv pigz gzip; ln -sv unpigz gunzip
-install -vm755 -t /usr/bin/ pigz unpigz gzip gunzip
 ```
 
 ### `34` - GNU Make
