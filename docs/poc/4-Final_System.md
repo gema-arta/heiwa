@@ -1641,7 +1641,7 @@ udevadm hwdb --update
 > #### `3.20.5` or newer
 > The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
 
-> **Required!**
+> **Optional!** Currently not required, but useful for future usage.
 ```bash
 # Disable applications that using Cmake from attempting to install files in "/usr/lib64".
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
@@ -1720,7 +1720,7 @@ time { make PREFIX=/usr install; }
 > #### `3.9.6` or newer
 > The Python3 package contains the Python development environment. It is useful for object-oriented programming, writing scripts, prototyping large programs, or developing entire applications.
 
-> **Optional!** Currently not required, but useful for future stage.
+> **Optional!** Currently not required, but useful for future usage.
 ```bash
 # Apply patch (from Void Linux) to allow compile under musl libc.
 patch -Np1 -i ../../extra/python3/patches/musl-find_library.patch
