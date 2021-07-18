@@ -1587,8 +1587,8 @@ pushd udev-gentoo-scripts-34/
 time { make install && popd; }
 ```
 
-### `49` - GNU Gperf
-> The Gperf package contains utility that generates a perfect hash function from a key set.
+### `49` - GNU perf
+> The GNU perf (gperf) package contains utility that generates a perfect hash function from a key set.
 > #### `3.1` or newer
 
 > **Required!** Before `Eudev`.
