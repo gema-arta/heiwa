@@ -12,6 +12,7 @@
 > |  ✓  | C Runtime Library                                  | musl                      | Clean, but not fast as Glibc. |
 > |  ✓  | Build System Tools                                 | GNU                       | Most packages depend.         |
 > |  ✓  | Native Language Support                            | Gettext-tiny              | Stub of bloated GNU Gettext.  |
+> |  ✓  | Secure Socket Layer Library                        | OpenSSL                   | Full-featured and Robust.     |
 > |  ✓  | Curses (Terminal Control) Library                  | NetBSD Curses             | Smaller than GNU Ncurses.     |
 > |  ✓  | Line-editing and History-capabilities Library      | GNU Readline              | Best implementation.          |
 > |  ✓  | Deflate or Inflate Algorithm Compression Library   | Zlib-ng                   | Next generation.              |
