@@ -18,8 +18,8 @@
 > |  ✓  | Line-editing and History-capabilities Library      | GNU Readline              | Best implementation.          |
 > |  ✓  | Deflate or Inflate Algorithm Compression Library   | Zlib-ng                   | Next generation.              |
 > |  ✓  | Unified Interface for Querying Installed Libraries | Pkgconf                   | No circular dependencies.     |
-> |  ✓  | `.gz` Data Compressor and Decompressor             | Pigz                      | Parallel support.             |
-> |  ✓  | Mostly Userspace Utility Programs                   | Toybox                    | No circular dependencies.     |
+> |  ✓  | Gzip Data Compressor and Decompressor              | Pigz                      | Parallel support.             |
+> |  ✓  | Mostly Userspace Utility Programs                  | Toybox                    | No circular dependencies.     |
 - [ ] Create a Proof-of-Concept (similiar to LFS books). *Under development, optimizing ..*
 - [ ] Create a fast, flexible, and futuristic package manager.
 - [ ] Build an auto build systems.
