@@ -488,7 +488,7 @@ time {
 > #### `2.5.1` or newer
 > The Attr package contains utilities to administer the extended attributes on filesystem objects.
 
-> **Required!** Before `ACL` and `libcap`.
+> **Required!** Before `ACL`, `libcap`, and `Shadow`.
 ```bash
 # Configure source.
 ./configure --prefix=/usr     \
@@ -508,7 +508,7 @@ time { make install; }
 > #### `2.3.1` or newer
 > The ACL package contains utilities to administer Access Control Lists, which are used to define more fine-grained discretionary access rights for files and directories.
 
-> **Required!**
+> **Required!** Before `Shadow`.
 ```bash
 # Configure source.
 ./configure --prefix=/usr    \
