@@ -1635,15 +1635,38 @@ time { make install; }
 udevadm hwdb --update
 ```
 
-### `53` - musl-locales
+### `53` - Cmake
+> #### `3.20.5` or newer
+> The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
+
+> **Required!**
+```bash
+# Disable applications that using Cmake from attempting to install files in "/usr/lib64".
+sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
+
+# Configure source using system installed libraries.
+./bootstrap --prefix=/user       \
+            --system-zlib        \
+            --system-bzip2       \
+            --system-liblzma     \
+            --system-zstd        \
+            --mandir=/share/man  \
+            --parallel=$(nproc)  \
+            --docdir=/share/doc/cmake-3.20.5
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `54` - musl-locales
 > #### `?` (git)
 > The musl-locales package contains `locale` implementation, which works on musl libc (with limitations in musl itself).
 
 > **Required!**
 ```bash
-# Apply patch (from Alpine Linux) to print all available locales.
-patch -Np1 -i ../../extra/musl-locales/patches/add-all-available-locales.patch
-
 # Configure source.
 cmake -B build \
     -DCMAKE_BUILD_TYPE=None \
@@ -1656,7 +1679,7 @@ time { make -C build; }
 time { make -C build install; }
 ```
 
-### `54` - cpio
+### `55` - cpio
 > #### `2.13` or newer
 > The cpio package contains tools for archiving.
 
@@ -1678,7 +1701,7 @@ time { make; }
 time { make install; }
 ```
 
-### `55` - LZ4
+### `56` - LZ4
 > #### `1.9.3` or newer
 > The LZ4 package contains library for lossless compression algorithm, providing compression speed > 500 MB/s per core, scalable with multi-cores CPU. It features an extremely fast decoder, with speed in multiple GB/s per core, typically reaching RAM speed limits on multi-core systems.
 
@@ -1691,7 +1714,7 @@ time { make PREFIX=/usr; }
 time { make PREFIX=/usr install; }
 ```
 
-### `56` - GNU Nano
+### `57` - GNU Nano
 > #### `5.8` or newer
 > The Nano package contains a small, simple text editor which aims to replace Pico, the default editor in the Pine package.
 
@@ -1710,7 +1733,7 @@ time { make; }
 time { make install; }
 ```
 
-### `57` - Cleaning Up
+### `58` - Cleaning Up
 > #### This section is optional!
 
 > If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
