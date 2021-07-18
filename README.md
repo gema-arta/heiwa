@@ -27,6 +27,8 @@
     > |  ✓  | Gzip Data Compressor and Decompressor              | Pigz                      | Parallel support.             |
     > |  ✓  | Mostly Userspace Utility Programs                  | Toybox                    | No circular dependencies.     |
   
+    <br>
+  
   </details>
 
 - [ ] Create a Proof-of-Concept (similiar to LFS books). *Under development, optimizing ..*
