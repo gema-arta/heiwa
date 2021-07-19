@@ -655,7 +655,7 @@ time { make -C build; }
 
 # Install.
 time {
-    make -C build install            && \
+    make -C build install             && \
     cp -fv include/*.h /usr/include/. && popd
 }
 ```
@@ -677,7 +677,7 @@ time { make -C build; }
 
 # Install.
 time {
-    make -C build install            && \
+    make -C build install             && \
     cp -fv include/*.h /usr/include/. && popd
 }
 ```
