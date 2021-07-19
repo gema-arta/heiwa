@@ -706,7 +706,6 @@ rm -rf projects/lib{unwind,cxx{abi,}}
 cmake -B build \
     -DCMAKE_BUILD_TYPE=Release -Wno-dev                        \
     -DCMAKE_INSTALL_PREFIX="/usr"                              \
-    -DCMAKE_INSTALL_OLDINCLUDEDIR="/usr/include"               \
     -DCMAKE_C_FLAGS="-g0 $CFGLAGS"                             \
     -DCMAKE_CXX_FLAGS="-g0 $CXXFLAGS"                          \
     -DLLVM_HOST_TRIPLE="x86_64-pc-linux-musl"                  \
