@@ -318,9 +318,9 @@ cmake -B build \
     -DLLVM_TARGETS_TO_BUILD="$L_TARGET"                                                     \
     -DLIBCXX_HAS_MUSL_LIBC=ON                                                               \
     -DCLANG_DEFAULT_CXX_STDLIB=libc++                                                       \
-    -DCLANG_DEFAULT_UNWINDLIB=libunwind                                                     \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                                                       \
     -DCLANG_DEFAULT_LINKER=lld                                                              \
+    -DCLANG_DEFAULT_UNWINDLIB=libunwind                                                     \
     -DDEFAULT_SYSROOT="/clang0-tools"
 
 # Build.
