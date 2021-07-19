@@ -321,9 +321,7 @@ cmake -B build \
     -DCLANG_DEFAULT_UNWINDLIB=libunwind                                                     \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                                                       \
     -DCLANG_DEFAULT_LINKER="/clang0-tools/bin/ld.lld"                                       \
-    -DDEFAULT_SYSROOT="/clang0-tools"                                                       \
-    -DBacktrace_INCLUDE_DIR="/clang0-tools/include"                                         \
-    -DBacktrace_LIBRARY="/clang0-tools/lib/libexecinfo.so"                                  \
+    -DDEFAULT_SYSROOT="/clang0-tools"
 
 # Build.
 time { make -C build; }
