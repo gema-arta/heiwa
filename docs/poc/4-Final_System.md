@@ -738,8 +738,6 @@ cmake -B build \
     -DCLANG_DEFAULT_LINKER=lld                                 \
     -DCLANG_DEFAULT_UNWINDLIB=libunwind                        \
     -DDEFAULT_SYSROOT="/usr"                                   \
-    -DBacktrace_INCLUDE_DIR="/usr/include"                     \
-    -DBacktrace_LIBRARY="/usr/lib/libexecinfo.so"              \
     -DICONV_LIBRARY_PATH="/usr/lib/libc.so"
 
 # Build.
