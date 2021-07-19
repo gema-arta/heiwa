@@ -1760,9 +1760,7 @@ time { make install; }
 # A large number of files will be reported "The file was not recognized as a valid object file".
 # These warnings can be safely ignored. These warnings indicate that those files are scripts instead of binaries.
 find /usr/lib -type f -name \*.a -exec llvm-strip --strip-debug {} \;
-
 find /lib /usr/lib -type f -name \*.so* ! -name \*dbg -exec llvm-strip --strip-unneeded {} \;
-
 /clang1-tools/usr/bin/find /{,s}bin /usr/{{,s}bin,libexec} -type f -exec /clang1-tools/bin/llvm-strip --strip-all {} \;
 ```
 ```bash
