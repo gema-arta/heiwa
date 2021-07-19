@@ -691,7 +691,6 @@ pushd ${LLVM_SRC}/projects/libcxx/ && \
         -DLIBCXX_CXX_ABI=libcxxabi                    \
         -DLIBCXX_CXX_ABI_INCLUDE_PATHS="/usr/include" \
         -DLIBCXX_CXX_ABI_LIBRARY_PATH="/usr/lib"      \
-        -DLIBCXXABI_USE_LLVM_UNWINDER=ON              \
         -DLIBCXX_HAS_MUSL_LIBC=ON                     \
         -DLIBCXX_USE_COMPILER_RT=ON                   \
         -DLIBCXX_INSTALL_HEADERS=ON                   \
