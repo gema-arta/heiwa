@@ -320,7 +320,7 @@ cmake -B build \
     -DCLANG_DEFAULT_CXX_STDLIB=libc++                                                       \
     -DCLANG_DEFAULT_UNWINDLIB=libunwind                                                     \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                                                       \
-    -DCLANG_DEFAULT_LINKER="/clang0-tools/bin/ld.lld"                                       \
+    -DCLANG_DEFAULT_LINKER=lld                                                              \
     -DDEFAULT_SYSROOT="/clang0-tools"
 
 # Build.
