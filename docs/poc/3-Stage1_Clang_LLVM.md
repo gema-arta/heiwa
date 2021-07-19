@@ -198,10 +198,6 @@ popd
 sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
 projects/compiler-rt/cmake/config-ix.cmake
 
-# Deletes atomic detection for Linux to build `libcxx` with "libatomic.so*" free (which is provided by GCC).
-sed -i '/check_library_exists(atomic __atomic_fetch_add_8 "" LIBCXX_HAS_ATOMIC_LIB)/d' \
-projects/libcxx/cmake/config-ix.cmake
-
 # Update config.guess for better platform detection.
 cp -fv ../extra/llvm/files/config.guess cmake/.
 ```
@@ -212,9 +208,29 @@ pushd ${LLVM_SRC}/projects/libunwind/ && \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools"  \
         -DCMAKE_C_FLAGS="-fPIC -g0 $CFLAGS"     \
         -DCMAKE_CXX_FLAGS="-fPIC -g0 $CXXFLAGS" \
-        -DLIBUNWIND_ENABLE_SHARED=ON            \
-        -DLIBUNWIND_USE_COMPILER_RT=ON          \
-        -DLLVM_PATH="$LLVM_SRC"
+        -DLLVM_PATH="$LLVM_SRC"                 \
+        -DLIBUNWIND_USE_COMPILER_RT=ON
+
+# Build.
+time { make -C build; }
+
+# Install, also the headers.
+time {
+    make -C build install                      && \
+    cp -fv include/*.h /clang1-tools/include/. && popd
+}
+```
+```bash
+# Configure `libcxxabi` source.
+pushd ${LLVM_SRC}/projects/libcxxabi/ && \
+    cmake -B build \
+        -DCMAKE_INSTALL_PREFIX="/clang1-tools" \
+        -DCMAKE_CXX_FLAGS="-g0 $CXXFLAGS"      \
+        -DLLVM_PATH="$LLVM_SRC"                \
+        -DLIBCXXABI_ENABLE_STATIC=ON           \
+        -DLIBCXXABI_USE_LLVM_UNWINDER=ON       \
+        -DLIBCXXABI_USE_COMPILER_RT=ON         \
+        -DLIBCXXABI_LIBCXX_INCLUDES="${LLVM_SRC}/projects/libcxx/include"
 
 # Build.
 time { make -C build; }
@@ -223,43 +239,20 @@ time { make -C build; }
 time { make -C build install && popd; }
 ```
 ```bash
-# Configure `libcxxabi` source.
-pushd ${LLVM_SRC}/projects/libcxxabi/ && \
-    cmake -B build \
-        -DCMAKE_INSTALL_PREFIX="/clang1-tools"                            \
-        -DCMAKE_CXX_FLAGS="-g0 $CXXFLAGS"                                 \
-        -DLIBCXXABI_ENABLE_STATIC=ON                                      \
-        -DLIBCXXABI_USE_COMPILER_RT=ON                                    \
-        -DLIBCXXABI_USE_LLVM_UNWINDER=ON                                  \
-        -DLIBCXXABI_LIBUNWIND_PATH="/clang1-tools/lib"                    \
-        -DLIBCXXABI_LIBCXX_INCLUDES="${LLVM_SRC}/projects/libcxx/include" \
-        -DLLVM_PATH="$LLVM_SRC"
-
-# Build.
-time { make -C build; }
-
-# Install.
-time {
-    make -C build install                      && \
-    cp -fv include/*.h /clang1-tools/include/. && popd
-}
-```
-```bash
 # Configure `libcxx` source.
 pushd ${LLVM_SRC}/projects/libcxx/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools"                           \
         -DCMAKE_CXX_FLAGS="-isystem /clang1-tools/include -g0 $CXXFLAGS" \
-        -DLIBCXX_ENABLE_SHARED=ON                                        \
+        -DLLVM_PATH="$LLVM_SRC"                                          \
         -DLIBCXX_ENABLE_STATIC=ON                                        \
-        -DLIBCXX_HAS_MUSL_LIBC=ON                                        \
-        -DLIBCXX_INSTALL_HEADERS=ON                                      \
-        -DLIBCXX_USE_COMPILER_RT=ON                                      \
         -DLIBCXX_CXX_ABI=libcxxabi                                       \
         -DLIBCXX_CXX_ABI_INCLUDE_PATHS="/clang1-tools/include"           \
         -DLIBCXX_CXX_ABI_LIBRARY_PATH="/clang1-tools/lib"                \
-        -DLIBCXXABI_USE_LLVM_UNWINDER=ON                                 \
-        -DLLVM_PATH="$LLVM_SRC"
+        -DLIBCXX_HAS_MUSL_LIBC=ON                                        \
+        -DLIBCXX_USE_COMPILER_RT=ON                                      \
+        -DLIBCXX_HAS_GCC_S_LIB=OFF                                       \
+        -DLIBCXX_HAS_ATOMIC_LIB=OFF
 
 # Build.
 time { make -C build; }
@@ -274,48 +267,40 @@ rm -rf projects/lib{unwind,cxx{abi,}}
 ```bash
 # Configure Clang/LLVM source.
 cmake -B build \
-    -DCMAKE_BUILD_TYPE=Release -Wno-dev                    \
-    -DCMAKE_INSTALL_PREFIX="/clang1-tools"                 \
-    -DCMAKE_INSTALL_OLDINCLUDEDIR="/clang1-tools/include"  \
-    -DCMAKE_C_FLAGS="-g0 $CFLAGS"                          \
-    -DCMAKE_CXX_FLAGS="-g0 $CXXFLAGS"                      \
-    -DLLVM_DEFAULT_TARGET_TRIPLE="$T_TRIPLET"              \
-    -DLLVM_HOST_TRIPLE="$T_TRIPLET"                        \
-    -DLLVM_TARGETS_TO_BUILD="$L_TARGET"                    \
-    -DLLVM_TARGET_ARCH="$L_TARGET"                         \
-    -DLLVM_LINK_LLVM_DYLIB=ON                              \
-    -DLLVM_BUILD_TESTS=OFF                                 \
-    -DLLVM_ENABLE_BINDINGS=OFF                             \
-    -DLLVM_ENABLE_IDE=OFF                                  \
-    -DLLVM_ENABLE_LIBCXX=ON                                \
-    -DLLVM_ENABLE_LLD=ON                                   \
-    -DLLVM_ENABLE_UNWIND_TABLES=OFF                        \
-    -DLLVM_ENABLE_RTTI=ON                                  \
-    -DLLVM_ENABLE_ZLIB=ON                                  \
-    -DLLVM_ENABLE_LIBEDIT=OFF                              \
-    -DLLVM_ENABLE_LIBXML2=OFF                              \
-    -DLLVM_INCLUDE_GO_TESTS=OFF                            \
-    -DLLVM_INCLUDE_TESTS=OFF                               \
-    -DLLVM_INCLUDE_DOCS=OFF                                \
-    -DLLVM_INCLUDE_EXAMPLES=OFF                            \
-    -DLLVM_INCLUDE_BENCHMARKS=OFF                          \
-    -DCOMPILER_RT_BUILD_SANITIZERS=OFF                     \
-    -DCOMPILER_RT_BUILD_XRAY=OFF                           \
-    -DCOMPILER_RT_BUILD_PROFILE=OFF                        \
-    -DCOMPILER_RT_BUILD_LIBFUZZER=OFF                      \
-    -DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON                  \
-    -DCOMPILER_RT_DEFAULT_TARGET_TRIPLE="$T_TRIPLET"       \
-    -DCLANG_DEFAULT_CXX_STDLIB=libc++                      \
-    -DCLANG_DEFAULT_UNWINDLIB=libunwind                    \
-    -DCLANG_DEFAULT_RTLIB=compiler-rt                      \
-    -DCLANG_DEFAULT_LINKER="/clang1-tools/bin/ld.lld"      \
-    -DDEFAULT_SYSROOT="/clang1-tools"                      \
-    -DBacktrace_INCLUDE_DIR="/clang1-tools/include"        \
-    -DBacktrace_LIBRARY="/clang1-tools/lib/libexecinfo.so" \
-    -DICONV_LIBRARY_PATH="/clang1-tools/lib/libc.so"       \
-    -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON                    \
-    -DLLVM_INSTALL_CCTOOLS_SYMLINKS=ON                     \
-    -DLLVM_INSTALL_UTILS=ON
+    -DCMAKE_BUILD_TYPE=Release -Wno-dev       \
+    -DCMAKE_INSTALL_PREFIX="/clang1-tools"    \
+    -DCMAKE_C_FLAGS="-g0 $CFLAGS"             \
+    -DCMAKE_CXX_FLAGS="-g0 $CXXFLAGS"         \
+    -DLLVM_HOST_TRIPLE="$T_TRIPLET"           \
+    -DLLVM_DEFAULT_TARGET_TRIPLE="$T_TRIPLET" \
+    -DLLVM_ENABLE_BINDINGS=OFF                \
+    -DLLVM_ENABLE_EH=ON                       \
+    -DLLVM_ENABLE_IDE=OFF                     \
+    -DLLVM_ENABLE_LIBCXX=ON                   \
+    -DLLVM_ENABLE_LLD=ON                      \
+    -DLLVM_ENABLE_RTTI=ON                     \
+    -DLLVM_ENABLE_UNWIND_TABLES=OFF           \
+    -DLLVM_ENABLE_WARNINGS=OFF                \
+    -DLLVM_ENABLE_LIBEDIT=OFF                 \
+    -DLLVM_ENABLE_LIBXML2=OFF                 \
+    -DLLVM_INCLUDE_BENCHMARKS=OFF             \
+    -DLLVM_INCLUDE_EXAMPLES=OFF               \
+    -DLLVM_INCLUDE_TESTS=OFF                  \
+    -DLLVM_INCLUDE_GO_TESTS=OFF               \
+    -DLLVM_INCLUDE_DOCS=OFF                   \
+    -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON       \
+    -DLLVM_INSTALL_CCTOOLS_SYMLINKS=ON        \
+    -DLLVM_INSTALL_UTILS=ON                   \
+    -DLLVM_LINK_LLVM_DYLIB=ON                 \
+    -DLLVM_OPTIMIZED_TABLEGEN=ON              \
+    -DLLVM_TARGET_ARCH="$L_TARGET"            \
+    -DLLVM_TARGETS_TO_BUILD="$L_TARGET"       \
+    -DCLANG_VENDOR="Heiwa/Linux"              \
+    -DCLANG_DEFAULT_CXX_STDLIB=libc++         \
+    -DCLANG_DEFAULT_RTLIB=compiler-rt         \
+    -DCLANG_DEFAULT_LINKER=lld                \
+    -DCLANG_DEFAULT_UNWINDLIB=libunwind       \
+    -DDEFAULT_SYSROOT="/clang1-tools"
 
 # Build.
 time { make -C build; }
