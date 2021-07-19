@@ -317,6 +317,12 @@ cmake -B build \
     -DLLVM_TARGET_ARCH="$L_TARGET"                                                          \
     -DLLVM_TARGETS_TO_BUILD="$L_TARGET"                                                     \
     -DLIBCXX_HAS_MUSL_LIBC=ON                                                               \
+    -DCOMPILER_RT_BUILD_BUILTINS=ON                                                         \
+    -DCOMPILER_RT_BUILD_LIBFUZZER=OFF                                                       \
+    -DCOMPILER_RT_BUILD_MEMPROF=OFF                                                         \
+    -DCOMPILER_RT_BUILD_PROFILE=OFF                                                         \
+    -DCOMPILER_RT_BUILD_SANITIZERS=OFF                                                      \
+    -DCOMPILER_RT_BUILD_XRAY=OFF                                                            \
     -DCLANG_DEFAULT_CXX_STDLIB=libc++                                                       \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                                                       \
     -DCLANG_DEFAULT_LINKER=lld                                                              \
