@@ -300,30 +300,23 @@ cmake -B build \
     -DCMAKE_CXX_FLAGS="-g0 -Os -pipe"                                                       \
     -DCMAKE_EXE_LINKER_FLAGS="-Wl,-dynamic-linker /clang0-tools/lib/ld-musl-x86_64.so.1"    \
     -DCMAKE_SHARED_LINKER_FLAGS="-Wl,-dynamic-linker /clang0-tools/lib/ld-musl-x86_64.so.1" \
-    -DLLVM_DEFAULT_TARGET_TRIPLE="$T_TRIPLET"                                               \
     -DLLVM_HOST_TRIPLE="$T_TRIPLET"                                                         \
-    -DLLVM_TARGETS_TO_BUILD="$L_TARGET"                                                     \
-    -DLLVM_TARGET_ARCH="$L_TARGET"                                                          \
-    -DLLVM_BUILD_TESTS=OFF                                                                  \
+    -DLLVM_DEFAULT_TARGET_TRIPLE="$T_TRIPLET"                                               \
     -DLLVM_ENABLE_BINDINGS=OFF                                                              \
     -DLLVM_ENABLE_IDE=OFF                                                                   \
     -DLLVM_ENABLE_LIBCXX=ON                                                                 \
-    -DLLVM_ENABLE_LLD=OFF                                                                   \
     -DLLVM_ENABLE_UNWIND_TABLES=OFF                                                         \
+    -DLLVM_ENABLE_WARNINGS=OFF                                                              \
     -DLLVM_ENABLE_LIBEDIT=OFF                                                               \
     -DLLVM_ENABLE_LIBXML2=OFF                                                               \
-    -DLLVM_INCLUDE_GO_TESTS=OFF                                                             \
-    -DLLVM_INCLUDE_TESTS=OFF                                                                \
-    -DLLVM_INCLUDE_DOCS=OFF                                                                 \
-    -DLLVM_INCLUDE_EXAMPLES=OFF                                                             \
     -DLLVM_INCLUDE_BENCHMARKS=OFF                                                           \
+    -DLLVM_INCLUDE_EXAMPLES=OFF                                                             \
+    -DLLVM_INCLUDE_TESTS=OFF                                                                \
+    -DLLVM_INCLUDE_GO_TESTS=OFF                                                             \
+    -DLLVM_INCLUDE_DOCS=OFF                                                                 \
+    -DLLVM_TARGET_ARCH="$L_TARGET"                                                          \
+    -DLLVM_TARGETS_TO_BUILD="$L_TARGET"                                                     \
     -DLIBCXX_HAS_MUSL_LIBC=ON                                                               \
-    -DCOMPILER_RT_BUILD_SANITIZERS=OFF                                                      \
-    -DCOMPILER_RT_BUILD_XRAY=OFF                                                            \
-    -DCOMPILER_RT_BUILD_PROFILE=OFF                                                         \
-    -DCOMPILER_RT_BUILD_LIBFUZZER=OFF                                                       \
-    -DCOMPILER_RT_USE_BUILTINS_LIBRARY=ON                                                   \
-    -DCOMPILER_RT_DEFAULT_TARGET_TRIPLE="$T_TRIPLET"                                        \
     -DCLANG_DEFAULT_CXX_STDLIB=libc++                                                       \
     -DCLANG_DEFAULT_UNWINDLIB=libunwind                                                     \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                                                       \
@@ -331,7 +324,6 @@ cmake -B build \
     -DDEFAULT_SYSROOT="/clang0-tools"                                                       \
     -DBacktrace_INCLUDE_DIR="/clang0-tools/include"                                         \
     -DBacktrace_LIBRARY="/clang0-tools/lib/libexecinfo.so"                                  \
-    -DICONV_LIBRARY_PATH="/clang0-tools/lib/libc.so"
 
 # Build.
 time { make -C build; }
