@@ -191,7 +191,6 @@ source ~/.bash_profile
 
 > **Required!** As mentioned in the description above.
 ```bash
-
 # Apply patch to fix "swab.h" under musl libc while building Linux kernel.
 patch -Np1 -i \
 ../../extra/linux-headers/patches/include-uapi-linux-swab-Fix-potentially-missing-__always_inline.patch
