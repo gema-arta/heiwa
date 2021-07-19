@@ -1426,7 +1426,8 @@ pushd data/keymaps/i386/ && \
 popd
 
 # Configure source.
-./configure --prefix=/usr --disable-vlock
+./configure --prefix=/usr \
+            --disable-vlock
 
 # Build.
 time { make; }
