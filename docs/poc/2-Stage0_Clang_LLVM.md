@@ -21,6 +21,7 @@ The purpose of this stage is to build a temporary Clang/LLVM toolchain with GCC 
 > 4. Using `flex` as `lex` alternative lexical analyzers (symlinked).
 > 5. See more at "[LFS Host System Requirements](https://linuxfromscratch.org/lfs/view/stable/chapter02/hostreqs.html)".
 > 
+> **Below to check:**
 > ```bash
 > file $(command -v {g{cc,++},sh,awk,yacc,lex})
 > ```
