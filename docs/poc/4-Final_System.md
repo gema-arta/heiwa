@@ -1719,7 +1719,9 @@ ax_cv_c_float_words_bigendian=no         \
             --enable-shared              \
             --with-ensurepip=yes         \
             --with-computed-gotos        \
+            --with-lto                   \
             --enable-ipv6                \
+            --enable-optimizations       \
             --with-dbmliborder=gdbm:ndbm \
             --enable-loadable-sqlite-extensions
 
