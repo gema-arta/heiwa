@@ -732,6 +732,7 @@ cmake -B build \
     -DLLVM_OPTIMIZED_TABLEGEN=ON                               \
     -DLLVM_TARGET_ARCH="X86"                                   \
     -DLLVM_TARGETS_TO_BUILD="host;BPF;AMDGPU;X86"              \
+    -DCLANG_VENDOR="Heiwa/Linux"                               \
     -DCLANG_DEFAULT_CXX_STDLIB=libc++                          \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                          \
     -DCLANG_DEFAULT_LINKER=lld                                 \
