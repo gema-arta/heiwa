@@ -647,9 +647,8 @@ pushd ${LLVM_SRC}/projects/libunwind/ && \
         -DCMAKE_INSTALL_PREFIX="/usr"           \
         -DCMAKE_C_FLAGS="-fPIC -g0 $CFLAGS"     \
         -DCMAKE_CXX_FLAGS="-fPIC -g0 $CXXFLAGS" \
-        -DLIBUNWIND_ENABLE_SHARED=ON            \
-        -DLIBUNWIND_USE_COMPILER_RT=ON          \
-        -DLLVM_PATH="$LLVM_SRC"
+        -DLLVM_PATH="$LLVM_SRC"                 \
+        -DLIBUNWIND_USE_COMPILER_RT=ON
 
 # Build.
 time { make -C build; }
@@ -661,14 +660,14 @@ time { make -C build install && popd; }
 # Configure `libcxxabi` source.
 pushd ${LLVM_SRC}/projects/libcxxabi/ && \
     cmake -B build \
-        -DCMAKE_INSTALL_PREFIX="/usr"                                     \
-        -DCMAKE_CXX_FLAGS="-g0 $CXXFLAGS"                                 \
-        -DLIBCXXABI_ENABLE_STATIC=ON                                      \
-        -DLIBCXXABI_USE_COMPILER_RT=ON                                    \
-        -DLIBCXXABI_USE_LLVM_UNWINDER=ON                                  \
-        -DLIBCXXABI_LIBUNWIND_PATH="/usr/lib"                             \
-        -DLIBCXXABI_LIBCXX_INCLUDES="${LLVM_SRC}/projects/libcxx/include" \
-        -DLLVM_PATH="$LLVM_SRC"
+        -DCMAKE_INSTALL_PREFIX="/usr"         \
+        -DCMAKE_CXX_FLAGS="-g0 $CXXFLAGS"     \
+        -DLLVM_PATH="$LLVM_SRC"               \
+        -DLIBCXXABI_ENABLE_STATIC=ON          \
+        -DLIBCXXABI_USE_LLVM_UNWINDER=ON      \
+        -DLIBCXXABI_USE_COMPILER_RT=ON        \
+        -DLIBCXXABI_LIBUNWIND_PATH="/usr/lib" \
+        -DLIBCXXABI_LIBCXX_INCLUDES="${LLVM_SRC}/projects/libcxx/include"
 
 # Build.
 time { make -C build; }
@@ -685,16 +684,15 @@ pushd ${LLVM_SRC}/projects/libcxx/ && \
     cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/usr"                 \
         -DCMAKE_CXX_FLAGS="-g0 $CXXFLAGS"             \
-        -DLIBCXX_ENABLE_SHARED=ON                     \
+        -DLLVM_PATH="$LLVM_SRC"                       \
         -DLIBCXX_ENABLE_STATIC=ON                     \
-        -DLIBCXX_HAS_MUSL_LIBC=ON                     \
-        -DLIBCXX_USE_COMPILER_RT=ON                   \
-        -DLIBCXX_INSTALL_HEADERS=ON                   \
         -DLIBCXX_CXX_ABI=libcxxabi                    \
         -DLIBCXX_CXX_ABI_INCLUDE_PATHS="/usr/include" \
         -DLIBCXX_CXX_ABI_LIBRARY_PATH="/usr/lib"      \
         -DLIBCXXABI_USE_LLVM_UNWINDER=ON              \
-        -DLLVM_PATH="$LLVM_SRC"
+        -DLIBCXX_HAS_MUSL_LIBC=ON                     \
+        -DLIBCXX_USE_COMPILER_RT=ON                   \
+        -DLIBCXX_INSTALL_HEADERS=ON                   \
 
 # Build.
 time { make -C build; }
