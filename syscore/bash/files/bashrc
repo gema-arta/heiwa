@@ -10,12 +10,12 @@ C="\[\033[1;36m\]"
 W="\[\033[1;37m\]"
 NC="\[\033[00m\]"
 
-if [ ! "$(id -u)" -eq 0 ]; then
+if [ "$(id -u)" -eq 0 ]; then
     UC="${R}"
 else
     UC="${G}"
 fi
 
-PS1="${C}^ ${R}\u@${NC}\h ${M}[${NC} \w ${M}]${NC}\n${M}\$${NC} "
+PS1="${C}^ ${UC}\u@${NC}\h ${M}[${NC} \w ${M}]${NC}\n${M}\$${NC} "
 
 # End /etc/bash/bashrc
