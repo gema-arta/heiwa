@@ -146,6 +146,8 @@ chmod -v 600  /var/log/btmp
 ```bash
 cat > ~/.bash_profile << "EOF"
 # Clang/LLVM Environment.
+export LLVM_SRC="/sources/llvm"
+
 CC="x86_64-pc-linux-musl-clang"
 CXX="x86_64-pc-linux-musl-clang++"
 LD="ld.lld"
@@ -162,13 +164,12 @@ SIZE="llvm-size"
 STRIP="llvm-strip"
 export CC CXX LD CC_LD CXX_LD AR AS NM OBJCOPY OBJDUMP RANLIB READELF SIZE STRIP
 
-LLVM_SRC="/sources/llvm"
 COMMON_FLAGS="-march=native -Oz -pipe"
 CFLAGS="${COMMON_FLAGS}"
 CXXFLAGS="${COMMON_FLAGS}"
 LDFLAGS="-Wl,-O2 -Wl,--as-needed"
 MAKEFLAGS="-j$(nproc) -l$(nproc)"
-export LLVM_SRC COMMON_FLAGS CFLAGS CXXFLAGS LDFLAGS MAKEFLAGS
+export COMMON_FLAGS CFLAGS CXXFLAGS LDFLAGS MAKEFLAGS
 EOF
 source ~/.bash_profile
 ```
