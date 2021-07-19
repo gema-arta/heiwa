@@ -653,7 +653,7 @@ pushd ${LLVM_SRC}/projects/libunwind/ && \
 # Build.
 time { make -C build; }
 
-# Install.
+# Install, also the headers.
 time {
     make -C build install             && \
     cp -fv include/*.h /usr/include/. && popd
@@ -674,7 +674,7 @@ pushd ${LLVM_SRC}/projects/libcxxabi/ && \
 # Build.
 time { make -C build; }
 
-# Install.
+# Install, also the headers.
 time {
     make -C build install             && \
     cp -fv include/*.h /usr/include/. && popd
