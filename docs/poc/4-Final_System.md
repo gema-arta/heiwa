@@ -656,7 +656,8 @@ time { make -C build; }
 # Install.
 time {
     make -C build install            && \
-    cp -v include/*.h /usr/include/. && popd; }
+    cp -v include/*.h /usr/include/. && popd
+}
 ```
 ```bash
 # Configure `libcxxabi` source.
