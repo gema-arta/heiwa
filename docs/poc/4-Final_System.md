@@ -670,7 +670,6 @@ pushd ${LLVM_SRC}/projects/libcxxabi/ && \
         -DLIBCXXABI_USE_LLVM_UNWINDER=ON      \
         -DLIBCXXABI_INCLUDE_TESTS=OFF         \
         -DLIBCXXABI_USE_COMPILER_RT=ON        \
-        -DLIBCXXABI_LIBUNWIND_PATH="/usr/lib" \
         -DLIBCXXABI_LIBCXX_INCLUDES="${LLVM_SRC}/projects/libcxx/include"
 
 # Build.
