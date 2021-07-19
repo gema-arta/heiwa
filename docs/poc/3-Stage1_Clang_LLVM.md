@@ -604,8 +604,7 @@ sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
             --mandir=/share/man              \
             --parallel=$(nproc)              \
             --docdir=/share/doc/cmake-3.20.5 \
-            -- -DCMAKE_USE_OPENSSL=OFF       \
-            -DBUILD_CursesDialog=ON
+            -- -DCMAKE_USE_OPENSSL=OFF -DBUILD_CursesDialog=ON
 
 # Build.
 time { make; }
@@ -621,6 +620,7 @@ time { make install; }
 ```bash
 # The libtool .la files are only useful when linking with static libraries.
 # They are unneeded, and potentially harmful, when using dynamic shared libraries, specially when using non-autotools build systems.
+# Remove those files.
 find /clang1-tools/{lib,libexec} -name \*.la -exec rm -rfv {} \;
 
 # Remove the documentation.
