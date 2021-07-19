@@ -1771,6 +1771,10 @@ find /lib /usr/lib -type f -name \*.so* ! -name \*dbg -exec llvm-strip --strip-u
 ```bash
 # Cleaning leftover files.
 rm -rfv /tmp/*
+
+# The clang0 and clang1 toolchains is still partially installed and not needed anymore.
+# Now safe to remove "/clang0-tools" and "/clang1-tools" directories as they're not required anymore.
+rm -rf /clang{0,1}-tools
 ```
 > #### * End of as root in a chroot env!
 
@@ -1793,17 +1797,6 @@ fi
 > #### * End of as root!
 
 > #### * Beginning of as root in a chroot env!
-```bash
-# There are also several files installed in the "/usr/lib" and "/usr/libexec" directories with a file name extension of .la. 
-# These are "libtool archive" files. As already said, they are only useful when linking with static libraries.
-# They are unneeded, and potentially harmful, when using dynamic shared libraries, specially when using also non-autotools build systems.
-# Remove those files.
-find /usr/lib /usr/libexec -name \*.la -exec rm -rfv {} \;
-
-# The clang0 and clang1 toolchains is still partially installed and not needed anymore.
-# Now safe to remove "/clang0-tools" and "/clang1-tools" directories as they're not required anymore.
-rm -rf /clang{0,1}-tools
-```
 
 <h2></h2>
 
