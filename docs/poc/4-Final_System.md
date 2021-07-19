@@ -693,7 +693,7 @@ pushd ${LLVM_SRC}/projects/libcxx/ && \
         -DLIBCXX_CXX_ABI_LIBRARY_PATH="/usr/lib"      \
         -DLIBCXX_HAS_MUSL_LIBC=ON                     \
         -DLIBCXX_USE_COMPILER_RT=ON                   \
-        -DLIBCXX_INSTALL_HEADERS=ON                   \
+        -DLIBCXX_INSTALL_HEADERS=ON
 
 # Build.
 time { make -C build; }
