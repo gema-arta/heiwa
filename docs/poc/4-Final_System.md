@@ -668,7 +668,6 @@ pushd ${LLVM_SRC}/projects/libcxxabi/ && \
         -DLLVM_PATH="$LLVM_SRC"               \
         -DLIBCXXABI_ENABLE_STATIC=ON          \
         -DLIBCXXABI_USE_LLVM_UNWINDER=ON      \
-        -DLIBCXXABI_INCLUDE_TESTS=OFF         \
         -DLIBCXXABI_USE_COMPILER_RT=ON        \
         -DLIBCXXABI_LIBCXX_INCLUDES="${LLVM_SRC}/projects/libcxx/include"
 
