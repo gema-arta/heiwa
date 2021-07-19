@@ -737,8 +737,7 @@ cmake -B build \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                          \
     -DCLANG_DEFAULT_LINKER=lld                                 \
     -DCLANG_DEFAULT_UNWINDLIB=libunwind                        \
-    -DDEFAULT_SYSROOT="/usr"                                   \
-    -DICONV_LIBRARY_PATH="/usr/lib/libc.so"
+    -DDEFAULT_SYSROOT="/usr"
 
 # Build.
 time { make -C build; }
