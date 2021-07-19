@@ -353,6 +353,7 @@ popd
 ```bash
 # The libtool .la files are only useful when linking with static libraries.
 # They are unneeded, and potentially harmful, when using dynamic shared libraries, specially when using non-autotools build systems.
+# Remove those files.
 find /clang0-tools/{{,${H_TRIPLET}/}lib{,64},libexec}/ -name \*.la -exec rm -rfv {} \;
 
 # Remove the documentation.
