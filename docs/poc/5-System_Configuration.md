@@ -205,12 +205,11 @@ EOF
 mv -fv ~/.bash_profile{,_disabled}
 
 # Logout and re-enter `chroot` again.
-logout
 ```
 ```bash
 # Apply patch to fix "swab.h" under musl libc while building Linux kernel.
 patch -Np1 -i \
-../../extra/linux-headers/patches/include-uapi-linux-swab-Fix-potentially-missing-__always_inline.patch
+/sources/extra/linux-headers/patches/include-uapi-linux-swab-Fix-potentially-missing-__always_inline.patch
 
 # Make sure there are no stale files embedded in the package.
 time { make LLVM=1 LLVM_IAS=1 mrproper; }
