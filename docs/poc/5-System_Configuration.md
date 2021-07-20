@@ -203,7 +203,7 @@ EOF
 ```bash
 # Make sure to disable Clang/LLVM environment variables to build kernel correctly.
 mv -fv ~/.bash_profile{,_disabled}
-exec /bin/bash --login
+exec /usr/bin/env -i /bin/bash --login
 ```
 ```bash
 # Apply patch to fix "swab.h" under musl libc while building Linux kernel.
