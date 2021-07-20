@@ -221,7 +221,7 @@ cp -rfv /sources/extra/linux-xanmod-cacule/files/{.config,localversion,drivers} 
 time { make LLVM=1 LLVM_IAS=1 menuconfig; }
 
 # Build.
-time { nice -n -1 make LLVM=1 LLVM_IAS=1; }
+time { nice -n -1 make LLVM=1 LLVM_IAS=1 -j$(nproc); }
 
 # Install modules.
 time { make LLVM=1 LLVM_IAS=1 modules_install; }
