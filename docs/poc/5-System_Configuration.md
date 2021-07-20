@@ -201,6 +201,10 @@ EOF
 
 > **Required!** If not, will you boot with the OpenBSD kernel?
 ```bash
+# Make sure to disable Clang/LLVM environment variables to build kernel correctly.
+mv -fv ~/.bash_profile{,_disabled}
+```
+```bash
 # Apply patch to fix "swab.h" under musl libc while building Linux kernel.
 patch -Np1 -i \
 ../../extra/linux-headers/patches/include-uapi-linux-swab-Fix-potentially-missing-__always_inline.patch
