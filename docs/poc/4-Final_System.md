@@ -1360,6 +1360,7 @@ autoreconf -fvi
 
 # Configure source.
 CFLAGS="-Wno-error -Wno-null-dereference -DFNM_EXTMATCH=0 $CFLAGS" \
+CXXFLAGS="-Wno-error" ac_cv_lib_error_at_line=no                   \
 ./configure --prefix=/usr                                          \
             --program-prefix=eu-                                   \
             --disable-debuginfod                                   \
