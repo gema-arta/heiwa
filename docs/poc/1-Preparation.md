@@ -1,7 +1,7 @@
 ## `I` Preparation
 
 > #### Announcement
-> * Currently only focus on **x86_64** architecture, build with native CPU optimization and ThinLTO for Stage-1 Clang/LLVM toolchain.  
+> * Currently only focus on **x86_64** architecture, build with native CPU optimization and ThinLTO for pure Clang/LLVM toolchain.  
 
 > #### * Beginning of as root!
 ### `1` - Prepare a volume/partition
