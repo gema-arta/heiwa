@@ -254,7 +254,7 @@ time { make CC=${H_TRIPLET}-gcc AR=${H_TRIPLET}-ar CFLAGS="-Os -pipe"; }
 time { make PREFIX=/clang0-tools install; }
 ```
 
-### `8` -  Clang/LLVM
+### `8` - Clang/LLVM
 > #### `12.x.x` or newer
 > C language family frontend for LLVM.
 
@@ -305,10 +305,14 @@ cmake -B build \
     -DLLVM_ENABLE_BINDINGS=OFF                                                              \
     -DLLVM_ENABLE_IDE=OFF                                                                   \
     -DLLVM_ENABLE_LIBCXX=ON                                                                 \
+    -DLLVM_ENABLE_BACKTRACES=OFF                                                            \
     -DLLVM_ENABLE_UNWIND_TABLES=OFF                                                         \
     -DLLVM_ENABLE_WARNINGS=OFF                                                              \
     -DLLVM_ENABLE_LIBEDIT=OFF                                                               \
     -DLLVM_ENABLE_LIBXML2=OFF                                                               \
+    -DLLVM_ENABLE_OCAMLDOC=OFF                                                              \
+    -DLLVM_ENABLE_ZLIB=OFF                                                                  \
+    -DLLVM_ENABLE_Z3_SOLVER=OFF                                                             \
     -DLLVM_INCLUDE_BENCHMARKS=OFF                                                           \
     -DLLVM_INCLUDE_EXAMPLES=OFF                                                             \
     -DLLVM_INCLUDE_TESTS=OFF                                                                \
@@ -317,6 +321,14 @@ cmake -B build \
     -DLLVM_TARGET_ARCH="$L_TARGET"                                                          \
     -DLLVM_TARGETS_TO_BUILD="$L_TARGET"                                                     \
     -DLIBCXX_HAS_MUSL_LIBC=ON                                                               \
+    -DCOMPILER_RT_BUILD_LIBFUZZER=OFF                                                       \
+    -DCOMPILER_RT_BUILD_MEMPROF=OFF                                                         \
+    -DCOMPILER_RT_BUILD_PROFILE=OFF                                                         \
+    -DCOMPILER_RT_BUILD_SANITIZERS=OFF                                                      \
+    -DCOMPILER_RT_BUILD_XRAY=OFF                                                            \
+    -DCLANG_VENDOR="Heiwa/Linux (ft. GNU)"                                                  \
+    -DCLANG_ENABLE_ARCMT=OFF                                                                \
+    -DCLANG_ENABLE_STATIC_ANALYZER=OFF                                                      \
     -DCLANG_DEFAULT_CXX_STDLIB=libc++                                                       \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                                                       \
     -DCLANG_DEFAULT_LINKER=lld                                                              \
