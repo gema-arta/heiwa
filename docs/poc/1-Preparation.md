@@ -1,7 +1,7 @@
 ## `I` Preparation
 
 > #### Announcement
-> Currently only focus on **x86_64** architecture, build with native CPU optimization.  
+> * Currently only focus on **x86_64** architecture, build with native CPU optimization.  
 
 > #### * Beginning of as root!
 ### `1` - Prepare a volume/partition
