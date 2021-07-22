@@ -72,13 +72,13 @@ export HEIWA LC_ALL PATH LLVM_SRC
 EOF
 source ~/.bash_profile
 
-export C_TRIPLET="$(echo "$MACHTYPE" | \
+C_TRIPLET="$(echo "$MACHTYPE" | \
     sed "s|$(echo "$MACHTYPE" | cut -d- -f2)|cross|")"
-export C_ARCH="x86"
-export C_CPU="x86-64"
-export L_TARGET="X86"
-export T_TRIPLET="x86_64-pc-linux-musl"
-export H_TRIPLET="$(echo "$T_TRIPLET" | \
+C_ARCH="x86"
+C_CPU="x86-64"
+L_TARGET="X86"
+T_TRIPLET="x86_64-pc-linux-musl"
+H_TRIPLET="$(echo "$T_TRIPLET" | \
     sed "s|$(echo "$T_TRIPLET" | cut -d- -f2)|heiwa|")"
 
 cat >> ~/.bashrc << EOF
