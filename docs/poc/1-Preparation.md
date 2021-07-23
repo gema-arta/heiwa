@@ -57,7 +57,7 @@ su - heiwa
 
 cat > ~/.bash_profile << "EOF"
 exec env -i HOME="$HOME" TERM="$TERM" \
-COMMON_FLAGS="-flto=thin -march=native -Oz -pipe" /bin/bash
+COMMON_FLAGS="-march=native -Oz -pipe" /bin/bash
 EOF
 
 cat > ~/.bashrc << EOF
