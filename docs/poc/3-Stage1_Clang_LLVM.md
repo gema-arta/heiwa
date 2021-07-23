@@ -103,11 +103,11 @@ grep "ld.lld:.*crt[1in].o" dummy.log
 > **Required!** As mentioned in the description above.
 ```bash
 # Make sure there are no stale files embedded in the package.
-time { make LLVM=1 mrproper; }
+time { make LLVM=1 LLVM_IAS=1 mrproper; }
 
 # The recommended make target `headers_install` cannot be used, because it requires rsync, which may not be available.
 # The headers are first placed in "./usr/", then copied to the needed location.
-time { make ARCH=${C_ARCH} LLVM=1 HOSTCC=${CC} headers; }
+time { make ARCH=${C_ARCH} LLVM=1 LLVM_IAS=1 HOSTCC=${CC} headers; }
 
 # Remove unnecessary files.
 find usr/include -name '.*' -exec rm -rfv {} \;
