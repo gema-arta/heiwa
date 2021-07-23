@@ -282,6 +282,7 @@ cmake -B build \
     -DLLVM_ENABLE_LIBCXX=ON                   \
     -DLLVM_ENABLE_LLD=ON                      \
     -DLLVM_ENABLE_RTTI=ON                     \
+    -DLLVM_ENABLE_BACKTRACES=OFF              \
     -DLLVM_ENABLE_UNWIND_TABLES=OFF           \
     -DLLVM_ENABLE_WARNINGS=OFF                \
     -DLLVM_ENABLE_LIBEDIT=OFF                 \
