@@ -252,7 +252,6 @@ pushd ${LLVM_SRC}/projects/libcxx/ && \
         -DLIBCXX_CXX_ABI_LIBRARY_PATH="/clang1-tools/lib"                \
         -DLIBCXX_HAS_MUSL_LIBC=ON                                        \
         -DLIBCXX_USE_COMPILER_RT=ON                                      \
-        -DLIBCXX_HAS_GCC_S_LIB=OFF                                       \
         -DLIBCXX_HAS_ATOMIC_LIB=OFF
 
 # Build.
