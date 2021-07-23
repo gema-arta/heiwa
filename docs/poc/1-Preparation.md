@@ -74,10 +74,10 @@ source ~/.bash_profile
 
 C_TRIPLET="$(echo "$MACHTYPE" | \
     sed "s|$(echo "$MACHTYPE" | cut -d- -f2)|cross|")"
-C_ARCH="x86"
+C_ARCH="x86" C_ARCH64="x86_64"
 C_CPU="x86-64"
 L_TARGET="X86"
-T_TRIPLET="x86_64-pc-linux-musl"
+T_TRIPLET="${C_ARCH64}-pc-linux-musl"
 H_TRIPLET="$(echo "$T_TRIPLET" | \
     sed "s|$(echo "$T_TRIPLET" | cut -d- -f2)|heiwa|")"
 
