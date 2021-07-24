@@ -615,6 +615,8 @@ time { make install; }
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
 
 # Configure source using provided libraries (built-in).
+CFLAGS="-flto=thin $CFLAGS"                  \
+CXXFLAGS="-flto=thin $CXXFLAGS"              \
 ./bootstrap --prefix=/clang1-tools           \
             --mandir=/share/man              \
             --parallel=$(nproc)              \
