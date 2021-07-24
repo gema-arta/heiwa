@@ -28,6 +28,7 @@
 > |  ✓  | Most Userspace Utility Programs                    | Toybox                    | No circular dependencies.      |
 > |  ✓  | Init and Service Manager                           | OpenRC                    | Sophisticated version of SysV. |
 > |  ✓  | Default Text-editor                                | GNU Nano                  | I don't use *Vim. :stuck_out_tongue_winking_eye: |
+
 > Maybe init switches to [finit](https://github.com/troglobit/finit) if that fits.
 > 
 > [See references.](https://wiki.musl-libc.org/alternatives.html)
