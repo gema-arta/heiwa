@@ -463,10 +463,12 @@ time { make install; }
 > **Required!** For the current and next stage (chroot environment) that most build systems depends on GNU implementation style.
 ```bash
 # Configure source.
-CFLAGS="-flto=thin $CFLAGS"        \
-./configure --prefix=/clang1-tools \
-            --build=${T_TRIPLET}   \
-            --host=${T_TRIPLET}
+CFLAGS="-flto=thin $CFLAGS"               \
+./configure --prefix=/clang1-tools        \
+            --build=${T_TRIPLET}          \
+            --host=${T_TRIPLET}           \
+            --with-packager="Heiwa/Linux" \
+            --with-packager-bug-reports="https://github.com/heiwalinux/heiwa/issues"
 
 # Build.
 time { make; }
