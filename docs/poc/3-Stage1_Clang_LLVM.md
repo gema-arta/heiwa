@@ -620,8 +620,8 @@ CXXFLAGS="-flto=thin $CXXFLAGS"              \
             --mandir=/share/man              \
             --parallel=$(nproc)              \
             --docdir=/share/doc/cmake-3.20.5 \
-            -- -DCMAKE_USE_OPENSSL=OFF       \
-            -DBUILD_CursesDialog=ON
+            -- -DCMAKE_BUILD_TYPE=Release    \
+            -Wno-dev -DCMAKE_USE_OPENSSL=OFF
 
 # Build.
 time { make; }
