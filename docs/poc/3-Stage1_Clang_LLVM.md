@@ -415,7 +415,7 @@ for X in ${CFFGPT}; do
 done
 
 # Build with verbose. Toybox will use `cc` that breaking the builds, so need to specify the CC and HOSTCC variable.
-time { make CC=${CC} HOSTCC=${CC} V=1; }
+time { make CC=${CC} HOSTCC=${CC} CFLAGS="-flto=thin $CFLAGS" V=1; }
 
 # Checks compiled 87 commands.
 ./toybox | tr ' ' '\n'i \
