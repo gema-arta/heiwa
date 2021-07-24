@@ -447,7 +447,8 @@ sed -i 's|extras||' Makefile.in
 CFLAGS="-flto=thin $CFLAGS"        \
 ./configure --prefix=/clang1-tools \
             --build=${T_TRIPLET}   \
-            --host=${T_TRIPLET}
+            --host=${T_TRIPLET}    \
+            --with-packager="Heiwa/Linux"
 
 # Build.
 time { make; }
