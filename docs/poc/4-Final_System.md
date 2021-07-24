@@ -92,7 +92,6 @@ ln -sv /proc/self/mounts /etc/mtab
 cat > /etc/passwd << "EOF"
 root:x:0:0:root:/root:/bin/bash
 bin:x:1:1:bin:/dev/null:/bin/false
-uucp:x:10:17:uucp:/var/spool/uucp:/bin/false
 daemon:x:6:6:Daemon User:/dev/null:/bin/false
 messagebus:x:18:18:D-Bus Message Daemon User:/run/dbus:/bin/false
 nobody:x:99:99:Unprivileged User:/dev/null:/bin/false
@@ -118,7 +117,6 @@ utmp:x:13:
 usb:x:14:
 cdrom:x:15:
 adm:x:16:
-uucp:x:17:uucp
 messagebus:x:18:
 input:x:24:
 mail:x:34:
