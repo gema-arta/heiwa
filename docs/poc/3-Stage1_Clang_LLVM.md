@@ -444,6 +444,7 @@ time { make CC=${CC} HOSTCC=${CC} PREFIX=/clang1-tools install; unset X CFFGPT; 
 sed -i 's|extras||' Makefile.in
 
 # Configure source.
+CFLAGS="-flto=thin $CFLAGS"        \
 ./configure --prefix=/clang1-tools \
             --build=${T_TRIPLET}   \
             --host=${T_TRIPLET}
@@ -462,6 +463,7 @@ time { make install; }
 > **Required!** For the current and next stage (chroot environment) that most build systems depends on GNU implementation style.
 ```bash
 # Configure source.
+CFLAGS="-flto=thin $CFLAGS"        \
 ./configure --prefix=/clang1-tools \
             --build=${T_TRIPLET}   \
             --host=${T_TRIPLET}
@@ -499,6 +501,7 @@ time { make install; }
 > **Required!** For the current and next stage (chroot environment). The GNU implementation of `patch` is can handle offset lines, which is powerful feature.
 ```bash
 # Configure source.
+CFLAGS="-flto=thin $CFLAGS"        \
 ./configure --prefix=/clang1-tools \
             --build=${T_TRIPLET}   \
             --host=${T_TRIPLET}
@@ -517,6 +520,7 @@ time { make install; }
 > **Required!** For the most packages next stage (chroot environment). Nothing is GNU-free.
 ```bash
 # Configure source.
+CFLAGS="-flto=thin $CFLAGS"        \
 ./configure --prefix=/clang1-tools \
             --build=${T_TRIPLET}   \
             --host=${T_TRIPLET}
@@ -535,6 +539,7 @@ time { make install; }
 > **Required!** As default shell for the next stage (chroot environment).
 ```bash
 # Configure source.
+CFLAGS="-flto=thin $CFLAGS"        \
 ./configure --prefix=/clang1-tools \
             --build=${T_TRIPLET}   \
             --host=${T_TRIPLET}    \
