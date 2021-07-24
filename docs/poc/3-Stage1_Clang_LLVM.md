@@ -415,7 +415,8 @@ for X in ${CFFGPT}; do
 done
 
 # Build. Toybox will detect CC as cc that breaking the builds, so need to specify the CC and HOSTCC variable.
-time { make CC=${CC} HOSTCC=${CC}; }
+# Enable verbose mode in GNU Make.
+time { make CC=${CC} HOSTCC=${CC} V=1; }
 
 # Checks compiled 87 commands.
 ./toybox | tr ' ' '\n'i \
