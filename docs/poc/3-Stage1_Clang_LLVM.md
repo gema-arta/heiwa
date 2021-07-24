@@ -619,8 +619,10 @@ sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
             --mandir=/share/man              \
             --parallel=$(nproc)              \
             --docdir=/share/doc/cmake-3.20.5 \
-            -- -DCMAKE_USE_OPENSSL=OFF       \
+            -- -DCMAKE_BUILD_TYPE=Release    \
+            -DCMAKE_USE_OPENSSL=OFF          \
             -DBUILD_CursesDialog=ON
+            
 
 # Build.
 time { make; }
