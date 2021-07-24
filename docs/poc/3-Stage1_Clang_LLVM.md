@@ -595,8 +595,8 @@ ax_cv_c_float_words_bigendian=no   \
 ./configure --prefix=/clang1-tools \
             --build=${T_TRIPLET}   \
             --host=${T_TRIPLET}    \
-            --enable-shared        \
-            --without-ensurepip
+            --without-ensurepip    \
+            --enable-shared --with-lto
 
 # Build. -> Ignore all issues! <-
 time { make; }
@@ -619,7 +619,8 @@ sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
             --mandir=/share/man              \
             --parallel=$(nproc)              \
             --docdir=/share/doc/cmake-3.20.5 \
-            -- -DCMAKE_USE_OPENSSL=OFF -DBUILD_CursesDialog=ON
+            -- -DCMAKE_USE_OPENSSL=OFF       \
+            -DBUILD_CursesDialog=ON
 
 # Build.
 time { make; }
