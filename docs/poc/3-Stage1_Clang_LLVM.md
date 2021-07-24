@@ -431,7 +431,7 @@ time { make CC=${CC} HOSTCC=${CC} V=1; }
 ./toybox | wc -w
 
 # Install.
-time { make CC=${CC} HOSTCC=${CC} V=1 PREFIX=/clang1-tools install; unset X CFFGPT; }
+time { make CC=${CC} HOSTCC=${CC} PREFIX=/clang1-tools install; unset X CFFGPT; }
 ```
 
 ### `11` - GNU AWK
