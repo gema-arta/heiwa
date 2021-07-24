@@ -142,9 +142,10 @@ chmod -v 600  /var/log/btmp
 > Apply persistent toolchain environment variables, now set the compiler to Stage-1 Clang/LLVM default triplet (pc).
 ```bash
 cat > ~/.bash_profile << "EOF"
-# Clang/LLVM Environment.
 export LLVM_SRC="/sources/llvm"
+export COMMON_FLAGS="-march=native -Oz -pipe"
 
+# Clang/LLVM Environment.
 CC="x86_64-pc-linux-musl-clang"
 CXX="x86_64-pc-linux-musl-clang++"
 LD="ld.lld"
@@ -161,12 +162,11 @@ SIZE="llvm-size"
 STRIP="llvm-strip"
 export CC CXX LD CC_LD CXX_LD AR AS NM OBJCOPY OBJDUMP RANLIB READELF SIZE STRIP
 
-COMMON_FLAGS="-march=native -Oz -pipe"
 CFLAGS="${COMMON_FLAGS}"
 CXXFLAGS="${COMMON_FLAGS}"
-LDFLAGS="-Wl,-O2 -Wl,--as-needed"
-MAKEFLAGS="-j$(nproc) -l$(nproc)"
-export COMMON_FLAGS CFLAGS CXXFLAGS LDFLAGS MAKEFLAGS
+LDFLAGS="-Wl,-O3 -Wl,--as-needed"
+MAKEFLAGS="-j$(nproc) -l$(($(nproc)+1))"
+export CFLAGS CXXFLAGS LDFLAGS MAKEFLAGS
 EOF
 source ~/.bash_profile
 ```
