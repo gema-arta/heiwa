@@ -382,4 +382,4 @@ find /clang0-tools/{,${H_TRIPLET}/}bin/ -maxdepth 1 -type f -exec /usr/bin/strip
 
 <h2></h2>
 
-~Continue to [Stage-1 Clang/LLVM Toolchain](./3-Stage1_Clang_LLVM.md).~ (under developments)
+Continue to [Stage-1 Clang/LLVM Toolchain](./3-Stage1_Clang_LLVM.md).
