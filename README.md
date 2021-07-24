@@ -31,7 +31,7 @@
 
 > Maybe init switches to [finit](https://github.com/troglobit/finit) if that fits.
 > 
-> [See references.](https://wiki.musl-libc.org/alternatives.html)
+> [See the reference about alternate packages.](https://wiki.musl-libc.org/alternatives.html)
 
 </details>
 
