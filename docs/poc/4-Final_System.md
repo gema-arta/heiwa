@@ -164,9 +164,9 @@ STRIP="llvm-strip"
 export CC CXX LD CC_LD CXX_LD AR AS NM OBJCOPY OBJDUMP RANLIB READELF SIZE STRIP
 
 # Compiler flags. Enable hardened only for:
-# Buffer Overflow Detector and Strong Stack Protection.
-CFLAGS="${COMMON_FLAGS} -fstack-protector-strong"
-CXXFLAGS="${COMMON_FLAGS} -fstack-protector-strong"
+# Buffer Overflow Detector and Safe Stack.
+CFLAGS="${COMMON_FLAGS} -fsanitize=safe-stack"
+CXXFLAGS="${COMMON_FLAGS} -fsanitize=safe-stack"
 CPPFLAGS="-D_FORTIFY_SOURCE=2"
 LDFLAGS="-Wl,-O3 -Wl,--as-needed"
 MAKEFLAGS="-j$(nproc) -l$(($(nproc)+1))"
