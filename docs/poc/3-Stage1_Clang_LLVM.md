@@ -525,8 +525,7 @@ time { make install; }
 CFLAGS="-flto=thin $CFLAGS"        \
 ./configure --prefix=/clang1-tools \
             --build=${T_TRIPLET}   \
-            --host=${T_TRIPLET}    \
-            --with-packager="Heiwa/Linux"
+            --host=${T_TRIPLET}
 
 # Build.
 time { make; }
