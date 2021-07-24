@@ -414,7 +414,7 @@ for X in ${CFFGPT}; do
     || echo "* $X not CONFIGURED"
 done
 
-# Build.
+# Build. Toybox will detect CC as cc that breaking the builds, so need to specify the CC and HOSTCC variable.
 time { make CC=${CC} HOSTCC=${CC}; }
 
 # Checks compiled 87 commands.
