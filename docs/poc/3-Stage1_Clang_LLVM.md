@@ -567,6 +567,7 @@ cp -rf ../perl-cross-1.3.5/utils/* utils/            && \
 rm -rf ../perl-cross-1.3.5
 
 # Configure source.
+CFLAGS="-flto=thin $CFLAGS"        \
 ./configure --prefix=/clang1-tools \
             --build=${T_TRIPLET}   \
             --target=${T_TRIPLET}
