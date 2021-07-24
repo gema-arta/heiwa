@@ -163,7 +163,7 @@ SIZE="llvm-size"
 STRIP="llvm-strip"
 export CC CXX LD CC_LD CXX_LD AR AS NM OBJCOPY OBJDUMP RANLIB READELF SIZE STRIP
 
-# Hardened flags. [ Buffer Overflow Detector and Safe Stack. ]
+# Hardened flags. [ Only Safe Stack. ]
 CPPFLAGS="-D_FORTIFY_SOURCE=2"
 COMMON_FLAGS+=" -fsanitize=safe-stack"
 export CPPFLAGS COMMON_FLAGS
