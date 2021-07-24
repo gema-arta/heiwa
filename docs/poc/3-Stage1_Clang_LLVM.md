@@ -545,8 +545,7 @@ CFLAGS="-flto=thin $CFLAGS"        \
 ./configure --prefix=/clang1-tools \
             --build=${T_TRIPLET}   \
             --host=${T_TRIPLET}    \
-            --without-bash-malloc  \
-            --with-packager="Heiwa/Linux"
+            --without-bash-malloc
 
 # Build.
 time { make; }
