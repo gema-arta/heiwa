@@ -88,7 +88,6 @@ ln -sv /proc/self/mounts /etc/mtab
 
 # In order for user root to be able to login and for the name `root` to be recognized, there must be relevant entries in the "/etc/passwd" and "/etc/group" files.
 # Create the "/etc/passwd" file by running the following command.
-# User `uucp` is required by OpenRC for later installation.
 cat > /etc/passwd << "EOF"
 root:x:0:0:root:/root:/bin/bash
 bin:x:1:1:bin:/dev/null:/bin/false
