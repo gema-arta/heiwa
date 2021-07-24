@@ -446,7 +446,8 @@ sed -i 's|extras||' Makefile.in
 # Configure source.
 ./configure --prefix=/clang1-tools \
             --build=${T_TRIPLET}   \
-            --host=${T_TRIPLET}
+            --host=${T_TRIPLET}    \
+            --libexec=/lib/misc
 
 # Build.
 time { make; }
