@@ -288,6 +288,7 @@ cmake -B build \
     -DLLVM_ENABLE_LIBEDIT=OFF                 \
     -DLLVM_ENABLE_LIBXML2=OFF                 \
     -DLLVM_ENABLE_OCAMLDOC=OFF                \
+    -DLLVM_ENABLE_Z3_SOLVER=OFF               \
     -DLLVM_INCLUDE_BENCHMARKS=OFF             \
     -DLLVM_INCLUDE_EXAMPLES=OFF               \
     -DLLVM_INCLUDE_TESTS=OFF                  \
@@ -320,7 +321,6 @@ time {
 ```bash
 # Configure Stage-1 Clang/LLVM with default triplet (pc) to produce binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1".
 ln -sv clang              /clang1-tools/bin/${T_TRIPLET}-clang
-ln -sv ${T_TRIPLET}-clang /clang1-tools/bin/cc
 ln -sv clang++            /clang1-tools/bin/${T_TRIPLET}-clang++
 cat > /clang1-tools/bin/${T_TRIPLET}.cfg << "EOF"
 -Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1
@@ -344,6 +344,7 @@ popd
 > **Required!** As default ".xz" and ".lzma" files de/compressor for the current and next stage (chroot environment).
 ```bash
 # Configure source.
+CFLAGS="-flto=thin $CFLAGS"        \
 ./configure --prefix=/clang1-tools \
             --build=${T_TRIPLET}   \
             --host=${T_TRIPLET}    \
