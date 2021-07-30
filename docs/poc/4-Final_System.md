@@ -441,7 +441,6 @@ time { make CFLAGS="-fPIC $CFLAGS" all-dynamic; }
 # Install and create symlinks as `libtinfo` libraries (which actually replace GNU Ncurses).
 time {
     make PREFIX=/usr install-dynamic
-    ln -sv libterminfo.a  /usr/lib/libtinfo.a
     ln -sv libterminfo.so /usr/lib/libtinfo.so
 }
 
