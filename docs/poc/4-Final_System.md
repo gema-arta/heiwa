@@ -467,10 +467,10 @@ sed -i '/{OLDSUFF}/c:' support/shlib-install
             --docdir=/usr/share/doc/readline-8.1
 
 # Build. Force to link against with `libncursesw` library.
-time { make SHLIB_LIBS="-lncursesw"; }
+time { make SHLIB_LIBS="-lncurses -ltinfo"; }
 
 # Install.
-time { make SHLIB_LIBS="-lncursesw" install; }
+time { make SHLIB_LIBS="-lncurses -ltinfo" install; }
 ```
 ```bash
 # Optional, documentation.
