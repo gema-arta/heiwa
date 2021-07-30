@@ -462,7 +462,6 @@ sed -i '/{OLDSUFF}/c:' support/shlib-install
 
 # Configure source.
 ./configure --prefix=/usr    \
-            --with-curses    \
             --disable-static \
             --docdir=/usr/share/doc/readline-8.1
 
