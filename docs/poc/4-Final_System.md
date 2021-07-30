@@ -299,7 +299,7 @@ cmake -B build \
     -DCMAKE_BUILD_TYPE=Release    \
     -DCMAKE_INSTALL_PREFIX="/usr" \
     -DMI_BUILD_STATIC=OFF         \
-    -DMI_BUILD_TESTS=OFF
+    -DMI_BUILD_TESTS=OFF -Wno-dev
     
 # Build `mimalloc`.
 time { make -C build; }
