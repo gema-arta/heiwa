@@ -165,6 +165,7 @@ export CC CXX LD CC_LD CXX_LD AR AS NM OBJCOPY OBJDUMP RANLIB READELF SIZE STRIP
 
 # Hardened flags. [ Only Buffer Overflow Detector ]
 CPPFLAGS="-D_FORTIFY_SOURCE=2"
+export CPPFLAGS
 
 # Compiler flags.
 CFLAGS="${COMMON_FLAGS}"
