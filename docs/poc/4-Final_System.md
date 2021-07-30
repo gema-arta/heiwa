@@ -309,7 +309,7 @@ time { make -C build install; }
 ```
 ```bash
 # Set `mimalloc` as default C/C++ memory allocator.
-sed -i "s|${COMMON_FLAGS}|-lmimalloc ${COMMON_FLAGS}|" ~/.bash_profile
+sed -i "s|${COMMON_FLAGS}|-lmimalloc ${COMMON_FLAGS} -Wno-unused-command-line-argument|" ~/.bash_profile
 source ~/.bash_profile
 ```
 ```bash
