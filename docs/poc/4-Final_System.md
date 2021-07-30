@@ -308,6 +308,10 @@ time { make -C build; }
 time { make -C build install; }
 ```
 ```bash
+# Set mimalloc as default C/C++ memory allocator.
+sed -i "s|${COMMON_FLAGS}|-lmimalloc ${COMMON_FLAGS}|" ~/.bash_profile
+```
+```bash
 # Quick test for the new triplet of Stage-1 Clang/LLVM.
 echo "int main(){}" > dummy.c
 ${CC} dummy.c -v -Wl,--verbose &> dummy.log
