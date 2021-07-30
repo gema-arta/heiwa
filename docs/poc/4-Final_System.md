@@ -384,9 +384,6 @@ popd && rm -rf tzdata; unset timezones
 
 > **Required!** Before `Kmod`, `Perl`, and `Util-linux`.
 ```bash
-# Apply patch (from OpenMandriva) to fix `Z_SOLO` while building Perl.
-patch -Np1 -i ../../extra/zlib-ng/patches/0001-Fix-Z_SOLO-mode.patch
-
 # Configure source.
 cmake -B build \
     -DCMAKE_BUILD_TYPE=Release     \
