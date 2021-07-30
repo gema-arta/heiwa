@@ -230,6 +230,21 @@ install -vm644 -t /etc/ services protocols
 
 > **Required!** As mentioned in the description above.
 ```bash
+# Configure mimalloc.
+cmake -B build \
+    -DCMAKE_BUILD_TYPE=Release    \
+    -DCMAKE_INSTALL_PREFIX="/usr" \
+    -DMI_SECURE=ON                \
+    -DMI_BUILD_STATIC=OFF         \
+    -DMI_BUILD_TESTS=OFF
+
+# Build.
+time { make -C build; }
+
+# Install.
+time { make -C build install; }
+```
+```bash
 # Apply patches (from Void Linux and Alpine Linux).
 for P in {epoll_cp,isascii,mo_lookup,handle-aux-at_base}.patch; do
     patch -Np1 -i ../../extra/musl/patches/${P}
@@ -242,6 +257,7 @@ LDFLAGS="-Wl,-soname,libc.musl-x86_64.so.1" \
             --localstatedir=/var            \
             --disable-gcc-wrapper           \
             --disable-static                \
+            --with-malloc=mimalloc          \
             --enable-optimize=speed
 
 # Build.
