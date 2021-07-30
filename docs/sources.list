@@ -31,7 +31,6 @@ https://www.python.org/ftp/python/3.9.6/Python-3.9.6.tar.xz
 https://ftp.gnu.org/gnu/texinfo/texinfo-6.8.tar.xz
 https://github.com/Kitware/CMake/releases/download/v3.20.5/cmake-3.20.5.tar.gz
 https://github.com/Mic92/iana-etc/releases/download/20210611/iana-etc-20210611.tar.gz
-https://github.com/microsoft/mimalloc/archive/refs/tags/v2.0.2.tar.gz
 https://www.iana.org/time-zones/repository/releases/tzdata2021a.tar.gz
 https://www.iana.org/time-zones/repository/releases/tzcode2021a.tar.gz
 https://dev.alpinelinux.org/archive/posixtz/posixtz-0.5.tar.xz
