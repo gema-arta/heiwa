@@ -466,7 +466,7 @@ sed -i '/{OLDSUFF}/c:' support/shlib-install
             --disable-static \
             --docdir=/usr/share/doc/readline-8.1
 
-# Build. Force to link against with `libncursesw` library.
+# Build. Force to link against with curses library.
 time { make SHLIB_LIBS="-lncurses -ltinfo"; }
 
 # Install.
