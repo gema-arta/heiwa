@@ -442,6 +442,7 @@ time { make CFLAGS="-fPIC $CFLAGS" all-dynamic; }
 time {
     make PREFIX=/usr install-dynamic install-manpages
     ln -sv libterminfo.so /usr/lib/libtinfo.so
+    ln -sv libterminfo.so /usr/lib/libtinfow.so
 }
 
 # Remove the man pages that colission with `attr`.
