@@ -462,14 +462,15 @@ sed -i '/{OLDSUFF}/c:' support/shlib-install
 
 # Configure source.
 ./configure --prefix=/usr    \
+            --with-curses    \
             --disable-static \
             --docdir=/usr/share/doc/readline-8.1
 
-# Build.
-time { make; }
+# Build. Force to link against with `libncursesw` library.
+time { make SHLIB_LIBS="-lncursesw"; }
 
 # Install.
-time { make install; }
+time { make SHLIB_LIBS="-lncursesw" install; }
 ```
 ```bash
 # Optional, documentation.
