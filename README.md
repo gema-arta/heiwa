@@ -15,7 +15,7 @@
 > |:---:|----------------------------------------------------|:-------------------------:|--------------------------------|
 > |  ✓  | Low-level Standard Libraries and Toolchain         | Clang/LLVM                | Pure, Fast, and Modern.        |
 > |  ✓  | C dynamic memory allocator implementation          | Microsoft mimalloc        | Excellent performance.         |
-> |  ✓  | Linux Kernel Patchset                              | Xanmod                    | and .. CacULE CPU scheduler.   |
+> |  ✓  | Linux Kernel Patchset                              | Xanmod (with CacULE)      | Optimized performance.         |
 > |  ✓  | C Runtime Library                                  | musl                      | Clean, but not fast as Glibc.  |
 > |  ✓  | Build System Tools                                 | GNU                       | Most packages depend.          |
 > |  ✓  | Native Language Support                            | Gettext-tiny              | Stub of bloated GNU Gettext.   |
