@@ -442,6 +442,10 @@ time { make SHLIB_LIBS="-lncursesw"; }
 # Install.
 time { make SHLIB_LIBS="-lncursesw" install; }
 ```
+```bash
+# Optional, documentation.
+install -vm644 doc/*.{ps,pdf,html,dvi} /usr/share/doc/readline-8.1
+```
 
 ### `13` - GNU M4
 > #### `1.4.19` or newer
