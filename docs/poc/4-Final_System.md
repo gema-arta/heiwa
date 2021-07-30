@@ -241,6 +241,7 @@ LDFLAGS="-Wl,-soname,libc.musl-x86_64.so.1" \
             --sysconfdir=/etc               \
             --localstatedir=/var            \
             --disable-gcc-wrapper           \
+            --disable-static                \
             --enable-optimize=speed
 
 # Build.
