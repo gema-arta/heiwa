@@ -224,26 +224,11 @@ cp -rfv usr/include /usr/.
 install -vm644 -t /etc/ services protocols
 ```
 
-### `7` - musl (with mimalloc)
-> #### `1.2.2` or newer (and `2.0.2` or newer for mimalloc)
+### `7` - musl
+> #### `1.2.2`
 > The musl package contains the main C library. This library provides the basic routines for allocating memory, searching directories, opening and closing files, reading and writing files, string handling, pattern matching, arithmetic, and so on.
 
 > **Required!** As mentioned in the description above.
-```bash
-# Configure `mimalloc`.
-cmake -B build \
-    -DCMAKE_BUILD_TYPE=Release    \
-    -DCMAKE_INSTALL_PREFIX="/usr" \
-    -DMI_SECURE=ON                \
-    -DMI_BUILD_STATIC=OFF         \
-    -DMI_BUILD_TESTS=OFF
-
-# Build `mimalloc`.
-time { make -C build; }
-
-# Install `mimalloc`.
-time { make -C build install; }
-```
 ```bash
 # Apply patches (from Void Linux and Alpine Linux).
 for P in {epoll_cp,isascii,mo_lookup,handle-aux-at_base}.patch; do
