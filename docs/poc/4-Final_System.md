@@ -230,7 +230,7 @@ install -vm644 -t /etc/ services protocols
 
 > **Required!** As mentioned in the description above.
 ```bash
-# Configure mimalloc.
+# Configure `mimalloc`.
 cmake -B build \
     -DCMAKE_BUILD_TYPE=Release    \
     -DCMAKE_INSTALL_PREFIX="/usr" \
@@ -238,10 +238,10 @@ cmake -B build \
     -DMI_BUILD_STATIC=OFF         \
     -DMI_BUILD_TESTS=OFF
 
-# Build.
+# Build `mimalloc`.
 time { make -C build; }
 
-# Install.
+# Install `mimalloc`.
 time { make -C build install; }
 ```
 ```bash
