@@ -275,8 +275,11 @@ done; unset B; install -vm644 -t /usr/include/ \
 ../../extra/musl/files/musl-legacy-compat/error.h
 ```
 
-### `8` - Adjusting Toolchain
-> **Required!**
+### `8` - Microsoft mimalloc and Adjusting Toolchain
+> #### `2.0.2` or newer
+> The Microsoft mimalloc package contains a compact general purpose allocator with excellent performance.
+
+> **Required!** Microsoft mimalloc is for high perfomance purpose.
 ```bash
 # Configure Stage-1 Clang/LLVM with new triplet to produce binaries with "/lib/ld-musl-x86_64.so.1" and libraries from "/usr/*".
 ln -sv clang   /clang1-tools/bin/x86_64-heiwa-linux-musl-clang
@@ -289,6 +292,20 @@ EOF
 sed -i 's|CC=.*|CC="x86_64-heiwa-linux-musl-clang"|'     ~/.bash_profile
 sed -i 's|CXX=.*|CXX="x86_64-heiwa-linux-musl-clang++"|' ~/.bash_profile
 source ~/.bash_profile
+```
+```bash
+# Configure `mimalloc`.
+cmake -B build \
+    -DCMAKE_BUILD_TYPE=Release    \
+    -DCMAKE_INSTALL_PREFIX="/usr" \
+    -DMI_BUILD_STATIC=OFF         \
+    -DMI_BUILD_TESTS=OFF
+    
+# Build `mimalloc`.
+time { make -C build; }
+
+# Install `mimalloc`.
+time { make -C build install; }
 ```
 ```bash
 # Quick test for the new triplet of Stage-1 Clang/LLVM.
