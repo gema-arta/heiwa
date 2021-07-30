@@ -502,8 +502,8 @@ time { make install; }
 > **Required!** Before `IPRoute2`, `Kbd`, and `Kmod`.
 ```bash
 # Configure source. Flex still expect `cc` or `gcc` to configure.
-./configure --prefix=/usr        \
-            --disable-static     \
+./configure --prefix=/usr    \
+            --disable-static \
             --docdir=/usr/share/doc/flex-2.6.4
 
 # Build.
