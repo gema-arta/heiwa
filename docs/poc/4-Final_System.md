@@ -401,7 +401,7 @@ zic -y ./yearistype -d /usr/share/zoneinfo -p America/New_York
 # Use `tzselect` to determine <xxx>.
 tzselect
 
-cp -v /usr/share/zoneinfo/<xxx> /etc/localtime
+cp -fv /usr/share/zoneinfo/<xxx> /etc/localtime
 ```
 ```bash
 # Back to "/sources/pkgs" directory.
