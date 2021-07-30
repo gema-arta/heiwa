@@ -257,7 +257,6 @@ LDFLAGS="-Wl,-soname,libc.musl-x86_64.so.1" \
             --localstatedir=/var            \
             --disable-gcc-wrapper           \
             --disable-static                \
-            --with-malloc=mimalloc          \
             --enable-optimize=speed
 
 # Build.
