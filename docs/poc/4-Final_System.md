@@ -224,8 +224,8 @@ cp -rfv usr/include /usr/.
 install -vm644 -t /etc/ services protocols
 ```
 
-### `7` - musl
-> #### `1.2.2` or newer
+### `7` - musl (with mimalloc)
+> #### `1.2.2` or newer (and `2.0.2` for mimalloc)
 > The musl package contains the main C library. This library provides the basic routines for allocating memory, searching directories, opening and closing files, reading and writing files, string handling, pattern matching, arithmetic, and so on.
 
 > **Required!** As mentioned in the description above.
