@@ -757,10 +757,13 @@ cmake -B build \
     -DLLVM_ENABLE_LIBCXX=ON                             \
     -DLLVM_ENABLE_LLD=ON                                \
     -DLLVM_ENABLE_RTTI=ON                               \
+    -DLLVM_ENABLE_BACKTRACES=OFF                        \
     -DLLVM_ENABLE_UNWIND_TABLES=OFF                     \
     -DLLVM_ENABLE_WARNINGS=OFF                          \
     -DLLVM_ENABLE_LIBEDIT=OFF                           \
     -DLLVM_ENABLE_LIBXML2=OFF                           \
+    -DLLVM_ENABLE_OCAMLDOC=OFF                          \
+    -DLLVM_ENABLE_Z3_SOLVER=OFF                         \
     -DLLVM_INCLUDE_BENCHMARKS=OFF                       \
     -DLLVM_INCLUDE_EXAMPLES=OFF                         \
     -DLLVM_INCLUDE_TESTS=OFF                            \
@@ -773,13 +776,6 @@ cmake -B build \
     -DLLVM_OPTIMIZED_TABLEGEN=ON                        \
     -DLLVM_TARGET_ARCH="X86"                            \
     -DLLVM_TARGETS_TO_BUILD="host;BPF;AMDGPU;X86"       \
-    -DCOMPILER_RT_BUILD_BUILTINS=ON                     \
-    -DCOMPILER_RT_BUILD_CRT=ON                          \
-    -DCOMPILER_RT_BUILD_LIBFUZZER=ON                    \
-    -DCOMPILER_RT_BUILD_MEMPROF=ON                      \
-    -DCOMPILER_RT_BUILD_PROFILE=ON                      \
-    -DCOMPILER_RT_BUILD_SANITIZERS=ON                   \
-    -DCOMPILER_RT_BUILD_XRAY=ON                         \
     -DCLANG_VENDOR="Heiwa/Linux"                        \
     -DCLANG_DEFAULT_CXX_STDLIB=libc++                   \
     -DCLANG_DEFAULT_RTLIB=compiler-rt                   \
