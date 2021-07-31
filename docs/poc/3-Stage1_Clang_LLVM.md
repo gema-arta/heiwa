@@ -82,7 +82,7 @@ EOF
 ```bash
 # Quick test for the new triplet of Stage-0 Clang/LLVM.
 echo "int main(){}" > dummy.c
-${CC} dummy.c -v -Wl,--verbose &> dummy.log
+${CC} ${CFLAGS} dummy.c -v -Wl,--verbose &> dummy.log
 ${READELF} -l a.out | grep ": /clang1-tools"
 
 # | The output should be:
