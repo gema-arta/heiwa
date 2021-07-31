@@ -13,7 +13,7 @@
 
 > |  ?  | Kernel and Userspace                               | Packages                  | Extended Description           |
 > |:---:|----------------------------------------------------|:-------------------------:|--------------------------------|
-> |  ✓  | Low-level Standard Libraries and Toolchain         | Clang/LLVM                | Pure, Fast, and Modern.        |
+> |  ✓  | Low-level Standard Libraries and Toolchain         | Clang/LLVM                | Clean, Fast, and Modern.       |
 > |  ✓  | C Dynamic Memory Allocator                         | Microsoft mimalloc        | Excellent performance.         |
 > |  ✓  | Linux Kernel Patchset                              | Xanmod-CacULE             | Optimized performance.         |
 > |  ✓  | C Runtime Library                                  | musl                      | Clean, but not fast as Glibc.  |
