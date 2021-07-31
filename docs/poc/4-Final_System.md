@@ -655,7 +655,7 @@ popd
 ```
 ```bash
 # Rename the LLVM source directory to "$LLVM_SRC", then enter.
-mv -fv llvm-12.0.1.src "$LLVM_SRC" && cd "$LLVM_SRC"
+mv -fv llvm-12.0.1.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 
 # Decompress `clang`, `lld`, `compiler-rt`, `libunwind`, `libcxxabi`, and `libcxx` to the correct directories.
 pushd ${LLVM_SRC}/projects/ && \
@@ -855,7 +855,7 @@ rm -fv dummy.{c,log} a.out
 ```
 ```bash
 # Back to "/sources/pkgs" directory.
-cd /sources/pkgs/
+popd
 ```
 
 ### `21` - Bzip2
