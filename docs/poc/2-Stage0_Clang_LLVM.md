@@ -128,6 +128,8 @@ CFLAGS="-Os -pipe" CXXFLAGS="-Os -pipe" ./configure \
     CROSS_COMPILE=${H_TRIPLET}-                     \
     --prefix=/                                      \
     --target=${H_TRIPLET}                           \
+    --disable-static                                \
+    --with-malloc=mallocng                          \
     --enable-optimize=speed
 
 # Build.
@@ -248,10 +250,10 @@ time { make PREFIX=/clang0-tools install-dynamic; }
 > **Required!** To build Stage-0 Clang/LLVM, since using musl libc.
 ```bash
 # Build.
-time { make CC=${H_TRIPLET}-gcc AR=${H_TRIPLET}-ar CFLAGS="-Os -pipe"; }
+time { make CC=${H_TRIPLET}-gcc CFLAGS="-Os -pipe" dynamic; }
 
 # Install.
-time { make PREFIX=/clang0-tools install; }
+time { make PREFIX=/clang0-tools install-{header,dynamic}; }
 ```
 
 ### `8` - Clang/LLVM
@@ -302,6 +304,7 @@ cmake -B build \
     -DCMAKE_SHARED_LINKER_FLAGS="-Wl,-dynamic-linker /clang0-tools/lib/ld-musl-x86_64.so.1" \
     -DLLVM_HOST_TRIPLE="$T_TRIPLET"                                                         \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$T_TRIPLET"                                               \
+    -DBUILD_SHARED_LIBS=ON                                                                  \
     -DLLVM_ENABLE_BINDINGS=OFF                                                              \
     -DLLVM_ENABLE_IDE=OFF                                                                   \
     -DLLVM_ENABLE_LIBCXX=ON                                                                 \
@@ -321,6 +324,10 @@ cmake -B build \
     -DLLVM_OPTIMIZED_TABLEGEN=ON                                                            \
     -DLLVM_TARGET_ARCH="$L_TARGET"                                                          \
     -DLLVM_TARGETS_TO_BUILD="$L_TARGET"                                                     \
+    -DLIBUNWIND_ENABLE_STATIC=OFF                                                           \
+    -DLIBCXXABI_ENABLE_STATIC=OFF                                                           \
+    -DLIBCXX_ENABLE_STATIC=OFF                                                              \
+    -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=OFF                                                \
     -DLIBCXX_HAS_MUSL_LIBC=ON                                                               \
     -DCOMPILER_RT_BUILD_LIBFUZZER=OFF                                                       \
     -DCOMPILER_RT_BUILD_MEMPROF=OFF                                                         \
