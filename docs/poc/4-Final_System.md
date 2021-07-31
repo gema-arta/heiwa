@@ -764,6 +764,7 @@ cmake -B build \
     -DLLVM_ENABLE_LIBXML2=OFF                           \
     -DLLVM_ENABLE_OCAMLDOC=OFF                          \
     -DLLVM_ENABLE_Z3_SOLVER=OFF                         \
+    -DLLVM_ENABLE_LTO=Thin                              \
     -DLLVM_INCLUDE_BENCHMARKS=OFF                       \
     -DLLVM_INCLUDE_EXAMPLES=OFF                         \
     -DLLVM_INCLUDE_TESTS=OFF                            \
