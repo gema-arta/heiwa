@@ -282,6 +282,7 @@ cmake -B build \
     -DCMAKE_CXX_FLAGS="-g0 $CXXFLAGS"         \
     -DLLVM_HOST_TRIPLE="$T_TRIPLET"           \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$T_TRIPLET" \
+    -DBUILD_SHARED_LIBS=ON                    \
     -DLLVM_ENABLE_BINDINGS=OFF                \
     -DLLVM_ENABLE_EH=ON                       \
     -DLLVM_ENABLE_IDE=OFF                     \
