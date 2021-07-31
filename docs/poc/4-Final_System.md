@@ -420,7 +420,8 @@ cmake -B build \
     -DCMAKE_INSTALL_PREFIX="/usr"  \
     -DWITH_NATIVE_INSTRUCTIONS=YES \
     -DWITH_SANITIZER=ON            \
-    -DZLIB_COMPAT=ON -Wno-dev
+    -DZLIB_COMPAT=ON               \
+    -DBUILD_SHARED_LIBS=ON -Wno-dev
 
 # Build.
 time { make -C build; }
