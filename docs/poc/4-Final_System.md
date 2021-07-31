@@ -687,6 +687,7 @@ pushd ${LLVM_SRC}/projects/libunwind/ && \
         -DCMAKE_C_FLAGS="-fPIC -g0 $CFLAGS"     \
         -DCMAKE_CXX_FLAGS="-fPIC -g0 $CXXFLAGS" \
         -DLLVM_PATH="$LLVM_SRC"                 \
+        -DLIBUNWIND_ENABLE_STATIC=OFF           \
         -DLIBUNWIND_USE_COMPILER_RT=ON
 
 # Build.
