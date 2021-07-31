@@ -50,7 +50,9 @@ source ~/.bashrc
 > **Required!** As mentioned in the description above.
 ```bash
 # Configure source.
-./configure --prefix=/ \
+./configure --prefix=/             \
+            --disable-static       \
+            --with-malloc=mallocng \
             --enable-optimize=speed
 
 # Build.
@@ -128,14 +130,19 @@ cp -rfv usr/include /clang1-tools/.
 > **Required!** By Pigz in the current stage and optionally enabled to build Stage-1 Clang/LLVM.
 ```bash
 # Configure source.
-./configure --prefix=/clang1-tools \
-            --zlib-compat --native
+cmake -B build \
+    -DCMAKE_BUILD_TYPE=Release             \
+    -DCMAKE_INSTALL_PREFIX="/clang1-tools" \
+    -DWITH_NATIVE_INSTRUCTIONS=YES         \
+    -DWITH_SANITIZER=ON                    \
+    -DZLIB_COMPAT=ON                       \
+    -DBUILD_SHARED_LIBS=ON -Wno-dev
 
 # Build.
-time { make; }
+time { make -C build; }
 
 # Install.
-time { make install; }
+time { make -C build install; }
 ```
 
 ### `4` - NetBSD Curses
@@ -158,10 +165,10 @@ time { make PREFIX=/clang1-tools install-dynamic; }
 > **Required!** To build Stage-1 Clang/LLVM, since using musl libc.
 ```bash
 # Build.
-time { make; }
+time { make dynamic; }
 
 # Install.
-time { make PREFIX=/clang1-tools install; }
+time { make PREFIX=/clang1-tools install-{header,dynamic}; }
 ```
 
 ### `6` - Clang/LLVM + libunwind, libcxxabi, and libcxx
@@ -210,6 +217,7 @@ pushd ${LLVM_SRC}/projects/libunwind/ && \
         -DCMAKE_C_FLAGS="-fPIC -g0 $CFLAGS"     \
         -DCMAKE_CXX_FLAGS="-fPIC -g0 $CXXFLAGS" \
         -DLLVM_PATH="$LLVM_SRC"                 \
+        -DLIBUNWIND_ENABLE_STATIC=OFF           \
         -DLIBUNWIND_USE_COMPILER_RT=ON
 
 # Build.
@@ -228,7 +236,7 @@ pushd ${LLVM_SRC}/projects/libcxxabi/ && \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools" \
         -DCMAKE_CXX_FLAGS="-g0 $CXXFLAGS"      \
         -DLLVM_PATH="$LLVM_SRC"                \
-        -DLIBCXXABI_ENABLE_STATIC=ON           \
+        -DLIBCXXABI_ENABLE_STATIC=OFF          \
         -DLIBCXXABI_USE_LLVM_UNWINDER=ON       \
         -DLIBCXXABI_USE_COMPILER_RT=ON         \
         -DLIBCXXABI_LIBCXX_INCLUDES="${LLVM_SRC}/projects/libcxx/include"
@@ -236,11 +244,8 @@ pushd ${LLVM_SRC}/projects/libcxxabi/ && \
 # Build.
 time { make -C build; }
 
-# Install, also the headers.
-time {
-    make -C build install                      && \
-    cp -fv include/*.h /clang1-tools/include/. && popd
-}
+# Install.
+time { make -C build install; }
 ```
 ```bash
 # Configure `libcxx` source.
@@ -249,7 +254,8 @@ pushd ${LLVM_SRC}/projects/libcxx/ && \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools"                           \
         -DCMAKE_CXX_FLAGS="-isystem /clang1-tools/include -g0 $CXXFLAGS" \
         -DLLVM_PATH="$LLVM_SRC"                                          \
-        -DLIBCXX_ENABLE_STATIC=ON                                        \
+        -DLIBCXX_ENABLE_STATIC=OFF                                       \
+        -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=OFF                         \
         -DLIBCXX_CXX_ABI=libcxxabi                                       \
         -DLIBCXX_CXX_ABI_INCLUDE_PATHS="/clang1-tools/include"           \
         -DLIBCXX_CXX_ABI_LIBRARY_PATH="/clang1-tools/lib"                \
