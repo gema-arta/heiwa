@@ -728,6 +728,7 @@ pushd ${LLVM_SRC}/projects/libcxx/ && \
         -DCMAKE_CXX_FLAGS="-g0 $CXXFLAGS"             \
         -DLLVM_PATH="$LLVM_SRC"                       \
         -DLIBCXX_ENABLE_STATIC=OFF                    \
+        -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=OFF      \
         -DLIBCXX_CXX_ABI=libcxxabi                    \
         -DLIBCXX_CXX_ABI_INCLUDE_PATHS="/usr/include" \
         -DLIBCXX_CXX_ABI_LIBRARY_PATH="/usr/lib"      \
