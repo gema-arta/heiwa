@@ -458,7 +458,7 @@ rm -fv /usr/share/man/man3/attr_{g,s}et.3
 ```bash
 # Reinstalling Readline will cause the old libraries to be moved to <libraryname>.old. While this is normally not a problem, in some cases it can trigger a linking bug in ldconfig.
 # This can be avoided by issuing the following two seds.
-sed -i '/MV.*old/d' Makefile.in
+sed -i '/MV.*old/d'    Makefile.in
 sed -i '/{OLDSUFF}/c:' support/shlib-install
 
 # Configure source.
