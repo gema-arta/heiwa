@@ -603,7 +603,7 @@ sed -i 's|1000|999|' etc/useradd
 # This parameter causes useradd to create a mailbox file for the newly created user.
 # `useradd` will make the group ownership of this file to the mail group with 0660 permissions.
 # If you would prefer that these mailbox files are not created by useradd, issue the following command.
-sed -i 's|yes|no|' /etc/default/useradd
+sed -i 's|yes|no|' etc/useradd
 
 # Configure source.
 touch /usr/bin/passwd      && \
