@@ -635,10 +635,10 @@ passwd root
 > **Required!** Before `Clang/LLVM`.
 ```bash
 # Build.
-time { make; }
+time { make dynamic; }
 
 # Install.
-time { make PREFIX=/usr install; }
+time { make PREFIX=/usr install-{header,dynamic}; }
 ```
 
 ### `20` - Clang/LLVM + libunwind, libcxxabi, and libcxx
