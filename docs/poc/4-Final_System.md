@@ -706,7 +706,7 @@ pushd ${LLVM_SRC}/projects/libcxxabi/ && \
         -DCMAKE_INSTALL_PREFIX="/usr"     \
         -DCMAKE_CXX_FLAGS="-g0 $CXXFLAGS" \
         -DLLVM_PATH="$LLVM_SRC"           \
-        -DLIBCXXABI_ENABLE_STATIC=ON      \
+        -DLIBCXXABI_ENABLE_STATIC=OFF     \
         -DLIBCXXABI_USE_LLVM_UNWINDER=ON  \
         -DLIBCXXABI_USE_COMPILER_RT=ON    \
         -DLIBCXXABI_LIBCXX_INCLUDES="${LLVM_SRC}/projects/libcxx/include"
