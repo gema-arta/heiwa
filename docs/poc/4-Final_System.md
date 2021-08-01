@@ -1037,6 +1037,10 @@ time { make CFLAGS="-flto=thin $CFLAGS"; }
 # Install.
 time { make install; }
 ```
+```bash
+# Delete useless static library.
+rm -fv liby.a
+```
 
 ### `29`- GDBM
 > #### `1.20` or newer
