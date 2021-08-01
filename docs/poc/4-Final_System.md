@@ -819,7 +819,7 @@ install -vm644 -t /usr/share/man/man1/ ../extra/musl/files/musl-utils/get{conf,e
 ```bash
 # Quick test.
 echo "int main(){}" > dummy.c
-cc dummy.c -v -Wl,--verbose &> dummy.log
+cc ${CFLAGS} dummy.c -v -Wl,--verbose &> dummy.log
 readelf -l a.out | grep ": /lib"
 
 # | The output should be:
