@@ -915,7 +915,20 @@ time { make; }
 time { make install; }
 ```
 
-### `23` - Zstd
+### `23` - LZ4
+> #### `1.9.3` or newer
+> The LZ4 package contains library for lossless compression algorithm, providing compression speed > 500 MB/s per core, scalable with multi-cores CPU. It features an extremely fast decoder, with speed in multiple GB/s per core, typically reaching RAM speed limits on multi-core systems.
+
+> **Required!** Before `Linux`.
+```bash
+# Build.
+time { make PREFIX=/usr; }
+
+# Install.
+time { make PREFIX=/usr install; }
+```
+
+### `24` - Zstd
 > #### `1.5.0` or newer
 > The Zstd (Zstandard) package contains real-time compression algorithm, providing high compression ratios. It offers a very wide range of compression / speed trade-offs, while being backed by a very fast decoder.
 
@@ -934,7 +947,7 @@ time {
 }
 ```
 
-### `24` - Pigz
+### `25` - Pigz
 > #### `2.6` or newer
 > The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
 
@@ -951,7 +964,7 @@ ln -sv pigz gzip; ln -sv unpigz gunzip
 install -vm755 -t /usr/bin/ pigz unpigz gzip gunzip
 ```
 
-### `25` - Pkgconf
+### `26` - Pkgconf
 > #### `1.7.4` or newer
 > The Pkgconf package contains a tool for passing the include path and/or library paths to build tools during the configure and make phases of package installations.
 
@@ -974,7 +987,7 @@ time {
 }
 ```
 
-### `26` - Gettext-tiny
+### `27` - Gettext-tiny
 > #### `0.3.2` or newer
 > The Gettext-tiny package contains utilities for internationalization and localization. These allow programs to be compiled with NLS (Native Language Support), enabling them to output messages in the user's native language. A lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
 
@@ -992,7 +1005,7 @@ time { make LIBINTL=MUSL prefix=/usr; }
 time { make LIBINTL=MUSL prefix=/usr install; }
 ```
 
-### `27` - GNU Bison
+### `28` - GNU Bison
 > #### `3.7.6` or newer
 > The GNU Bison package contains a parser generator.
 
@@ -1011,7 +1024,7 @@ time { make; }
 time { make install; }
 ```
 
-### `28`- GDBM
+### `29`- GDBM
 > #### `1.20` or newer
 > The GDBM package contains the GNU Database Manager. It is a library of database functions that use extensible hashing and works similar to the standard UNIX dbm. The library provides primitives for storing key/data pairs, searching and retrieving the data by its key and deleting a key along with its data.
 
@@ -1029,7 +1042,7 @@ time { make; }
 time { make install; }
 ```
 
-### `29` - Perl
+### `30` - Perl
 > #### `5.32.1`
 > The Perl package contains the Practical Extraction and Report Language.
 
@@ -1065,7 +1078,7 @@ time { make; }
 time { make install; unset BUILD_ZLIB BUILD_BZIP2; }
 ```
 
-### `30` - OpenSSL
+### `31` - OpenSSL
 > #### `1.1.1k` or newer
 > The OpenSSL package contains management tools and libraries relating to cryptography. These are useful for providing cryptographic functions to other packages, such as OpenSSH, email applications, and web browsers (for accessing HTTPS sites).
 
@@ -1089,7 +1102,7 @@ time { make MANSUFFIX=ssl install; }
 mv -fv /usr/share/doc/openssl /usr/share/doc/openssl-1.1.1k
 ```
 
-### `31` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man, Procps, Psmisc, Sed, Sysklogd, Tar)
+### `32` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man, Procps, Psmisc, Sed, Sysklogd, Tar)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
@@ -1137,7 +1150,7 @@ time { make; }
 time { make PREFIX=/ install; unset CFFGPT; }
 ```
 
-### `32` - GNU AWK
+### `33` - GNU AWK
 > #### `5.1.0` or newer
 > The GNU AWK (gawk) package contains programs for manipulating text files.
 
@@ -1156,7 +1169,7 @@ time { make; }
 time { make install; }
 ```
 
-### `33` - GNU Diffutils
+### `34` - GNU Diffutils
 > #### `3.7` or newer
 > The GNU Diffutils package contains programs that show the differences between files or directories.
 
@@ -1174,7 +1187,7 @@ time { make; }
 time { make install; }
 ```
 
-### `34` - GNU Make
+### `35` - GNU Make
 > #### `4.3` or newer
 > The GNU Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
  
@@ -1190,7 +1203,7 @@ time { make; }
 time { make install; }
 ```
 
-### `35` - GNU Patch
+### `36` - GNU Patch
 > #### `2.7.6` or newer
 > The GNU Patch package contains a program for modifying or creating files by applying a patch file typically created by the diff program.
 
@@ -1208,7 +1221,7 @@ time { make; }
 time { make install; }
 ```
 
-### `36` - GNU Texinfo
+### `37` - GNU Texinfo
 > #### `6.8` or newer
 > The Texinfo package contains programs for reading, writing, and converting info pages.
 
@@ -1226,7 +1239,7 @@ time { make; }
 time { make install; }
 ```
 
-### `37` - GNU Bash
+### `38` - GNU Bash
 > #### `5.1` (with patch level 8) or newer
 > The GNU Bash package contains the Bourne-Again SHell.
 
@@ -1246,7 +1259,7 @@ time { make install && mv -fv /usr/bin/bash /bin/.; }
 ```
 
 
-### `38` - Kmod
+### `39` - Kmod
 > #### `29` or newer
 > The Kmod package contains libraries and utilities for loading kernel modules
 
@@ -1276,7 +1289,7 @@ time {
 }
 ```
 
-### `39` - GNU libtool
+### `40` - GNU libtool
 > #### `2.4.6` or newer
 > The GNU libtool package contains the GNU generic library support script. It wraps the complexity of using shared libraries in a consistent, portable interface.
 
@@ -1292,7 +1305,7 @@ time { make; }
 time { make install; }
 ```
 
-### `40` - GNU Autoconf
+### `41` - GNU Autoconf
 > #### `2.71` or newer
 > The GNU Autoconf package contains programs for producing shell scripts that can automatically configure source code.
 
@@ -1308,7 +1321,7 @@ time { make; }
 time { make install; }
 ```
 
-### `41` - GNU Automake
+### `42` - GNU Automake
 > #### `1.16.3` or newer
 > The GNU Automake package contains programs for generating Makefiles for use with Autoconf.
 
@@ -1325,7 +1338,7 @@ time { make; }
 time { make install; }
 ```
 
-### `42` - argp-standalone
+### `43` - argp-standalone
 > #### `1.4.1` or newer (from Void Linux)
 > The argp-standalone package contains hierarchial argument parsing library broken out from GNU libc (glibc).
 
@@ -1348,7 +1361,7 @@ install -vm644 -t /usr/lib/  libargp.a
 install -vm644 -t /usr/include/ argp.h 
 ```
 
-### `43` - musl-fts
+### `44` - musl-fts
 > #### `1.2.7` or newer
 > The musl-fts package contains implementation of fts(3) for musl libc.
 
@@ -1371,7 +1384,7 @@ time { make; }
 time { make install; }
 ```
 
-### `44` - musl-obstack
+### `45` - musl-obstack
 > #### `1.2.2` or newer
 > The musl-obstack package contains a standalone library to implement GNU libc obstack.
 
@@ -1394,7 +1407,7 @@ time { make; }
 time { make install; }
 ```
 
-### `45` - Elfutils - libelf
+### `46` - Elfutils - libelf
 > #### `0.185` or newer
 > The Elfutils package contains library for handling ELF (Executable and Linkable Format) files.
 
@@ -1424,7 +1437,7 @@ time {
 }
 ```
 
-### `46` - IPRoute2
+### `47` - IPRoute2
 > #### `5.13.0` or newer
 > The IPRoute2 package contains programs for basic and advanced IPV4-based networking.
 
@@ -1446,7 +1459,7 @@ time { make CC=${CC} CCOPTS="-D_GNU_SOURCE $CFLAGS"; }
 time { make install; }
 ```
 
-### `47` - KBD
+### `48` - KBD
 > #### `2.4.0` or newer
 > The Kbd package contains key-table files, console fonts, and keyboard utilities.
 
@@ -1496,7 +1509,7 @@ for K in sun amiga atari; do
 done; unset K
 ```
 
-### `48` - Util-linux
+### `49` - Util-linux
 > #### `2.37` or newer
 > The Util-linux package contains miscellaneous utility programs.
 
@@ -1542,7 +1555,7 @@ time {
 }
 ```
 
-### `49` - E2fsprogs
+### `50` - E2fsprogs
 > #### `1.46.2` or newer
 > The E2fsprogs package contains the utilities for handling the ext2 file system. It also supports the ext3 and ext4 journaling file systems.
 
@@ -1576,7 +1589,7 @@ gunzip -v /usr/share/info/libext2fs.info.gz
 install-info --dir-file=/usr/share/info/dir /usr/share/info/libext2fs.info
 ```
 
-### `50` - OpenRC and additional services
+### `51` - OpenRC and additional services
 > #### `0.43.3` or newer
 > OpenRC is a dependency-based init system that works with the system-provided init program, normally /sbin/init.
 
@@ -1633,7 +1646,7 @@ pushd udev-gentoo-scripts-34/
 time { make install && popd; }
 ```
 
-### `51` - GNU perf
+### `52` - GNU perf
 > The GNU perf (gperf) package contains utility that generates a perfect hash function from a key set.
 > #### `3.1` or newer
 
@@ -1650,7 +1663,7 @@ time { make; }
 time { make install; }
 ```
 
-### `52` - Eudev
+### `53` - Eudev
 > #### `3.2.10` or newer
 > The Eudev package contains programs for dynamic creation of device nodes.
 
@@ -1680,7 +1693,7 @@ time { make install; }
 udevadm hwdb --update
 ```
 
-### `53` - Cmake
+### `54` - Cmake
 > #### `3.20.5` or newer
 > The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
 
@@ -1706,7 +1719,7 @@ time { make; }
 time { make install; }
 ```
 
-### `54` - musl-locales
+### `55` - musl-locales
 > #### `?` (git)
 > The musl-locales package contains `locale` implementation, which works on musl libc (with limitations in musl itself).
 
@@ -1724,7 +1737,7 @@ time { make -C build; }
 time { make -C build install; }
 ```
 
-### `55` - cpio
+### `56` - cpio
 > #### `2.13` or newer
 > The cpio package contains tools for archiving.
 
@@ -1744,19 +1757,6 @@ time { make; }
 
 # Install.
 time { make install; }
-```
-
-### `56` - LZ4
-> #### `1.9.3` or newer
-> The LZ4 package contains library for lossless compression algorithm, providing compression speed > 500 MB/s per core, scalable with multi-cores CPU. It features an extremely fast decoder, with speed in multiple GB/s per core, typically reaching RAM speed limits on multi-core systems.
-
-> **Required!** Before `Linux`.
-```bash
-# Build.
-time { make PREFIX=/usr; }
-
-# Install.
-time { make PREFIX=/usr install; }
 ```
 
 ### `57` - Python3
