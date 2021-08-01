@@ -927,7 +927,7 @@ cmake -S build/cmake -B build \
     -DBUILD_STATIC_LIBS=NO
 
 # Build. Fails with LTO.
-time { make -C build CFLAGS="$CFLAGS"; }
+time { make -C build; }
 
 # Install.
 time { make -C build install; }
