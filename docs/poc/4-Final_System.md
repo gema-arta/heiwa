@@ -922,7 +922,7 @@ time { make install; }
 > **Required!** Before `zstd` and `Linux`.
 ```bash
 # Build.
-time { make PREFIX=/usr CFLAGS="-flto=thin $CFLAGS"; }
+time { make PREFIX=/usr CFLAGS="-flto=thin $CFLAGS" V=1; }
 
 # Install.
 time { make PREFIX=/usr install; }
@@ -936,8 +936,8 @@ time { make PREFIX=/usr install; }
 ```bash
 # Build zstd and pzstd (parallel zstandard).
 time {
-    make CFLAGS="-flto=thin $CFLAGS" && \
-    make -C contrib/pzstd CFLAGS="-flto=thin $CFLAGS" 
+    make CFLAGS="-flto=thin $CFLAGS" V=1 && \
+    make -C contrib/pzstd CFLAGS="-flto=thin $CFLAGS" V=1
 }
 
 # Install.
