@@ -887,11 +887,11 @@ time { make CFLAGS="-fPIC -flto=thin $CFLAGS"; }
 # Install (also shared libraries) and fix the symlinks.
 time {
     make PREFIX=/usr install
-    ln -sv libbz2.so.1.0 libbz2.so
+    ln -sv libbz2.so.1.0 libbz2.so && \
     install -vm755 -t /usr/lib/ libbz2.so*
-    cp -fv bzip2-shared bzip2
-    ln -sv bzip2        bunzip2
-    ln -sv bzip2        bzcat
+    cp -fv bzip2-shared bzip2      && \
+    ln -sv bzip2        bunzip2    && \
+    ln -sv bzip2        bzcat      && \
     install -vm755 -t /usr/bin/ b{un,}zip2 bzcat
 }
 ```
