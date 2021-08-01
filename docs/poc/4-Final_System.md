@@ -871,12 +871,16 @@ patch -Np1 -i ../../extra/bzip2/patches/soname.patch
 sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@'   Makefile
 sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
 
-# Prevent to install static library.
+# Prevent to build and install static library.
+sed -i 's|: libbz2.a|: |'                      Makefile
 sed -i '/cp -f libbz2.a $(PREFIX)\/lib/d'      Makefile
 sed -i '/chmod a+r $(PREFIX)\/lib\/libbz2.a/d' Makefile
     
 # Prepare.
-time { make CFLAGS="-fPIC -flto=thin $CFLAGS" -f Makefile-libbz2_so && make clean; }
+time {
+    make CFLAGS="-fPIC -flto=thin $CFLAGS" \
+    -f Makefile-libbz2_so && make clean
+}
 
 # Build.
 time { make CFLAGS="-fPIC -flto=thin $CFLAGS" bzip2{.o,recover}; }
