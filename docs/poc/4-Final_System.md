@@ -924,7 +924,7 @@ time { make install; }
 # Build zstd and pzstd (parallel zstandard).
 time {
     make CFLAGS="-flto=thin $CFLAGS" && \
-    make -C CFLAGS="-flto=thin $CFLAGS" contrib/pzstd
+    make -C contrib/pzstd CFLAGS="-flto=thin $CFLAGS" 
 }
 
 # Install.
