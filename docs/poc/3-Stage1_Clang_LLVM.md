@@ -355,6 +355,7 @@ CFLAGS="-flto=thin $CFLAGS"        \
 ./configure --prefix=/clang1-tools \
             --build=${T_TRIPLET}   \
             --host=${T_TRIPLET}    \
+            --disable-doc          \
             --disable-static
 
 # Build.
