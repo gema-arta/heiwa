@@ -1032,7 +1032,7 @@ ac_cv_lib_error_at_line=no  \
             --docdir=/usr/share/doc/bison-3.7.6
 
 # Build.
-time { make; }
+time { make CFLAGS="-flto=thin $CFLAGS"; }
 
 # Install.
 time { make install; }
@@ -1050,7 +1050,7 @@ time { make install; }
             --enable-libgdbm-compat
 
 # Build.
-time { make; }
+time { make CFLAGS="-flto=thin $CFLAGS"; }
 
 # Install.
 time { make install; }
