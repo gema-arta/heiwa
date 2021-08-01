@@ -922,7 +922,7 @@ time { make install; }
 > **Required!** Before `zstd` and `Linux`.
 ```bash
 # Build.
-time { make PREFIX=/usr CFLAGS="-flto=Thin $CFLAGS"; }
+time { make PREFIX=/usr CFLAGS="-flto=thin $CFLAGS"; }
 
 # Install.
 time { make PREFIX=/usr install; }
