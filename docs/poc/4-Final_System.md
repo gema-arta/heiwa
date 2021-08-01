@@ -872,8 +872,8 @@ sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@'   Makefile
 sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
 
 # Disable install static library.
-sed -i '|cp -f libbz2.a $(PREFIX)/lib|d'     Makefile
-sed -i '|chmod a+r $(PREFIX)/lib/libbz2.a|d' Makefile
+sed -i '/cp -f libbz2.a $(PREFIX)\/lib/d'      Makefile
+sed -i '/chmod a+r $(PREFIX)\/lib\/libbz2.a/d' Makefile
     
 # Prepare.
 time { make CFLAGS="-fPIC -flto=thin $CFLAGS" -f Makefile-libbz2_so && make clean; }
