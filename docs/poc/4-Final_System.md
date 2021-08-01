@@ -1026,10 +1026,9 @@ rm -fv libintl.a
 > **Required!** Before `Kmod`, `Kbd`, and `Util-Linux`.
 ```bash
 # Configure source.
-ac_cv_header_sys_cdefs_h=no  \
-ac_cv_lib_error_at_line=no   \
-./configure --prefix=/usr    \
-            --disable-static \
+ac_cv_header_sys_cdefs_h=no \
+ac_cv_lib_error_at_line=no  \
+./configure --prefix=/usr   \
             --docdir=/usr/share/doc/bison-3.7.6
 
 # Build.
