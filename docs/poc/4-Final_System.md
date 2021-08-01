@@ -1009,7 +1009,7 @@ for P in {line-length,flip-macro-logic,respect-cflags}.patch; do
 done; unset P
 
 # Build.
-time { make LIBINTL=MUSL prefix=/usr; }
+time { make LIBINTL=MUSL CFLAGS="-flto=thin $CFLAGS" prefix=/usr; }
 
 # Install.
 time { make LIBINTL=MUSL prefix=/usr install; }
