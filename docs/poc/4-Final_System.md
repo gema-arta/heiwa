@@ -871,8 +871,7 @@ patch -Np1 -i ../../extra/bzip2/patches/soname.patch
 sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@'   Makefile
 sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
 
-# Prevent to build and install static library.
-sed -i 's| libbz2.a||'                         Makefile
+# Prevent to install static library.
 sed -i '/cp -f libbz2.a $(PREFIX)\/lib/d'      Makefile
 sed -i '/chmod a+r $(PREFIX)\/lib\/libbz2.a/d' Makefile
     
