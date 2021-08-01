@@ -883,7 +883,7 @@ time {
 }
 
 # Build.
-time { make CFLAGS="-fPIC -flto=thin $CFLAGS" bzip2{.o,recover}; }
+time { make CFLAGS="-fPIC -flto=thin $CFLAGS"; }
 
 # Install (also shared libraries) and fix the symlinks.
 time {
