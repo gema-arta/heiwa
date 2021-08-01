@@ -923,13 +923,14 @@ time { make install; }
 ```bash
 # Configure to disable static library.
 cmake -S build/cmake -B build \
+    -DCMAKE_INSTALL_PREFIX="/usr" \
     -DBUILD_STATIC_LIBS=NO
 
 # Build. Fails with LTO.
-time { make PREFIX=/usr CFLAGS="$CFLAGS" V=1; }
+time { make -C build CFLAGS="$CFLAGS" V=1; }
 
 # Install.
-time { make PREFIX=/usr install; }
+time { make -C build install; }
 ```
 
 ### `24` - Zstd
