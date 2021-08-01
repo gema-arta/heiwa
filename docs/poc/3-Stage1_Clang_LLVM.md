@@ -389,7 +389,7 @@ install -vm755 -t /clang1-tools/bin/ pigz unpigz gzip gunzip
 > **Required!** To allow programs compiled with NLS (Native Language Support) in the next stage (chroot environment).
 ```bash
 # Build.
-time { make LIBINTL=MUSL prefix=/clang1-tools; }
+time { make LIBINTL=MUSL CFLAGS="-flto=thin $CFLAGS" prefix=/clang1-tools; }
 
 # Only install `msgfmt`, `msgmerge` and `xgettext`.
 install -vm755 -t /clang1-tools/bin/ msg{fmt,merge} xgettext 
