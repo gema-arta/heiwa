@@ -947,6 +947,7 @@ time {
 
 # Install.
 time {
+    rm -fv lib/libzstd.a     && \
     make PREFIX=/usr install && \
     make -C contrib/pzstd PREFIX=/usr install
 }
