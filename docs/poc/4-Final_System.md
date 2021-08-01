@@ -1039,7 +1039,7 @@ time { make install; }
 ```
 ```bash
 # Delete useless static library.
-rm -fv liby.a
+rm -fv /usr/lib/liby.a
 ```
 
 ### `29`- GDBM
