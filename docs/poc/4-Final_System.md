@@ -939,12 +939,6 @@ time { make -C build install; }
 
 > **Required!**  Before `Kmod`.
 ```bash
-# Configure.
-cmake -S build/cmake -B build \
-    -DCMAKE_INSTALL_PREFIX="/usr" \
-    -DBUILD_TESTING=NO            \
-    -DZSTD_PROGRAMS_LINK_SHARED=YES
-
 # Build zstd and pzstd (parallel zstandard).
 time {
     make CFLAGS="-flto=thin $CFLAGS" V=1 && \
@@ -953,7 +947,6 @@ time {
 
 # Install.
 time {
-    rm -fv lib/libzstd.a     && \
     make PREFIX=/usr install && \
     make -C contrib/pzstd PREFIX=/usr install
 }
