@@ -987,7 +987,7 @@ install -vm755 -t /usr/bin/ pigz unpigz gzip gunzip
             --with-pkg-config-dir=/usr/local/lib/pkgconfig:/usr/local/share/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig:/opt/qt5/lib/pkgconfig
 
 # Build.
-time { make; }
+time { make V=1; }
 
 # Install and create symlink as `pkg-config`.
 time {
