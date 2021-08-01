@@ -872,7 +872,7 @@ sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@'   Makefile
 sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
 
 # Prevent to build and install static library.
-sed -i 's|: libbz2.a|: |'                      Makefile
+sed -i 's| libbz2.a| |'                      Makefile
 sed -i '/cp -f libbz2.a $(PREFIX)\/lib/d'      Makefile
 sed -i '/chmod a+r $(PREFIX)\/lib\/libbz2.a/d' Makefile
     
