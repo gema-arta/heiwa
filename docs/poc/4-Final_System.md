@@ -921,7 +921,7 @@ time { make install; }
 
 > **Required!** Before `zstd` and `Linux`.
 ```bash
-# Configure to disable static library.
+# Configure.
 cmake -S build/cmake -B build \
     -DCMAKE_INSTALL_PREFIX="/usr" \
     -DBUILD_STATIC_LIBS=NO
