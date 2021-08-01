@@ -375,7 +375,7 @@ time { make install; }
 sed -i 's|ln -f|ln -sf|' Makefile
 
 # Build.
-time { make CC=${CC}; }
+time { make CC=${CC} CFLAGS="-flto=thin $CFLAGS"; }
 
 # Install and create symlinks as `gzip` tools.
 ln -sv pigz gzip; ln -sv unpigz gunzip
