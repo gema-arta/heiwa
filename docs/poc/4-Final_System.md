@@ -950,6 +950,9 @@ time {
     make PREFIX=/usr install && \
     make -C contrib/pzstd PREFIX=/usr install
 }
+
+# Delete useless static library.
+rm -fv /usr/lib/libzstd.a
 ```
 
 ### `25` - Pigz
