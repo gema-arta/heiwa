@@ -984,6 +984,7 @@ install -vm755 -t /usr/bin/ pigz unpigz gzip gunzip
             --sysconfdir=/etc                     \
             --localstatedir=/var                  \
             --docdir=/usr/share/doc/pkgconf-1.7.4 \
+            --disable-static                      \
             --with-pkg-config-dir=/usr/local/lib/pkgconfig:/usr/local/share/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig:/opt/qt5/lib/pkgconfig
 
 # Build.
