@@ -921,8 +921,8 @@ time { make install; }
 
 > **Required!** Before `zstd` and `Linux`.
 ```bash
-# Build.
-time { make PREFIX=/usr CFLAGS="-flto=thin $CFLAGS" V=1; }
+# Build. Fails with LTO.
+time { make PREFIX=/usr V=1; }
 
 # Install.
 time { make PREFIX=/usr install; }
