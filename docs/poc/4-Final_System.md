@@ -872,10 +872,10 @@ sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
 sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
 
 # Prepare.
-time { make CFLAGS="-fPIC $CFLAGS" -f Makefile-libbz2_so && make clean; }
+time { make CFLAGS="-fPIC -flto=thin $CFLAGS" -f Makefile-libbz2_so && make clean; }
 
 # Build.
-time { make CFLAGS="-fPIC $CFLAGS"; }
+time { make CFLAGS="-fPIC -flto=thin $CFLAGS"; }
 
 # Install (also shared libraries) and fix the symlinks.
 time {
@@ -896,8 +896,9 @@ time {
 > **Required!** Before `Kmod` and `Eudev`.
 ```bash
 # Configure source.
-./configure --prefix=/usr \
-            --disable-doc \
+CFLAGS="-flto=thin $CFLAGS" \
+./configure --prefix=/usr   \
+            --disable-doc   \
             --disable-static
 
 # Build.
@@ -914,7 +915,10 @@ time { make install; }
 > **Required!**  Before `Kmod`.
 ```bash
 # Build zstd and pzstd (parallel zstandard).
-time { make && make -C contrib/pzstd; }
+time {
+    make CFLAGS="-flto=thin $CFLAGS" && \
+    make -C CFLAGS="-flto=thin $CFLAGS" contrib/pzstd
+}
 
 # Install.
 time {
@@ -933,7 +937,7 @@ time {
 sed -i 's|ln -f|ln -sf|' Makefile
 
 # Build.
-time { make CC=${CC}; }
+time { make CC=${CC} CFLAGS="-flto=thin $CFLAGS"; }
 
 # Install and create symlinks as `gzip` tools.
 ln -sv pigz gzip; ln -sv unpigz gunzip
