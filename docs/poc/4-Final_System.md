@@ -919,7 +919,7 @@ time { make install; }
 > #### `1.9.3` or newer
 > The LZ4 package contains library for lossless compression algorithm, providing compression speed > 500 MB/s per core, scalable with multi-cores CPU. It features an extremely fast decoder, with speed in multiple GB/s per core, typically reaching RAM speed limits on multi-core systems.
 
-> **Required!** Before `Linux`.
+> **Required!** Before `zstd` and `Linux`.
 ```bash
 # Build.
 time { make PREFIX=/usr; }
