@@ -868,14 +868,18 @@ patch -Np1 -i ../../extra/bzip2/patches/install_docs-1.patch
 patch -Np1 -i ../../extra/bzip2/patches/soname.patch
 
 # Fix the makefile to ensures installation of symlinks are relative and the man pages are installed into correct location.
-sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
+sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@'   Makefile
 sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
 
+# Disable install static library.
+sed -i '|cp -f libbz2.a $(PREFIX)/lib|d'     Makefile
+sed -i '|chmod a+r $(PREFIX)/lib/libbz2.a|d' Makefile
+    
 # Prepare.
 time { make CFLAGS="-fPIC -flto=thin $CFLAGS" -f Makefile-libbz2_so && make clean; }
 
 # Build.
-time { make CFLAGS="-fPIC -flto=thin $CFLAGS" bzip2{,recover}; }
+time { make CFLAGS="-fPIC -flto=thin $CFLAGS" bzip2{.o,recover}; }
 
 # Install (also shared libraries) and fix the symlinks.
 time {
