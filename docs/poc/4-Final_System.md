@@ -875,7 +875,7 @@ sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
 time { make CFLAGS="-fPIC -flto=thin $CFLAGS" -f Makefile-libbz2_so && make clean; }
 
 # Build.
-time { make CFLAGS="-fPIC -flto=thin $CFLAGS"; }
+time { make CFLAGS="-fPIC -flto=thin $CFLAGS" bzip2{,recover}; }
 
 # Install (also shared libraries) and fix the symlinks.
 time {
