@@ -922,7 +922,8 @@ time { make install; }
 > **Required!** Before `zstd` and `Linux`.
 ```bash
 # Configure to disable static library.
-cmake -S build/cmake -DBUILD_STATIC_LIBS=NO
+cmake -S build/cmake -B build \
+    -DBUILD_STATIC_LIBS=NO
 
 # Build. Fails with LTO.
 time { make PREFIX=/usr CFLAGS="$CFLAGS" V=1; }
