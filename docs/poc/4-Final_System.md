@@ -941,8 +941,8 @@ time { make -C build install; }
 ```bash
 # Build zstd and pzstd (parallel zstandard).
 time {
-    make CFLAGS="-flto=thin $CFLAGS" V=1 && \
-    make -C contrib/pzstd CFLAGS="-flto=thin $CFLAGS" V=1
+    make CFLAGS="-flto=thin $CFLAGS" && \
+    make -C contrib/pzstd CFLAGS="-flto=thin $CFLAGS"
 }
 
 # Install.
@@ -988,7 +988,7 @@ install -vm755 -t /usr/bin/ pigz unpigz gzip gunzip
             --with-pkg-config-dir=/usr/local/lib/pkgconfig:/usr/local/share/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig:/opt/qt5/lib/pkgconfig
 
 # Build.
-time { make V=1; }
+time { make; }
 
 # Install and create symlink as `pkg-config`.
 time {
