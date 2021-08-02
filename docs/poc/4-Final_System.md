@@ -1208,7 +1208,7 @@ tr true truncate tty uname uniq unlink wc who whoami yes file find xargs egrep g
 dnsdomainname ifconfig hostname ping telnet tftp traceroute man killall sed klogd tar"
 
 # Checks 102 commands, and make sure is enabled (=y).
-# Pipe to " | wc -l" at the right of "done" to checks total of commands.
+# Pipe to ` | wc -l` at the right of `done` to checks total of commands.
 for X in ${CFFGPT}; do
     grep -v '#' .config | grep -i --color=auto "_${X}=" \
     || echo "* $X not CONFIGURED"
