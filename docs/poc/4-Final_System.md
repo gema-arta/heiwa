@@ -1127,7 +1127,6 @@ patch -Np1 -i ../../extra/perl/patches/musl-stack-size.patch
     -Dvendorprefix=/usr                                       \
     -Dccdlflags="-rdynamic"                                   \
     -Dcccdlflags="-fPIC"                                      \
-    -Dcccdlflags="-fPIC"                                      \
     -Dprivlib=/usr/lib/perl5/5.34/core_perl                   \
     -Darchlib=/usr/lib/perl5/5.34/core_perl                   \
     -Dsitelib=/usr/lib/perl5/5.34/site_perl                   \
