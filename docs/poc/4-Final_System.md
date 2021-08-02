@@ -331,7 +331,7 @@ ldd a.out
 # |    libmimalloc.so.2.0 => /usr/lib/libmimalloc.so.2.0 (0x7fd979ec1000)
 # |    libc.musl-x86_64.so.1 => /lib/ld-musl-x86_64.so.1 (0x7fd979f46000)
 
-grep "ld.lld:.*crt[1in]" dummy.log
+grep --color=auto "ld.lld:.*crt[1in]" dummy.log
 
 # | The output should be:
 # |-----------------------
@@ -340,7 +340,7 @@ grep "ld.lld:.*crt[1in]" dummy.log
 # |ld.lld: /usr/lib/crtn.o
 
 # Check the headers path.
-grep -B1 "^ /usr/include" dummy.log
+grep --color=auto -B1 "^ /usr/include" dummy.log
 
 # | The output should be:
 # |-----------------------
@@ -348,7 +348,7 @@ grep -B1 "^ /usr/include" dummy.log
 # | /usr/include
 
 # Check the dynamic linker libraries path.
-grep -oE "\-L/usr/lib|\-L/lib" dummy.log
+grep --color=auto -oE "\-L/usr/lib|\-L/lib" dummy.log
 
 # | The output should be:
 # |-----------------------
@@ -870,7 +870,7 @@ ldd a.out
 # |    libmimalloc.so.2.0 => /usr/lib/libmimalloc.so.2.0 (0x7fbc218c6000)
 # |    libc.musl-x86_64.so.1 => /lib/ld-musl-x86_64.so.1 (0x7fbc2194b000)
 
-grep "ld.lld:.*crt[1in].o" dummy.log
+grep --color=auto "ld.lld:.*crt[1in].o" dummy.log
 
 # | The output should be:
 # |-----------------------
@@ -879,7 +879,7 @@ grep "ld.lld:.*crt[1in].o" dummy.log
 # |ld.lld: /usr/bin/../lib/crtn.o
 
 # Check the headers path.
-grep -B1 "^ /usr/include" dummy.log
+grep --color=auto -B1 "^ /usr/include" dummy.log
 
 # | The output should be:
 # |-----------------------
@@ -887,7 +887,7 @@ grep -B1 "^ /usr/include" dummy.log
 # | /usr/include
 
 # Check the dynamic linker libraries path.
-grep -oE "\-L/usr/lib|\-L/lib" dummy.log
+grep --color=auto -oE "\-L/usr/lib|\-L/lib" dummy.log
 
 # | The output should be:
 # |-----------------------
