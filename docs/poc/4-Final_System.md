@@ -1159,7 +1159,8 @@ time { make install; unset BUILD_ZLIB BUILD_BZIP2; }
 > **Required!** Before `Toybox` and `Kmod`.
 ```bash
 # Configure source.
-./Configure \
+CFLAGS="-flto=thin $CFLAGS"    \
+./Configure                    \
     linux-x86_64               \
     --prefix=/usr              \
     --libdir=lib               \
