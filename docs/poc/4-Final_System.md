@@ -274,12 +274,6 @@ for B in {cdefs,queue,tree}.h; do
 done; unset B; install -vm644 -t /usr/include/ \
 ../../extra/musl/files/musl-legacy-compat/error.h
 ```
-
-### `8` - Microsoft mimalloc and Adjusting Toolchain
-> #### `2.0.2` or newer
-> The Microsoft mimalloc package contains a compact general purpose allocator with excellent performance.
-
-> **Required!** Microsoft mimalloc is for high perfomance purpose. We will build all packages to use mimalloc, except for libc.
 ```bash
 # Configure Stage-1 Clang/LLVM with new triplet to produce binaries with "/lib/ld-musl-x86_64.so.1" and libraries from "/usr/*".
 ln -sv clang   /clang1-tools/bin/x86_64-heiwa-linux-musl-clang
@@ -293,6 +287,12 @@ sed -i 's|CC=.*|CC="x86_64-heiwa-linux-musl-clang"|'     ~/.bash_profile
 sed -i 's|CXX=.*|CXX="x86_64-heiwa-linux-musl-clang++"|' ~/.bash_profile
 source ~/.bash_profile
 ```
+
+### `8` - Microsoft mimalloc
+> #### `2.0.2` or newer
+> The Microsoft mimalloc package contains a compact general purpose allocator with excellent performance.
+
+> **Required!** Microsoft mimalloc is for high perfomance purpose. We will build all packages to use mimalloc, except for libc.
 ```bash
 # Configure `mimalloc`.
 cmake -B build \
