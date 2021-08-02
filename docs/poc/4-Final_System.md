@@ -321,7 +321,7 @@ source ~/.bash_profile
 # Quick test for the new triplet of Stage-1 Clang/LLVM.
 echo "int main(){}" > dummy.c
 ${CC} ${CFLAGS} dummy.c -v -Wl,--verbose &> dummy.log
-${READELF} -l a.out | grep ": /lib"
+${READELF} -l a.out | grep --color=auto ": /lib"
 
 # | The output should be:
 # |-----------------------
@@ -860,7 +860,7 @@ install -vm644 -t /usr/share/man/man1/ ../extra/musl/files/musl-utils/get{conf,e
 # Quick test.
 echo "int main(){}" > dummy.c
 cc ${CFLAGS} dummy.c -v -Wl,--verbose &> dummy.log
-readelf -l a.out | grep ": /lib"
+readelf -l a.out | grep --color=auto ": /lib"
 
 # | The output should be:
 # |-----------------------
