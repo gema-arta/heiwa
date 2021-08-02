@@ -1412,7 +1412,7 @@ time { make install; }
 ```
 
 ### `42` - GNU Autoconf
-> #### `2.69` (2.71 has serious bugs)
+> #### `2.69` (2.70+ has serious bugs)
 > The GNU Autoconf package contains programs for producing shell scripts that can automatically configure source code.
 
 > **Required!** Before `GNU Automake` and `argp-standalone`.
