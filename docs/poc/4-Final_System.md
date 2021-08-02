@@ -1349,7 +1349,7 @@ time { make install; }
 CFLAGS="-flto=thin $CFLAGS"                  \
 ./configure --prefix=/usr                    \
             --docdir=/usr/share/doc/bash-5.1 \
-            --with-curses
+            --with-curses                    \
             --without-bash-malloc            \
             --with-installed-readline
 
