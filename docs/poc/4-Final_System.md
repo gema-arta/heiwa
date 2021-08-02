@@ -1452,10 +1452,6 @@ time { make install; }
 
 > **Required!** Before `Elfutils - libelf`.
 ```bash
-# Apply patches (from Alpine Linux) to fix some issues.
-patch -Np1 -i ../../extra/argp-standalone/001-throw-in-funcdef.patch
-patch -Np1 -i ../../extra/argp-standalone/gnu89-inline.patch
-
 # Generate configure script.
 autoreconf -fvi
 
