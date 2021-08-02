@@ -439,7 +439,7 @@ time { make -C build install; }
 ```bash
 # Configure source.
 cmake -B build \
-    -DCMAKE_BUILD_TYPE=Release  -Wno-dev \
+    -DCMAKE_BUILD_TYPE=Release -Wno-dev  \
     -DCMAKE_INSTALL_PREFIX="/usr"        \
     -DCMAKE_C_FLAGS="-flto=thin $CFLAGS" \
     -DWITH_NATIVE_INSTRUCTIONS=YES       \
