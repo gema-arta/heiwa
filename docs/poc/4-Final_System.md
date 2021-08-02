@@ -1173,6 +1173,9 @@ CFLAGS="-flto=thin $CFLAGS"    \
 # Build.
 time { make; }
 
+# Prevent to install static library.
+sed -i '/INSTALL_LIBS=libcrypto.a libssl.a/d' Makefile
+
 # Install.
 time { make MANSUFFIX=ssl install; }
 ```
