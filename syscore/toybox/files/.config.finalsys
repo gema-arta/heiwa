@@ -2,6 +2,7 @@
 # Automatically generated make config: don't edit
 # ToyBox version: KCONFIG_VERSION
 # Mon Aug  2 17:42:00 2021
+# Configured by owl4ce
 #
 CONFIG_TOYBOX_CONTAINER=y
 CONFIG_TOYBOX_FIFREEZE=y
