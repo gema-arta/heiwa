@@ -1026,13 +1026,14 @@ rm -fv libintl.a
 > **Required!** Before `Kmod`, `Kbd`, and `Util-Linux`.
 ```bash
 # Configure source.
+CFLAGS="-flto=thin $CFLAGS" \
 ac_cv_header_sys_cdefs_h=no \
 ac_cv_lib_error_at_line=no  \
 ./configure --prefix=/usr   \
             --docdir=/usr/share/doc/bison-3.7.6
 
 # Build.
-time { make CFLAGS="-flto=thin $CFLAGS"; }
+time { make; }
 
 # Install.
 time { make install; }
@@ -1049,12 +1050,13 @@ rm -fv /usr/lib/liby.a
 > **Required!** Before `Perl`.
 ```bash
 # Configure source.
+CFLAGS="-flto=thin $CFLAGS"  \
 ./configure --prefix=/usr    \
             --disable-static \
             --enable-libgdbm-compat
 
 # Build.
-time { make CFLAGS="-flto=thin $CFLAGS"; }
+time { make; }
 
 # Install.
 time { make install; }
