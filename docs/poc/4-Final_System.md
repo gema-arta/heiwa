@@ -1401,7 +1401,8 @@ time {
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS" \
-./configure --prefix=/usr
+./configure --prefix=/usr   \
+            --disable-static
 
 # Build.
 time { make; }
