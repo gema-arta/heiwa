@@ -439,13 +439,13 @@ time { make -C build install; }
 ```bash
 # Configure source.
 cmake -B build \
-    -DCMAKE_BUILD_TYPE=Release           \
+    -DCMAKE_BUILD_TYPE=Release -Wno-dev  \
     -DCMAKE_INSTALL_PREFIX="/usr"        \
     -DCMAKE_C_FLAGS="-flto=thin $CFLAGS" \
     -DWITH_NATIVE_INSTRUCTIONS=YES       \
     -DWITH_SANITIZER=ON                  \
     -DZLIB_COMPAT=ON                     \
-    -DBUILD_SHARED_LIBS=ON -Wno-dev
+    -DBUILD_SHARED_LIBS=ON
 
 # Build.
 time { make -C build; }
