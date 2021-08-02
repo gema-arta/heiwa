@@ -520,7 +520,8 @@ install -vm644 doc/*.{ps,pdf,html,dvi} /usr/share/doc/readline-8.1
 CFLAGS="-flto=thin $CFLAGS" \
 ac_cv_header_sys_cdefs_h=no \
 ac_cv_lib_error_at_line=no  \
-./configure --prefix=/usr
+./configure --prefix=/usr   \
+            --with-packager="Heiwa/Linux"
 
 # Build.
 time { make; }
