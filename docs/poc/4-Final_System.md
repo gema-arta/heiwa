@@ -1142,7 +1142,8 @@ patch -Np1 -i ../../extra/perl/patches/musl-stack-size.patch
     -Duseshrplib                                              \
     -Dman1ext=1                                               \
     -Dman3ext=3pm                                             \
-    -Dman1dir=/usr/share/man/man1 -Dman3dir=/usr/share/man/man3
+    -Dman1dir=/usr/share/man/man1                             \
+    -Dman3dir=/usr/share/man/man3
 
 # Build.
 time { make; }
