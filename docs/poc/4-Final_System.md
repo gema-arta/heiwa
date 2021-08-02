@@ -1399,7 +1399,7 @@ time {
 > #### `2.4.6` or newer
 > The GNU libtool package contains the GNU generic library support script. It wraps the complexity of using shared libraries in a consistent, portable interface.
 
-> **Required!** Before `musl-fts`, `musl-obstack`, and `argp-standalone`.
+> **Required!** Before `musl-fts` and `musl-obstack`.
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS" \
@@ -1417,7 +1417,7 @@ time { make install; }
 > #### `2.69` (2.70+ has serious bugs)
 > The GNU Autoconf package contains programs for producing shell scripts that can automatically configure source code.
 
-> **Required!** Before `GNU Automake` and `argp-standalone`.
+> **Required!** Before `GNU Automake`.
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS" \
@@ -1434,7 +1434,7 @@ time { make install; }
 > #### `1.16.4` or newer
 > The GNU Automake package contains programs for generating Makefiles for use with Autoconf.
 
-> **Required!** Before `musl-fts`, `musl-obstack`, and `argp-standalone`.
+> **Required!** Before `musl-fts` and `musl-obstack`.
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS" \
@@ -1454,12 +1454,8 @@ time { make install; }
 
 > **Required!** Before `Elfutils - libelf`.
 ```bash
-# Apply patches (from Alpine Linux) to fix some issues.
+# Apply patch (from Alpine Linux).
 patch -Np1 -i ../../extra/argp-standalone/001-throw-in-funcdef.patch
-patch -Np1 -i ../../extra/argp-standalone/gnu89-inline.patch
-
-# Generate configure script.
-autoreconf -fvi
 
 # Configure source.
 CFLAGS="-fPIC -flto=thin $CFLAGS" \
