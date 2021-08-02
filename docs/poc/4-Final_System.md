@@ -1215,7 +1215,7 @@ for X in ${CFFGPT}; do
 done
 
 # Build.
-time { make; }
+time { make CFLAGS="-flto=thin $CFLAGS" V=1; }
 
 # Checks compiled 115 commands.
 ./toybox | tr ' ' '\n'i \
