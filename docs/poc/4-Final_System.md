@@ -1447,7 +1447,7 @@ time { make install; }
 ```
 
 ### `44` - argp-standalone
-> #### `1.4.1` or newer (from Void Linux)
+> #### `1.3` or newer
 > The argp-standalone package contains hierarchial argument parsing library broken out from GNU libc (glibc).
 
 > **Required!** Before `Elfutils - libelf`.
@@ -1465,8 +1465,7 @@ CFLAGS="-fPIC -flto=thin $CFLAGS" \
 time { make; }
 
 # Install.
-install -vm644 -t /usr/lib/  libargp.a 
-install -vm644 -t /usr/include/ argp.h 
+time { install -vm644 -t /usr/include/ argp.h; }
 ```
 
 ### `45` - musl-fts
