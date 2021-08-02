@@ -1137,7 +1137,7 @@ patch -Np1 -i ../../extra/perl/patches/musl-stack-size.patch
     -Dcf_by="Heiwa/Linux"                                     \
     -Dmyuname="linux"                                         \
     -Dmyhostname="localh3art"                                 \
-    -Dperladmin='heiwa@localh3art'                            \
+    -Dperladmin="heiwa@localh3art"                            \
     -Dusethreads                                              \
     -Duseshrplib                                              \
     -Dman1ext=1                                               \
