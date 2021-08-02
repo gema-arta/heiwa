@@ -517,10 +517,11 @@ install -vm644 doc/*.{ps,pdf,html,dvi} /usr/share/doc/readline-8.1
 > **Required!** Before `Flex`, `Attr`, `Acl`, `GNU Autoconf`, and `GNU Automake`.
 ```bash
 # Configure source.
-CFLAGS="-flto=thin $CFLAGS" \
-ac_cv_header_sys_cdefs_h=no \
-ac_cv_lib_error_at_line=no  \
-./configure --prefix=/usr   \
+CFLAGS="-flto=thin $CFLAGS"     \
+ac_cv_header_sys_cdefs_h=no     \
+ac_cv_lib_error_at_line=no      \
+./configure --prefix=/usr       \
+            --enable-changeword \
             --with-packager="Heiwa/Linux"
 
 # Build.
