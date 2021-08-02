@@ -426,6 +426,10 @@ time { make -C build; }
 # Install.
 time { make -C build install; }
 ```
+```bash
+# Load musl locale path.
+. /etc/profile.d/00locale.sh
+```
 
 ### `11` - Zlib-ng
 > #### `2.0.5` or newer
