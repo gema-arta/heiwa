@@ -980,6 +980,7 @@ install -vm755 -t /usr/bin/ pigz unpigz gzip gunzip
 > **Required!** Before `Kmod`.
 ```bash
 # Configure source.
+CFLAGS="-flto=thin $CFLAGS"                       \
 ./configure --prefix=/usr                         \
             --sysconfdir=/etc                     \
             --localstatedir=/var                  \
