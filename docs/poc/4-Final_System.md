@@ -1261,7 +1261,7 @@ time { make install; }
 ```bash
 # Optional, install some additional documentation.
 mkdir -pv /usr/share/doc/gawk-5.1.0 && \
-cp -fv doc/{awkforai.txt,*.{eps,pdf,jpg}} /usr/share/doc/gawk-5.1.0
+cp -fv doc/{awkforai.txt,*.{eps,pdf,jpg}} /usr/share/doc/gawk-5.1.0/.
 ```
 
 ### `35` - GNU Diffutils
