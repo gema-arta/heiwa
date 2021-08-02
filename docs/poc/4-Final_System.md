@@ -1108,7 +1108,7 @@ time { make install; }
 ```
 
 ### `31` - Perl
-> #### `5.32.1`
+> #### `5.34.0` or newer
 > The Perl package contains the Practical Extraction and Report Language.
 
 > **Required!** Before `OpenSSL` and `GNU Autoconf`.
