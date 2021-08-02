@@ -1454,8 +1454,11 @@ time { make install; }
 
 > **Required!** Before `Elfutils - libelf`.
 ```bash
-# Apply patch (from Alpine Linux).
+# Apply patch (from Alpine Linux) to fix THROW function.
 patch -Np1 -i ../../extra/argp-standalone/001-throw-in-funcdef.patch
+
+# Fixed `gnu89-inline`.
+sed -i 's|-Wnested-externs|-Wnested-externs -fgnu89-inline|' configure
 
 # Configure source.
 CFLAGS="-fPIC -flto=thin $CFLAGS" \
