@@ -287,7 +287,7 @@ sed -i 's|CC=.*|CC="x86_64-heiwa-linux-musl-clang"|'     ~/.bash_profile
 sed -i 's|CXX=.*|CXX="x86_64-heiwa-linux-musl-clang++"|' ~/.bash_profile
 cat >> ~/.bash_profile << "EOF"
 
-MIMALLOC_LARGE_OS_PAGES=1"
+MIMALLOC_LARGE_OS_PAGES=1
 export MIMALLOC_LARGE_OS_PAGES
 EOF
 source ~/.bash_profile
