@@ -1357,7 +1357,7 @@ CFLAGS="-flto=thin $CFLAGS"                  \
 # Build.
 time { make; }
 
-# Install.
+# Install and move `bash` binary to correct place.
 time { make install && mv -fv /usr/bin/bash /bin/.; }
 ```
 
