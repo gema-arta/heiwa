@@ -285,7 +285,7 @@ EOF
 # Set toolchain to the new triplet from Stage-1 Clang/LLVM.
 sed -i 's|CC=.*|CC="x86_64-heiwa-linux-musl-clang"|'     ~/.bash_profile
 sed -i 's|CXX=.*|CXX="x86_64-heiwa-linux-musl-clang++"|' ~/.bash_profile
-printf "\n%n\n" "MIMALLOC_LARGE_OS_PAGES=1" >> ~/.bash_profile
+printf "\n%s\n" "MIMALLOC_LARGE_OS_PAGES=1" >> ~/.bash_profile
 source ~/.bash_profile
 ```
 
