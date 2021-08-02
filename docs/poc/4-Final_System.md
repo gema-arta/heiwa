@@ -1400,6 +1400,7 @@ time {
 > **Required!** Before `musl-fts`, `musl-obstack`, and `argp-standalone`.
 ```bash
 # Configure source.
+CFLAGS="-flto=thin $CFLAGS" \
 ./configure --prefix=/usr
 
 # Build.
@@ -1416,6 +1417,7 @@ time { make install; }
 > **Required!** Before `GNU Automake` and `argp-standalone`.
 ```bash
 # Configure source.
+CFLAGS="-flto=thin $CFLAGS" \
 ./configure --prefix=/usr
 
 # Build.
@@ -1432,7 +1434,8 @@ time { make install; }
 > **Required!** Before `musl-fts`, `musl-obstack`, and `argp-standalone`.
 ```bash
 # Configure source.
-./configure --prefix=/usr \
+CFLAGS="-flto=thin $CFLAGS" \
+./configure --prefix=/usr   \
             --docdir=/usr/share/doc/automake-1.16.3
 
 # Build.
@@ -1452,9 +1455,9 @@ time { make install; }
 autoreconf -fvi
 
 # Configure source.
-CFLAGS="-fPIC $CFLAGS"        \
-./configure --prefix=/usr     \
-            --sysconfdir=/etc \
+CFLAGS="-fPIC -flto=thin $CFLAGS" \
+./configure --prefix=/usr         \
+            --sysconfdir=/etc     \
             --localstatedir=/var
 
 # Build.
@@ -1476,7 +1479,7 @@ sed -i '/pkgconfig_DATA/i pkgconfigdir=/usr/lib/pkgconfig' Makefile.am
 ./bootstrap.sh
 
 # Configure source.
-CFLAGS="-fPIC $CFLAGS"        \
+CFLAGS="-fPIC -flto=thin $CFLAGS" \
 ./configure --prefix=/usr     \
             --sysconfdir=/etc \
             --localstatedir=/var
@@ -1499,7 +1502,7 @@ sed -i '/pkgconfig_DATA/i pkgconfigdir=/usr/lib/pkgconfig' Makefile.am
 ./bootstrap.sh
 
 # Configure source.
-CFLAGS="-fPIC $CFLAGS"        \
+CFLAGS="-fPIC -flto=thin $CFLAGS" \
 ./configure --prefix=/usr     \
             --sysconfdir=/etc \
             --localstatedir=/var
@@ -1524,11 +1527,11 @@ patch -Np1 -i ../../extra/elfutils/patches/elfutils-musl-clang.patch
 autoreconf -fvi
 
 # Configure source.
-CFLAGS="-Wno-error -Wno-null-dereference -DFNM_EXTMATCH=0 $CFLAGS" \
-CXXFLAGS="-Wno-error $CXXFLAGS"                                    \
-./configure --prefix=/usr                                          \
-            --program-prefix=eu-                                   \
-            --disable-debuginfod                                   \
+CFLAGS="-Wno-error -Wno-null-dereference -DFNM_EXTMATCH=0 -flto=thin $CFLAGS" \
+CXXFLAGS="-Wno-error $CXXFLAGS"                                               \
+./configure --prefix=/usr                                                     \
+            --program-prefix=eu-                                              \
+            --disable-debuginfod                                              \
             --disable-libdebuginfod
 
 # Build `libelf`.
@@ -1557,7 +1560,7 @@ rm -fv man/man8/arpd.8
 sed -i 's/.m_ipt.o//' tc/Makefile
 
 # Build.
-time { make CC=${CC} CCOPTS="-D_GNU_SOURCE $CFLAGS"; }
+time { make CC=${CC} CCOPTS="-D_GNU_SOURCE -flto=thin $CFLAGS"; }
 
 # Install.
 time { make install; }
@@ -1598,7 +1601,8 @@ pushd data/keymaps/i386/ && \
 popd
 
 # Configure source.
-./configure --prefix=/usr \
+CFLAGS="-flto=thin $CFLAGS" \
+./configure --prefix=/usr   \
             --disable-vlock
 
 # Build.
@@ -1632,7 +1636,7 @@ mkdir -pv /var/lib/hwclock
 NOCONFIGURE=1 ./autogen.sh
 
 # Configure source. musl needs `-D_DIRENT_HAVE_D_TYPE` for switch_root(8).
-CFLAGS="-D_DIRENT_HAVE_D_TYPE $CFLAGS"              \
+CFLAGS="-D_DIRENT_HAVE_D_TYPE -flto=thin $CFLAGS"   \
 ./configure ADJTIME_PATH=/var/lib/hwclock/adjtime   \
             --libdir=/usr/lib                       \
             --docdir=/usr/share/doc/util-linux-2.37 \
