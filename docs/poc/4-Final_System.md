@@ -1351,6 +1351,7 @@ CFLAGS="-flto=thin $CFLAGS"                  \
             --docdir=/usr/share/doc/bash-5.1 \
             --with-curses                    \
             --without-bash-malloc            \
+            --enable-readline                \
             --with-installed-readline
 
 # Build.
