@@ -1187,7 +1187,7 @@ mv -fv /usr/share/doc/openssl /usr/share/doc/openssl-1.1.1k
 cp -rfv doc/* /usr/share/doc/openssl-1.1.1k
 ```
 
-### `33` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man, Procps, Psmisc, Sed, Sysklogd, Tar)
+### `33` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man, Psmisc, Sed, Sysklogd, Tar)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
@@ -1203,10 +1203,9 @@ export CFFGPT="bc base64 base32 basename cat chgrp chmod chown chroot cksum comm
 date dd df dirname du echo env expand expr factor false fmt fold groups head hostid id
 install link ln logname ls md5sum mkdir mkfifo mknod mktemp mv nice nl nohup nproc od
 paste printenv printf pwd readlink realpath rm rmdir seq sha1sum sha224sum sha256sum
-sha384sum sha512sum shred sleep sort split stat stty sync tac tail tee test timeout
-touch tr true truncate tty uname uniq unlink wc who whoami yes file find xargs egrep
-grep fgrep dnsdomainname ifconfig hostname ping telnet tftp traceroute man free pgrep
-pidof pkill pmap ps pwdx sysctl top uptime vmstat w watch killall sed klogd tar"
+sha384sum sha512sum shred sleep sort split stat stty sync tac tail tee test timeout touch
+tr true truncate tty uname uniq unlink wc who whoami yes file find xargs egrep grep fgrep
+dnsdomainname ifconfig hostname ping telnet tftp traceroute man killall sed klogd tar"
 
 # Checks 115 commands, and make sure is enabled (=y).
 # Pipe to " | wc -l" at the right of "done" to checks total of commands.
