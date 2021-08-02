@@ -1429,7 +1429,7 @@ time { make install; }
 ```
 
 ### `43` - GNU Automake
-> #### `1.16.3` or newer
+> #### `1.16.4` or newer
 > The GNU Automake package contains programs for generating Makefiles for use with Autoconf.
 
 > **Required!** Before `musl-fts`, `musl-obstack`, and `argp-standalone`.
@@ -1437,7 +1437,7 @@ time { make install; }
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS" \
 ./configure --prefix=/usr   \
-            --docdir=/usr/share/doc/automake-1.16.3
+            --docdir=/usr/share/doc/automake-1.16.4
 
 # Build.
 time { make; }
