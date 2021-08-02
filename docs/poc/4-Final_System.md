@@ -1051,7 +1051,7 @@ time { make LIBINTL=MUSL prefix=/usr install; }
 ```
 ```bash
 # Delete useless static library.
-rm -fv libintl.a
+rm -fv /usr/lib/libintl.a
 ```
 
 ### `29` - GNU Bison
