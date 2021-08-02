@@ -417,7 +417,7 @@ popd && rm -rf tzdata; unset timezones
 # Configure source.
 cmake -B build \
     -DCMAKE_BUILD_TYPE=None -Wno-dev \
-    -DCMAKE_INSTALL_PREFIX=/usr      \
+    -DCMAKE_INSTALL_PREFIX="/usr"    \
     -DCMAKE_C_FLAGS="-flto=thin $CFLAGS"
 
 # Build.
