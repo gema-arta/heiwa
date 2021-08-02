@@ -1266,6 +1266,7 @@ time { make install; }
 > **Required!**
 ```bash
 # Configure source.
+CFLAGS="-flto=thin $CFLAGS" \
 ac_cv_header_sys_cdefs_h=no \
 ac_cv_lib_error_at_line=no  \
 ./configure --prefix=/usr
@@ -1284,6 +1285,7 @@ time { make install; }
 > **Required!**
 ```bash
 # Configure source.
+CFLAGS="-flto=thin $CFLAGS" \
 ./configure --prefix=/usr
 
 # Build.
@@ -1300,6 +1302,7 @@ time { make install; }
 > **Required!**
 ```bash
 # Configure source.
+CFLAGS="-flto=thin $CFLAGS" \
 ac_cv_header_sys_cdefs_h=no \
 ac_cv_lib_error_at_line=no  \
 ./configure --prefix=/usr
@@ -1318,6 +1321,7 @@ time { make install; }
 > **Required!** Before `GNU Bash`.
 ```bash
 # Configure source.
+CFLAGS="-flto=thin $CFLAGS" \
 ac_cv_header_sys_cdefs_h=no \
 ac_cv_lib_error_at_line=no  \
 ./configure --prefix=/usr
@@ -1336,6 +1340,7 @@ time { make install; }
 > **Required!**
 ```bash
 # Configure source.
+CFLAGS="-flto=thin $CFLAGS"                  \
 ./configure --prefix=/usr                    \
             --docdir=/usr/share/doc/bash-5.1 \
             --without-bash-malloc            \
