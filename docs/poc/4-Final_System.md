@@ -1121,7 +1121,7 @@ export BUILD_ZLIB BUILD_BZIP2
 patch -Np1 -i ../../extra/perl/patches/musl-locale.patch
 patch -Np1 -i ../../extra/perl/patches/musl-stack-size.patch
 
-# Configure source.
+# Configure source. Disable all warning compiler outputs.
 ./Configure -des \
     -Dprefix=/usr                                                             \
     -Dvendorprefix=/usr                                                       \
