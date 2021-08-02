@@ -1369,6 +1369,7 @@ time { make install && mv -fv /usr/bin/bash /bin/.; }
 > **Required!** Before `Eudev`.
 ```bash
 # Configure source.
+CFLAGS="-flto=thin $CFLAGS"   \
 ./configure --prefix=/usr     \
             --bindir=/bin     \
             --sysconfdir=/etc \
