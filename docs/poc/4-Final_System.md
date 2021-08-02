@@ -1123,26 +1123,26 @@ patch -Np1 -i ../../extra/perl/patches/musl-stack-size.patch
 
 # Configure source.
 ./Configure -des \
-    -Dprefix=/usr                                             \
-    -Dvendorprefix=/usr                                       \
-    -Dccdlflags="-rdynamic"                                   \
-    -Dcccdlflags="-fPIC"                                      \
-    -Dprivlib=/usr/lib/perl5/5.34/core_perl                   \
-    -Darchlib=/usr/lib/perl5/5.34/core_perl                   \
-    -Dsitelib=/usr/lib/perl5/5.34/site_perl                   \
-    -Dsitearch=/usr/lib/perl5/5.34/site_perl                  \
-    -Dvendorlib=/usr/lib/perl5/5.34/vendor_perl               \
-    -Dvendorarch=/usr/lib/perl5/5.34/vendor_perl              \
-    -Doptimize="-DNO_POSIX_2008_LOCALE -D_GNU_SOURCE $CFLAGS" \
-    -Dcf_by="Heiwa/Linux"                                     \
-    -Dmyuname="linux"                                         \
-    -Dmyhostname="localh3art"                                 \
-    -Dperladmin="heiwa@localh3art"                            \
-    -Dusethreads                                              \
-    -Duseshrplib                                              \
-    -Dman1ext=1                                               \
-    -Dman3ext=3pm                                             \
-    -Dman1dir=/usr/share/man/man1                             \
+    -Dprefix=/usr                                                             \
+    -Dvendorprefix=/usr                                                       \
+    -Dccdlflags="-rdynamic"                                                   \
+    -Dcccdlflags="-fPIC"                                                      \
+    -Dprivlib=/usr/lib/perl5/5.34/core_perl                                   \
+    -Darchlib=/usr/lib/perl5/5.34/core_perl                                   \
+    -Dsitelib=/usr/lib/perl5/5.34/site_perl                                   \
+    -Dsitearch=/usr/lib/perl5/5.34/site_perl                                  \
+    -Dvendorlib=/usr/lib/perl5/5.34/vendor_perl                               \
+    -Dvendorarch=/usr/lib/perl5/5.34/vendor_perl                              \
+    -Doptimize="-DNO_POSIX_2008_LOCALE -D_GNU_SOURCE -Wno-everything $CFLAGS" \
+    -Dcf_by="Heiwa/Linux"                                                     \
+    -Dmyuname="linux"                                                         \
+    -Dmyhostname="localh3art"                                                 \
+    -Dperladmin="heiwa@localh3art"                                            \
+    -Dusethreads                                                              \
+    -Duseshrplib                                                              \
+    -Dman1ext=1                                                               \
+    -Dman3ext=3pm                                                             \
+    -Dman1dir=/usr/share/man/man1                                             \
     -Dman3dir=/usr/share/man/man3
 
 # Build.
