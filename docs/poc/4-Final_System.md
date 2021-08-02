@@ -1214,7 +1214,7 @@ for X in ${CFFGPT}; do
     || echo "* $X not CONFIGURED"
 done
 
-# Build.
+# Build with verbose.
 time { make CFLAGS="-flto=thin $CFLAGS" V=1; }
 
 # Checks compiled 102 commands.
