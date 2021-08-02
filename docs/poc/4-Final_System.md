@@ -1160,8 +1160,7 @@ time { make install; unset BUILD_ZLIB BUILD_BZIP2; }
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"    \
-./Configure                    \
-    linux-x86_64               \
+./Configure linux-x86_64       \
     --prefix=/usr              \
     --libdir=lib               \
     --openssldir=/etc/ssl      \
