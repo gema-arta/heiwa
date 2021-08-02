@@ -1249,6 +1249,7 @@ time { make PREFIX=/ install; unset CFFGPT; }
 sed -i 's|extras||' Makefile.in
 
 # Configure source.
+CFLAGS="-flto=thin $CFLAGS" \
 ./configure --prefix=/usr
 
 # Build.
