@@ -348,7 +348,7 @@ grep --color=auto -B1 "^ /usr/include" dummy.log
 # | /usr/include
 
 # Check the dynamic linker libraries path.
-grep --color=auto -oE "\-L/usr/lib|\-L/lib" dummy.log
+grep -oE "\-L/usr/lib|\-L/lib" dummy.log
 
 # | The output should be:
 # |-----------------------
@@ -887,7 +887,7 @@ grep --color=auto -B1 "^ /usr/include" dummy.log
 # | /usr/include
 
 # Check the dynamic linker libraries path.
-grep --color=auto -oE "\-L/usr/lib|\-L/lib" dummy.log
+grep -oE "\-L/usr/lib|\-L/lib" dummy.log
 
 # | The output should be:
 # |-----------------------
