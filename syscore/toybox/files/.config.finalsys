@@ -1,8 +1,7 @@
 #
 # Automatically generated make config: don't edit
 # ToyBox version: KCONFIG_VERSION
-# Mon Jun 21 22:20:40 2021
-# Configured by owl4ce
+# Mon Aug  2 17:42:00 2021
 #
 CONFIG_TOYBOX_CONTAINER=y
 CONFIG_TOYBOX_FIFREEZE=y
@@ -74,11 +73,11 @@ CONFIG_OD=y
 CONFIG_PASTE=y
 # CONFIG_PATCH is not set
 CONFIG_PRINTF=y
-CONFIG_PS=y
-CONFIG_TOP=y
+# CONFIG_PS is not set
+# CONFIG_TOP is not set
 # CONFIG_IOTOP is not set
-CONFIG_PGREP=y
-CONFIG_PKILL=y
+# CONFIG_PGREP is not set
+# CONFIG_PKILL is not set
 CONFIG_PWD=y
 # CONFIG_RENICE is not set
 CONFIG_RM=y
@@ -215,7 +214,7 @@ CONFIG_FACTOR=y
 # CONFIG_FALLOCATE is not set
 # CONFIG_FLOCK is not set
 CONFIG_FMT=y
-CONFIG_FREE=y
+# CONFIG_FREE is not set
 # CONFIG_FREERAMDISK is not set
 # CONFIG_FSFREEZE is not set
 # CONFIG_FSYNC is not set
@@ -251,9 +250,9 @@ CONFIG_FREE=y
 # CONFIG_ONEIT is not set
 # CONFIG_PARTPROBE is not set
 # CONFIG_PIVOT_ROOT is not set
-CONFIG_PMAP=y
+# CONFIG_PMAP is not set
 CONFIG_PRINTENV=y
-CONFIG_PWDX=y
+# CONFIG_PWDX is not set
 # CONFIG_PWGEN is not set
 # CONFIG_READAHEAD is not set
 # CONFIG_READELF is not set
@@ -272,19 +271,19 @@ CONFIG_STAT=y
 # CONFIG_SWAPOFF is not set
 # CONFIG_SWAPON is not set
 # CONFIG_SWITCH_ROOT is not set
-CONFIG_SYSCTL=y
+# CONFIG_SYSCTL is not set
 CONFIG_TAC=y
 CONFIG_NPROC=y
 # CONFIG_TASKSET is not set
 CONFIG_TIMEOUT=y
 CONFIG_TRUNCATE=y
-CONFIG_UPTIME=y
+# CONFIG_UPTIME is not set
 # CONFIG_USLEEP is not set
 # CONFIG_UUIDGEN is not set
 # CONFIG_VCONFIG is not set
-CONFIG_VMSTAT=y
-CONFIG_W=y
-CONFIG_WATCH=y
+# CONFIG_VMSTAT is not set
+# CONFIG_W is not set
+# CONFIG_WATCH is not set
 # CONFIG_WATCHDOG is not set
 # CONFIG_WHICH is not set
 # CONFIG_XXD is not set
@@ -327,7 +326,7 @@ CONFIG_MKTEMP=y
 # CONFIG_MOUNT is not set
 # CONFIG_PASSWD is not set
 # CONFIG_PASSWD_SAD is not set
-CONFIG_PIDOF=y
+# CONFIG_PIDOF is not set
 CONFIG_SEQ=y
 # CONFIG_SU is not set
 CONFIG_SYNC=y
