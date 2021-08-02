@@ -1207,7 +1207,7 @@ sha384sum sha512sum shred sleep sort split stat stty sync tac tail tee test time
 tr true truncate tty uname uniq unlink wc who whoami yes file find xargs egrep grep fgrep
 dnsdomainname ifconfig hostname ping telnet tftp traceroute man killall sed klogd tar"
 
-# Checks 115 commands, and make sure is enabled (=y).
+# Checks 102 commands, and make sure is enabled (=y).
 # Pipe to " | wc -l" at the right of "done" to checks total of commands.
 for X in ${CFFGPT}; do
     grep -v '#' .config | grep -i --color=auto "_${X}=" \
@@ -1217,7 +1217,7 @@ done
 # Build.
 time { make CFLAGS="-flto=thin $CFLAGS" V=1; }
 
-# Checks compiled 115 commands.
+# Checks compiled 102 commands.
 ./toybox | tr ' ' '\n'i \
 | grep -xE --color=auto $(echo $CFFGPT | tr ' ' '|'i) | wc -l
 
@@ -1227,7 +1227,7 @@ time { make CFLAGS="-flto=thin $CFLAGS" V=1; }
 ./toybox | tr ' ' '\n'i \
 | grep -vxE --color=auto $(echo $CFFGPT | tr ' ' '|'i)
 
-# So, totally is 118 commands.
+# So, totally is 105 commands.
 ./toybox | wc -w
 
 # Install.
