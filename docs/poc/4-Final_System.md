@@ -322,6 +322,7 @@ ${READELF} -l a.out | grep ": /lib"
 # |-----------------------
 # |      [Requesting program interpreter: /lib/ld-musl-x86_64.so.1]
 
+# Check if the ELF successfuly linked with mimalloc.
 ldd a.out
 
 # | The output should be (below addresses are example):
