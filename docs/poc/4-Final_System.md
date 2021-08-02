@@ -1160,11 +1160,13 @@ time { make install; unset BUILD_ZLIB BUILD_BZIP2; }
 ```bash
 # Configure source.
 ./Configure \
-    linux-x86_64       \       \
+    linux-x86_64               \
     --prefix=/usr              \
     --libdir=lib               \
     --openssldir=/etc/ssl      \
-    shared no-ssl3-method      \
+    shared                     \
+    zlib-dynamic               \
+    no-ssl3-method             \
     enable-ec_nistp_64_gcc_128 \
     ${CFLAGS} -Wa,--noexecstack
 
