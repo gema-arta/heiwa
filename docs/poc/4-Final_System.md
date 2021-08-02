@@ -501,7 +501,7 @@ time { make SHLIB_LIBS="-lcurses -lterminfo"; }
 time { make SHLIB_LIBS="-lcurses -lterminfo" install; }
 ```
 ```bash
-# Optional, documentation.
+# Optional, install some additional documentation.
 install -vm644 doc/*.{ps,pdf,html,dvi} /usr/share/doc/readline-8.1
 ```
 
