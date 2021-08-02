@@ -1145,7 +1145,7 @@ patch -Np1 -i ../../extra/perl/patches/musl-stack-size.patch
     -Dman1dir=/usr/share/man/man1                                             \
     -Dman3dir=/usr/share/man/man3
 
-# Build.
+# Build. Fails with LTO.
 time { make; }
 
 # Install and unset Perl-specific exported variables.
