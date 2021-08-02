@@ -1189,7 +1189,7 @@ time { make MANSUFFIX=ssl install; }
 mv -fv /usr/share/doc/openssl /usr/share/doc/openssl-1.1.1k
 
 # Optional, install some additional documentation.
-cp -rfv doc/* /usr/share/doc/openssl-1.1.1k
+cp -rfv doc/* /usr/share/doc/openssl-1.1.1k/.
 ```
 
 ### `33` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man, Psmisc, Sed, Sysklogd, Tar)
