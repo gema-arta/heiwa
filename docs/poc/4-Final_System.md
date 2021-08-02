@@ -381,9 +381,9 @@ southamerica etcetera backward factory"
 
 # Build. -> Ignore "pkg-config: No such file or directory" while building `posixtz`! <-
 time {
-    make CC=${CC} CFLAGS="-DHAVE_STDINT_H=1 $CFLAGS" \
-    TZDIR="/usr/share/zoneinfo"                   && \
-    make -C posixtz-0.5 CC=${CC} posixtz
+    make CC=${CC} TZDIR="/usr/share/zoneinfo"        \
+    CFLAGS="-DHAVE_STDINT_H=1 -flto=thin $CFLAGS" && \
+    make -C posixtz-0.5 CC=${CC} CFLAGS="-flto=thin $CFLAGS" posixtz
 }
 
 # Install utilities and the man pages.
@@ -408,7 +408,26 @@ cp -fv /usr/share/zoneinfo/<xxx> /etc/localtime
 popd && rm -rf tzdata; unset timezones
 ```
 
-### `10` - Zlib-ng
+### `10` - musl-locales
+> #### `?` (git)
+> The musl-locales package contains `locale` implementation, which works on musl libc (with limitations in musl itself).
+
+> **Required!**
+```bash
+# Configure source.
+cmake -B build \
+    -DCMAKE_BUILD_TYPE=None -Wno-dev \
+    -DCMAKE_INSTALL_PREFIX=/usr      \
+    -DCMAKE_C_FLAGS="-flto=thin $CFLAGS"
+
+# Build.
+time { make -C build; }
+
+# Install.
+time { make -C build install; }
+```
+
+### `11` - Zlib-ng
 > #### `2.0.5` or newer
 > The Zlib-ng package contains zlib data compression library for the next generation systems.
 
@@ -416,11 +435,12 @@ popd && rm -rf tzdata; unset timezones
 ```bash
 # Configure source.
 cmake -B build \
-    -DCMAKE_BUILD_TYPE=Release     \
-    -DCMAKE_INSTALL_PREFIX="/usr"  \
-    -DWITH_NATIVE_INSTRUCTIONS=YES \
-    -DWITH_SANITIZER=ON            \
-    -DZLIB_COMPAT=ON               \
+    -DCMAKE_BUILD_TYPE=Release           \
+    -DCMAKE_INSTALL_PREFIX="/usr"        \
+    -DCMAKE_C_FLAGS="-flto=thin $CFLAGS" \
+    -DWITH_NATIVE_INSTRUCTIONS=YES       \
+    -DWITH_SANITIZER=ON                  \
+    -DZLIB_COMPAT=ON                     \
     -DBUILD_SHARED_LIBS=ON -Wno-dev
 
 # Build.
@@ -430,14 +450,14 @@ time { make -C build; }
 time { make -C build install; }
 ```
 
-### `11` - NetBSD Curses
+### `12` - NetBSD Curses
 > #### `0.3.2` or newer
 > The NetBSD Curses package contains libraries for terminal-independent handling of character screens.
 
 > **Required!** Before `GNU Bash`, `GNU Readline`, `GNU Texinfo`, and `Util-linux`.
 ```bash
 # Build.
-time { make CFLAGS="-fPIC $CFLAGS" all-dynamic; }
+time { make CFLAGS="-fPIC -flto=thin $CFLAGS" all-dynamic; }
 
 # Install and create symlinks as `libtinfo` libraries (which actually replace GNU Ncurses).
 time {
@@ -450,7 +470,7 @@ time {
 rm -fv /usr/share/man/man3/attr_{g,s}et.3
 ```
 
-### `12` - GNU Readline
+### `13` - GNU Readline
 > #### `8.1` or newer
 > The GNU Readline pacakage contains library providing line editing, history, and tokenisation functions.
 
@@ -462,6 +482,7 @@ sed -i '/MV.*old/d'    Makefile.in
 sed -i '/{OLDSUFF}/c:' support/shlib-install
 
 # Configure source.
+CFLAGS="-flto=thin $CFLAGS"  \
 ./configure --prefix=/usr    \
             --with-curses    \
             --disable-static \
@@ -478,13 +499,14 @@ time { make SHLIB_LIBS="-lcurses -lterminfo" install; }
 install -vm644 doc/*.{ps,pdf,html,dvi} /usr/share/doc/readline-8.1
 ```
 
-### `13` - GNU M4
+### `14` - GNU M4
 > #### `1.4.19` or newer
 > The GNU M4 package contains a macro processor.
 
 > **Required!** Before `Flex`, `Attr`, `Acl`, `GNU Autoconf`, and `GNU Automake`.
 ```bash
 # Configure source.
+CFLAGS="-flto=thin $CFLAGS" \
 ac_cv_header_sys_cdefs_h=no \
 ac_cv_lib_error_at_line=no  \
 ./configure --prefix=/usr
@@ -496,13 +518,14 @@ time { make; }
 time { make install; }
 ```
 
-### `14` - Flex
+### `15` - Flex
 > #### `2.6.4` or newer
 > The Flex package contains a utility for generating programs that recognize patterns in text.
 
 > **Required!** Before `IPRoute2`, `Kbd`, and `Kmod`.
 ```bash
 # Configure source. Flex still expect `cc` or `gcc` to configure.
+CFLAGS="-flto=thin $CFLAGS"      \
 ac_cv_func_malloc_0_nonnull=yes  \
 ac_cv_func_realloc_0_nonnull=yes \
 ./configure --prefix=/usr        \
@@ -523,13 +546,14 @@ time {
 # To support those programs, create a symbolic link named `lex` that runs `flex` in `lex` emulation mode.
 ```
 
-### `15` - Attr
+### `16` - Attr
 > #### `2.5.1` or newer
 > The Attr package contains utilities to administer the extended attributes on filesystem objects.
 
 > **Required!** Before `ACL`, `libcap`, and `Shadow`.
 ```bash
 # Configure source.
+CFLAGS="-flto=thin $CFLAGS"   \
 ./configure --prefix=/usr     \
             --bindir=/bin     \
             --disable-static  \
@@ -543,13 +567,14 @@ time { make; }
 time { make install; }
 ```
 
-### `16` - ACL
+### `17` - ACL
 > #### `2.3.1` or newer
 > The ACL package contains utilities to administer Access Control Lists, which are used to define more fine-grained discretionary access rights for files and directories.
 
 > **Required!** Before `Shadow`.
 ```bash
 # Configure source.
+CFLAGS="-flto=thin $CFLAGS"  \
 ./configure --prefix=/usr    \
             --bindir=/bin    \
             --disable-static \
@@ -562,7 +587,7 @@ time { make; }
 time { make install; }
 ```
 
-### `17` - libcap
+### `18` - libcap
 > #### `2.51` or newer
 > The libcap package implements the user-space interfaces to the POSIX 1003.1e capabilities available in Linux kernels. These capabilities are a partitioning of the all powerful root privilege into a set of distinct privileges.
 
@@ -572,13 +597,16 @@ time { make install; }
 sed -i '/install -m.*STA/d' libcap/Makefile
 
 # Build.
-time { make CC=${CC} SBINDIR=/sbin prefix=/usr lib=lib; }
+time {
+    make CC=${CC} CFLAGS="-flto=thin $CFLAGS" \
+    SBINDIR=/sbin prefix=/usr lib=lib
+}
 
 # Install.
 time { make CC=${CC} SBINDIR=/sbin prefix=/usr lib=lib install; }
 ```
 
-### `18` - Shadow
+### `19` - Shadow
 > #### `4.8.1` or newer
 > The Shadow package contains programs for handling passwords in a secure way.
 
@@ -606,6 +634,7 @@ sed -i 's|1000|999|' etc/useradd
 sed -i 's|yes|no|' etc/useradd
 
 # Configure source.
+CFLAGS="-flto=thin $CFLAGS"   \
 touch /usr/bin/passwd      && \
 ./configure --sysconfdir=/etc \
             --with-group-name-max-length=32
@@ -628,20 +657,20 @@ pwconv; grpconv
 passwd root
 ```
 
-### `19` - libexecinfo
+### `20` - libexecinfo
 > #### `1.1` or newer (from Heiwa/Linux fork)
 > The libexecinfo package contains backtrace facility that usually found in GNU libc (glibc).
 
 > **Required!** Before `Clang/LLVM`.
 ```bash
 # Build.
-time { make dynamic; }
+time { make CFLAGS="-flto=thin $CFLAGS" dynamic; }
 
 # Install.
 time { make PREFIX=/usr install-{header,dynamic}; }
 ```
 
-### `20` - Clang/LLVM + libunwind, libcxxabi, and libcxx
+### `21` - Clang/LLVM + libunwind, libcxxabi, and libcxx
 > #### `12.x.x` or newer
 > - C language family frontend for LLVM;  
 > - C++ runtime stack unwinder from LLVM;  
@@ -855,24 +884,6 @@ rm -fv dummy.{c,log} a.out
 ```bash
 # Back to "/sources/pkgs" directory.
 popd
-```
-
-### `21` - musl-locales
-> #### `?` (git)
-> The musl-locales package contains `locale` implementation, which works on musl libc (with limitations in musl itself).
-
-> **Required!**
-```bash
-# Configure source.
-cmake -B build \
-    -DCMAKE_BUILD_TYPE=None \
-    -DCMAKE_INSTALL_PREFIX=/usr -Wno-dev 
-
-# Build.
-time { make -C build; }
-
-# Install.
-time { make -C build install; }
 ```
 
 ### `22` - Bzip2
