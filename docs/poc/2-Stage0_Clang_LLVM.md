@@ -75,7 +75,7 @@ time { make install; }
 > #### `10.3.1_git20210424` (from Alpine Linux)
 > The GCC package contains the GNU compiler collection, which includes the C and C++ compilers.
 
-> **Required!** This build of GCC is mainly done so that the C library can be built next.
+> **Required!** This build of GCC is mainly done so that the musl libc can be built next.
 ```bash
 # GCC requires the GMP, MPFR, and MPC packages to either be present on the host or to be present in source form within the GCC source tree.
 tar xf ../gmp-6.2.1.tar.xz  && mv -fv gmp-6.2.1 gmp
@@ -162,7 +162,7 @@ ln -sv ../include /clang0-tools/usr/include
 > #### `10.3.1_git20210424` (from Alpine Linux)
 > The GCC package contains the GNU compiler collection, which includes the C and C++ compilers.
 
-> **Required!** This second build of GCC will produce the final cross compiler which will use the previously built C library.
+> **Required!** This second build of GCC will produce the final cross compiler which will use the previously built musl libc.
 ```bash
 # GCC requires the GMP, MPFR, and MPC packages to either be present on the host or to be present in source form within the GCC source tree.
 tar xf ../gmp-6.2.1.tar.xz  && mv -fv gmp-6.2.1 gmp
