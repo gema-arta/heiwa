@@ -213,11 +213,11 @@ cp -fv ../extra/llvm/files/config.guess cmake/.
 # Configure `libunwind` source.
 pushd ${LLVM_SRC}/projects/libunwind/ && \
     cmake -B build \
-        -DCMAKE_INSTALL_PREFIX="/clang1-tools"  \
-        -DCMAKE_C_FLAGS="-fPIC -g0 $CFLAGS"     \
-        -DCMAKE_CXX_FLAGS="-fPIC -g0 $CXXFLAGS" \
-        -DLLVM_PATH="$LLVM_SRC"                 \
-        -DLIBUNWIND_ENABLE_STATIC=OFF           \
+        -DCMAKE_INSTALL_PREFIX="/clang1-tools"             \
+        -DCMAKE_C_FLAGS="-fPIC -flto=thin -g0 $CFLAGS"     \
+        -DCMAKE_CXX_FLAGS="-fPIC -flto=thin -g0 $CXXFLAGS" \
+        -DLLVM_PATH="$LLVM_SRC"                            \
+        -DLIBUNWIND_ENABLE_STATIC=OFF                      \
         -DLIBUNWIND_USE_COMPILER_RT=ON
 
 # Build.
@@ -233,12 +233,12 @@ time {
 # Configure `libcxxabi` source.
 pushd ${LLVM_SRC}/projects/libcxxabi/ && \
     cmake -B build \
-        -DCMAKE_INSTALL_PREFIX="/clang1-tools" \
-        -DCMAKE_CXX_FLAGS="-g0 $CXXFLAGS"      \
-        -DLLVM_PATH="$LLVM_SRC"                \
-        -DLIBCXXABI_ENABLE_STATIC=OFF          \
-        -DLIBCXXABI_USE_LLVM_UNWINDER=ON       \
-        -DLIBCXXABI_USE_COMPILER_RT=ON         \
+        -DCMAKE_INSTALL_PREFIX="/clang1-tools"       \
+        -DCMAKE_CXX_FLAGS="-flto=thin -g0 $CXXFLAGS" \
+        -DLLVM_PATH="$LLVM_SRC"                      \
+        -DLIBCXXABI_ENABLE_STATIC=OFF                \
+        -DLIBCXXABI_USE_LLVM_UNWINDER=ON             \
+        -DLIBCXXABI_USE_COMPILER_RT=ON               \
         -DLIBCXXABI_LIBCXX_INCLUDES="${LLVM_SRC}/projects/libcxx/include"
 
 # Build.
@@ -251,16 +251,16 @@ time { make -C build install; }
 # Configure `libcxx` source.
 pushd ${LLVM_SRC}/projects/libcxx/ && \
     cmake -B build \
-        -DCMAKE_INSTALL_PREFIX="/clang1-tools"                           \
-        -DCMAKE_CXX_FLAGS="-isystem /clang1-tools/include -g0 $CXXFLAGS" \
-        -DLLVM_PATH="$LLVM_SRC"                                          \
-        -DLIBCXX_ENABLE_STATIC=OFF                                       \
-        -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=OFF                         \
-        -DLIBCXX_CXX_ABI=libcxxabi                                       \
-        -DLIBCXX_CXX_ABI_INCLUDE_PATHS="/clang1-tools/include"           \
-        -DLIBCXX_CXX_ABI_LIBRARY_PATH="/clang1-tools/lib"                \
-        -DLIBCXX_HAS_MUSL_LIBC=ON                                        \
-        -DLIBCXX_USE_COMPILER_RT=ON                                      \
+        -DCMAKE_INSTALL_PREFIX="/clang1-tools"                                      \
+        -DCMAKE_CXX_FLAGS="-isystem /clang1-tools/include -flto=thin -g0 $CXXFLAGS" \
+        -DLLVM_PATH="$LLVM_SRC"                                                     \
+        -DLIBCXX_ENABLE_STATIC=OFF                                                  \
+        -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=OFF                                    \
+        -DLIBCXX_CXX_ABI=libcxxabi                                                  \
+        -DLIBCXX_CXX_ABI_INCLUDE_PATHS="/clang1-tools/include"                      \
+        -DLIBCXX_CXX_ABI_LIBRARY_PATH="/clang1-tools/lib"                           \
+        -DLIBCXX_HAS_MUSL_LIBC=ON                                                   \
+        -DLIBCXX_USE_COMPILER_RT=ON                                                 \
         -DLIBCXX_HAS_ATOMIC_LIB=OFF
 
 # Build.
