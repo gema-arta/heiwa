@@ -221,7 +221,7 @@ mv -fv specs "$SPECFILE"; unset SPECFILE
 # Quick test.
 echo "int main(){}" > dummy.c
 ${H_TRIPLET}-gcc dummy.c
-readelf -l a.out | grep "Requesting"
+readelf -l a.out | grep --color=auto "Requesting"
 
 # | The output should be:
 # |-----------------------
