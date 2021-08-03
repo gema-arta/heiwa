@@ -112,8 +112,7 @@ time { make LLVM=1 LLVM_IAS=1 mrproper; }
 time { make ARCH=${C_ARCH} LLVM=1 LLVM_IAS=1 HOSTCC=${CC} headers; }
 
 # Remove unnecessary files.
-find usr/include -name '.*' -exec rm -rfv {} \;
-rm -fv usr/include/Makefile
+find usr/include \( -name '.*' -o -name 'Makefile' \) -exec rm -rfv {} \;
 
 # Install.
 cp -rfv usr/include /clang1-tools/.
