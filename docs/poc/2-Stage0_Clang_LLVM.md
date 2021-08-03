@@ -39,8 +39,7 @@ time { make mrproper; }
 time { make ARCH=${C_ARCH} headers; }
 
 # Remove unnecessary files.
-find usr/include -name '.*' -exec rm -rfv {} \;
-rm -fv usr/include/Makefile
+find usr/include -name '.*' -o -name 'Makefile' -exec rm -rfv {} \;
 
 # Install.
 mkdir -v /clang0-tools/${H_TRIPLET} && \
