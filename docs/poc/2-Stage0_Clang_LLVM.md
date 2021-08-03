@@ -371,7 +371,7 @@ popd
 # The libtool .la files are only useful when linking with static libraries.
 # They are unneeded, and potentially harmful, when using dynamic shared libraries, specially when using non-autotools build systems.
 # Remove those files.
-find /clang0-tools/{{,${H_TRIPLET}/}lib{,64},libexec}/ -name \*.la -exec rm -rfv {} \;
+find /clang0-tools/{{,${H_TRIPLET}/}lib{,64},libexec}/ -name '*.la' -exec rm -rfv {} \;
 
 # Remove the documentation.
 rm -rf /clang0-tools/share/{info,man,doc}/*
@@ -379,7 +379,7 @@ rm -rf /clang0-tools/share/{info,man,doc}/*
 # Strip off debugging symbols from binaries using `llvm-strip`.
 # A large number of files will be reported "The file was not recognized as a valid object file".
 # These warnings can be safely ignored. These warnings indicate that those files are scripts instead of binaries.
-find /clang0-tools/{,${H_TRIPLET}/}lib{,64}/ -type f \( -name \*.a -o -name \*.so* \) -exec llvm-strip --strip-debug {} \;
+find /clang0-tools/{,${H_TRIPLET}/}lib{,64}/ -type f \( -name '*.a' -o -name '*.so*' \) -exec llvm-strip --strip-debug {} \;
 find /clang0-tools/libexec/gcc/${H_TRIPLET}/10.3.1/ -type f -exec llvm-strip --strip-unneeded {} \;
 find /clang0-tools/{,${H_TRIPLET}/}bin/ -maxdepth 1 -type f -exec /usr/bin/strip --strip-unneeded {} \;
 ```
