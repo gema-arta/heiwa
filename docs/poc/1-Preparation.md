@@ -50,7 +50,7 @@ fi
 
 > #### * Beginning of as privileged user!
 ### `4` - Setup privileged user's environment
-> **Warning!** Always set multiple jobs with load average to prevent hangs nor system freeze. Below will use total of core/threads.
+> **Warning!** Always set multiple jobs with load average to prevent hangs nor system freeze. Below will use total of host's core/threads.
 ```bash
 # Login as privileged user.
 su - heiwa
