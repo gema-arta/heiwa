@@ -89,7 +89,7 @@ ${READELF} -l a.out | grep --color=auto "Requesting program interpreter"
 # |-----------------------
 # |      [Requesting program interpreter: /clang1-tools/lib/ld-musl-x86_64.so.1]
 
-grep "ld.lld:.*crt[1in].o" dummy.log
+grep --color=auto "ld.lld:.*crt[1in].o" dummy.log
 
 # | The output should be:
 # |-----------------------
