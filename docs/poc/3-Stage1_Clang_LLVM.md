@@ -244,8 +244,11 @@ pushd ${LLVM_SRC}/projects/libcxxabi/ && \
 # Build.
 time { make -C build; }
 
-# Install.
-time { make -C build install; }
+# Install, also the headers.
+time {
+    make -C build install                      && \
+    cp -fv include/*.h /clang1-tools/include/. && popd
+}
 ```
 ```bash
 # Configure `libcxx` source.
