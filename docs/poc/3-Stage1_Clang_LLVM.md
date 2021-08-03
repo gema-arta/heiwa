@@ -250,7 +250,7 @@ time { make -C build install; }
 ```bash
 # Configure `libcxx` source.
 pushd ${LLVM_SRC}/projects/libcxx/ && \
-    cmake -B build \s
+    cmake -B build \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools"                                      \
         -DCMAKE_CXX_FLAGS="-isystem /clang1-tools/include -flto=thin -g0 $CXXFLAGS" \
         -DLLVM_PATH="$LLVM_SRC"                                                     \
