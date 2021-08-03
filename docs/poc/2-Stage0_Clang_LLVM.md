@@ -14,12 +14,12 @@ The purpose of this stage is to build a temporary Clang/LLVM toolchain with GCC 
 > ```
 
 > #### Build Notes
-> 0. Using GCC and Binutils as compiler toolchain.
-> 1. Using `bash` as current shell and symlink it to `sh`.
-> 2. Using `gawk` as `awk` implementation (symlinked).
-> 3. Using `bison` as `yacc` replacements (wrapped).
-> 4. Using `flex` as `lex` alternative lexical analyzers (symlinked).
-> 5. See more at "[LFS Host System Requirements](https://linuxfromscratch.org/lfs/view/stable/chapter02/hostreqs.html)".
+> 0. Use GCC and Binutils as host's toolchain.
+> 1. Install `bash` and symlink it to `sh`.
+> 2. Install `gawk` as `awk` implementation (symlinked).
+> 3. Install `bison` as `yacc` replacements (wrapped).
+> 4. Install `flex` as `lex` alternative lexical analyzers (symlinked).
+> 5. See more at LFS Host System Requirements](https://linuxfromscratch.org/lfs/view/stable/chapter02/hostreqs.html).
 > 
 > ```bash
 > file $(command -v {g{cc,++},sh,awk,yacc,lex})
@@ -171,12 +171,6 @@ tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc-1.2.1 mpc
 
 # Apply patches (from Alpine Linux).
 ../../extra/gcc/patches/appatch
-
-# On x86_64 hosts, set the default directory name for 64-bit libraries to "lib".
-case $(uname -m) in
-    x86_64) sed -e '/m64=/s/lib64/lib/' -i.orig gcc/config/i386/t-linux64
-    ;;
-esac
 
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build
