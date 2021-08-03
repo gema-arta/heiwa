@@ -171,7 +171,7 @@ export CPPFLAGS
 CFLAGS="${COMMON_FLAGS}"
 CXXFLAGS="${COMMON_FLAGS}"
 LDFLAGS="-Wl,-O2 -Wl,--as-needed"
-MAKEFLAGS="-j$(nproc) -l$(($(nproc)+1))"
+MAKEFLAGS="-j$(nproc) -l$(nproc)"
 export CFLAGS CXXFLAGS LDFLAGS MAKEFLAGS
 EOF
 source ~/.bash_profile
