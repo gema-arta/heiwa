@@ -373,7 +373,7 @@ popd
 # Remove those files.
 find /clang0-tools/{{,${H_TRIPLET}/}lib{,64},libexec}/ -name '*.la' -exec rm -rfv {} \;
 
-# Remove the documentation.
+# Remove the documentation and manpages.
 rm -rf /clang0-tools/share/{info,man,doc}/*
 
 # Strip off debugging symbols from binaries using `llvm-strip`.
