@@ -63,13 +63,13 @@ time {
     make DESTDIR=/clang1-tools install
     ln -sfv libc.so /clang1-tools/lib/ld-musl-x86_64.so.1
     mkdir -v /clang1-tools/bin && \
-    ln -sv ../lib/libc.so /clang1-tools/bin/ldd
+    ln -sfv ../lib/libc.so /clang1-tools/bin/ldd
 }
 ```
 ```bash
 # Set compiler to the new triplet from Stage-0 Clang/LLVM to use current libc.
-sed -i 's|CC=.*|CC="${H_TRIPLET}-clang"|'     ~/.bashrc
-sed -i 's|CXX=.*|CXX="${H_TRIPLET}-clang++"|' ~/.bashrc
+sed -i "s|${CC}|${H_TRIPLET}-${CC}|"   ~/.bashrc
+sed -i "s|${CXX}|${H_TRIPLET}-${CXX}|" ~/.bashrc
 source ~/.bashrc
 ```
 ```bash
