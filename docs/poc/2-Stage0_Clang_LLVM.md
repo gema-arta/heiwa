@@ -215,7 +215,7 @@ mv -fv specs "$SPECFILE"; unset SPECFILE
 # Quick test.
 echo "int main(){}" > dummy.c
 ${H_TRIPLET}-gcc dummy.c
-readelf -l a.out | grep --color=auto "Requesting program interpreter"
+readelf -l a.out | grep --color=auto "Req.*ter"
 
 # | The output should be:
 # |-----------------------
