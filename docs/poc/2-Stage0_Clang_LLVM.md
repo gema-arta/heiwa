@@ -138,7 +138,7 @@ time { make; }
 time {
     make DESTDIR=/clang0-tools install
     ln -sfv libc.so /clang0-tools/lib/ld-musl-x86_64.so.1
-    ln -sv ../lib/libc.so /clang0-tools/bin/ldd
+    ln -sfv ../lib/libc.so /clang0-tools/bin/ldd
 }
 ```
 ```bash
