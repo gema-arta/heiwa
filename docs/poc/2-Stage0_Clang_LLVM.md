@@ -50,7 +50,7 @@ cp -rfv usr/include /clang0-tools/${H_TRIPLET}/.
 > #### `2.36.1` or newer
 > The GNU Binutils package contains a linker, an assembler, and other tools for handling object files.
 
-> **Required!** To build GCC in this stage.
+> **Required!** To build Stage-0 Clang/LLVM.
 ```bash
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build
