@@ -69,7 +69,6 @@ time {
 ```bash
 # Set compiler to the new triplet from Stage-0 Clang/LLVM to use current libc.
 sed -i "s|${CC}|${H_TRIPLET}-${CC}|"   ~/.bashrc
-sed -i "s|${CXX}|${H_TRIPLET}-${CXX}|" ~/.bashrc
 source ~/.bashrc
 ```
 ```bash
