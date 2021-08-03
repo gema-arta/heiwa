@@ -130,12 +130,12 @@ cp -rfv usr/include /clang1-tools/.
 ```bash
 # Configure source.
 cmake -B build \
-    -DCMAKE_BUILD_TYPE=Release             \
+    -DCMAKE_BUILD_TYPE=Release -Wno-dev    \
     -DCMAKE_INSTALL_PREFIX="/clang1-tools" \
     -DWITH_NATIVE_INSTRUCTIONS=YES         \
     -DWITH_SANITIZER=ON                    \
     -DZLIB_COMPAT=ON                       \
-    -DBUILD_SHARED_LIBS=ON -Wno-dev
+    -DBUILD_SHARED_LIBS=ON
 
 # Build.
 time { make -C build; }
