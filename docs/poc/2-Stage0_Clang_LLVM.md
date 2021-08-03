@@ -201,7 +201,7 @@ time { make AS_FOR_TARGET=${H_TRIPLET}-as LD_FOR_TARGET=${H_TRIPLET}-ld; }
 time { make install; }
 ```
 ```bash
-# Adjust current GCC to produce binaries with "/clang0-tools/lib/ld-musl-x86_64.so.1".
+# Adjust the current GCC specs to produce binaries with "/clang0-tools/lib/ld-musl-x86_64.so.1".
 export SPECFILE="$(dirname $(${H_TRIPLET}-gcc -print-libgcc-file-name))/specs"
 ${H_TRIPLET}-gcc -dumpspecs > specs
 sed -i 's|/lib/ld-musl-x86_64.so.1|/clang0-tools/lib/ld-musl-x86_64.so.1|g' specs
