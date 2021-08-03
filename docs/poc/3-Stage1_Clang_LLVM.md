@@ -83,7 +83,7 @@ EOF
 # Quick test for the new triplet of Stage-0 Clang/LLVM.
 echo "int main(){}" > dummy.c
 ${CC} ${CFLAGS} dummy.c -v -Wl,--verbose &> dummy.log
-${READELF} -l a.out | grep --color=auto "Requesting program interpreter"
+${READELF} -l a.out | grep --color=auto "Req.*ter"
 
 # | The output should be:
 # |-----------------------
