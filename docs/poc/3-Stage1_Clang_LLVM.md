@@ -165,7 +165,7 @@ time { make PREFIX=/clang1-tools install-dynamic; }
 > **Required!** To build Stage-1 Clang/LLVM, since using musl libc.
 ```bash
 # Build.
-time { make dynamic; }
+time { make CFLAGS="-flto=thin $CFLAGS" dynamic; }
 
 # Install.
 time { make PREFIX=/clang1-tools install-{header,dynamic}; }
