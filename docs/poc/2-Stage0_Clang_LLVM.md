@@ -180,7 +180,6 @@ esac
 
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build
-
 CFLAGS="-g0 -Os -pipe" CXXFLAGS="-g0 -Os -pipe"     \
 LDFLAGS="-Wl,-rpath,/clang0-tools/lib" ../configure \
     --prefix=/clang0-tools                          \
