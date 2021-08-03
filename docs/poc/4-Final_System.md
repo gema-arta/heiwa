@@ -170,7 +170,7 @@ export CPPFLAGS
 # Compiler flags.
 CFLAGS="${COMMON_FLAGS}"
 CXXFLAGS="${COMMON_FLAGS}"
-LDFLAGS="-Wl,-O3 -Wl,--as-needed"
+LDFLAGS="-Wl,-O2 -Wl,--as-needed"
 MAKEFLAGS="-j$(nproc) -l$(($(nproc)+1))"
 export CFLAGS CXXFLAGS LDFLAGS MAKEFLAGS
 EOF
