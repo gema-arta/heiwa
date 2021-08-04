@@ -249,7 +249,7 @@ time { make; }
 # Install and create a `ldd` symlink to use to print shared object dependencies.
 time {
     make install
-    ln -sv ../usr/lib/libc.so /bin/ldd
+    ln -sfv ../usr/lib/libc.so /bin/ldd
 }
 ```
 ```bash
@@ -274,8 +274,8 @@ done; unset B; install -vm644 -t /usr/include/ \
 ```
 ```bash
 # Configure Stage-1 Clang/LLVM with new triplet to produce binaries with "/lib/ld-musl-x86_64.so.1" and libraries from "/usr/*".
-ln -sv clang   /clang1-tools/bin/x86_64-heiwa-linux-musl-clang
-ln -sv clang++ /clang1-tools/bin/x86_64-heiwa-linux-musl-clang++
+ln -sfv clang   /clang1-tools/bin/x86_64-heiwa-linux-musl-clang
+ln -sfv clang++ /clang1-tools/bin/x86_64-heiwa-linux-musl-clang++
 cat > /clang1-tools/bin/x86_64-heiwa-linux-musl.cfg << "EOF"
 --sysroot=/usr -Wl,-dynamic-linker /lib/ld-musl-x86_64.so.1
 EOF
@@ -469,8 +469,8 @@ time { make CFLAGS="-fPIC -flto=thin $CFLAGS" all-dynamic; }
 # Install and create symlinks as `libtinfo` libraries (which actually replace GNU Ncurses).
 time {
     make PREFIX=/usr install-{dynamic,manpages}
-    ln -sv libterminfo.so /usr/lib/libtinfo.so && \
-    ln -sv libterminfo.so /usr/lib/libtinfow.so
+    ln -sfv libterminfo.so /usr/lib/libtinfo.so
+    ln -sfv libterminfo.so /usr/lib/libtinfow.so
 }
 
 # Remove the man pages that colission with `attr`.
@@ -549,7 +549,7 @@ time { make; }
 # Install and create symlink as `lex`.
 time {
     make install 
-    ln -sv flex /usr/bin/lex
+    ln -sfv flex /usr/bin/lex
 }
 
 # A few programs do not know about `flex` yet and try to run its predecessor, `lex`.
@@ -835,9 +835,9 @@ time {
 ```bash
 # Create a symlink required by the FHS for "historical" reasons, and
 # set `clang`, `clang++`, and `lld` as default toolchain compiler and linker.
-ln -sv ../usr/bin/clang            /lib/cpp
-ln -sv clang                       /usr/bin/cc
-ln -sv lld                         /usr/bin/ld
+ln -sfv ../usr/bin/clang           /lib/cpp
+ln -sfv clang                      /usr/bin/cc
+ln -sfv lld                        /usr/bin/ld
 sed -e "s|\"${CXX}\"|\"clang++\"|" \
     -e "s|\"${CC}\"|\"clang\"|" -i ~/.bash_profile    
 source                             ~/.bash_profile
@@ -934,11 +934,11 @@ time { make CFLAGS="-fPIC -flto=thin $CFLAGS"; }
 # Install (also shared libraries) and fix the symlinks.
 time {
     make PREFIX=/usr install
-    ln -sv libbz2.so.1.0 libbz2.so && \
+    ln -sfv libbz2.so.1.0 libbz2.so && \
     install -vm755 -t /usr/lib/ libbz2.so*
-    cp -fv bzip2-shared bzip2      && \
-    ln -sv bzip2        bunzip2    && \
-    ln -sv bzip2        bzcat      && \
+    cp -fv bzip2-shared bzip2       && \
+    ln -sfv bzip2        bunzip2    && \
+    ln -sfv bzip2        bzcat      && \
     install -vm755 -t /usr/bin/ b{un,}zip2 bzcat
 }
 ```
@@ -1016,7 +1016,7 @@ sed -i 's|ln -f|ln -sf|' Makefile
 time { make CC=${CC} CFLAGS="-flto=thin $CFLAGS"; }
 
 # Install and create symlinks as `gzip` tools.
-ln -sv pigz gzip; ln -sv unpigz gunzip
+ln -sfv pigz gzip; ln -sfv unpigz gunzip
 install -vm755 -t /usr/bin/ pigz unpigz gzip gunzip
 ```
 
@@ -1041,7 +1041,7 @@ time { make; }
 # Install and create symlink as `pkg-config`.
 time {
     make install
-    ln -sv pkgconf /usr/bin/pkg-config
+    ln -sfv pkgconf /usr/bin/pkg-config
 }
 ```
 
@@ -1383,10 +1383,10 @@ time { make; }
 time {
     make install
     for B in {dep,ins,rm}mod modprobe; do
-        ln -sv ../bin/kmod /sbin/${B}
+        ln -sfv ../bin/kmod /sbin/${B}
     done; unset B
     for B in lsmod modinfo; do
-        ln -sv kmod /bin/${B}
+        ln -sfv kmod /bin/${B}
     done; unset B
 }
 ```
