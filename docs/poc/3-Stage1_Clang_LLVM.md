@@ -68,8 +68,8 @@ time {
 ```
 ```bash
 # Set compiler to the new triplet from Stage-0 Clang/LLVM to use current libc.
-sed -i "s|\"${CC}\"|\"${H_TRIPLET}-clang\"|"    ~/.bashrc
-sed -i "s|\"${CXX}\"|\"${H_TRIPLET}-clang++\"|" ~/.bashrc
+sed -e "s|\"${CXX}\"|\"${H_TRIPLET}-clang++\"|" \
+    -e "s|\"${CC}\"|\"${H_TRIPLET}-clang\"|" -i ~/.bashrc
 source                                          ~/.bashrc
 ```
 ```bash
@@ -338,10 +338,10 @@ cat > /clang1-tools/bin/${T_TRIPLET}.cfg << "EOF"
 EOF
 
 # Set the new PATH since "/clang0-tools" won't be used anymore and the Stage-1 Clang/LLVM default triplet (pc).
-sed -i 's|/clang0-tools/usr/bin:/clang0-tools/bin:||' ~/.bashrc
-sed -i "s|\"${CC}\"|\"${T_TRIPLET}-clang\"|"          ~/.bashrc
-sed -i "s|\"${CXX}\"|\"${T_TRIPLET}-clang++\"|"       ~/.bashrc
-source                                                ~/.bashrc
+sed -e 's|/clang0-tools/usr/bin:/clang0-tools/bin:||' \
+    -e "s|\"${CXX}\"|\"${T_TRIPLET}-clang++\"|"       \
+    -e "s|\"${CC}\"|\"${T_TRIPLET}-clang\"|" -i ~/.bashrc
+source                                          ~/.bashrc
 ```
 ```bash
 # Back to "${HEIWA}/sources/pkgs" directory.
