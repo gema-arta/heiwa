@@ -1,10 +1,10 @@
 # <p align="center">`Heiwa/Linux`</p>
-<pre>
-<p align="center"><samp>
-A hobby and performance-oriented Linux® distribution that provides aesthetics and practical functionality.
-Without sacrificing <b>build size</b> and <b>build times</b> just for optimizing <b>the performance</b>. It's all <b>balanced</b>
-</samp></p>
-</pre>
+<pre><p align="center"><samp>
+A hobby and performance-oriented Linux® distribution
+that provides aesthetics and practical functionality.
+Without sacrificing <b>build size</b> and <b>build times</b> just
+for optimizing <b>the performance</b>. It's all <b>balanced</b>
+</samp></p></pre>
 
 <br>
 
@@ -45,6 +45,6 @@ Without sacrificing <b>build size</b> and <b>build times</b> just for optimizing
 - [ ] Create a fast, flexible, and futuristic package manager.
 - [ ] Build an auto build systems.
 - [ ] Packaging, make it usable but with the aim of not being big.
-> <samp>Always W.I.P, since this is hobbyist. A radical experiments.</samp>
+> Always W.I.P, since this is hobbyist. A radical experiments.
 
 See [docs](./docs).
