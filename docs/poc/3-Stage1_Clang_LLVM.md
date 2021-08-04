@@ -382,7 +382,7 @@ sed -i 's|ln -f|ln -sf|' Makefile
 time { make CC=${CC} CFLAGS="-flto=thin $CFLAGS"; }
 
 # Install and create symlinks as `gzip` tools.
-ln -sv pigz gzip; ln -sv unpigz gunzip
+ln -sfv pigz gzip; ln -sfv unpigz gunzip
 install -vm755 -t /clang1-tools/bin/ pigz unpigz gzip gunzip
 ```
 
