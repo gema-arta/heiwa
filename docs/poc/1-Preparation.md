@@ -1,7 +1,7 @@
 ## `I` Preparation
 
 > #### Announcement
-> * Currently only focus on **x86_64** arch, build with native CPU optimization and ThinLTO for final toolchain. [Triplet @ OSDev](https://wiki.osdev.org/Target_Triplet).
+> * Currently only focus on **x86_64** architecture, build with native CPU optimization and ThinLTO for final toolchain. [Triplet @ OSDev](https://wiki.osdev.org/Target_Triplet).
 
 > #### * Beginning of as root!
 ### `1` - Prepare a volume/partition
