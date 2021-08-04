@@ -3,7 +3,7 @@
 A hobby and performance-oriented Linux® distribution
 that provides aesthetics and practical functionality.
 Without sacrificing <b>build size</b> and <b>build times</b> just
-for optimizing <b>the performance</b>. It's all <b>balanced</b>
+for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 </samp></p></pre>
 
 <br>
