@@ -70,7 +70,7 @@ time {
 # Set compiler to the new triplet from Stage-0 Clang/LLVM to use current libc.
 sed -i "s|\"${CC}\"|\"${H_TRIPLET}-clang\"|"    ~/.bashrc
 sed -i "s|\"${CXX}\"|\"${H_TRIPLET}-clang++\"|" ~/.bashrc
-source ~/.bashrc
+source                                          ~/.bashrc
 ```
 ```bash
 # Configure PATH for dynamic linker.
@@ -341,7 +341,7 @@ EOF
 sed -i 's|/clang0-tools/usr/bin:/clang0-tools/bin:||' ~/.bashrc
 sed -i "s|\"${CC}\"|\"${T_TRIPLET}-clang\"|"          ~/.bashrc
 sed -i "s|\"${CXX}\"|\"${T_TRIPLET}-clang++\"|"       ~/.bashrc
-source ~/.bashrc
+source                                                ~/.bashrc
 ```
 ```bash
 # Back to "${HEIWA}/sources/pkgs" directory.
