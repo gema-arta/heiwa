@@ -346,8 +346,8 @@ time {
 ```
 ```bash
 # Configure Stage-0 Clang with new triplet to produce binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" later.
-ln -sv clang   /clang0-tools/bin/${H_TRIPLET}-clang
-ln -sv clang++ /clang0-tools/bin/${H_TRIPLET}-clang++
+ln -sfv clang   /clang0-tools/bin/${H_TRIPLET}-clang
+ln -sfv clang++ /clang0-tools/bin/${H_TRIPLET}-clang++
 cat > /clang0-tools/bin/${H_TRIPLET}.cfg << "EOF"
 -Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1
 EOF
