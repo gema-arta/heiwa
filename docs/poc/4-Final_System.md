@@ -164,8 +164,7 @@ STRIP="llvm-strip"
 export CC CXX LD CC_LD CXX_LD AR AS NM OBJCOPY OBJDUMP RANLIB READELF SIZE STRIP
 
 # Hardened flags. [ Only Buffer Overflow Detector ]
-CPPFLAGS="-D_FORTIFY_SOURCE=2"
-export CPPFLAGS
+export CPPFLAGS="-D_FORTIFY_SOURCE=2"
 
 # Compiler flags.
 CFLAGS="${COMMON_FLAGS}"
@@ -207,8 +206,7 @@ time { make LLVM=1 LLVM_IAS=1 mrproper; }
 time { make LLVM=1 LLVM_IAS=1 HOSTCC=${CC} headers; }
 
 # Remove unnecessary files.
-find usr/include -name '.*' -exec rm -rfv {} \;
-rm -fv usr/include/Makefile
+find usr/include \( -name '.*' -o -name 'Makefile' \) -exec rm -rfv {} \;
 
 # Install.
 cp -rfv usr/include /usr/.
@@ -282,13 +280,12 @@ cat > /clang1-tools/bin/x86_64-heiwa-linux-musl.cfg << "EOF"
 --sysroot=/usr -Wl,-dynamic-linker /lib/ld-musl-x86_64.so.1
 EOF
 
-# Set toolchain to the new triplet from Stage-1 Clang/LLVM.
-sed -i 's|CC=.*|CC="x86_64-heiwa-linux-musl-clang"|'     ~/.bash_profile
-sed -i 's|CXX=.*|CXX="x86_64-heiwa-linux-musl-clang++"|' ~/.bash_profile
+# Set compiler to the new triplet from Stage-1 Clang/LLVM.
+sed -i "s|\"${CC}\"|\"x86_64-heiwa-linux-musl-clang\"|"    ~/.bash_profile
+sed -i "s|\"${CXX}\"|\"x86_64-heiwa-linux-musl-clang++\"|" ~/.bash_profile
 cat >> ~/.bash_profile << "EOF"
 
-MIMALLOC_LARGE_OS_PAGES=1
-export MIMALLOC_LARGE_OS_PAGES
+export MIMALLOC_LARGE_OS_PAGES=1
 EOF
 source ~/.bash_profile
 ```
@@ -315,13 +312,13 @@ time { make -C build install; }
 ```bash
 # Set `mimalloc` as default C/C++ memory allocator.
 sed -i "s|${COMMON_FLAGS}|-lmimalloc ${COMMON_FLAGS}|" ~/.bash_profile
-source ~/.bash_profile
+source                                                 ~/.bash_profile
 ```
 ```bash
 # Quick test for the new triplet of Stage-1 Clang/LLVM.
 echo "int main(){}" > dummy.c
 ${CC} ${CFLAGS} dummy.c -v -Wl,--verbose &> dummy.log
-${READELF} -l a.out | grep --color=auto ": /lib"
+${READELF} -l a.out | grep --color=auto "Req.*ter"
 
 # | The output should be:
 # |-----------------------
@@ -839,12 +836,12 @@ time {
 ```bash
 # Create a symlink required by the FHS for "historical" reasons, and
 # set `clang`, `clang++`, and `lld` as default toolchain compiler and linker.
-ln -sv ../usr/bin/clang          /lib/cpp
-ln -sv clang                     /usr/bin/cc
-ln -sv lld                       /usr/bin/ld
-sed -i 's|CC=.*|CC="clang"|'     ~/.bash_profile
-sed -i 's|CXX=.*|CXX="clang++"|' ~/.bash_profile
-source ~/.bash_profile
+ln -sv ../usr/bin/clang            /lib/cpp
+ln -sv clang                       /usr/bin/cc
+ln -sv lld                         /usr/bin/ld
+sed -i "s|\"${CC}\"|\"clang\"|"    ~/.bash_profile
+sed -i "s|\"${CXX}\"|\"clang++\"|" ~/.bash_profile
+source                             ~/.bash_profile
 ```
 ```bash
 # Build useful utilities for BSD-compability.
@@ -862,7 +859,7 @@ install -vm644 -t /usr/share/man/man1/ ../extra/musl/files/musl-utils/get{conf,e
 # Quick test.
 echo "int main(){}" > dummy.c
 cc ${CFLAGS} dummy.c -v -Wl,--verbose &> dummy.log
-readelf -l a.out | grep --color=auto ": /lib"
+readelf -l a.out | grep --color=auto "Req.*ter"
 
 # | The output should be:
 # |-----------------------
