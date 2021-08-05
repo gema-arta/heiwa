@@ -656,8 +656,7 @@ time { make; }
 time {
     make libdir=/usr/lib suidperms=4711 install
     make -C man install-man
-    mkdir -p /etc/default && \
-    useradd -D --gid 999
+    mkdir -v /etc/default && useradd -D --gid 999
 }
 ```
 ```bash
