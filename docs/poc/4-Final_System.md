@@ -388,8 +388,7 @@ EOF
 
 # Build. -> Ignore "pkg-config: No such file or directory" while building `posixtz`! <-
 time {
-    make CC=${CC} TZDIR="/usr/share/zoneinfo"        \
-    CFLAGS="-DHAVE_STDINT_H=1 -flto=thin $CFLAGS" && \
+    make CC=${CC} TZDIR="/usr/share/zoneinfo" CFLAGS="-DHAVE_STDINT_H=1 -flto=thin $CFLAGS" && \
     make -C posixtz-0.5 CC=${CC} CFLAGS="-flto=thin $CFLAGS" posixtz
 }
 
