@@ -638,10 +638,14 @@ find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;
 sed -e 's|#ENCRYPT_METHOD DES|ENCRYPT_METHOD SHA512|' \
     -e 's|/var/spool/mail|/var/mail|' -i etc/login.defs
 
+# Completely disable unportable `ruserok()`.
+sed -i '/RUSEROK/d' configure
+
 # Configure source.
-CFLAGS="-flto=thin $CFLAGS"   \
-touch /usr/bin/passwd      && \
-./configure --sysconfdir=/etc \
+touch /usr/bin/passwd
+CFLAGS="-flto=thin $CFLAGS"                \
+./configure --sysconfdir=/etc              \
+            --disable-account-tools-setuid \
             --with-group-name-max-length=32
 
 # Build.
