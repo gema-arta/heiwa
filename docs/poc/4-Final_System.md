@@ -643,9 +643,11 @@ sed -i '/RUSEROK/d' configure
 
 # Configure source.
 touch /usr/bin/passwd
-CFLAGS="-flto=thin $CFLAGS"                \
-./configure --sysconfdir=/etc              \
-            --disable-account-tools-setuid \
+CFLAGS="-flto=thin $CFLAGS"                 \
+./configure --sysconfdir=/etc               \
+            --without-tcb                   \
+            --disable-account-tools-setuid  \
+            --without-group-name-max-length \
             --with-group-name-max-length=32
 
 # Build.
