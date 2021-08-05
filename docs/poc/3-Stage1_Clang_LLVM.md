@@ -664,7 +664,7 @@ time { make install; }
 # Remove those files.
 find /clang1-tools/{lib,libexec}/ -name '*.la' -exec rm -rfv {} \;
 
-# Remove the documentation and manpages.
+# Remove the documentation, manpages, and uncessary files.
 rm -rf /clang1-tools/share/{info,man,doc,emacs,vim}/*
 
 # Strip off debugging symbols from binaries using `llvm-strip`.
