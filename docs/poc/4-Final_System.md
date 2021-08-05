@@ -146,6 +146,7 @@ chmod -v 600  /var/log/btmp
 ```bash
 cat > ~/.bash_profile << "EOF"
 LLVM_SRC="/sources/llvm"
+# Performance flags.
 COMMON_FLAGS="-march=native -O2 -ftree-vectorize -pipe"
 COMMON_FLAGS+=" -Wno-unused-command-line-argument"
 export LLVM_SRC COMMON_FLAGS
