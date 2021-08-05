@@ -411,12 +411,14 @@ cp -v ../../extra/toybox/files/.config.toolchain.nolibcrypto .config
 # Make sure to enable `libz`.
 grep --color=auto "LIBZ" .config
 
-export CFFGPT="base64 base32 basename cat chgrp chmod chown chroot cksum comm cp cut date
-dd df dirname du echo env expand expr factor false fmt fold groups head hostid id install
-link ln logname ls md5sum mkdir mkfifo mknod mktemp mv nice nl nohup nproc od paste printenv
-printf pwd readlink realpath rm rmdir seq sha1sum shred sleep sort split stat stty sync tac
-tail tee test timeout touch tr true truncate tty uname uniq unlink wc who whoami yes file
-find xargs egrep grep fgrep sed tar"
+read -rd '' TOYBOX << "EOF"
+base64 base32 basename cat chgrp chmod chown chroot cksum comm cp cut date dd df 
+dirname du echo env expand expr factor false fmt fold groups head hostid id install
+link ln logname ls md5sum mkdir mkfifo mknod mktemp mv nice nl nohup nproc od paste
+printenv printf pwd readlink realpath rm rmdir seq sha1sum shred sleep sort split
+stat stty sync tac tail tee test timeout touch tr true truncate tty uname uniq
+unlink wc who whoami yes file find xargs egrep grep fgrep sed tar
+EOF
 
 # Checks 87 commands, and make sure is enabled (=y).
 # Pipe to ` | wc -l` at the right of `done` to checks total of commands.
