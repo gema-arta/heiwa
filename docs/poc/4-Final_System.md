@@ -85,7 +85,8 @@ ln -sv bash                                             /bin/sh
 # Modern kernels maintain this list internally and exposes it to the user via the "/proc" filesystem.
 # To satisfy utilities that expect the presence of "/etc/mtab", create the following symbolic link.
 ln -sv /proc/self/mounts /etc/mtab
-
+```
+```bash
 # In order for user root to be able to login and for the name `root` to be recognized, there must be relevant entries in the "/etc/passwd" and "/etc/group" files.
 # Create the "/etc/passwd" file by running the following command.
 cat > /etc/passwd << "EOF"
@@ -124,11 +125,13 @@ wheel:x:97:
 nogroup:x:99:
 users:x:999:
 EOF
-
+```
+```bash
 # To remove the "I have no name!" prompt, start a new shell.
 # Since the "/etc/passwd" and "/etc/group" files have been created, user name and group name resolution will now work.
 exec /clang1-tools/bin/bash --login +h
-
+```
+```bash
 # The login, agetty, and init programs (and others) use a number of log files to record information such as who was logged into the system and when.
 # However, these programs will not write to the log files if they do not already exist.
 # Initialize the log files and give them proper permissions.
