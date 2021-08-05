@@ -424,7 +424,7 @@ EOF
 # Pipe to ` | wc -l` at the right of `done` to checks total of commands.
 for X in ${TOYBOX}; do
     grep -v '#' .config | grep -i --color=auto "_${X}=" \
-    || echo "* $X not CONFIGURED"
+    || echo "* ${X} not CONFIGURED"
 done
 
 # Build with verbose. Toybox will use `cc` that breaking the builds, so need to specify the CC and HOSTCC variable.
