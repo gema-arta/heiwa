@@ -2,7 +2,7 @@
 <pre><p align="center"><samp>
 A hobby and performance-oriented Linux® distribution
 that provides aesthetics and practical functionality.
-Without sacrificing <b>build size</b> and <b>build times</b> just
+Without sacrificing <b>build size</b> and <b>build time</b> just
 for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 </samp></p></pre>
 
@@ -44,13 +44,13 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 
 <br>
 
-> |  ?  | Stage                                                                                | Status            |
-> |:---:|--------------------------------------------------------------------------------------|:-----------------:|
-> |  ✓  | 1. [Preparation](./docs/poc/1-Preparation.md)                                        | Finished          |
-> |  ✓  | 2. [Stage-0 Clang/LLVM (ft. GNU) Cross-Toolchain](./docs/poc/2-Stage0_Clang_LLVM.md) | Finished          |
-> |  ✓  | 3. [Stage-1 Clang/LLVM Toolchain](./docs/poc/3-Stage1_Clang_LLVM.md)                 | Finished          |
-> |     | 4. [Final System](./docs/poc/4-Final_System.md)                                      | Under development |
-> |     | 5. [System Configuration](./docs/poc/5-System_Configuration.md)                      | Pending           |
+> |  ?  | Stage                                                                                | Status            | Optimized for              |
+> |:---:|--------------------------------------------------------------------------------------|:-----------------:|----------------------------|
+> |  ✓  | 1. [Preparation](./docs/poc/1-Preparation.md)                                        | Finished          | -                          |
+> |  ✓  | 2. [Stage-0 Clang/LLVM (ft. GNU) Cross-Toolchain](./docs/poc/2-Stage0_Clang_LLVM.md) | Finished          | Build Size and Build Time. |
+> |  ✓  | 3. [Stage-1 Clang/LLVM Toolchain](./docs/poc/3-Stage1_Clang_LLVM.md)                 | Finished          | Build Size and Build Time. |
+> |     | 4. [Final System](./docs/poc/4-Final_System.md)                                      | Under development | Faster Performance.        |
+> |     | 5. [System Configuration](./docs/poc/5-System_Configuration.md)                      | Pending           | -                          |
 
 </details>
 
