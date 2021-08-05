@@ -535,10 +535,14 @@ time { make install; }
 > **Required!** For the most packages next stage (chroot environment). Nothing is GNU-free.
 ```bash
 # Configure source.
-CFLAGS="-flto=thin $CFLAGS"        \
-./configure --prefix=/clang1-tools \
-            --build=${T_TRIPLET}   \
-            --host=${T_TRIPLET}
+CFLAGS="-flto=thin $CFLAGS"                   \
+./configure --prefix=/clang1-tools            \
+            --build=${T_TRIPLET}              \
+            --host=${T_TRIPLET}               \
+            --disable-perl-xs                 \
+            --without-external-libintl-perl   \
+            --without-external-Text-Unidecode \
+            --without-external-Unicode-EastAsianWidth
 
 # Build.
 time { make; }
