@@ -422,7 +422,7 @@ EOF
 
 # Checks 87 commands, and make sure is enabled (=y).
 # Pipe to ` | wc -l` at the right of `done` to checks total of commands.
-for X in ${CFFGPT}; do
+for X in ${TOYBOX}; do
     grep -v '#' .config | grep -i --color=auto "_${X}=" \
     || echo "* $X not CONFIGURED"
 done
@@ -432,18 +432,18 @@ time { make CC=${CC} HOSTCC=${CC} CFLAGS="-flto=thin $CFLAGS" V=1; }
 
 # Checks compiled 87 commands.
 ./toybox | tr ' ' '\n'i \
-| grep -xE --color=auto $(echo $CFFGPT | tr ' ' '|'i) | wc -l
+| grep -xE --color=auto $(echo ${TOYBOX} | tr ' ' '|'i) | wc -l
 
 # Checks commands that not configured but compiled.
 # `[` (coreutils)
 ./toybox | tr ' ' '\n'i \
-| grep -vxE --color=auto $(echo $CFFGPT | tr ' ' '|'i)
+| grep -vxE --color=auto $(echo ${TOYBOX} | tr ' ' '|'i)
 
 # So, totally is 88 commands.
 ./toybox | wc -w
 
 # Install.
-time { make CC=${CC} HOSTCC=${CC} PREFIX=/clang1-tools install; unset X CFFGPT; }
+time { make CC=${CC} HOSTCC=${CC} PREFIX=/clang1-tools install; unset X TOYBOX; }
 ```
 
 ### `11` - GNU AWK
