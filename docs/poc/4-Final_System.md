@@ -602,7 +602,7 @@ time { make install; }
 ```
 
 ### `18` - libcap
-> #### `2.51` or newer
+> #### `2.52` or newer
 > The libcap package implements the user-space interfaces to the POSIX 1003.1e capabilities available in Linux kernels. These capabilities are a partitioning of the all powerful root privilege into a set of distinct privileges.
 
 > **Required!** Before `IPRoute2` and `Shadow`.
