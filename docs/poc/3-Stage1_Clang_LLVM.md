@@ -611,7 +611,7 @@ patch -Np1 -i ../../extra/python3/patches/musl-find_library.patch
 sed -i '/def add_multiarch_paths/a \        return' setup.py
 
 # Replace Full LTO with ThinLTO to speedup build.
-sed -i -e 's|-flto |-flto=thin |' configure
+sed -i -e 's|-flto|-flto=thin|' configure
 
 # Configure source using provided libraries (built-in).
 ax_cv_c_float_words_bigendian=no   \
