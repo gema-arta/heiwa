@@ -588,8 +588,8 @@ rm -rf ./perl-cross-1.3.6
 CFLAGS="-DNO_POSIX_2008_LOCALE -D_GNU_SOURCE $CFLAGS" \
 HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE"     \
 LDFLAGS="-Wl,-z,stack-size=2097152 -pthread $LDFLAGS" \
-./configure --prefix=/clang1-tools \
-            --build=${T_TRIPLET}   \
+./configure --prefix=/clang1-tools                    \
+            --build=${T_TRIPLET}                      \
             --target=${T_TRIPLET}
 
 # Build.
