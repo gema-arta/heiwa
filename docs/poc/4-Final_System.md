@@ -146,10 +146,6 @@ chmod -v 600  /var/log/btmp
 ```bash
 cat > ~/.bash_profile << "EOF"
 export LLVM_SRC="/sources/llvm"
-# Performance flags.
-COMMON_FLAGS="-march=native -O2 -ftree-vectorize -pipe"
-COMMON_FLAGS+=" -Wno-unused-command-line-argument"
-export COMMON_FLAGS
 
 # Clang/LLVM Environment.
 CC="x86_64-pc-linux-musl-clang"
@@ -167,6 +163,11 @@ READELF="llvm-readelf"
 SIZE="llvm-size"
 STRIP="llvm-strip"
 export CC CXX LD CC_LD CXX_LD AR AS NM OBJCOPY OBJDUMP RANLIB READELF SIZE STRIP
+
+# Performance flags.
+COMMON_FLAGS="-march=native -O2 -ftree-vectorize -pipe"
+COMMON_FLAGS+=" -Wno-unused-command-line-argument"
+export COMMON_FLAGS
 
 # Hardened flags. [ Only Buffer Overflow Detector ]
 export CPPFLAGS="-D_FORTIFY_SOURCE=2"
