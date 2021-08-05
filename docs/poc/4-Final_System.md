@@ -289,11 +289,7 @@ EOF
 # Set compiler to the new triplet from Stage-1 Clang/LLVM.
 sed -e "s|\"${CXX}\"|\"x86_64-heiwa-linux-musl-clang++\"|" \
     -e "s|\"${CC}\"|\"x86_64-heiwa-linux-musl-clang\"|" -i ~/.bash_profile
-cat >> ~/.bash_profile << "EOF"
-
-export MIMALLOC_LARGE_OS_PAGES=1
-EOF
-source ~/.bash_profile
+source                                                     ~/.bash_profile
 ```
 
 ### `8` - Microsoft mimalloc
@@ -318,6 +314,7 @@ time { make -C build install; }
 ```bash
 # Set `mimalloc` as default C/C++ memory allocator.
 sed -i "s|${COMMON_FLAGS}|-lmimalloc ${COMMON_FLAGS}|" ~/.bash_profile
+printf '\n%s\n' 'export MIMALLOC_LARGE_OS_PAGES=1' >>  ~/.bash_profile
 source                                                 ~/.bash_profile
 ```
 ```bash
