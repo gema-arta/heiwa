@@ -115,7 +115,7 @@ time { make ARCH=${C_ARCH} LLVM=1 LLVM_IAS=1 HOSTCC=${CC} headers; }
 find usr/include \( -name '.*' -o -name 'Makefile' \) -exec rm -rfv {} \;
 
 # Install.
-cp -rfv usr/include /clang1-tools/.
+cp -afv usr/include /clang1-tools/.
 ```
 ```bash
 # I don't know .. why if HOSTCC is defaults since use "LLVM=1" (clang),
