@@ -620,7 +620,7 @@ ax_cv_c_float_words_bigendian=no   \
             --without-ensurepip    \
             --enable-shared --with-lto
 
-# Build. -> Ignore all issues! <-
+# Build. -> Ignore all issues at the end! <-
 time { make; }
 
 # Install.
