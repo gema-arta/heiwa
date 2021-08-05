@@ -42,6 +42,22 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 </details>
 
 - [ ] Create a Proof-of-Concept (similiar to LFS books). *Under development, optimizing ..*
+
+<details>
+<summary>Details</summary>
+
+<br>
+
+> |  ?  | Stage                                                                             | Status            |
+> |:---:|----------------------------------------------------------------------------=------|:-----------------:|
+> |  ✓  | [Preparation](./docs/poc/1-Preparation.md)                                        | Finished          |
+> |  ✓  | [Stage-0 Clang/LLVM (ft. GNU) Cross-Toolchain](./docs/poc/2-Stage0_Clang_LLVM.md) | Finished          |
+> |  ✓  | [Stage-1 Clang/LLVM Toolchain](./docs/poc/3-Stage1_Clang_LLVM.md)                 | Finished          |
+> |     | [Final System](./docs/poc/4-Final_System.md)                                      | Under development |
+> |     | [System Configuration](./docs/poc/5-System_Configuration.md)                      | Pending           |
+
+</details>
+
 - [ ] Create a fast, flexible, and futuristic package manager.
 - [ ] Build an auto build systems.
 - [ ] Packaging, make it usable but with the aim of not being big.
