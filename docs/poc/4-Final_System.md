@@ -12,7 +12,8 @@ if [[ -n "$HEIWA" ]]; then
     mknod -m 600 ${HEIWA}/dev/console c 5 1   && \
     mknod -m 666 ${HEIWA}/dev/null c 1 3
 fi
-
+```
+```bash
 # Mounting and Populating VKFS
 # The recommended method of populating the "/dev" directory with devices is to mount a virtual filesystem (such as tmpfs) on the "/dev" directory, and allow the devices to be created dynamically on that virtual filesystem as they are detected or accessed.
 # Device creation is generally done during the boot process by Udev.
