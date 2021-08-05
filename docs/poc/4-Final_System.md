@@ -172,7 +172,7 @@ export COMMON_FLAGS
 # Hardened flags. [ Only Buffer Overflow Detector ]
 export CPPFLAGS="-D_FORTIFY_SOURCE=2"
 
-# Compiler flags.
+# Toolchain flags.
 CFLAGS="${COMMON_FLAGS}"
 CXXFLAGS="${COMMON_FLAGS}"
 LDFLAGS="-Wl,-O2 -Wl,--as-needed"
