@@ -298,21 +298,21 @@ source                                                     ~/.bash_profile
 
 > **Required!** Microsoft mimalloc is for high perfomance purpose. We will build all packages to use mimalloc, except for libc.
 ```bash
-# Configure `mimalloc`.
+# Configure mimalloc.
 cmake -B build \
     -DCMAKE_BUILD_TYPE=Release    \
     -DCMAKE_INSTALL_PREFIX="/usr" \
     -DMI_BUILD_STATIC=OFF         \
     -DMI_BUILD_TESTS=OFF -Wno-dev
     
-# Build `mimalloc`.
+# Build mimalloc.
 time { make -C build; }
 
-# Install `mimalloc`.
+# Install mimalloc.
 time { make -C build install; }
 ```
 ```bash
-# Set `mimalloc` as default C/C++ memory allocator.
+# Set `mimalloc` as default C/C++ memory allocator, apply to compiler flags.
 sed -i '/COMMON_FLAGS+=/s/ / -lmimalloc /'            ~/.bash_profile
 printf '\n%s\n' 'export MIMALLOC_LARGE_OS_PAGES=1' >> ~/.bash_profile
 source                                                ~/.bash_profile
