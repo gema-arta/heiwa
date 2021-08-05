@@ -32,12 +32,8 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 > |  ✓  | Unified Interface for Querying Installed Libraries | Pkgconf                   | No circular dependencies.      |
 > |  ✓  | Gzip Data Compressor and Decompressor              | Pigz                      | Parallel threads support.      |
 > |  ✓  | Most Userspace Utility Programs                    | Toybox                    | No circular dependencies.      |
-> |  ✓  | Init and Service Manager                           | OpenRC                    | Sophisticated version of SysV. |
+> |     | Init and Process Supervision                       | Finit                     | F for fast. Fast init.         |
 > |  ✓  | Default Text-editor                                | GNU Nano                  | I don't use *Vim. :stuck_out_tongue_winking_eye: |
-
-> Maybe init switches to [finit](https://github.com/troglobit/finit) if that fits. See also [mimalloc](https://github.com/microsoft/mimalloc).
-> 
-> [See the reference about alternate packages.](https://wiki.musl-libc.org/alternatives.html)
 
 </details>
 
