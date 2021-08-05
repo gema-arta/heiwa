@@ -48,13 +48,13 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 
 <br>
 
-> |  ?  | Stage                                                                                | Status            |
-> |:---:|--------------------------------------------------------------------------------------|:-----------------:|
-> |  ✓  | 1. [Preparation](./docs/poc/1-Preparation.md)                                        | Finished          |
-> |  ✓  | 2. [Stage-0 Clang/LLVM (ft. GNU) Cross-Toolchain](./docs/poc/2-Stage0_Clang_LLVM.md) | Finished          |
-> |  ✓  | 3. [Stage-1 Clang/LLVM Toolchain](./docs/poc/3-Stage1_Clang_LLVM.md)                 | Finished          |
-> |     | 4. [Final System](./docs/poc/4-Final_System.md)                                      | Under development |
-> |     | 5. [System Configuration](./docs/poc/5-System_Configuration.md)                      | Pending           |
+> |  ?  | Stage                                                                                | Status            | COMMON_FLAGS                         |
+> |:---:|--------------------------------------------------------------------------------------|:-----------------:|:------------------------------------:|
+> |  ✓  | 1. [Preparation](./docs/poc/1-Preparation.md)                                        | Finished          | -                                    |
+> |  ✓  | 2. [Stage-0 Clang/LLVM (ft. GNU) Cross-Toolchain](./docs/poc/2-Stage0_Clang_LLVM.md) | Finished          | `-Os -pipe` ( `-g0` for toolchain )  |
+> |  ✓  | 3. [Stage-1 Clang/LLVM Toolchain](./docs/poc/3-Stage1_Clang_LLVM.md)                 | Finished          | `-flto=thin -march=native -Oz -pipe` |
+> |     | 4. [Final System](./docs/poc/4-Final_System.md)                                      | Under development | `-flto=thin -march=native -O2 -ftree-vectorize -pipe -Wno-unused-command-line-argument` |
+> |     | 5. [System Configuration](./docs/poc/5-System_Configuration.md)                      | Pending           | -                                    |
 
 </details>
 
