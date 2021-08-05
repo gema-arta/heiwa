@@ -591,7 +591,7 @@ LDFLAGS="-Wl,-z,stack-size=2097152 -pthread $LDFLAGS" \
             --build=${T_TRIPLET}                      \
             --target=${T_TRIPLET}
 
-# Build.
+# Build. Fails with LTO. This will display a lot compiler warnings.
 time { make; }
 
 # Install.
