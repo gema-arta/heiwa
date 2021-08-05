@@ -44,7 +44,7 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 
 <br>
 
-> |  ?  | Stage                                                                                | Status            | Optimized for              |
+> |  ?  | Stage                                                                                | Status            | Optimized more for         |
 > |:---:|--------------------------------------------------------------------------------------|:-----------------:|----------------------------|
 > |  ✓  | 1. [Preparation](./docs/poc/1-Preparation.md)                                        | Finished          | -                          |
 > |  ✓  | 2. [Stage-0 Clang/LLVM (ft. GNU) Cross-Toolchain](./docs/poc/2-Stage0_Clang_LLVM.md) | Finished          | Build Size and Build Time. |
