@@ -475,7 +475,8 @@ time {
     ln -sfv libterminfo.so /usr/lib/libtinfo.so
     ln -sfv libterminfo.so /usr/lib/libtinfow.so
 }
-
+```
+```bash
 # Remove the man pages that colission with `attr`.
 rm -fv /usr/share/man/man3/attr_{g,s}et.3
 ```
