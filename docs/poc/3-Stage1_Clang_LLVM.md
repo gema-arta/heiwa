@@ -582,12 +582,12 @@ time { make install; }
 # Copy `perl-cross` over the source.
 tar xzf ../perl-cross-1.3.6.tar.gz && \
 cp -af ./perl-cross-1.3.6/* .      && \
-rm -rf ./perl-cross-1.3.6/
+rm -rf ./perl-cross-1.3.6
 
 # Configure source.
-LDFLAGS="-Wl,-z,stack-size=2097152 -pthread $LDFLAGS" \
-HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE"     \
 CFLAGS="-DNO_POSIX_2008_LOCALE -D_GNU_SOURCE $CFLAGS" \
+HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE"     \
+LDFLAGS="-Wl,-z,stack-size=2097152 -pthread $LDFLAGS" \
 ./configure --prefix=/clang1-tools \
             --build=${T_TRIPLET}   \
             --target=${T_TRIPLET}
