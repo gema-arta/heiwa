@@ -654,7 +654,7 @@ time { make; }
 
 # Install.
 time {
-    make suidperms=4711 install
+    make exec_prefix=/usr suidperms=4711 install
     make -C man install-man
     mkdir -p /etc/default && \
     useradd -D --gid 999
