@@ -581,7 +581,7 @@ time { make install; }
 ```bash
 # Copy `perl-cross` over the source.
 tar xzf ../perl-cross-1.3.6.tar.gz && \
-cp -a  ./perl-cross-1.3.6/* .      && \
+cp -af ./perl-cross-1.3.6/* .      && \
 rm -rf ./perl-cross-1.3.6/
 
 # Configure source.
