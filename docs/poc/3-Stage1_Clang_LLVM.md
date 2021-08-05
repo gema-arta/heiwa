@@ -579,7 +579,7 @@ time { make install; }
 
 > **Required!** To build required packages in the next stage (chroot environment). 
 ```bash
-# Copy `perl-cross` over the source.
+# Decompress, then copy the `perl-cross` over the source.
 tar xzf ../perl-cross-1.3.6.tar.gz && \
 cp -af ./perl-cross-1.3.6/* .
 
