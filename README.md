@@ -49,7 +49,7 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 <br>
 
 > |  ?  | Stage                                                                             | Status            |
-> |:---:|----------------------------------------------------------------------------=------|:-----------------:|
+> |:---:|-----------------------------------------------------------------------------------|:-----------------:|
 > |  ✓  | [Preparation](./docs/poc/1-Preparation.md)                                        | Finished          |
 > |  ✓  | [Stage-0 Clang/LLVM (ft. GNU) Cross-Toolchain](./docs/poc/2-Stage0_Clang_LLVM.md) | Finished          |
 > |  ✓  | [Stage-1 Clang/LLVM Toolchain](./docs/poc/3-Stage1_Clang_LLVM.md)                 | Finished          |
