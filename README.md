@@ -16,24 +16,24 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 
 <br>
 
-> |  ?  | Kernel and Userspace                               | Packages                  | Extended Description           |
-> |:---:|----------------------------------------------------|:-------------------------:|--------------------------------|
-> |  ✓  | Low-level Standard Libraries and Toolchain         | Clang/LLVM                | Clean, Fast, and Modern.       |
-> |  ✓  | C Dynamic Memory Allocator                         | Microsoft mimalloc        | Excellent performance.         |
-> |  ✓  | Linux Kernel Patchset                              | Xanmod-CacULE             | Optimized performance.         |
-> |  ✓  | C Runtime Library                                  | musl                      | Clean, but not fast as Glibc.  |
-> |  ✓  | Build System Tools                                 | GNU                       | Most packages depend.          |
-> |  ✓  | Native Language Support                            | Gettext-tiny              | Stub of bloated GNU Gettext.   |
-> |  ✓  | Secure Socket Layer Library                        | OpenSSL                   | Full-featured and Robust.      |
-> |  ✓  | Curses (terminal control) Library                  | NetBSD Curses             | Smaller than GNU Ncurses.      |
-> |  ✓  | Command Line Interpreter or Shell                  | GNU Bash                  | Best implementation.           |
-> |  ✓  | Line-editing and History-capabilities Library      | GNU Readline              | Best implementation.           |
-> |  ✓  | Deflate or Inflate Algorithm Compression Library   | Zlib-ng                   | Next generation.               |
-> |  ✓  | Unified Interface for Querying Installed Libraries | Pkgconf                   | No circular dependencies.      |
-> |  ✓  | Gzip Data Compressor and Decompressor              | Pigz                      | Parallel threads support.      |
-> |  ✓  | Most Userspace Utility Programs                    | Toybox                    | No circular dependencies.      |
-> |     | Init and Process Supervision                       | Finit                     | F for fast. Fast init.         |
-> |  ✓  | Default Text-editor                                | GNU Nano                  | I don't use *Vim. :stuck_out_tongue_winking_eye: |
+> |  ?  | Kernel and Userspace                               | Packages           | Extended Description           |
+> |:---:|----------------------------------------------------|:------------------:|--------------------------------|
+> |  ✓  | Low-level Standard Libraries and Toolchain         | Clang/LLVM         | Clean, Fast, and Modern.       |
+> |  ✓  | C Dynamic Memory Allocator                         | Microsoft mimalloc | Excellent performance.         |
+> |  ✓  | Linux Kernel Patchset                              | Xanmod (CacULE)    | Optimized performance.         |
+> |  ✓  | C Runtime Library                                  | musl               | Clean, but not fast as Glibc.  |
+> |  ✓  | Build System Tools                                 | GNU                | Most packages depend.          |
+> |  ✓  | Native Language Support                            | Gettext-tiny       | Stub of bloated GNU Gettext.   |
+> |  ✓  | Secure Socket Layer Library                        | OpenSSL            | Full-featured and Robust.      |
+> |  ✓  | Curses (terminal control) Library                  | NetBSD Curses      | Smaller than GNU Ncurses.      |
+> |  ✓  | Command Line Interpreter or Shell                  | GNU Bash           | Best implementation.           |
+> |  ✓  | Line-editing and History-capabilities Library      | GNU Readline       | Best implementation.           |
+> |  ✓  | Deflate or Inflate Algorithm Compression Library   | Zlib-ng            | Next generation.               |
+> |  ✓  | Unified Interface for Querying Installed Libraries | Pkgconf            | No circular dependencies.      |
+> |  ✓  | Gzip Data Compressor and Decompressor              | Pigz               | Parallel threads support.      |
+> |  ✓  | Most Userspace Utility Programs                    | Toybox             | No circular dependencies.      |
+> |     | Init and Process Supervision                       | Finit              | F for fast. Fast init.         |
+> |  ✓  | Default Text-editor                                | GNU Nano           | I don't use *Vim. :stuck_out_tongue_winking_eye: |
 
 </details>
 
