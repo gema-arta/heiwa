@@ -421,7 +421,7 @@ sleep sort split stat stty sync tac tail tee test timeout touch tr true truncate
 tty uname uniq unlink wc who whoami yes file find xargs egrep grep fgrep sed tar
 EOF
 
-# Checks 87 commands, and make sure is enabled (=y).
+# Verify 87 commands, and make sure is enabled (=y).
 # Pipe to ` | wc -l` at the right of `done` to checks total of commands.
 for X in ${TOYBOX}; do
     grep -v '#' .config | grep -i --color=auto "_${X}=" \
@@ -431,11 +431,11 @@ done
 # Build with verbose. Toybox will use `cc` that breaking the builds, so need to specify the CC and HOSTCC variable.
 time { make CC=${CC} HOSTCC=${CC} CFLAGS="-flto=thin $CFLAGS" V=1; }
 
-# Checks compiled 87 commands.
+# Verify compiled 87 commands.
 ./toybox | tr ' ' '\n'i \
 | grep -xE --color=auto $(echo ${TOYBOX} | tr ' ' '|'i) | wc -l
 
-# Checks commands that not configured but compiled.
+# Verify commands that not configured but compiled.
 # `[` (coreutils)
 ./toybox | tr ' ' '\n'i \
 | grep -vxE --color=auto $(echo ${TOYBOX} | tr ' ' '|'i)
@@ -443,7 +443,7 @@ time { make CC=${CC} HOSTCC=${CC} CFLAGS="-flto=thin $CFLAGS" V=1; }
 # So, totally is 88 commands.
 ./toybox | wc -w
 
-# Install.
+# Install and unset exported commands in TOYBOX variable.
 time { make CC=${CC} HOSTCC=${CC} PREFIX=/clang1-tools install; unset X TOYBOX; }
 ```
 
