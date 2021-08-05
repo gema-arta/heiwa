@@ -61,7 +61,6 @@ mkdir -pv /usr/{,local/}share/{color,dict,doc,info,locale,man,misc,terminfo,zone
 mkdir -pv /usr/{,local/}share/man/man{1..8}
 
 mkdir -pv /usr/libexec
-
 mkdir -pv /var/{opt,cache,lib/{color,misc,locate},local,log,mail,spool}
 
 ln -sv /run /var/run
