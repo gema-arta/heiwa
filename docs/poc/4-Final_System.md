@@ -621,7 +621,7 @@ time { make CC=${CC} SBINDIR=/sbin prefix=/usr lib=lib install; }
 ```
 
 ### `19` - Shadow
-> #### `4.8.1` or newer
+> #### `4.9` or newer
 > The Shadow package contains programs for handling passwords in a secure way.
 
 > **Required!** Currently build without `cracklib` support.
