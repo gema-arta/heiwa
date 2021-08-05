@@ -563,7 +563,8 @@ CFLAGS="-flto=thin $CFLAGS"        \
             --build=${T_TRIPLET}   \
             --host=${T_TRIPLET}    \
             --disable-profiling    \
-            --without-bash-malloc
+            --without-bash-malloc  \
+            --enable-net-redirections
 
 # Build.
 time { make; }
