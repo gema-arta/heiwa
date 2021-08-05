@@ -57,7 +57,7 @@ su - heiwa
 
 cat > ~/.bash_profile << "EOF"
 exec env -i HOME="$HOME" TERM="$TERM" \
-COMMON_FLAGS="-march=native -Oz -pipe -Wno-unused-command-line-argument" /bin/bash
+COMMON_FLAGS="-march=native -Oz -pipe" /bin/bash
 EOF
 
 cat > ~/.bashrc << EOF
