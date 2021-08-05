@@ -602,7 +602,7 @@ time { make install; }
 ```
 
 ### `18` - libcap
-> #### `2.51` or newer
+> #### `2.51` (`2.52` [fails](https://github.com/heiwalinux/heiwa/discussions/2#discussioncomment-1135973))
 > The libcap package implements the user-space interfaces to the POSIX 1003.1e capabilities available in Linux kernels. These capabilities are a partitioning of the all powerful root privilege into a set of distinct privileges.
 
 > **Required!** Before `IPRoute2` and `Shadow`.
