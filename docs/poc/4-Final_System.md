@@ -1071,6 +1071,9 @@ for P in {line-length,flip-macro-logic,respect-cflags}.patch; do
     patch -Np1 -i ../../extra/gettext-tiny/patches/${P}
 done; unset P
 
+# Prevent to build static library.
+sed -i 's|libintl.a||' Makefile
+
 # Build.
 time { make LIBINTL=MUSL CFLAGS="-flto=thin $CFLAGS" prefix=/usr; }
 
