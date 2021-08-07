@@ -1184,16 +1184,19 @@ time {
 > **Required!** Before `Toybox` and `Kmod`.
 ```bash
 # Configure source.
-CFLAGS="-flto=thin $CFLAGS -Qunused-arguments" \
-./Configure linux-x86_64                       \
-    --prefix=/usr                              \
-    --libdir=lib                               \
-    --openssldir=/etc/ssl                      \
-    shared                                     \
-    zlib-dynamic                               \
-    no-ssl3-method                             \
-    enable-ec_nistp_64_gcc_128                 \
-    ${CFLAGS} -Wa,--noexecstack
+./Configure linux-x86_64         \
+    --prefix=/usr                \
+    --libdir=lib                 \
+    --openssldir=/etc/ssl        \
+    shared threads               \
+    zlib-dynamic                 \
+    no-ssl3-method no-async      \
+    enable-ec_nistp_64_gcc_128   \
+    -DOPENSSL_NO_BUF_FREELISTS   \
+    ${CPPFLAGS} -flto=thin       \
+    -fno-strict-aliasing         \
+    ${CFLAGS} -Qunused-arguments \
+    ${LDFLAGS} -Wa,--noexecstack
 
 # Build.
 time { make; }
