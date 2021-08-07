@@ -1135,7 +1135,7 @@ BUILD_ZLIB=0 BUILD_BZIP2=0
 export BUILD_ZLIB BUILD_BZIP2
 
 # Configure source. Disable all warning compiler outputs.
-HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE" ./Configure -des    \
+HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE" ./Configure         \
     -Dusethreads                                                      \
     -Duseshrplib                                                      \
     -Dusesoname                                                       \
