@@ -1168,7 +1168,7 @@ HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE" ./Configure -des    \
     -Dman3dir=/usr/share/man/man3                                     \
     -Dd_semctl_semun -Ud_csh -Uusenm
 
-# Build. Fails with LTO. This will display a lot of compiler warnings.
+# Build. Fails with LTO since v5.28. This will display a lot of compiler warnings.
 time { make; }
 
 # Install and unset Perl-specific exported variables.
