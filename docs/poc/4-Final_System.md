@@ -1191,7 +1191,8 @@ time {
     shared threads zlib-dynamic \
     no-ssl3-method no-async     \
     enable-ec_nistp_64_gcc_128  \
-    -flto=thin -fno-strict-aliasing
+    -DOPENSSL_NO_BUF_FREELISTS  \
+    -flto=thin
 
 # Prevent to install static library.
 sed -i '/INSTALL_LIBS=libcrypto.a libssl.a/d' Makefile
