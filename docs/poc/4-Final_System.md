@@ -1130,7 +1130,7 @@ time { make install; }
 
 > **Required!** Before `OpenSSL` and `GNU Autoconf`.
 ```bash
-# Configure source. Disable all warning compiler outputs.
+# Configure source.
 HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE" ./Configure -des    \
     -Dusethreads                                                      \
     -Duseshrplib                                                      \
