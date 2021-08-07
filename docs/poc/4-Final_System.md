@@ -1188,8 +1188,7 @@ time {
     --prefix=/usr                \
     --libdir=lib                 \
     --openssldir=/etc/ssl        \
-    shared threads               \
-    zlib-dynamic                 \
+    shared threads zlib-dynamic  \
     no-ssl3-method no-async      \
     enable-ec_nistp_64_gcc_128   \
     -DOPENSSL_NO_BUF_FREELISTS   \
