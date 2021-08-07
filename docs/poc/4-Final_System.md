@@ -1137,8 +1137,7 @@ BZIP2_INCLUDE="/usr/include" ZLIB_INCLUDE="/usr/include"
 export BUILD_BZIP2 BUILD_ZLIB BZIP2_LIB ZLIB_LIB BZIP2_INCLUDE ZLIB_INCLUDE
 
 # Configure source.
-LDFLAGS="-Wl,-z,stack-size=2097152 -pthread $LDFLAGS"                 \
-HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE"    ./Configure -des \
+HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE" ./Configure -des    \
     -Dusethreads                                                      \
     -Duseshrplib                                                      \
     -Dusesoname                                                       \
@@ -1151,11 +1150,11 @@ HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE"    ./Configure -des \
     -Dsitearch=/usr/lib/perl5/5.34/site_perl                          \
     -Dvendorlib=/usr/lib/perl5/5.34/vendor_perl                       \
     -Dvendorarch=/usr/lib/perl5/5.34/vendor_perl                      \
-    -Doptimize="-DNO_POSIX_2008_LOCALE -D_GNU_SOURCE $CFLAGS"         \
+    -Doptimize="-Wall -DNO_POSIX_2008_LOCALE -D_GNU_SOURCE $CFLAGS"   \
     -Dccflags="-DNO_POSIX_2008_LOCALE -D_GNU_SOURCE $CFLAGS"          \
     -Dcccdlflags="-fPIC"                                              \
-    -Dperl_static_inline="static __inline__"                          \
-    -Dd_static_inline                                                 \
+    -Dldflags="-Wl,-z,stack-size=2097152 -pthread $LDFLAGS"           \
+    -Dlddlflags="-shared -Wl,-z,stack-size=2097152 -pthread $LDFLAGS" \
     -Duselargefiles                                                   \
     -Dcf_by="Heiwa/Linux"                                             \
     -Dmyuname="linux"                                                 \
