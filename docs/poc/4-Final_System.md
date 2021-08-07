@@ -1194,11 +1194,11 @@ time {
     -DOPENSSL_NO_BUF_FREELISTS  \
     -flto=thin -fno-strict-aliasing
 
-# Prevent to install static library.
-sed -i '/INSTALL_LIBS=libcrypto.a libssl.a/d' Makefile
-
 # Build.
 time { make; }
+
+# Prevent to install static library.
+sed -i '/INSTALL_LIBS=libcrypto.a libssl.a/d' Makefile
 
 # Install.
 time { make MANSUFFIX=ssl install; }
