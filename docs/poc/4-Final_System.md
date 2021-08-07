@@ -1142,6 +1142,7 @@ HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE" ./Configure -des    \
     -Duseshrplib                                                      \
     -Dusesoname                                                       \
     -Dusevendorprefix                                                 \
+    -Duselargefiles                                                   \
     -Dprefix=/usr                                                     \
     -Dvendorprefix=/usr                                               \
     -Dprivlib=/usr/lib/perl5/5.34/core_perl                           \
@@ -1157,7 +1158,6 @@ HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE" ./Configure -des    \
     -Dlddlflags="-shared -Wl,-z,stack-size=2097152 -pthread $LDFLAGS" \
     -Dperl_static_inline="static __inline__"                          \
     -Dd_static_inline                                                 \
-    -Duselargefiles                                                   \
     -Dcf_by="Heiwa/Linux"                                             \
     -Dmyuname="linux"                                                 \
     -Dmyhostname="localh3art"                                         \
