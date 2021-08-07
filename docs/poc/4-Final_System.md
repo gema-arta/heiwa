@@ -1136,18 +1136,21 @@ export BUILD_ZLIB BUILD_BZIP2
 
 # Configure source. Disable all warning compiler outputs.
 HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE" ./Configure -des    \
+    -Dusethreads                                                      \
+    -Duseshrplib                                                      \
+    -Dusesoname                                                       \
+    -Dusevendorprefix                                                 \
     -Dprefix=/usr                                                     \
     -Dvendorprefix=/usr                                               \
-    -Dccdlflags="-rdynamic"                                           \
-    -Dcccdlflags="-fPIC"                                              \
     -Dprivlib=/usr/lib/perl5/5.34/core_perl                           \
     -Darchlib=/usr/lib/perl5/5.34/core_perl                           \
     -Dsitelib=/usr/lib/perl5/5.34/site_perl                           \
     -Dsitearch=/usr/lib/perl5/5.34/site_perl                          \
     -Dvendorlib=/usr/lib/perl5/5.34/vendor_perl                       \
     -Dvendorarch=/usr/lib/perl5/5.34/vendor_perl                      \
-    -Doptimize="-DNO_POSIX_2008_LOCALE -D_GNU_SOURCE $CFLAGS"         \
+    -Doptimize="-Wall -DNO_POSIX_2008_LOCALE -D_GNU_SOURCE $CFLAGS"   \
     -Dccflags="-DNO_POSIX_2008_LOCALE -D_GNU_SOURCE $CFLAGS"          \
+    -Dcccdlflags="-fPIC"                                              \
     -Dldflags="-Wl,-z,stack-size=2097152 -pthread $LDFLAGS"           \
     -Dlddlflags="-shared -Wl,-z,stack-size=2097152 -pthread $LDFLAGS" \
     -Dperl_static_inline="static __inline__"                          \
@@ -1156,8 +1159,6 @@ HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE" ./Configure -des    \
     -Dmyuname="linux"                                                 \
     -Dmyhostname="localh3art"                                         \
     -Dperladmin="heiwa@localh3art"                                    \
-    -Dusethreads                                                      \
-    -Duseshrplib                                                      \
     -Dman1ext=1                                                       \
     -Dman3ext=3pm                                                     \
     -Dman1dir=/usr/share/man/man1                                     \
