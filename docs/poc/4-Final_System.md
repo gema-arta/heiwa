@@ -1159,7 +1159,6 @@ HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE" ./Configure -des    \
     -Dperl_static_inline="static __inline__"                          \
     -Dd_static_inline                                                 \
     -Dcf_by="Heiwa/Linux"                                             \
-    -Dmyuname="linux"                                                 \
     -Dmyhostname="localh3art"                                         \
     -Dperladmin="heiwa@localh3art"                                    \
     -Dman1ext=1                                                       \
