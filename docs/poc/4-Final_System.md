@@ -1183,7 +1183,7 @@ time {
 
 > **Required!** Before `Toybox` and `Kmod`.
 ```bash
-# Configure source.
+# Configure source. Optimized for x86_64.
 ./Configure linux-x86_64        \
     --prefix=/usr               \
     --libdir=lib                \
