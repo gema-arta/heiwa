@@ -1166,7 +1166,7 @@ HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE" ./Configure -des    \
     -Dman3ext=3pm                                                     \
     -Dman1dir=/usr/share/man/man1                                     \
     -Dman3dir=/usr/share/man/man3                                     \
-    -Dd_semctl_semun -Uusenm
+    -Dd_semctl_semun -Ud_csh
 
 # Build. Fails with LTO since v5.28. This will display a lot of compiler warnings.
 time { make; }
