@@ -1192,7 +1192,7 @@ time {
     no-ssl3-method no-async     \
     enable-ec_nistp_64_gcc_128  \
     -DOPENSSL_NO_BUF_FREELISTS  \
-    -flto=thin
+    -fno-strict-aliasing
 
 # Prevent to install static library.
 sed -i '/INSTALL_LIBS=libcrypto.a libssl.a/d' Makefile
