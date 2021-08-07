@@ -849,7 +849,7 @@ time {
 }
 ```
 ```bash
-# Create a symlink required by the FHS for "historical" reasons, and
+# Create a symlink required by the FHS for "historical" reasons, and ..
 # set `clang`, `clang++`, and `lld` as default toolchain compiler and linker.
 ln -sfv ../usr/bin/clang /lib/cpp
 ln -sfv clang            /usr/bin/cc
@@ -931,11 +931,10 @@ patch -Np1 -i ../../extra/bzip2/patches/install_docs-1.patch
 patch -Np1 -i ../../extra/bzip2/patches/soname.patch
 
 # Fix the makefile to ensures installation of symlinks are relative and the man pages are installed into correct location.
-sed -e "s@(PREFIX)/man@(PREFIX)/share/man@g" \
-    -e 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' -i Makefile    
-
-# Prevent to install static library.
-sed -e '/chmod a+r $(PREFIX)\/lib\/libbz2.a/d' \
+# Also prevent to install static library.
+sed -e "s@(PREFIX)/man@(PREFIX)/share/man@g"   \
+    -e 's@\(ln -s -f \)$(PREFIX)/bin/@\1@'     \
+    -e '/chmod a+r $(PREFIX)\/lib\/libbz2.a/d' \
     -e '/cp -f libbz2.a $(PREFIX)\/lib/d' -i Makefile
     
 # Prepare.
