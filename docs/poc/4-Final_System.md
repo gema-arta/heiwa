@@ -1183,7 +1183,7 @@ time {
 
 > **Required!** Before `Toybox` and `Kmod`.
 ```bash
-# Configure source. Optimized for x86_64. No need to specify flags to configure script since applied in makefile.
+# Configure source. Optimized for x86_64. No need to specify flags variable to configure script since applied in makefile.
 ./Configure linux-x86_64            \
     --prefix=/usr                   \
     --libdir=lib                    \
