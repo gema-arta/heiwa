@@ -1080,10 +1080,6 @@ time { make LIBINTL=MUSL CFLAGS="-flto=thin $CFLAGS" prefix=/usr; }
 # Install.
 time { make LIBINTL=MUSL prefix=/usr install; }
 ```
-```bash
-# Delete useless static library.
-rm -fv /usr/lib/libintl.a
-```
 
 ### `29` - GNU Bison
 > #### `3.7.6` or newer
