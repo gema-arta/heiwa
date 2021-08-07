@@ -1183,9 +1183,6 @@ time {
 
 > **Required!** Before `Toybox` and `Kmod`.
 ```bash
-# Prevent to install static library.
-sed -i '/INSTALL_LIBS=libcrypto.a libssl.a/d' Makefile
-
 # Configure source.
 ./Configure linux-x86_64        \
     --prefix=/usr               \
@@ -1199,6 +1196,9 @@ sed -i '/INSTALL_LIBS=libcrypto.a libssl.a/d' Makefile
     -fno-strict-aliasing        \
     -Qunused-arguments          \
     ${LDFLAGS} -Wa,--noexecstack
+
+# Prevent to install static library.
+sed -i '/INSTALL_LIBS=libcrypto.a libssl.a/d' Makefile
 
 # Build.
 time { make; }
