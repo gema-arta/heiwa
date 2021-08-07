@@ -1072,7 +1072,7 @@ for P in {line-length,flip-macro-logic,respect-cflags}.patch; do
 done; unset P
 
 # Prevent to build static library.
-sed -i 's|libintl.a||' Makefile
+sed -i 's|=libintl.a|=|' Makefile
 
 # Build.
 time { make LIBINTL=MUSL CFLAGS="-flto=thin $CFLAGS" prefix=/usr; }
