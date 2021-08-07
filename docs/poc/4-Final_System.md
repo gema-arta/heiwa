@@ -1130,6 +1130,12 @@ time { make install; }
 
 > **Required!** Before `OpenSSL` and `GNU Autoconf`.
 ```bash
+# Ensure to build with Perl with the libraries installed on the system.
+BUILD_BZIP2=0 BUILD_ZLIB=False
+BZIP2_LIB="/usr/lib" ZLIB_LIB="/usr/lib"
+BZIP2_INCLUDE="/usr/include" ZLIB_INCLUDE="/usr/include"
+export BUILD_BZIP2 BUILD_ZLIB BZIP2_LIB ZLIB_LIB BZIP2_INCLUDE ZLIB_INCLUDE
+
 # Configure source.
 HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE" ./Configure -des    \
     -Dusethreads                                                      \
@@ -1163,8 +1169,11 @@ HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE" ./Configure -des    \
 # Build. Fails with LTO. This will display a lot of compiler warnings.
 time { make; }
 
-# Install.
-time { make install; }
+# Install and unset Perl-specific exported variables.
+time {
+    make install
+    unset BUILD_BZIP2 BUILD_ZLIB BZIP2_LIB ZLIB_LIB BZIP2_INCLUDE ZLIB_INCLUDE
+}
 ```
 
 ### `32` - OpenSSL
