@@ -1183,19 +1183,17 @@ time {
 
 > **Required!** Before `Toybox` and `Kmod`.
 ```bash
-# Configure source. Optimized for x86_64.
-./Configure linux-x86_64        \
-    --prefix=/usr               \
-    --libdir=lib                \
-    --openssldir=/etc/ssl       \
-    shared threads zlib-dynamic \
-    no-ssl3-method no-async     \
-    enable-ec_nistp_64_gcc_128  \
-    -DOPENSSL_NO_BUF_FREELISTS  \
-    -flto=thin ${CFLAGS}        \
-    -fno-strict-aliasing        \
-    -Qunused-arguments          \
-    ${LDFLAGS} -Wa,--noexecstack
+# Configure source. Optimized for x86_64. No need to specify flags to configure script since applied in makefile.
+./Configure linux-x86_64            \
+    --prefix=/usr                   \
+    --libdir=lib                    \
+    --openssldir=/etc/ssl           \
+    shared threads zlib-dynamic     \
+    no-ssl3-method no-async         \
+    enable-ec_nistp_64_gcc_128      \
+    -DOPENSSL_NO_BUF_FREELISTS      \
+    -flto=thin -fno-strict-aliasing \
+    -Qunused-arguments -Wa,--noexecstack
 
 # Prevent to install static library.
 sed -i '/INSTALL_LIBS=libcrypto.a libssl.a/d' Makefile
