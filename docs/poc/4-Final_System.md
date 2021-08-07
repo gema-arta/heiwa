@@ -1036,7 +1036,7 @@ install -vm755 -t /usr/bin/ pigz unpigz gzip gunzip
 ```
 
 ### `27` - Pkgconf
-> #### `1.7.4` or newer
+> #### `1.8.0` or newer
 > The Pkgconf package contains a tool for passing the include path and/or library paths to build tools during the configure and make phases of package installations.
 
 > **Required!** Before `Kmod`.
@@ -1046,7 +1046,7 @@ CFLAGS="-flto=thin $CFLAGS"                       \
 ./configure --prefix=/usr                         \
             --sysconfdir=/etc                     \
             --localstatedir=/var                  \
-            --docdir=/usr/share/doc/pkgconf-1.7.4 \
+            --docdir=/usr/share/doc/pkgconf-1.8.0 \
             --disable-static                      \
             --with-pkg-config-dir=/usr/local/lib/pkgconfig:/usr/local/share/pkgconfig:/usr/lib/pkgconfig:/usr/share/pkgconfig:/opt/qt5/lib/pkgconfig
 
