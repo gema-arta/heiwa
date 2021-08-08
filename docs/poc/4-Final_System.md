@@ -1392,7 +1392,10 @@ CFLAGS="-flto=thin $CFLAGS"                  \
 time { make; }
 
 # Install and move the `bash` binary to correct place.
-time { make install && mv -fv /usr/bin/bash /bin/.; }
+time {
+    make install
+    mv -fv /usr/bin/bash /bin/.
+}
 ```
 
 ### `40` - Kmod
