@@ -1438,7 +1438,7 @@ time {
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS" \
 ./configure --prefix=/usr   \
-            --disable-static
+            --disable-ltdl-install
 
 # Build.
 time { make; }
