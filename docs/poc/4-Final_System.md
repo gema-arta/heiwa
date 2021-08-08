@@ -1395,7 +1395,6 @@ time { make; }
 time { make install && mv -fv /usr/bin/bash /bin/.; }
 ```
 
-
 ### `40` - Kmod
 > #### `29` or newer
 > The Kmod package contains libraries and utilities for loading kernel modules
