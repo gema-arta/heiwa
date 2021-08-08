@@ -1472,8 +1472,7 @@ time { make install; }
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS" \
-WANT_AUTOCONF=2.5           \
-./configure --prefix=/usr   \
+./configure --prefix=/usr WANT_AUTOCONF=2.5 \
             --docdir=/usr/share/doc/automake-1.16.4
 
 # Build.
