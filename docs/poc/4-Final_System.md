@@ -1471,6 +1471,7 @@ time { make install; }
 > **Required!** Before `musl-fts` and `musl-obstack`.
 ```bash
 # Configure source.
+WANT_AUTOCONF=2.5           \
 CFLAGS="-flto=thin $CFLAGS" \
 ./configure --prefix=/usr   \
             --docdir=/usr/share/doc/automake-1.16.4
