@@ -1242,7 +1242,7 @@ for X in ${TOYBOX}; do
 done
 
 # Build with verbose.
-time { make CFLAGS="-flto=thin $CFLAGS" V=1; }
+time { make CFLAGS="-fPIE -flto=thin $CFLAGS" V=1; }
 
 # Verify compiled 102 commands.
 ./toybox | tr ' ' '\n'i \
