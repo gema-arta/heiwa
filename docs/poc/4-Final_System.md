@@ -1319,7 +1319,8 @@ time { make install; }
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS" \
-./configure --prefix=/usr
+./configure --prefix=/usr   \
+            --without-guile
 
 # Build.
 time { make; }
