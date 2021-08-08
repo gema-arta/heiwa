@@ -1197,7 +1197,7 @@ time {
 # Prevent to install static library.
 sed -i '/INSTALL_LIBS=libcrypto.a libssl.a/d' Makefile
 
-# Build.
+# Build. Fails with LTO.
 time { make; }
 
 # Install.
@@ -1223,39 +1223,42 @@ cp -v ../../extra/toybox/files/.config.finalsys .config
 # Make sure to enable `libcrypto` and `libz`.
 grep -E --color=auto "LIBCRYPTO|LIBZ" .config
 
-export CFFGPT="bc base64 base32 basename cat chgrp chmod chown chroot cksum comm cp cut
-date dd df dirname du echo env expand expr factor false fmt fold groups head hostid id
-install link ln logname ls md5sum mkdir mkfifo mknod mktemp mv nice nl nohup nproc od
-paste printenv printf pwd readlink realpath rm rmdir seq sha1sum sha224sum sha256sum
-sha384sum sha512sum shred sleep sort split stat stty sync tac tail tee test timeout touch
-tr true truncate tty uname uniq unlink wc who whoami yes file find xargs egrep grep fgrep
-dnsdomainname ifconfig hostname ping telnet tftp traceroute man killall sed klogd tar"
+# Export commands as TOYBOX variable that will be use to verify Toybox .config.
+read -rd '' TOYBOX << "EOF"
+bc base64 base32 basename cat chgrp chmod chown chroot cksum comm cp cut date dd df
+dirname du echo env expand expr factor false fmt fold groups head hostid id install
+link ln logname ls md5sum mkdir mkfifo mknod mktemp mv nice nl nohup nproc od paste
+printenv printf pwd readlink realpath rm rmdir seq sha1sum sha224sum sha256sum sha384sum
+sha512sum shred sleep sort split stat stty sync tac tail tee test timeout touch tr true
+truncate tty uname uniq unlink wc who whoami yes file find xargs egrep grep fgrep
+dnsdomainname ifconfig hostname ping telnet tftp traceroute man killall sed klogd tar
+EOF
 
-# Checks 102 commands, and make sure is enabled (=y).
+# Verify 102 commands, and make sure is enabled (=y).
 # Pipe to ` | wc -l` at the right of `done` to checks total of commands.
-for X in ${CFFGPT}; do
+for X in ${TOYBOX}; do
     grep -v '#' .config | grep -i --color=auto "_${X}=" \
-    || echo "* $X not CONFIGURED"
+    || echo "* ${X} not CONFIGURED"
 done
 
 # Build with verbose.
 time { make CFLAGS="-flto=thin $CFLAGS" V=1; }
 
-# Checks compiled 102 commands.
+# Verify compiled 102 commands.
 ./toybox | tr ' ' '\n'i \
-| grep -xE --color=auto $(echo $CFFGPT | tr ' ' '|'i) | wc -l
+| grep -xE --color=auto $(echo ${TOYBOX} | tr ' ' '|'i) | wc -l
 
-# Checks commands that not configured but compiled.
+# Verify commands that not configured but compiled.
 # `[` (coreutils)
 # `ping6` and `traceroute6` (inetutils)
 ./toybox | tr ' ' '\n'i \
-| grep -vxE --color=auto $(echo $CFFGPT | tr ' ' '|'i)
+| grep -vxE --color=auto $(echo ${TOYBOX} | tr ' ' '|'i)
 
 # So, totally is 105 commands.
 ./toybox | wc -w
 
 # Install.
-time { make PREFIX=/ install; unset CFFGPT; }
+time { make PREFIX=/ install; unset X TOYBOX; }
 ```
 
 ### `34` - GNU AWK
