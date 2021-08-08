@@ -1274,8 +1274,7 @@ sed -e '/^LN =/s|=.*|= $(LN_S)|'         \
 
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS" \
-./configure --prefix=/usr   \
-            --with-readline
+./configure --prefix=/usr
 
 # Build.
 time { make; }
