@@ -1267,8 +1267,10 @@ time { make PREFIX=/ install; unset X TOYBOX; }
 
 > **Required!**
 ```bash
-# Ensure some unneeded files are not installed.
-sed -i 's|extras||' Makefile.in
+# Ensure some unneeded files are not installed, use symlinks rather than hardlinks, and disable version links.
+sed -e '/^LN =/s|=.*|= $(LN_S)|'         \
+    -e '/install-exec-hook:/s|$|\nfoo:|' \
+    -e 's|extras||' -i Makefile.in doc/Makefile.in
 
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS" \
