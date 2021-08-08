@@ -1384,7 +1384,9 @@ CFLAGS="-flto=thin $CFLAGS"                  \
             --with-curses                    \
             --without-bash-malloc            \
             --enable-readline                \
-            --with-installed-readline
+            --with-installed-readline        \
+            --disable-profiling              \
+            --enable-net-redirections
 
 # Build.
 time { make; }
