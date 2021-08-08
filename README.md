@@ -59,4 +59,4 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 - [ ] Packaging, make it usable but with the aim of not being big.
 > Always W.I.P, since this is hobbyist. A radical experiments.
 
-See [docs](./docs). Go [discussions](https://github.com/heiwalinux/heiwa/discussions).
+See [docs](./docs). Go [discussions](https://github.com/heiwalinux/heiwa/discussions) for Errata.
