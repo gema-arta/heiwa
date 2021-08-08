@@ -1355,10 +1355,14 @@ time { make install; }
 > **Required!** Before `GNU Bash`.
 ```bash
 # Configure source.
-CFLAGS="-flto=thin $CFLAGS" \
-ac_cv_header_sys_cdefs_h=no \
-ac_cv_lib_error_at_line=no  \
-./configure --prefix=/usr
+CFLAGS="-flto=thin $CFLAGS"                   \
+ac_cv_header_sys_cdefs_h=no                   \
+ac_cv_lib_error_at_line=no                    \
+./configure --prefix=/usr                     \
+            --disable-perl-xs                 \
+            --without-external-libintl-perl   \
+            --without-external-Text-Unidecode \
+            --without-external-Unicode-EastAsianWidth
 
 # Build.
 time { make; }
