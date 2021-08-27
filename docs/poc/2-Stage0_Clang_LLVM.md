@@ -175,8 +175,8 @@ CFLAGS="-g0 $CFLAGS" CXXFLAGS="-g0 $CXXFLAGS" ../configure \
     --target=${H_TRIPLET}                                  \
     --with-sysroot=/clang0-tools                           \
     --enable-{clocale=generic,languages=c,c++}             \
-    --enable-{fully-dynamic-string,shared,threads=posix}   \
-    --disable-{gnu-unique-object,lib{mudflap,sanitizer,ssp},multilib,nls,symvers}
+    --enable-{shared,threads=posix}                        \
+    --disable-{gnu-unique-object,lib{mudflap,sanitizer},multilib,nls,symvers}
 
 # Build.
 time { make AS_FOR_TARGET=${H_TRIPLET}-as LD_FOR_TARGET=${H_TRIPLET}-ld; }
