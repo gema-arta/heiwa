@@ -193,7 +193,7 @@ sed -i 's|/lib/ld-musl-x86_64.so.1|/clang0-tools/lib/ld-musl-x86_64.so.1|g' spec
 grep --color=auto "/clang0-tools/lib/ld-musl-x86_64.so.1" specs
 
 # Install specs file (if correct).
-mv -fv specs "$SPECFILE"; unset SPECFILE
+mv -fv specs "$SPECFILE" && unset SPECFILE
 
 # Quick test.
 echo "int main(){}" > dummy.c
