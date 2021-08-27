@@ -158,9 +158,9 @@ ln -sv ../include /clang0-tools/usr/include
 > **Required!** This second build of GCC will produce the final cross compiler which will use the previously built musl libc.
 ```bash
 # GCC requires the GMP, MPFR, and MPC packages to either be present on the host or to be present in source form within the GCC source tree.
-tar xf ../gmp-6.2.1.tar.xz  && mv -fv gmp-6.2.1 gmp
-tar xf ../mpfr-4.1.0.tar.xz && mv -fv mpfr-4.1.0 mpfr
-tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc-1.2.1 mpc
+tar xf ../gmp-6.2.1.tar.xz  && mv -fv gmp{-6.2.1,}
+tar xf ../mpfr-4.1.0.tar.xz && mv -fv mpfr{-4.1.0,}
+tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc{-1.2.1,}
 
 # Apply patches (from Alpine Linux).
 ../../extra/gcc/patches/appatch
