@@ -1,18 +1,20 @@
 ## `I` Preparation
 
 > #### Announcement
-> * Currently only focus on **x86_64** architecture, build with native CPU optimization and ThinLTO for final toolchain. [Triplet @ OSDev](https://wiki.osdev.org/Target_Triplet).
+> * Currently only focus on **x86_64** architecture, build with native CPU optimization and ThinLTO for the final toolchain. [Triplet @ OSDev](https://wiki.osdev.org/Target_Triplet).
 
 > #### * Beginning of as root!
 ### `1` - Prepare a volume/partition
 ```bash
 # Formatting.
 mkfs.ext4 -m 0 -L "Heiwa_Linux" /dev/sdaX
-
+```
+```sh
 # Export mountpoint variable and create the directory if not exist.
 export HEIWA="/media/Heiwa"
 mkdir -pv "$HEIWA"
-
+```
+```sh
 # Mount the target volume/partition.
 mount -vo noatime,discard /dev/sdaX "$HEIWA"
 ```
@@ -37,7 +39,7 @@ useradd -s /bin/bash -g heiwa -m -k /dev/null heiwa
 passwd heiwa
 ```
 ```bash
-# Setting up directory permission.
+# Set-up directory permissions.
 # Warning! This is danger, so check its variables before `chown`.
 # echo {${HEIWA},}/clang{0,1}-tools
 if [[ -n "$HEIWA" ]]; then
@@ -50,7 +52,6 @@ fi
 
 > #### * Beginning of as privileged user!
 ### `4` - Setup privileged user's environment
-> If you want multitasking responsiveness when using multiple jobs, set the load average to prevent slowdowned system (or maybe even up to OOM).
 ```bash
 # Login as privileged user.
 su - heiwa
@@ -84,6 +85,7 @@ T_TRIPLET="x86_64-pc-linux-musl"
 H_TRIPLET="$(echo "$T_TRIPLET" | \
     sed "s|$(echo "$T_TRIPLET" | cut -d- -f2)|heiwa|")"
 ```
+> If you want multitasking responsiveness when using multiple jobs, set the load average to prevent slowdowned system (maybe OOM).
 ```sh
 cat >> ~/.bashrc << EOF
 
