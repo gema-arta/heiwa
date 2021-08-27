@@ -84,9 +84,9 @@ time { make install; }
 > **Required!** This build of GCC is mainly done so that the musl libc can be built next.
 ```bash
 # GCC requires the GMP, MPFR, and MPC packages to either be present on the host or to be present in source form within the GCC source tree.
-tar xf ../gmp-6.2.1.tar.xz  && mv -fv gmp-6.2.1 gmp
-tar xf ../mpfr-4.1.0.tar.xz && mv -fv mpfr-4.1.0 mpfr
-tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc-1.2.1 mpc
+tar xf ../gmp-6.2.1.tar.xz  && mv -fv gmp{-6.2.1,}
+tar xf ../mpfr-4.1.0.tar.xz && mv -fv mpfr{-4.1.0,}
+tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc{-1.2.1,}
 
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build
