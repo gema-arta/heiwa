@@ -72,7 +72,7 @@ EOF
 cat > ~/.bashrc << EOF
 set +h
 umask 022
-unalias grep 2>/dev/null
+unalias -a
 HEIWA="${HEIWA:-/media/Heiwa}"
 LC_ALL="POSIX"
 PATH="/clang0-tools/usr/bin:/clang0-tools/bin:/clang1-tools/usr/bin:/clang1-tools/bin:/usr/bin:/bin"
