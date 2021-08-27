@@ -167,24 +167,24 @@ tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc-1.2.1 mpc
 
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build
-CFLAGS="-g0 $CFLAGS" CXXFLAGS="-g0 $CXXFLAGS"       \
-LDFLAGS="-Wl,-rpath,/clang0-tools/lib" ../configure \
-    --prefix=/clang0-tools                          \
-    --build=${C_TRIPLET}                            \
-    --host=${C_TRIPLET}                             \
-    --target=${H_TRIPLET}                           \
-    --with-sysroot=/clang0-tools                    \
-    --disable-nls                                   \
-    --enable-languages=c,c++                        \
-    --enable-clocale=generic                        \
-    --enable-libstdcxx-time                         \
-    --enable-threads=posix                          \
-    --enable-fully-dynamic-string                   \
-    --enable-shared                                 \
-    --disable-multilib                              \
-    --disable-libsanitizer                          \
-    --disable-symvers                               \
-    --disable-lto-plugin                            \
+LDFLAGS="-Wl,-rpath,/clang0-tools/lib $LDFLAGS"            \
+CFLAGS="-g0 $CFLAGS" CXXFLAGS="-g0 $CXXFLAGS" ../configure \
+    --prefix=/clang0-tools                                 \
+    --build=${C_TRIPLET}                                   \
+    --host=${C_TRIPLET}                                    \
+    --target=${H_TRIPLET}                                  \
+    --with-sysroot=/clang0-tools                           \
+    --disable-nls                                          \
+    --enable-languages=c,c++                               \
+    --enable-clocale=generic                               \
+    --enable-libstdcxx-time                                \
+    --enable-threads=posix                                 \
+    --enable-fully-dynamic-string                          \
+    --enable-shared                                        \
+    --disable-multilib                                     \
+    --disable-libsanitizer                                 \
+    --disable-symvers                                      \
+    --disable-lto-plugin                                   \
     --disable-libssp
 
 # Build.
