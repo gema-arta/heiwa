@@ -7,10 +7,10 @@
 ### `1` - Prepare a volume/partition
 ```bash
 # Formatting. EXT4 recommended for HDDs.
-mkfs.ext4 -m 0 -L "Heiwa_Linux" /dev/sdxY
+mkfs.ext4 -m 0 -L "Heiwa.Linux" /dev/sdxY
 
 # Formatting. F2FS recommended for SSDs.
-mkfs.f2fs -l "Heiwa_Linux" -O extra_attr,inode_checksum,sb_checksum,compression,encrypt /dev/sdxY
+mkfs.f2fs -l "Heiwa.Linux" -O extra_attr,inode_checksum,sb_checksum,compression,encrypt /dev/sdxY
 ```
 ```bash
 # Export the mount point variable and create the directory if not exist.
