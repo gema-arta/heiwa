@@ -174,18 +174,10 @@ CFLAGS="-g0 $CFLAGS" CXXFLAGS="-g0 $CXXFLAGS" ../configure \
     --host=${C_TRIPLET}                                    \
     --target=${H_TRIPLET}                                  \
     --with-sysroot=/clang0-tools                           \
-    --disable-nls                                          \
-    --enable-languages=c,c++                               \
-    --enable-clocale=generic                               \
-    --enable-libstdcxx-time                                \
-    --enable-threads=posix                                 \
-    --enable-fully-dynamic-string                          \
-    --enable-shared                                        \
-    --disable-multilib                                     \
-    --disable-libsanitizer                                 \
-    --disable-symvers                                      \
-    --disable-lto-plugin                                   \
-    --disable-libssp
+    --enable-{languages=c,c++,clocale=generic}             \
+    --enable-{libstdcxx-time,threads=posix}                \
+    --enable-{fully-dynamic-string,shared}                 \
+    --disable-{multilib,libsanitizer,symvers,lto-plugin,libssp}
 
 # Build.
 time { make AS_FOR_TARGET=${H_TRIPLET}-as LD_FOR_TARGET=${H_TRIPLET}-ld; }
