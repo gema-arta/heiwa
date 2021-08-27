@@ -96,24 +96,10 @@ CFLAGS="-g0 -O0 -pipe" CXXFLAGS="-g0 -O0 -pipe" ../configure \
     --host=${C_TRIPLET}                                      \
     --target=${H_TRIPLET}                                    \
     --with-sysroot=/clang0-tools/${H_TRIPLET}                \
-    --disable-nls                                            \
-    --disable-shared                                         \
     --without-headers                                        \
-    --with-newlib                                            \
-    --disable-decimal-float                                  \
-    --disable-libgomp                                        \
-    --disable-libssp                                         \
-    --disable-libatomic                                      \
-    --disable-libquadmath                                    \
-    --disable-threads                                        \
-    --disable-libitm                                         \
-    --disable-libsanitizer                                   \
-    --disable-libstdcxx                                      \
-    --disable-libvtv                                         \
-    --enable-languages=c                                     \
-    --enable-clocale=generic                                 \
-    --disable-multilib                                       \
-    --with-arch=${C_CPU}
+    --with-{newlib,arch=${C_CPU}}                            \
+    --enable-{languages=c,clocale=generic}                   \
+    --disable-{nls,shared,decimal-float,lib{gomp,ssp,atomic,quadmath,itm,sanitizer,stdcxxx,vtv},threads,multilib
 
 # Build only the minimum.
 time { make all-gcc all-target-libgcc; }
