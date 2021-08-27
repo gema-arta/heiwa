@@ -24,6 +24,14 @@ The purpose of this stage is to build a temporary Clang/LLVM toolchain with GCC 
 > ```bash
 > file $(command -v {g{cc,++},sh,awk,yacc,lex})
 > ```
+> ```bash
+> /usr/bin/gcc:  symbolic link to /usr/x86_64-pc-linux-gnu/gcc-bin/10.3.0/gcc
+> /usr/bin/g++:  symbolic link to /usr/x86_64-pc-linux-gnu/gcc-bin/10.3.0/g++
+> /bin/sh:       symbolic link to bash
+> /usr/bin/awk:  symbolic link to gawk
+> /usr/bin/yacc: symbolic link to yacc.bison
+> /usr/bin/lex:  symbolic link to flex
+> ```
 
 ### `1` - Linux API Headers
 > #### `5.13.x` (CacULE) or newer
