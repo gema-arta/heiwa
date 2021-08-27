@@ -213,7 +213,7 @@ readelf -l a.out | grep --color=auto "Req.*ter"
 > **Required!** To build Stage-0 Clang/LLVM.
 ```bash
 # Build.
-time { make CC=${H_TRIPLET}-gcc all-dynamic; }
+time { make CC=${H_TRIPLET}-gcc CFLAGS="-fPIC $CFLAGS" all-dynamic; }
 
 # Install.
 time { make PREFIX=/clang0-tools install-dynamic; }
