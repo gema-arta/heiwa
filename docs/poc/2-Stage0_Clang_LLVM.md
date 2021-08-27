@@ -66,8 +66,8 @@ CFLAGS="-g0 -Os -pipe" CXXFLAGS="-g0 -Os -pipe" ../configure \
     --prefix=/clang0-tools                                   \
     --target=${H_TRIPLET}                                    \
     --with-sysroot=/clang0-tools/${H_TRIPLET}                \
-    --enable-gold=default                                    \
     --without-{stage1-ldflags,debuginfod}                    \
+    --enable-gold=default                                    \
     --disable-{ld,nls,multilib,gdb,libdecnumber,readline,sim,werror}
 
 # Checks the host's environment and makes sure all the necessary tools are available to compile Binutils. Then build.
@@ -96,8 +96,8 @@ CFLAGS="-g0 -O0 -pipe" CXXFLAGS="-g0 -O0 -pipe" ../configure \
     --host=${C_TRIPLET}                                      \
     --target=${H_TRIPLET}                                    \
     --with-sysroot=/clang0-tools/${H_TRIPLET}                \
-    --without-headers                                        \
     --with-{newlib,arch=${C_CPU}}                            \
+    --without-headers                                        \
     --enable-{languages=c,clocale=generic}                   \
     --disable-{nls,shared,decimal-float,threads,multilib}    \
     --disable-lib{gomp,mudflap,ssp,atomic,quadmath,itm,sanitizer,stdcxx,vtv}
