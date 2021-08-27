@@ -65,7 +65,7 @@ su - heiwa
 ```bash
 cat > ~/.bash_profile << "EOF"
 exec env -i HOME="$HOME" TERM="$TERM" \
-COMMON_FLAGS="-march=native -Oz -pipe" /bin/bash
+COMMON_FLAGS="-march=native -Os -pipe" /bin/bash
 EOF
 ```
 ```bash
