@@ -6,17 +6,23 @@
 > #### * Beginning of as root!
 ### `1` - Prepare a volume/partition
 ```bash
-# Formatting.
-mkfs.ext4 -m 0 -L "Heiwa_Linux" /dev/sdaX
+# Formatting. EXT4 recommended for HDDs.
+mkfs.ext4 -m 0 -L "Heiwa_Linux" /dev/sdxY
+
+# Formatting. F2FS recommended for SSDs.
+mkfs.f2fs -l "Heiwa_Linux" -O extra_attr,inode_checksum,sb_checksum,compression,encrypt /dev/sdxY
 ```
-```sh
-# Export mountpoint variable and create the directory if not exist.
+```bash
+# Export the mount point variable and create the directory if not exist.
 export HEIWA="/media/Heiwa"
 mkdir -pv "$HEIWA"
 ```
-```sh
-# Mount the target volume/partition.
-mount -vo noatime,discard /dev/sdaX "$HEIWA"
+```bash
+# Mount the target volume/partition. EXT4 example on Linux-5.13.x or newer.
+mount -vo noatime,discard /dev/sdxY "$HEIWA"
+
+# Mount the target volume/partition. F2FS example on Linux-5.13.x or newer.
+mount -vo noatime,background_gc=sync,gc_merge,active_logs=2,compress_algorithm=lz4,compress_extension=*,compress_chksum /dev/sdxY "$HEIWA"
 ```
 
 ### `2` - Creating sources and toolchains directories
@@ -40,7 +46,7 @@ passwd heiwa
 ```
 ```bash
 # Set-up directory permissions.
-# Warning! This is danger, so check its variables before `chown`.
+# Warning! This is danger, so check the variables before `chown`.
 # echo {${HEIWA},}/clang{0,1}-tools
 if [[ -n "$HEIWA" ]]; then
     chmod -vR a+wt ${HEIWA}/sources
@@ -56,13 +62,13 @@ fi
 # Login as privileged user.
 su - heiwa
 ```
-```sh
+```bash
 cat > ~/.bash_profile << "EOF"
 exec env -i HOME="$HOME" TERM="$TERM" \
 COMMON_FLAGS="-march=native -Oz -pipe" /bin/bash
 EOF
 ```
-```sh
+```bash
 cat > ~/.bashrc << EOF
 set +h
 umask 022
@@ -75,7 +81,7 @@ export HEIWA LC_ALL PATH LLVM_SRC
 EOF
 source ~/.bash_profile
 ```
-```sh
+```bash
 C_TRIPLET="$(echo "$MACHTYPE" | \
     sed "s|$(echo "$MACHTYPE" | cut -d- -f2)|cross|")"
 C_ARCH="x86"
@@ -86,7 +92,7 @@ H_TRIPLET="$(echo "$T_TRIPLET" | \
     sed "s|$(echo "$T_TRIPLET" | cut -d- -f2)|heiwa|")"
 ```
 > If you want multitasking responsiveness when using multiple jobs, set the load average to prevent slowdowned system (maybe OOM).
-```sh
+```bash
 cat >> ~/.bashrc << EOF
 
 C_TRIPLET="${C_TRIPLET}"
@@ -95,14 +101,14 @@ C_CPU="${C_CPU}"
 L_TARGET="${L_TARGET}"
 T_TRIPLET="${T_TRIPLET}"
 H_TRIPLET="${H_TRIPLET}"
-MAKEFLAGS="-j\$(nproc) -l\$(nproc)"
+MAKEFLAGS="-j\$(nproc) -l\$(($(nproc)+1)"
 export C_TRIPLET C_ARCH C_CPU L_TARGET T_TRIPLET H_TRIPLET MAKEFLAGS
 EOF
 source ~/.bashrc
 ```
 
 > #### After Preparation
-> Copy [`syscore/*`](./../../syscore/) to `${HEIWA}/sources/extra/.` now!
+> Copy [**syscore/**](./../../syscore/) to **${HEIWA}/sources/extra/** now!
 
 <h2></h2>
 
