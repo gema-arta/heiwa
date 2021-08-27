@@ -66,7 +66,7 @@ CFLAGS="-g0 -Os -pipe" CXXFLAGS="-g0 -Os -pipe" ../configure \
     --prefix=/clang0-tools                                   \
     --target=${H_TRIPLET}                                    \
     --with-sysroot=/clang0-tools/${H_TRIPLET}                \
-    --enable-gold{,=default}                                 \
+    --enable-{ld=no,gold=default}                            \
     --without-{stage1-ldflags,debuginfod}                    \
     --disable-{nls,multilib,gdb,libdecnumber,readline,sim,werror}
 
