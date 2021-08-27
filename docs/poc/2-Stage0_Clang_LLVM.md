@@ -189,10 +189,10 @@ export SPECFILE="$(dirname $(${H_TRIPLET}-gcc -print-libgcc-file-name))/specs"
 ${H_TRIPLET}-gcc -dumpspecs > specs
 sed -i 's|/lib/ld-musl-x86_64.so.1|/clang0-tools/lib/ld-musl-x86_64.so.1|g' specs
 
-# Check specs file.
+# Check the specs file.
 grep --color=auto "/clang0-tools/lib/ld-musl-x86_64.so.1" specs
 
-# Install specs file (if correct).
+# Install the specs file (if correct).
 mv -fv specs "$SPECFILE" && unset SPECFILE
 
 # Quick test.
