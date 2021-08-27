@@ -174,7 +174,7 @@ CFLAGS="-g0 $CFLAGS" CXXFLAGS="-g0 $CXXFLAGS" ../configure \
     --host=${C_TRIPLET}                                    \
     --target=${H_TRIPLET}                                  \
     --with-sysroot=/clang0-tools                           \
-    --enable-{clocale=generic,languages=c,c++}             \
+    --enable-{clocale=generic,languages=c\,c++}            \
     --enable-{shared,threads=posix}                        \
     --disable-{gnu-unique-object,lib{mudflap,sanitizer},multilib,nls,symvers}
 
