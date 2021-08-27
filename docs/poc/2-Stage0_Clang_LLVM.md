@@ -67,8 +67,7 @@ CFLAGS="-g0 $CFLAGS" CXXFLAGS="-g0 $CXXFLAGS" ../configure \
     --target=${H_TRIPLET}                                  \
     --with-sysroot=/clang0-tools/${H_TRIPLET}              \
     --without-{stage1-ldflags,debuginfod}                  \
-    --enable-gold=default                                  \
-    --disable-{ld,nls,multilib,gdb,libdecnumber,readline,sim,werror}
+    --disable-{nls,multilib,gdb,libdecnumber,readline,sim,werror}
 
 # Checks the host's environment and makes sure all the necessary tools are available to compile Binutils. Then build.
 time { make configure-host && make; }
