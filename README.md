@@ -1,6 +1,6 @@
 # <p align="center">`Heiwa/Linux`</p>
 <pre><p align="center"><samp>
-A hobby and performance-oriented Linux® distribution
+A hobby and performance-oriented Linux® system
 that provides aesthetics and practical functionality.
 Without sacrificing <b>build size</b> and <b>build time</b> just
 for optimizing <b>the performance</b>. It's all <b>balanced</b>.
