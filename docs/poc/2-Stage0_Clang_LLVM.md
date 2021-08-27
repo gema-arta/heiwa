@@ -98,9 +98,9 @@ CFLAGS="-g0 $CFLAGS" CXXFLAGS="-g0 $CXXFLAGS" ../configure \
     --with-sysroot=/clang0-tools/${H_TRIPLET}              \
     --with-{newlib,arch=${C_CPU}}                          \
     --without-headers                                      \
-    --enable-{languages=c,clocale=generic}                 \
-    --disable-{nls,shared,decimal-float,threads,multilib}  \
-    --disable-lib{gomp,mudflap,ssp,atomic,quadmath,itm,sanitizer,stdcxx,vtv}
+    --enable-{clocale=generic,languages=c}                 \
+    --disable-{decimal-float,multilib,nls,shared,threads}  \
+    --disable-lib{atomic,gomp,itm,mudflap,quadmath,sanitizer,ssp,stdcxx,vtv}
 
 # Build only the minimum.
 time { make all-gcc all-target-libgcc; }
@@ -174,10 +174,9 @@ CFLAGS="-g0 $CFLAGS" CXXFLAGS="-g0 $CXXFLAGS" ../configure \
     --host=${C_TRIPLET}                                    \
     --target=${H_TRIPLET}                                  \
     --with-sysroot=/clang0-tools                           \
-    --enable-{languages=c,c++,clocale=generic}             \
-    --enable-{libstdcxx-time,threads=posix}                \
-    --enable-{fully-dynamic-string,shared}                 \
-    --disable-{multilib,lib{mudflap,sanitizer,ssp},symvers,lto-plugin}
+    --enable-{clocale=generic,languages=c,c++}             \
+    --enable-{fully-dynamic-string,shared,threads=posix}   \
+    --disable-{gnu-unique-object,lib{mudflap,sanitizer,ssp},multilib,nls,symvers}
 
 # Build.
 time { make AS_FOR_TARGET=${H_TRIPLET}-as LD_FOR_TARGET=${H_TRIPLET}-ld; }
