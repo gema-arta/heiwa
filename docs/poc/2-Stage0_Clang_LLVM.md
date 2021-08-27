@@ -71,7 +71,7 @@ CFLAGS="-g0 $CFLAGS" CXXFLAGS="-g0 $CXXFLAGS" ../configure \
     --disable-{ld,nls,multilib,gdb,libdecnumber,readline,sim,werror}
 
 # Checks the host's environment and makes sure all the necessary tools are available to compile Binutils. Then build.
-time { CFLAGS= CXXFLAGS= make configure-host && make; }
+time { make configure-host && make; }
 
 # Install.
 time { make install; }
