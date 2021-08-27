@@ -99,7 +99,7 @@ CFLAGS="-g0 -O0 -pipe" CXXFLAGS="-g0 -O0 -pipe" ../configure \
     --without-headers                                        \
     --with-{newlib,arch=${C_CPU}}                            \
     --enable-{languages=c,clocale=generic}                   \
-    --disable-{nls,shared,decimal-float,lib{gomp,ssp,atomic,quadmath,itm,sanitizer,stdcxxx,vtv},threads,multilib}
+    --disable-{nls,shared,decimal-float,lib{gomp,ssp,atomic,quadmath,itm,sanitizer,stdcxx,vtv},threads,multilib}
 
 # Build only the minimum.
 time { make all-gcc all-target-libgcc; }
