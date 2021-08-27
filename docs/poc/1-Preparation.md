@@ -91,8 +91,8 @@ T_TRIPLET="x86_64-pc-linux-musl"
 H_TRIPLET="$(echo "$T_TRIPLET" | \
     sed "s|$(echo "$T_TRIPLET" | cut -d- -f2)|heiwa|")"
 ```
-> If you want multitasking responsiveness when using multiple jobs, set the load average to prevent slowdowned system (maybe OOM).
 ```bash
+# If you want multitasking responsiveness when using multiple jobs, set the load average to prevent slowdowned system (maybe OOM).
 cat >> ~/.bashrc << EOF
 
 C_TRIPLET="${C_TRIPLET}"
