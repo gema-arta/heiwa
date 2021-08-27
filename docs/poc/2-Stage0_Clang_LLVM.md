@@ -177,7 +177,7 @@ CFLAGS="-g0 $CFLAGS" CXXFLAGS="-g0 $CXXFLAGS" ../configure \
     --enable-{languages=c,c++,clocale=generic}             \
     --enable-{libstdcxx-time,threads=posix}                \
     --enable-{fully-dynamic-string,shared}                 \
-    --disable-{multilib,lib{mudflap,sanitizer},symvers,lto-plugin,libssp}
+    --disable-{multilib,lib{mudflap,sanitizer,ssp},symvers,lto-plugin}
 
 # Build.
 time { make AS_FOR_TARGET=${H_TRIPLET}-as LD_FOR_TARGET=${H_TRIPLET}-ld; }
