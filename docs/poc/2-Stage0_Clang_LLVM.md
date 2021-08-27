@@ -90,16 +90,16 @@ tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc{-1.2.1,}
 
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build
-CFLAGS="-g0 -O0 -pipe" CXXFLAGS="-g0 -O0 -pipe" ../configure \
-    --prefix=/clang0-tools                                   \
-    --build=${C_TRIPLET}                                     \
-    --host=${C_TRIPLET}                                      \
-    --target=${H_TRIPLET}                                    \
-    --with-sysroot=/clang0-tools/${H_TRIPLET}                \
-    --with-{newlib,arch=${C_CPU}}                            \
-    --without-headers                                        \
-    --enable-{languages=c,clocale=generic}                   \
-    --disable-{nls,shared,decimal-float,threads,multilib}    \
+CFLAGS="-g0 $CFLAGS" CXXFLAGS="-g0 $CXXFLAGS" ../configure \
+    --prefix=/clang0-tools                                 \
+    --build=${C_TRIPLET}                                   \
+    --host=${C_TRIPLET}                                    \
+    --target=${H_TRIPLET}                                  \
+    --with-sysroot=/clang0-tools/${H_TRIPLET}              \
+    --with-{newlib,arch=${C_CPU}}                          \
+    --without-headers                                      \
+    --enable-{languages=c,clocale=generic}                 \
+    --disable-{nls,shared,decimal-float,threads,multilib}  \
     --disable-lib{gomp,mudflap,ssp,atomic,quadmath,itm,sanitizer,stdcxx,vtv}
 
 # Build only the minimum.
@@ -116,7 +116,7 @@ time { make install-gcc install-target-libgcc; }
 > **Required!** As mentioned in the description above.
 ```bash
 # Configure source.
-CFLAGS="-Os -pipe" CXXFLAGS="-Os -pipe" ./configure \
+./configure \
     CROSS_COMPILE=${H_TRIPLET}-                     \
     --prefix=/                                      \
     --target=${H_TRIPLET}                           \
@@ -167,7 +167,7 @@ tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc-1.2.1 mpc
 
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build
-CFLAGS="-g0 -Os -pipe" CXXFLAGS="-g0 -Os -pipe"     \
+CFLAGS="-g0 $CFLAGS" CXXFLAGS="-g0 $CXXFLAGS"       \
 LDFLAGS="-Wl,-rpath,/clang0-tools/lib" ../configure \
     --prefix=/clang0-tools                          \
     --build=${C_TRIPLET}                            \
@@ -222,7 +222,7 @@ readelf -l a.out | grep --color=auto "Req.*ter"
 > **Required!** To build Stage-0 Clang/LLVM.
 ```bash
 # Build.
-time { make CC=${H_TRIPLET}-gcc CFLAGS="-fPIC -Os -pipe" all-dynamic; }
+time { make CC=${H_TRIPLET}-gcc CFLAGS="-fPIC $CFLAGS" all-dynamic; }
 
 # Install.
 time { make PREFIX=/clang0-tools install-dynamic; }
@@ -235,7 +235,7 @@ time { make PREFIX=/clang0-tools install-dynamic; }
 > **Required!** To build Stage-0 Clang/LLVM, since using musl libc.
 ```bash
 # Build.
-time { make CC=${H_TRIPLET}-gcc CFLAGS="-Os -pipe" dynamic; }
+time { make CC=${H_TRIPLET}-gcc dynamic; }
 
 # Install.
 time { make PREFIX=/clang0-tools install-{header,dynamic}; }
@@ -283,8 +283,8 @@ cmake -B build \
     -DCMAKE_INSTALL_PREFIX="/clang0-tools"                                                  \
     -DCMAKE_C_COMPILER="${H_TRIPLET}-gcc"                                                   \
     -DCMAKE_CXX_COMPILER="${H_TRIPLET}-g++"                                                 \
-    -DCMAKE_C_FLAGS="-g0 -Os -pipe"                                                         \
-    -DCMAKE_CXX_FLAGS="-g0 -Os -pipe"                                                       \
+    -DCMAKE_C_FLAGS="-g0 $CFLAGS"                                                           \
+    -DCMAKE_CXX_FLAGS="-g0 $CXXFLAGS"                                                       \
     -DCMAKE_EXE_LINKER_FLAGS="-Wl,-dynamic-linker /clang0-tools/lib/ld-musl-x86_64.so.1"    \
     -DCMAKE_SHARED_LINKER_FLAGS="-Wl,-dynamic-linker /clang0-tools/lib/ld-musl-x86_64.so.1" \
     -DLLVM_HOST_TRIPLE="$T_TRIPLET"                                                         \
