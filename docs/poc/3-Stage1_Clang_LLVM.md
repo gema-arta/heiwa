@@ -34,11 +34,6 @@ READELF="llvm-readelf"
 SIZE="llvm-size"
 STRIP="llvm-strip"
 export CC CXX LD CC_LD CXX_LD AR AS NM OBJCOPY OBJDUMP RANLIB READELF SIZE STRIP
-
-CFLAGS="${COMMON_FLAGS}"
-CXXFLAGS="${COMMON_FLAGS}"
-LDFLAGS="-Wl,-O2 -Wl,--as-needed"
-export CFLAGS CXXFLAGS LDFLAGS
 EOF
 source ~/.bashrc
 ```
