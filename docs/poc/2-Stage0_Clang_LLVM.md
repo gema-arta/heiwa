@@ -99,7 +99,7 @@ CFLAGS="-g0 $CFLAGS" CXXFLAGS="-g0 $CXXFLAGS" ../configure \
     --without-headers                                      \
     --enable-{clocale=generic,languages=c}                 \
     --disable-{decimal-float,multilib,nls,shared,threads}  \
-    --disable-lib{atomic,gomp,itm,mudflap,quadmath,sanitizer,ssp,stdcxx,vtv,werror}
+    --disable-lib{atomic,gomp,itm,mudflap,quadmath,sanitizer,ssp,stdcxx,vtv}
 
 # Build only the minimum.
 time { make all-gcc all-target-libgcc; }
@@ -175,7 +175,7 @@ CFLAGS="-g0 $CFLAGS" CXXFLAGS="-g0 $CXXFLAGS" ../configure \
     --with-sysroot=/clang0-tools                           \
     --enable-{clocale=generic,languages=c\,c++}            \
     --enable-{shared,threads=posix}                        \
-    --disable-{gnu-unique-object,lib{mudflap,sanitizer},multilib,nls,symvers,werror}
+    --disable-{gnu-unique-object,lib{mudflap,sanitizer,ssp,vtv},multilib,nls,symvers,werror}
 
 # Build.
 time { make AS_FOR_TARGET=${H_TRIPLET}-as LD_FOR_TARGET=${H_TRIPLET}-ld; }
