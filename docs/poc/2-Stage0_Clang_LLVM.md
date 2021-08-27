@@ -96,7 +96,7 @@ CFLAGS="-g0 $CFLAGS" CXXFLAGS="-g0 $CXXFLAGS" ../configure \
     --host=${C_TRIPLET}                                    \
     --target=${H_TRIPLET}                                  \
     --with-sysroot=/clang0-tools/${H_TRIPLET}              \
-    --with-{newlib,arch=${C_CPU}}                          \
+    --with-{arch=${C_CPU},newlib}                          \
     --without-headers                                      \
     --enable-{clocale=generic,languages=c}                 \
     --disable-{decimal-float,multilib,nls,shared,threads}  \
