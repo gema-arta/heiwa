@@ -94,15 +94,18 @@ H_TRIPLET="$(echo "$T_TRIPLET" | \
 ```bash
 # If you want multitasking responsiveness when using multiple jobs, set the load average to prevent slowdowned system (maybe OOM).
 cat >> ~/.bashrc << EOF
-
 C_TRIPLET="${C_TRIPLET}"
 C_ARCH="${C_ARCH}"
 C_CPU="${C_CPU}"
 L_TARGET="${L_TARGET}"
 T_TRIPLET="${T_TRIPLET}"
 H_TRIPLET="${H_TRIPLET}"
+export C_TRIPLET C_ARCH C_CPU L_TARGET T_TRIPLET H_TRIPLET
+CFLAGS="${COMMON_FLAGS}"
+CXXFLAGS="${COMMON_FLAGS}"
+LDFLAGS="-Wl,-O2 -Wl,--as-needed"
 MAKEFLAGS="-j\$(nproc) -l\$(nproc)"
-export C_TRIPLET C_ARCH C_CPU L_TARGET T_TRIPLET H_TRIPLET MAKEFLAGS
+export CFLAGS CXXFLAGS LDFLAGS MAKEFLAGS
 EOF
 source ~/.bashrc
 ```
