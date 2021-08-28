@@ -239,7 +239,7 @@ time { make PREFIX=/clang0-tools install-{header,dynamic}; }
 
 > **Required!** Build Stage-0 Clang/LLVM toolchain with `libgcc_s.so*` and `libstdc++.so*` dependencies since built with GCC toolchain.
 ```bash
-# Exit from the LLVM source directory if already entered after decompressing.
+# Exit from LLVM source directory if already entered after decompressing.
 popd
 ```
 ```bash
