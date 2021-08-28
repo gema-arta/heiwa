@@ -177,7 +177,7 @@ mv -fv specs "$SPECFILE" && unset SPECFILE
 ```bash
 # Quick test.
 echo "int main(){}" > dummy.c
-${H_TRIPLET}-gcc -march=native -Os -pipe dummy.c
+${H_TRIPLET}-gcc ${CFLAGS} dummy.c
 readelf -l a.out | grep --color=auto "Req.*ter"
 
 # | The output should be:
