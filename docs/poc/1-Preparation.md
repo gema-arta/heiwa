@@ -27,7 +27,7 @@ mkdir -pv "$HEIWA"
 mount -vo noatime,discard /dev/sdxY "$HEIWA"
 
 # Mount the target volume/partition. F2FS example on Linux-5.13.x or newer.
-mount -vo noatime,gc_merge,compress_algorithm=lz4,compress_extension=*,compress_chksum,atgc /dev/sdxY "$HEIWA"
+mount -vo noatime,gc_merge,compress_algorithm=lz4,compress_extension='*',compress_chksum,atgc /dev/sdxY "$HEIWA"
 ```
 
 ### `2` - Creating sources and toolchains directories
