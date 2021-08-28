@@ -218,6 +218,7 @@ time { make CC=${H_TRIPLET}-gcc all-dynamic; }
 time { make PREFIX=/clang0-tools install-dynamic; }
 ```
 
+<!--
 ### `7` - libexecinfo
 > #### `1.1` or newer (from Heiwa/Linux fork)
 > The libexecinfo package contains backtrace facility that usually found in GNU libc (glibc).
@@ -230,8 +231,9 @@ time { make CC=${H_TRIPLET}-gcc dynamic; }
 # Install.
 time { make PREFIX=/clang0-tools install-{header,dynamic}; }
 ```
+-->
 
-### `8` - Clang/LLVM
+### `7` - Clang/LLVM
 > #### `12.x.x` or newer
 > C language family frontend for LLVM.
 
