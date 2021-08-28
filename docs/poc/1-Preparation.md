@@ -3,6 +3,11 @@
 > #### Announcement
 > * Currently only focus on **x86_64** architecture, build with native CPU optimization and ThinLTO for the final toolchain. [Triplet at OSDev](https://wiki.osdev.org/Target_Triplet).
 
+> #### Host System Requirements
+> ```sh
+> sh <(curl -s "https://raw.githubusercontent.com/heiwalinux/heiwa/main/version-check")
+> ```
+
 > #### * Beginning of as root!
 ### `1` - Prepare a volume/partition
 ```bash
