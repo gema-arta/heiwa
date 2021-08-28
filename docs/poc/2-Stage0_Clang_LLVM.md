@@ -95,12 +95,11 @@ time { make install-gcc install-target-libgcc; }
 > **Required!** As mentioned in the description above.
 ```bash
 # Configure source.
-./configure \
-    CROSS_COMPILE=${H_TRIPLET}- \
-    --prefix=/                  \
-    --target=${H_TRIPLET}       \
-    --disable-static            \
-    --with-malloc=mallocng      \
+./configure CROSS_COMPILE=${H_TRIPLET}- \
+    --prefix=/                          \
+    --target=${H_TRIPLET}               \
+    --disable-static                    \
+    --with-malloc=mallocng              \
     --enable-optimize=speed
 
 # Build.
