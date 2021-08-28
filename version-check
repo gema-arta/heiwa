@@ -1,0 +1,210 @@
+#!/usr/bin/env sh
+
+# POSIX-sh script to check host system requirements for Heiwa/Linux builds.
+# Author: owl4ce <findarr@pm.me>
+# License: LGPL-2.1
+# -----------------------------------
+# https://github.com/heiwalinux/heiwa
+
+export LC_ALL=C LANG=C
+
+G="\033[0;32m" M="\033[1;35m" R="\033[1;31m" NC="\033[0m"
+msg() { printf "${M}*${NC} ${G}${1}${NC} ${2}\n"; }
+sym() { printf "${R}~${NC} ${1} ${M}->${NC} ${2}\n" ;}
+err() { 2>&1 printf "${R}error:${NC} ${@}\n"; exit 1; }
+
+# bash.
+if [ -x "$(command -v bash)" ]; then
+    msg "bash" "$(bash --version | sed 1q | cut -d' ' -f4-5)"
+    if SH="$(readlink -f /bin/sh)" && echo "$SH" | grep -qo bash; then
+        sym "/bin/sh" "$SH"
+    else
+        err "/bin/sh does not point to bash!"
+    fi && unset SH
+else
+    err "bash not installed!"
+fi
+
+# binutils.
+if [ -x "$(command -v ld)" ]; then
+    msg "binutils" "$(ld --version | sed 1q | cut -d' ' -f3-)"
+else
+    err "binutils not installed!"
+fi
+    
+    
+# bison and yacc.
+if [ -x "$(command -v bison)" ]; then
+    msg "bison" "$(bison --version | sed 1q | cut -d' ' -f2-)"
+fi
+if [ -h "$(command -v yacc)" ]; then
+  sym "$(command -v yacc)" "$(readlink -f $(command -v yacc))"
+elif [ -x "$(command -v yacc)" ]; then
+  sym "yacc" "$(yacc --version | sed 1q)"
+else
+  err "yacc not found nor installed!"
+fi
+
+# bzip2.
+if [ -x "$(command -v bzip2)" ]; then
+    msg "bzip2" "$(bzip2 --version 2>&1 < /dev/null | sed 1q | cut -d' ' -f8-)"
+else
+    err "bzip2 not installed!"
+fi
+
+# cmake.
+if [ -x "$(command -v cmake)" ]; then
+    msg "cmake" "$(cmake --version | sed 1q | cut -d' ' -f3)"
+else
+    err "cmake not installed!"
+fi
+
+# coreutils implementation.
+if [ -x "$(command -v chown)" ] && chown -v 2>&1 | grep -qo 'BusyBox'; then
+    msg "BusyBox" ""$(busybox chown -v 2>&1 | sed 1q | cut -d' ' -f2-)""
+elif [ -x "$(command -v chown)" ] && chown -v 2>&1 | grep -qo 'ToyBox'; then
+    msg "ToyBox" ""$(toybox chown -v 2>&1 | sed 1q | cut -d' ' -f2-)""
+elif [ -x "$(command -v chown)" ]; then
+    msg "coreutils" "$(chown --version | sed 1q | cut -d' ' -f2-)"
+    # diffutils.
+    if [ -x "$(command -v diff)" ]; then
+        msg "diffutils" "$(diff --version | sed 1q | cut -d' ' -f2-)"
+    else
+        err "diffutils not installed!"
+    fi
+    # findutils.
+    if [ -x "$(command -v find)" ]; then
+        msg "findutils" "$(find --version | sed 1q | cut -d' ' -f2-)"
+    else
+        err "findutils not installed!"
+    fi
+    # grep.
+    if [ -x "$(command -v grep)" ]; then
+        msg "grep" "$(grep --version | sed 1q | cut -d' ' -f2-)"
+    else
+        err "grep not installed!"
+    fi
+    # sed.
+    if [ -x "$(command -v sed)" ]; then
+        msg "sed" "$(sed --version | sed 1q | cut -d' ' -f2-)"
+    else
+        err "sed not installed!"
+    fi
+    # tar.
+    if [ -x "$(command -v tar)" ]; then
+        msg "tar" "$(tar --version | sed 1q | cut -d' ' -f2-)"
+    else
+        err "tar not installed!"
+    fi
+else
+    err "There's no any coreutils implementation installed!"
+fi
+
+# flex.
+if [ -x "$(command -v flex)" ]; then
+    msg "flex" "$(flex --version | cut -d' ' -f2)"
+fi
+if [ -h "$(command -v lex)" ]; then
+    sym "$(command -v lex)" "$(readlink -f $(command -v lex))"
+elif [ -x "$(command -v lex)" ]; then
+    sym "lex" "$(lex --version | sed 1q)"
+else 
+    err "lex not found nor installed!"
+fi
+
+
+# GNU Awk and awk.
+if [ -x "$(command -v gawk)" ]; then
+    msg "GNU Awk" "$(gawk --version | sed 1q | cut -d' ' -f3-)"
+fi
+if [ -h "$(command -v awk)" ]; then
+    sym "$(command -v awk)" "$(readlink -f $(command -v awk))"
+elif [ -x "$(command -v awk)" ]; then
+    sym "awk" "$(awk --version | sed 1q)"
+else 
+    err "awk not found nor installed!"
+fi
+
+# GCC.
+if [ -x "$(command -v gcc)" ] && [ -x "$(command -v g++)" ]; then
+    msg "gcc" "$(gcc --version | sed 1q | cut -d' ' -f2-)"
+    msg "g++" "$(g++ --version | sed 1q | cut -d' ' -f2-)"
+else
+    err "GCC not installed!"
+fi
+
+# libc ldd.
+if [ -x "$(command -v ldd)" ]; then
+    msg "ldd" "$(ldd --version | sed 1q | cut -d' ' -f2-)"
+else
+    err "What's your libc implementation? nothing ldd found in this system!"
+fi
+
+# gzip.
+if [ -x "$(command -v gzip)" ]; then
+    msg "gzip" "$(gzip --version | sed 1q | cut -d' ' -f2)"
+else
+    err "gzip not installed!"
+fi
+
+# Linux.
+msg "Linux" "$(cut -d' ' -f 3- /proc/version)"
+
+# m4.
+if [ -x "$(command -v m4)" ]; then
+    msg "m4" "$(m4 --version | sed 1q | cut -d' ' -f2-)"
+else
+    err "m4 not installed!"
+fi
+
+# Make.
+if [ -x "$(command -v make)" ]; then
+    msg "Make" "is $(make --version | sed 1q | cut -d' ' -f 1-)"
+else
+    err "Make not installed!"
+fi
+
+# Perl.
+if [ -x "$(command -v perl)" ]; then
+    msg "Perl" "$(perl -V:version | grep -oP "'\K[^';]+")"
+else
+    err "Perl not installed!"
+fi
+
+# Python.
+if [ -x "$(command -v python)" ]; then
+    msg "Python" "$(python --version | cut -d' ' -f 2-)"
+else
+    err "Python not installed!"
+fi
+
+# makeinfo.
+if [ -x "$(command -v makeinfo)" ]; then
+    msg "makeinfo" "$(makeinfo --version | sed 1q | cut -d' ' -f2-)"
+    if [ -h "$(command -v makeinfo)" ]; then
+        sym "$(command -v makeinfo)" "$(readlink -f $(command -v makeinfo))"
+    fi
+else
+    err "There's no makeinfo found nor installed!"
+fi
+
+# xz.
+if [ -x "$(command -v xz)" ]; then
+    msg "xz" "$(xz --version | sed 1q | cut -d' ' -f2-)"
+else
+    err "xz not installed!"
+fi
+
+# Compiler sanity test.
+msg "g++" "sanity test:\n"
+echo 'int main(){}' >dummy.c
+if g++ -march=native -O2 -ftree-vectorize -pipe -o dummy dummy.c && [ -x dummy ]; then
+    readelf -h dummy
+    printf "\n${G}[${NC} %s ${G}]${NC}\n\n" "OK"
+    rm -f dummy.c dummy && exit $?
+else
+    printf "\n${R}[${NC} %s ${R}]${NC}\n\n" "FAILED"
+    rm -f dummy.c dummy && exit 1
+fi
+
+unset LC_ALL LANG
