@@ -194,7 +194,8 @@ grep --color=auto "/clang0-tools/lib/ld-musl-x86_64.so.1" specs
 
 # Install the specs file (if correct).
 mv -fv specs "$SPECFILE" && unset SPECFILE
-
+```
+```bash
 # Quick test.
 echo "int main(){}" > dummy.c
 ${H_TRIPLET}-gcc dummy.c
