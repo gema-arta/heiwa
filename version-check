@@ -50,7 +50,7 @@ fi
 
 # bzip2.
 if [ -x "$(command -v bzip2)" ]; then
-    msg "bzip2" "$(bzip2 --version 2>&1 < /dev/null | sed 1q | cut -d' ' -f8-)"
+    msg "bzip2" "$(bzip2 --version 2>&1 </dev/null | sed 1q | cut -d' ' -f8-)"
 else
     err "bzip2 not installed!"
 fi
@@ -64,9 +64,9 @@ fi
 
 # coreutils implementation.
 if [ -x "$(command -v chown)" ] && chown -v 2>&1 | grep -qo 'BusyBox'; then
-    msg "BusyBox" ""$(busybox chown -v 2>&1 | sed 1q | cut -d' ' -f2-)""
+    msg "BusyBox" "$(busybox chown -v 2>&1 | sed 1q | cut -d' ' -f2-)"
 elif [ -x "$(command -v chown)" ] && chown -v 2>&1 | grep -qo 'ToyBox'; then
-    msg "ToyBox" ""$(toybox chown -v 2>&1 | sed 1q | cut -d' ' -f2-)""
+    msg "ToyBox" "$(toybox chown -v 2>&1 | sed 1q | cut -d' ' -f2-)"
 elif [ -x "$(command -v chown)" ]; then
     msg "coreutils" "$(chown --version | sed 1q | cut -d' ' -f2-)"
     # diffutils.
@@ -199,14 +199,12 @@ fi
 
 # Compiler sanity test.
 msg "g++" "sanity test:\n"
-echo 'int main(){}' >dummy.c
-if g++ -march=native -O2 -ftree-vectorize -pipe -o dummy dummy.c && [ -x dummy ]; then
-    readelf -h dummy
+echo "int main(){}" > dummy.c
+if g++ -march=native -O2 -ftree-vectorize -pipe dummy.c && [ -x a.out ]; then
+    readelf -l a.out | grep --color=auto "Req.*ter"
     printf "\n${G}[${NC} %s ${G}]${NC}\n\n" "OK"
-    rm -f dummy.c dummy && exit $?
+    rm -f dummy.c a.out
 else
-    printf "\n${R}[${NC} %s ${R}]${NC}\n\n" "FAILED"
-    rm -f dummy.c dummy && exit 1
-fi
-
-unset LC_ALL LANG
+    printf "${R}[${NC} %s ${R}]${NC}\n\n" "FAILED"
+    rm -f dummy.c a.out && exit 1
+fi && unset LC_ALL LANG && exit $?
