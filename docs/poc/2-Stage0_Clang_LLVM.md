@@ -241,7 +241,7 @@ time { make PREFIX=/clang0-tools install-{header,dynamic}; }
 popd
 ```
 ```bash
-# Rename the LLVM source directory to "$LLVM_SRC", then enter.
+# Rename LLVM source directory to "$LLVM_SRC", then enter.
 mv -fv llvm-12.0.1.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 
 # Decompress `clang`, `lld`, `compiler-rt`, `libunwind`, `libcxxabi`, and `libcxx` to the correct directories.
