@@ -3,7 +3,7 @@ export LC_ALL=C LANG=C
 
 G="\033[0;32m" M="\033[1;35m" R="\033[1;31m" NC="\033[0m"
 msg() { printf "${M}*${NC} ${G}${1}${NC} ${2}\n"; }
-sym() { printf "${R}~${NC} ${1} ${M}->${NC} ${2}\n" ;}
+sym() { printf "${R}~${NC} ${1} ${M}->${NC} ${2}\n"; }
 err() { 2>&1 printf "${R}error:${NC} ${@}\n"; exit 1; }
 
 # Introduction.
