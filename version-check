@@ -1,17 +1,21 @@
 #!/usr/bin/env sh
-
-# POSIX-sh script to check host system requirements for Heiwa/Linux builds.
-# Author: owl4ce <findarr@pm.me>
-# License: LGPL-2.1
-# -----------------------------------
-# https://github.com/heiwalinux/heiwa
-
 export LC_ALL=C LANG=C
 
 G="\033[0;32m" M="\033[1;35m" R="\033[1;31m" NC="\033[0m"
 msg() { printf "${M}*${NC} ${G}${1}${NC} ${2}\n"; }
 sym() { printf "${R}~${NC} ${1} ${M}->${NC} ${2}\n" ;}
 err() { 2>&1 printf "${R}error:${NC} ${@}\n"; exit 1; }
+
+# Introduction.
+cat << "EOF"
+
+POSIX-sh script to check host system requirements for Heiwa/Linux builds.
+Author: owl4ce <findarr@pm.me>
+License: LGPL-2.1
+-----------------------------------
+https://github.com/heiwalinux/heiwa
+
+EOF
 
 # bash.
 if [ -x "$(command -v bash)" ]; then
@@ -31,8 +35,7 @@ if [ -x "$(command -v ld)" ]; then
 else
     err "binutils not installed!"
 fi
-    
-    
+
 # bison and yacc.
 if [ -x "$(command -v bison)" ]; then
     msg "bison" "$(bison --version | sed 1q | cut -d' ' -f2-)"
@@ -100,7 +103,7 @@ else
     err "There's no any coreutils implementation installed!"
 fi
 
-# flex.
+# flex and lex.
 if [ -x "$(command -v flex)" ]; then
     msg "flex" "$(flex --version | cut -d' ' -f2)"
 fi
@@ -111,7 +114,6 @@ elif [ -x "$(command -v lex)" ]; then
 else 
     err "lex not found nor installed!"
 fi
-
 
 # GNU Awk and awk.
 if [ -x "$(command -v gawk)" ]; then
