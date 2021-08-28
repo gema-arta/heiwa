@@ -82,10 +82,10 @@ CFLAGS="-g0 $CFLAGS" CXXFLAGS="-g0 $CXXFLAGS" ../configure \
     --disable-lib{atomic,gomp,itm,mudflap,quadmath,sanitizer,ssp,stdcxx,vtv}
 
 # Build only the minimum.
-time { make all-gcc all-target-libgcc; }
+time { make all-{gcc,target-libgcc}; }
 
 # Install.
-time { make install-gcc install-target-libgcc; }
+time { make install-{gcc,target-libgcc}; }
 ```
 
 ### `4` - musl
@@ -124,7 +124,7 @@ EOF
 ```
 ```bash
 # GCC will looking for system headers in "/clang0-tools/usr/include/*".
-# Create the directory, then symlink it.
+# Create the "/clang0-tools/usr" directory, then symlink it.
 mkdir -v /clang0-tools/usr && \
 ln -sv ../include /clang0-tools/usr/include
 ```
