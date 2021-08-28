@@ -26,7 +26,7 @@ time { make mrproper; }
 # The headers are first placed in "./usr/", then copied to the needed location.
 time { make ARCH=${C_ARCH} headers; }
 
-# Remove unnecessary files.
+# Remove unnecessary dotfiles and Makefile.
 find usr/include \( -name '.*' -o -name 'Makefile' \) -exec rm -fv {} \;
 
 # Install.
