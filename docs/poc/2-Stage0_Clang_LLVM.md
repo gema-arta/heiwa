@@ -79,7 +79,7 @@ CFLAGS="-g0 -O0 -pipe" CXXFLAGS="-g0 -O0 -pipe" ../configure \
     --without-headers                                        \
     --enable-{clocale=generic,languages=c}                   \
     --disable-{decimal-float,multilib,nls,shared,threads}    \
-    --disable-lib{atomic,gomp,itm,mudflap,quadmath,sanitizer,ssp,stdcxx,vtv}
+    --disable-lib{atomic,gomp,itm,mpx,mudflap,quadmath,sanitizer,ssp,stdcxx,vtv}
 
 # Build only the minimum.
 time { make all-{gcc,target-libgcc}; }
