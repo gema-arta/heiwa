@@ -14,10 +14,9 @@ The purpose of this stage is to build a pure Clang/LLVM toolchain that will be u
 > ```
 
 ### `0` - Setting Up Clang/LLVM Environment Variables
-> Apply persistent toolchain environment variables, but currently don't set the compiler to the new triplet of Stage-0 Clang/LLVM. Meaning to use libc from Stage-0 Clang/LLVM firstly, in case to build musl libc in this stage.
+> Apply persistent toolchain environment variables, but currently don't set compiler to new triplet of Stage-0 Clang/LLVM in order to use libc from Stage-0 Clang/LLVM firstly, to build musl libc in this stage.
 ```bash
 cat >> ~/.bashrc << "EOF"
-
 # Stage-1 Clang/LLVM Environment.
 CC="clang"
 CXX="clang++"
