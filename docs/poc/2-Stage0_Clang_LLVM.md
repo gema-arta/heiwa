@@ -78,8 +78,8 @@ CFLAGS="-g0 -O0 -pipe" CXXFLAGS="-g0 -O0 -pipe" ../configure \
     --with-{arch=${C_CPU},newlib}                            \
     --without-headers                                        \
     --enable-{clocale=generic,languages=c,threads=no}        \
-    --disable-{decimal-float,multilib,nls,shared}            \
-    --disable-lib{atomic,gomp,itm,mpx,mudflap,quadmath,sanitizer,ssp,stdcxx,vtv,werror}
+    --disable-{decimal-float,multilib,nls,shared,werror}     \
+    --disable-lib{atomic,gomp,itm,mpx,mudflap,quadmath,sanitizer,ssp,stdcxx,vtv}
 
 # Build only the minimum.
 time { make all-{gcc,target-libgcc}; }
