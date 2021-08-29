@@ -123,8 +123,7 @@ cat > /clang0-tools/etc/ld-musl-x86_64.path << EOF
 EOF
 ```
 ```bash
-# GCC will looking for system headers in "/clang0-tools/usr/include/*".
-# Create the "/clang0-tools/usr" directory, then symlink it.
+# GCC will looking for system headers in "/clang0-tools/usr/include/*", so create the "/clang0-tools/usr" directory, then symlink it.
 mkdir -v /clang0-tools/usr && \
 ln -sv ../include /clang0-tools/usr/include
 ```
