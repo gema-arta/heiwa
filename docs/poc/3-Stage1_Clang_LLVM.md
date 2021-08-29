@@ -264,7 +264,7 @@ time { make -C build; }
 time { make -C build install && popd; }
 ```
 ```bash
-# Remove `libunwind`, `libcxxabi`, and `libcxx` from the LLVM source.
+# Remove `libunwind`, `libcxxabi`, and `libcxx` from LLVM source directory.
 rm -rf projects/lib{unwind,cxx{abi,}}
 ```
 ```bash
