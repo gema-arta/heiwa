@@ -105,15 +105,11 @@ time { make LLVM=1 LLVM_IAS=1 mrproper; }
 # The headers are first placed in "./usr/", then copied to the needed location.
 time { make ARCH=${C_ARCH} LLVM=1 LLVM_IAS=1 HOSTCC=${CC} headers; }
 
-# Remove unnecessary files.
-find usr/include \( -name '.*' -o -name 'Makefile' \) -exec rm -rfv {} \;
+# Remove unnecessary dotfiles and Makefile.
+find usr/include \( -name '.*' -o -name 'Makefile' \) -exec rm -fv {} \;
 
 # Install.
 cp -afv usr/include /clang1-tools/.
-```
-```bash
-# I don't know .. why if HOSTCC is defaults since use "LLVM=1" (clang),
-# it will fails to compile "scripts/basic/fixdep.c", but successful using `${TARGET_TRIPLET}-compiler`.
 ```
 
 ### `3` - Zlib-ng
