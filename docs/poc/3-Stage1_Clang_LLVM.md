@@ -61,17 +61,17 @@ time {
 }
 ```
 ```bash
-# Set compiler to new triplet from Stage-0 Clang/LLVM to use current libc built.
-sed -e "s|\"${CXX}\"|\"${H_TRIPLET}-clang++\"|" \
-    -e "s|\"${CC}\"|\"${H_TRIPLET}-clang\"|" -i ~/.bashrc
-source                                          ~/.bashrc
-```
-```bash
 # Configure PATH for dynamic linker.
 mkdir -v /clang1-tools/etc && \
 cat > /clang1-tools/etc/ld-musl-x86_64.path << "EOF"
 /clang1-tools/lib
 EOF
+```
+```bash
+# Set compiler to new triplet from Stage-0 Clang/LLVM to use current libc built.
+sed -e "s|\"${CXX}\"|\"${H_TRIPLET}-clang++\"|" \
+    -e "s|\"${CC}\"|\"${H_TRIPLET}-clang\"|" -i ~/.bashrc
+source                                          ~/.bashrc
 ```
 ```bash
 # Quick test for the new triplet of Stage-0 Clang/LLVM.
