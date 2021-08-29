@@ -154,7 +154,8 @@ CFLAGS="-g0 $CFLAGS" CXXFLAGS="-g0 $CXXFLAGS" ../configure \
     --with-sysroot=/clang0-tools                           \
     --enable-{clocale=generic,languages=c\,c++}            \
     --enable-{shared,threads=posix}                        \
-    --disable-{gnu-unique-object,lib{mpx,mudflap,sanitizer,ssp,vtv},multilib,nls,symvers,werror}
+    --disable-lib{mpx,mudflap,sanitizer,ssp,vtv}           \
+    --disable-{gnu-unique-object,multilib,nls,symvers,werror}
 
 # Build.
 time { make AS_FOR_TARGET=${H_TRIPLET}-as LD_FOR_TARGET=${H_TRIPLET}-ld; }
