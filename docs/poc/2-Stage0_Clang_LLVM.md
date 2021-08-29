@@ -69,16 +69,16 @@ tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc{-1.2.1,}
 
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build
-CFLAGS="-g0 $CFLAGS" CXXFLAGS="-g0 $CXXFLAGS" ../configure \
-    --prefix=/clang0-tools                                 \
-    --build=${C_TRIPLET}                                   \
-    --host=${C_TRIPLET}                                    \
-    --target=${H_TRIPLET}                                  \
-    --with-sysroot=/clang0-tools/${H_TRIPLET}              \
-    --with-{arch=${C_CPU},newlib}                          \
-    --without-headers                                      \
-    --enable-{clocale=generic,languages=c}                 \
-    --disable-{decimal-float,multilib,nls,shared,threads}  \
+CFLAGS="-g0 -O0 -pipe" CXXFLAGS="-g0 -O0 -pipe" ../configure \
+    --prefix=/clang0-tools                                   \
+    --build=${C_TRIPLET}                                     \
+    --host=${C_TRIPLET}                                      \
+    --target=${H_TRIPLET}                                    \
+    --with-sysroot=/clang0-tools/${H_TRIPLET}                \
+    --with-{arch=${C_CPU},newlib}                            \
+    --without-headers                                        \
+    --enable-{clocale=generic,languages=c}                   \
+    --disable-{decimal-float,multilib,nls,shared,threads}    \
     --disable-lib{atomic,gomp,itm,mudflap,quadmath,sanitizer,ssp,stdcxx,vtv}
 
 # Build only the minimum.
