@@ -50,7 +50,7 @@ useradd -s /bin/bash -g heiwa -m -k /dev/null heiwa
 passwd heiwa
 ```
 ```bash
-# Set-up directory permissions.
+# Setup directory permissions.
 # Warning! This is danger, so check the variables before `chown`.
 # echo {${HEIWA},}/clang{0,1}-tools
 if [[ -n "$HEIWA" ]]; then
