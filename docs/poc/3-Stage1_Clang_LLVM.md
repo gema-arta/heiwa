@@ -171,11 +171,11 @@ time { make PREFIX=/clang1-tools install-{header,dynamic}; }
 
 > **Required!** Build Stage-1 Clang/LLVM self-hosted toolchain with GCC libraries-free since compiled with Stage-0 Clang/LLVM itself.
 ```bash
-# Exit from the LLVM source directory if already entered after decompressing.
+# Exit from LLVM source directory if already entered after decompressing.
 popd
 ```
 ```bash
-# Rename the LLVM source directory to "$LLVM_SRC", then enter.
+# Rename LLVM source directory to "$LLVM_SRC", then enter.
 mv -fv llvm-12.0.1.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 
 # Decompress `clang`, `lld`, `compiler-rt`, `libunwind`, `libcxxabi`, and `libcxx` to the correct directories.
@@ -193,7 +193,7 @@ popd
 # Apply patches (from Void Linux).
 ../extra/llvm/patches/appatch
 
-# Disable sanitizers for musl, it's broken since it duplicates some libc bits.
+# Disable sanitizers for musl, it's broken since duplicates some libc bits.
 sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
 projects/compiler-rt/cmake/config-ix.cmake
 
@@ -327,7 +327,8 @@ ln -sfv clang++            /clang1-tools/bin/${T_TRIPLET}-clang++
 cat > /clang1-tools/bin/${T_TRIPLET}.cfg << "EOF"
 -Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1
 EOF
-
+```
+```bash
 # Set the new PATH since "/clang0-tools" won't be used anymore and the Stage-1 Clang/LLVM default triplet (pc).
 sed -e 's|/clang0-tools/usr/bin:/clang0-tools/bin:||' \
     -e "s|\"${CXX}\"|\"${T_TRIPLET}-clang++\"|"       \
