@@ -18,12 +18,12 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 
 > |  ?  | Kernel and Userspace                               | Packages           | Extended Description           |
 > |:---:|----------------------------------------------------|:------------------:|--------------------------------|
-> |  ✓  | Low-level standard libraries and toolchain         | Clang/LLVM         | Lightweight, Fast, Modern.     |
+> |  ✓  | Low-level standard libraries and toolchain         | Clang/LLVM         | Lightweight, fast, modern.     |
 > |  ?  | C dynamic memory allocator                         | Microsoft mimalloc | Excellent performance.         |
 > |  ✓  | Linux kernel patchset                              | Xanmod (CacULE)    | Optimized performance.         |
 > |  ✓  | C runtime library                                  | musl               | Clean, but not fast as Glibc.  |
 > |  ✓  | Build system tools                                 | GNU                | Most packages depend.          |
-> |  ✓  | SSL/TLS implementation                             | OpenSSL            | Full-featured and Robust.      |
+> |  ✓  | SSL/TLS implementation                             | OpenSSL            | Full-featured and robust.      |
 > |  ✓  | Native language support                            | Gettext-tiny       | Stub of bloated GNU Gettext.   |
 > |  ✓  | Curses (terminal control) library                  | NetBSD Curses      | Smaller than GNU Ncurses.      |
 > |  ✓  | Command-line interpreter or shell                  | GNU Bash           | Best implementation.           |
@@ -62,4 +62,4 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 - [ ] Packaging, make it usable but with the aim of not being big.
 > Always W.I.P, since this is hobbyist. A radical experiments.
 
-See [docs](./docs). Go [discussions](https://github.com/heiwalinux/heiwa/discussions) for Errata.
+See [docs](./docs). Go [discussions](https://github.com/heiwalinux/heiwa/discussions) for the Errata.
