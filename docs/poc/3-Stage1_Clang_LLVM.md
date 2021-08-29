@@ -13,7 +13,7 @@ The purpose of this stage is to build a pure Clang/LLVM toolchain that will be u
 > heiwa@localh3art /media/Heiwa/sources/pkgs $ rm -rf target-package
 > ```
 
-### `0` - Setting Up Clang/LLVM Environment Variables
+### `1` - Setting Up Clang/LLVM Environment Variables
 > Apply persistent toolchain environment variables, but currently don't set compiler to new triplet of Stage-0 Clang/LLVM in order to use libc from Stage-0 Clang/LLVM firstly, to build musl libc in this stage.
 ```bash
 cat >> ~/.bashrc << "EOF"
@@ -37,7 +37,7 @@ EOF
 source ~/.bashrc
 ```
 
-### `1` - musl
+### `2` - musl
 > #### `1.2.2` or newer
 > The musl package contains the main C library. This library provides the basic routines for allocating memory, searching directories, opening and closing files, reading and writing files, string handling, pattern matching, arithmetic, and so on.
 
@@ -92,7 +92,7 @@ grep --color=auto "ld.lld:.*crt[1in].o" dummy.log
 # |ld.lld: /clang0-tools/lib/gcc/x86_64-heiwa-linux-musl/10.3.1/../../../crtn.o
 ```
 
-### `2` - Linux API Headers
+### `3` - Linux API Headers
 > #### `5.13.x` (CacULE) or newer
 > The Linux API Headers expose the kernel's API for use by musl libc.
 
@@ -112,7 +112,7 @@ find usr/include \( -name '.*' -o -name 'Makefile' \) -exec rm -fv {} \;
 cp -afv usr/include /clang1-tools/.
 ```
 
-### `3` - Zlib-ng
+### `4` - Zlib-ng
 > #### `2.0.5` or newer
 > The Zlib-ng package contains zlib data compression library for the next generation systems.
 
@@ -134,7 +134,7 @@ time { make -C build; }
 time { make -C build install; }
 ```
 
-### `4` - NetBSD Curses
+### `5` - NetBSD Curses
 > #### `0.3.2` or newer
 > The NetBSD Curses package contains libraries for terminal-independent handling of character screens.
 
@@ -162,7 +162,7 @@ time { make PREFIX=/clang1-tools install-{header,dynamic}; }
 ```
 -->
 
-### `5` - Clang/LLVM + libunwind, libcxxabi, and libcxx
+### `6` - Clang/LLVM + libunwind, libcxxabi, and libcxx
 > #### `12.x.x` or newer
 > - C language family frontend for LLVM;  
 > - C++ runtime stack unwinder from LLVM;  
@@ -339,7 +339,7 @@ source                                          ~/.bashrc
 popd
 ```
 
-### `6` - Xz
+### `7` - Xz
 > #### `5.2.5` or newer
 > The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
 
@@ -360,7 +360,7 @@ time { make; }
 time { make install; }
 ```
 
-### `7` - Pigz
+### `8` - Pigz
 > #### `2.6` or newer
 > The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
 
@@ -377,7 +377,7 @@ ln -sfv pigz gzip; ln -sfv unpigz gunzip
 install -vm755 -t /clang1-tools/bin/ pigz unpigz gzip gunzip
 ```
 
-### `8` - Gettext-tiny
+### `9` - Gettext-tiny
 > #### `0.3.2` or newer
 > The Gettext-tiny package contains utilities for internationalization and localization. These allow programs to be compiled with NLS (Native Language Support), enabling them to output messages in the user's native language. A lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
 
@@ -390,7 +390,7 @@ time { make LIBINTL=MUSL CFLAGS="-flto=thin $CFLAGS" prefix=/clang1-tools; }
 install -vm755 -t /clang1-tools/bin/ msg{fmt,merge} xgettext 
 ```
 
-### `9` - Toybox (Coreutils, File, Findutils, Grep, Sed, Tar)
+### `10` - Toybox (Coreutils, File, Findutils, Grep, Sed, Tar)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
@@ -438,7 +438,7 @@ time { make CC=${CC} HOSTCC=${CC} CFLAGS="-flto=thin $CFLAGS" V=1; }
 time { make CC=${CC} HOSTCC=${CC} PREFIX=/clang1-tools install; unset X TOYBOX; }
 ```
 
-### `10` - GNU AWK
+### `11` - GNU AWK
 > #### `5.1.0` or newer
 > The GNU AWK (gawk) package contains programs for manipulating text files.
 
@@ -460,7 +460,7 @@ time { make; }
 time { make install; }
 ```
 
-### `11` - GNU Diffutils
+### `12` - GNU Diffutils
 > #### `3.7` or newer
 > The GNU Diffutils package contains programs that show the differences between files or directories.
 
@@ -480,7 +480,7 @@ time { make; }
 time { make install; }
 ```
 
-### `12` - GNU Make
+### `13` - GNU Make
 > #### `4.3` or newer
 > The GNU Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
  
@@ -500,7 +500,7 @@ time { make; }
 time { make install; }
 ```
 
-### `13` - GNU Patch
+### `14` - GNU Patch
 > #### `2.7.6` or newer
 > The GNU Patch package contains a program for modifying or creating files by applying a patch file typically created by the diff program.
 
@@ -519,7 +519,7 @@ time { make; }
 time { make install; }
 ```
 
-### `14` - GNU Texinfo
+### `15` - GNU Texinfo
 > #### `6.8` or newer
 > The Texinfo package contains programs for reading, writing, and converting info pages.
 
@@ -542,7 +542,7 @@ time { make; }
 time { make install; }
 ```
 
-### `15` - GNU Bash
+### `16` - GNU Bash
 > #### `5.1` (with patch level 8) or newer
 > The GNU Bash package contains the Bourne-Again SHell.
 
@@ -564,7 +564,7 @@ time { make; }
 time { make install; }
 ```
 
-### `16` - Perl (+ cross)
+### `17` - Perl (+ cross)
 > #### `5.34.0` (and `1.3.6` for cross)
 > The Perl package contains the Practical Extraction and Report Language.
 
@@ -589,7 +589,7 @@ time { make; }
 time { make install; }
 ```
 
-### `17` - Python3
+### `18` - Python3
 > #### `3.9.6` or newer
 > The Python3 package contains the Python development environment. It is useful for object-oriented programming, writing scripts, prototyping large programs, or developing entire applications.
 
@@ -619,7 +619,7 @@ time { make; }
 time { make install; }
 ```
 
-### `18` - Cmake
+### `19` - Cmake
 > #### `3.20.5` or newer
 > The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
 
@@ -645,7 +645,7 @@ time { make; }
 time { make install; }
 ```
 
-### `19` - Cleaning Up and Changing Ownership
+### `20` - Cleaning Up and Changing Ownership
 > **This section is optional!**
 
 > If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
