@@ -59,6 +59,13 @@ if [[ -n "$HEIWA" ]]; then
     chown -Rv heiwa {${HEIWA},}/clang{0,1}-tools
 fi
 ```
+```bash
+# This is an optional section to make privileged user use 19 as default user level priority using linux-PAM.
+# Ref: https://github.com/owl4ce/hmg/blob/main/etc/security/limits.conf#L65
+cat >> /etc/security/limits.conf << "EOF"
+heiwa            -       priority        -1
+EOF
+```
 > #### * End of as root!
 
 > #### * Beginning of as privileged user!
