@@ -420,7 +420,7 @@ for X in ${TOYBOX}; do
     || echo "* ${X} not CONFIGURED"
 done
 
-# Build with verbose. Toybox will use `cc` that break the builds, so need to specify the CC and HOSTCC variable.
+# Build with verbose. Toybox will use `cc` that breaks the build, so we need to specify the CC and HOSTCC variable.
 time { make CC=${CC} HOSTCC=${CC} CFLAGS="-flto=thin $CFLAGS" V=1; }
 
 # Verify compiled 87 commands.
