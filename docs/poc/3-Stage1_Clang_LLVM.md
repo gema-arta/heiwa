@@ -414,7 +414,7 @@ tty uname uniq unlink wc who whoami yes file find xargs egrep grep fgrep sed tar
 EOF
 
 # Verify 87 commands, and make sure is enabled (=y).
-# Pipe to ` | wc -l` at the right of `done` to checks total of commands.
+# Pipe to ` | wc -l` at the right of `done` to check the total of commands.
 for X in ${TOYBOX}; do
     grep -v '#' .config | grep -i --color=auto "CONFIG_${X}=" \
     || echo "* ${X} not CONFIGURED"
