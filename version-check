@@ -20,7 +20,7 @@ EOF
 # bash.
 if [ -x "$(command -v bash)" ]; then
     msg "bash" "$(bash --version | sed 1q | cut -d' ' -f4-5)"
-    if SH="$(readlink -f /bin/sh)" && echo "$SH" | grep -qo bash; then
+    if SH="$(readlink -f /bin/sh)" && echo "$SH" | grep -Fqo 'bash'; then
         sym "/bin/sh" "$SH"
     else
         err "/bin/sh does not point to bash!"
@@ -63,10 +63,10 @@ else
 fi
 
 # coreutils implementation.
-if [ -x "$(command -v chown)" ] && chown --help 2>&1 | grep -qo 'BusyBox'; then
+if [ -x "$(command -v chown)" ] && chown --help 2>&1 | grep -Fqo 'BusyBox'; then
     msg "BusyBox" "$(busybox chown --help 2>&1 | sed 1q | cut -d' ' -f2-)"
-elif [ -x "$(command -v chown)" ] && chown --help 2>&1 | grep -qo 'ToyBox'; then
-    msg "ToyBox" "$(toybox chown --help 2>&1 | sed 1q | cut -d' ' -f2-)"
+elif [ -x "$(command -v chown)" ] && chown --help 2>&1 | grep -Fqo 'Toybox'; then
+    msg "Toybox" "$(toybox chown --help 2>&1 | sed 1q | cut -d' ' -f2-)"
 elif [ -x "$(command -v chown)" ]; then
     msg "coreutils" "$(chown --version | sed 1q | cut -d' ' -f2-)"
     # diffutils.
@@ -168,7 +168,7 @@ fi
 
 # Perl.
 if [ -x "$(command -v perl)" ]; then
-    msg "Perl" "$(perl -V:version | grep -oP "'\K[^';]+")"
+    msg "Perl" "$(perl -v | grep -F 'version' | cut -d' ' -f9-)"
 else
     err "Perl not installed!"
 fi
