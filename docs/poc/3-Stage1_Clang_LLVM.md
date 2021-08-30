@@ -427,7 +427,7 @@ time { make CC=${CC} HOSTCC=${CC} CFLAGS="-flto=thin $CFLAGS" V=1; }
 ./toybox | tr ' ' '\n'i \
 | grep -xE --color=auto $(echo ${TOYBOX} | tr ' ' '|'i) | wc -l
 
-# Verify commands that not configured but compiled.
+# Verify commands that's not configured but compiled.
 # `[` (coreutils)
 ./toybox | tr ' ' '\n'i \
 | grep -vxE --color=auto $(echo ${TOYBOX} | tr ' ' '|'i)
