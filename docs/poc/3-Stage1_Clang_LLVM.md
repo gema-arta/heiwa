@@ -575,7 +575,7 @@ time { make install; }
 tar xzf ../perl-cross-1.3.6.tar.gz && \
 cp -af ./perl-cross-1.3.6/* .
 
-# Configure source.
+# Configure source (from perl-cross).
 CFLAGS="-DNO_POSIX_2008_LOCALE -D_GNU_SOURCE $CFLAGS" \
 HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE"     \
 LDFLAGS="-Wl,-z,stack-size=2097152 -pthread $LDFLAGS" \
