@@ -375,7 +375,7 @@ time { make CC=${CC} CFLAGS="-flto=thin $CFLAGS"; }
 
 # Install and create symlinks as `gzip` tools.
 ln -sfv pigz gzip; ln -sfv unpigz gunzip
-install -vm755 -t /clang1-tools/bin/ pigz unpigz gzip gunzip
+install -vm755 -t /clang1-tools/bin/ {,un}pigz g{,un}zip
 ```
 
 ### `9` - Gettext-tiny
