@@ -329,7 +329,7 @@ cat > /clang1-tools/bin/${T_TRIPLET}.cfg << "EOF"
 EOF
 ```
 ```bash
-# Set the new PATH since "/clang0-tools" won't be used anymore and the Stage-1 Clang/LLVM default triplet (pc).
+# Set the new PATH since "/clang0-tools" won't be used anymore and use the Stage-1 Clang/LLVM default triplet (pc).
 sed -e 's|/clang0-tools/usr/bin:/clang0-tools/bin:||' \
     -e "s|\"${CXX}\"|\"${T_TRIPLET}-clang++\"|"       \
     -e "s|\"${CC}\"|\"${T_TRIPLET}-clang\"|" -i ~/.bashrc
