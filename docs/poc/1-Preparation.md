@@ -72,7 +72,7 @@ EOF
 ### `4` - Setup privileged user's environment
 ```bash
 # Login as privileged user.
-su - heiwa
+exec su - heiwa
 ```
 ```bash
 cat > ~/.bash_profile << "EOF"
