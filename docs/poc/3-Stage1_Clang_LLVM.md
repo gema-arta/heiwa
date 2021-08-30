@@ -436,7 +436,7 @@ time { make CC=${CC} HOSTCC=${CC} CFLAGS="-flto=thin $CFLAGS" V=1; }
 ./toybox | wc -w
 
 # Install and unset exported commands in TOYBOX variable.
-time { make CC=${CC} HOSTCC=${CC} PREFIX=/clang1-tools install; unset X TOYBOX; }
+time { make CC=${CC} HOSTCC=${CC} PREFIX=/clang1-tools install && unset X TOYBOX; }
 ```
 
 ### `11` - GNU AWK
