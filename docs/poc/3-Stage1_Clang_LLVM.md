@@ -505,7 +505,7 @@ time { make install; }
 > #### `2.7.6` or newer
 > The GNU Patch package contains a program for modifying or creating files by applying a patch file typically created by the diff program.
 
-> **Required!** For the current and next stage (chroot environment). The GNU implementation of `patch` is can handle offset lines, which is powerful feature.
+> **Required!** For the current and next stage (chroot environment). The GNU's `patch` is can handle offset lines, which is powerful feature.
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"        \
@@ -524,7 +524,7 @@ time { make install; }
 > #### `6.8` or newer
 > The Texinfo package contains programs for reading, writing, and converting info pages.
 
-> **Required!** For the most packages next stage (chroot environment). Nothing is GNU-free.
+> **Required!** For most packages in the next stage (chroot environment). Nothing is GNU-free.
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"                   \
