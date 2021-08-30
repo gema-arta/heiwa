@@ -64,9 +64,9 @@ fi
 
 # coreutils implementation.
 if [ -x "$(command -v chown)" ] && chown --help 2>&1 | grep -qo 'BusyBox'; then
-    msg "BusyBox" "$(busybox chown -v 2>&1 | sed 1q | cut -d' ' -f2-)"
+    msg "BusyBox" "$(busybox chown --help 2>&1 | sed 1q | cut -d' ' -f2-)"
 elif [ -x "$(command -v chown)" ] && chown --help 2>&1 | grep -qo 'ToyBox'; then
-    msg "ToyBox" "$(toybox chown -v 2>&1 | sed 1q | cut -d' ' -f2-)"
+    msg "ToyBox" "$(toybox chown --help 2>&1 | sed 1q | cut -d' ' -f2-)"
 elif [ -x "$(command -v chown)" ]; then
     msg "coreutils" "$(chown --version | sed 1q | cut -d' ' -f2-)"
     # diffutils.
