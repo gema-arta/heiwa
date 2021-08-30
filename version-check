@@ -65,22 +65,20 @@ fi
 # coreutils implementation.
 if [ -x "$(command -v chown)" ] && chown --help 2>&1 | grep -Fqo 'BusyBox'; then
     msg "BusyBox" "$(busybox chown --help 2>&1 | sed 1q | cut -d' ' -f2-)"
-    for X in ' diff,' ' find,' ' grep,' ' sed,' ' tar,'; do 
-        if busybox --help 2>&1 | grep -Fqo "$X"; then
-            sym "$(echo "$X" | sed 's/[ ,]//g')" "$(command -v busybox) $(echo "$X" | sed 's/[ ,]//g')"
+    for X in diff find grep sed tar; do 
+        if busybox --list 2>&1 | grep -Fqo "$X"; then
+            sym "${X}" "$(command -v busybox) ${X}"
         else
-            sym "$(echo "$X" | sed 's/[ ,]//g')" "?"
-            err "$(echo "$X" | sed 's/[ ,]//g') not compiled in $(command -v busybox)!"
+            sym "${X}" "?"; err "${X} not compiled in $(command -v busybox)!"
         fi
     done
 elif [ -x "$(command -v chown)" ] && chown --help 2>&1 | grep -Fqo 'Toybox'; then
     msg "Toybox" "$(toybox chown --help 2>&1 | sed 1q | cut -d' ' -f2-)"
-    for X in ' diff ' ' find ' ' grep ' ' sed ' ' tar '; do 
-        if toybox 2>&1 | grep -Fqo "$X"; then
-            sym "$(echo "$X" | sed 's/ //g')" "$(command -v toybox) $(echo "$X" | sed -e 's/ //g')"
+    for X in diff find grep sed tar; do 
+        if toybox 2>&1 | grep -Fqo " ${X} "; then
+            sym "${X}" "$(command -v toybox) ${X}"
         else
-            sym "$(echo "$X" | sed 's/ //g')" "?"
-            err "$(echo "$X" | sed 's/ //g') not compiled in $(command -v toybox)!"
+            sym "${X}" "?"; err "${X} not compiled in $(command -v toybox)!"
         fi
     done
 elif [ -x "$(command -v chown)" ]; then
