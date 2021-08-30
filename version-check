@@ -6,7 +6,6 @@ msg() { printf "${M}*${NC} ${G}${1}${NC} ${2}\n"; }
 sym() { printf "${R}~${NC} ${1} ${M}->${NC} ${2}\n"; }
 err() { 2>&1 printf "${R}error:${NC} ${@}\n"; exit 1; }
 
-# Introduction.
 cat << "EOF"
 
 POSIX-sh script to check host system requirements for Heiwa/Linux builds.
