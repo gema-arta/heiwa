@@ -400,7 +400,7 @@ install -vm755 -t /clang1-tools/bin/ msg{fmt,merge} xgettext
 # Copy the Toybox .config file.
 cp -v ../../extra/toybox/files/.config.toolchain.nolibcrypto .config
 
-# Make sure to enable `libz`.
+# Ensure `libz` is enabled in the config.
 grep --color=auto "CONFIG_TOYBOX_LIBZ=y" .config
 
 # Export commands as TOYBOX variable that will be use to verify Toybox .config.
