@@ -65,8 +65,24 @@ fi
 # coreutils implementation.
 if [ -x "$(command -v chown)" ] && chown --help 2>&1 | grep -Fqo 'BusyBox'; then
     msg "BusyBox" "$(busybox chown --help 2>&1 | sed 1q | cut -d' ' -f2-)"
+    for X in ' diff,' ' find,' ' grep,' ' sed,' ' tar,'; do 
+        if busybox --help 2>&1 | grep -Fqo "$X"; then
+            sym "$(echo "$X" | sed -e 's/ //' -e 's/,//')" "$(command -v busybox) $(echo "$X" | sed -e 's/ //' -e 's/,//')"
+        else
+            sym "$(echo "$X" | sed -e 's/ //' -e 's/,//')" "?"
+            err "$(echo "$X" | sed -e 's/ //' -e 's/,//') not compiled in $(command -v busybox)!"
+        fi
+    done
 elif [ -x "$(command -v chown)" ] && chown --help 2>&1 | grep -Fqo 'Toybox'; then
     msg "Toybox" "$(toybox chown --help 2>&1 | sed 1q | cut -d' ' -f2-)"
+    for X in ' diff ' ' find ' ' grep ' ' sed ' ' tar '; do 
+        if toybox --help 2>&1 | grep -Fqo "$X"; then
+            sym "$(echo "$X" | sed -e 's/ //')" "$(command -v toybox) $(echo "$X" | sed -e 's/ //')"
+        else
+            sym "$(echo "$X" | sed -e 's/ //')" "?"
+            err "$(echo "$X" | sed -e 's/ //') not compiled in $(command -v toybox)!"
+        fi
+    done
 elif [ -x "$(command -v chown)" ]; then
     msg "coreutils" "$(chown --version | sed 1q | cut -d' ' -f2-)"
     # diffutils.
