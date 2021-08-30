@@ -416,7 +416,7 @@ EOF
 # Verify 87 commands, and make sure is enabled (=y).
 # Pipe to ` | wc -l` at the right of `done` to checks total of commands.
 for X in ${TOYBOX}; do
-    grep -v '#' .config | grep -i --color=auto "_${X}=" \
+    grep -v '#' .config | grep -i --color=auto "CONFIG_${X}=" \
     || echo "* ${X} not CONFIGURED"
 done
 
