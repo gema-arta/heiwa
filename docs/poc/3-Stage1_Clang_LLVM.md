@@ -462,7 +462,7 @@ time { make install; }
 ```
 
 ### `12` - GNU Diffutils
-> #### `3.7` or newer
+> #### `3.8` or newer
 > The GNU Diffutils package contains programs that show the differences between files or directories.
 
 > **Required!** For the current and next stage (chroot environment) that most build systems depends on GNU implementation style.
