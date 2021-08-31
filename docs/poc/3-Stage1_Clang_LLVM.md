@@ -660,7 +660,7 @@ rm -rf /clang1-tools/share/{bash-completion,doc,emacs,info,man,vim}/*
 # A large number of files will be reported "The file was not recognized as a valid object file".
 # These warnings can be safely ignored. These warnings indicate that those files are scripts instead of binaries.
 find /clang1-tools/lib/ -type f \( -name '*.a' -o -name '*.so*' \) -exec llvm-strip --strip-debug {} \;
-find /clang1-tools/{{,usr/}{,s}bin,libexec/awk}/ -maxdepth 1 -type f -exec /clang0-tools/bin/llvm-strip --strip-unneeded {} \;
+find /clang1-tools/{{,usr/}{,s}bin,libexec/awk}/ -type f -exec /clang0-tools/bin/llvm-strip --strip-unneeded {} \;
 ```
 ```bash
 # Exit from privileged user.
