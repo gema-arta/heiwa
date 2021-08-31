@@ -651,7 +651,7 @@ time { make install; }
 # The libtool .la files are only useful when linking with static libraries.
 # They are unneeded, and potentially harmful, when using dynamic shared libraries, specially when using non-autotools build systems.
 # Remove those files.
-find /clang1-tools/{lib,libexec}/ -name '*.la' -exec rm -rfv {} \;
+find /clang1-tools/{lib,libexec}/ -name '*.la' -exec rm -fv {} \;
 
 # Remove the documentation, manpages, and uncessary files.
 rm -rf /clang1-tools/share/{info,man,doc,emacs,vim}/*
