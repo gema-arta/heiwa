@@ -643,7 +643,7 @@ time { make; }
 time { make install; }
 ```
 
-### `20` - Cleaning Up and Changing Ownership
+### `20` - Cleaning Up, Changing Ownership, and Saving the Clang/LLVM Toolchain
 > #### This section is optional!
 
 > If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
@@ -674,6 +674,17 @@ exit
 # Warning! This is danger, so check the variables before `chown`.
 # echo ${HEIWA}/clang1-tools
 [[ -n "$HEIWA" ]] && chown -R root:root ${HEIWA}/clang1-tools
+```
+
+> At this point the essential programs and libraries have been created and your current toolchain is in a good state. Your toolchain can now be backed up for later reuse. In case of fatal failures in the subsequent chapters, it often turns out that removing everything and starting over (more carefully) is the best option to recover. Unfortunately, all the temporary files will be removed, too. To avoid spending extra time to redo something which has been built successfully, prepare a backup.
+```bash
+if [[ -n "$HEIWA" ]]; then
+    export XZ_OPT="-9e -T2"
+    pushd "$HEIWA" && \
+        tar --totals -cJpf clang0-tools.tar.xz clang0-tools && \
+        tar --totals -cJpf clang1-tools.tar.xz clang1-tools && \
+    popd && unset XZ_OPT
+fi
 ```
 > #### * End of as root!
 
