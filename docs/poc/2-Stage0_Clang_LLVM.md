@@ -340,7 +340,7 @@ rm -rf /clang0-tools/share/{info,man}/*
 # These warnings can be safely ignored. These warnings indicate that those files are scripts instead of binaries.
 find /clang0-tools/{lib64,{,${H_TRIPLET}/}lib}/ -type f \( -name '*.a' -o -name '*.so*' \) -exec llvm-strip --strip-debug {} \;
 find /clang0-tools/libexec/gcc/${H_TRIPLET}/10.3.1/ -type f -exec llvm-strip --strip-unneeded {} \;
-find /clang0-tools/{,${H_TRIPLET}/}bin/ -maxdepth 1 -type f -exec /usr/bin/strip --strip-unneeded {} \;
+find /clang0-tools/{,${H_TRIPLET}/}bin/ -type f -exec /usr/bin/strip --strip-unneeded {} \;
 ```
 
 <h2></h2>
