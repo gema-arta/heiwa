@@ -675,6 +675,7 @@ exit
 # echo ${HEIWA}/clang1-tools
 [[ -n "$HEIWA" ]] && chown -R root:root ${HEIWA}/clang1-tools
 ```
+> #### This section is recommended!
 
 > At this point the essential programs and libraries have been created and your current toolchain is in a good state. Your toolchain can now be backed up for later reuse. In case of fatal failures in the subsequent chapters, it often turns out that removing everything and starting over (more carefully) is the best option to recover. Unfortunately, all the temporary files will be removed, too. To avoid spending extra time to redo something which has been built successfully, prepare a backup.
 ```bash
