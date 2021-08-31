@@ -671,7 +671,7 @@ exit
 > #### * Beginning of as root!
 ```bash
 # Change the ownership of the "${HEIWA}/clang1-tools" directory to root by running the following command.
-# Warning! This is danger, so check its variables before `chown`.
+# Warning! This is danger, so check the variables before `chown`.
 # echo ${HEIWA}/clang1-tools
 [[ -n "$HEIWA" ]] && chown -R root:root ${HEIWA}/clang1-tools
 ```
