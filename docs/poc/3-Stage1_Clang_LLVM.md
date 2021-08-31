@@ -621,7 +621,7 @@ time { make install; }
 > #### `3.20.5` or newer
 > The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
 
-> **Required!** To build Clang/LLVM and others in the next stage (chroot environment).
+> **Required!** To build Clang/LLVM toolchain and others in the next stage (chroot environment).
 ```bash
 # Disable applications that using Cmake from attempting to install files in "/usr/lib64".
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
