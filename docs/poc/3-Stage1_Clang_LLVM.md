@@ -178,7 +178,7 @@ popd
 mv -fv llvm-12.0.1.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 ```
 ```bash
-# Decompress `clang`, `lld`, `compiler-rt`, `libunwind`, `libcxxabi`, and `libcxx` to the correct directories.
+# Decompress `clang`, `lld`, `compiler-rt`, `libunwind`, `libcxxabi`, and `libcxx` to correct directories.
 pushd ${LLVM_SRC}/projects/ && \
     tar xf ../../pkgs/compiler-rt-12.0.1.src.tar.xz && mv -fv compiler-rt-12.0.1.src compiler-rt
     tar xf ../../pkgs/libunwind-12.0.1.src.tar.xz   && mv -fv libunwind-12.0.1.src libunwind
@@ -413,7 +413,7 @@ sleep sort split stat stty sync tac tail tee test timeout touch tr true truncate
 tty uname uniq unlink wc who whoami yes file find xargs egrep grep fgrep sed tar
 EOF
 
-# Verify 87 commands, and make sure is enabled (=y).
+# Verify 87 commands, and make sure enabled (=y).
 # Pipe to ` | wc -l` at the right of `done` to check the total of commands.
 for X in ${TOYBOX}; do
     grep -v '#' .config | grep -i --color=auto "CONFIG_${X}=" \
@@ -427,7 +427,7 @@ time { make CC=${CC} HOSTCC=${CC} CFLAGS="-flto=thin $CFLAGS" V=1; }
 ./toybox | tr ' ' '\n'i \
 | grep -xE --color=auto $(echo ${TOYBOX} | tr ' ' '|'i) | wc -l
 
-# Verify commands that's not configured but compiled.
+# Verify unconfigured commands, but compiled.
 # `[` (coreutils)
 ./toybox | tr ' ' '\n'i \
 | grep -vxE --color=auto $(echo ${TOYBOX} | tr ' ' '|'i)
@@ -435,7 +435,7 @@ time { make CC=${CC} HOSTCC=${CC} CFLAGS="-flto=thin $CFLAGS" V=1; }
 # So, totally is 88 commands.
 ./toybox | wc -w
 
-# Install and unset exported commands in TOYBOX variable.
+# Install and unset exported commands in the TOYBOX variable.
 time { make CC=${CC} HOSTCC=${CC} PREFIX=/clang1-tools install && unset X TOYBOX; }
 ```
 
@@ -505,7 +505,7 @@ time { make install; }
 > #### `2.7.6` or newer
 > The GNU Patch package contains a program for modifying or creating files by applying a patch file typically created by the diff program.
 
-> **Required!** For the current and next stage (chroot environment). The GNU's `patch` is can handle offset lines, which is powerful feature.
+> **Required!** For the current and next stage (chroot environment). The GNU's `patch` can handle offset lines, which is powerful feature.
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"        \
