@@ -1,2 +1,2 @@
 ## Table of Contents
-- [Proof-of-Concept](./poc/) (Manual Book, basically implementation of LFS)
+- [Proof-of-Concept](./poc/) (Manual book, basically my own implementation of B/LFS)
