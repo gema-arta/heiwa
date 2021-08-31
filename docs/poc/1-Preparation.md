@@ -73,7 +73,7 @@ EOF
 > #### * Beginning of as privileged user!
 ### `4` - Setup privileged user's environment
 ```bash
-# Login as privileged user as current shell PID.
+# Login as privileged user in place of the current shell PID.
 exec su - heiwa
 ```
 ```bash
