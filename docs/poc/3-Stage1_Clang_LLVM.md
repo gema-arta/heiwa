@@ -653,8 +653,8 @@ time { make install; }
 # Remove those files.
 find /clang1-tools/lib{,exec}/ -name '*.la' -exec rm -fv {} \;
 
-# Remove the documentation, manpages, and uncessary files.
-rm -rf /clang1-tools/share/{info,man,doc,emacs,vim}/*
+# Remove the documentation, manpages, and all unecessary files.
+rm -rf /clang1-tools/share/{bash-completion,doc,emacs,info,man,vim}/*
 
 # Strip off debugging symbols from binaries using `llvm-strip`.
 # A large number of files will be reported "The file was not recognized as a valid object file".
