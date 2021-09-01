@@ -463,7 +463,7 @@ time { make -C build install; }
 > **Required!** Before `GNU Bash`, `GNU Readline`, `GNU Texinfo`, and `Util-linux`.
 ```bash
 # Build.
-time { make CFLAGS="-fPIC -flto=thin $CFLAGS" all-dynamic; }
+time { make CFLAGS="-flto=thin $CFLAGS" all-dynamic; }
 
 # Install and create symlinks as `libtinfo` libraries (which actually replace GNU Ncurses).
 time {
