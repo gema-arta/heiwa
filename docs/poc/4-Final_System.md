@@ -504,7 +504,7 @@ time { make SHLIB_LIBS="-lcurses -lterminfo" install; }
 ```
 ```bash
 # Optional, install some additional documentation.
-install -vm644 doc/*.{ps,pdf,html,dvi} /usr/share/doc/readline-8.1
+install -vm644 -t /usr/share/doc/readline-8.1/ doc/*.{ps,pdf,html,dvi}
 ```
 
 ### `14` - GNU M4
