@@ -446,7 +446,6 @@ cmake -B build \
     -DCMAKE_INSTALL_PREFIX="/usr"        \
     -DCMAKE_C_FLAGS="-flto=thin $CFLAGS" \
     -DWITH_NATIVE_INSTRUCTIONS=YES       \
-    -DWITH_SANITIZER=ON                  \
     -DZLIB_COMPAT=ON                     \
     -DBUILD_SHARED_LIBS=ON
 
