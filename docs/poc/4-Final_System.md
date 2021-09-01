@@ -53,7 +53,7 @@ fi
 
 > #### * Beginning of as root in a chroot env!
 ### `2` - Creating Directories
-> It's time to create the full-structured filesystem.
+> It's time to create the full-structured filesystem. See [FHS version 3.0](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html).
 ```bash
 mkdir -pv /{{,s}bin,boot,etc,home,lib/firmware,media,mnt,opt,root,var/tmp}
 
