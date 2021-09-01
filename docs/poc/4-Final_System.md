@@ -438,7 +438,7 @@ time { make -C build install; }
 > #### `2.0.5` or newer
 > The Zlib-ng package contains zlib data compression library for the next generation systems.
 
-> **Required!** Before `Kmod`, `Perl`, and `Util-linux`.
+> **Required!** Before `Clang/LLVM`, `Kmod`, `Perl`, and `Util-linux`.
 ```bash
 # Configure source.
 cmake -B build \
