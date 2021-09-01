@@ -567,8 +567,8 @@ time {
 CFLAGS="-flto=thin $CFLAGS"   \
 ./configure --prefix=/usr     \
             --bindir=/bin     \
-            --disable-static  \
             --sysconfdir=/etc \
+            --disable-static  \
             --docdir=/usr/share/doc/attr-2.5.1
 
 # Build.
