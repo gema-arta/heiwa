@@ -389,9 +389,9 @@ install -vm644 -t /usr/share/man/man8/ z{ic,dump}.8
 
 # Install zoneinfo. -> Ignore all warnings! <-
 install -vm444 -t /usr/share/zoneinfo/ {iso3166,zone{1970,}}.tab
-zic -y ./yearistype -d /usr/share/zoneinfo ${timezones}
-zic -y ./yearistype -d /usr/share/zoneinfo/right -L leapseconds ${timezones}
-zic -y ./yearistype -d /usr/share/zoneinfo -p America/New_York
+zic -b fat -y ./yearistype -d /usr/share/zoneinfo ${timezones}
+zic -b fat -y ./yearistype -d /usr/share/zoneinfo/right -L leapseconds ${timezones}
+zic -b fat -y ./yearistype -d /usr/share/zoneinfo -p America/New_York
 ```
 ```bash
 # Configure timezone.
