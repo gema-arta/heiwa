@@ -285,7 +285,7 @@ cat > /clang1-tools/bin/x86_64-heiwa-linux-musl.cfg << "EOF"
 --sysroot=/usr -Wl,-dynamic-linker /lib/ld-musl-x86_64.so.1
 EOF
 
-# Set compiler to the new triplet from Stage-1 Clang/LLVM.
+# Set compiler to new triplet from Stage-1 Clang/LLVM.
 sed -e "s|\"${CXX}\"|\"x86_64-heiwa-linux-musl-clang++\"|" \
     -e "s|\"${CC}\"|\"x86_64-heiwa-linux-musl-clang\"|" -i ~/.bash_profile
 source                                                     ~/.bash_profile
