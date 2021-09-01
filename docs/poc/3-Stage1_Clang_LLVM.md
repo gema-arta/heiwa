@@ -329,7 +329,7 @@ cat > /clang1-tools/bin/${T_TRIPLET}.cfg << "EOF"
 EOF
 ```
 ```bash
-# Set the new PATH since "/clang0-tools" won't be used anymore and use the Stage-1 Clang/LLVM default triplet (pc).
+# Setup new PATH since "/clang0-tools" won't be used anymore and use Stage-1 Clang/LLVM default triplet (pc).
 sed -e 's|/clang0-tools/usr/bin:/clang0-tools/bin:||' \
     -e "s|\"${CXX}\"|\"${T_TRIPLET}-clang++\"|"       \
     -e "s|\"${CC}\"|\"${T_TRIPLET}-clang\"|" -i ~/.bashrc
@@ -344,7 +344,7 @@ popd
 > #### `5.2.5` or newer
 > The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
 
-> **Required!** As default ".xz" and ".lzma" files de/compressor for the current and next stage (chroot environment).
+> **Required!** As the default ".xz" and ".lzma" files de/compressor for current and next stage (chroot environment).
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"        \
@@ -364,7 +364,7 @@ time { make install; }
 > #### `2.6` or newer
 > The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
 
-> **Required!** As default ".gz" files de/compressor for the current and next stage (chroot environment).
+> **Required!** As the default ".gz" files de/compressor for current and next stage (chroot environment).
 ```bash
 # Make sure to use symlink instead of hardlink for `unpigz`.
 sed -i 's|ln -f|ln -sf|' Makefile
@@ -394,7 +394,7 @@ install -vm755 -t /clang1-tools/bin/ msg{fmt,merge} xgettext
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
-> **Required!** For the current and next stage (chroot environment).
+> **Required!** For current and next stage (chroot environment).
 ```bash
 # Copy the Toybox .config file.
 cp -v ../../extra/toybox/files/.config.toolchain.nolibcrypto .config
@@ -419,7 +419,7 @@ for X in ${TOYBOX}; do
     || 2>&1 echo "> ${X} not CONFIGURED!"
 done
 
-# Build with verbose. Toybox will use `cc` that breaks the build, so we need to specify the CC and HOSTCC variable.
+# Build with verbose. Toybox will use `cc` that breaks the build, so we need to specify CC and HOSTCC variable.
 time { make CC=${CC} HOSTCC=${CC} CFLAGS="-flto=thin $CFLAGS" V=1; }
 
 # Verify compiled 87 commands.
@@ -442,7 +442,7 @@ time { make CC=${CC} HOSTCC=${CC} PREFIX=/clang1-tools install && unset X TOYBOX
 > #### `5.1.0` or newer
 > The GNU AWK (gawk) package contains programs for manipulating text files.
 
-> **Required!** For the current and next stage (chroot environment) that most build systems depends on GNU implementation style.
+> **Required!** For current and next stage (chroot environment) that most build systems depends on GNU implementation style.
 ```bash
 # Ensure some unneeded files are not installed.
 sed -i 's|extras||' Makefile.in
@@ -464,7 +464,7 @@ time { make install; }
 > #### `3.8` or newer
 > The GNU Diffutils package contains programs that show the differences between files or directories.
 
-> **Required!** For the current and next stage (chroot environment) that most build systems depends on GNU implementation style.
+> **Required!** For current and next stage (chroot environment) that most build systems depends on GNU implementation style.
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"        \
@@ -484,7 +484,7 @@ time { make install; }
 > #### `4.3` or newer
 > The GNU Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
  
-> **Required!** For the current and next stage (chroot environment) that most build systems depends on GNU implementation style.
+> **Required!** For current and next stage (chroot environment) that most build systems depends on GNU implementation style.
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"        \
@@ -504,7 +504,7 @@ time { make install; }
 > #### `2.7.6` or newer
 > The GNU Patch package contains a program for modifying or creating files by applying a patch file typically created by the diff program.
 
-> **Required!** For the current and next stage (chroot environment). The GNU's `patch` can handle offset lines, which is powerful feature.
+> **Required!** For current and next stage (chroot environment). The GNU's `patch` can handle offset lines, which is powerful feature.
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"        \
@@ -546,7 +546,7 @@ time { make install; }
 > #### `5.1` (with patch level 8) or newer
 > The GNU Bash package contains the Bourne-Again SHell.
 
-> **Required!** As default shell for the next stage (chroot environment).
+> **Required!** As the default shell for next stage (chroot environment).
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"        \
@@ -595,7 +595,7 @@ time { make install; }
 
 > **Required!** To build Clang/LLVM and other required packages in the next stage (chroot environment).
 ```bash
-# Prevent main script that uses hard-coded paths to the host "/usr/include" and "/usr/lib" directories.
+# Prevent main script that uses hard-coded paths to host "/usr/include" and "/usr/lib" directories.
 sed -i '/def add_multiarch_paths/a \        return' setup.py
 
 # Use ThinLTO rather than Full LTO to speedup build.
