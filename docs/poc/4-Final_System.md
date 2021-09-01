@@ -1,7 +1,7 @@
 ## `IV` Final System
 
 > #### * Beginning of as root!
-### `0` - Preparing Virtual Kernel File Systems
+### `1` - Preparing Virtual Kernel File Systems
 > Various file systems exported by the kernel are used to communicate to and from the kernel itself. These file systems are virtual in that no disk space is used for them. The content of the file systems resides in memory.
 
 > #### Creating Initial Device Nodes
@@ -36,7 +36,7 @@ if [[ -n "$HEIWA" ]]; then
 fi
 ```
 
-### `1` - Entering the Chroot Environment
+### `2` - Entering the Chroot Environment
 ```bash
 # Term variable is set to `xterm` for better compability, instead of "$TERM" that will broken if using `rxvt-unicode`.
 if [[ -n "$HEIWA" ]]; then
@@ -52,7 +52,7 @@ fi
 > #### * End of as root!
 
 > #### * Beginning of as root in a chroot env!
-### `2` - Creating Directories
+### `3` - Creating Directories
 > It's time to create the full-structured filesystem. See [FHS version 3.0](https://refspecs.linuxfoundation.org/fhs.shtml).
 ```bash
 mkdir -pv /{{,s}bin,boot,etc,home,lib/firmware,media,mnt,opt,root,var/tmp}
@@ -71,7 +71,7 @@ chmod -v 0700 /root
 chmod -v 1777 /{var/,}tmp
 ```
 
-### `3` - Creating Essential Files and Symlinks
+### `4` - Creating Essential Files and Symlinks
 ```bash
 # Some programs use hard-wired paths to programs which do not exist yet.
 # In order to satisfy these programs, create a number of symbolic links which will be replaced by real files throughout the course of this chapter after the software has been installed.
@@ -142,7 +142,7 @@ chmod -v 664  /var/log/lastlog
 chmod -v 600  /var/log/btmp
 ```
 
-### `4` - Setup Clang/LLVM Environment Variables
+### `5` - Setup Clang/LLVM Environment Variables
 > Apply persistent toolchain environment variables, now set the compiler to Stage-1 Clang/LLVM default triplet (pc).
 ```bash
 cat > ~/.bash_profile << "EOF"
@@ -195,7 +195,7 @@ source ~/.bash_profile
 > (heiwa chroot) root: /sources/pkgs # rm -rf target-package
 > ```
 
-### `5` - Linux API Headers
+### `6` - Linux API Headers
 > #### `5.13.x` (CacULE) or newer
 > The Linux API Headers expose the kernel's API for use by musl libc.
 
@@ -218,7 +218,7 @@ find usr/include \( -name '.*' -o -name 'Makefile' \) -exec rm -fv {} \;
 cp -afv usr/include /usr/.
 ```
 
-### `6` - Iana-Etc
+### `7` - Iana-Etc
 > #### `20210611` or newer
 > The Iana-Etc package provides data for network services and protocols.
 
@@ -228,7 +228,7 @@ cp -afv usr/include /usr/.
 install -vm644 -t /etc/ services protocols
 ```
 
-### `7` - musl
+### `8` - musl
 > #### `1.2.2`
 > The musl package contains the main C library. This library provides the basic routines for allocating memory, searching directories, opening and closing files, reading and writing files, string handling, pattern matching, arithmetic, and so on.
 
@@ -291,6 +291,7 @@ sed -e "s|\"${CXX}\"|\"x86_64-heiwa-linux-musl-clang++\"|" \
 source                                                     ~/.bash_profile
 ```
 
+<!--
 ### `8` - Microsoft mimalloc
 > #### `2.0.2` or newer
 > The Microsoft mimalloc package contains a compact general purpose allocator with excellent performance.
@@ -316,6 +317,7 @@ sed -i '/COMMON_FLAGS+=/s/ / -lmimalloc /'            ~/.bash_profile
 printf '\n%s\n' 'export MIMALLOC_LARGE_OS_PAGES=1' >> ~/.bash_profile
 source                                                ~/.bash_profile
 ```
+-->
 ```bash
 # Quick test for the new triplet of Stage-1 Clang/LLVM.
 echo "int main(){}" > dummy.c
