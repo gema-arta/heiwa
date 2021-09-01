@@ -328,15 +328,6 @@ ${READELF} -l a.out | grep --color=auto "Req.*ter"
 # |-----------------------
 # |      [Requesting program interpreter: /lib/ld-musl-x86_64.so.1]
 
-# Check if the ELF successfuly linked with mimalloc.
-ldd a.out
-
-# | The output should be (below addresses are example):
-# |-----------------------------------------------------
-# |    /lib/ld-musl-x86_64.so.1 (0x7fd979f46000)
-# |    libmimalloc.so.2.0 => /usr/lib/libmimalloc.so.2.0 (0x7fd979ec1000)
-# |    libc.musl-x86_64.so.1 => /lib/ld-musl-x86_64.so.1 (0x7fd979f46000)
-
 grep --color=auto "ld.lld:.*crt[1in].o" dummy.log
 
 # | The output should be:
