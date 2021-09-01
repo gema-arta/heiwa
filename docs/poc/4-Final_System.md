@@ -37,7 +37,6 @@ fi
 ```
 
 ### `1` - Entering the Chroot Environment
-> Now that all the packages which are required to build the rest of the needed tools are on the system.
 ```bash
 # Term variable is set to `xterm` for better compability, instead of "$TERM" that will broken if using `rxvt-unicode`.
 if [[ -n "$HEIWA" ]]; then
