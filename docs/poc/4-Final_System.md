@@ -22,7 +22,8 @@ fi
 # Since this new system does not yet have Udev and has not yet been booted, it is necessary to mount and populate "/dev" manually.
 # This is accomplished by bind mounting the host system's "/dev" directory.
 # A bind mount is a special type of mount that allows you to create a mirror of a directory or mount point to some other location.
-# In some host systems, "/dev/shm" is a symbolic link to "/run/shm". The "/run" tmpfs was mounted above so in this case only a directory needs to be created.
+# In some host systems, "/dev/shm" is a symbolic link to "/run/shm".
+# The "/run" tmpfs was mounted above so in this case only a directory needs to be created.
 if [[ -n "$HEIWA" ]]; then
     mount -Rv /dev        ${HEIWA}/dev     && \
     mount -Rv /dev/pts    ${HEIWA}/dev/pts && \
