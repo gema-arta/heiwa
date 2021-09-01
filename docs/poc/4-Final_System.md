@@ -60,8 +60,8 @@ mkdir -pv /{{,s}bin,boot,etc,home,lib/firmware,media,mnt,opt,root,var/tmp}
 mkdir -pv /usr/{,local/}{bin,include,lib,sbin,src}
 mkdir -pv /usr/{,local/}share/{color,dict,doc,info,locale,man,misc,terminfo,zoneinfo}
 mkdir -pv /usr/{,local/}share/man/man{1..8}
-
 mkdir -pv /usr/libexec
+
 mkdir -pv /var/{opt,cache,lib/{color,misc,locate},local,log,mail,spool}
 
 ln -sv /run /var/run
