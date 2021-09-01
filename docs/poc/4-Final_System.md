@@ -413,7 +413,7 @@ popd && rm -rf tzdata; unset timezones
 
 ### `10` - musl-locales
 > #### `?` (git)
-> The musl-locales package contains `locale` implementation, which works on musl libc (with limitations in musl itself).
+> The musl-locales package contains "/usr/bin/locale" implementation, which works on musl libc (with limitations in musl itself).
 
 > **Required!**
 ```bash
