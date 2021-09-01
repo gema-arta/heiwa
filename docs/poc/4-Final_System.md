@@ -564,11 +564,12 @@ time {
 > **Required!** Before `ACL`, `libcap`, and `Shadow`.
 ```bash
 # Configure source.
-CFLAGS="-flto=thin $CFLAGS"   \
-./configure --prefix=/usr     \
-            --bindir=/bin     \
-            --sysconfdir=/etc \
-            --disable-static  \
+CFLAGS="-flto=thin $CFLAGS"             \
+LDFLAGS="-Wl,--no-gc-sections $LDFLAGS" \
+./configure --prefix=/usr               \
+            --bindir=/bin               \
+            --sysconfdir=/etc           \
+            --disable-static            \
             --docdir=/usr/share/doc/attr-2.5.1
 
 # Build.
