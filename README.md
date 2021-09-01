@@ -63,6 +63,7 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 
 > Always W.I.P, since this is hobbyist. A radical experiments.
 
-> TBH, my English is still far from perfect so don't be surprised if I spam commits. I hope I can finish it nicely and a little formally.
+> To be honest, my English is still far from perfect so don't be surprised if I spam commits.  
+> I hope I can finish it nicely and a little formally.
 
 See [docs](./docs). Go [discussions](https://github.com/heiwalinux/heiwa/discussions) for the Errata.
