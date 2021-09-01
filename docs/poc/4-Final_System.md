@@ -17,7 +17,9 @@ fi
 ```
 > #### Mounting and Populating VKFS
 
-> The recommended method of populating the "/dev" directory with devices is to mount a virtual filesystem (such as tmpfs) on the "/dev" directory, and allow the devices to be created dynamically on that virtual filesystem as they are detected or accessed. Device creation is generally done during the boot process by Udev. Since this new system does not yet have Udev and has not yet been booted, it is necessary to mount and populate "/dev" manually. This is accomplished by bind mounting the host system's "/dev" directory. A bind mount is a special type of mount that allows you to create a mirror of a directory or mount point to some other location. In some host systems, "/dev/shm" is a symbolic link to "/run/shm". The "/run" tmpfs was mounted above so in this case only a directory needs to be created.
+> The recommended method of populating the "/dev" directory with devices is to mount a virtual filesystem (such as tmpfs) on the "/dev" directory, and allow the devices to be created dynamically on that virtual filesystem as they are detected or accessed. Device creation is generally done during the boot process by Udev. Since this new system does not yet have Udev and has not yet been booted, it is necessary to mount and populate "/dev" manually. This is accomplished by bind mounting the host system's "/dev" directory. A bind mount is a special type of mount that allows you to create a mirror of a directory or mount point to some other location.
+> 
+> In some host systems, "/dev/shm" is a symbolic link to "/run/shm". The "/run" tmpfs was mounted above so in this case only a directory needs to be created.
 ```bash
 if [[ -n "$HEIWA" ]]; then
     mount -Rv /dev        ${HEIWA}/dev     && \
