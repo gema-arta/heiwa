@@ -675,7 +675,7 @@ exit
 # echo ${HEIWA}/clang1-tools
 [[ -n "$HEIWA" ]] && chown -R root:root ${HEIWA}/clang1-tools
 ```
-> #### This section is recommended!
+> #### Backup
 
 > At this point the essential programs and libraries have been created and your current toolchain is in a good state. Your toolchain can now be backed up for later reuse. In case of fatal failures in the subsequent chapters, it often turns out that removing everything and starting over (more carefully) is the best option to recover. Unfortunately, all the temporary files will be removed, too. To avoid spending extra time to redo something which has been built successfully, prepare a backup.
 ```bash
@@ -685,6 +685,18 @@ if [[ -n "$HEIWA" ]]; then
         tar --totals -cJpf clang0-tools.tar.xz clang0-tools && \
         tar --totals -cJpf clang1-tools.tar.xz clang1-tools && \
     popd && unset XZ_OPT
+fi
+```
+> #### Restore
+
+> In case some mistakes have been made and you need to start over, you can use this backup to restore the system and save some recovery time. Since the sources are located under "$HEIWA", they are included in the backup archive as well, so they do not need to be downloaded again.
+```bash
+if [[ -n "$HEIWA" ]]; then
+    pushd "$HEIWA" && \
+        rm -rf clang{0,1}-tools                      && \
+        tar -xpf clang0-tools.tar.xz --numeric-owner && \
+        tar -xpf clang1-tools.tar.xz --numeric-owner && \
+    popd
 fi
 ```
 > #### * End of as root!
