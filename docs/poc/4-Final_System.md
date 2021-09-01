@@ -142,7 +142,7 @@ chmod -v 664  /var/log/lastlog
 chmod -v 600  /var/log/btmp
 ```
 
-### `4` - Setting Up Clang/LLVM Environment Variables
+### `4` - Setup Clang/LLVM Environment Variables
 > Apply persistent toolchain environment variables, now set the compiler to Stage-1 Clang/LLVM default triplet (pc).
 ```bash
 cat > ~/.bash_profile << "EOF"
