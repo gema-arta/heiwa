@@ -473,7 +473,7 @@ time {
 }
 ```
 ```bash
-# Remove the man pages that colission with `attr`.
+# Remove the manpages that colission with `attr`.
 rm -fv /usr/share/man/man3/attr_{g,s}et.3
 ```
 
