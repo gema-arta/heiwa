@@ -98,7 +98,7 @@ messagebus:x:101:101:System user; messagebus:/dev/null:/sbin/nologin
 nobody:x:65534:65534:nobody:/dev/null:/bin/false
 EOF
 
-# The actual password for root will be set later.
+# The actual password for "root" will be set later.
 # Create the "/etc/group" file by running the following command.
 cat > /etc/group << "EOF"
 root:x:0:
