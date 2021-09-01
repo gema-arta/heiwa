@@ -599,7 +599,7 @@ time { make install; }
 ```
 
 ### `18` - libcap
-> #### `2.51` (`2.52` [fails](https://github.com/heiwalinux/heiwa/discussions/2#discussioncomment-1135973))
+> #### `2.55` or newer
 > The libcap package implements the user-space interfaces to the POSIX 1003.1e capabilities available in Linux kernels. These capabilities are a partitioning of the all powerful root privilege into a set of distinct privileges.
 
 > **Required!** Before `IPRoute2` and `Shadow`.
@@ -607,11 +607,8 @@ time { make install; }
 # Prevent static libraries from being installed.
 sed -i '/install -m.*STA/d' libcap/Makefile
 
-# Build.
-time {
-    make CC=${CC} CFLAGS="-flto=thin $CFLAGS" \
-    SBINDIR=/sbin prefix=/usr lib=lib
-}
+# Build. Fails with LTO since version 2.52 onwards.
+time { make CC=${CC} SBINDIR=/sbin prefix=/usr lib=lib; }
 
 # Install.
 time { make CC=${CC} SBINDIR=/sbin prefix=/usr lib=lib install; }
