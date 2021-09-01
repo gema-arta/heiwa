@@ -201,7 +201,7 @@ source ~/.bash_profile
 
 > **Required!** As mentioned in the description above.
 ```bash
-# Apply patch to fix `swab.h` under musl libc while building Linux kernel.
+# Apply patch to fix `swab.h` under musl libc when building Linux kernel.
 patch -Np1 -i ../../extra/linux-headers/patches/include-uapi-linux-swab-Fix-potentially-missing-__always_inline.patch
 
 # Make sure there are no stale files embedded in the package.
@@ -377,7 +377,7 @@ read -rd '' timezones << "EOF"
 africa antarctica asia australasia europe northamerica southamerica etcetera backward factory
 EOF
 
-# Build. -> Ignore "pkg-config: No such file or directory" while building `posixtz`! <-
+# Build. -> Ignore "pkg-config: No such file or directory" when building `posixtz`! <-
 time {
     make CC=${CC} TZDIR="/usr/share/zoneinfo" CFLAGS="-DHAVE_STDINT_H=1 -flto=thin $CFLAGS" && \
     make -C posixtz-0.5 CC=${CC} CFLAGS="-flto=thin $CFLAGS" posixtz
