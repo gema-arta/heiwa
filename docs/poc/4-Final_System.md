@@ -611,7 +611,7 @@ sed -i '/install -m.*STA/d' libcap/Makefile
 time { make CC=${CC} SBINDIR=/sbin prefix=/usr lib=lib; }
 
 # Install.
-time { make CC=${CC} SBINDIR=/sbin prefix=/usr lib=lib install; }
+time { make SBINDIR=/sbin prefix=/usr lib=lib install; }
 ```
 
 ### `19` - Shadow
