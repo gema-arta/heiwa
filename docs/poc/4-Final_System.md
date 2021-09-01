@@ -383,7 +383,7 @@ time {
     make -C posixtz-0.5 CC=${CC} CFLAGS="-flto=thin $CFLAGS" posixtz
 }
 
-# Install utilities and the man pages.
+# Install utilities and the manpages.
 install -vm755 -t /usr/bin/ tzselect z{ic,dump} posixtz-0.5/posixtz
 install -vm644 -t /usr/share/man/man8/ z{ic,dump}.8
 
