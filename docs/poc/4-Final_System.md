@@ -2,6 +2,8 @@
 
 > #### * Beginning of as root!
 ### `0` - Preparing Virtual Kernel File Systems
+> #### Creating Initial Device Nodes
+
 > Various file systems exported by the kernel are used to communicate to and from the kernel itself. These file systems are virtual in that no disk space is used for them. The content of the file systems resides in memory.
 ```bash
 # When the kernel boots the system, it requires the presence of a few device nodes, in particular the console and null devices.
@@ -13,8 +15,8 @@ if [[ -n "$HEIWA" ]]; then
     mknod -m 666 ${HEIWA}/dev/null c 1 3
 fi
 ```
+> #### Mounting and Populating VKFS
 ```bash
-# Mounting and Populating VKFS
 # The recommended method of populating the "/dev" directory with devices is to mount a virtual filesystem (such as tmpfs) on the "/dev" directory, and allow the devices to be created dynamically on that virtual filesystem as they are detected or accessed.
 # Device creation is generally done during the boot process by Udev.
 # Since this new system does not yet have Udev and has not yet been booted, it is necessary to mount and populate "/dev" manually.
