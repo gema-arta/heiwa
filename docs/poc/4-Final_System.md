@@ -585,8 +585,7 @@ time { make install; }
 
 > **Required!** Before `Shadow`.
 ```bash
-# Configure source.
-CFLAGS="-flto=thin $CFLAGS"  \
+# Configure source. Don't use LTO, it's break POSIX ACL in the binaries.
 ./configure --prefix=/usr    \
             --bindir=/bin    \
             --disable-static \
