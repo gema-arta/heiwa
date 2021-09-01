@@ -6,7 +6,7 @@
 
 > #### Creating Initial Device Nodes
 
-> When the kernel boots the system, it requires the presence of a few device nodes, in particular the console and null devices. The device nodes must be created on the hard disk so that they are available before the kernel populates "/dev", and additionally when Linux is started with init=/bin/bash.
+> When the kernel boots the system, it requires the presence of a few device nodes, in particular the console and null devices. The device nodes must be created on the hard disk so that they are available before the kernel populates "/dev", and additionally when Linux is started with init=/bin/bash. Read more about [Linux device nodes](https://kernel.org/doc/Documentation/admin-guide/devices.txt).
 ```bash
 # Create the directories and initial device nodes.
 if [[ -n "$HEIWA" ]]; then
