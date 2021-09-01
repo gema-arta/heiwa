@@ -398,6 +398,12 @@ zic -b fat -y ./yearistype -d /usr/share/zoneinfo -p America/New_York
 # Use `tzselect` to determine <xxx>.
 tzselect
 
+# | Example output (Asia/Jakarta):
+# |-----------------
+# |Here is that TZ value again, this time on standard output so that you
+# |can use the /usr/bin/tzselect command in shell scripts:
+# |Asia/Jakarta
+
 cp -fv /usr/share/zoneinfo/<xxx> /etc/localtime
 ```
 ```bash
