@@ -372,6 +372,7 @@ tar xf  ../posixtz-0.5.tar.xz
 patch -Np1 -i ../../extra/tzdata/patches/0001-posixtz-ensure-the-file-offset-we-pass-to-lseek-is-o.patch
 patch -Np1 -i ../../extra/tzdata/patches/0002-fix-implicit-declaration-warnings-by-including-strin.patch
 
+# Export the timezones variable.
 read -rd '' timezones << "EOF"
 africa antarctica asia australasia europe northamerica southamerica etcetera backward factory
 EOF
