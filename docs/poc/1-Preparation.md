@@ -104,7 +104,7 @@ T_TRIPLET="x86_64-pc-linux-musl"                          # Target triplet for f
 H_TRIPLET="$(echo "$T_TRIPLET" | sed 's/-[^-]*/-heiwa/')" # Target triplet for cross-toolchain.
 
 # Let's check if it's correct.
-for EV in $C_{TRIPLET,ARCH,CPU} ${L_TARGET} ${T_TRIPLET} ${H_TRIPLET}; do echo ${EV}; done && unset EV
+printf "%b\n" $C_{TRIPLET,ARCH,CPU} ${L_TARGET} ${T_TRIPLET} ${H_TRIPLET}
 
 # | In glibc host, the output should be:
 # |--------------------------------------
