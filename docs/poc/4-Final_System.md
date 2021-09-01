@@ -202,8 +202,7 @@ source ~/.bash_profile
 > **Required!** As mentioned in the description above.
 ```bash
 # Apply patch to fix `swab.h` under musl libc while building Linux kernel.
-patch -Np1 -i \
-../../extra/linux-headers/patches/include-uapi-linux-swab-Fix-potentially-missing-__always_inline.patch
+patch -Np1 -i ../../extra/linux-headers/patches/include-uapi-linux-swab-Fix-potentially-missing-__always_inline.patch
 
 # Make sure there are no stale files embedded in the package.
 time { make LLVM=1 LLVM_IAS=1 mrproper; }
@@ -212,8 +211,8 @@ time { make LLVM=1 LLVM_IAS=1 mrproper; }
 # The headers are first placed in "./usr/", then copied to the needed location.
 time { make LLVM=1 LLVM_IAS=1 HOSTCC=${CC} headers; }
 
-# Remove unnecessary files.
-find usr/include \( -name '.*' -o -name 'Makefile' \) -exec rm -rfv {} \;
+# Remove unnecessary dotfiles and Makefile.
+find usr/include \( -name '.*' -o -name 'Makefile' \) -exec rm -fv {} \;
 
 # Install.
 cp -afv usr/include /usr/.
