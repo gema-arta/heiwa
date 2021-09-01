@@ -362,10 +362,10 @@ grep -oE "\-L/usr/lib|\-L/lib" dummy.log
 > **Required!** Since using musl libc.
 ```bash
 # Create a directory and decompress needed tarball.
-mkdir -v tzdata && pushd tzdata   && \
-    tar xzf ../tzdata2021a.tar.gz && \
-    tar xzf ../tzcode2021a.tar.gz && \
-    tar xf  ../posixtz-0.5.tar.xz
+mkdir -v tzdata && pushd tzdata && \
+tar xzf ../tzdata2021a.tar.gz   && \
+tar xzf ../tzcode2021a.tar.gz   && \
+tar xf  ../posixtz-0.5.tar.xz
 ```
 ```bash
 # Apply patches (from Alpine Linux).
