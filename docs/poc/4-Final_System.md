@@ -2,12 +2,12 @@
 
 > #### * Beginning of as root!
 ### `0` - Preparing Virtual Kernel File Systems
+> Various file systems exported by the kernel are used to communicate to and from the kernel itself. These file systems are virtual in that no disk space is used for them. The content of the file systems resides in memory.
+
 > #### Creating Initial Device Nodes
 
-> Various file systems exported by the kernel are used to communicate to and from the kernel itself. These file systems are virtual in that no disk space is used for them. The content of the file systems resides in memory.
+> When the kernel boots the system, it requires the presence of a few device nodes, in particular the console and null devices. The device nodes must be created on the hard disk so that they are available before the kernel populates "/dev", and additionally when Linux is started with init=/bin/bash.
 ```bash
-# When the kernel boots the system, it requires the presence of a few device nodes, in particular the console and null devices.
-# The device nodes must be created on the hard disk so that they are available before the kernel populates "/dev", and additionally when Linux is started with init=/bin/bash.
 # Create the directories and initial device nodes.
 if [[ -n "$HEIWA" ]]; then
     mkdir -pv ${HEIWA}/{dev,proc,sys,run,tmp} && \
@@ -16,14 +16,9 @@ if [[ -n "$HEIWA" ]]; then
 fi
 ```
 > #### Mounting and Populating VKFS
+
+> The recommended method of populating the "/dev" directory with devices is to mount a virtual filesystem (such as tmpfs) on the "/dev" directory, and allow the devices to be created dynamically on that virtual filesystem as they are detected or accessed. Device creation is generally done during the boot process by Udev. Since this new system does not yet have Udev and has not yet been booted, it is necessary to mount and populate "/dev" manually. This is accomplished by bind mounting the host system's "/dev" directory. A bind mount is a special type of mount that allows you to create a mirror of a directory or mount point to some other location. In some host systems, "/dev/shm" is a symbolic link to "/run/shm". The "/run" tmpfs was mounted above so in this case only a directory needs to be created.
 ```bash
-# The recommended method of populating the "/dev" directory with devices is to mount a virtual filesystem (such as tmpfs) on the "/dev" directory, and allow the devices to be created dynamically on that virtual filesystem as they are detected or accessed.
-# Device creation is generally done during the boot process by Udev.
-# Since this new system does not yet have Udev and has not yet been booted, it is necessary to mount and populate "/dev" manually.
-# This is accomplished by bind mounting the host system's "/dev" directory.
-# A bind mount is a special type of mount that allows you to create a mirror of a directory or mount point to some other location.
-# In some host systems, "/dev/shm" is a symbolic link to "/run/shm".
-# The "/run" tmpfs was mounted above so in this case only a directory needs to be created.
 if [[ -n "$HEIWA" ]]; then
     mount -Rv /dev        ${HEIWA}/dev     && \
     mount -Rv /dev/pts    ${HEIWA}/dev/pts && \
