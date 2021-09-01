@@ -93,9 +93,9 @@ ln -sv /proc/self/mounts /etc/mtab
 cat > /etc/passwd << "EOF"
 root:x:0:0:root:/root:/bin/bash
 bin:x:1:1:bin:/dev/null:/bin/false
-daemon:x:6:6:Daemon User:/dev/null:/bin/false
-messagebus:x:18:18:D-Bus Message Daemon User:/run/dbus:/bin/false
-nobody:x:99:99:Unprivileged User:/dev/null:/bin/false
+daemon:x:2:2:daemon:/dev/null:/bin/false
+messagebus:x:101:101:System user; messagebus:/dev/null:/sbin/nologin
+nobody:x:65534:65534:nobody:/dev/null:/bin/false
 EOF
 
 # The actual password for root will be set later.
