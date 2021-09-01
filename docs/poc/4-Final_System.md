@@ -585,7 +585,7 @@ time { make install; }
 
 > **Required!** Before `Shadow`.
 ```bash
-# Configure source. Don't use LTO, it's break POSIX ACL in the binaries.
+# Configure source. Don't use LTO, it breaks POSIX ACL in the binaries.
 ./configure --prefix=/usr    \
             --bindir=/bin    \
             --disable-static \
