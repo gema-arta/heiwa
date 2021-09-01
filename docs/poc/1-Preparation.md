@@ -96,12 +96,12 @@ EOF
 source ~/.bash_profile
 ```
 ```bash
-C_TRIPLET="$(echo "$MACHTYPE" | sed 's/-[^-]*/-cross/')" # Host cross-triplet, to be used to build GCC toolchain.
-C_ARCH="x86"                                             # CPU arch, used to build Linux API headers.
-C_CPU="x86-64"                                           # CPU arch, used to build static GCC in cross-toolchain.
-L_TARGET="X86"                                           # LLVM specific arch build target.
-T_TRIPLET="x86_64-pc-linux-musl"                         # Target triplet for final toolchain.
-H_TRIPLET="$(echo "$MACHTYPE" | sed 's/-[^-]*/-heiwa/')" # Target triplet for cross-toolchain.
+C_TRIPLET="$(echo "$MACHTYPE" | sed 's/-[^-]*/-cross/')"  # Host cross-triplet, to be used to build GCC toolchain.
+C_ARCH="x86"                                              # CPU arch, used to build Linux API headers.
+C_CPU="x86-64"                                            # CPU arch, used to build static GCC in cross-toolchain.
+L_TARGET="X86"                                            # LLVM specific arch build target.
+T_TRIPLET="x86_64-pc-linux-musl"                          # Target triplet for final toolchain.
+H_TRIPLET="$(echo "$T_TRIPLET" | sed 's/-[^-]*/-heiwa/')" # Target triplet for cross-toolchain.
 ```
 ```bash
 # If you want multitasking responsiveness when using multiple jobs, set the load average to prevent slowdowned system (maybe OOM).
