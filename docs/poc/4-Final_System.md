@@ -602,7 +602,7 @@ time { make install; }
 > #### `2.55` or newer
 > The libcap package implements the user-space interfaces to the POSIX 1003.1e capabilities available in Linux kernels. These capabilities are a partitioning of the all powerful root privilege into a set of distinct privileges.
 
-> **Required!** Before `IPRoute2` and `Shadow`.
+> **Required!** Before `IPRoute2` and `Shadow`. Currently without linux-PAM support.
 ```bash
 # Prevent static libraries from being installed.
 sed -i '/install -m.*STA/d' libcap/Makefile
@@ -618,7 +618,7 @@ time { make SBINDIR=/sbin prefix=/usr lib=lib install; }
 > #### `4.9` or newer
 > The Shadow package contains programs for handling passwords in a secure way.
 
-> **Required!**
+> **Required!** Currently without linux-PAM support.
 ```bash
 # Disable the installation of the groups program and its manpages, as Coreutils (replaced by Toybox) provides a better version.
 # Also, prevent the installation of manpages that included by Linux `man-pages`.
