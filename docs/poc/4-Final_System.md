@@ -680,7 +680,7 @@ time { make PREFIX=/usr install-{header,dynamic}; }
 ```
 -->
 
-### `21` - Clang/LLVM + libunwind, libcxxabi, and libcxx
+### `20` - Clang/LLVM + libunwind, libcxxabi, and libcxx
 > #### `12.x.x` or newer
 > - C language family frontend for LLVM;  
 > - C++ runtime stack unwinder from LLVM;  
@@ -689,29 +689,29 @@ time { make PREFIX=/usr install-{header,dynamic}; }
 
 > **Required!**
 ```bash
-# Exit from the LLVM source directory if already entered after decompressing.
+# Exit from LLVM source directory if already entered after decompressing.
 popd
+
+# Rename LLVM source directory to "$LLVM_SRC", then enter.
+mv -fv llvm-12.0.1.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 ```
 ```bash
-# Rename the LLVM source directory to "$LLVM_SRC", then enter.
-mv -fv llvm-12.0.1.src "$LLVM_SRC" && pushd "$LLVM_SRC"
-
-# Decompress `clang`, `lld`, `compiler-rt`, `libunwind`, `libcxxabi`, and `libcxx` to the correct directories.
+# Decompress `clang`, `lld`, `compiler-rt`, `libunwind`, `libcxxabi`, and `libcxx` to correct directories.
 pushd ${LLVM_SRC}/projects/ && \
-    tar xf ../../pkgs/compiler-rt-12.0.1.src.tar.xz && mv -fv compiler-rt-12.0.1.src compiler-rt
-    tar xf ../../pkgs/libunwind-12.0.1.src.tar.xz   && mv -fv libunwind-12.0.1.src libunwind
-    tar xf ../../pkgs/libcxxabi-12.0.1.src.tar.xz   && mv -fv libcxxabi-12.0.1.src libcxxabi
-    tar xf ../../pkgs/libcxx-12.0.1.src.tar.xz      && mv -fv libcxx-12.0.1.src libcxx
+    tar xf ../../pkgs/compiler-rt-12.0.1.src.tar.xz && mv -fv compiler-rt{-12.0.1.src,}
+    tar xf ../../pkgs/libunwind-12.0.1.src.tar.xz   && mv -fv libunwind{-12.0.1.src,}
+    tar xf ../../pkgs/libcxxabi-12.0.1.src.tar.xz   && mv -fv libcxxabi{-12.0.1.src,}
+    tar xf ../../pkgs/libcxx-12.0.1.src.tar.xz      && mv -fv libcxx{-12.0.1.src,}
 popd
 pushd ${LLVM_SRC}/tools/ && \
-    tar xf ../../pkgs/clang-12.0.1.src.tar.xz && mv -fv clang-12.0.1.src clang
-    tar xf ../../pkgs/lld-12.0.1.src.tar.xz   && mv -fv lld-12.0.1.src lld
+    tar xf ../../pkgs/clang-12.0.1.src.tar.xz && mv -fv clang{-12.0.1.src,}
+    tar xf ../../pkgs/lld-12.0.1.src.tar.xz   && mv -fv lld{-12.0.1.src,}
 popd
 
 # Apply patches (from Void Linux).
 ../extra/llvm/patches/appatch
 
-# Disable sanitizers for musl, it's broken since it duplicates some libc bits.
+# Disable sanitizers for musl, it's broken since duplicates some libc bits.
 sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
 projects/compiler-rt/cmake/config-ix.cmake
 
@@ -781,7 +781,7 @@ time { make -C build; }
 time { make -C build install && popd; }
 ```
 ```bash
-# Remove `libunwind`, `libcxxabi`, and `libcxx` from the LLVM source.
+# Remove `libunwind`, `libcxxabi`, and `libcxx` from LLVM source directory.
 rm -rf projects/lib{unwind,cxx{abi,}}
 ```
 ```bash
@@ -837,8 +837,7 @@ time {
 }
 ```
 ```bash
-# Create a symlink required by the FHS for "historical" reasons, and ..
-# set `clang`, `clang++`, and `lld` as default toolchain compiler and linker.
+# Create a symlink that required by FHS for "historical" reasons, and set `clang`, `clang++`, and `lld` as default toolchain compiler and linker.
 ln -sfv ../usr/bin/clang /lib/cpp
 ln -sfv clang            /usr/bin/cc
 ln -sfv lld              /usr/bin/ld
