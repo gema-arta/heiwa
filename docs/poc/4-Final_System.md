@@ -639,9 +639,8 @@ sed -i '/RUSEROK/d' configure
 touch /usr/bin/passwd
 CFLAGS="-flto=thin $CFLAGS"                \
 ./configure --sysconfdir=/etc              \
-            --without-tcb                  \
             --disable-account-tools-setuid \
-            --without-group-name-max-length 
+            --without-{tcb,group-name-max-length}
 
 # Build.
 time { make; }
@@ -649,7 +648,7 @@ time { make; }
 # Install.
 time {
     make libdir=/usr/lib suidperms=4711 install
-    make -C man install-man
+    make -C {,install-}man
 }
 ```
 ```bash
