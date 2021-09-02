@@ -620,8 +620,8 @@ time { make SBINDIR=/sbin prefix=/usr lib=lib install; }
 
 > **Required!**
 ```bash
-# Disable the installation of the groups program and its man pages, as Coreutils (replaced by Toybox) provides a better version.
-# Also, prevent the installation of manual pages.
+# Disable the installation of the groups program and its manpages, as Coreutils (replaced by Toybox) provides a better version.
+# Also, prevent the installation of manpages that included by Linux `man-pages`.
 sed -i 's|groups$(EXEEXT) ||' src/Makefile.in
 find man -name Makefile.in -exec sed -i 's/groups\.1 / /'   {} \;
 find man -name Makefile.in -exec sed -i 's/getspnam\.3 / /' {} \;
