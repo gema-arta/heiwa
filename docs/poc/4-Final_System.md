@@ -662,9 +662,6 @@ sed -i '/CREATE_MAIL_SPOOL=.*/d' /etc/default/useradd
 # That is, they need to be able to work with shadowed passwords.
 # Enable shadowed passwords and groups.
 pwconv; grpconv
-
-# Set the root password.
-passwd root
 ```
 
 ### `20` - libexecinfo
