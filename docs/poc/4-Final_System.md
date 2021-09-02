@@ -653,13 +653,13 @@ time {
 ```
 ```bash
 # Create the default configuration.
-mkdir -v /etc/default && useradd -D --gid 100
+mkdir -v /etc/default && useradd -D --gid 100 && \
+sed -i '/CREATE_MAIL_SPOOL=.*/d' /etc/default/useradd
 
 # CREATE_MAIL_SPOOL=yes
 # This parameter causes useradd to create a mailbox file for the newly created user.
 # `useradd` will make the group ownership of this file to the mail group with 0660 permissions.
 # If you would prefer that these mailbox files are not created by useradd, issue the following command.
-sed -i 's|yes|no|' /etc/default/useradd
 
 # This package contains utilities to add, modify, and delete users and groups; set and change their passwords; and perform other administrative tasks.
 # For a full explanation of what password shadowing means, see the doc/HOWTO file within the unpacked source tree.
