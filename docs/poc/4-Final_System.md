@@ -665,6 +665,7 @@ sed -i '/CREATE_MAIL_SPOOL=.*/d' /etc/default/useradd
 pwconv; grpconv
 ```
 
+<!--
 ### `20` - libexecinfo
 > #### `1.1` or newer (from Heiwa/Linux fork)
 > The libexecinfo package contains backtrace facility that usually found in GNU libc (glibc).
@@ -677,6 +678,7 @@ time { make CFLAGS="-flto=thin $CFLAGS" dynamic; }
 # Install.
 time { make PREFIX=/usr install-{header,dynamic}; }
 ```
+-->
 
 ### `21` - Clang/LLVM + libunwind, libcxxabi, and libcxx
 > #### `12.x.x` or newer
