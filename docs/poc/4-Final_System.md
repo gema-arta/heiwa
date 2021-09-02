@@ -867,15 +867,6 @@ readelf -l a.out | grep --color=auto "Req.*ter"
 # |-----------------------
 # |      [Requesting program interpreter: /lib/ld-musl-x86_64.so.1]
 
-# Check if the ELF successfuly linked with mimalloc.
-ldd a.out
-
-# | The output should be (below addresses are example):
-# |-----------------------------------------------------
-# |    /lib/ld-musl-x86_64.so.1 (0x7fbc2194b000)
-# |    libmimalloc.so.2.0 => /usr/lib/libmimalloc.so.2.0 (0x7fbc218c6000)
-# |    libc.musl-x86_64.so.1 => /lib/ld-musl-x86_64.so.1 (0x7fbc2194b000)
-
 grep --color=auto "ld.lld:.*crt[1in].o" dummy.log
 
 # | The output should be:
@@ -898,9 +889,6 @@ grep -oE "\-L/usr/lib|\-L/lib" dummy.log
 # | The output should be:
 # |-----------------------
 # |-L/usr/lib
-
-# Clean up.
-rm -fv dummy.{c,log} a.out
 ```
 ```bash
 # Back to "/sources/pkgs" directory.
