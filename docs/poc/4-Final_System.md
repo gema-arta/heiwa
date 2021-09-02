@@ -636,6 +636,7 @@ sed -e 's|#ENCRYPT_METHOD DES|ENCRYPT_METHOD SHA512|' \
 sed -i '/RUSEROK/d' configure
 
 # Configure source.
+# The file "/usr/bin/passwd" needs to exist because its location is harcoded in some programs, and the default location if it does not exist is not right.
 touch /usr/bin/passwd
 CFLAGS="-flto=thin $CFLAGS"                \
 ./configure --sysconfdir=/etc              \
