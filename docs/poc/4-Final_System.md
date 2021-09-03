@@ -1640,7 +1640,7 @@ mkdir -pv /usr/share/doc/kbd-2.4.0 && \
 cp -rfv docs/doc/* /usr/share/doc/kbd-2.4.0
 ```
 
-### `49` - Util-linux
+### `50` - Util-linux
 > #### `2.37.2` or newer
 > The Util-linux package contains miscellaneous utility programs.
 
@@ -1687,7 +1687,7 @@ time {
 }
 ```
 
-### `50` - E2fsprogs
+### `51` - E2fsprogs
 > #### `1.46.2` or newer
 > The E2fsprogs package contains the utilities for handling the ext2 file system. It also supports the ext3 and ext4 journaling file systems.
 
