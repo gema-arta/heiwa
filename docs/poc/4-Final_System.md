@@ -1543,7 +1543,7 @@ CXXFLAGS="-Wno-error -Wl,-z,stack-size=2097152 -flto=thin $CXXFLAGS"          \
 ./configure --prefix=/usr                                                     \
             --disable-{{,lib}debuginfod,werror} ac_cv_c99=yes
 
-# Build `libelf`.
+# Only build `libelf`.
 time { make -C lib && make -C libelf; }
 
 # Install.
