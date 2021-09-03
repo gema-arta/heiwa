@@ -1532,15 +1532,12 @@ time { make install; }
 # Apply patch to allow build with Clang under musl libc.
 patch -Np1 -i ../../extra/elfutils/patches/elfutils-musl-clang.patch
 
-# Re-generate configure script.
-autoreconf -fvi
-
 # Configure source.
 CFLAGS="-Wno-error -Wno-null-dereference -DFNM_EXTMATCH=0 -flto=thin $CFLAGS" \
 CXXFLAGS="-Wno-error $CXXFLAGS"                                               \
 ./configure --prefix=/usr                                                     \
             --disable-debuginfod                                              \
-            --disable-libdebuginfod
+            --disable-libdebuginfod ac_cv_c99=yes
 
 # Build `libelf`.
 time { make -C lib && make -C libelf; }
