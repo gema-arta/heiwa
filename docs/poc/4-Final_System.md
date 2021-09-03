@@ -1041,9 +1041,8 @@ time {
 > **Required!** Before `GNU Automake` and `Kmod`.
 ```bash
 # Apply patches to fix some issues.
-for P in {line-length,flip-macro-logic}.patch; do
-    patch -Np1 -i ../../extra/gettext-tiny/patches/${P}
-done; unset P
+patch -Np1 -i ../../extra/gettext-tiny/patches/line-length.patch
+patch -Np1 -i ../../extra/gettext-tiny/patches/flip-macro-logic.patch
 
 # Build.
 time { make LIBINTL=MUSL CFLAGS="-flto=thin $CFLAGS"; }
