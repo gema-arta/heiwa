@@ -1190,7 +1190,7 @@ cp -rfv doc/* /usr/share/doc/openssl-1.1.1l/.
 # Copy the Toybox .config file.
 cp -v ../../extra/toybox/files/.config.finalsys .config
 
-# Make sure to enable `libcrypto` and `libz`.
+# Ensure `libcrypto` and `libz` are enabled in the config.
 grep -E --color=auto "LIBCRYPTO|LIBZ" .config
 
 # Export commands as TOYBOX variable that will be use to verify Toybox .config.
@@ -1204,11 +1204,11 @@ truncate tty uname uniq unlink wc who whoami yes file find xargs egrep grep fgre
 dnsdomainname ifconfig hostname ping telnet tftp traceroute man killall sed klogd tar
 EOF
 
-# Verify 102 commands, and make sure is enabled (=y).
-# Pipe to ` | wc -l` at the right of `done` to checks total of commands.
+# Verify 102 commands, and make sure enabled (=y).
+# Pipe to ` | wc -l` at the right of `done` to check the total of commands.
 for X in ${TOYBOX}; do
-    grep -v '#' .config | grep -i --color=auto "_${X}=" \
-    || echo "* ${X} not CONFIGURED"
+    grep -v '#' .config | grep -i --color=auto "CONFIG_${X}=" \
+    || 2>&1 echo "> ${X} not CONFIGURED!"
 done
 
 # Build with verbose.
@@ -1218,7 +1218,7 @@ time { make CFLAGS="-flto=thin $CFLAGS" V=1; }
 ./toybox | tr ' ' '\n'i \
 | grep -xE --color=auto $(echo ${TOYBOX} | tr ' ' '|'i) | wc -l
 
-# Verify commands that not configured but compiled.
+# Verify unconfigured commands, but compiled.
 # `[` (coreutils)
 # `ping6` and `traceroute6` (inetutils)
 ./toybox | tr ' ' '\n'i \
@@ -1228,7 +1228,7 @@ time { make CFLAGS="-flto=thin $CFLAGS" V=1; }
 ./toybox | wc -w
 
 # Install.
-time { make PREFIX=/ install; unset X TOYBOX; }
+time { make PREFIX=/ install && unset X TOYBOX; }
 ```
 
 ### `33` - GNU AWK
