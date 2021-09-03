@@ -1465,8 +1465,7 @@ patch -Np1 -i ../../extra/argp-standalone/001-throw-in-funcdef.patch
 # Configure source.
 CFLAGS="-fPIC -flto=thin $CFLAGS" \
 ./configure --prefix=/usr         \
-            --sysconfdir=/etc     \
-            --localstatedir=/var
+            --sysconfdir=/etc
 
 # Build.
 time { make; }
