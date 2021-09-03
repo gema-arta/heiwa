@@ -1557,7 +1557,7 @@ time {
 }
 ```
 
-### `48` - IPRoute2
+### `47` - IPRoute2
 > #### `5.13.0` or newer
 > The IPRoute2 package contains programs for basic and advanced IPV4-based networking.
 
@@ -1579,7 +1579,7 @@ time { make CC=${CC} CCOPTS="-D_GNU_SOURCE -flto=thin $CFLAGS"; }
 time { make install; }
 ```
 
-### `49` - KBD
+### `48` - KBD
 > #### `2.4.0` or newer
 > The Kbd package contains key-table files, console fonts, and keyboard utilities.
 
@@ -1630,7 +1630,7 @@ for K in sun amiga atari; do
 done; unset K
 ```
 
-### `50` - Util-linux
+### `49` - Util-linux
 > #### `2.37` or newer
 > The Util-linux package contains miscellaneous utility programs.
 
@@ -1676,7 +1676,7 @@ time {
 }
 ```
 
-### `51` - E2fsprogs
+### `50` - E2fsprogs
 > #### `1.46.2` or newer
 > The E2fsprogs package contains the utilities for handling the ext2 file system. It also supports the ext3 and ext4 journaling file systems.
 
