@@ -1387,7 +1387,7 @@ CFLAGS="-flto=thin $CFLAGS"   \
 # Build.
 time { make; }
 
-# Install the package and create symlinks for compatibility with Module-Init-Tools (the package that previously handled Linux kernel modules).
+# Install and create symlinks for compatibility with Module-Init-Tools (the package that previously handled Linux kernel modules).
 time {
     make install
     for B in {dep,ins,rm}mod modprobe; do
