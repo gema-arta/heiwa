@@ -1132,7 +1132,7 @@ HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE" ./Configure -des    \
     -Dd_static_inline                                                 \
     -Dcf_by="Heiwa/Linux"                                             \
     -Dmyhostname="localh3art"                                         \
-    -Dperladmin="heiwa@localh3art"                                    \
+    -Dperladmin="root@localh3art"                                     \
     -Dman1ext=1                                                       \
     -Dman3ext=3pm                                                     \
     -Dman1dir=/usr/share/man/man1                                     \
