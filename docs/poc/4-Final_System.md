@@ -1641,7 +1641,7 @@ cp -rfv docs/doc/* /usr/share/doc/kbd-2.4.0
 ```
 
 ### `49` - Util-linux
-> #### `2.37` or newer
+> #### `2.37.2` or newer
 > The Util-linux package contains miscellaneous utility programs.
 
 > **Required!** Before `E2fsprogs` and `Eudev`.
