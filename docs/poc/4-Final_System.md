@@ -1569,7 +1569,7 @@ time {
 sed -i /ARPD/d Makefile
 rm -fv man/man8/arpd.8
 
-# Prevent build two module that require `iptables`.
+# Prevent build two modules that require `iptables`.
 sed -i 's|.m_ipt.o||' tc/Makefile
 
 # Build.
