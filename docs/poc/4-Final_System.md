@@ -1539,7 +1539,6 @@ autoreconf -fvi
 CFLAGS="-Wno-error -Wno-null-dereference -DFNM_EXTMATCH=0 -flto=thin $CFLAGS" \
 CXXFLAGS="-Wno-error $CXXFLAGS"                                               \
 ./configure --prefix=/usr                                                     \
-            --program-prefix=eu-                                              \
             --disable-debuginfod                                              \
             --disable-libdebuginfod
 
