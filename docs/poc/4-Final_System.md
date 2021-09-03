@@ -980,8 +980,8 @@ time { make -C build install; }
 ```bash
 # Build zstd and pzstd (parallel zstandard).
 time {
-    make CFLAGS="-flto=thin $CFLAGS -pthread" && \
-    make -C contrib/pzstd CFLAGS="-flto=thin $CFLAGS -pthread"
+    make CFLAGS="-flto=thin $CFLAGS" && \
+    make -C contrib/pzstd CFLAGS="-flto=thin $CFLAGS"
 }
 
 # Install.
