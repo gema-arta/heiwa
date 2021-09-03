@@ -1100,14 +1100,15 @@ time { make install; }
 > The Perl package contains the Practical Extraction and Report Language.
 
 > **Required!** Before `OpenSSL` and `GNU Autoconf`.
+<!--
+* BUILD FAILS SINCE USING ZLIB-NG.
+Ensure to build Perl with libraries installed on the system.
+BUILD_BZIP2=0 BUILD_ZLIB=False
+BZIP2_LIB="/usr/lib" ZLIB_LIB="/usr/lib"
+BZIP2_INCLUDE="/usr/include" ZLIB_INCLUDE="/usr/include"
+export BUILD_{BZIP2,ZLIB} {BZIP2,ZLIB}_{LIB,INCLUDE}
+-->
 ```bash
-# * BUILD FAILS SINCE USING ZLIB-NG.
-# Ensure to build Perl with libraries installed on the system.
-#BUILD_BZIP2=0 BUILD_ZLIB=False
-#BZIP2_LIB="/usr/lib" ZLIB_LIB="/usr/lib"
-#BZIP2_INCLUDE="/usr/include" ZLIB_INCLUDE="/usr/include"
-#export BUILD_{BZIP2,ZLIB} {BZIP2,ZLIB}_{LIB,INCLUDE}
-
 # Configure source.
 HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE" ./Configure -des    \
     -Dusethreads                                                      \
@@ -1143,7 +1144,6 @@ HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE" ./Configure -des    \
 time { make; }
 
 # Install and unset Perl specific exported variables.
-#time { make install && unset BUILD_{BZIP2,ZLIB} {BZIP2,ZLIB}_{LIB,INCLUDE}; }
 time { make install; }
 ```
 
