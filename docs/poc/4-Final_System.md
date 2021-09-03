@@ -1040,16 +1040,13 @@ time {
 
 > **Required!** Before `GNU Automake` and `Kmod`.
 ```bash
-# Apply patches to fix some issues and respect compiler flags.
-for P in {line-length,flip-macro-logic,respect-cflags}.patch; do
+# Apply patches to fix some issues.
+for P in {line-length,flip-macro-logic}.patch; do
     patch -Np1 -i ../../extra/gettext-tiny/patches/${P}
 done; unset P
 
-# Prevent to build static library.
-sed -i 's|=libintl.a|=|' Makefile
-
 # Build.
-time { make LIBINTL=MUSL CFLAGS="-flto=thin $CFLAGS" prefix=/usr; }
+time { make LIBINTL=MUSL CFLAGS="-flto=thin $CFLAGS"; }
 
 # Install.
 time { make LIBINTL=MUSL prefix=/usr install; }
