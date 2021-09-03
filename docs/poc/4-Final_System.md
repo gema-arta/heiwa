@@ -1348,15 +1348,15 @@ time { make install; }
 > **Required!**
 ```bash
 # Configure source.
-CFLAGS="-flto=thin $CFLAGS"                  \
-./configure --prefix=/usr                    \
-            --docdir=/usr/share/doc/bash-5.1 \
-            --with-curses                    \
-            --without-bash-malloc            \
-            --enable-readline                \
-            --with-installed-readline        \
-            --disable-profiling              \
-            --enable-net-redirections
+CFLAGS="-flto=thin $CFLAGS"           \
+./configure --prefix=/usr             \
+            --with-curses             \
+            --without-bash-malloc     \
+            --with-installed-readline \
+            --disable-profiling       \
+            --enable-readline         \
+            --enable-net-redirections \
+            --docdir=/usr/share/doc/bash-5.1
 
 # Build.
 time { make; }
