@@ -1659,21 +1659,21 @@ mkdir -pv /var/lib/hwclock
 NOCONFIGURE=1 ./autogen.sh
 
 # Configure source. musl needs `-D_DIRENT_HAVE_D_TYPE` for switch_root(8).
-CFLAGS="-D_DIRENT_HAVE_D_TYPE -flto=thin $CFLAGS"   \
-./configure ADJTIME_PATH=/var/lib/hwclock/adjtime   \
-            --libdir=/usr/lib                       \
-            --docdir=/usr/share/doc/util-linux-2.37 \
-            --disable-chfn-chsh                     \
-            --disable-login                         \
-            --disable-nologin                       \
-            --disable-su                            \
-            --disable-setpriv                       \
-            --disable-runuser                       \
-            --disable-pylibmount                    \
-            --disable-static                        \
-            --without-python                        \
-            --without-systemd                       \
-            --without-systemdsystemunitdir          \
+CFLAGS="-D_DIRENT_HAVE_D_TYPE -flto=thin $CFLAGS"     \
+./configure ADJTIME_PATH=/var/lib/hwclock/adjtime     \
+            --libdir=/usr/lib                         \
+            --docdir=/usr/share/doc/util-linux-2.37.2 \
+            --disable-chfn-chsh                       \
+            --disable-login                           \
+            --disable-nologin                         \
+            --disable-su                              \
+            --disable-setpriv                         \
+            --disable-runuser                         \
+            --disable-pylibmount                      \
+            --disable-static                          \
+            --without-python                          \
+            --without-systemd                         \
+            --without-systemdsystemunitdir            \
             runstatedir=/run
 
 # Build.
