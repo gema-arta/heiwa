@@ -1123,7 +1123,7 @@ HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE" ./Configure -des    \
     -Dsitearch=/usr/lib/perl5/5.34/site_perl                          \
     -Dvendorlib=/usr/lib/perl5/5.34/vendor_perl                       \
     -Dvendorarch=/usr/lib/perl5/5.34/vendor_perl                      \
-    -Doptimize="-Wall -DNO_POSIX_2008_LOCALE -D_GNU_SOURCE $CFLAGS"   \
+    -Doptimize="-DNO_POSIX_2008_LOCALE -D_GNU_SOURCE $CFLAGS"         \
     -Dccflags="-DNO_POSIX_2008_LOCALE -D_GNU_SOURCE $CFLAGS"          \
     -Dcccdlflags="-fPIC"                                              \
     -Dldflags="-Wl,-z,stack-size=2097152 -pthread $LDFLAGS"           \
