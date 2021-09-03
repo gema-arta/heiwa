@@ -1534,7 +1534,7 @@ patch -Np1 -i ../../extra/elfutils/patches/elfutils-musl-clang.patch
 
 # Configure source.
 CFLAGS="-Wno-error -Wno-null-dereference -DFNM_EXTMATCH=0 -flto=thin $CFLAGS" \
-CXXFLAGS="-Wno-error $CXXFLAGS"                                               \
+CXXFLAGS="-Wno-error -flto=thin $CXXFLAGS"                                    \
 ./configure --prefix=/usr                                                     \
             --disable-debuginfod                                              \
             --disable-libdebuginfod ac_cv_c99=yes
