@@ -941,9 +941,10 @@ time {
 > **Required!** Before `Kmod` and `Eudev`.
 ```bash
 # Configure source.
-CFLAGS="-flto=thin $CFLAGS"  \
-./configure --prefix=/usr    \
-            --disable-static \
+CFLAGS="-flto=thin $CFLAGS"        \
+./configure --prefix=/usr          \
+            --enable-threads=posix \
+            --disable-static       \
             --docdir=/usr/share/doc/xz-5.2.5
 
 # Build.
