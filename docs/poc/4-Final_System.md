@@ -1019,8 +1019,9 @@ install -vm755 -t /usr/bin/ {,un}pigz g{,un}zip
 > **Required!** Before `Kmod`.
 ```bash
 # Configure source.
-CFLAGS="-flto=thin $CFLAGS" \
-./configure --prefix=/usr   \
+CFLAGS="-flto=thin $CFLAGS"   \
+./configure --prefix=/usr     \
+            --sysconfdir=/etc \
             --disable-static
 
 # Build.
