@@ -1537,6 +1537,9 @@ rm -fv /usr/lib/libobstack.a
 # Apply patch to allow build with Clang under musl libc.
 patch -Np1 -i ../../extra/elfutils/patches/elfutils-musl-clang.patch
 
+# Prevent to build static library.
+sed -e '/^lib_LIBRARIES/s:=.*:=:' -e '/^%.os/s:%.o$::' -i lib{asm,dw,elf}/Makefile.in
+
 # Configure source.
 CFLAGS="-Wno-error -Wno-null-dereference -DFNM_EXTMATCH=0 -flto=thin $CFLAGS" \
 CXXFLAGS="-Wno-error -Wl,-z,stack-size=2097152 -flto=thin $CXXFLAGS"          \
