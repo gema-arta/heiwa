@@ -1022,7 +1022,8 @@ install -vm755 -t /usr/bin/ {,un}pigz g{,un}zip
 CFLAGS="-flto=thin $CFLAGS"   \
 ./configure --prefix=/usr     \
             --sysconfdir=/etc \
-            --disable-static
+            --disable-static  \
+            --docdir=/usr/share/doc/pkgconf-1.8.0
 
 # Build.
 time { make; }
