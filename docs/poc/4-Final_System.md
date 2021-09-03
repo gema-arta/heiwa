@@ -1175,7 +1175,7 @@ time { make MANSUFFIX=ssl install; }
 ```
 ```bash
 # Add the version to the documentation directory name, to be consistent with other packages.
-mv -fv /usr/share/doc/openssl /usr/share/doc/openssl-1.1.1l
+mv -fv /usr/share/doc/openssl{,-1.1.1l}
 
 # Optional, install some additional documentation.
 cp -rfv doc/* /usr/share/doc/openssl-1.1.1l/.
