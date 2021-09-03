@@ -1458,13 +1458,12 @@ time { make install; }
 
 > **Required!** Before `Elfutils - libelf`.
 ```bash
-# Apply patches (from Alpine Linux) to some issues.
-patch -Np1 -i ../../extra/argp-standalone/gnu89-inline.patch
+# Apply patch (from Alpine Linux) to remove `__THROW` in function implementation.
 patch -Np1 -i ../../extra/argp-standalone/001-throw-in-funcdef.patch
 
 # Configure source.
-CFLAGS="-fPIC -flto=thin $CFLAGS" \
-./configure --prefix=/usr         \
+CFLAGS="-fPIC -flto=thin $CFLAGS -fgnu89-inline" \
+./configure --prefix=/usr                        \
             --sysconfdir=/etc
 
 # Build.
