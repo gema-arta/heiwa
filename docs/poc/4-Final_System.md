@@ -1262,7 +1262,7 @@ cp -fv doc/{awkforai.txt,*.{eps,pdf,jpg}} /usr/share/doc/gawk-5.1.0/.
 ```
 
 ### `34` - GNU Diffutils
-> #### `3.7` or newer
+> #### `3.8` or newer
 > The GNU Diffutils package contains programs that show the differences between files or directories.
 
 > **Required!**
