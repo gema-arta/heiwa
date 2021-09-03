@@ -1399,7 +1399,7 @@ time {
 }
 ```
 
-### `41` - GNU libtool
+### `40` - GNU libtool
 > #### `2.4.6` or newer
 > The GNU libtool package contains the GNU generic library support script. It wraps the complexity of using shared libraries in a consistent, portable interface.
 
@@ -1417,7 +1417,7 @@ time { make; }
 time { make install; }
 ```
 
-### `42` - GNU Autoconf
+### `41` - GNU Autoconf
 > #### `2.71` or newer
 > The GNU Autoconf package contains programs for producing shell scripts that can automatically configure source code.
 
@@ -1434,7 +1434,7 @@ time { make; }
 time { make install; }
 ```
 
-### `43` - GNU Automake
+### `42` - GNU Automake
 > #### `1.16.4` or newer
 > The GNU Automake package contains programs for generating Makefiles for use with Autoconf.
 
@@ -1452,7 +1452,7 @@ time { make; }
 time { make install; }
 ```
 
-### `44` - argp-standalone
+### `43` - argp-standalone
 > #### `1.3` or newer
 > The argp-standalone package contains hierarchial argument parsing library broken out from GNU libc (glibc).
 
@@ -1476,7 +1476,7 @@ time {
 }
 ```
 
-### `45` - musl-fts
+### `44` - musl-fts
 > #### `1.2.7` or newer
 > The musl-fts package contains implementation of fts(3) for musl libc.
 
@@ -1499,7 +1499,7 @@ time { make; }
 time { make install; }
 ```
 
-### `46` - musl-obstack
+### `45` - musl-obstack
 > #### `1.2.2` or newer
 > The musl-obstack package contains a standalone library to implement GNU libc obstack.
 
@@ -1522,7 +1522,7 @@ time { make; }
 time { make install; }
 ```
 
-### `47` - Elfutils - libelf
+### `46` - Elfutils - libelf
 > #### `0.185` or newer
 > The Elfutils package contains library for handling ELF (Executable and Linkable Format) files.
 
