@@ -1497,6 +1497,10 @@ time { make; }
 # Install.
 time { make install; }
 ```
+```bash
+# Delete useless static library.
+rm -fv /usr/lib/libfts.a
+```
 
 ### `45` - musl-obstack
 > #### `1.2.2` or newer
@@ -1518,6 +1522,10 @@ time { make; }
 
 # Install.
 time { make install; }
+```
+```bash
+# Delete useless static library.
+rm -fv /usr/lib/libobstack.a
 ```
 
 ### `46` - Elfutils - libelf
