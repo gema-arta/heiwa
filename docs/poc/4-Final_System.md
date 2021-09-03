@@ -896,7 +896,7 @@ grep -oE "\-L/usr/lib|\-L/lib" dummy.log
 popd
 ```
 
-### `22` - Bzip2
+### `21` - Bzip2
 > #### `1.0.8` or newer
 > The Bzip2 package contains programs for compressing and decompressing files. Compressing text files with bzip2 yields a much better compression percentage than with the traditional gzip.
 
@@ -934,7 +934,7 @@ time {
 }
 ```
 
-### `23` -  Xz
+### `22` -  Xz
 > #### `5.2.5`
 > The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
 
@@ -953,7 +953,7 @@ time { make; }
 time { make install; }
 ```
 
-### `24` - LZ4
+### `23` - LZ4
 > #### `1.9.3` or newer
 > The LZ4 package contains library for lossless compression algorithm, providing compression speed > 500 MB/s per core, scalable with multi-cores CPU. It features an extremely fast decoder, with speed in multiple GB/s per core, typically reaching RAM speed limits on multi-core systems.
 
@@ -971,7 +971,7 @@ time { make -C build; }
 time { make -C build install; }
 ```
 
-### `25` - Zstd
+### `24` - Zstd
 > #### `1.5.0` or newer
 > The Zstd (Zstandard) package contains real-time compression algorithm, providing high compression ratios. It offers a very wide range of compression / speed trade-offs, while being backed by a very fast decoder.
 
@@ -994,7 +994,7 @@ time {
 rm -fv /usr/lib/libzstd.a
 ```
 
-### `26` - Pigz
+### `25` - Pigz
 > #### `2.6` or newer
 > The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
 
@@ -1011,7 +1011,7 @@ ln -sfv pigz gzip; ln -sfv unpigz gunzip
 install -vm755 -t /usr/bin/ pigz unpigz gzip gunzip
 ```
 
-### `27` - Pkgconf
+### `26` - Pkgconf
 > #### `1.8.0` or newer
 > The Pkgconf package contains a tool for passing the include path and/or library paths to build tools during the configure and make phases of package installations.
 
@@ -1036,7 +1036,7 @@ time {
 }
 ```
 
-### `28` - Gettext-tiny
+### `27` - Gettext-tiny
 > #### `0.3.2` or newer
 > The Gettext-tiny package contains utilities for internationalization and localization. These allow programs to be compiled with NLS (Native Language Support), enabling them to output messages in the user's native language. A lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
 
@@ -1057,7 +1057,7 @@ time { make LIBINTL=MUSL CFLAGS="-flto=thin $CFLAGS" prefix=/usr; }
 time { make LIBINTL=MUSL prefix=/usr install; }
 ```
 
-### `29` - GNU Bison
+### `28` - GNU Bison
 > #### `3.7.6` or newer
 > The GNU Bison package contains a parser generator.
 
@@ -1081,7 +1081,7 @@ time { make install; }
 rm -fv /usr/lib/liby.a
 ```
 
-### `30`- GDBM
+### `29`- GDBM
 > #### `1.20` or newer
 > The GDBM package contains the GNU Database Manager. It is a library of database functions that use extensible hashing and works similar to the standard UNIX dbm. The library provides primitives for storing key/data pairs, searching and retrieving the data by its key and deleting a key along with its data.
 
@@ -1100,7 +1100,7 @@ time { make; }
 time { make install; }
 ```
 
-### `31` - Perl
+### `30` - Perl
 > #### `5.34.0` or newer
 > The Perl package contains the Practical Extraction and Report Language.
 
@@ -1153,7 +1153,7 @@ time {
 }
 ```
 
-### `32` - OpenSSL
+### `31` - OpenSSL
 > #### `1.1.1k` or newer
 > The OpenSSL package contains management tools and libraries relating to cryptography. These are useful for providing cryptographic functions to other packages, such as OpenSSH, email applications, and web browsers (for accessing HTTPS sites).
 
@@ -1187,7 +1187,7 @@ mv -fv /usr/share/doc/openssl /usr/share/doc/openssl-1.1.1k
 cp -rfv doc/* /usr/share/doc/openssl-1.1.1k/.
 ```
 
-### `33` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man, Psmisc, Sed, Sysklogd, Tar)
+### `32` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man, Psmisc, Sed, Sysklogd, Tar)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
@@ -1237,7 +1237,7 @@ time { make CFLAGS="-flto=thin $CFLAGS" V=1; }
 time { make PREFIX=/ install; unset X TOYBOX; }
 ```
 
-### `34` - GNU AWK
+### `33` - GNU AWK
 > #### `5.1.0` or newer
 > The GNU AWK (gawk) package contains programs for manipulating text files.
 
@@ -1267,7 +1267,7 @@ mkdir -pv /usr/share/doc/gawk-5.1.0 && \
 cp -fv doc/{awkforai.txt,*.{eps,pdf,jpg}} /usr/share/doc/gawk-5.1.0/.
 ```
 
-### `35` - GNU Diffutils
+### `34` - GNU Diffutils
 > #### `3.7` or newer
 > The GNU Diffutils package contains programs that show the differences between files or directories.
 
@@ -1287,7 +1287,7 @@ time { make; }
 time { make install; }
 ```
 
-### `36` - GNU Make
+### `35` - GNU Make
 > #### `4.3` or newer
 > The GNU Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
  
@@ -1305,7 +1305,7 @@ time { make; }
 time { make install; }
 ```
 
-### `37` - GNU Patch
+### `35` - GNU Patch
 > #### `2.7.6` or newer
 > The GNU Patch package contains a program for modifying or creating files by applying a patch file typically created by the diff program.
 
@@ -1324,7 +1324,7 @@ time { make; }
 time { make install; }
 ```
 
-### `38` - GNU Texinfo
+### `37` - GNU Texinfo
 > #### `6.8` or newer
 > The Texinfo package contains programs for reading, writing, and converting info pages.
 
@@ -1347,7 +1347,7 @@ time { make; }
 time { make install; }
 ```
 
-### `39` - GNU Bash
+### `38` - GNU Bash
 > #### `5.1` (with patch level 8) or newer
 > The GNU Bash package contains the Bourne-Again SHell.
 
@@ -1374,7 +1374,7 @@ time {
 }
 ```
 
-### `40` - Kmod
+### `39` - Kmod
 > #### `29` or newer
 > The Kmod package contains libraries and utilities for loading kernel modules
 
