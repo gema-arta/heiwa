@@ -1470,7 +1470,7 @@ CFLAGS="-fPIC -flto=thin $CFLAGS -fgnu89-inline" \
 time { make; }
 
 # Install.
-install -vm644 -t /usr/include/ argp.h
+time { install -vm644 -t /usr/include/ argp.h; }
 ```
 
 ### `45` - musl-fts
