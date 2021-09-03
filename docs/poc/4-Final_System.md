@@ -906,7 +906,7 @@ popd
 patch -Np1 -i ../../extra/bzip2/patches/install_docs-1.patch
 patch -Np1 -i ../../extra/bzip2/patches/soname.patch
 
-# Fix the makefile to ensures installation of symlinks are relative and the man pages are installed into correct location.
+# Ensure installation of symlinks are relative and the manpages are installed into correct location.
 # Also prevent to install static library.
 sed -e 's|(PREFIX)/man|(PREFIX)/share/man|g'   \
     -e 's|\(ln -s -f \)$(PREFIX)/bin/|\1|'     \
