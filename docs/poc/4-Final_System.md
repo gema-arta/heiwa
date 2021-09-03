@@ -1009,7 +1009,7 @@ time { make CC=${CC} CFLAGS="-flto=thin $CFLAGS"; }
 
 # Install and create symlinks as `gzip` tools.
 ln -sfv pigz gzip; ln -sfv unpigz gunzip
-install -vm755 -t /usr/bin/ pigz unpigz gzip gunzip
+install -vm755 -t /usr/bin/ {,un}pigz g{,un}zip
 ```
 
 ### `26` - Pkgconf
