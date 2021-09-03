@@ -1505,14 +1505,13 @@ time { make install; }
 > **Required!** Before `Elfutils - libelf`.
 ```bash
 # Prepare.
-sed -i '/pkgconfig_DATA/i pkgconfigdir=/usr/lib/pkgconfig' Makefile.am
+sed -i '/pkgconfig_DATA/i pkgconfigdir=$(libdir)/pkgconfig' Makefile.am
 ./bootstrap.sh
 
 # Configure source.
 CFLAGS="-fPIC -flto=thin $CFLAGS" \
-./configure --prefix=/usr     \
-            --sysconfdir=/etc \
-            --localstatedir=/var
+./configure --prefix=/usr         \
+            --sysconfdir=/etc
 
 # Build.
 time { make; }
