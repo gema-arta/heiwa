@@ -876,12 +876,13 @@ grep --color=auto "ld.lld:.*crt[1in].o" dummy.log
 # |ld.lld: /usr/bin/../lib/crtn.o
 
 # Check the headers path.
-grep --color=auto -B1 "^ /usr/include" dummy.log
+grep --color=auto -A1 -B1 "^ /usr/include" dummy.log
 
 # | The output should be:
 # |-----------------------
 # |#include <...> search starts here:
 # | /usr/include
+# | /usr/lib/clang/12.0.1/include
 
 # Check the dynamic linker libraries path.
 grep -oE "\-L/usr/lib|\-L/lib" dummy.log
