@@ -1665,6 +1665,7 @@ CFLAGS="-D_DIRENT_HAVE_D_TYPE -flto=thin $CFLAGS"     \
             --docdir=/usr/share/doc/util-linux-2.37.2 \
             --disable-chfn-chsh                       \
             --disable-login                           \
+            --disable-newgrp                          \
             --disable-nologin                         \
             --disable-su                              \
             --disable-setpriv                         \
