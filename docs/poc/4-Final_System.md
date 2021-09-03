@@ -1458,7 +1458,7 @@ time { make install; }
 
 > **Required!** Before `Elfutils - libelf`.
 ```bash
-# Apply patch (from Alpine Linux) to some issues.
+# Apply patches (from Alpine Linux) to some issues.
 patch -Np1 -i ../../extra/argp-standalone/gnu89-inline.patch
 patch -Np1 -i ../../extra/argp-standalone/001-throw-in-funcdef.patch
 
