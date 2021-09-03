@@ -1488,9 +1488,8 @@ sed -i '/pkgconfig_DATA/i pkgconfigdir=/usr/lib/pkgconfig' Makefile.am
 
 # Configure source.
 CFLAGS="-fPIC -flto=thin $CFLAGS" \
-./configure --prefix=/usr     \
-            --sysconfdir=/etc \
-            --localstatedir=/var
+./configure --prefix=/usr         \
+            --sysconfdir=/etc
 
 # Build.
 time { make; }
