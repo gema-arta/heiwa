@@ -1141,7 +1141,7 @@ HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE" ./Configure -des    \
 # Build. Fails with LTO since v5.28. This will display a lot of compiler warnings.
 time { make; }
 
-# Install and unset Perl-specific exported variables.
+# Install and unset Perl specific exported variables.
 time {
     make install
     unset BUILD_BZIP2 BUILD_ZLIB BZIP2_LIB ZLIB_LIB BZIP2_INCLUDE ZLIB_INCLUDE
