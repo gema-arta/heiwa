@@ -1621,7 +1621,7 @@ popd
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS" \
 ./configure --prefix=/usr   \
-            --disable-vlock
+            --disable-{static,vlock}
 
 # Build.
 time { make; }
