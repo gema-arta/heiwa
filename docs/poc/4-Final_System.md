@@ -1105,7 +1105,7 @@ time { make install; }
 BUILD_BZIP2=0 BUILD_ZLIB=False
 BZIP2_LIB="/usr/lib" ZLIB_LIB="/usr/lib"
 BZIP2_INCLUDE="/usr/include" ZLIB_INCLUDE="/usr/include"
-export BUILD_BZIP2 BUILD_ZLIB BZIP2_LIB ZLIB_LIB BZIP2_INCLUDE ZLIB_INCLUDE
+export BUILD_{BZIP2,ZLIB} {BZIP2,ZLIB}_{LIB,INCLUDE}
 
 # Configure source.
 HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE" ./Configure -des    \
@@ -1142,10 +1142,7 @@ HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE" ./Configure -des    \
 time { make; }
 
 # Install and unset Perl specific exported variables.
-time {
-    make install && \
-    unset BUILD_BZIP2 BUILD_ZLIB BZIP2_LIB ZLIB_LIB BZIP2_INCLUDE ZLIB_INCLUDE
-}
+time { make install && unset BUILD_{BZIP2,ZLIB} {BZIP2,ZLIB}_{LIB,INCLUDE}; }
 ```
 
 ### `31` - OpenSSL
