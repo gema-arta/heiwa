@@ -1101,7 +1101,7 @@ time { make install; }
 
 > **Required!** Before `OpenSSL` and `GNU Autoconf`.
 ```bash
-# Ensure to build with Perl with the libraries installed on the system.
+# Ensure to build Perl with libraries installed on the system.
 BUILD_BZIP2=0 BUILD_ZLIB=False
 BZIP2_LIB="/usr/lib" ZLIB_LIB="/usr/lib"
 BZIP2_INCLUDE="/usr/include" ZLIB_INCLUDE="/usr/include"
