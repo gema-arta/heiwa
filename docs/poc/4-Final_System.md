@@ -1143,7 +1143,7 @@ time { make; }
 
 # Install and unset Perl specific exported variables.
 time {
-    make install
+    make install && \
     unset BUILD_BZIP2 BUILD_ZLIB BZIP2_LIB ZLIB_LIB BZIP2_INCLUDE ZLIB_INCLUDE
 }
 ```
