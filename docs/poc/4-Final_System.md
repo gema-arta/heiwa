@@ -1148,7 +1148,7 @@ time { make install; }
 ```
 
 ### `31` - OpenSSL
-> #### `1.1.1k` or newer
+> #### `1.1.1l` or newer
 > The OpenSSL package contains management tools and libraries relating to cryptography. These are useful for providing cryptographic functions to other packages, such as OpenSSH, email applications, and web browsers (for accessing HTTPS sites).
 
 > **Required!** Before `Toybox` and `Kmod`.
@@ -1175,10 +1175,10 @@ time { make MANSUFFIX=ssl install; }
 ```
 ```bash
 # Add the version to the documentation directory name, to be consistent with other packages.
-mv -fv /usr/share/doc/openssl /usr/share/doc/openssl-1.1.1k
+mv -fv /usr/share/doc/openssl /usr/share/doc/openssl-1.1.1l
 
 # Optional, install some additional documentation.
-cp -rfv doc/* /usr/share/doc/openssl-1.1.1k/.
+cp -rfv doc/* /usr/share/doc/openssl-1.1.1l/.
 ```
 
 ### `32` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man, Psmisc, Sed, Sysklogd, Tar)
