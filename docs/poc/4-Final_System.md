@@ -1578,6 +1578,11 @@ time { make CC=${CC} CCOPTS="-D_GNU_SOURCE" V=1; }
 # Install.
 time { make install; }
 ```
+```bash
+# Optional, install some additional documentation.
+mkdir -pv /usr/share/doc/iproute2-5.13.0 && \
+cp -fv COPYING README* /usr/share/doc/iproute2-5.13.0
+```
 
 ### `48` - KBD
 > #### `2.4.0` or newer
