@@ -1538,7 +1538,8 @@ rm -fv /usr/lib/libobstack.a
 patch -Np1 -i ../../extra/elfutils/patches/elfutils-musl-clang.patch
 
 # Prevent to build static library.
-sed -e '/^lib_LIBRARIES/s:=.*:=:' -e '/^%.os/s:%.o$::' -i lib{asm,dw,elf}/Makefile.in
+sed -e '/^lib_LIBRARIES/s:=.*:=:' \
+    -e '/^%.os/s:%.o$::' -i lib{asm,dw,elf}/Makefile.in
 
 # Configure source.
 CFLAGS="-Wno-error -Wno-null-dereference -DFNM_EXTMATCH=0 -flto=thin $CFLAGS" \
