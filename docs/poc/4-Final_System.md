@@ -1878,7 +1878,8 @@ time { make install; }
             --with-rootlibexecdir=/lib/udev \
             --enable-manpages               \
             --enable-hwdb                   \
-            --disable-static
+            --disable-static                \
+            --disable-introspection
 
 # Build.
 time { make; }
