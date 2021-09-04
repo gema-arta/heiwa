@@ -1871,9 +1871,6 @@ time { make install; }
 
 > **Required!**
 ```bash
-# Generate configure script.
-autoreconf -fvi
-
 # Configure source.
 ./configure --prefix=/usr                   \
             --bindir=/sbin                  \
