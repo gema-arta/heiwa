@@ -337,16 +337,17 @@ grep --color=auto "ld.lld:.*crt[1in].o" dummy.log
 # |ld.lld: /usr/lib/crtn.o
 
 # Check the headers path.
-grep --color=auto -A1 -B1 "^ /usr/include" dummy.log
+grep --color=auto -A2 -B1 "^ /usr/include" dummy.log
 
 # | The output should be:
 # |-----------------------
 # |#include <...> search starts here:
 # | /usr/include
 # | /clang1-tools/lib/clang/12.0.1/include
+# |End of search list.
 
 # Check the dynamic linker libraries path.
-grep -oE "\-L/usr/lib|\-L/lib" dummy.log
+grep -oE "\-L/(usr/|/)lib" dummy.log
 
 # | The output should be:
 # |-----------------------
@@ -873,16 +874,17 @@ grep --color=auto "ld.lld:.*crt[1in].o" dummy.log
 # |ld.lld: /usr/bin/../lib/crtn.o
 
 # Check the headers path.
-grep --color=auto -A1 -B1 "^ /usr/include" dummy.log
+grep --color=auto -A2 -B1 "^ /usr/include" dummy.log
 
 # | The output should be:
 # |-----------------------
 # |#include <...> search starts here:
 # | /usr/include
 # | /usr/lib/clang/12.0.1/include
+# |End of search list.
 
 # Check the dynamic linker libraries path.
-grep -oE "\-L/usr/lib|\-L/lib" dummy.log
+grep -oE "\-L/(usr/|/)lib" dummy.log
 
 # | The output should be:
 # |-----------------------
