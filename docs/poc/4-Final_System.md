@@ -1367,7 +1367,7 @@ CFLAGS="-flto=thin $CFLAGS"           \
 # Build.
 time { make; }
 
-# Install and move the `bash` binary to correct place.
+# Install and move the `bash` binary into correct place.
 time {
     make install
     mv -fv /usr/bin/bash /bin/.
@@ -1475,7 +1475,7 @@ CFLAGS="-fPIC -flto=thin $CFLAGS -fgnu89-inline" \
 # Build.
 time { make; }
 
-# Install.
+# Install the header and static library.
 time {
     install -vm644 -t /usr/include/ argp.h
     install -vm755 -t /usr/lib/  libargp.a
@@ -1551,7 +1551,9 @@ sed -e '/^lib_LIBRARIES/s:=.*:=:' \
 CFLAGS="-Wno-error -Wno-null-dereference -DFNM_EXTMATCH=0 -flto=thin $CFLAGS" \
 CXXFLAGS="-Wno-error -Wl,-z,stack-size=2097152 -flto=thin $CXXFLAGS"          \
 ./configure --prefix=/usr                                                     \
-            --disable-{{,lib}debuginfod,werror} ac_cv_c99=yes
+            --disable-debuginfod                                              \
+            --disable-libdebuginfod                                           \
+            --disable-werror ac_cv_c99=yes
 
 # Only build `libelf`.
 time { make -C lib && make -C libelf; }
@@ -1587,7 +1589,7 @@ time { make install; }
 ```bash
 # Optional, install some additional documentation.
 mkdir -pv /usr/share/doc/iproute2-5.13.0 && \
-cp -fv COPYING README* /usr/share/doc/iproute2-5.13.0
+install -vm644 -t /usr/share/doc/iproute2-5.13.0/ COPYING README*
 ```
 
 ### `48` - KBD
@@ -1658,7 +1660,7 @@ sed -i 's|ncursesw/ncurses.h|ncurses.h|g' watch.c
 sed -i '1i#include <utmp.h>'              w.c
 sed -i '1i#include <langinfo.h>'          proc/escape.c
 
-# Configure source. watch8bit disabled since fails with netbsd-curses.
+# Configure source. `watch8bit` disabled since fails with netbsd-curses.
 CFLAGS="-flto=thin $CFLAGS"       \
 ./configure --prefix=/usr         \
             --disable-static      \
@@ -1733,7 +1735,7 @@ CFLAGS="-flto=thin $CFLAGS"         \
 # Build.
 time { make; }
 
-# Install and move the misplaced binary to correct place.
+# Install and move the misplaced binary into correct place.
 time {
     make MKDIR_P="install -d" install
     for B in e2fsck mke2fs {mkfs,fsck}.ext*; do
