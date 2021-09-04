@@ -1784,7 +1784,8 @@ time { make install; }
 > **Required!** Before `Finit`.
 ```bash
 # Configure source.
-./configure --prefix=/usr \
+CFLAGS="-flto=thin $CFLAGS" \
+./configure --prefix=/usr   \
             --disable-static
 
 # Build.
