@@ -1646,11 +1646,10 @@ cp -rfv docs/doc/* /usr/share/doc/kbd-2.4.0
 
 > **Required!**
 ```bash
-# Configure source.
+# Configure source. watch8bit fails since using netbsd-curses.
 CFLAGS="-flto=thin $CFLAGS"                \
 ./configure --prefix=/usr                  \
             --disable-static               \
-            --enable-watch8bit             \
             --enable-wide-{percent,memory} \
             --docdir=/usr/share/doc/procps-ng-3.3.17
 
