@@ -1848,7 +1848,7 @@ time { make; }
 time { make install; }
 ```
 
-### `53` - GNU perf
+### `56` - GNU perf
 > The GNU perf (gperf) package contains utility that generates a perfect hash function from a key set.
 > #### `3.1` or newer
 
@@ -1867,7 +1867,7 @@ time { make; }
 time { make install; }
 ```
 
-### `54` - Eudev
+### `57` - Eudev
 > #### `3.2.10` or newer
 > The Eudev package contains programs for dynamic creation of device nodes.
 
@@ -1901,7 +1901,7 @@ time { make install; }
 udevadm hwdb --update
 ```
 
-### `55` - Cmake
+### `58` - Cmake
 > #### `3.20.5` or newer
 > The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
 
@@ -1927,7 +1927,7 @@ time { make; }
 time { make install; }
 ```
 
-### `56` - cpio
+### `59` - cpio
 > #### `2.13` or newer
 > The cpio package contains tools for archiving.
 
@@ -1949,7 +1949,7 @@ time { make; }
 time { make install; }
 ```
 
-### `57` - Python3
+### `60` - Python3
 > #### `3.9.6` or newer
 > The Python3 package contains the Python development environment. It is useful for object-oriented programming, writing scripts, prototyping large programs, or developing entire applications.
 
@@ -1977,7 +1977,7 @@ time { make; }
 time { make install; }
 ```
 
-### `58` - GNU Nano
+### `61` - GNU Nano
 > #### `5.8` or newer
 > The Nano package contains a small, simple text editor which aims to replace Pico, the default editor in the Pine package.
 
@@ -1996,7 +1996,7 @@ time { make; }
 time { make install; }
 ```
 
-### `59` - Cleaning Up
+### `62` - Cleaning Up
 > #### This section is optional!
 
 > If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
