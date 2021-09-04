@@ -1960,7 +1960,7 @@ time { make install; }
 # Apply patch (from Void Linux) to allow compile under musl libc.
 patch -Np1 -i ../../extra/python3/patches/musl-find_library.patch
 
-# Use ThinLTO rather than Full LTO to speedup build.
+# Use ThinLTO rather than FullLTO to speedup build.
 sed -i 's|-flto|-flto=thin|' configure
 
 # Configure source using provided libraries (built-in).
