@@ -1876,7 +1876,6 @@ time { make install; }
             --bindir=/bin                   \
             --sysconfdir=/etc               \
             --with-rootlibexecdir=/lib/udev \
-            --enable-manpages               \
             --enable-hwdb                   \
             --disable-static                \
             --disable-introspection
