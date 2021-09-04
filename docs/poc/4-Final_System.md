@@ -8,7 +8,7 @@
 
 > When the kernel boots the system, it requires the presence of a few device nodes, in particular the console and null devices. The device nodes must be created on the hard disk so that they are available before the kernel populates "/dev", and additionally when Linux is started with "init=/bin/bash". Read the documentation about [Linux device nodes](https://kernel.org/doc/Documentation/admin-guide/devices.txt).
 ```bash
-# Create directories for the next step (Populating VKFS) and initial device nodes.
+# Create directories for populating VKFS and create initial device nodes (static).
 if [[ -n "$HEIWA" ]]; then
     mkdir -pv ${HEIWA}/{dev,proc,sys,run,tmp} && \
     mknod -m 600 ${HEIWA}/dev/console c 5 1   && \
