@@ -1646,7 +1646,7 @@ cp -rfv docs/doc/* /usr/share/doc/kbd-2.4.0
 
 > **Required!**
 ```bash
-# Fix some issues.
+# Fix some issues in musl libc.
 sed -i 's|ncursesw/ncurses.h|ncurses.h|g' watch.c
 sed -i '1i#include <utmp.h>' w.c
 sed -i '1i#include <langinfo.h>' proc/escape.c
