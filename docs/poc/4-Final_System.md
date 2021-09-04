@@ -1819,6 +1819,7 @@ CFLAGS="-flto=thin $CFLAGS"              \
             --enable-alsa-utils-plugin   \
             --enable-modules-load-plugin \
             --enable-resolvconf-plugin   \
+            --enable-x11-common-plugin   \
             --with-keventd               \
             --with-watchdog
 ```
