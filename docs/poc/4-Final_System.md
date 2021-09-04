@@ -1811,6 +1811,16 @@ time { make install; }
 
 > **Required!**
 ```bash
+# Configure source.
+CFLAGS="-flto=thin $CFLAGS"              \
+./configure --prefix=/usr                \
+            --sysconfdir=/etc            \
+            --enable-dbus-plugin         \
+            --enable-alsa-utils-plugin   \
+            --enable-modules-load-plugin \
+            --enable-resolvconf-plugin   \
+            --with-keventd               \
+            --with-watchdog
 ```
 
 ### `53` - GNU perf
