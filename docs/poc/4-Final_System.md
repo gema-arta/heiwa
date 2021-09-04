@@ -1170,7 +1170,7 @@ time { make install; }
     -DOPENSSL_NO_BUF_FREELISTS  \
     -fno-strict-aliasing
 
-# Prevent from installing static libraries.
+# Prevent static libraries from being installed.
 sed -i '/INSTALL_LIBS=libcrypto.a libssl.a/d' Makefile
 
 # Build. Fails with LTO.
