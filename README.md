@@ -28,7 +28,7 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 > |  ✓  | Curses (terminal control) library                  | NetBSD Curses      | Smaller than GNU Ncurses.      |
 > |  ✓  | Command-line interpreter or shell                  | GNU Bash           | Best implementation.           |
 > |  ✓  | Line-editing and history-capabilities library      | GNU Readline       | Best implementation.           |
-> |  ✓  | Deflate or inflate algorithm compression library   | Zlib-ng            | Optimized and next generation. |
+> |  ✓  | Deflate or inflate algorithm compression library   | Zlib-ng            | Optimized for NGS.             |
 > |  ✓  | Unified interface for querying installed libraries | Pkgconf            | No circular dependencies.      |
 > |  ✓  | Gzip data compressor and decompressor              | Pigz               | Parallel threads support.      |
 > |  ✓  | Most userspace utility programs                    | Toybox             | Small, fast, and simple.       |
@@ -67,7 +67,7 @@ See [docs](./docs). Go [discussions](https://github.com/heiwalinux/heiwa/discuss
 
 ##  
 <pre><samp>
-Copyright © 2021 owl4ce
+owl4ce © 2021
 
 The registered trademark Linux® is used pursuant to a sublicense from the
 Linux Foundation, the exclusive licensee of Linus Torvalds, owner of the mark
