@@ -18,7 +18,7 @@ mkfs.ext4 -m 0 -L "Heiwa.Linux" /dev/sdxY
 mkfs.f2fs -l "Heiwa.Linux" -O extra_attr,inode_checksum,sb_checksum,compression,encrypt /dev/sdxY
 ```
 ```bash
-# Export the mount point variable and create the directory if not exist. Why "/media"? Detected in the file manager via GVFS.
+# Export the mount point variable and create the directory if not exist. Why "/media"? It can be detected via GVFS.
 export HEIWA="/media/Heiwa"
 mkdir -pv "$HEIWA"
 ```
