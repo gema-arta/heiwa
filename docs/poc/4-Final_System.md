@@ -1783,6 +1783,15 @@ time { make install; }
 
 > **Required!** Before `Finit`.
 ```bash
+# Configure source.
+./configure --prefix=/usr \
+            --disable-static
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
 ```
 
 ### `55` - Finit
