@@ -1771,7 +1771,7 @@ time { make install; }
 
 ### `53` - Finit
 > #### `4.1` or newer
-> Finit is fast init for Linux systems. Reverse engineered from the EeePC fastinit over ten years ago by Claudio Matsuoka — "gaps filled with frog DNA …"
+> Fast init for Linux systems. Reverse engineered from the EeePC fastinit over ten years ago by Claudio Matsuoka — "gaps filled with frog DNA …"
 
 > **Required!**
 ```bash
