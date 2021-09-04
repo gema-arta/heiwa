@@ -1717,7 +1717,6 @@ CFLAGS="-flto=thin $CFLAGS"      \
              --disable-libuuid   \
              --disable-uuidd     \ 
              --disable-fsck      \
-             --enable-pthread    \
              --enable-elf-shlibs \
              --enable-symlink-install
              
