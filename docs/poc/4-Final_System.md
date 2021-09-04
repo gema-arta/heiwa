@@ -1720,7 +1720,6 @@ CFLAGS="-flto=thin $CFLAGS"         \
              --enable-elf-shlibs    \
              --enable-symlink-build \
              --enable-symlink-install
-             
 
 # Build.
 time { make; }
