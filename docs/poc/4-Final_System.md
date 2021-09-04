@@ -295,7 +295,7 @@ source                                                     ~/.bash_profile
 ```
 
 <!--
-### `8` - Microsoft mimalloc
+### `X` - Microsoft mimalloc
 > #### `2.0.2` or newer
 > The Microsoft mimalloc package contains a compact general purpose allocator with excellent performance.
 
@@ -321,6 +321,7 @@ printf '\n%s\n' 'export MIMALLOC_LARGE_OS_PAGES=1' >> ~/.bash_profile
 source                                                ~/.bash_profile
 ```
 -->
+
 ```bash
 # Quick test for the new triplet of Stage-1 Clang/LLVM.
 echo "int main(){}" > dummy.c
@@ -671,7 +672,7 @@ pwconv; grpconv
 ```
 
 <!--
-### `20` - libexecinfo
+### `X` - libexecinfo
 > #### `1.1` or newer (from Heiwa/Linux fork)
 > The libexecinfo package contains backtrace facility that usually found in GNU libc (glibc).
 
