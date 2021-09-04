@@ -1815,6 +1815,7 @@ time { make install; }
 CFLAGS="-flto=thin $CFLAGS"              \
 ./configure --prefix=/usr                \
             --sysconfdir=/etc            \
+            --localstatedir=/var         \
             --enable-dbus-plugin         \
             --enable-alsa-utils-plugin   \
             --enable-modules-load-plugin \
