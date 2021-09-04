@@ -1671,23 +1671,23 @@ time { make install; }
 sed -i 's|, 0, 0|, 0, 0, 0, 0, 0, 0, 0, 0, 0|' text-utils/more.c
 
 # Configure source. musl needs `-D_DIRENT_HAVE_D_TYPE` for switch_root(8).
-CFLAGS="-D_DIRENT_HAVE_D_TYPE -flto=thin $CFLAGS"     \
-./configure ADJTIME_PATH=/var/lib/hwclock/adjtime     \
-            --libdir=/usr/lib                         \
-            --docdir=/usr/share/doc/util-linux-2.37.2 \
-            --disable-chfn-chsh                       \
-            --disable-login                           \
-            --disable-newgrp                          \
-            --disable-nologin                         \
-            --disable-su                              \
-            --disable-setpriv                         \
-            --disable-runuser                         \
-            --disable-pylibmount                      \
-            --disable-static                          \
-            --without-python                          \
-            --without-systemd                         \
-            --without-systemdsystemunitdir            \
-            runstatedir=/run
+CFLAGS="-D_DIRENT_HAVE_D_TYPE -flto=thin $CFLAGS" \
+./configure ADJTIME_PATH=/var/lib/hwclock/adjtime \
+            --libdir=/usr/lib                     \
+            --disable-chfn-chsh                   \
+            --disable-login                       \
+            --disable-newgrp                      \
+            --disable-nologin                     \
+            --disable-su                          \
+            --disable-setpriv                     \
+            --disable-runuser                     \
+            --disable-pylibmount                  \
+            --disable-static                      \
+            --without-python                      \
+            --without-systemd                     \
+            --without-systemdsystemunitdir        \
+            runstatedir=/run                      \
+            --docdir=/usr/share/doc/util-linux-2.37.2
 
 # Build.
 time { make; }
