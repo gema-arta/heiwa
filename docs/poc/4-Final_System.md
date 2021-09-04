@@ -1769,7 +1769,23 @@ time { make; }
 time { make install; }
 ```
 
-### `53` - Finit
+### `53` - libuev
+> #### `2.3.2` or newer
+> The libuev package contains lightweight event loop library for Linux epoll() family APIs.
+
+> **Required!** Before `Finit`.
+```bash
+```
+
+### `54` - libite
+> #### `2.4.0` or newer
+> The libite package contains lightweight library of frog DNA that can be used to fill the gaps in any dinosaur project. It holds useful functions and macros developed by both Finit and the OpenBSD project.
+
+> **Required!** Before `Finit`.
+```bash
+```
+
+### `55` - Finit
 > #### `4.1` or newer
 > Fast init for Linux systems. Reverse engineered from the EeePC fastinit over ten years ago by Claudio Matsuoka — "gaps filled with frog DNA …"
 
