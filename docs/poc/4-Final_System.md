@@ -1675,18 +1675,19 @@ CFLAGS="-D_DIRENT_HAVE_D_TYPE -flto=thin $CFLAGS" \
 ./configure ADJTIME_PATH=/var/lib/hwclock/adjtime \
             --libdir=/usr/lib                     \
             --disable-chfn-chsh                   \
-            --disable-kill                        \
             --disable-login                       \
             --disable-newgrp                      \
             --disable-nologin                     \
-            --disable-su                          \
-            --disable-setpriv                     \
-            --disable-runuser                     \
             --disable-pylibmount                  \
+            --disable-vipw                        \
+            --disable-setpriv                     \
+            --disable-hardlink                    \
+            --disable-kill                        \
+            --disable-su                          \
+            --disable-runuser                     \
             --without-python                      \
             --without-systemd                     \
             --without-systemdsystemunitdir        \
-            --disable-hardlink                    \
             --disable-static                      \
             runstatedir=/run                      \
             --docdir=/usr/share/doc/util-linux-2.37.2
