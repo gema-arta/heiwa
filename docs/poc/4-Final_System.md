@@ -2021,7 +2021,7 @@ find /usr/lib -name '*.la' -exec rm -fv {} \;
 # A large number of files will be reported "The file was not recognized as a valid object file".
 # These warnings can be safely ignored. These warnings indicate that those files are scripts instead of binaries.
 find /{,usr/}lib/ -type f \( -name '*.a' -o -name '*.so*' \) -exec llvm-strip --strip-debug {} \;
-/clang1-tools/usr/bin/find /{{,usr/}{,s}bin,libexec}/ -type f -exec /clang1-tools/bin/llvm-strip --strip-unneeded {} \;
+/clang1-tools/usr/bin/find /{,usr/}{,s}bin/ /usr/libexec -type f -exec /clang1-tools/bin/llvm-strip --strip-unneeded {} \;
 ```
 ```bash
 # Cleaning leftover files.
