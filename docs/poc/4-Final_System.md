@@ -1874,7 +1874,7 @@ time { make install; }
 > **Required!**
 ```bash
 # Fix misplaced hwdb dir.
-sed -i 's|=.*/hwdb.d|=${udevlibexecdir}/hwdb.d|' configure
+sed -i '/udevhwdbdir/s/${udevconfdir}|${udevlibexecdir}/' configure
 
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"                 \
