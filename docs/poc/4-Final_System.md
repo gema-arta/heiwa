@@ -1647,8 +1647,10 @@ cp -rfv docs/doc/* /usr/share/doc/kbd-2.4.0
 > **Required!**
 ```bash
 # Configure source.
-./configure --prefix=/usr    \
-            --disable-static \
+CFLAGS="-flto=thin $CFLAGS"    \
+./configure --prefix=/usr      \
+            --enable-watch8bit \
+            --disable-static   \
             --docdir=/usr/share/doc/procps-ng-3.3.17
 
 # Build.
