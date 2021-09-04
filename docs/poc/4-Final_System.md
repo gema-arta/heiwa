@@ -1716,8 +1716,7 @@ mkdir -v build && cd build
              --disable-libblkid  \
              --disable-libuuid   \
              --disable-uuidd     \
-             --disable-fsck      \
-             --disable-rpath
+             --disable-fsck
 
 # Build.
 time { make; }
