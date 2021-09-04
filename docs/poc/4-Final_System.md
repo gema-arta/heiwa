@@ -2025,7 +2025,7 @@ find /{,usr/}lib/ -type f \( -name '*.a' -o -name '*.so*' \) -exec llvm-strip --
 ```
 ```bash
 # Cleaning leftover files.
-rm -rfv /tmp/* ~/.python*
+rm -rfv /tmp/*
 
 # The clang0 and clang1 toolchains is still partially installed and not needed anymore.
 # Now safe to remove "/clang0-tools" and "/clang1-tools" directories as they're not required anymore.
