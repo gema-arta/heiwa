@@ -1814,6 +1814,7 @@ time { make install; }
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"              \
 ./configure --prefix=/usr                \
+            --sbindir=/sbin              \
             --sysconfdir=/etc            \
             --localstatedir=/var         \
             --enable-dbus-plugin         \
