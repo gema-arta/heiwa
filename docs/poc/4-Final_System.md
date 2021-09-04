@@ -1902,7 +1902,7 @@ udevadm hwdb --update
 ```
 
 ### `58` - Cmake
-> #### `3.20.5` or newer
+> #### `3.21.2` or newer
 > The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
 
 > **Optional!** Currently not really required since using Cmake from "/clang1-tools", but useful for future usage.
@@ -1920,7 +1920,7 @@ CXXFLAGS="-flto=thin $CXXFLAGS" \
             --system-zstd       \
             --mandir=/share/man \
             --parallel=$(nproc) \
-            --docdir=/share/doc/cmake-3.20.5
+            --docdir=/share/doc/cmake-3.21.2
 
 # Build.
 time { make; }
