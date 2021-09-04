@@ -1735,12 +1735,18 @@ time {
 
 # This package installs a gzipped .info file but doesn't update the system-wide dir file.
 # Unzip this file and then update the system dir file using the following commands.
-gunzip -v /usr/share/info/libext2fs.info.gz
+gunzip -v /usr/share/info/libext2fs.info.gz && \
 install-info --dir-file=/usr/share/info/dir /usr/share/info/libext2fs.info
 ```
 ```bash
 # Delete useless static library.
 rm -fv /usr/lib/lib{com_err,e2p,ext2fs,ss}.a
+```
+```bash
+# Optional, install some additional documentation.
+install -vm644 -t /usr/share/info/ doc/com_err.info
+makeinfo -o doc/com_err.info ../lib/et/com_err.texinfo && \
+install-info --dir-file=/usr/share/info/dir /usr/share/info/com_err.info
 ```
 
 ### `52` - OpenRC and additional services
