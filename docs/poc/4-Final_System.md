@@ -1822,6 +1822,12 @@ CFLAGS="-flto=thin $CFLAGS"              \
             --enable-x11-common-plugin   \
             --with-keventd               \
             --with-watchdog
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
 ```
 
 ### `53` - GNU perf
