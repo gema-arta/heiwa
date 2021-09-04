@@ -1873,6 +1873,9 @@ time { make install; }
 
 > **Required!**
 ```bash
+# Fix misplaced hwdb dir.
+sed -i 's|=.*/hwdb.d|=${udevlibexecdir}/hwdb.d|' configure
+
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"                 \
 ./configure --prefix=/usr                   \
@@ -1881,8 +1884,7 @@ CFLAGS="-flto=thin $CFLAGS"                 \
             --with-rootlibexecdir=/lib/udev \
             --enable-hwdb                   \
             --disable-static                \
-            --disable-introspection         \
-            udevhwdbdir=/lib/udev/hwdb.d
+            --disable-introspection
 
 # Build.
 time { make; }
