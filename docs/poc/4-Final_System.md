@@ -1744,8 +1744,8 @@ rm -fv /usr/lib/lib{com_err,e2p,ext2fs,ss}.a
 ```
 ```bash
 # Optional, install some additional documentation.
-install -vm644 -t /usr/share/info/ doc/com_err.info
 makeinfo -o doc/com_err.info ../lib/et/com_err.texinfo && \
+install -vm644 -t /usr/share/info/ doc/com_err.info    && \
 install-info --dir-file=/usr/share/info/dir /usr/share/info/com_err.info
 ```
 
