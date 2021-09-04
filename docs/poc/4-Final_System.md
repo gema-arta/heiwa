@@ -1648,10 +1648,11 @@ sed -i '1i#include <utmp.h>' w.c
 sed -i '1i#include <langinfo.h>' proc/escape.c
 
 # Configure source. watch8bit disabled since fails with netbsd-curses.
-CFLAGS="-flto=thin $CFLAGS"                \
-./configure --prefix=/usr                  \
-            --disable-static               \
-            --enable-wide-{percent,memory} \
+CFLAGS="-flto=thin $CFLAGS"       \
+./configure --prefix=/usr         \
+            --disable-static      \
+            --enable-wide-percent \
+            --enable-wide-memory  \
             --docdir=/usr/share/doc/procps-ng-3.3.17
 
 # Build.
