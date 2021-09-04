@@ -1740,7 +1740,7 @@ install-info --dir-file=/usr/share/info/dir /usr/share/info/libext2fs.info
 ```
 ```bash
 # Delete useless static library.
-rm -fv /usr/lib/{libcom_err,libe2p,libext2fs,libss}.a
+rm -fv /usr/lib/lib{com_err,e2p,ext2fs,ss}.a
 ```
 
 ### `52` - OpenRC and additional services
