@@ -67,7 +67,7 @@ See [docs](./docs). Go [discussions](https://github.com/heiwalinux/heiwa/discuss
 
 ##  
 <pre><samp>
-owl4ce © 2021
+<a href="https://github.com/owl4ce">owl4ce</a> © 2021
 
 The registered trademark Linux® is used pursuant to a sublicense from the
 Linux Foundation, the exclusive licensee of Linus Torvalds, owner of the mark
