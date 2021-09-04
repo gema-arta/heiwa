@@ -1776,9 +1776,10 @@ time { make install; }
 > **Required!** Before `Finit`.
 ```bash
 # Configure source.
-CFLAGS="-flto=thin $CFLAGS" \
-./configure --prefix=/usr   \
-            --disable-static
+CFLAGS="-flto=thin $CFLAGS"  \
+./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/libuev-2.3.2
 
 # Build.
 time { make; }
