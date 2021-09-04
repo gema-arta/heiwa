@@ -416,7 +416,7 @@ cp -fv /usr/share/zoneinfo/<xxx> /etc/localtime
 ```
 ```bash
 # Back to "/sources/pkgs" directory.
-popd && rm -rf tzdata; unset timezones
+popd && rm -rf tzdata && unset timezones
 ```
 
 ### `10` - musl-locales
