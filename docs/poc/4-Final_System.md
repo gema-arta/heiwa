@@ -1855,11 +1855,12 @@ time { make install; }
 > **Required!** Before `Eudev`.
 ```bash
 # Configure source.
-./configure --prefix=/usr \
+CFLAGS="-flto=thin $CFLAGS" \
+./configure --prefix=/usr   \
             --docdir=/usr/share/doc/gperf-3.1
 
 # Build.
-time { make CFLAGS="-flto=thin $CFLAGS"; }
+time { make; }
 
 # Install.
 time { make install; }
