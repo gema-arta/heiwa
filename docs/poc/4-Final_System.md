@@ -1880,7 +1880,7 @@ sed -i '/udevhwdbdir/s/${udevconfdir}/${udevlibexecdir}/' configure
 CFLAGS="-flto=thin $CFLAGS"                 \
 ./configure --prefix=/usr                   \
             --bindir=/bin                   \
-            --sbindir=/sbin                 \
+            --sbindir=/bin                  \
             --sysconfdir=/etc               \
             --with-rootlibexecdir=/lib/udev \
             --enable-hwdb                   \
