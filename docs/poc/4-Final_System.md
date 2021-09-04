@@ -81,7 +81,8 @@ ln -sv /clang1-tools/usr/bin/{env,file,install,dd}      /usr/bin/
 ln -sv /clang1-tools/lib/libc++{,abi}.so{,.1}           /usr/lib/
 ln -sv /clang1-tools/lib/libunwind.so{,.1}              /usr/lib/
 ln -sv bash                                             /bin/sh
-
+```
+```bash
 # Historically, Linux maintains a list of the mounted file systems in the file "/etc/mtab".
 # Modern kernels maintain this list internally and exposes it to the user via the "/proc" filesystem.
 # To satisfy utilities that expect the presence of "/etc/mtab", create the following symbolic link.
@@ -97,7 +98,8 @@ daemon:x:2:2:daemon:/dev/null:/bin/false
 messagebus:x:101:101:System user; messagebus:/dev/null:/sbin/nologin
 nobody:x:65534:65534:nobody:/dev/null:/bin/false
 EOF
-
+```
+```bash
 # The actual password for "root" will be set later.
 # Create the "/etc/group" file by running the following command.
 cat > /etc/group << "EOF"
