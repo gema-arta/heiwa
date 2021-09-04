@@ -1682,10 +1682,10 @@ CFLAGS="-D_DIRENT_HAVE_D_TYPE -flto=thin $CFLAGS" \
             --disable-setpriv                     \
             --disable-runuser                     \
             --disable-pylibmount                  \
-            --disable-static                      \
             --without-python                      \
             --without-systemd                     \
             --without-systemdsystemunitdir        \
+            --disable-static                      \
             runstatedir=/run                      \
             --docdir=/usr/share/doc/util-linux-2.37.2
 
