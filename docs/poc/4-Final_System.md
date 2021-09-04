@@ -87,8 +87,8 @@ ln -sv bash                                             /bin/sh
 # To satisfy utilities that expect the presence of "/etc/mtab", create the following symbolic link.
 ln -sv /proc/self/mounts /etc/mtab
 ```
+> In order for user root to be able to login and for the name `root` to be recognized, there must be relevant entries in the "/etc/passwd" and "/etc/group" files.
 ```bash
-# In order for user root to be able to login and for the name `root` to be recognized, there must be relevant entries in the "/etc/passwd" and "/etc/group" files.
 # Create the "/etc/passwd" file by running the following command.
 cat > /etc/passwd << "EOF"
 root:x:0:0:root:/root:/bin/bash
