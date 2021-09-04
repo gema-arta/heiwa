@@ -617,7 +617,7 @@ time { make install; }
 ```
 
 ### `19` - Cmake
-> #### `3.20.5` or newer
+> #### `3.21.2` or newer
 > The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
 
 > **Required!** To build Clang/LLVM and other packages in the next stage (chroot environment).
@@ -631,7 +631,7 @@ CXXFLAGS="-flto=thin $CXXFLAGS"              \
 ./bootstrap --prefix=/clang1-tools           \
             --mandir=/share/man              \
             --parallel=$(nproc)              \
-            --docdir=/share/doc/cmake-3.20.5 \
+            --docdir=/share/doc/cmake-3.21.2 \
             -- -DCMAKE_BUILD_TYPE=Release    \
             -Wno-dev -DCMAKE_USE_OPENSSL=OFF
 
