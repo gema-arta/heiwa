@@ -1640,6 +1640,24 @@ mkdir -pv /usr/share/doc/kbd-2.4.0 && \
 cp -rfv docs/doc/* /usr/share/doc/kbd-2.4.0
 ```
 
+### `49` - Procps-ng
+> #### `3.3.17` or newer
+> The Procps-ng package contains programs for monitoring processes.
+
+> **Required!**
+```bash
+# Configure source.
+./configure --prefix=/usr           \
+            --disable-{static,kill} \
+            --docdir=/usr/share/doc/procps-ng-3.3.17
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
 ### `50` - Util-linux
 > #### `2.37.2` or newer
 > The Util-linux package contains miscellaneous utility programs.
