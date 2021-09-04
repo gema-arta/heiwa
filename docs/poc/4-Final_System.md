@@ -412,7 +412,7 @@ cp -fv /usr/share/zoneinfo/<xxx> /etc/localtime
 
 # | Example command of Asia/Jakarta:
 # |----------------------------------
-# | cp -fv /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
+# | (heiwa chroot) root: /sources/pkgs/tzdata # cp -fv /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 ```
 ```bash
 # Back to "/sources/pkgs" directory.
