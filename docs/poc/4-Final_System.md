@@ -1696,11 +1696,8 @@ CFLAGS="-D_DIRENT_HAVE_D_TYPE -flto=thin $CFLAGS" \
 # Build.
 time { make; }
 
-# Install and fix permissions (add SUID).
-time {
-    make install
-    chmod -v u+s /usr/bin/{newgrp,chsh,chfn}
-}
+# Install.
+time { make install; }
 ```
 
 ### `51` - E2fsprogs
