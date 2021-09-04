@@ -1911,6 +1911,8 @@ udevadm hwdb --update
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
 
 # Configure source using system installed libraries.
+CFLAGS="-flto=thin $CFLAGS"     \
+CXXFLAGS="-flto=thin $CXXFLAGS" \
 ./bootstrap --prefix=/usr       \
             --system-zlib       \
             --system-bzip2      \
