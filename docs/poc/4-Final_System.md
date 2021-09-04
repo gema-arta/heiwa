@@ -1771,7 +1771,7 @@ time { make install; }
 
 ### `53` - libuev
 > #### `2.3.2` or newer
-> The libuev package contains lightweight event loop library for Linux epoll() family APIs.
+> The libuev package contains lightweight event loop library for Linux `epoll()` family APIs.
 
 > **Required!** Before `Finit`.
 ```bash
