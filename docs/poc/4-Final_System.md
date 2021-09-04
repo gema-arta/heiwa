@@ -1710,14 +1710,13 @@ time { make install; }
 ```bash
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build
-../configure --prefix=/usr      \
-             --sysconfdir=/etc  \
-             --disable-libblkid \
-             --disable-libuuid  \
-             --disable-uuidd    \
-             --disable-fsck     \
-             --enable-pthread   \
-             --enable-elf-shlibs
+../configure --prefix=/usr       \
+             --sysconfdir=/etc   \
+             --disable-libblkid  \
+             --disable-libuuid   \
+             --disable-uuidd     \
+             --disable-fsck     
+             --enable-elf-shlibs \
              
 
 # Build.
