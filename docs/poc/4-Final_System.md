@@ -1755,7 +1755,7 @@ install-info --dir-file=/usr/share/info/dir /usr/share/info/com_err.info
 > **Recommended!**
 ```bash
 # Prepare.
-autoreconf -vfi
+./autogen.sh
 
 # Configure source.
 ./configure --prefix=/usr \
