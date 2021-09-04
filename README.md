@@ -25,10 +25,10 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 > |  ✓  | Build system tools                                 | GNU                | Broad-scale compatibility.     |
 > |  ✓  | SSL/TLS implementation                             | OpenSSL            | Full-featured and robust.      |
 > |  ✓  | Native language support                            | Gettext-tiny       | Stub of bloated GNU Gettext.   |
+> |  ✓  | Z data compression library                         | Zlib-ng            | Optimized for NGS.             |
 > |  ✓  | Curses (terminal control) library                  | NetBSD Curses      | Smaller than GNU Ncurses.      |
 > |  ✓  | Command-line interpreter or shell                  | GNU Bash           | Best implementation.           |
 > |  ✓  | Line-editing and history-capabilities library      | GNU Readline       | Best implementation.           |
-> |  ✓  | Deflate or inflate algorithm compression library   | Zlib-ng            | Optimized for NGS.             |
 > |  ✓  | Unified interface for querying installed libraries | Pkgconf            | No circular dependencies.      |
 > |  ✓  | Gzip data compressor and decompressor              | Pigz               | Parallel threads support.      |
 > |  ✓  | Most userspace utility programs                    | Toybox             | Small, fast, and simple.       |
