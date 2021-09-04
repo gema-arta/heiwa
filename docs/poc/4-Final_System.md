@@ -1795,9 +1795,10 @@ time { make install; }
 > **Required!** Before `Finit`.
 ```bash
 # Configure source.
-CFLAGS="-flto=thin $CFLAGS" \
-./configure --prefix=/usr   \
-            --disable-static
+CFLAGS="-flto=thin $CFLAGS"  \
+./configure --prefix=/usr    \
+            --disable-static \
+            --docdir=/usr/share/doc/libite-2.4.0
 
 # Build.
 time { make; }
