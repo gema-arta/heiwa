@@ -18,29 +18,29 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 
 > |  ?  | Kernel and Userspace                               | Packages           | Extended Description           |
 > |:---:|----------------------------------------------------|:------------------:|--------------------------------|
-> |  ✓  | Low-level standard libraries and toolchain         | Clang/LLVM         | Lightweight, fast, modern.     |
+> |  ✓  | Low-level standard libraries and toolchain         | Clang/LLVM         | Modular, fast, and modern.     |
 > |  ?  | C dynamic memory allocator                         | Microsoft mimalloc | Excellent performance.         |
 > |  ✓  | Linux kernel patchset                              | Xanmod (CacULE)    | Optimized performance.         |
-> |  ✓  | C runtime library                                  | musl               | Clean, but not fast as Glibc.  |
-> |  ✓  | Build system tools                                 | GNU                | Most packages depend.          |
+> |  ✓  | C runtime library                                  | musl               | Clean, POSIX, and [fast?](https://www.linkedin.com/pulse/testing-alternative-c-memory-allocators-pt-2-musl-mystery-gomes) |
+> |  ✓  | Build system tools                                 | GNU                | Broad-scale compatibility.     |
 > |  ✓  | SSL/TLS implementation                             | OpenSSL            | Full-featured and robust.      |
 > |  ✓  | Native language support                            | Gettext-tiny       | Stub of bloated GNU Gettext.   |
 > |  ✓  | Curses (terminal control) library                  | NetBSD Curses      | Smaller than GNU Ncurses.      |
 > |  ✓  | Command-line interpreter or shell                  | GNU Bash           | Best implementation.           |
 > |  ✓  | Line-editing and history-capabilities library      | GNU Readline       | Best implementation.           |
-> |  ✓  | Deflate or inflate algorithm compression library   | Zlib-ng            | Next generation.               |
+> |  ✓  | Deflate or inflate algorithm compression library   | Zlib-ng            | Optimized and next generation. |
 > |  ✓  | Unified interface for querying installed libraries | Pkgconf            | No circular dependencies.      |
 > |  ✓  | Gzip data compressor and decompressor              | Pigz               | Parallel threads support.      |
-> |  ✓  | Most userspace utility programs                    | Toybox             | No circular dependencies.      |
+> |  ✓  | Most userspace utility programs                    | Toybox             | Small, fast, and simple.       |
 > |     | Init and process supervision                       | Finit              | F for fast. Fast init.         |
 > |  ✓  | Default text-editor                                | GNU Nano           | I don't use Neo/Vi/m. :stuck_out_tongue_winking_eye: |
-> |  ✓  | Device manager                                     | Eudev              | Simple and standalone.         |
+> |  ✓  | Device manager                                     | Eudev              | No reason, portable.           |
 
-> I think Microsoft mimalloc breaks some packages if build whole system with it.
+> I think Microsoft mimalloc breaks some packages if build whole system with it, need more research.
 
 </details>
 
-- [ ] Create a Proof-of-Concept (similiar to LFS books). *Under development, optimizing ..*
+- [ ] Create a Proof-of-Concept. *Under development, optimizing ..*
 
 <details>
 <summary>Details</summary>
@@ -63,7 +63,15 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 
 > Always W.I.P, since this is hobbyist. A radical experiments.
 
-> To be honest, my English is still far from perfect so don't be surprised if I spam commits.  
-> I hope I can finish it nicely and a little formally.
-
 See [docs](./docs). Go [discussions](https://github.com/heiwalinux/heiwa/discussions) for the Errata.
+
+##  
+<pre><samp>
+Copyright © 2021 owl4ce
+
+The registered trademark Linux® is used pursuant to a sublicense from the
+Linux Foundation, the exclusive licensee of Linus Torvalds, owner of the mark
+on a world­wide basis.
+</samp></pre>
+- The Proof-of-Concept is licensed under the [MIT License](./docs/poc/LICENSE).
+- The entire repository is licensed under the [GPL-2.0 License](./LICENSE).
