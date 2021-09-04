@@ -1703,7 +1703,7 @@ time { make install; }
 ```
 
 ### `51` - E2fsprogs
-> #### `1.46.2` or newer
+> #### `1.46.4` or newer
 > The E2fsprogs package contains the utilities for handling the ext2 file system. It also supports the ext3 and ext4 journaling file systems.
 
 > **Required!**
