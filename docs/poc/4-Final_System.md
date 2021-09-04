@@ -1305,7 +1305,7 @@ time { make; }
 time { make install; }
 ```
 
-### `35` - GNU Patch
+### `36` - GNU Patch
 > #### `2.7.6` or newer
 > The GNU Patch package contains a program for modifying or creating files by applying a patch file typically created by the diff program.
 
