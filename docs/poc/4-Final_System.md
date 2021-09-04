@@ -1646,6 +1646,11 @@ cp -rfv docs/doc/* /usr/share/doc/kbd-2.4.0
 
 > **Required!**
 ```bash
+# Fix some issues.
+sed -i 's,ncursesw/ncurses.h,ncurses.h,g' watch.c
+sed -i '1i#include <utmp.h>' w.c
+sed -i '1i#include <langinfo.h>' proc/escape.c
+
 # Configure source. watch8bit fails since using netbsd-curses.
 CFLAGS="-flto=thin $CFLAGS"                \
 ./configure --prefix=/usr                  \
