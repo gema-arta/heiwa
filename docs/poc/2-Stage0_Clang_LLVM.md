@@ -199,7 +199,7 @@ time { make PREFIX=/clang0-tools install-dynamic; }
 ```
 
 <!--
-### `7` - libexecinfo
+### `X` - libexecinfo
 > #### `1.1` or newer (from Heiwa/Linux fork)
 > The libexecinfo package contains backtrace facility that usually found in GNU libc (glibc).
 
