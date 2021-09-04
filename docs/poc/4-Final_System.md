@@ -1937,8 +1937,8 @@ time { make install; }
 > **Required!** Before `Linux`.
 ```bash
 # Configure source.
-ac_cv_lib_error_at_line=no           \
 CFLAGS="-fcommon -flto=thin $CFLAGS" \
+ac_cv_lib_error_at_line=no           \
 ./configure --prefix=/usr            \
             --bindir=/bin            \
             --disable-mt             \
