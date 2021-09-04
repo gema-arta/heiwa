@@ -409,6 +409,10 @@ tzselect
 # |Asia/Jakarta
 
 cp -fv /usr/share/zoneinfo/<xxx> /etc/localtime
+
+# | Example command of Asia/Jakarta:
+# |----------------------------------
+# | cp -fv /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 ```
 ```bash
 # Back to "/sources/pkgs" directory.
