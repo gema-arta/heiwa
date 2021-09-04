@@ -1879,6 +1879,7 @@ CFLAGS="-flto=thin $CFLAGS"                 \
             --bindir=/bin                   \
             --sysconfdir=/etc               \
             --with-rootlibexecdir=/lib/udev \
+            --udevhwdbdir=/lib/udev/hwdb.d  \
             --enable-hwdb                   \
             --disable-static                \
             --disable-introspection
