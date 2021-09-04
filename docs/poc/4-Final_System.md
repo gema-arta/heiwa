@@ -2036,7 +2036,6 @@ rm -rf /clang{0,1}-tools
 > #### * Beginning of as root!
 ```bash
 # Now log out and reenter the chroot environment with an updated chroot command.
-# From now on, use this updated chroot command any time you need to reenter the chroot environment after exiting.
 logout
 
 # From now on, use this updated chroot command any time you need to reenter the chroot environment after exiting.
