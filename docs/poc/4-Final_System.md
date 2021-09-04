@@ -1873,8 +1873,7 @@ time { make install; }
 ```bash
 # Configure source.
 ./configure --prefix=/usr                   \
-            --bindir=/sbin                  \
-            --sbindir=/sbin                 \
+            --bindir=/bin                   \
             --sysconfdir=/etc               \
             --with-rootlibexecdir=/lib/udev \
             --enable-manpages               \
