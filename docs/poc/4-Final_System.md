@@ -1824,7 +1824,8 @@ CFLAGS="-flto=thin $CFLAGS"              \
             --enable-x11-common-plugin   \
             --with-keventd               \
             --with-watchdog              \
-            --disable-contrib
+            --disable-contrib            \
+            --docdir=/usr/share/doc/finit-4.1
 
 # Build.
 time { make; }
