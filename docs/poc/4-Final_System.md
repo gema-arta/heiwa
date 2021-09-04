@@ -1715,7 +1715,7 @@ CFLAGS="-flto=thin $CFLAGS"         \
              --sysconfdir=/etc      \
              --disable-libblkid     \
              --disable-libuuid      \
-             --disable-uuidd        \ 
+             --disable-uuidd        \
              --disable-fsck         \
              --enable-elf-shlibs    \
              --enable-symlink-build \
