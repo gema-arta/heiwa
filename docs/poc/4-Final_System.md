@@ -350,7 +350,7 @@ grep --color=auto -A2 -B1 "^ /usr/include" dummy.log
 # |End of search list.
 
 # Check the dynamic linker libraries path.
-grep -oE "\-L/(usr/|/)lib" dummy.log
+grep -oE "\-L(/usr/|/)lib" dummy.log
 
 # | The output should be:
 # |-----------------------
