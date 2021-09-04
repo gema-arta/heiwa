@@ -1989,9 +1989,10 @@ time { make install; }
 > **Optional!** For text editing (configuration).
 ```bash
 # Configure source.
-./configure --prefix=/usr     \
-            --sysconfdir=/etc \
-            --enable-utf8     \
+./configure --prefix=/usr          \
+            --sysconfdir=/etc      \
+            --enable-utf8          \
+            --enable-threads=posix \
             --docdir=/usr/share/doc/nano-5.8
 
 # Build.
