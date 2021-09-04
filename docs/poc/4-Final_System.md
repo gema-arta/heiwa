@@ -1815,6 +1815,7 @@ time { make install; }
 CFLAGS="-flto=thin $CFLAGS"              \
 ./configure --prefix=/usr                \
             --exec-prefix=               \
+            --libexecdir=/usr/libexec    \
             --sysconfdir=/etc            \
             --localstatedir=/var         \
             --enable-dbus-plugin         \
