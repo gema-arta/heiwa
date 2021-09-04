@@ -1670,12 +1670,6 @@ time { make install; }
 # Fix `more.c` that fails with netbsd-curses.
 sed -i 's|, 0, 0|, 0, 0, 0, 0, 0, 0, 0, 0, 0|' text-utils/more.c
 
-# The FHS recommends using the "/var/lib/hwclock" directory instead of the usual "/etc" directory as the location for the adjtime file. 
-mkdir -pv /var/lib/hwclock
-
-# Generate configure script.
-NOCONFIGURE=1 ./autogen.sh
-
 # Configure source. musl needs `-D_DIRENT_HAVE_D_TYPE` for switch_root(8).
 CFLAGS="-D_DIRENT_HAVE_D_TYPE -flto=thin $CFLAGS"     \
 ./configure ADJTIME_PATH=/var/lib/hwclock/adjtime     \
