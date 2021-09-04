@@ -1534,7 +1534,7 @@ rm -fv /usr/lib/libobstack.a
 
 > **Required!** Before `IPRoute2`.
 ```bash
-# Apply patch to allow build with Clang under musl libc.
+# Apply patch to allow compile with Clang under musl libc.
 patch -Np1 -i ../../extra/elfutils/patches/elfutils-musl-clang.patch
 
 # Prevent to build static library.
@@ -1646,7 +1646,7 @@ cp -rfv docs/doc/* /usr/share/doc/kbd-2.4.0
 
 > **Required!**
 ```bash
-# Fix some issues in musl libc.
+# Fix some issues to allow compile under musl libc.
 sed -i 's|ncursesw/ncurses.h|ncurses.h|g' watch.c
 sed -i '1i#include <utmp.h>' w.c
 sed -i '1i#include <langinfo.h>' proc/escape.c
