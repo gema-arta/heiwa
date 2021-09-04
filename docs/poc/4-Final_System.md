@@ -1883,6 +1883,7 @@ CFLAGS="-flto=thin $CFLAGS"                 \
             --sbindir=/bin                  \
             --sysconfdir=/etc               \
             --with-rootlibexecdir=/lib/udev \
+            --enable-manpages               \
             --enable-hwdb                   \
             --disable-static                \
             --disable-introspection
