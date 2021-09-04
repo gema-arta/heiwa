@@ -1936,12 +1936,12 @@ time { make install; }
 > **Required!** Before `Linux`.
 ```bash
 # Configure source.
-ac_cv_lib_error_at_line=no           \
-CFLAGS="-fcommon -flto=thin $CFLAGS" \
-./configure --prefix=/usr            \
-            --bindir=/bin            \
-            --disable-mt             \
-            --disable-rpath          \
+ac_cv_lib_error_at_line=no  \
+CFLAGS="-fcommon $CFLAGS"   \
+./configure --prefix=/usr   \
+            --bindir=/bin   \
+            --disable-mt    \
+            --disable-rpath \
             --enable-largefile
 
 # Build.
