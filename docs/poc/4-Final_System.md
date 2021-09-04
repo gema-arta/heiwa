@@ -1989,6 +1989,7 @@ time { make install; }
 > **Optional!** For text editing (configuration).
 ```bash
 # Configure source.
+CFLAGS="-flto=thin $CFLAGS"        \
 ./configure --prefix=/usr          \
             --sysconfdir=/etc      \
             --enable-utf8          \
