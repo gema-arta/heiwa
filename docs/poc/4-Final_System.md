@@ -1725,7 +1725,7 @@ CFLAGS="-flto=thin $CFLAGS"         \
 # Build.
 time { make; }
 
-# Install (fixed dir installation).
+# Install.
 time {
     make MKDIR_P="install -d" install
     for B in e2fsck mke2fs {mkfs,fsck}.ext*; do
