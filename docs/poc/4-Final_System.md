@@ -1738,6 +1738,10 @@ time {
 gunzip -v /usr/share/info/libext2fs.info.gz
 install-info --dir-file=/usr/share/info/dir /usr/share/info/libext2fs.info
 ```
+```bash
+# Delete useless static library.
+rm -fv /usr/lib/{libcom_err,libe2p,libext2fs,libss}.a
+```
 
 ### `52` - OpenRC and additional services
 > #### `0.43.3` or newer
