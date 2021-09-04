@@ -116,7 +116,7 @@ printf "%b\n" $C_{TRIPLET,ARCH,CPU} ${L_TARGET} ${T_TRIPLET} ${H_TRIPLET}
 # |x86_64-heiwa-linux-musl
 ```
 ```bash
-# If you want multitasking responsiveness when using multiple jobs, set the load average to prevent slowdowned system (maybe OOM).
+# If you want multitasking responsiveness when using multiple jobs, set the load average to prevent slow down system.
 cat >> ~/.bashrc << EOF
 C_TRIPLET="${C_TRIPLET}"
 C_ARCH="${C_ARCH}"
