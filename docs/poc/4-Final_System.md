@@ -1771,7 +1771,7 @@ time { make install; }
 
 ### `53` - libuev
 > #### `2.3.2` or newer
-> The libuev package contains lightweight event loop library for Linux `epoll()` family APIs.
+> The libuev package contains lightweight event loop library for Linux `epoll()` family APIs. It is similar to the more established libevent, libev and the venerable Xt(3) event loop
 
 > **Required!** Before `Finit`.
 ```bash
@@ -1790,7 +1790,7 @@ time { make install; }
 
 ### `54` - libite
 > #### `2.4.0` or newer
-> The libite package contains lightweight library of frog DNA that can be used to fill the gaps in any dinosaur project. It holds useful functions and macros developed by both Finit and the OpenBSD project.
+> The libite package contains lightweight library of *frog* DNA that can be used to fill the gaps in any dinosaur project. It holds useful functions and macros developed by both Finit and the OpenBSD project.
 
 > **Required!** Before `Finit`.
 ```bash
