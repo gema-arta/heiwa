@@ -1750,7 +1750,7 @@ install-info --dir-file=/usr/share/info/dir /usr/share/info/com_err.info
 
 ### `52` - F2FS-tools
 > #### `1.14.0` or newer
-> The F2FS-tools package contains tools for Flash-Friendly File System (F2FS)
+> The F2FS-tools package contains tools for Flash-Friendly File System (F2FS).
 
 > **Recommended!**
 ```bash
