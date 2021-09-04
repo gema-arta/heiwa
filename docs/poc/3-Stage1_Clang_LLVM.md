@@ -415,7 +415,7 @@ EOF
 # Verify 87 commands, and make sure enabled (=y).
 # Pipe to ` | wc -l` at the right of `done` to check the total of commands.
 for X in ${TOYBOX}; do
-    grep -v '#' .config | grep -i --color=auto "CONFIG_${X}=" \
+    grep -v '#' .config | grep --color=auto -i "CONFIG_${X}=" \
     || 2>&1 echo "> ${X} not CONFIGURED!"
 done
 
@@ -424,12 +424,12 @@ time { make CC=${CC} HOSTCC=${CC} CFLAGS="-flto=thin $CFLAGS" V=1; }
 
 # Verify compiled 87 commands.
 ./toybox | tr ' ' '\n'i \
-| grep -xE --color=auto $(echo ${TOYBOX} | tr ' ' '|'i) | wc -l
+| grep --color=auto -xE $(echo ${TOYBOX} | tr ' ' '|'i) | wc -l
 
 # Verify unconfigured commands, but compiled.
 # `[` (coreutils)
 ./toybox | tr ' ' '\n'i \
-| grep -vxE --color=auto $(echo ${TOYBOX} | tr ' ' '|'i)
+| grep --color=auto -vxE $(echo ${TOYBOX} | tr ' ' '|'i)
 
 # So, totally is 88 commands.
 ./toybox | wc -w
