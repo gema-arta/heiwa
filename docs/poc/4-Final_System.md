@@ -1942,7 +1942,7 @@ CFLAGS="-fcommon -flto=thin $CFLAGS" \
             --bindir=/bin            \
             --disable-mt             \
             --disable-rpath          \
-            --enable-largefile
+            --with-packager="Heiwa/Linux"
 
 # Build.
 time { make; }
