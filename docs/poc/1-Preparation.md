@@ -106,8 +106,8 @@ H_TRIPLET="$(echo "$T_TRIPLET" | sed 's/-[^-]*/-heiwa/')" # Target triplet for c
 # Let's check if it's correct.
 printf "%b\n" $C_{TRIPLET,ARCH,CPU} ${L_TARGET} ${T_TRIPLET} ${H_TRIPLET}
 
-# | In glibc host, the output should be:
-# |--------------------------------------
+# | On the glibc host, the output should be:
+# |------------------------------------------
 # |x86_64-cross-linux-gnu
 # |x86
 # |x86-64
