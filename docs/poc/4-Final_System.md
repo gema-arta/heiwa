@@ -1775,6 +1775,16 @@ time { make install; }
 
 > **Required!** Before `Finit`.
 ```bash
+# Configure source.
+CFLAGS="-flto=thin $CFLAGS" \
+./configure --prefix=/usr   \
+            --disable-static
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
 ```
 
 ### `54` - libite
