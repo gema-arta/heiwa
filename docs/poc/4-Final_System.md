@@ -1769,61 +1769,12 @@ time { make; }
 time { make install; }
 ```
 
-### `53` - OpenRC and additional services
-> #### `0.43.3` or newer
-> OpenRC is a dependency-based init system that works with the system-provided init program, normally /sbin/init.
+### `53` - Finit
+> #### `4.1` or newer
+> Finit is fast init for Linux systems. Reverse engineered from the EeePC fastinit over ten years ago by Claudio Matsuoka — "gaps filled with frog DNA …"
 
 > **Required!**
 ```bash
-# Apply patches (from Alpine Linux).
-patch -Np1 -i ../../extra/openrc/patches/0009-Support-early-loading-of-keymap-if-kdb-is-installed.patch
-patch -Np1 -i ../../extra/openrc/patches/0014-time_t-64bit.patch
-
-# Build.
-MAKE_ARGS="
-    LIBNAME=/usr/lib
-    LIBDIR=/usr/lib
-    PKGCONFIGDIR=/usr/lib/pkgconfig
-    LIBEXECDIR=/lib/rc
-    MKBASHCOMP=yes
-    MKNET=no
-    MKPREFIX=no
-    MKSELINUX=no
-    MKSTATICLIBS=no
-    MKSYSVINIT=yes
-    MKTERMCAP=ncurses
-    MKZSHCOMP=yes
-    PKG_PREFIX=''
-    BRANDING=Heiwa/Linux
-    OS=Linux
-    SH=/bin/sh"
-
-time { make ${MAKE_ARGS}; }
-
-# Install.
-time { make ${MAKE_ARGS} DESTDIR=/ install; }
-```
-```bash
-# Decompress opentmpfiles.
-tar xzf ../opentmpfiles-0.3.1.tar.gz && \
-pushd opentmpfiles-0.3.1/
-
-# Install opentmpfiles.
-time {
-    make install
-    for C in opentmpfiles-dev opentmpfiles-setup; do
-        install -vm644 openrc/${C}.confd /etc/conf.d/${C}
-        install -vm755 openrc/${C}.initd /etc/init.d/${C}
-    done && popd; unset C
-}
-```
-```bash
-# Decompress udev-gentoo-scripts.
-tar xzf ../udev-gentoo-scripts-34.tar.gz && \
-pushd udev-gentoo-scripts-34/
-
-# Install udev-gentoo-scripts.
-time { make install && popd; }
 ```
 
 ### `53` - GNU perf
