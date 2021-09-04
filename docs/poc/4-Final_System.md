@@ -1728,7 +1728,7 @@ time { make; }
 # Install (fixed dir installation).
 time {
     make MKDIR_P="install -d" install
-    for B in e2fsck mke2fs {mkfs,fsck}.ext{2..4}; do
+    for B in e2fsck mke2fs {mkfs,fsck}.ext*; do
         mv -fv /usr/sbin/${B} /sbin/.
     done; unset B
 }
