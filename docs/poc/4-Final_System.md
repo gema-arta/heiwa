@@ -637,7 +637,8 @@ touch /usr/bin/passwd
 CFLAGS="-flto=thin $CFLAGS"                \
 ./configure --sysconfdir=/etc              \
             --disable-account-tools-setuid \
-            --without-{tcb,group-name-max-length}
+            --without-tcb                  \
+            --without-group-name-max-length
 
 # Build.
 time { make; }
