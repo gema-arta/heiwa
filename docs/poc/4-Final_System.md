@@ -1647,8 +1647,8 @@ cp -rfv docs/doc/* /usr/share/doc/kbd-2.4.0
 > **Required!**
 ```bash
 # Configure source.
-./configure --prefix=/usr    \
-            --disable-static \
+./configure --prefix=/usr           \
+            --disable-{static,kill} \
             --docdir=/usr/share/doc/procps-ng-3.3.17
 
 # Build.
