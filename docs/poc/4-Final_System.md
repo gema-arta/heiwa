@@ -1754,6 +1754,9 @@ install-info --dir-file=/usr/share/info/dir /usr/share/info/com_err.info
 
 > **Recommended!**
 ```bash
+# Prepare.
+autoreconf -vfi
+
 # Configure source.
 ./configure --prefix=/usr \
             --disable-static
