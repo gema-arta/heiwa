@@ -1877,6 +1877,7 @@ time { make install; }
             --sysconfdir=/etc               \
             --with-rootlibexecdir=/lib/udev \
             --enable-manpages               \
+            --enable-hwdb                   \
             --disable-static
 
 # Build.
