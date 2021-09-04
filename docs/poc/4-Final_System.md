@@ -1689,8 +1689,7 @@ CFLAGS="-D_DIRENT_HAVE_D_TYPE -flto=thin $CFLAGS" \
             --without-python                      \
             --without-systemd                     \
             --without-systemdsystemunitdir        \
-            --enable-line                         \
-            runstatedir=/run                      \
+            --enable-line runstatedir=/run        \
             --docdir=/usr/share/doc/util-linux-2.37.2
 
 # Build.
