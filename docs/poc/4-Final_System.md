@@ -1685,10 +1685,11 @@ CFLAGS="-D_DIRENT_HAVE_D_TYPE -flto=thin $CFLAGS" \
             --disable-kill                        \
             --disable-su                          \
             --disable-runuser                     \
+            --disable-static                      \
             --without-python                      \
             --without-systemd                     \
             --without-systemdsystemunitdir        \
-            --disable-static                      \
+            --enable-line                         \
             runstatedir=/run                      \
             --docdir=/usr/share/doc/util-linux-2.37.2
 
