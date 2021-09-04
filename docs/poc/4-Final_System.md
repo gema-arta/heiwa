@@ -1873,7 +1873,7 @@ time { make install; }
 
 > **Required!**
 ```bash
-# Fix misplaced hwdb dir to be precise as systemd-udev.
+# Fix misplaced hwdb dir to be correct as systemd-udev.
 sed -i '/udevhwdbdir/s/${udevconfdir}/${udevlibexecdir}/' configure
 
 # Configure source.
