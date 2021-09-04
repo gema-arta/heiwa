@@ -1823,7 +1823,8 @@ CFLAGS="-flto=thin $CFLAGS"              \
             --enable-resolvconf-plugin   \
             --enable-x11-common-plugin   \
             --with-keventd               \
-            --with-watchdog
+            --with-watchdog              \
+            --disable-contrib
 
 # Build.
 time { make; }
