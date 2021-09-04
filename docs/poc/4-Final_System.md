@@ -1960,6 +1960,9 @@ time { make install; }
 # Apply patch (from Void Linux) to allow compile under musl libc.
 patch -Np1 -i ../../extra/python3/patches/musl-find_library.patch
 
+# Use ThinLTO rather than Full LTO to speedup build.
+sed -i 's|-flto|-flto=thin|' configure
+
 # Configure source using provided libraries (built-in).
 ax_cv_c_float_words_bigendian=no         \
 ./configure --prefix=/usr                \
@@ -1972,7 +1975,7 @@ ax_cv_c_float_words_bigendian=no         \
             --with-dbmliborder=gdbm:ndbm \
             --enable-loadable-sqlite-extensions
 
-# Build. -> Ignore all issues! <-
+# Build. -> Ignore all issues at the end! We won't build them. <-
 time { make; }
 
 # Install.
