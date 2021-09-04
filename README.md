@@ -69,9 +69,7 @@ See [docs](./docs). Go [discussions](https://github.com/heiwalinux/heiwa/discuss
 <pre><samp>
 <a href="https://github.com/owl4ce">owl4ce</a> © 2021
 
-The registered trademark Linux® is used pursuant to a sublicense from the
-Linux Foundation, the exclusive licensee of Linus Torvalds, owner of the mark
-on a world­wide basis.
+The registered trademark Linux® is used pursuant to a sublicense from the Linux Foundation, the exclusive licensee of Linus Torvalds, owner of the mark on a world-wide basis.
 
 </samp></pre>
 The Proof-of-Concept is licensed under the [MIT License](./docs/poc/LICENSE). The entire repository is licensed under the [GPL-2.0 License](./LICENSE).
