@@ -537,8 +537,6 @@ time { make install; }
 # Configure source. Flex still expect `cc` or `gcc` to configure.
 CFLAGS="-D_GNU_SOURCE -flto=thin $CFLAGS" \
 ./configure --prefix=/usr                 \
-            --disable-shared              \
-            --disable-static              \
             --disable-libfl               \
             --docdir=/usr/share/doc/flex-2.6.4
 
