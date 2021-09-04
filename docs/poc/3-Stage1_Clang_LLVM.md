@@ -598,7 +598,7 @@ time { make install; }
 # Prevent main script that uses hard-coded paths to host "/usr/include" and "/usr/lib" directories.
 sed -i '/def add_multiarch_paths/a \        return' setup.py
 
-# Use ThinLTO rather than Full LTO to speedup build.
+# Use ThinLTO rather than FullLTO to speedup build.
 sed -i 's|-flto|-flto=thin|' configure
 
 # Configure source using provided libraries (built-in).
