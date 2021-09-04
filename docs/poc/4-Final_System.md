@@ -1647,7 +1647,7 @@ sed -i 's|ncursesw/ncurses.h|ncurses.h|g' watch.c
 sed -i '1i#include <utmp.h>' w.c
 sed -i '1i#include <langinfo.h>' proc/escape.c
 
-# Configure source. watch8bit disabled since fails againts netbsd-curses.
+# Configure source. watch8bit disabled since fails with netbsd-curses.
 CFLAGS="-flto=thin $CFLAGS"                \
 ./configure --prefix=/usr                  \
             --disable-static               \
