@@ -1644,8 +1644,8 @@ cp -rfv docs/doc/* /usr/share/doc/kbd-2.4.0
 ```bash
 # Fix some issues to allow compile under musl libc and netbsd-curses.
 sed -i 's|ncursesw/ncurses.h|ncurses.h|g' watch.c
-sed -i '1i#include <utmp.h>' w.c
-sed -i '1i#include <langinfo.h>' proc/escape.c
+sed -i '1i#include <utmp.h>'              w.c
+sed -i '1i#include <langinfo.h>'          proc/escape.c
 
 # Configure source. watch8bit disabled since fails with netbsd-curses.
 CFLAGS="-flto=thin $CFLAGS"       \
