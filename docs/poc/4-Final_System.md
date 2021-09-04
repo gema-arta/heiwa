@@ -1255,7 +1255,7 @@ CFLAGS="-flto=thin $CFLAGS" \
 # Build.
 time { make; }
 
-# Install and create symlink as `awk`, not automatically linked since disabled version links.
+# Install and create symlink as `awk` that not linked since version links is disabled.
 time {
     make install
     ln -sfv gawk /usr/bin/awk
