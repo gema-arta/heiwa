@@ -1197,7 +1197,7 @@ cp -rfv doc/* /usr/share/doc/openssl-1.1.1l/.
 cp -v ../../extra/toybox/files/.config.finalsys .config
 
 # Ensure `libcrypto` and `libz` are enabled in the config.
-grep --color=auto -E "CONFIG_TOYBOX_(LIBCRYPTO|LIBZ)=y" .config
+grep --color=auto -E "CONFIG_TOYBOX_LIB(CRYPTO|Z)=y" .config
 
 # Export commands as TOYBOX variable that will be use to verify Toybox .config.
 read -rd '' TOYBOX << "EOF"
