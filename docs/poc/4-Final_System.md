@@ -1758,8 +1758,7 @@ install-info --dir-file=/usr/share/info/dir /usr/share/info/com_err.info
 ./autogen.sh
 
 # Configure source.
-CFLAGS="-flto=thin $CFLAGS" \
-./configure --prefix=/usr   \
+./configure --prefix=/usr \
             --disable-static
 
 # Build.
