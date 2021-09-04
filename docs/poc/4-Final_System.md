@@ -1706,7 +1706,7 @@ time { make install; }
 > #### `1.46.4` or newer
 > The E2fsprogs package contains the utilities for handling the ext2 file system. It also supports the ext3 and ext4 journaling file systems.
 
-> **Required!**
+> **Recommended!**
 ```bash
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build
@@ -1748,7 +1748,25 @@ install -vm644 -t /usr/share/info/ doc/com_err.info    && \
 install-info --dir-file=/usr/share/info/dir /usr/share/info/com_err.info
 ```
 
-### `52` - OpenRC and additional services
+### `52` - F2FS-tools
+> #### `1.14.0` or newer
+> The F2FS-tools package contains tools for Flash-Friendly File System (F2FS)
+
+> **Recommended!**
+```bash
+# Configure source.
+./configure --prefix=/usr  \
+            --bindir=/sbin \
+            --disable-static
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `53` - OpenRC and additional services
 > #### `0.43.3` or newer
 > OpenRC is a dependency-based init system that works with the system-provided init program, normally /sbin/init.
 
