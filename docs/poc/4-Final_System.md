@@ -2002,6 +2002,10 @@ time { make; }
 # Install.
 time { make install; }
 ```
+```bash
+# Optional, install some additional documentation.
+install -vm644 -t /usr/share/doc/nano-5.8/ doc/{nano.html,sample.nanorc}
+```
 
 ### `62` - Cleaning Up
 > #### This section is optional!
