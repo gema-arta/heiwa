@@ -223,7 +223,7 @@ EOF
 mv -fv ~/.bash_profile{,_disabled}
 
 # Reload the environment.
-env -i HOME="/root" TERM="xterm" bash --login
+env -i HOME=/root TERM=xterm bash --login
 ```
 ```bash
 # Apply patch to fix "swab.h" under musl libc while building Linux kernel.
