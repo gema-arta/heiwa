@@ -142,7 +142,7 @@ set output-meta On
 # Do not bell on tab-completion.
 set bell-style none
 
-# All of the following map the escape sequence of the value contained in the 1st argument to the readline specific functions
+# All of the following map the escape sequence of the value contained in the 1st argument to the readline specific functions.
 "\eOd": backward-word
 "\eOc": forward-word
 
