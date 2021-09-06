@@ -1937,12 +1937,12 @@ time { make install; }
 > **Required!** Before `Linux`.
 ```bash
 # Configure source.
-CFLAGS="-flto=thin $CFLAGS" \
-ac_cv_header_sys_cdefs_h=no \
-ac_cv_lib_error_at_line=no  \
-./configure --prefix=/usr   \
-            --bindir=/bin   \
-            --disable-mt    \
+CFLAGS="-fcommon -flto=thin $CFLAGS" \
+ac_cv_header_sys_cdefs_h=no          \
+ac_cv_lib_error_at_line=no           \
+./configure --prefix=/usr            \
+            --bindir=/bin            \
+            --disable-mt             \
             --with-packager="Heiwa/Linux"
 
 # Build.
