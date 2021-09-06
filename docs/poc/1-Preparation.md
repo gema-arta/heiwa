@@ -62,9 +62,9 @@ fi
 ```bash
 # This is an optional section to make privileged user use 19 as default user-level priority through linux-PAM.
 # [ https://github.com/owl4ce/hmg/blob/main/etc/security/limits.conf#L65 ]
-cat >> /etc/security/limits.conf << "EOF"
-heiwa            -       priority        -1
-EOF
+if [[ -f "/etc/security/limits.conf" ]]; then
+    echo "heiwa            -       priority        -1" >> /etc/security/limits.conf
+fi
 
 # Warning! The above rules can slow down the system, especially GUI if run.
 ```
