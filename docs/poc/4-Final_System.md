@@ -1902,35 +1902,7 @@ time { make install; }
 udevadm hwdb --update
 ```
 
-### `58` - Cmake
-> #### `3.21.2` or newer
-> The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
-
-> **Optional!** Currently not required since using Cmake from "/clang1-tools", but useful for future usage.
-```bash
-# Disable applications that using Cmake from attempting to install files in "/usr/lib64".
-sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
-
-# Configure source using system installed libraries (partial).
-CFLAGS="-flto=thin $CFLAGS"     \
-CXXFLAGS="-flto=thin $CXXFLAGS" \
-./bootstrap --prefix=/usr       \
-            --mandir=/share/man \
-            --parallel=$(nproc) \
-            --system-zlib       \
-            --system-bzip2      \
-            --system-liblzma    \
-            --system-zstd       \
-            --docdir=/share/doc/cmake-3.21.2
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
-```
-
-### `59` - cpio
+### `58` - cpio
 > #### `2.13` or newer
 > The cpio package contains tools for archiving.
 
@@ -1950,6 +1922,31 @@ time { make; }
 
 # Install.
 time { make install; }
+```
+
+### `59` - GNU Nano
+> #### `5.8` or newer
+> The Nano package contains a small, simple text editor which aims to replace Pico, the default editor in the Pine package.
+
+> **Optional!** For text editing (configuration).
+```bash
+# Configure source.
+CFLAGS="-flto=thin $CFLAGS"        \
+./configure --prefix=/usr          \
+            --sysconfdir=/etc      \
+            --enable-utf8          \
+            --enable-threads=posix \
+            --docdir=/usr/share/doc/nano-5.8
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+```bash
+# Optional, install some additional documentation.
+install -vm644 -t /usr/share/doc/nano-5.8/ doc/{nano.html,sample.nanorc}
 ```
 
 ### `60` - Python3
@@ -1983,29 +1980,32 @@ time { make; }
 time { make install; }
 ```
 
-### `61` - GNU Nano
-> #### `5.8` or newer
-> The Nano package contains a small, simple text editor which aims to replace Pico, the default editor in the Pine package.
+### `61` - Cmake
+> #### `3.21.2` or newer
+> The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
 
-> **Optional!** For text editing (configuration).
+> **Optional!** Currently not required since using Cmake from "/clang1-tools", but useful for future usage.
 ```bash
-# Configure source.
-CFLAGS="-flto=thin $CFLAGS"        \
-./configure --prefix=/usr          \
-            --sysconfdir=/etc      \
-            --enable-utf8          \
-            --enable-threads=posix \
-            --docdir=/usr/share/doc/nano-5.8
+# Disable applications that using Cmake from attempting to install files in "/usr/lib64".
+sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
+
+# Configure source using system installed libraries (partial).
+CFLAGS="-flto=thin $CFLAGS"     \
+CXXFLAGS="-flto=thin $CXXFLAGS" \
+./bootstrap --prefix=/usr       \
+            --mandir=/share/man \
+            --parallel=$(nproc) \
+            --system-zlib       \
+            --system-bzip2      \
+            --system-liblzma    \
+            --system-zstd       \
+            --docdir=/share/doc/cmake-3.21.2
 
 # Build.
 time { make; }
 
 # Install.
 time { make install; }
-```
-```bash
-# Optional, install some additional documentation.
-install -vm644 -t /usr/share/doc/nano-5.8/ doc/{nano.html,sample.nanorc}
 ```
 
 ### `62` - Cleaning Up
