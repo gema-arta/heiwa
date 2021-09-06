@@ -844,9 +844,9 @@ time {
 ```
 ```bash
 # Create a symlink that required by FHS for "historical" reasons, and set `clang`, `clang++`, and `lld` as default toolchain compiler and linker.
-ln -sfv ../usr/bin/clang /lib/cpp
-ln -sfv clang            /usr/bin/cc
-ln -sfv lld              /usr/bin/ld
+ln -sfv /usr/bin/clang /lib/cpp
+ln -sfv clang          /usr/bin/cc
+ln -sfv lld            /usr/bin/ld
 sed -e "s|\"${CXX}\"|\"clang++\"|" \
     -e "s|\"${CC}\"|\"clang\"|" -i ~/.bash_profile    
 source                             ~/.bash_profile
