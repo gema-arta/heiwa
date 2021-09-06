@@ -1968,8 +1968,8 @@ ax_cv_c_float_words_bigendian=no         \
 ./configure --prefix=/usr                \
             --with-ensurepip=yes         \
             --with-computed-gotos        \
+            --with-dbmliborder=gdbm      \
             --with-lto                   \
-            --with-dbmliborder=gdbm:ndbm \
             --enable-shared              \
             --enable-ipv6                \
             --enable-optimizations       \
