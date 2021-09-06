@@ -29,7 +29,7 @@ sed -i "s|localhost|${HOSTNAME}|" /etc/conf.d/hostname
 cat > /etc/hosts << EOF
 # Begin /etc/hosts
 
-127.0.0.1 ${HOSTNAME}.localdomain localhost
+127.0.0.1 ${HOSTNAME} localhost
 127.0.1.1 ${HOSTNAME}
 ::1       ${HOSTNAME} localhost ip6-localhost ip6-loopback
 
