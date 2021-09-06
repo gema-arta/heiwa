@@ -64,7 +64,8 @@ EOF
 ```bash
 # Determine locale supported by `musl-locales`. Should display "UTF-8".
 LC_ALL=en_US.utf8 locale charmap
-
+```
+```bash
 # Once the proper locale settings have been determined, create the "/etc/profile" file.
 cat > /etc/profile << "EOF"
 # Begin /etc/profile
@@ -107,12 +108,14 @@ fi
 
 # End /etc/profile
 EOF
-
+```
+```bash
 # Install Heiwa/Linux bashrc configuration.
 install -vDm644 /sources/extra/bash/files/bashrc /etc/bash/
-
+```
+```bash
 # Reload the environment.
-source /etc/profile
+. /etc/profile
 ```
 
 ### `5` - Creating the `/etc/inputrc` File (GNU Readline)
