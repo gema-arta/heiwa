@@ -1942,7 +1942,6 @@ ac_cv_lib_error_at_line=no           \
 ./configure --prefix=/usr            \
             --bindir=/bin            \
             --disable-mt             \
-            --disable-rpath          \
             --with-packager="Heiwa/Linux"
 
 # Build.
