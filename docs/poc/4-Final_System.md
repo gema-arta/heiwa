@@ -1966,10 +1966,10 @@ sed -i 's|-flto|-flto=thin|' configure
 # Configure source using provided libraries (built-in).
 ax_cv_c_float_words_bigendian=no         \
 ./configure --prefix=/usr                \
-            --enable-shared              \
             --with-ensurepip=yes         \
             --with-computed-gotos        \
             --with-lto                   \
+            --enable-shared              \
             --enable-ipv6                \
             --enable-optimizations       \
             --with-dbmliborder=gdbm:ndbm \
