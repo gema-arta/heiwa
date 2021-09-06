@@ -40,28 +40,21 @@ EOF
 cat > /etc/nanorc << "EOF"
 # Begin /etc/nanorc
 
-# FUNCTION
+# Functions
+# ---
 set autoindent
-#set backup
-#set backupdir "~/nano-backups"
-#set casesensitive
-#set historylog
-#set nohelp
 set tabsize 4
 set tabstospaces
-#set mouse
 set linenumbers
 set softwrap
 
-# COLOR SCHEME
+# Color Schemes
+# ---
 set titlecolor black,red
 set statuscolor magenta
 set keycolor blue
 set functioncolor white
 set numbercolor white
-
-# SYNTAX HIGHTLIGHTING
-#include "/etc/nano/*.nanorc"
 
 # End /etc/nanorc
 EOF
