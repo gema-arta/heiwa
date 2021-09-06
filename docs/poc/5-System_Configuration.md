@@ -141,20 +141,59 @@ set convert-meta Off
 # Keep the 8th bit for display.
 set output-meta On
 
-# none, visible or audible.
+# Do not bell on tab-completion.
 set bell-style none
 
-# All of the following map the escape sequence of the value contained in the 1st argument to the readline specific functions.
+# All of the following map the escape sequence of the value contained in the 1st argument to the readline specific functions
 "\eOd": backward-word
 "\eOc": forward-word
 
-# Linux console.
+# Linux console and RH/Debian xterm.
+# Allow the use of the Home/End keys.
 "\e[1~": beginning-of-line
 "\e[4~": end-of-line
-"\e[5~": beginning-of-history
-"\e[6~": end-of-history
+# Map "page up" and "page down" to search history based on current cmdline.
+"\e[5~": history-search-backward
+"\e[6~": history-search-forward
+# Allow the use of the Delete/Insert keys.
 "\e[3~": delete-char
 "\e[2~": quoted-insert
+
+# GNOME / others (escape + arrow key).
+"\e[5C": forward-word
+"\e[5D": backward-word
+
+# konsole / xterm / rxvt (escape + arrow key).
+"\e\e[C": forward-word
+"\e\e[D": backward-word
+
+# GNOME / konsole / others (control + arrow key).
+"\e[1;5C": forward-word
+"\e[1;5D": backward-word
+
+# aterm / eterm (control + arrow key).
+"\eOc": forward-word
+"\eOd": backward-word
+
+# konsole (alt + arrow key).
+"\e[1;3C": forward-word
+"\e[1;3D": backward-word
+
+# Chromebooks, remap (alt + backspace) so provide alternative (alt + k).
+"\ek": backward-kill-word
+
+$if term=rxvt
+"\e[8~": end-of-line
+$endif
+
+# For non RH/Debian xterm, can't hurt for RH/Debian xterm.
+"\eOH": beginning-of-line
+"\eOF": end-of-line
+
+# Freebsd console.
+"\e[H": beginning-of-line
+"\e[F": end-of-line
+$endif
 
 # End /etc/inputrc
 EOF
