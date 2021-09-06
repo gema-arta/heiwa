@@ -191,7 +191,6 @@ $endif
 # Freebsd console.
 "\e[H": beginning-of-line
 "\e[F": end-of-line
-$endif
 
 # End /etc/inputrc
 EOF
