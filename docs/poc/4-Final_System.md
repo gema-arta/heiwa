@@ -1928,7 +1928,7 @@ time { make install; }
 > #### `5.8` or newer
 > The Nano package contains a small, simple text editor which aims to replace Pico, the default editor in the Pine package.
 
-> **Optional!** For text editing (configuration).
+> **Optional!** As default text-editor.
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"        \
