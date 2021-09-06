@@ -223,7 +223,8 @@ EOF
 # Make sure to disable Clang/LLVM environment variables to build kernel correctly.
 mv -fv ~/.bash_profile{,_disabled}
 
-# Logout and re-enter `chroot` again.
+# Reload the environment.
+. /etc/profile
 ```
 ```bash
 # Apply patch to fix "swab.h" under musl libc while building Linux kernel.
