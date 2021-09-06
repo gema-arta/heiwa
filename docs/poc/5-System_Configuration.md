@@ -123,8 +123,6 @@ install -vDm644 /sources/extra/bash/files/bashrc /etc/bash/
 
 > Most people do not need user-specific functionality so the command below creates a global "/etc/inputrc" used by everyone who logs in. If you later decide you need to override the defaults on a per user basis, you can create a ".inputrc" file in the user's home directory with the modified mappings.
 ```bash
-# Below is a generic global inputrc along with comments to explain what the various options do.
-# Note that comments cannot be on the same line as commands.
 cat > /etc/inputrc << "EOF"
 # Begin /etc/inputrc
 
