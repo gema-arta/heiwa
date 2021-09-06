@@ -226,10 +226,6 @@ mv -fv ~/.bash_profile{,_disabled}
 exec env -i HOME=/root TERM=xterm bash --login
 ```
 ```bash
-# Apply patch to fix "swab.h" under musl libc while building Linux kernel.
-patch -Np1 -i \
-/sources/extra/linux-headers/patches/include-uapi-linux-swab-Fix-potentially-missing-__always_inline.patch
-
 # Make sure there are no stale files embedded in the package.
 time { make LLVM=1 LLVM_IAS=1 mrproper; }
 
@@ -240,10 +236,10 @@ cp -rfv /sources/extra/linux-xanmod-cacule/files/{.config,localversion,drivers} 
 time { make LLVM=1 LLVM_IAS=1 menuconfig; }
 
 # Build.
-time { nice -n -1 make LLVM=1 LLVM_IAS=1 -j$(nproc); }
+time { make LLVM=1 LLVM_IAS=1 -j$(nproc); }
 
 # Install modules.
-time { make LLVM=1 LLVM_IAS=1 modules_install; }
+time { make LLVM=1 LLVM_IAS=1 -j$(nproc) modules_install; }
 
 # If the host system has a separate "/boot" partition, the files copied below should go there.
 # The easiest way to do that is to bind "/boot" on the host (outside chroot) to "${HEIWA}/boot" before proceeding.
