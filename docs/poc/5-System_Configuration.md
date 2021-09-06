@@ -4,7 +4,7 @@ The purpose of this stage is to configure the system to be boot-able, and instal
 ### `1` - Creating the `/etc/resolv.conf` File
 > The system will need some means of obtaining Domain Name Service (DNS) name resolution to resolve Internet domain names to IP addresses, and vice versa. This is best achieved by placing the IP address of the DNS server, available from the ISP or network administrator, into "/etc/resolv.conf".
 
-> Using Cloudflare DNS as primary, Google as secondary.
+> Use Cloudflare DNS as primary, Google as secondary.
 ```bash
 cat > /etc/resolv.conf << "EOF"
 # Begin /etc/resolv.conf
