@@ -1915,12 +1915,12 @@ sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
 CFLAGS="-flto=thin $CFLAGS"     \
 CXXFLAGS="-flto=thin $CXXFLAGS" \
 ./bootstrap --prefix=/usr       \
+            --mandir=/share/man \
+            --parallel=$(nproc) \
             --system-zlib       \
             --system-bzip2      \
             --system-liblzma    \
             --system-zstd       \
-            --mandir=/share/man \
-            --parallel=$(nproc) \
             --docdir=/share/doc/cmake-3.21.2
 
 # Build.
