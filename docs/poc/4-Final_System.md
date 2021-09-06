@@ -1647,7 +1647,7 @@ done; unset K
 ```bash
 # Optional, install some additional documentation.
 mkdir -pv /usr/share/doc/kbd-2.4.0 && \
-cp -rfv docs/doc/* /usr/share/doc/kbd-2.4.0
+cp -rfv docs/doc/* /usr/share/doc/kbd-2.4.0/.
 ```
 
 ### `49` - Procps-ng
