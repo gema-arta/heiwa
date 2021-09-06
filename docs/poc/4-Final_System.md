@@ -1969,10 +1969,10 @@ ax_cv_c_float_words_bigendian=no         \
             --with-ensurepip=yes         \
             --with-computed-gotos        \
             --with-lto                   \
+            --with-dbmliborder=gdbm:ndbm \
             --enable-shared              \
             --enable-ipv6                \
             --enable-optimizations       \
-            --with-dbmliborder=gdbm:ndbm \
             --enable-loadable-sqlite-extensions
 
 # Build. -> Ignore all issues at the end! We won't build them. <-
