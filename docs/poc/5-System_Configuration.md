@@ -1,5 +1,5 @@
 ## `V` System Configuration
-The purpose of this stage is to configure the system to be bootable, and also to install the Linux Kernel and desired Bootloader (nor EFI Stub).
+The purpose of this stage is to configure the system to be boot-able, and installing the Linux Kernel with desired Bootloader (and/or EFI Stub).
 
 ### `1` - Creating the `/etc/resolv.conf` File
 > The system will need some means of obtaining Domain Name Service (DNS) name resolution to resolve Internet domain names to IP addresses, and vice versa. This is best achieved by placing the IP address of the DNS server, available from the ISP or network administrator, into "/etc/resolv.conf".
