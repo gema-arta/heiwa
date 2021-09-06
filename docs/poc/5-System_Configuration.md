@@ -247,7 +247,7 @@ time { make LLVM=1 LLVM_IAS=1 -j$(nproc) modules_install; }
 # mount -R /boot /media/Heiwa/boot
 
 # Export target kernel version to use on installation steps.
-export KVER="5.13.1-heiwa-x86_64"
+export KVER="5.13.13-heiwa-x86_64"
 
 # Install.
 # The path to the kernel image may vary depending on the platform being used.
