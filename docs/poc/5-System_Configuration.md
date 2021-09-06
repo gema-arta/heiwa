@@ -158,14 +158,6 @@ set bell-style none
 "\e[3~": delete-char
 "\e[2~": quoted-insert
 
-# for xterm
-"\eOH": beginning-of-line
-"\eOF": end-of-line
-
-# for Konsole
-"\e[H": beginning-of-line
-"\e[F": end-of-line
-
 # End /etc/inputrc
 EOF
 ```
