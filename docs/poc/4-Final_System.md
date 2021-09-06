@@ -55,7 +55,7 @@ fi
 ### `3` - Creating Directories
 > It's time to create the full-structured filesystem. See [Filesystem Hierarchy Standard](https://refspecs.linuxfoundation.org/fhs.shtml).
 ```bash
-mkdir -pv /{{,s}bin,boot,etc,home,lib/firmware,media,mnt,opt,root,var/tmp}
+mkdir -pv /{{,s}bin,boot,etc/mod{ules-load,probe}.d,home,lib/firmware,media,mnt,opt,root,var/tmp}
 
 mkdir -pv /usr/{,local/}{bin,include,lib,sbin,src}
 mkdir -pv /usr/{,local/}share/{color,dict,doc,info,locale,man,misc,terminfo,zoneinfo}
