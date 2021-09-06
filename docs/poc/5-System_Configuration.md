@@ -267,7 +267,12 @@ cp -iv .config /boot/config-${KVER}
 
 # Unset exported KVER variable.
 unset KVER
-
+```
+```bash
+# Optional, install some additional documentation.
+mkdir -pv /usr/share/doc/linux-5.13.13 && \
+cp -rv Documentation/* /usr/share/doc/linux-5.13.13/.
+```
 # Create the modules-load.d and modprobe directories in the "/etc".
 mkdir -pv /etc/mod{ules-load,probe}.d
 ```
