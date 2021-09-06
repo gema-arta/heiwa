@@ -1906,7 +1906,7 @@ udevadm hwdb --update
 > #### `3.21.2` or newer
 > The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
 
-> **Optional!** Currently not really required since using Cmake from "/clang1-tools", but useful for future usage.
+> **Optional!** Currently not required since using Cmake from "/clang1-tools", but useful for future usage.
 ```bash
 # Disable applications that using Cmake from attempting to install files in "/usr/lib64".
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
