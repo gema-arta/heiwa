@@ -62,7 +62,7 @@ EOF
 
 ### `4` - Configure Locales and Shell Startup Files
 ```bash
-# Determine locale that supported by `musl-locales`. Should output "UTF-8".
+# Determine locale supported by `musl-locales`. Should display "UTF-8".
 LC_ALL=en_US.utf8 locale charmap
 
 # Once the proper locale settings have been determined, create the "/etc/profile" file.
