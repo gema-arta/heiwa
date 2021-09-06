@@ -271,11 +271,7 @@ unset KVER
 ```bash
 # Optional, install some additional documentation.
 mkdir -pv /usr/share/doc/linux-5.13.13 && \
-cp -rv Documentation/* /usr/share/doc/linux-5.13.13/.
-```
-```bash
-# Create the modules-load.d and modprobe directories in the "/etc".
-mkdir -pv /etc/mod{ules-load,probe}.d
+cp -rfv Documentation/* /usr/share/doc/linux-5.13.13/.
 ```
 
 ### `8` - Creating the `/etc/fstab` File
