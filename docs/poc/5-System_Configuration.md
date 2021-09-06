@@ -19,8 +19,7 @@ EOF
 ### `2` - Customizing the `/etc/hosts` File and OpenRC's conf
 > When booting, OpenRC will set the system hostname from "/etc/conf.d/hostname".
 ```bash
-# Define preferred default hostname.
-# Below will using host's name.
+# Define preferred default hostname. Below will using host's name.
 export HOSTNAME="${HOSTNAME}"
 
 # Hostname.
