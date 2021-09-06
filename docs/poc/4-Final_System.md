@@ -1911,7 +1911,7 @@ udevadm hwdb --update
 # Disable applications that using Cmake from attempting to install files in "/usr/lib64".
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
 
-# Configure source using system installed libraries.
+# Configure source using system installed libraries (partial).
 CFLAGS="-flto=thin $CFLAGS"     \
 CXXFLAGS="-flto=thin $CXXFLAGS" \
 ./bootstrap --prefix=/usr       \
