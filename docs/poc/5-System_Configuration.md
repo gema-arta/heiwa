@@ -34,7 +34,7 @@ cat > /etc/hosts << EOF
 EOF
 ```
 
-### `3` - Customizing the `/etc/nanorc` File (branding)
+### `3` - Customizing the `/etc/nanorc` File
 > Setup the Nano text-editor default configuration.
 ```bash
 cat > /etc/nanorc << "EOF"
