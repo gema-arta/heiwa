@@ -1930,7 +1930,7 @@ time { make install; }
 
 > **Required!** Before `Linux`.
 ```bash
-# Apply patch (from Void Linux) to allow compile under musl libc.
+# Apply patch (from Void Linux) to allow search manually musl system paths (fallback).
 patch -Np1 -i ../../extra/python3/patches/musl-find_library.patch
 
 # Use ThinLTO rather than FullLTO to speedup build.
