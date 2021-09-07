@@ -607,7 +607,7 @@ ax_cv_c_float_words_bigendian=no   \
             --build=${T_TRIPLET}   \
             --host=${T_TRIPLET}    \
             --without-ensurepip    \
-            --enable-shared --with-lto
+            --with-lto --enable-shared
 
 # Build. -> Ignore all issues at the end! We won't build them. <-
 time { make; }
