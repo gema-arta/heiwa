@@ -1924,36 +1924,11 @@ time { make; }
 time { make install; }
 ```
 
-### `59` - GNU Nano
-> #### `5.8` or newer
-> The Nano package contains a small, simple text editor which aims to replace Pico, the default editor in the Pine package.
-
-> **Optional!** As default text-editor.
-```bash
-# Configure source.
-CFLAGS="-flto=thin $CFLAGS"        \
-./configure --prefix=/usr          \
-            --sysconfdir=/etc      \
-            --enable-utf8          \
-            --enable-threads=posix \
-            --docdir=/usr/share/doc/nano-5.8
-
-# Build.
-time { make; }
-
-# Install.
-time { make install; }
-```
-```bash
-# Optional, install some additional documentation.
-install -vm644 -t /usr/share/doc/nano-5.8/ doc/{nano.html,sample.nanorc}
-```
-
-### `60` - Python3
+### `59` - Python3
 > #### `3.9.6` or newer
 > The Python3 package contains the Python development environment. It is useful for object-oriented programming, writing scripts, prototyping large programs, or developing entire applications.
 
-> **Optional!** Currently not required, but useful for future usage.
+> **Required!** Before `Linux`.
 ```bash
 # Apply patch (from Void Linux) to allow compile under musl libc.
 patch -Np1 -i ../../extra/python3/patches/musl-find_library.patch
@@ -1978,6 +1953,31 @@ time { make; }
 
 # Install.
 time { make install; }
+```
+
+### `60` - GNU Nano
+> #### `5.8` or newer
+> The Nano package contains a small, simple text editor which aims to replace Pico, the default editor in the Pine package.
+
+> **Optional!** As default text-editor.
+```bash
+# Configure source.
+CFLAGS="-flto=thin $CFLAGS"        \
+./configure --prefix=/usr          \
+            --sysconfdir=/etc      \
+            --enable-utf8          \
+            --enable-threads=posix \
+            --docdir=/usr/share/doc/nano-5.8
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+```bash
+# Optional, install some additional documentation.
+install -vm644 -t /usr/share/doc/nano-5.8/ doc/{nano.html,sample.nanorc}
 ```
 
 ### `61` - Cmake
