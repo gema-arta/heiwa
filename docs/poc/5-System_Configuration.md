@@ -295,12 +295,12 @@ EOF
 ### `9` - Tweaking sysctl
 ```bash
 # Apply some sysctl tweaks.
-cat > /etc/sysctl.conf << "EOF"
-# Reduce Swappiness
+cat > /etc/sysctl.d/99-sysctl.conf << "EOF"
+# Swappiness and cache pressure
 vm.swappiness = 10
 vm.vfs_cache_pressure = 50
 
-# Network Optimization
+# Network optimization
 net.core.netdev_max_backlog = 100000
 net.core.netdev_budget = 50000
 net.core.netdev_budget_usecs = 5000
