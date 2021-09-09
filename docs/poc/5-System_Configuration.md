@@ -284,9 +284,9 @@ cat > /etc/fstab << "EOF"
 # file system  mount-point  type     options             dump  fsck
 #                                                              order
 
-/dev/<xxx>     /boot        vfat     noatime             0     0
-/dev/<yyy>     /            ext4     noatime,discard     0     0
-/dev/<zzz>     none         swap     sw                  0     0
+#/dev/<xxx>     /boot        vfat     noatime             0     0
+#/dev/<yyy>     /            ext4     noatime,discard     0     0
+#/dev/<zzz>     none         swap     sw                  0     0
 
 # End /etc/fstab
 EOF
