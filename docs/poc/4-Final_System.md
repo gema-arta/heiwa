@@ -1932,12 +1932,14 @@ MANM_MDOC=mandoc_mdoc
 UTF8_LOCALE="C.UTF-8"
 # Don't use less.
 HAVE_LESS_T=0
+# Build catman(8) which is disabled by default.
+BUILD_CATMAN=1
 # Toolchain flags.
 CC="$CC"
 AR="$AR"
 CFLAGS="-fcommon -flto=thin $CFLAGS"
 LDFLAGS="$LDFLAGS"
-# The STATIC variable is only used by man.cgi.
+# The STATIC variable is only used by "man.cgi".
 STATIC=
 EOF
 
