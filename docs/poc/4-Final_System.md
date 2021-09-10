@@ -1904,7 +1904,7 @@ udevadm hwdb --update
 
 ### `58` - OpenBSD mandoc
 > #### `1.14.5` or newer
-> The OpenBSD mandoc package contains suite of tools compiling mdoc and man.
+> The OpenBSD mandoc package contains suite of tools compiling `mdoc` and `man`.
 
 > **Required!**
 ```bash
