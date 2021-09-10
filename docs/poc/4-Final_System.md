@@ -1913,7 +1913,7 @@ patch -Np1 -i ../../extra/mandoc/patches/fix-tbl-null-pointer.patch
 
 # Fix broken script tries to execute make to get CC that fails due to `env -i`, and use `printf` instead.
 # [ https://savannah.gnu.org/bugs/index.php?57674 ]
-sed -e "s|^CC=.*|CC=${CC}|" \
+sed -e "/CC=/s/\`.*\`/${CC}/" \
     -e 's|echo -n|printf|g' -i configure
 
 # Prepare.
