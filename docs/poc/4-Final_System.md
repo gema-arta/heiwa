@@ -1902,6 +1902,16 @@ time { make install; }
 udevadm hwdb --update
 ```
 
+### `58` - Man-pages
+> #### `5.13` or newer
+> The Man-pages package contains over 2,200 man pages.
+
+> **Recommended!**
+```bash
+# Install.
+time { make prefix=/usr install; }
+```
+
 ### `59` - OpenBSD mandoc
 > #### `1.14.5` or newer
 > The OpenBSD mandoc package contains suite of tools compiling `mdoc` and `man`.
