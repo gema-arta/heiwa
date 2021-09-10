@@ -1930,7 +1930,7 @@ MANM_MAN=mandoc_man
 MANM_MDOC=mandoc_mdoc
 # Fix utf-8 locale on musl.
 UTF8_LOCALE="C.UTF-8"
-# Don't use `less`.
+# Don't use less.
 HAVE_LESS_T=0
 # Toolchain flags.
 CC="$CC"
