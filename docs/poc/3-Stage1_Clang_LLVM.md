@@ -681,8 +681,8 @@ exit
 if [[ -n "$HEIWA" ]]; then
     export XZ_OPT="-9e -T2"
     pushd "$HEIWA" && \
-        tar --totals -cJpf clang0-tools.tar.xz clang0-tools && \
-        tar --totals -cJpf clang1-tools.tar.xz clang1-tools && \
+        tar -cJpf clang0-tools.tar.xz clang0-tools && \
+        tar -cJpf clang1-tools.tar.xz clang1-tools && \
     popd && unset XZ_OPT
 fi
 ```
