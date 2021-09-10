@@ -24,18 +24,18 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 > |  ✓  | C runtime library                                  | musl               | Clean, POSIX, and [fast?](https://www.linkedin.com/pulse/testing-alternative-c-memory-allocators-pt-2-musl-mystery-gomes) |
 > |  ✓  | Build system tools                                 | GNU                | Broad-scale compatibility.     |
 > |  ✓  | SSL/TLS implementation                             | OpenSSL            | Full-featured and robust.      |
-> |  ✓  | Native language support                            | Gettext-tiny       | Stub of bloated GNU Gettext.   |
+> |  ✓  | Native language support                            | gettext-tiny       | Stub of bloated GNU gettext.   |
 > |  ✓  | Z data compression library                         | Zlib-ng            | Optimized for NGS.             |
-> |  ✓  | Curses (terminal control) library                  | NetBSD Curses      | Smaller than GNU Ncurses.      |
+> |  ✓  | Curses (terminal control) library                  | NetBSD curses      | Smaller than GNU ncurses.      |
 > |  ✓  | Command-line interpreter or shell                  | GNU Bash           | Best implementation.           |
 > |  ✓  | Line-editing and history-capabilities library      | GNU Readline       | Best implementation.           |
 > |  ✓  | Unified interface for querying installed libraries | Pkgconf            | No circular dependencies.      |
 > |  ✓  | Gzip data compressor and decompressor              | Pigz               | Parallel threads support.      |
 > |  ✓  | Most userspace utility programs                    | Toybox             | Small, fast, and simple.       |
 > |     | Init and process supervision                       | Finit              | F for fast. Fast init.         |
-> |  ✓  | Manpage suite tools                                | OpenBSD mandoc     | Smaller than GNU man-db        |
-> |  ✓  | Default text-editor                                | GNU Nano           | I don't use Neo/Vi/m. :stuck_out_tongue_winking_eye: |
-> |  ✓  | Device manager                                     | Eudev              | No reason, portable.           |
+> |  ✓  | Manpage suite tools                                | OpenBSD mandoc     | Smaller than GNU man-db.       |
+> |  ✓  | Default text-editor                                | GNU nano           | I don't use Neo/Vi/m. :stuck_out_tongue_winking_eye: |
+> |  ✓  | Device manager                                     | eudev              | No reason, portable.           |
 
 > I think Microsoft mimalloc breaks some packages if build whole system with it, need more research.
 
