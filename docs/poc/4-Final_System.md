@@ -1938,7 +1938,6 @@ HAVE_LESS_T=0
 BUILD_CATMAN=1
 # Toolchain flags.
 CC="$CC"
-AR="$AR"
 CFLAGS="-fcommon -flto=thin $CFLAGS"
 LDFLAGS="$LDFLAGS"
 EOF
