@@ -34,6 +34,7 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 > |  ✓  | Most userspace utility programs                    | Toybox             | Small, fast, and simple.       |
 > |     | Init and process supervision                       | Finit              | F for fast. Fast init.         |
 > |  ✓  | Default text-editor                                | GNU Nano           | I don't use Neo/Vi/m. :stuck_out_tongue_winking_eye: |
+> |  ✓  | Manpage suite tools                                | OpenBSD mandoc     | Smaller than GNU man-db        |
 > |  ✓  | Device manager                                     | Eudev              | No reason, portable.           |
 
 > I think Microsoft mimalloc breaks some packages if build whole system with it, need more research.
