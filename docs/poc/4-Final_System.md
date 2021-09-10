@@ -1980,7 +1980,15 @@ time { make install; }
 install -vm644 -t /usr/share/doc/nano-5.8/ doc/{nano.html,sample.nanorc}
 ```
 
-### `61` - Cmake
+### `XX` - cURL
+> #### `7.78.0` or newer
+> The cURL package contains an utility and a library used for transferring files with URL syntax to any of the following protocols: FTP, FTPS, HTTP, HTTPS, SCP, SFTP, TFTP, TELNET, DICT, LDAP, LDAPS and FILE. Its ability to both download and upload files can be incorporated into other programs to support functions like streaming media.
+
+> **Required!** Before `Cmake`.
+```bash
+```
+
+### `XX` - Cmake
 > #### `3.21.2` or newer
 > The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
 
@@ -2009,7 +2017,7 @@ time { make -C build; }
 time { make -C build install; }
 ```
 
-### `62` - Cleaning Up
+### `XX` - Cleaning Up
 > #### This section is optional!
 
 > If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
