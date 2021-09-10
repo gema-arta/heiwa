@@ -55,7 +55,7 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 > |     | 4. [Final System](./docs/poc/4-Final_System.md) (core)                               | Under development | Faster performance.        |
 > |     | 5. [System Configuration](./docs/poc/5-System_Configuration.md)                      | Pending           | -                          |
 
-> This will be long to develop PoC along with the package manager, and the whole system is like a Gentoo's Stage 3.
+> This will be long to develop PoC along with the package manager, and the whole system is like Stage 3 Gentoo.
 
 </details>
 
