@@ -1991,15 +1991,15 @@ sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
 
 # Configure source using system installed libraries (partial).
 cmake -B build \
-    -DCMAKE_BUILD_TYPE=Release -Wno-dev      \
-    -DCMAKE_INSTALL_PREFIX="/usr"            \
-    -DCMAKE_C_FLAGS="-flto=thin $CFLAGS"     \
-    -DCMAKE_CXX_FLAGS="-flto=thin $CXXFLAGS" \
-    -DCMAKE_MAN_DIR=/share/man               \
-    -DCMAKE_DOC_DIR=/share/doc/cmake-3.21.2  \
-    -DCMAKE_USE_SYSTEM_ZLIB=ON               \
-    -DCMAKE_USE_SYSTEM_BZIP2=ON              \
-    -DCMAKE_USE_SYSTEM_LIBLZMA=ON            \
+    -DCMAKE_BUILD_TYPE=Release -Wno-dev       \
+    -DCMAKE_INSTALL_PREFIX="/usr"             \
+    -DCMAKE_C_FLAGS="-flto=thin $CFLAGS"      \
+    -DCMAKE_CXX_FLAGS="-flto=thin $CXXFLAGS"  \
+    -DCMAKE_MAN_DIR="/share/man"              \
+    -DCMAKE_DOC_DIR="/share/doc/cmake-3.21.2" \
+    -DCMAKE_USE_SYSTEM_ZLIB=ON                \
+    -DCMAKE_USE_SYSTEM_BZIP2=ON               \
+    -DCMAKE_USE_SYSTEM_LIBLZMA=ON             \
     -DCMAKE_USE_SYSTEM_ZSTD=ON
 
 # Build.
