@@ -1919,24 +1919,25 @@ sed -e "s|^CC=.*|CC=${CC}|" \
 # Prepare.
 cat > configure.local << EOF
 PREFIX="/usr"
-BINDIR="/usr/bin"
-SBINDIR="/usr/sbin"
-LIBDIR="/usr/lib"
-MANDIR="/usr/share/man"
-INCLUDEDIR="/usr/include/mandoc"
-MANPATH_DEFAULT="/usr/share/man:/usr/local/share/man"
+BINDIR="\${PREFIX}/bin"
+SBINDIR="\${PREFIX}/sbin"
+LIBDIR="\${PREFIX}/lib"
+MANDIR="\${PREFIX}/share/man"
+INCLUDEDIR="\${PREFIX}/include/mandoc"
+MANPATH_DEFAULT="\${PREFIX}/share/man:\${PREFIX}/local/share/man"
 # Conflicts with man(7) and mdoc(7) from Linux man-pages.
 MANM_MAN=mandoc_man
 MANM_MDOC=mandoc_mdoc
 # Fix utf-8 locale on musl.
 UTF8_LOCALE="C.UTF-8"
+# Don't use `less`.
 HAVE_LESS_T=0
-OSNAME="Heiwa/Linux"
 # Toolchain flags.
 CC="$CC"
 AR="$AR"
 CFLAGS="-fcommon -flto=thin $CFLAGS"
 LDFLAGS="$LDFLAGS"
+# The STATIC variable is only used by man.cgi.
 STATIC=
 EOF
 
