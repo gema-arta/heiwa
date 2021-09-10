@@ -1990,22 +1990,22 @@ install -vm644 -t /usr/share/doc/nano-5.8/ doc/{nano.html,sample.nanorc}
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
 
 # Configure source using system installed libraries (partial).
-CFLAGS="-flto=thin $CFLAGS"     \
-CXXFLAGS="-flto=thin $CXXFLAGS" \
-./bootstrap --prefix=/usr       \
-            --mandir=/share/man \
-            --parallel=$(nproc) \
-            --system-zlib       \
-            --system-bzip2      \
-            --system-liblzma    \
-            --system-zstd       \
-            --docdir=/share/doc/cmake-3.21.2
+cmake -B build \
+    -DCMAKE_INSTALL_PREFIX="/usr"            \
+    -DCMAKE_C_FLAGS="-flto=thin $CFLAGS"     \
+    -DCMAKE_CXX_FLAGS="-flto=thin $CXXFLAGS" \
+    -DCMAKE_MAN_DIR=/share/man               \
+    -DCMAKE_DOC_DIR=/share/doc/cmake-3.21.2  \
+    -DCMAKE_USE_SYSTEM_ZLIB=ON               \
+    -DCMAKE_USE_SYSTEM_BZIP2=ON              \
+    -DCMAKE_USE_SYSTEM_LIBLZMA=ON            \
+    -DCMAKE_USE_SYSTEM_ZSTD=ON
 
 # Build.
-time { make; }
+time { make -C build; }
 
 # Install.
-time { make install; }
+time { make -C build install; }
 ```
 
 ### `62` - Cleaning Up
