@@ -1920,7 +1920,7 @@ LIBDIR="/usr/lib"
 MANDIR="/usr/share/man"
 INCLUDEDIR="/usr/include/mandoc"
 MANPATH_DEFAULT="/usr/share/man:/usr/local/share/man"
-# Conflicts with man(7) and mdoc(7) from Linux `man-pages`.
+# Conflicts with man(7) and mdoc(7) from Linux man-pages.
 MANM_MAN=mandoc_man
 MANM_MDOC=mandoc_mdoc
 # Fix utf-8 locale on musl.
