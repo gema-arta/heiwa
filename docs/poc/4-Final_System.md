@@ -1959,7 +1959,7 @@ time { make install; }
 > #### `5.8` or newer
 > The Nano package contains a small, simple text editor which aims to replace Pico, the default editor in the Pine package.
 
-> **Optional!** As default text-editor.
+> **Recommended!** As default text-editor.
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"        \
@@ -1984,7 +1984,7 @@ install -vm644 -t /usr/share/doc/nano-5.8/ doc/{nano.html,sample.nanorc}
 > #### `3.21.2` or newer
 > The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
 
-> **Optional!** Currently not required since using Cmake from "/clang1-tools", but useful for future usage.
+> **Recommended!** Currently not required since using Cmake from "/clang1-tools", but useful for future usage.
 ```bash
 # Disable applications that using Cmake from attempting to install files in "/usr/lib64".
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
