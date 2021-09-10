@@ -1902,7 +1902,7 @@ time { make install; }
 udevadm hwdb --update
 ```
 
-### `58` - OpenBSD mandoc
+### `59` - OpenBSD mandoc
 > #### `1.14.5` or newer
 > The OpenBSD mandoc package contains suite of tools compiling `mdoc` and `man`.
 
@@ -1950,6 +1950,10 @@ time { make; }
 
 # Install.
 time { make install; }
+```
+```bash
+# Generate mandoc database.
+makewhatis
 ```
 
 ### `59` - cpio
