@@ -1935,7 +1935,7 @@ OSNAME="Heiwa/Linux"
 # Toolchain flags.
 CC="$CC"
 AR="$AR"
-CFLAGS="-fcommon -flto=thin $CFLAGS $CPPFLAGS"
+CFLAGS="-fcommon -flto=thin $CFLAGS"
 LDFLAGS="$LDFLAGS"
 STATIC=
 EOF
