@@ -1991,6 +1991,7 @@ sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
 
 # Configure source using system installed libraries (partial).
 cmake -B build \
+    -DCMAKE_BUILD_TYPE=Release -Wno-dev      \
     -DCMAKE_INSTALL_PREFIX="/usr"            \
     -DCMAKE_C_FLAGS="-flto=thin $CFLAGS"     \
     -DCMAKE_CXX_FLAGS="-flto=thin $CXXFLAGS" \
