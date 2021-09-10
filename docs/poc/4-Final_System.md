@@ -1930,6 +1930,8 @@ MANM_MAN=mandoc_man
 MANM_MDOC=mandoc_mdoc
 # Fix utf-8 locale on musl.
 UTF8_LOCALE="C.UTF-8"
+# Use symlink instead of hardlink.
+LN="ln -sf"
 # Don't use less.
 HAVE_LESS_T=0
 # Build catman(8) which is disabled by default.
@@ -1939,8 +1941,6 @@ CC="$CC"
 AR="$AR"
 CFLAGS="-fcommon -flto=thin $CFLAGS"
 LDFLAGS="$LDFLAGS"
-# The STATIC variable is only used by "man.cgi".
-STATIC=
 EOF
 
 # Configure source.
