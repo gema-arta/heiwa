@@ -1902,7 +1902,50 @@ time { make install; }
 udevadm hwdb --update
 ```
 
-### `58` - cpio
+### `58` - OpenBSD mandoc
+> #### `1.14.5` or newer
+> The OpenBSD mandoc package contains suite of tools compiling mdoc and man.
+
+> **Required!**
+```bash
+# Apply patch (from Alpine Linux) to fix segfault when formatting tables on some manpages.
+patch -Np1 -i ../../extra/mandoc/patches/fix-tbl-null-pointer.patch
+
+# Prepare.
+cat > configure.local << EOF
+PREFIX="/usr"
+BINDIR="/usr/bin"
+SBINDIR="/usr/sbin"
+LIBDIR="/usr/lib"
+MANDIR="/usr/share/man"
+INCLUDEDIR="/usr/include/mandoc"
+MANPATH_DEFAULT="/usr/share/man:/usr/local/share/man"
+# Conflicts with man(7) and mdoc(7) from Linux `man-pages`.
+MANM_MAN=mandoc_man
+MANM_MDOC=mandoc_mdoc
+# Fix utf-8 locale on musl.
+UTF8_LOCALE="C.UTF-8"
+HAVE_LESS_T=0
+OSNAME="Heiwa/Linux"
+# Toolchain flags.
+CC="$CC"
+AR="$AR"
+CFLAGS="-fcommon -flto=thin $CFLAGS $CPPFLAGS"
+LDFLAGS="$LDFLAGS"
+STATIC=
+EOF
+
+# Configure source.
+./configure
+
+# Build.
+time { make; }
+
+# Install.
+time { make install; }
+```
+
+### `59` - cpio
 > #### `2.13` or newer
 > The cpio package contains tools for archiving.
 
@@ -1924,7 +1967,7 @@ time { make; }
 time { make install; }
 ```
 
-### `59` - Python3
+### `60` - Python3
 > #### `3.9.6` or newer
 > The Python3 package contains the Python development environment. It is useful for object-oriented programming, writing scripts, prototyping large programs, or developing entire applications.
 
@@ -1955,7 +1998,7 @@ time { make; }
 time { make install; }
 ```
 
-### `60` - GNU Nano
+### `XX` - GNU Nano
 > #### `5.8` or newer
 > The Nano package contains a small, simple text editor which aims to replace Pico, the default editor in the Pine package.
 
