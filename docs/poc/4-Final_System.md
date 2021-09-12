@@ -1930,7 +1930,7 @@ time { make prefix=/usr install; }
 > #### `1.14.5` or newer
 > The OpenBSD mandoc package contains suite of tools compiling `mdoc` and `man`.
 
-> **Required!**
+> **Required!** As default manpage suite tools.
 ```bash
 # Apply patch (from Alpine Linux) to fix segfault when formatting tables on some manpages.
 patch -Np1 -i ../../extra/mandoc/patches/fix-tbl-null-pointer.patch
