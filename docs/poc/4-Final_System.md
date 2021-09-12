@@ -1814,7 +1814,7 @@ time { make install; }
 > #### `4.1` or newer
 > Fast init for Linux systems. Reverse engineered from the EeePC fastinit over ten years ago by Claudio Matsuoka — "gaps filled with frog DNA …"
 
-> **Required!**
+> **Required!** As default init and process supervision.
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"              \
