@@ -468,9 +468,9 @@ time { make -C build; }
 time { make -C build install; }
 ```
 
-### `11` - NetBSD Curses
+### `11` - NetBSD curses
 > #### `0.3.2` or newer
-> The NetBSD Curses package contains libraries for terminal-independent handling of character screens.
+> The NetBSD curses package contains libraries for terminal-independent handling of character screens.
 
 > **Required!** Before `GNU Bash`, `GNU Readline`, `GNU Texinfo`, and `Util-linux`.
 ```bash
