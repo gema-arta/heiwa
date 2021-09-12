@@ -283,6 +283,18 @@ sed -e "s|\"${CXX}\"|\"x86_64-heiwa-linux-musl-clang++\"|" \
     -e "s|\"${CC}\"|\"x86_64-heiwa-linux-musl-clang\"|" -i ~/.bash_profile
 source                                                     ~/.bash_profile
 ```
+```bash
+# Build useful utilities for BSD-compability (from NetBSD, rewritted by Alpine Linux).
+time {
+    cc ${CFLAGS} -fpie ../extra/musl/files/musl-utils/getconf.c -o getconf && \
+    cc ${CFLAGS} -fpie ../extra/musl/files/musl-utils/getent.c -o getent   && \
+    cc ${CFLAGS} -fpie ../extra/musl/files/musl-utils/iconv.c -o iconv
+}
+
+# Install above utilities.
+install -vm755 -t /usr/bin/ get{conf,ent} iconv
+install -vm644 -t /usr/share/man/man1/ ../extra/musl/files/musl-utils/get{conf,ent}.1
+```
 
 <!--
 ### `X` - Microsoft mimalloc
@@ -840,18 +852,6 @@ ln -sfv lld            /usr/bin/ld
 sed -e "s|\"${CXX}\"|\"clang++\"|" \
     -e "s|\"${CC}\"|\"clang\"|" -i ~/.bash_profile    
 source                             ~/.bash_profile
-```
-```bash
-# Build useful utilities for BSD-compability (from NetBSD, rewritted by Alpine Linux).
-time {
-    cc ${CFLAGS} -fpie ../extra/musl/files/musl-utils/getconf.c -o getconf && \
-    cc ${CFLAGS} -fpie ../extra/musl/files/musl-utils/getent.c -o getent   && \
-    cc ${CFLAGS} -fpie ../extra/musl/files/musl-utils/iconv.c -o iconv
-}
-
-# Install above utilities.
-install -vm755 -t /usr/bin/ get{conf,ent} iconv
-install -vm644 -t /usr/share/man/man1/ ../extra/musl/files/musl-utils/get{conf,ent}.1
 ```
 ```bash
 # Quick test.
