@@ -31,7 +31,7 @@ find usr/include \( -name '.*' -o -name 'Makefile' \) -exec rm -fv {} \;
 
 # Install.
 mkdir -v /clang0-tools/${H_TRIPLET} && \
-cp -afv usr/include /clang0-tools/${H_TRIPLET}/.
+cp -rfv usr/include /clang0-tools/${H_TRIPLET}/.
 ```
 
 ### `2` - GNU Binutils
