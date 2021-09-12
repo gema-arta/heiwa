@@ -218,7 +218,7 @@ time { make LLVM=1 LLVM_IAS=1 HOSTCC=${CC} headers; }
 find usr/include \( -name '.*' -o -name 'Makefile' \) -exec rm -fv {} \;
 
 # Install.
-cp -afv usr/include /usr/.
+cp -rfv usr/include /usr/.
 ```
 
 ### `7` - musl
