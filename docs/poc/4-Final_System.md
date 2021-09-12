@@ -2033,9 +2033,9 @@ time { make; }
 time { make install; }
 ```
 
-### `XX` - GNU Nano
+### `XX` - GNU nano
 > #### `5.8` or newer
-> The Nano package contains a small, simple text editor which aims to replace Pico, the default editor in the Pine package.
+> The GNU nano package contains a small, simple text editor which aims to replace Pico, the default editor in the Pine package.
 
 > **Recommended!** As default text-editor.
 ```bash
