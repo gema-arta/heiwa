@@ -476,7 +476,7 @@ time { make -C build install; }
 # Build.
 time { make CFLAGS="-flto=thin $CFLAGS" all-dynamic; }
 
-# Install and create symlinks as `libtinfo` libraries (which actually replace GNU Ncurses).
+# Install and create symlinks as `libtinfo` libraries (which actually replace GNU ncurses).
 time {
     make PREFIX=/usr install-{dynamic,manpages}
     ln -sfv libterminfo.so /usr/lib/libtinfo.so
