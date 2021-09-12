@@ -284,7 +284,7 @@ sed -e "s|\"${CXX}\"|\"x86_64-heiwa-linux-musl-clang++\"|" \
 source                                                     ~/.bash_profile
 ```
 ```bash
-# Build useful utilities for BSD-compability (from NetBSD, rewritted by Alpine Linux).
+# Build useful utilities for BSD-compability (from NetBSD, rewritten by Alpine Linux).
 time {
     cc ${CFLAGS} -fpie ../extra/musl/files/musl-utils/getconf.c -o getconf && \
     cc ${CFLAGS} -fpie ../extra/musl/files/musl-utils/getent.c -o getent   && \
