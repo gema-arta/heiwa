@@ -38,10 +38,10 @@ fi
 
 ### `2` - Entering the Chroot Environment
 ```bash
-# Term variable is set to `xterm` for better compability, instead of "$TERM" that will broken if using `rxvt-unicode`.
+# The term variable is set to `xterm` rather than "$TERM" that broken when using `rxvt-unicode`. Also disable hashing by passing `+h` option.
 if [[ -n "$HEIWA" ]]; then
     chroot "$HEIWA" /clang1-tools/usr/bin/env -i                                 \
-    HOME="/root" TERM="xterm" PS1='(heiwa chroot) \u: \w \$ '                    \
+    TERM=xterm HOME=/root PS1="(heiwa chroot) \u: \w \$ "                        \
     PATH="/usr/sbin:/usr/bin:/sbin:/bin:/clang1-tools/usr/bin:/clang1-tools/bin" \
     /clang1-tools/bin/bash --login +h
 fi
@@ -2126,7 +2126,7 @@ rm -rf /clang{0,1}-tools
 logout
 
 # From now on, use this updated chroot command any time you need to reenter the chroot environment after exiting.
-# Term variable is set to `xterm` for better compability, instead of "$TERM" that will broken if using `rxvt-unicode`.
+# The term variable is set to `xterm` rather than "$TERM" that broken when using `rxvt-unicode`.
 if [[ -n "$HEIWA" ]]; then
     chroot "$HEIWA" /usr/bin/env -i      \
     HOME="/root" TERM="xterm"            \
