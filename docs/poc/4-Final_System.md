@@ -997,7 +997,7 @@ rm -fv /usr/lib/libzstd.a
 > #### `2.6` or newer
 > The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
 
-> **Required!**
+> **Required!** As default gzip data compressor and decompressor
 ```bash
 # Make sure to use symlink instead of hardlink for `unpigz`.
 sed -i 's|ln -f|ln -sf|' Makefile
