@@ -913,12 +913,12 @@ sed -e 's|(PREFIX)/man|(PREFIX)/share/man|g'   \
     
 # Prepare.
 time {
-    make CFLAGS="-fPIC -flto=thin $CFLAGS" \
+    make CFLAGS="-flto=thin $CFLAGS" \
     -f Makefile-libbz2_so && make clean
 }
 
 # Build.
-time { make CFLAGS="-fPIC -flto=thin $CFLAGS"; }
+time { make CFLAGS="-flto=thin $CFLAGS"; }
 
 # Install (also shared libraries) and fix the symlinks.
 time {
