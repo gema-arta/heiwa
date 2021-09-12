@@ -266,10 +266,9 @@ install -vm755 -t /sbin/ ../../extra/musl/files/ldconfig
 
 # Install `musl-legacy-compat` (from Void Linux).
 for B in {cdefs,queue,tree}.h; do
-    install -vm644 -t /usr/include/sys/ \
-    ../../extra/musl/files/musl-legacy-compat/${B}
-done; unset B && install -vm644 -t /usr/include/ \
-../../extra/musl/files/musl-legacy-compat/error.h
+    install -vm644 -t /usr/include/sys/  ../../extra/musl/files/musl-legacy-compat/${B}
+done; unset B
+install -vm644 -t /usr/include/ ../../extra/musl/files/musl-legacy-compat/error.h
 ```
 ```bash
 # Configure Stage-1 Clang/LLVM with new triplet to produce binaries with "/lib/ld-musl-x86_64.so.1" and libraries from "/usr/*".
