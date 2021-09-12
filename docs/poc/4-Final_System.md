@@ -1899,6 +1899,8 @@ udevadm hwdb --update
 > **Recommended!**
 ```bash
 # Removing conflicts manpages and not relavant since using alternate packages.
+# musl
+rm -fv man3/err.3           # Should not present since use musl libc.
 # musl-utils
 rm -fv man1/getent.1        # Already provided by Alpine / NetBSD.
 rm -fv man1/iconv.1         # Should not present since use musl libc.
