@@ -286,9 +286,9 @@ source                                                     ~/.bash_profile
 ```bash
 # Build useful utilities for BSD-compability (from NetBSD, rewritten by Alpine Linux).
 time {
-    ${CC} -flto=thin ${CFLAGS} -fpie ../extra/musl/files/musl-utils/getconf.c -o getconf && \
-    ${CC} -flto=thin ${CFLAGS} -fpie ../extra/musl/files/musl-utils/getent.c -o getent   && \
-    ${CC} -flto=thin ${CFLAGS} -fpie ../extra/musl/files/musl-utils/iconv.c -o iconv
+    ${CC} -flto=thin ${CFLAGS} -fpie ../../extra/musl/files/musl-utils/getconf.c -o getconf && \
+    ${CC} -flto=thin ${CFLAGS} -fpie ../../extra/musl/files/musl-utils/getent.c -o getent   && \
+    ${CC} -flto=thin ${CFLAGS} -fpie ../../extra/musl/files/musl-utils/iconv.c -o iconv
 }
 
 # Install above utilities and the manpages.
