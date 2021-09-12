@@ -1343,7 +1343,7 @@ time { make install; }
 > #### `5.1` (with patch level 8) or newer
 > The GNU Bash package contains the Bourne-Again SHell.
 
-> **Required!**
+> **Required!** As default command-line interpreter or shell.
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"           \
