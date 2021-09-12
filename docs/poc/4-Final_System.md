@@ -399,6 +399,7 @@ install -vm444 -t /usr/share/zoneinfo/ {iso3166,zone{1970,}}.tab
 zic -b fat -y ./yearistype -d /usr/share/zoneinfo ${timezones}
 zic -b fat -y ./yearistype -d /usr/share/zoneinfo/right -L leapseconds ${timezones}
 zic -b fat -y ./yearistype -d /usr/share/zoneinfo -p America/New_York
+unset timezones
 ```
 ```bash
 # Configure timezone.
@@ -419,7 +420,7 @@ cp -fv /usr/share/zoneinfo/<xxx> /etc/localtime
 ```
 ```bash
 # Back to "/sources/pkgs" directory.
-popd && rm -rf tzdata && unset timezones
+popd && rm -rf tzdata
 ```
 
 ### `9` - musl-locales
