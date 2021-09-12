@@ -291,7 +291,7 @@ time {
     cc ${CFLAGS} -fpie ../extra/musl/files/musl-utils/iconv.c -o iconv
 }
 
-# Install above utilities.
+# Install above utilities and the manpages.
 install -vm755 -t /usr/bin/ get{conf,ent} iconv
 install -vm644 -t /usr/share/man/man1/ ../extra/musl/files/musl-utils/get{conf,ent}.1
 ```
