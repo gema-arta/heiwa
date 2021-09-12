@@ -134,9 +134,9 @@ time { make -C build; }
 time { make -C build install; }
 ```
 
-### `5` - NetBSD Curses
+### `5` - NetBSD curses
 > #### `0.3.2` or newer
-> The NetBSD Curses package contains libraries for terminal-independent handling of character screens.
+> The NetBSD curses package contains libraries for terminal-independent handling of character screens.
 
 > **Required!** To build Stage-1 Clang/LLVM and for the most programs that depends on `-ltinfo` or `-lterminfo` linker's flags.
 ```bash
