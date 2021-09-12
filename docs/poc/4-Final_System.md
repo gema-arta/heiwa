@@ -426,7 +426,7 @@ popd && rm -rf tzdata && unset timezones
 > #### `?` (git)
 > The musl-locales package contains "/usr/bin/locale" implementation, which works on musl libc (with limitations in musl itself).
 
-> **Required!**
+> **Required!** Since using musl libc.
 ```bash
 # Configure source.
 cmake -B build \
