@@ -1178,7 +1178,7 @@ mv -fv /usr/share/doc/openssl{,-1.1.1l}
 cp -rfv doc/* /usr/share/doc/openssl-1.1.1l/.
 ```
 
-### `31` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Man, Psmisc, Sed, Sysklogd, Tar)
+### `31` - Toybox (Bc, Coreutils, File, Findutils, Grep, Inetutils, Psmisc, Sed, Sysklogd, Tar)
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
@@ -1198,10 +1198,10 @@ link ln logname ls md5sum mkdir mkfifo mknod mktemp mv nice nl nohup nproc od pa
 printenv printf pwd readlink realpath rm rmdir seq sha1sum sha224sum sha256sum sha384sum
 sha512sum shred sleep sort split stat stty sync tac tail tee test timeout touch tr true
 truncate tty uname uniq unlink wc who whoami yes file find xargs egrep grep fgrep
-dnsdomainname ifconfig hostname ping telnet tftp traceroute man killall sed klogd tar
+dnsdomainname ifconfig hostname ping telnet tftp traceroute killall sed klogd tar
 EOF
 
-# Verify 102 commands, and make sure enabled (=y).
+# Verify 101 commands, and make sure enabled (=y).
 # Pipe to ` | wc -l` at the right of `done` to check the total of commands.
 for X in ${TOYBOX}; do
     grep -v '#' .config | grep --color=auto -i "CONFIG_${X}=" \
@@ -1211,7 +1211,7 @@ done
 # Build with verbose.
 time { make CFLAGS="-flto=thin $CFLAGS" V=1; }
 
-# Verify compiled 102 commands.
+# Verify compiled 101 commands.
 ./toybox | tr ' ' '\n'i \
 | grep --color=auto -xE $(echo ${TOYBOX} | tr ' ' '|'i) | wc -l
 
@@ -1221,7 +1221,7 @@ time { make CFLAGS="-flto=thin $CFLAGS" V=1; }
 ./toybox | tr ' ' '\n'i \
 | grep --color=auto -vxE $(echo ${TOYBOX} | tr ' ' '|'i)
 
-# So, totally is 105 commands.
+# So, totally is 104 commands.
 ./toybox | wc -w
 
 # Install.
