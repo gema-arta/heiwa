@@ -171,8 +171,7 @@ STRIP="llvm-strip"
 export CC CXX LD CC_LD CXX_LD AR AS NM OBJCOPY OBJDUMP RANLIB READELF SIZE STRIP
 
 # Performance flags.
-COMMON_FLAGS="-march=native -O2 -ftree-vectorize -pipe"
-export COMMON_FLAGS
+export COMMON_FLAGS="-march=native -O2 -ftree-vectorize -pipe"
 
 # Hardened flags. Only Buffer Overflow Detector.
 export CPPFLAGS="-D_FORTIFY_SOURCE=2"
