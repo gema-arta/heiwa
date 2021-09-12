@@ -48,7 +48,8 @@ if [[ -n "$HEIWA" ]]; then
 fi
 
 # The `-i` option given to the env command will clear all variables of the chroot environment.
-# Note! that the bash prompt will say "I have no name!". This is normal because the "/etc/passwd" file has not been created yet.
+# Note! that the bash prompt will say "I have no name!".
+# This is normal because the "/etc/passwd" file has not been created yet.
 ```
 > #### * End of as root!
 
