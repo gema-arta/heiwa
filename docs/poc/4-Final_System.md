@@ -1863,7 +1863,7 @@ time { make install; }
 > #### `3.2.10` or newer
 > The Eudev package contains programs for dynamic creation of device nodes.
 
-> **Required!**
+> **Required!** As default device manager.
 ```bash
 # Fix misplaced hwdb dir to be correct as systemd-udev.
 sed -i '/udevhwdbdir/s/${udevconfdir}/${udevlibexecdir}/' configure
