@@ -696,7 +696,7 @@ time { make PREFIX=/usr install-{header,dynamic}; }
 > - Low level support for a standard C++ library from LLVM;  
 > - New implementation of the C++ standard library, targeting C++11 from LLVM.
 
-> **Required!**
+> **Required!** As mentioned in the description above.
 ```bash
 # Exit from LLVM source directory if already entered after decompressing.
 popd
