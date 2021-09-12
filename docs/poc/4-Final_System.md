@@ -1900,9 +1900,9 @@ udevadm hwdb --update
 ```bash
 # Removing conflicts manpages and not relavant since using alternate packages.
 # musl-utils
-rm -fv man1/iconv.1
-rm -fv man1/ldd.1
-rm -fv man1/getent.1
+rm -fv man1/iconv.1         # Should not present if using musl libc.
+rm -fv man1/ldd.1           # Should not present if using musl libc.
+rm -fv man1/getent.1        # Already installed from Alpine/NetBSD.
 # tzdata
 rm -fv man5/tzfile.5
 rm -fv man8/zdump.8
