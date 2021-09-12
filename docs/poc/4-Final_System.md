@@ -1183,7 +1183,7 @@ cp -rfv doc/* /usr/share/doc/openssl-1.1.1l/.
 > #### `0.8.5`
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
-> **Required!**
+> **Required!** As mentioned in the description above.
 ```bash
 # Copy the Toybox .config file.
 cp -v ../../extra/toybox/files/.config.finalsys .config
