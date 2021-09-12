@@ -1918,6 +1918,9 @@ rm -fv man7/man.7           # Already provided by mandoc.
 # xf86-input-mouse
 rm -fv man4/mouse.4         # Already provided by xf86-input-mouse.
 
+# Fix the `install` that uses GNU coreutils style which not provided in Toybox.
+sed -i 's|-T ||g' Makefile
+
 # Install.
 time { make prefix=/usr install; }
 ```
