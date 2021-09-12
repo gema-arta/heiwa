@@ -1900,22 +1900,23 @@ udevadm hwdb --update
 ```bash
 # Removing conflicts manpages and not relavant since using alternate packages.
 # musl-utils
-rm -fv man1/getent.1        # Already installed from Alpine / NetBSD.
+rm -fv man1/getent.1        # Already provided by Alpine / NetBSD.
 rm -fv man1/iconv.1         # Should not present since use musl libc.
 rm -fv man1/ldd.1           # Should not present since use musl libc.
 # tzdata
 rm -fv man5/tzfile.5        # Should not present since use tzdata.
 rm -fv man8/tzselect.8      # Should not present since use tzdata.
-rm -fv man8/zic.8           # Already installed from tzdata.
-rm -fv man8/zdump.8         # Already installed from tzdata.
+rm -fv man8/zic.8           # Already provided by tzdata.
+rm -fv man8/zdump.8         # Already provided by tzdata.
 # shadow
-rm -fv man5/passwd.5
+rm -fv man5/passwd.5        # Already provided by shadow.
+rm -fv man3/getspnam.3      # Already provided by shadow.
 # openssl
-rm -fv man3/rand.3
+rm -fv man3/rand.3          # Already provided by openssl.
 # mandoc
-rm -fv man7/man.7
+rm -fv man7/man.7           # Already provided by mandoc.
 # xf86-input-mouse
-rm -fv man4/mouse.4
+rm -fv man4/mouse.4         # Already provided by xf86-input-mouse.
 
 # Install.
 time { make prefix=/usr install; }
