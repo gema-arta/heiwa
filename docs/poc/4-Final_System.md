@@ -38,7 +38,7 @@ fi
 
 ### `2` - Entering the Chroot Environment
 ```bash
-# The term variable is set to `xterm` rather than "$TERM" that broken when using `rxvt-unicode`.
+# The term variable is set to `xterm` rather than "$TERM" that broken when using `rxvt-unicode`. It's up to you.
 # Also disable hashing by passing `+h` option.
 if [[ -n "$HEIWA" ]]; then
     chroot "$HEIWA" /clang1-tools/usr/bin/env -i                                 \
