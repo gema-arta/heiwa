@@ -84,9 +84,8 @@ fi
 > > The below rules can slow down the system, especially GUI if run.
 ```bash
 if ! grep -qo 'heiwa.*priority' /etc/security/limits.conf; then
-    cat >> /etc/security/limits.conf << "EOF"
-        echo "heiwa            -       priority        -1"
-    EOF
+    echo "heiwa            -       priority        -1" >> \
+    /etc/security/limits.conf
 fi
 ```
 > #### * End of as root!
