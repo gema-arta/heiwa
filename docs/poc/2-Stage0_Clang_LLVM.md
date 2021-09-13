@@ -105,7 +105,7 @@ time { make install-{gcc,target-libgcc}; }
 # Build.
 time { make; }
 
-# Install and fix a wrong shared object symlink, also create a `ldd` symlink to use to print shared object dependencies.
+# Install and fix wrong shared object symlink, also create a `ldd` symlink to use to print shared object dependencies.
 time {
     make DESTDIR=/clang0-tools install
     ln -sfv libc.so /clang0-tools/lib/ld-musl-x86_64.so.1
@@ -113,7 +113,7 @@ time {
 }
 ```
 ```bash
-# Configure PATH for dynamic linker.
+# Configure path for the dynamic linker.
 mkdir -v /clang0-tools/etc && \
 cat > /clang0-tools/etc/ld-musl-x86_64.path << EOF
 /clang0-tools/lib
