@@ -34,11 +34,11 @@ mkdir -pv "$HEIWA"
 ```
 > Next, mount the target volume/partition.
 
-> An exanmple for **EXT4** on **Linux-5.13.x** or newer.
+> An example for **EXT4** on **Linux-5.13.x** or newer.
 ```bash
 mount -vo noatime,discard /dev/sdxY "$HEIWA"
 ```
-> An exanmple for **F2FS** on **Linux-5.13.x** or newer.
+> An example for **F2FS** on **Linux-5.13.x** or newer.
 ```bash
 mount -vo noatime,gc_merge,compress_algorithm=lz4,compress_extension='*',compress_chksum,atgc /dev/sdxY "$HEIWA"
 ```
