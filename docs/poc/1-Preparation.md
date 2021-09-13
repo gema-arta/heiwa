@@ -67,6 +67,10 @@ passwd heiwa
 > ```bash
 > echo {${HEIWA},}/clang{0,1}-tools
 > ```
+> Should output:
+> ```bash
+> /media/Heiwa/clang0-tools /media/Heiwa/clang1-tools /clang0-tools /clang1-tool
+> ```
 ```bash
 if [[ -n "$HEIWA" ]]; then
     chmod -vR a+wt ${HEIWA}/sources
