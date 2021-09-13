@@ -18,16 +18,19 @@ mkfs.ext4 -m 0 -L "Heiwa.Linux" /dev/sdxY
 ```bash
 mkfs.f2fs -l "Heiwa.Linux" -O extra_attr,inode_checksum,sb_checksum,compression,encrypt /dev/sdxY
 ```
+> Export the mount point variable and create the directory if not exist. Why "/media"? It can be detected via GVFS with D-Bus.
 ```bash
-# Export the mount point variable and create the directory if not exist. Why "/media"? It can be detected via GVFS.
 export HEIWA="/media/Heiwa"
 mkdir -pv "$HEIWA"
 ```
-```bash
-# Mount the target volume/partition. EXT4 example on Linux-5.13.x or newer.
-mount -vo noatime,discard /dev/sdxY "$HEIWA"
+> Next, mount the target volume/partition.
 
-# Mount the target volume/partition. F2FS example on Linux-5.13.x or newer.
+> An exanmple for EXT4 on Linux-5.13.x or newer.
+```bash
+mount -vo noatime,discard /dev/sdxY "$HEIWA"
+```
+> An exanmple for F2FS on Linux-5.13.x or newer.
+```bash
 mount -vo noatime,gc_merge,compress_algorithm=lz4,compress_extension='*',compress_chksum,atgc /dev/sdxY "$HEIWA"
 ```
 
