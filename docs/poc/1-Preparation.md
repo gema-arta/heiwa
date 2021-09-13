@@ -48,11 +48,11 @@ mount -vo noatime,gc_merge,compress_algorithm=lz4,compress_extension='*',compres
 ```bash
 if [[ -n "$HEIWA" ]]; then
     mkdir -pv ${HEIWA}/clang{0,1}-tools
-    ln -sv ${HEIWA}/clang0-tools /  && \
-    ln -sv ${HEIWA}/clang1-tools /  && \
-    ln -sv ./bin /clang1-tools/sbin && \
-    ln -sv ../bin /clang1-tools/bin && \
-    ln -sv ../sbin /clang1-tools/sbin
+    ln -sfv ${HEIWA}/clang0-tools /
+    ln -sfv ${HEIWA}/clang1-tools /
+    ln -sfv ./bin /clang1-tools/sbin
+    ln -sfv ../bin /clang1-tools/bin
+    ln -sfv ../sbin /clang1-tools/sbin
     mkdir -pv ${HEIWA}/sources/{extra,pkgs}
 fi
 ```
