@@ -113,7 +113,7 @@ time {
 }
 ```
 ```bash
-# Configure PATH for dynamic linker.
+# Configure path for dynamic linker.
 mkdir -v /clang0-tools/etc && \
 cat > /clang0-tools/etc/ld-musl-x86_64.path << EOF
 /clang0-tools/lib
