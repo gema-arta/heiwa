@@ -133,7 +133,7 @@ L_TARGET="X86"                                            # LLVM specific arch b
 T_TRIPLET="x86_64-pc-linux-musl"                          # Target triplet for final toolchain.
 H_TRIPLET="$(echo "$T_TRIPLET" | sed 's/-[^-]*/-heiwa/')" # Target triplet for cross-toolchain.
 ```
-> Let's check if it's correct.
+> Let's check if the above variables are all correct.
 ```bash
 printf "%b\n" $C_{TRIPLET,ARCH,CPU} ${L_TARGET} ${T_TRIPLET} ${H_TRIPLET}
 ```
