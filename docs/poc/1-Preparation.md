@@ -63,7 +63,7 @@ passwd heiwa
 ```
 > #### Setup directory permissions
 
-> **This is danger**, so verify the variables before use `chown`.
+> This is danger, so verify the variables before use `chown`.
 > ```bash
 > echo {${HEIWA},}/clang{0,1}-tools
 > 
