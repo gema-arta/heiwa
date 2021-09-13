@@ -9,8 +9,6 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 > **Warning!**  
 > Everything in this repo is still unstable. Don't practice it yourself. Still improvising.
 
-<br>
-
 ## Roadmap <img alt="" align="right" src="https://badges.pufler.dev/visits/heiwalinux/heiwa?style=flat-square&label=&color=000000&logo=GitHub&logoColor=white&labelColor=373e4d"/>
 - [x] Specifies the packages to be used, instead of mainstream GNU/Linux distribution.
 
