@@ -66,10 +66,10 @@ passwd heiwa
 > **This is danger**, so verify the variables before use `chown`.
 > ```bash
 > echo {${HEIWA},}/clang{0,1}-tools
-> ```
-> Should output:
-> ```bash
-> /media/Heiwa/clang0-tools /media/Heiwa/clang1-tools /clang0-tools /clang1-tool
+> 
+> # | The output should be:
+> # |-----------------------
+> # |/media/Heiwa/clang0-tools /media/Heiwa/clang1-tools /clang0-tools /clang1-tools
 > ```
 ```bash
 if [[ -n "$HEIWA" ]]; then
