@@ -79,8 +79,7 @@ if [[ -n "$HEIWA" ]]; then
 fi
 ```
 > This is an optional section to make privileged user use 19 as default user-level priority through linux-PAM.
-
-> The below rules can slow down the system, especially GUI if run.
+> > The below rules can slow down the system, especially GUI if run.
 ```bash
 if [[ -f "/etc/security/limits.conf" ]]; then
     echo "heiwa            -       priority        -1" >> /etc/security/limits.conf
