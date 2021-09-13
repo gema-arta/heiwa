@@ -10,13 +10,11 @@
 
 > #### * Beginning of as root!
 ### `1` - Prepare a volume/partition
-> #### EXT4 
-> Recommended for HDDs.
+> #### EXT4 - Recommended for HDDs.
 ```bash
 mkfs.ext4 -m 0 -L "Heiwa.Linux" /dev/sdxY
 ```
-> #### F2FS
-> Recommended for SSDs.
+> #### F2FS - Recommended for SSDs.
 ```bash
 mkfs.f2fs -l "Heiwa.Linux" -O extra_attr,inode_checksum,sb_checksum,compression,encrypt /dev/sdxY
 ```
