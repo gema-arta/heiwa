@@ -8,11 +8,13 @@
 > sh <(curl -s "https://raw.githubusercontent.com/heiwalinux/heiwa/main/version-check")
 > ```
 > <details>
-> <summary><strong>Screenshot of Gentoo/Linux host</strong></summary>
+> <summary>Screenshot of Gentoo/Linux host</summary>
 > 
+> <br>
 > <p align="center"><img src="https://i.imgur.com/WwBmI68.png" alt=""/></p>
 > 
 > </details>
+> 
 
 > #### * Beginning of as root!
 ### `1` - Prepare a volume/partition
