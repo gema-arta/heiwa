@@ -19,12 +19,11 @@ The purpose of this stage is to build a temporary Clang/LLVM toolchain with GCC 
 
 > **Required!** As mentioned in the description above.
 ```bash
-# Make sure there are no stale files embedded in the package.
-time { make mrproper; }
-
 # The recommended make target `headers_install` cannot be used, because it requires `rsync`, which may not be available.
 # The headers are first placed in "./usr/", then copied to the needed location.
-time { make ARCH=${C_ARCH} headers; }
+
+# Make sure there are no stale files embedded in the package. Then build.
+time { make mrproper && make ARCH=${C_ARCH} headers; }
 
 # Remove unnecessary dotfiles and Makefile.
 find usr/include \( -name '.*' -o -name 'Makefile' \) -exec rm -fv {} \;
