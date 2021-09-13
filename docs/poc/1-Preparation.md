@@ -123,8 +123,9 @@ C_CPU="x86-64"                                            # CPU arch, used to bu
 L_TARGET="X86"                                            # LLVM specific arch build target.
 T_TRIPLET="x86_64-pc-linux-musl"                          # Target triplet for final toolchain.
 H_TRIPLET="$(echo "$T_TRIPLET" | sed 's/-[^-]*/-heiwa/')" # Target triplet for cross-toolchain.
-
-# Let's check if it's correct.
+```
+> Let's check if it's correct.
+```bash
 printf "%b\n" $C_{TRIPLET,ARCH,CPU} ${L_TARGET} ${T_TRIPLET} ${H_TRIPLET}
 
 # | On the glibc host, the output should be:
@@ -136,8 +137,8 @@ printf "%b\n" $C_{TRIPLET,ARCH,CPU} ${L_TARGET} ${T_TRIPLET} ${H_TRIPLET}
 # |x86_64-pc-linux-musl
 # |x86_64-heiwa-linux-musl
 ```
+> If you want multitasking responsiveness when using multiple jobs, set the load average to prevent slow down system.
 ```bash
-# If you want multitasking responsiveness when using multiple jobs, set the load average to prevent slow down system.
 cat >> ~/.bashrc << EOF
 C_TRIPLET="${C_TRIPLET}"
 C_ARCH="${C_ARCH}"
