@@ -14,7 +14,7 @@
 > <p align="center"><img src="https://i.imgur.com/WwBmI68.png" alt=""/></p>
 > 
 > </details>
-> 
+> <br>
 
 > #### * Beginning of as root!
 ### `1` - Prepare a volume/partition
