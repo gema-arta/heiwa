@@ -55,16 +55,18 @@ fi
 ```
 
 ### `3` - Adding privileged user
+> Setup privileged user.
 ```bash
-# Setup privileged user.
 groupadd heiwa
 useradd -s /bin/bash -g heiwa -m -k /dev/null heiwa
 passwd heiwa
 ```
+> # Setup directory permissions.
+> Warning! This is danger, so verify the variables before use `chown`.
+> ```bash
+> echo {${HEIWA},}/clang{0,1}-tools
+> ```
 ```bash
-# Setup directory permissions.
-# Warning! This is danger, so check the variables before `chown`.
-# echo {${HEIWA},}/clang{0,1}-tools
 if [[ -n "$HEIWA" ]]; then
     chmod -vR a+wt ${HEIWA}/sources
     chown -Rv heiwa ${HEIWA}/sources
