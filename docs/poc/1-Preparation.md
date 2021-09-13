@@ -78,7 +78,7 @@ if [[ -n "$HEIWA" ]]; then
     chown -Rv heiwa {${HEIWA},}/clang{0,1}-tools
 fi
 ```
-> This is an optional section to make privileged user use 19 as default user-level priority through linux-PAM.
+> This is an optional section to make privileged user use **19** as default user-level priority through linux-PAM. Don't use **RT** priorities! It's bad.
 > > The below rules can slow down the system, especially GUI if run.
 ```bash
 if [[ -f "/etc/security/limits.conf" ]]; then
