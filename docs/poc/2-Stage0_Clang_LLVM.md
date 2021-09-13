@@ -78,7 +78,7 @@ CFLAGS="-g0 -O0 -pipe" CXXFLAGS="-g0 -O0 -pipe" ../configure \
     --with-{arch=${C_CPU},newlib}                            \
     --without-headers                                        \
     --enable-{clocale=generic,languages=c,threads=no}        \
-    --disable-{decimal-float,multilib,nls,shared,werror}     \
+    --disable-{decimal-float,lto,multilib,nls,shared,werror} \
     --disable-lib{atomic,gomp,itm,mpx,mudflap,quadmath,sanitizer,ssp,stdcxx,vtv}
 
 # Build only the minimum.
@@ -154,7 +154,7 @@ CFLAGS="-g0 $CFLAGS" CXXFLAGS="-g0 $CXXFLAGS" ../configure \
     --enable-{clocale=generic,languages=c\,c++}            \
     --enable-{shared,threads=posix}                        \
     --disable-lib{mpx,mudflap,sanitizer,ssp,vtv}           \
-    --disable-{gnu-unique-object,multilib,nls,symvers,werror}
+    --disable-{gnu-unique-object,lto,multilib,nls,symvers,werror}
 
 # Build.
 time { make AS_FOR_TARGET=${H_TRIPLET}-as LD_FOR_TARGET=${H_TRIPLET}-ld; }
