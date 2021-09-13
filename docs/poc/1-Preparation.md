@@ -44,9 +44,8 @@ mount -vo noatime,gc_merge,compress_algorithm=lz4,compress_extension='*',compres
 ```
 
 ### `2` - Creating sources and toolchains directories
+> Create directories to build Clang/LLVM with GCC libraries and the final toolchain without GCC libraries. As root, link them to host's root directory.
 ```bash
-# Create directories to build Clang/LLVM with GCC libraries and the final toolchain without GCC libraries.
-# As root, link them to host's root directory.
 if [[ -n "$HEIWA" ]]; then
     mkdir -pv ${HEIWA}/clang{0,1}-tools
     ln -sv ${HEIWA}/clang0-tools /
