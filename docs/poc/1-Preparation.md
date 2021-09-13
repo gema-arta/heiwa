@@ -11,6 +11,7 @@
 > #### * Beginning of as root!
 ### `1` - Prepare a volume/partition
 > #### Formatting
+
 > **EXT4**. Recommended for HDDs.
 ```bash
 mkfs.ext4 -m 0 -L "Heiwa.Linux" /dev/sdxY
