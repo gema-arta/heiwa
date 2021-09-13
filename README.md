@@ -7,7 +7,7 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 </samp></p></pre>
 
 > **Warning!**  
-> Everything in this repo is still unstable and still improvising so don't practice it yourself. The PoC is messed up.
+> Everything in this repo is still unstable and still improvising, so don't practice it by yourself. The PoC is messed up.
 
 ## Roadmap <img alt="" align="right" src="https://badges.pufler.dev/visits/heiwalinux/heiwa?style=flat-square&label=&color=000000&logo=GitHub&logoColor=white&labelColor=373e4d"/>
 - [x] Specifies the packages to be used, instead of mainstream GNU/Linux distribution.
