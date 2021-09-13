@@ -110,7 +110,7 @@ umask 022
 unalias -a
 HEIWA="${HEIWA:-/media/Heiwa}"
 LC_ALL="POSIX"
-PATH="/clang0-tools/usr/bin:/clang0-tools/bin:/clang1-tools/usr/bin:/clang1-tools/bin:/usr/bin:/bin"
+PATH="/clang0-tools/bin:/clang1-tools/bin:/usr/bin:/bin"
 LLVM_SRC="\${HEIWA}/sources/llvm"
 export HEIWA LC_ALL PATH LLVM_SRC
 EOF
