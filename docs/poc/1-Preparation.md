@@ -53,7 +53,7 @@ if [[ -n "$HEIWA" ]]; then
         ln -sfv ${HEIWA}/clang0-tools /
         ln -sfv ${HEIWA}/clang1-tools /
         ln -sfv ./bin /clang1-tools/sbin
-        if mkdir -pv /clang1-tools/usr; then
+        if mkdir -v /clang1-tools/usr; then
             ln -sfv ../bin /clang1-tools/usr/bin
             ln -sfv ../sbin /clang1-tools/usr/sbin
         fi
