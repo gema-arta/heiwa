@@ -47,13 +47,14 @@ mount -vo noatime,gc_merge,compress_algorithm=lz4,compress_extension='*',compres
 > Create directories to build Clang/LLVM with GCC and the final toolchain without GCC libraries. As root, link them to host's root directory.
 ```bash
 if [[ -n "$HEIWA" ]]; then
-    mkdir -pv ${HEIWA}/clang{0,1}-tools
-    ln -sfv ${HEIWA}/clang0-tools /
-    ln -sfv ${HEIWA}/clang1-tools /
-    ln -sfv ./bin /clang1-tools/sbin
-    if mkdir -pv /clang1-tools/usr; then
-        ln -sfv ../bin /clang1-tools/usr/bin
-        ln -sfv ../sbin /clang1-tools/usr/sbin
+    if mkdir -pv ${HEIWA}/clang{0,1}-tools; then
+        ln -sfv ${HEIWA}/clang0-tools /
+        ln -sfv ${HEIWA}/clang1-tools /
+        ln -sfv ./bin /clang1-tools/sbin
+        if mkdir -pv /clang1-tools/usr; then
+            ln -sfv ../bin /clang1-tools/usr/bin
+            ln -sfv ../sbin /clang1-tools/usr/sbin
+        fi
     fi
     mkdir -pv ${HEIWA}/sources/{extra,pkgs}
 fi
