@@ -10,26 +10,28 @@
 
 > #### * Beginning of as root!
 ### `1` - Prepare a volume/partition
-> #### EXT4 - Recommended for HDDs.
+> #### Formatting
+> **EXT4**. Recommended for HDDs.
 ```bash
 mkfs.ext4 -m 0 -L "Heiwa.Linux" /dev/sdxY
 ```
-> #### F2FS - Recommended for SSDs.
+> **F2FS**. Recommended for SSDs.
 ```bash
 mkfs.f2fs -l "Heiwa.Linux" -O extra_attr,inode_checksum,sb_checksum,compression,encrypt /dev/sdxY
 ```
-> Export the mount point variable and create the directory if not exist. Why "/media"? It can be detected via GVFS with D-Bus.
+> Then, export the mount point variable and create the directory if not exist.  
+> Why "/media"? It easily detected via GVFS with D-Bus.
 ```bash
 export HEIWA="/media/Heiwa"
 mkdir -pv "$HEIWA"
 ```
 > Next, mount the target volume/partition.
 
-> An exanmple for EXT4 on Linux-5.13.x or newer.
+> An exanmple for **EXT4** on **Linux-5.13.x** or newer.
 ```bash
 mount -vo noatime,discard /dev/sdxY "$HEIWA"
 ```
-> An exanmple for F2FS on Linux-5.13.x or newer.
+> An exanmple for **F2FS** on **Linux-5.13.x** or newer.
 ```bash
 mount -vo noatime,gc_merge,compress_algorithm=lz4,compress_extension='*',compress_chksum,atgc /dev/sdxY "$HEIWA"
 ```
