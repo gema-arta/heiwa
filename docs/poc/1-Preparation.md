@@ -19,11 +19,11 @@
 ### `1` - Prepare a volume/partition
 > #### Formatting
 
-> **EXT4**. Recommended for HDDs.
+> **EXT4.** Recommended for HDDs.
 ```bash
 mkfs.ext4 -m 0 -L "Heiwa.Linux" /dev/sdxY
 ```
-> **F2FS**. Recommended for SSDs.
+> **F2FS.** Recommended for SSDs.
 ```bash
 mkfs.f2fs -l "Heiwa.Linux" -O extra_attr,inode_checksum,sb_checksum,compression,encrypt /dev/sdxY
 ```
@@ -46,7 +46,7 @@ mount -vo noatime,gc_merge,compress_algorithm=lz4,compress_extension='*',compres
 ### `2` - Creating sources and toolchains directories
 > Create directories to build Clang/LLVM with GCC and the final toolchain without GCC libraries. As root, link them to host's root directory.
 
-> "/clang1-tools" should use "/usr" merge with relative paths.
+> The "/clang1-tools" should use "/usr" merge with relative paths. **Why?** Because we implement it.
 ```bash
 if [[ -n "$HEIWA" ]]; then
     if mkdir -pv ${HEIWA}/clang{0,1}-tools; then
