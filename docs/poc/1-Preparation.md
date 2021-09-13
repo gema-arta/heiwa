@@ -92,10 +92,11 @@ fi
 
 > #### * Beginning of as privileged user!
 ### `4` - Setup privileged user's environment
+> First, login as privileged user in place of the current shell PID.
 ```bash
-# Login as privileged user in place of the current shell PID.
 exec su - heiwa
 ```
+> Then, setup the bash environment variables.
 ```bash
 cat > ~/.bash_profile << "EOF"
 exec env -i HOME="$HOME" TERM="$TERM" \
