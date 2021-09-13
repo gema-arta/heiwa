@@ -38,7 +38,7 @@ cp -rfv usr/include /clang0-tools/${H_TRIPLET}/.
 > #### `2.36.1` or newer
 > The GNU Binutils package contains a linker, an assembler, and other tools for handling object files.
 
-> **Required!** To build Stage-0 Clang/LLVM.
+> **Required!** To build the entire packages in this stage.
 ```bash
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build
@@ -60,7 +60,7 @@ time { make install; }
 > #### `10.3.1_git20210424` (from Alpine Linux)
 > The GCC package contains the GNU compiler collection, which includes the C and C++ compilers.
 
-> **Required!** This build of GCC is mainly done so that the musl libc can be built next.
+> **Required!** This build of GCC is mainly done, so that the musl libc can be built next.
 ```bash
 # GCC requires the GMP, MPFR, and MPC packages to either be present on the host or to be present in source form within the GCC source tree.
 tar xf ../gmp-6.2.1.tar.xz  && mv -fv gmp{-6.2.1,}
@@ -189,7 +189,7 @@ readelf -l a.out | grep --color=auto "Req.*ter"
 > #### `0.3.2` or newer
 > The NetBSD curses package contains libraries for terminal-independent handling of character screens.
 
-> **Required!** To build Stage-0 Clang/LLVM.
+> **Required!** To build the next step, Stage-0 Clang/LLVM.
 ```bash
 # Build.
 time { make CC=${H_TRIPLET}-gcc all-dynamic; }
