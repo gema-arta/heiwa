@@ -187,7 +187,7 @@ readelf -l a.out | grep --color=auto "Req.*ter"
 > #### `0.3.2` or newer
 > The NetBSD curses package contains libraries for terminal-independent handling of character screens.
 
-> **Required!** To build the next step, Stage-0 Clang/LLVM.
+> **Required!** For the next step, Stage-0 Clang/LLVM.
 ```bash
 # Build.
 time { make CC=${H_TRIPLET}-gcc all-dynamic; }
