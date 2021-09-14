@@ -334,7 +334,7 @@ rm -rf /clang0-tools/share/{info,man}/*
 # So, remove those files.
 find /clang0-tools/{lib{exec,64},{,${H_TRIPLET}/}lib}/ -name '*.la' -exec rm -fv {} \;
 
-# Strip off debugging symbols from binaries using `llvm-strip`.
+# Strip off all unneeded symbols from binaries using `llvm-strip`.
 # A large number of files will be reported "The file was not recognized as a valid object file".
 # These warnings can be safely ignored. These warnings indicate that those files are scripts instead of binaries.
 find /clang0-tools/{lib64,{,${H_TRIPLET}/}lib}/ -type f \( -name '*.a' -o -name '*.so*' \) -exec llvm-strip --strip-unneeded {} \;
