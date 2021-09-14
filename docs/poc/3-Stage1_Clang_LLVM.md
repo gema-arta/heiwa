@@ -68,7 +68,7 @@ cat > /clang1-tools/etc/ld-musl-x86_64.path << "EOF"
 EOF
 ```
 ```bash
-# Set compiler to new triplet from Stage-0 Clang/LLVM to use current libc built.
+# Set compiler to new triplet from Stage-0 Clang/LLVM to use current musl libc built.
 sed -e "s|\"${CXX}\"|\"${H_TRIPLET}-clang++\"|" \
     -e "s|\"${CC}\"|\"${H_TRIPLET}-clang\"|" -i ~/.bashrc
 source                                          ~/.bashrc
