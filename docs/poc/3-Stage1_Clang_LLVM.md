@@ -118,7 +118,7 @@ cp -rfv usr/include /clang1-tools/.
 > #### `2.0.5` or newer
 > The Zlib-ng package contains zlib data compression library for the next generation systems.
 
-> **Required!** By Pigz in the current stage and optionally enabled to build Stage-1 Clang/LLVM.
+> **Required!** By Pigz in the current stage and optionally enabled for Stage-1 Clang/LLVM built.
 ```bash
 # Configure source.
 cmake -B build \
