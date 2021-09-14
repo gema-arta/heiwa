@@ -153,7 +153,7 @@ CFLAGS="-g0 $CFLAGS" CXXFLAGS="-g0 $CXXFLAGS" ../configure \
     --enable-{clocale=generic,languages=c\,c++}            \
     --enable-{shared,threads=posix}                        \
     --disable-lib{mpx,mudflap,sanitizer,ssp,vtv}           \
-    --disable-{gnu-unique-object,lto,multilib,nls,symvers,werror}
+    --disable-{gnu-unique-object,lto,multilib,nls,static,symvers,werror}
 
 # Build.
 time { make AS_FOR_TARGET=${H_TRIPLET}-as LD_FOR_TARGET=${H_TRIPLET}-ld; }
