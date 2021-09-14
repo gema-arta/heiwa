@@ -125,9 +125,9 @@ cmake -B build \
     -DCMAKE_BUILD_TYPE=Release -Wno-dev    \
     -DCMAKE_INSTALL_PREFIX="/clang1-tools" \
     -DCMAKE_C_FLAGS="-flto=thin $CFLAGS"   \
+    -DBUILD_SHARED_LIBS=ON                 \
     -DWITH_NATIVE_INSTRUCTIONS=YES         \
-    -DZLIB_COMPAT=ON                       \
-    -DBUILD_SHARED_LIBS=ON
+    -DZLIB_COMPAT=ON
 
 # Build.
 time { make -C build; }
