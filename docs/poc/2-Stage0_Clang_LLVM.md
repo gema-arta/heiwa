@@ -143,7 +143,6 @@ tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc{-1.2.1,}
 
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build
-LDFLAGS="-Wl,-rpath,/clang0-tools/lib $LDFLAGS"            \
 CFLAGS="-g0 $CFLAGS" CXXFLAGS="-g0 $CXXFLAGS" ../configure \
     --prefix=/clang0-tools                                 \
     --build=${C_TRIPLET}                                   \
@@ -156,14 +155,14 @@ CFLAGS="-g0 $CFLAGS" CXXFLAGS="-g0 $CXXFLAGS" ../configure \
     --disable-{gnu-unique-object,lto,multilib,nls,static,symvers,werror}
 
 # Build.
-time { make AS_FOR_TARGET=${H_TRIPLET}-as LD_FOR_TARGET=${H_TRIPLET}-ld; }
+time { make; }
 
 # Install.
 time { make install; }
 ```
 ```bash
 # Adjust the current GCC to produce binaries with "/clang0-tools/lib/ld-musl-x86_64.so.1" by dumping the specs file, then `sed` it.
-export SPECFILE="$(dirname $(${H_TRIPLET}-gcc -print-libgcc-file-name))/specs"
+SPECFILE="$(dirname $(${H_TRIPLET}-gcc -print-libgcc-file-name))/specs"
 ${H_TRIPLET}-gcc -dumpspecs > specs
 sed -i 's|/lib/ld-musl-x86_64.so.1|/clang0-tools/lib/ld-musl-x86_64.so.1|g' specs
 
