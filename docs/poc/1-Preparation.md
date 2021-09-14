@@ -160,7 +160,7 @@ export C_TRIPLET C_ARCH C_CPU L_TARGET T_TRIPLET H_TRIPLET
 CFLAGS="\${COMMON_FLAGS}"
 CXXFLAGS="\${COMMON_FLAGS}"
 LDFLAGS="-Wl,-O2 -Wl,--as-needed"
-MAKEFLAGS="-j\$(nproc) -l\$(nproc)"
+MAKEFLAGS="-j\$(nproc) -l\$((\$(nproc)+2))"
 export CFLAGS CXXFLAGS LDFLAGS MAKEFLAGS
 EOF
 source ~/.bashrc
