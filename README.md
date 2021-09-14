@@ -57,9 +57,9 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 > |     | 4. [Final System](./docs/poc/4-Final_System.md) (core)                               | Under development | Faster performance.        |
 > |     | 5. [System Configuration](./docs/poc/5-System_Configuration.md)                      | Pending           | -                          |
 
-> Generally there's no **"**stage 0**"** for the toolchain, actually **"**preparation**"**.
+> Generally there's no "stage 0" for the toolchain, actually "preparation".
 
-> I lower the value because for the final toolchain, namely **"**stage 2**"**, is actually in the **"**Final System (core)**"** because here there are 3 stages where **"**stage 0**"** itself uses GCC libraries after bootstrapping musl libc.
+> I lower the value because for the final toolchain, namely "stage 2", is actually in the "Final System (core)" because here there are 3 stages where "stage 0" itself uses GCC libraries after bootstrapping musl libc.
 
 > This will be long to develop PoC along with the package manager, and the whole system is like Stage 3 Gentoo.
 
