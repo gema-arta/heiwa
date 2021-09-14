@@ -240,9 +240,9 @@ cmake -B build \
     -DCMAKE_CXX_COMPILER="${H_TRIPLET}-g++"                                                 \
     -DCMAKE_C_FLAGS="-g0 $CFLAGS"                                                           \
     -DCMAKE_CXX_FLAGS="-g0 $CXXFLAGS"                                                       \
+    -DBUILD_SHARED_LIBS=ON                                                                  \
     -DLLVM_HOST_TRIPLE="$T_TRIPLET"                                                         \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$T_TRIPLET"                                               \
-    -DBUILD_SHARED_LIBS=ON                                                                  \
     -DLLVM_ENABLE_BINDINGS=OFF                                                              \
     -DLLVM_ENABLE_IDE=OFF                                                                   \
     -DLLVM_ENABLE_LIBCXX=ON                                                                 \
