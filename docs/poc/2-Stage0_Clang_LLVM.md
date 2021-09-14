@@ -330,8 +330,8 @@ popd
 rm -rf /clang0-tools/share/{info,man}/*
 
 # The libtool ".la" files are only useful when linking with static libraries.
-# They are unneeded, and potentially harmful, when using dynamic shared libraries, specially when using non-autotools build systems.
-# Remove those files.
+# They are unneeded and potentially harmful when using dynamic shared libraries, specially when using non-autotools build systems.
+# So, remove those files.
 find /clang0-tools/{lib{exec,64},{,${H_TRIPLET}/}lib}/ -name '*.la' -exec rm -fv {} \;
 
 # Strip off debugging symbols from binaries using `llvm-strip`.
