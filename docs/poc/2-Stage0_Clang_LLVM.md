@@ -240,7 +240,7 @@ popd
 # Apply patches (from Void Linux).
 ../extra/llvm/patches/appatch
 
-# Disable sanitizers for musl, it's broken since duplicates some libc bits.
+# Disable sanitizers for musl libc, it's broken since duplicates some libc bits.
 sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
 projects/compiler-rt/cmake/config-ix.cmake
 
