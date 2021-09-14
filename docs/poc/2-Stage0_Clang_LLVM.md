@@ -326,13 +326,13 @@ popd
 
 > If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
 ```bash
-# The libtool .la files are only useful when linking with static libraries.
+# Remove the documentation and manpages.
+rm -rf /clang0-tools/share/{info,man}/*
+
+# The libtool ".la" files are only useful when linking with static libraries.
 # They are unneeded, and potentially harmful, when using dynamic shared libraries, specially when using non-autotools build systems.
 # Remove those files.
 find /clang0-tools/{lib{exec,64},{,${H_TRIPLET}/}lib}/ -name '*.la' -exec rm -fv {} \;
-
-# Remove the documentation and manpages.
-rm -rf /clang0-tools/share/{info,man}/*
 
 # Strip off debugging symbols from binaries using `llvm-strip`.
 # A large number of files will be reported "The file was not recognized as a valid object file".
