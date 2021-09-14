@@ -196,7 +196,7 @@ popd
 ../extra/llvm/patches/appatch
 
 # Disable sanitizers for musl, it's broken since duplicates some libc bits.
-sed -i 's|COMPILER_RT_HAS_SANITIZER_COMMON TRUE|COMPILER_RT_HAS_SANITIZER_COMMON FALSE|' \
+sed -i 's|set(COMPILER_RT_HAS_SANITIZER_COMMON TRUE)|set(COMPILER_RT_HAS_SANITIZER_COMMON FALSE)|' \
 projects/compiler-rt/cmake/config-ix.cmake
 
 # Update config.guess for better platform detection.
