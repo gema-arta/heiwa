@@ -73,12 +73,15 @@ passwd heiwa
 
 > This is danger, so verify the variables before use `chown`.
 > ```bash
-> echo {${HEIWA},}/clang{0,1}-tools
+> printf '%b\n' {${HEIWA},}/clang{0,1}-tools
 > ```
 > ```bash
 > # | The output should be:
 > # |-----------------------
-> # |/media/Heiwa/clang0-tools /media/Heiwa/clang1-tools /clang0-tools /clang1-tools
+> # |/media/Heiwa/clang0-tools
+> # |/media/Heiwa/clang1-tools
+> # |/clang0-tools
+> # |/clang1-tools
 > ```
 ```bash
 if [[ -n "$HEIWA" ]]; then
@@ -135,7 +138,7 @@ H_TRIPLET="$(echo "$T_TRIPLET" | sed 's/-[^-]*/-heiwa/')" # Target triplet for c
 ```
 > Let's check if the above variables are all correct.
 ```bash
-printf "%b\n" $C_{TRIPLET,ARCH,CPU} ${L_TARGET} ${T_TRIPLET} ${H_TRIPLET}
+printf '%b\n' $C_{TRIPLET,ARCH,CPU} ${L_TARGET} ${T_TRIPLET} ${H_TRIPLET}
 ```
 ```bash
 # | On the glibc host, the output should be:
