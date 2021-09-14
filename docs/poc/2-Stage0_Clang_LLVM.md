@@ -19,7 +19,7 @@ The purpose of this stage is to build a temporary Clang/LLVM toolchain with GCC 
 
 > **Required!** As mentioned in the description above.
 ```bash
-# The recommended make target `headers_install` cannot be used, because it requires `rsync`, which may not be available.
+# The recommended make target `headers_install` cannot be used, because it requires `rsync` which may not be available.
 # The headers are first placed in "./usr/", then copied to the needed location.
 
 # Make sure there are no stale files embedded in the package. Then build.
@@ -162,15 +162,15 @@ time { make AS_FOR_TARGET=${H_TRIPLET}-as LD_FOR_TARGET=${H_TRIPLET}-ld; }
 time { make install; }
 ```
 ```bash
-# Adjust the current GCC specs to produce binaries with "/clang0-tools/lib/ld-musl-x86_64.so.1".
+# Adjust the current GCC specs to produce binaries with "/clang0-tools/lib/ld-musl-x86_64.so.1". Dump the specs file, then `sed` it.
 export SPECFILE="$(dirname $(${H_TRIPLET}-gcc -print-libgcc-file-name))/specs"
 ${H_TRIPLET}-gcc -dumpspecs > specs
 sed -i 's|/lib/ld-musl-x86_64.so.1|/clang0-tools/lib/ld-musl-x86_64.so.1|g' specs
 
-# Check the specs file.
+# Check the path of the specs file.
 grep --color=auto "/clang0-tools/lib/ld-musl-x86_64.so.1" specs
 
-# Install the specs file (if correct).
+# Install the specs file if the path is correct.
 mv -fv specs "$SPECFILE" && unset SPECFILE
 ```
 ```bash
