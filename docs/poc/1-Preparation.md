@@ -147,7 +147,7 @@ printf "%b\n" $C_{TRIPLET,ARCH,CPU} ${L_TARGET} ${T_TRIPLET} ${H_TRIPLET}
 # |x86_64-pc-linux-musl
 # |x86_64-heiwa-linux-musl
 ```
-> If you want multitasking responsiveness when using multiple jobs, set the load average to prevent slow down system.
+> If you want multitasking responsiveness when using multiple jobs, set the load average to prevent slow down system. **core/threads + 2**.
 ```bash
 cat >> ~/.bashrc << EOF
 C_TRIPLET="${C_TRIPLET}"
@@ -160,7 +160,7 @@ export C_TRIPLET C_ARCH C_CPU L_TARGET T_TRIPLET H_TRIPLET
 CFLAGS="\${COMMON_FLAGS}"
 CXXFLAGS="\${COMMON_FLAGS}"
 LDFLAGS="-Wl,-O2 -Wl,--as-needed"
-MAKEFLAGS="-j\$(nproc) -l\$(nproc)"
+MAKEFLAGS="-j\$(nproc) -l\$((\$(nproc)+2))"
 export CFLAGS CXXFLAGS LDFLAGS MAKEFLAGS
 EOF
 source ~/.bashrc
