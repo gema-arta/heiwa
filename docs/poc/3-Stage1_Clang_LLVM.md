@@ -305,6 +305,8 @@ cmake -B build \
     -DLLVM_TARGET_ARCH="$L_TARGET"            \
     -DLLVM_TARGETS_TO_BUILD="$L_TARGET"       \
     -DCLANG_VENDOR="Heiwa/Linux"              \
+    -DCLANG_ENABLE_ARCMT=OFF                  \
+    -DCLANG_ENABLE_STATIC_ANALYZER=OFF        \
     -DCLANG_DEFAULT_CXX_STDLIB=libc++         \
     -DCLANG_DEFAULT_RTLIB=compiler-rt         \
     -DCLANG_DEFAULT_LINKER=lld                \
