@@ -276,6 +276,7 @@ cmake -B build \
     -DCMAKE_INSTALL_PREFIX="/clang1-tools"    \
     -DCMAKE_C_FLAGS="-g0 $CFLAGS"             \
     -DCMAKE_CXX_FLAGS="-g0 $CXXFLAGS"         \
+    -DBUILD_SHARED_LIBS=ON                    \
     -DLLVM_HOST_TRIPLE="$T_TRIPLET"           \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$T_TRIPLET" \
     -DLLVM_ENABLE_BINDINGS=OFF                \
@@ -300,7 +301,6 @@ cmake -B build \
     -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON       \
     -DLLVM_INSTALL_CCTOOLS_SYMLINKS=ON        \
     -DLLVM_INSTALL_UTILS=ON                   \
-    -DLLVM_LINK_LLVM_DYLIB=ON                 \
     -DLLVM_OPTIMIZED_TABLEGEN=ON              \
     -DLLVM_TARGET_ARCH="$L_TARGET"            \
     -DLLVM_TARGETS_TO_BUILD="$L_TARGET"       \
