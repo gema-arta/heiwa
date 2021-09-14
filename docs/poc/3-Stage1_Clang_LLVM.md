@@ -52,7 +52,7 @@ source ~/.bashrc
 # Build.
 time { make; }
 
-# Install and fix a wrong shared object symlink, also create a `ldd` symlink to use to print shared object dependencies.
+# Install and fix wrong shared object symlink, also create a `ldd` symlink to use to print shared object dependencies.
 time {
     make DESTDIR=/clang1-tools install
     ln -sfv libc.so /clang1-tools/lib/ld-musl-x86_64.so.1
