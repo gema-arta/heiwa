@@ -240,8 +240,6 @@ cmake -B build \
     -DCMAKE_CXX_COMPILER="${H_TRIPLET}-g++"                                                 \
     -DCMAKE_C_FLAGS="-g0 $CFLAGS"                                                           \
     -DCMAKE_CXX_FLAGS="-g0 $CXXFLAGS"                                                       \
-    -DCMAKE_EXE_LINKER_FLAGS="-Wl,-dynamic-linker /clang0-tools/lib/ld-musl-x86_64.so.1"    \
-    -DCMAKE_SHARED_LINKER_FLAGS="-Wl,-dynamic-linker /clang0-tools/lib/ld-musl-x86_64.so.1" \
     -DLLVM_HOST_TRIPLE="$T_TRIPLET"                                                         \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$T_TRIPLET"                                               \
     -DBUILD_SHARED_LIBS=ON                                                                  \
