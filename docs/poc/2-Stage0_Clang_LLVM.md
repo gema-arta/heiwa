@@ -183,20 +183,7 @@ readelf -l a.out | grep --color=auto "Req.*ter"
 # |      [Requesting program interpreter: /clang0-tools/lib/ld-musl-x86_64.so.1]
 ```
 
-### `6` - NetBSD curses
-> #### `0.3.2` or newer
-> The NetBSD curses package contains libraries for terminal-independent handling of character screens.
-
-> **Required!** For the next step, Stage-0 Clang/LLVM.
-```bash
-# Build.
-time { make CC=${H_TRIPLET}-gcc all-dynamic; }
-
-# Install.
-time { make PREFIX=/clang0-tools install-dynamic; }
-```
-
-### `7` - Clang/LLVM
+### `6` - Clang/LLVM
 > #### `12.x.x` or newer
 > C language family frontend for LLVM.
 
