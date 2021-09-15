@@ -122,7 +122,7 @@ cp -rfv usr/include /clang1-tools/.
 ```bash
 # Configure source.
 cmake -B build \
-    -DCMAKE_BUILD_TYPE=Release -Wno-dev    \
+    -DCMAKE_BUILD_TYPE=MinSizeRel -Wno-dev \
     -DCMAKE_INSTALL_PREFIX="/clang1-tools" \
     -DCMAKE_C_FLAGS="-flto=thin $CFLAGS"   \
     -DBUILD_SHARED_LIBS=ON                 \
@@ -272,7 +272,7 @@ rm -rf projects/lib{unwind,cxx{abi,}}
 ```bash
 # Configure Clang/LLVM source.
 cmake -B build \
-    -DCMAKE_BUILD_TYPE=Release -Wno-dev       \
+    -DCMAKE_BUILD_TYPE=MinSizeRel -Wno-dev    \
     -DCMAKE_INSTALL_PREFIX="/clang1-tools"    \
     -DCMAKE_C_FLAGS="-g0 $CFLAGS"             \
     -DCMAKE_CXX_FLAGS="-g0 $CXXFLAGS"         \
@@ -636,7 +636,7 @@ CXXFLAGS="-flto=thin $CXXFLAGS"              \
             --mandir=/share/man              \
             --parallel=$(nproc)              \
             --docdir=/share/doc/cmake-3.21.2 \
-            -- -DCMAKE_BUILD_TYPE=Release    \
+            -- -DCMAKE_BUILD_TYPE=MinSizeRel \
             -Wno-dev -DCMAKE_USE_OPENSSL=OFF
 
 # Build.
