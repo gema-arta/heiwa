@@ -41,12 +41,11 @@ cp -rfv usr/include /clang0-tools/${H_TRIPLET}/.
 ```bash
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build
-CFLAGS="-g0 $CFLAGS" CXXFLAGS="-g0 $CXXFLAGS" ../configure \
-    --prefix=/clang0-tools                                 \
-    --target=${H_TRIPLET}                                  \
-    --with-sysroot=/clang0-tools/${H_TRIPLET}              \
-    --without-{debuginfod,stage1-ldflags}                  \
-    --disable-{gdb,libdecnumber,lto,multilib,nls,readline,sim,static,werror}
+../configure --prefix=/clang0-tools                    \
+             --target=${H_TRIPLET}                     \
+             --with-sysroot=/clang0-tools/${H_TRIPLET} \
+             --without-{debuginfod,stage1-ldflags}     \
+             --disable-{gdb,libdecnumber,lto,multilib,nls,readline,sim,static,werror}
 
 # Check host's environment and make sure all necessary tools are available to build Binutils. Then build.
 time { make configure-host && make; }
@@ -68,7 +67,7 @@ tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc{-1.2.1,}
 
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build
-CFLAGS="-g0 -O0 -pipe" CXXFLAGS="-g0 -O0 -pipe" ../configure \
+CFLAGS="$CFLAGS -O0" CXXFLAGS="$CXXFLAGS -O0" ../configure   \
     --prefix=/clang0-tools                                   \
     --build=${C_TRIPLET}                                     \
     --host=${C_TRIPLET}                                      \
@@ -143,16 +142,15 @@ tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc{-1.2.1,}
 
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build
-CFLAGS="-g0 $CFLAGS" CXXFLAGS="-g0 $CXXFLAGS" ../configure \
-    --prefix=/clang0-tools                                 \
-    --build=${C_TRIPLET}                                   \
-    --host=${C_TRIPLET}                                    \
-    --target=${H_TRIPLET}                                  \
-    --with-sysroot=/clang0-tools                           \
-    --enable-{clocale=generic,languages=c\,c++}            \
-    --enable-{shared,threads=posix}                        \
-    --disable-lib{mpx,mudflap,sanitizer,ssp,vtv}           \
-    --disable-{gnu-unique-object,lto,multilib,nls,static,symvers,werror}
+../configure --prefix=/clang0-tools                       \
+             --build=${C_TRIPLET}                         \
+             --host=${C_TRIPLET}                          \
+             --target=${H_TRIPLET}                        \
+             --with-sysroot=/clang0-tools                 \
+             --enable-{clocale=generic,languages=c\,c++}  \
+             --enable-{shared,threads=posix}              \
+             --disable-lib{mpx,mudflap,sanitizer,ssp,vtv} \
+             --disable-{gnu-unique-object,lto,multilib,nls,static,symvers,werror}
 
 # Build.
 time { make; }
@@ -225,8 +223,6 @@ cmake -B build \
     -DCMAKE_INSTALL_PREFIX="/clang0-tools"    \
     -DCMAKE_C_COMPILER="${H_TRIPLET}-gcc"     \
     -DCMAKE_CXX_COMPILER="${H_TRIPLET}-g++"   \
-    -DCMAKE_C_FLAGS="-g0 $CFLAGS"             \
-    -DCMAKE_CXX_FLAGS="-g0 $CXXFLAGS"         \
     -DBUILD_SHARED_LIBS=ON                    \
     -DLLVM_HOST_TRIPLE="$T_TRIPLET"           \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$T_TRIPLET" \
