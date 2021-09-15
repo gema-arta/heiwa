@@ -178,7 +178,7 @@ readelf -l a.out | grep --color=auto "Req.*ter"
 
 # | The output should be:
 # |-----------------------
-# |      [Requesting program interpreter: /clang0-tools/lib/ld-musl-${T_ARCH}.so.1]
+# |      [Requesting program interpreter: /clang0-tools/lib/ld-musl-x86_64.so.1]
 ```
 
 ### `6` - Clang/LLVM
