@@ -250,7 +250,9 @@ cmake -B build \
     -DLLVM_ENABLE_UNWIND_TABLES=OFF           \
     -DLLVM_ENABLE_WARNINGS=OFF                \
     -DLLVM_ENABLE_LIBEDIT=OFF                 \
+    -DLLVM_ENABLE_TERMINFO=OFF                \
     -DLLVM_ENABLE_LIBXML2=OFF                 \
+    -DLLVM_ENABLE_LIBPFM=OFF                  \
     -DLLVM_ENABLE_OCAMLDOC=OFF                \
     -DLLVM_ENABLE_ZLIB=OFF                    \
     -DLLVM_ENABLE_Z3_SOLVER=OFF               \
