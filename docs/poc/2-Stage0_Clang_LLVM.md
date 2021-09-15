@@ -106,14 +106,14 @@ time { make; }
 # Install and fix wrong shared object symlink, also create a `ldd` symlink to use to print shared object dependencies.
 time {
     make DESTDIR=/clang0-tools install
-    ln -sfv libc.so /clang0-tools/lib/ld-musl-x86_64.so.1
+    ln -sfv libc.so /clang0-tools/lib/ld-musl-${T_ARCH}.so.1
     ln -sfv ../lib/libc.so /clang0-tools/bin/ldd
 }
 ```
 ```bash
 # Configure path for the dynamic linker.
 mkdir -v /clang0-tools/etc && \
-cat > /clang0-tools/etc/ld-musl-x86_64.path << EOF
+cat > /clang0-tools/etc/ld-musl-${T_ARCH}.path << EOF
 /clang0-tools/lib
 /clang0-tools/${H_TRIPLET}/lib
 /usr/lib
@@ -159,13 +159,13 @@ time { make; }
 time { make install; }
 ```
 ```bash
-# Adjust the current GCC to produce binaries with "/clang0-tools/lib/ld-musl-x86_64.so.1" by dumping the specs file, then `sed` it.
+# Adjust the current GCC to produce binaries with "/clang0-tools/lib/ld-musl-${T_ARCH}.so.1" by dumping the specs file, then `sed` it.
 SPECFILE="$(dirname $(${H_TRIPLET}-gcc -print-libgcc-file-name))/specs"
 ${H_TRIPLET}-gcc -dumpspecs > specs
-sed -i 's|/lib/ld-musl-x86_64.so.1|/clang0-tools/lib/ld-musl-x86_64.so.1|g' specs
+sed -i 's|/lib/ld-musl-${T_ARCH}.so.1|/clang0-tools/lib/ld-musl-${T_ARCH}.so.1|g' specs
 
 # Check the path of the specs file.
-grep --color=auto "/clang0-tools/lib/ld-musl-x86_64.so.1" specs
+grep --color=auto "/clang0-tools/lib/ld-musl-${T_ARCH}.so.1" specs
 
 # Install the specs file if the path is correct.
 mv -fv specs "$SPECFILE" && unset SPECFILE
@@ -178,7 +178,7 @@ readelf -l a.out | grep --color=auto "Req.*ter"
 
 # | The output should be:
 # |-----------------------
-# |      [Requesting program interpreter: /clang0-tools/lib/ld-musl-x86_64.so.1]
+# |      [Requesting program interpreter: /clang0-tools/lib/ld-musl-${T_ARCH}.so.1]
 ```
 
 ### `6` - Clang/LLVM
@@ -279,11 +279,11 @@ time {
 }
 ```
 ```bash
-# Configure Stage-0 Clang with new triplet to produce binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1" later.
+# Configure Stage-0 Clang with new triplet to produce binaries with "/clang1-tools/lib/ld-musl-${T_ARCH}.so.1" later.
 ln -sfv clang   /clang0-tools/bin/${H_TRIPLET}-clang
 ln -sfv clang++ /clang0-tools/bin/${H_TRIPLET}-clang++
 cat > /clang0-tools/bin/${H_TRIPLET}.cfg << "EOF"
--Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1
+-Wl,-dynamic-linker /clang1-tools/lib/ld-musl-${T_ARCH}.so.1
 EOF
 ```
 ```bash
