@@ -652,13 +652,13 @@ time { make install; }
 
 > If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
 ```bash
-# The libtool .la files are only useful when linking with static libraries.
-# They are unneeded, and potentially harmful, when using dynamic shared libraries, specially when using non-autotools build systems.
-# Remove those files.
-find /clang1-tools/lib{,exec}/ -name '*.la' -exec rm -fv {} \;
-
 # Remove the documentation, manpages, and all unecessary files.
 rm -rf /clang1-tools/share/{bash-completion,doc,emacs,info,man,vim}/*
+
+# The libtool ".la" files are only useful when linking with static libraries.
+# They are unneeded and potentially harmful, when using dynamic shared libraries, specially when using non-autotools build systems.
+# So, remove those files.
+find /clang1-tools/lib{,exec}/ -name '*.la' -exec rm -fv {} \;
 
 # Strip off debugging symbols from binaries using `llvm-strip`.
 # A large number of files will be reported "The file was not recognized as a valid object file".
@@ -673,11 +673,24 @@ exit
 > #### * End of as privileged user!
 
 > #### * Beginning of as root!
+
+> #### Changing final toolchain ownership
+
+> Change the ownership of the "${HEIWA}/clang1-tools" directory to root by running the following command.
+
+> This is danger, so verify the variables before use `chown`.
+> ```bash
+> printf '%b\n' ${HEIWA}/clang1-tools
+> ```
+> ```bash
+> # | The output should be:
+> # |-----------------------
+> # |/clang1-tools
+> ```
 ```bash
-# Change the ownership of the "${HEIWA}/clang1-tools" directory to root by running the following command.
-# Warning! This is danger, so check the variables before `chown`.
-# echo ${HEIWA}/clang1-tools
-[[ -n "$HEIWA" ]] && chown -R root:root ${HEIWA}/clang1-tools
+if [[ -n "$HEIWA" ]]; then
+    chown -R root:root ${HEIWA}/clang1-tools
+fi
 ```
 > #### Backup
 
