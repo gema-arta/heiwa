@@ -17,7 +17,7 @@
 
 > #### * Beginning of as root!
 ### `1` - Prepare a volume/partition
-> #### Formatting
+> #### Choose preferred filesystem
 
 > **EXT4.** Recommended for HDDs.
 ```bash
