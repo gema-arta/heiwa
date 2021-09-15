@@ -242,7 +242,6 @@ cmake -B build \
     -DLLVM_ENABLE_LIBXML2=OFF                 \
     -DLLVM_ENABLE_LIBPFM=OFF                  \
     -DLLVM_ENABLE_OCAMLDOC=OFF                \
-    -DLLVM_ENABLE_ZLIB=OFF                    \
     -DLLVM_ENABLE_Z3_SOLVER=OFF               \
     -DLLVM_INCLUDE_BENCHMARKS=OFF             \
     -DLLVM_INCLUDE_EXAMPLES=OFF               \
