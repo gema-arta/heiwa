@@ -641,11 +641,11 @@ time { make install; }
 rm -rf /clang1-tools/share/{bash-completion,doc,emacs,info,man,vim}/*
 
 # The libtool ".la" files are only useful when linking with static libraries.
-# They are unneeded and potentially harmful, when using dynamic shared libraries, specially when using non-autotools build systems.
+# They are unneeded and potentially harmful when using dynamic shared libraries, specially when using non-autotools build systems.
 # So, remove those files.
 find /clang1-tools/lib{,exec}/ -name '*.la' -exec rm -fv {} \;
 
-# Strip off debugging symbols from binaries using `llvm-strip`.
+# Strip off all unneeded symbols from binaries using `llvm-strip`.
 # A large number of files will be reported "The file was not recognized as a valid object file".
 # These warnings can be safely ignored. These warnings indicate that those files are scripts instead of binaries.
 find /clang1-tools/lib/ -type f \( -name '*.a' -o -name '*.so*' \) -exec llvm-strip --strip-unneeded {} \;
