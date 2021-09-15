@@ -149,21 +149,6 @@ time { make CFLAGS="-flto=thin $CFLAGS" all-dynamic; }
 time { make PREFIX=/clang1-tools install-dynamic; }
 ```
 
-<!--
-### `X` - libexecinfo
-> #### `1.1` or newer (from Heiwa/Linux fork)
-> The libexecinfo package contains backtrace facility that usually found in GNU libc (glibc).
-
-> **Required!** To build Stage-1 Clang/LLVM, since using musl libc.
-```bash
-# Build.
-time { make CFLAGS="-flto=thin $CFLAGS" dynamic; }
-
-# Install.
-time { make PREFIX=/clang1-tools install-{header,dynamic}; }
-```
--->
-
 ### `6` - Clang/LLVM + libunwind, libcxxabi, and libcxx
 > #### `12.x.x` or newer
 > - C language family frontend for LLVM;  
