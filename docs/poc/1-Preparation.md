@@ -112,7 +112,7 @@ exec su - heiwa
 ```bash
 cat > ~/.bash_profile << EOF
 exec env -i HOME="\$HOME" TERM="\$TERM" \
-COMMON_FLAGS="-march=native -Os -pipe" $(command -v bash)
+COMMON_FLAGS="-g0 -march=native -Os -pipe" $(command -v bash)
 EOF
 ```
 ```bash
