@@ -206,11 +206,11 @@ cp -fv ../extra/llvm/files/config.guess cmake/.
 # Configure `libunwind` source.
 pushd ${LLVM_SRC}/projects/libunwind/ && \
     cmake -B build \
-        -DCMAKE_INSTALL_PREFIX="/clang1-tools"             \
-        -DCMAKE_C_FLAGS="-fPIC -flto=thin -g0 $CFLAGS"     \
-        -DCMAKE_CXX_FLAGS="-fPIC -flto=thin -g0 $CXXFLAGS" \
-        -DLLVM_PATH="$LLVM_SRC"                            \
-        -DLIBUNWIND_ENABLE_STATIC=OFF                      \
+        -DCMAKE_INSTALL_PREFIX="/clang1-tools"         \
+        -DCMAKE_C_FLAGS="-fPIC -flto=thin $CFLAGS"     \
+        -DCMAKE_CXX_FLAGS="-fPIC -flto=thin $CXXFLAGS" \
+        -DLLVM_PATH="$LLVM_SRC"                        \
+        -DLIBUNWIND_ENABLE_STATIC=OFF                  \
         -DLIBUNWIND_USE_COMPILER_RT=ON
 
 # Build.
@@ -226,12 +226,12 @@ time {
 # Configure `libcxxabi` source.
 pushd ${LLVM_SRC}/projects/libcxxabi/ && \
     cmake -B build \
-        -DCMAKE_INSTALL_PREFIX="/clang1-tools"       \
-        -DCMAKE_CXX_FLAGS="-flto=thin -g0 $CXXFLAGS" \
-        -DLLVM_PATH="$LLVM_SRC"                      \
-        -DLIBCXXABI_ENABLE_STATIC=OFF                \
-        -DLIBCXXABI_USE_LLVM_UNWINDER=ON             \
-        -DLIBCXXABI_USE_COMPILER_RT=ON               \
+        -DCMAKE_INSTALL_PREFIX="/clang1-tools"   \
+        -DCMAKE_CXX_FLAGS="-flto=thin $CXXFLAGS" \
+        -DLLVM_PATH="$LLVM_SRC"                  \
+        -DLIBCXXABI_ENABLE_STATIC=OFF            \
+        -DLIBCXXABI_USE_LLVM_UNWINDER=ON         \
+        -DLIBCXXABI_USE_COMPILER_RT=ON           \
         -DLIBCXXABI_LIBCXX_INCLUDES="${LLVM_SRC}/projects/libcxx/include"
 
 # Build.
@@ -247,16 +247,16 @@ time {
 # Configure `libcxx` source.
 pushd ${LLVM_SRC}/projects/libcxx/ && \
     cmake -B build \
-        -DCMAKE_INSTALL_PREFIX="/clang1-tools"                                      \
-        -DCMAKE_CXX_FLAGS="-isystem /clang1-tools/include -flto=thin -g0 $CXXFLAGS" \
-        -DLLVM_PATH="$LLVM_SRC"                                                     \
-        -DLIBCXX_ENABLE_STATIC=OFF                                                  \
-        -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=OFF                                    \
-        -DLIBCXX_CXX_ABI=libcxxabi                                                  \
-        -DLIBCXX_CXX_ABI_INCLUDE_PATHS="/clang1-tools/include"                      \
-        -DLIBCXX_CXX_ABI_LIBRARY_PATH="/clang1-tools/lib"                           \
-        -DLIBCXX_HAS_MUSL_LIBC=ON                                                   \
-        -DLIBCXX_USE_COMPILER_RT=ON                                                 \
+        -DCMAKE_INSTALL_PREFIX="/clang1-tools"                                  \
+        -DCMAKE_CXX_FLAGS="-isystem /clang1-tools/include -flto=thin $CXXFLAGS" \
+        -DLLVM_PATH="$LLVM_SRC"                                                 \
+        -DLIBCXX_ENABLE_STATIC=OFF                                              \
+        -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=OFF                                \
+        -DLIBCXX_CXX_ABI=libcxxabi                                              \
+        -DLIBCXX_CXX_ABI_INCLUDE_PATHS="/clang1-tools/include"                  \
+        -DLIBCXX_CXX_ABI_LIBRARY_PATH="/clang1-tools/lib"                       \
+        -DLIBCXX_HAS_MUSL_LIBC=ON                                               \
+        -DLIBCXX_USE_COMPILER_RT=ON                                             \
         -DLIBCXX_HAS_ATOMIC_LIB=OFF
 
 # Build.
@@ -274,9 +274,9 @@ rm -rf projects/lib{unwind,cxx{abi,}}
 cmake -B build \
     -DCMAKE_BUILD_TYPE=MinSizeRel -Wno-dev    \
     -DCMAKE_INSTALL_PREFIX="/clang1-tools"    \
-    -DCMAKE_C_FLAGS="-g0 $CFLAGS"             \
-    -DCMAKE_CXX_FLAGS="-g0 $CXXFLAGS"         \
     -DBUILD_SHARED_LIBS=ON                    \
+    -DOCAMLFIND=NO                            \
+    -DLLVM_APPEND_VC_REV=OFF                  \
     -DLLVM_HOST_TRIPLE="$T_TRIPLET"           \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$T_TRIPLET" \
     -DLLVM_ENABLE_BINDINGS=OFF                \
@@ -290,6 +290,7 @@ cmake -B build \
     -DLLVM_ENABLE_WARNINGS=OFF                \
     -DLLVM_ENABLE_LIBEDIT=OFF                 \
     -DLLVM_ENABLE_LIBXML2=OFF                 \
+    -DLLVM_ENABLE_LIBPFM=OFF                  \
     -DLLVM_ENABLE_OCAMLDOC=OFF                \
     -DLLVM_ENABLE_Z3_SOLVER=OFF               \
     -DLLVM_ENABLE_LTO=Thin                    \
@@ -298,10 +299,10 @@ cmake -B build \
     -DLLVM_INCLUDE_TESTS=OFF                  \
     -DLLVM_INCLUDE_GO_TESTS=OFF               \
     -DLLVM_INCLUDE_DOCS=OFF                   \
+    -DLLVM_OPTIMIZED_TABLEGEN=ON              \
     -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON       \
     -DLLVM_INSTALL_CCTOOLS_SYMLINKS=ON        \
     -DLLVM_INSTALL_UTILS=ON                   \
-    -DLLVM_OPTIMIZED_TABLEGEN=ON              \
     -DLLVM_TARGET_ARCH="$L_TARGET"            \
     -DLLVM_TARGETS_TO_BUILD="$L_TARGET"       \
     -DCLANG_VENDOR="Heiwa/Linux"              \
@@ -334,10 +335,10 @@ EOF
 ```
 ```bash
 # Setup new PATH since "/clang0-tools" won't be used anymore and use Stage-1 Clang/LLVM default triplet (pc).
-sed -e 's|/clang0-tools/usr/bin:/clang0-tools/bin:||' \
-    -e "s|\"${CXX}\"|\"${T_TRIPLET}-clang++\"|"       \
-    -e "s|\"${CC}\"|\"${T_TRIPLET}-clang\"|" -i ~/.bashrc
-source                                          ~/.bashrc
+sed -e "s|\"${CXX}\"|\"${T_TRIPLET}-clang++\"|" \
+    -e "s|\"${CC}\"|\"${T_TRIPLET}-clang\"|"    \
+    -e 's|/clang0-tools/bin:||' -i ~/.bashrc
+source                             ~/.bashrc
 ```
 ```bash
 # Back to "${HEIWA}/sources/pkgs" directory.
