@@ -313,7 +313,7 @@ find /clang0-tools/{lib{exec,64},{,${H_TRIPLET}/}lib}/ -name '*.la' -exec rm -fv
 find /clang0-tools/{lib64,{,${H_TRIPLET}/}lib}/ -type f \( -name '*.a' -o -name '*.so*' \) -exec llvm-strip --strip-unneeded {} \;
 find /clang0-tools/libexec/gcc/${H_TRIPLET}/10.3.1/ -type f -exec llvm-strip --strip-unneeded {} \;
 if cp -v $(command -v llvm-strip) .; then
-    find /clang0-tools/{,${H_TRIPLET}/}bin/ -type f -exec /usr/bin/strip --strip-unneeded {} \;
+    find /clang0-tools/{,${H_TRIPLET}/}bin/ -type f -exec ./llvm-strip --strip-unneeded {} \;
     rm -v llvm-strip
 fi
 ```
