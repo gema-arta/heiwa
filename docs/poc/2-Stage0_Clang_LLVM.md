@@ -300,7 +300,7 @@ popd
 > If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
 ```bash
 # Remove the documentation and manpages.
-rm -rf /clang0-tools/share/{info,man}/*
+rm -rf /clang0-tools/share/{info,man}
 
 # The libtool ".la" files are only useful when linking with static libraries.
 # They are unneeded and potentially harmful when using dynamic shared libraries, specially when using non-autotools build systems.
