@@ -129,26 +129,24 @@ EOF
 source ~/.bash_profile
 ```
 ```bash
-C_TRIPLET="$(echo "$MACHTYPE" | sed 's|-[^-]*|-cross|')"  # Host cross-triplet, to bootstrap cross-libc GCC.
-T_ARCH="$(echo "$MACHTYPE" | cut -d- -f1)"                # Target CPU architecture, use native host's arch.
-C_ARCH="$(cut -d_ -f1 <<< "$T_ARCH")"                     # CPU arch, to be used to build Linux API headers.
-C_CPU="$(sed 's|_|-|' <<< "$T_ARCH")"                     # CPU arch, to be used to build static GCC.
-L_TARGET="X86"                                            # LLVM-specific architecture build target.
-T_TRIPLET="${T_ARCH}-pc-linux-musl"                       # Target triplet for final toolchain.
-H_TRIPLET="$(echo "$T_TRIPLET" | sed 's/-[^-]*/-heiwa/')" # Target triplet for cross-libraries.
+C_TRIPLET="$(echo "$MACHTYPE" | sed 's/-[^-]*/-cross/')"  # Host cross-triplet, to be used to build GCC toolchain.
+C_ARCH="x86"                                              # CPU arch, used to build Linux API headers.
+C_CPU="x86-64"                                            # CPU arch, used to build static GCC in cross-toolchain.
+L_TARGET="X86"                                            # LLVM specific arch build target.
+T_TRIPLET="x86_64-pc-linux-musl"                          # Target triplet for final toolchain.
+H_TRIPLET="$(echo "$T_TRIPLET" | sed 's/-[^-]*/-heiwa/')" # Target triplet for cross-toolchain.
 ```
 > Let's check if the above variables are all correct.
 ```bash
-printf '%b\n' $C_{ARCH,CPU,TRIPLET} $L_TARGET $T_{ARCH,TRIPLET} $H_TRIPLET
+printf '%b\n' $C_{TRIPLET,ARCH,CPU} ${L_TARGET} ${T_TRIPLET} ${H_TRIPLET}
 ```
 ```bash
 # | On the glibc host, the output should be:
 # |------------------------------------------
+# |x86_64-cross-linux-gnu
 # |x86
 # |x86-64
-# |x86_64-cross-linux-gnu
 # |X86
-# |x86_64
 # |x86_64-pc-linux-musl
 # |x86_64-heiwa-linux-musl
 ```
