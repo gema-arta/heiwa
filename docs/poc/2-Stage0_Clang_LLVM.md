@@ -243,6 +243,7 @@ cmake -B build \
     -DLLVM_ENABLE_OCAMLDOC=OFF                \
     -DLLVM_ENABLE_ZLIB=OFF                    \
     -DLLVM_ENABLE_Z3_SOLVER=OFF               \
+    -DOCAMLFIND=NO                            \
     -DLLVM_INCLUDE_BENCHMARKS=OFF             \
     -DLLVM_INCLUDE_EXAMPLES=OFF               \
     -DLLVM_INCLUDE_TESTS=OFF                  \
