@@ -677,18 +677,8 @@ exit
 > #### Changing final toolchain ownership
 
 > Change the ownership of the "${HEIWA}/clang1-tools" directory to root by running the following command.
-
-> This is danger, so verify the variables before use `chown`.
-> ```bash
-> printf '%b\n' ${HEIWA}/clang1-tools
-> ```
-> ```bash
-> # | The output should be:
-> # |-----------------------
-> # |/clang1-tools
-> ```
 ```bash
-if [[ -n "$HEIWA" ]]; then
+if [[ -d "${HEIWA}/clang1-tools" ]]; then
     chown -R root:root ${HEIWA}/clang1-tools
 fi
 ```
