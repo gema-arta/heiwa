@@ -295,31 +295,28 @@ popd
 ```
 
 ### `7` - Cleaning Up
-> #### This section is optional!
+> #### This section is recommended!
 
-> If the intended user is not a programmer and does not plan to do any debugging on the system software, the system size can be decreased by removing the debugging symbols from binaries and libraries. This causes no inconvenience other than not being able to debug the software fully anymore.
 ```bash
 # Remove the documentation and manpages.
 rm -rf /clang0-tools/share/{info,man}
-
+```
+```bash
 # The libtool ".la" files are only useful when linking with static libraries.
 # They are unneeded and potentially harmful when using dynamic shared libraries, specially when using non-autotools build systems.
 # So, remove those files.
-find /clang0-tools/{lib{exec,64},{,${H_TRIPLET}/}lib}/ \
--name '*.la' -exec rm -fv {} \;
-
+find /clang0-tools/{lib{exec,64},{,${H_TRIPLET}/}lib}/ -name '*.la' -exec rm -fv {} \;
+```
+```bash
 # Strip off all unneeded symbols from binaries using `llvm-strip`.
 # A large number of files will be reported "The file was not recognized as a valid object file".
 # These warnings can be safely ignored. These warnings indicate that those files are scripts instead of binaries.
-find /clang0-tools/{lib64,{,${H_TRIPLET}/}lib}/ \
--type f \( -name '*.a' -o -name '*.so*' \) -exec llvm-strip --strip-unneeded {} \;
+find /clang0-tools/{lib64,{,${H_TRIPLET}/}lib}/ -type f \( -name '*.a' -o -name '*.so*' \) -exec llvm-strip --strip-unneeded {} \;
 
-find /clang0-tools/libexec/gcc/${H_TRIPLET}/10.3.1/ \
--type f -exec llvm-strip --strip-unneeded {} \;
+find /clang0-tools/libexec/gcc/${H_TRIPLET}/10.3.1/ -type f -exec llvm-strip --strip-unneeded {} \;
 
 if cp -v $(command -v llvm-strip) .; then
-    find /clang0-tools/{,${H_TRIPLET}/}bin/ \
-    -type f -exec ./llvm-strip --strip-unneeded {} \;
+    find /clang0-tools/{,${H_TRIPLET}/}bin/ -type f -exec ./llvm-strip --strip-unneeded {} \;
     rm -v llvm-strip
 fi
 ```
