@@ -156,6 +156,7 @@ printf '%b\n' $C_{ARCH,CPU,TRIPLET} $L_TARGET $T_{ARCH,TRIPLET} $H_TRIPLET
 ```bash
 cat >> ~/.bashrc << EOF
 C_TRIPLET="${C_TRIPLET}"
+T_ARCH="${T_ARCH}"
 C_ARCH="${C_ARCH}"
 C_CPU="${C_CPU}"
 L_TARGET="${L_TARGET}"
