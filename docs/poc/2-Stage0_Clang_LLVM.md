@@ -181,9 +181,12 @@ readelf -l a.out | grep --color=auto "Req.*ter"
 # |      [Requesting program interpreter: /clang0-tools/lib/ld-musl-x86_64.so.1]
 ```
 
-### `6` - Clang/LLVM
+### `6` - Clang/LLVM + libunwind, libcxxabi, and libcxx
 > #### `12.x.x` or newer
-> C language family frontend for LLVM.
+> - C language family frontend for LLVM;  
+> - C++ runtime stack unwinder from LLVM;  
+> - Low level support for a standard C++ library from LLVM;  
+> - New implementation of the C++ standard library, targeting C++11 from LLVM.
 
 > **Required!** Build Stage-0 Clang/LLVM toolchain with `libgcc_s.so*` and `libstdc++.so*` dependencies since built with GCC toolchain.
 ```bash
