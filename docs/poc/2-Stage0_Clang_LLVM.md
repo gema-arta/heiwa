@@ -230,6 +230,7 @@ cmake -B build \
     -DBUILD_SHARED_LIBS=ON                    \
     -DLLVM_HOST_TRIPLE="$T_TRIPLET"           \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$T_TRIPLET" \
+    -DLLVM_APPEND_VC_REV=OFF                  \
     -DLLVM_ENABLE_BINDINGS=OFF                \
     -DLLVM_ENABLE_IDE=OFF                     \
     -DLLVM_ENABLE_LIBCXX=ON                   \
