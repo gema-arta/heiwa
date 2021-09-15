@@ -55,7 +55,7 @@ time { make; }
 # Install and fix wrong shared object symlink, also create a `ldd` symlink to use to print shared object dependencies.
 time {
     make DESTDIR=/clang1-tools install
-    ln -sfv libc.so /clang1-tools/lib/ld-musl-x86_64.so.1
+    ln -sfv libc.so /clang1-tools/lib/ld-musl-${T_ARCH}.so.1
     mkdir -v /clang1-tools/bin && \
     ln -sfv ../lib/libc.so /clang1-tools/bin/ldd
 }
@@ -63,7 +63,7 @@ time {
 ```bash
 # Configure path for the dynamic linker.
 mkdir -v /clang1-tools/etc && \
-cat > /clang1-tools/etc/ld-musl-x86_64.path << "EOF"
+cat > /clang1-tools/etc/ld-musl-${T_ARCH}.path << "EOF"
 /clang1-tools/lib
 EOF
 ```
@@ -324,12 +324,12 @@ time {
 }
 ```
 ```bash
-# Configure Stage-1 Clang/LLVM with default triplet (pc) to produce binaries with "/clang1-tools/lib/ld-musl-x86_64.so.1".
+# Configure Stage-1 Clang/LLVM with default triplet (pc) to produce binaries with "/clang1-tools/lib/ld-musl-${T_ARCH}.so.1".
 ln -sfv clang              /clang1-tools/bin/${T_TRIPLET}-clang
 ln -sfv ${T_TRIPLET}-clang /clang1-tools/bin/cc
 ln -sfv clang++            /clang1-tools/bin/${T_TRIPLET}-clang++
-cat > /clang1-tools/bin/${T_TRIPLET}.cfg << "EOF"
--Wl,-dynamic-linker /clang1-tools/lib/ld-musl-x86_64.so.1
+cat > /clang1-tools/bin/${T_TRIPLET}.cfg << EOF
+-Wl,-dynamic-linker /clang1-tools/lib/ld-musl-${T_ARCH}.so.1
 EOF
 ```
 ```bash
