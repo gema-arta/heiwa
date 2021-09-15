@@ -110,9 +110,9 @@ exec su - heiwa
 ```
 > Then, setup the bash environment variables.
 ```bash
-cat > ~/.bash_profile << "EOF"
-exec env -i HOME="$HOME" TERM="$TERM" \
-COMMON_FLAGS="-march=native -Os -pipe" /bin/bash
+cat > ~/.bash_profile << EOF
+exec env -i HOME="\$HOME" TERM="\$TERM" \
+COMMON_FLAGS="-march=native -Os -pipe" $(command -v bash)
 EOF
 ```
 ```bash
