@@ -222,7 +222,7 @@ cp -fv ../extra/llvm/files/config.guess cmake/.
 ```bash
 # Configure source.
 cmake -B build \
-    -DCMAKE_BUILD_TYPE=Release -Wno-dev       \
+    -DCMAKE_BUILD_TYPE=MinSizeRel -Wno-dev    \
     -DCMAKE_INSTALL_PREFIX="/clang0-tools"    \
     -DCMAKE_C_COMPILER="${H_TRIPLET}-gcc"     \
     -DCMAKE_CXX_COMPILER="${H_TRIPLET}-g++"   \
