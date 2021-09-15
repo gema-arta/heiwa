@@ -674,7 +674,7 @@ exit
 
 > #### * Beginning of as root!
 
-> #### Changing final toolchain ownership
+> #### Changing the final toolchain directory ownership
 
 > Change the ownership of the "${HEIWA}/clang1-tools" directory to root by running the following command.
 ```bash
