@@ -40,12 +40,12 @@ cp -rfv usr/include /clang0-tools/${H_TRIPLET}/.
 > **Required!** To build the entire packages in this stage.
 ```bash
 # Create a dedicated directory and configure source.
-mkdir -v build && cd build && ../configure     \
-     --prefix=/clang0-tools                    \
-     --target=${H_TRIPLET}                     \
-     --with-sysroot=/clang0-tools/${H_TRIPLET} \
-     --without-{debuginfod,stage1-ldflags}     \
-     --disable-{gdb,libdecnumber,lto,multilib,nls,readline,sim,static,werror}
+mkdir -v build && cd build && ../configure    \
+    --prefix=/clang0-tools                    \
+    --target=${H_TRIPLET}                     \
+    --with-sysroot=/clang0-tools/${H_TRIPLET} \
+    --without-{debuginfod,stage1-ldflags}     \
+    --disable-{gdb,libdecnumber,lto,multilib,nls,readline,sim,static,werror}
 
 # Check host's environment and make sure all necessary tools are available to build Binutils. Then build.
 time { make configure-host && make; }
