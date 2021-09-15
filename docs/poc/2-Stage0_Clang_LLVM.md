@@ -282,7 +282,7 @@ time {
 # Configure Stage-0 Clang with new triplet to produce binaries with "/clang1-tools/lib/ld-musl-${T_ARCH}.so.1" later.
 ln -sfv clang   /clang0-tools/bin/${H_TRIPLET}-clang
 ln -sfv clang++ /clang0-tools/bin/${H_TRIPLET}-clang++
-cat > /clang0-tools/bin/${H_TRIPLET}.cfg << "EOF"
+cat > /clang0-tools/bin/${H_TRIPLET}.cfg << EOF
 -Wl,-dynamic-linker /clang1-tools/lib/ld-musl-${T_ARCH}.so.1
 EOF
 ```
