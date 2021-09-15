@@ -40,7 +40,7 @@ cp -rfv usr/include /clang0-tools/${H_TRIPLET}/.
 > **Required!** To build the entire packages in this stage.
 ```bash
 # Create a dedicated directory and configure source.
-mkdir -v build && cd build && ../configure    \
+mkdir -v build && cd build &&    ../configure \
     --prefix=/clang0-tools                    \
     --target=${H_TRIPLET}                     \
     --with-sysroot=/clang0-tools/${H_TRIPLET} \
@@ -66,8 +66,8 @@ tar xf ../mpfr-4.1.0.tar.xz && mv -fv mpfr{-4.1.0,}
 tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc{-1.2.1,}
 
 # Create a dedicated directory and configure source.
-mkdir -v build && cd build                                && \
-CFLAGS="$CFLAGS -O0" CXXFLAGS="$CXXFLAGS -O0" ../configure   \
+mkdir -v build && cd build &&                                \
+CFLAGS="$CFLAGS -O0" CXXFLAGS="$CXXFLAGS -O0"   ../configure \
     --prefix=/clang0-tools                                   \
     --build=${C_TRIPLET}                                     \
     --host=${C_TRIPLET}                                      \
@@ -141,7 +141,7 @@ tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc{-1.2.1,}
 ../../extra/gcc/patches/appatch
 
 # Create a dedicated directory and configure source.
-mkdir -v build && cd build && ../configure       \
+mkdir -v build && cd build &&       ../configure \
     --prefix=/clang0-tools                       \
     --build=${C_TRIPLET}                         \
     --host=${C_TRIPLET}                          \
