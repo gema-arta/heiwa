@@ -224,9 +224,10 @@ cmake -B build \
     -DCMAKE_C_COMPILER="${H_TRIPLET}-gcc"     \
     -DCMAKE_CXX_COMPILER="${H_TRIPLET}-g++"   \
     -DBUILD_SHARED_LIBS=ON                    \
+    -DOCAMLFIND=NO                            \
+    -DLLVM_APPEND_VC_REV=OFF                  \
     -DLLVM_HOST_TRIPLE="$T_TRIPLET"           \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$T_TRIPLET" \
-    -DLLVM_APPEND_VC_REV=OFF                  \
     -DLLVM_ENABLE_BINDINGS=OFF                \
     -DLLVM_ENABLE_IDE=OFF                     \
     -DLLVM_ENABLE_LIBCXX=ON                   \
@@ -240,7 +241,6 @@ cmake -B build \
     -DLLVM_ENABLE_OCAMLDOC=OFF                \
     -DLLVM_ENABLE_ZLIB=OFF                    \
     -DLLVM_ENABLE_Z3_SOLVER=OFF               \
-    -DOCAMLFIND=NO                            \
     -DLLVM_INCLUDE_BENCHMARKS=OFF             \
     -DLLVM_INCLUDE_EXAMPLES=OFF               \
     -DLLVM_INCLUDE_TESTS=OFF                  \
