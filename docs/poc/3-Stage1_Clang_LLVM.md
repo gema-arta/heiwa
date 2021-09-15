@@ -650,8 +650,8 @@ find /clang1-tools/lib/ -type f \( -name '*.a' -o -name '*.so*' \) -exec llvm-st
 ```bash
 find /clang1-tools/{{,usr/}{,s}bin,libexec/awk}/ -type f -exec /clang0-tools/bin/llvm-strip --strip-unneeded {} \;
 ```
+> Exit from privileged user.
 ```bash
-# Exit from privileged user.
 exit
 ```
 > #### * End of as privileged user!
