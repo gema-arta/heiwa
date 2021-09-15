@@ -129,13 +129,13 @@ EOF
 source ~/.bash_profile
 ```
 ```bash
-C_TRIPLET="$(echo "$MACHTYPE"  | sed 's|-[^-]*|-cross|')" # Host cross-triplet, to bootstrap cross-libc GCC.
-T_ARCH="$(echo "$MACHTYPE" | cut -d- -f1)"                # Target CPU architecture, use native host's arch.
-C_ARCH="$(cut -d_ -f1 <<< "$T_ARCH")"                     # CPU arch, to be used to build Linux API headers.
-C_CPU="$(sed 's|_|-|' <<< "$T_ARCH")"                     # CPU arch, to be used to build static GCC.
-L_TARGET="X86"                                            # LLVM-specific architecture build target.
-T_TRIPLET="${T_ARCH}-pc-linux-musl"                       # Target triplet for final toolchain.
-H_TRIPLET="$(echo "$T_TRIPLET" | sed 's|-[^-]*|-heiwa|')" # Target triplet for cross-libraries.
+C_TRIPLET="$(sed 's|-[^-]*|-cross|' <<<  "$MACHTYPE")" # Host cross-triplet, to bootstrap cross-libc GCC.
+T_ARCH="$(echo "$MACHTYPE" | cut -d- -f1)"             # Target CPU architecture, use native host's arch.
+C_ARCH="$(cut -d_ -f1 <<< "$T_ARCH")"                  # CPU arch, to be used to build Linux API headers.
+C_CPU="$(sed 's|_|-|' <<< "$T_ARCH")"                  # CPU arch, to be used to build static GCC.
+L_TARGET="X86"                                         # LLVM-specific architecture build target.
+T_TRIPLET="${T_ARCH}-pc-linux-musl"                    # Target triplet for final toolchain.
+H_TRIPLET="$(sed 's|-[^-]*|-heiwa|' <<< "$T_TRIPLET")" # Target triplet for cross-libraries.
 ```
 > Let's check if the above variables are all correct.
 ```bash
