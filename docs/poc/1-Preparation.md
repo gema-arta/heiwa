@@ -64,11 +64,9 @@ fi
 
 ### `3` - Adding privileged user
 > #### Setup privileged user
-
-> **Why?** When logged in as user root, making a single mistake can damage or destroy a system. That's it.
 ```bash
 groupadd heiwa
-useradd -s $(comand -v bash) -g heiwa -m -k /dev/null heiwa
+useradd -s /bin/bash -g heiwa -m -k /dev/null heiwa
 passwd heiwa
 ```
 > #### Setup directory permissions
