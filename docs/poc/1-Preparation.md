@@ -71,20 +71,8 @@ passwd heiwa
 ```
 > #### Setup directory permissions
 
-> This is danger, so verify the variables before use `chown`.
-> ```bash
-> printf '%b\n' {${HEIWA},}/clang{0,1}-tools
-> ```
-> ```bash
-> # | The output should be:
-> # |-----------------------
-> # |/media/Heiwa/clang0-tools
-> # |/media/Heiwa/clang1-tools
-> # |/clang0-tools
-> # |/clang1-tools
-> ```
 ```bash
-if [[ -n "$HEIWA" ]]; then
+if [[ -d "${HEIWA}/sources" ]]; then
     chmod -vR a+wt ${HEIWA}/sources
     chown -Rv heiwa ${HEIWA}/sources
     chown -Rv heiwa {${HEIWA},}/clang{0,1}-tools
