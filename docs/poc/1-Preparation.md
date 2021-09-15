@@ -48,7 +48,7 @@ mount -vo noatime,gc_merge,compress_algorithm=lz4,compress_extension='*',compres
 
 > The "/clang1-tools" should use "/usr" merge with relative paths. **Why?** Because we implement it.
 ```bash
-if [[ -n "$HEIWA" ]]; then
+if [[ -d "$HEIWA" ]]; then
     if mkdir -pv ${HEIWA}/clang{0,1}-tools; then
         ln -sfv ${HEIWA}/clang0-tools /
         ln -sfv ${HEIWA}/clang1-tools /
