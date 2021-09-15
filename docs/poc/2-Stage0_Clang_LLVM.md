@@ -160,7 +160,6 @@ time { make install; }
 ```
 ```bash
 # Adjust the current GCC to produce binaries with "/clang0-tools/lib/ld-musl-${T_ARCH}.so.1" by dumping the specs file, then `sed` it.
-SPECFILE="$(dirname $(${H_TRIPLET}-gcc -print-libgcc-file-name))/specs"
 ${H_TRIPLET}-gcc -dumpspecs > specs
 sed -i 's|/lib/ld-musl-${T_ARCH}.so.1|/clang0-tools/lib/ld-musl-${T_ARCH}.so.1|g' specs
 
@@ -168,6 +167,7 @@ sed -i 's|/lib/ld-musl-${T_ARCH}.so.1|/clang0-tools/lib/ld-musl-${T_ARCH}.so.1|g
 grep --color=auto "/clang0-tools/lib/ld-musl-${T_ARCH}.so.1" specs
 
 # Install the specs file if the path is correct.
+SPECFILE="$(dirname $(${H_TRIPLET}-gcc -print-libgcc-file-name))/specs"
 mv -fv specs "$SPECFILE" && unset SPECFILE
 ```
 ```bash
