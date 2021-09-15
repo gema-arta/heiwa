@@ -272,7 +272,7 @@ rm -rf projects/lib{unwind,cxx{abi,}}
 ```bash
 # Configure Clang/LLVM source.
 cmake -B build \
-    -DCMAKE_BUILD_TYPE=MinSizeRel -Wno-dev    \
+    -DCMAKE_BUILD_TYPE=Release -Wno-dev       \
     -DCMAKE_INSTALL_PREFIX="/clang1-tools"    \
     -DBUILD_SHARED_LIBS=ON                    \
     -DOCAMLFIND=NO                            \
