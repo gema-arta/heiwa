@@ -281,6 +281,7 @@ cmake -B build \
     -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON       \
     -DLLVM_INSTALL_CCTOOLS_SYMLINKS=ON        \
     -DLLVM_INSTALL_UTILS=ON                   \
+    -DLLVM_LINK_LLVM_DYLIB=ON                 \
     -DLLVM_TARGET_ARCH="$L_TARGET"            \
     -DLLVM_TARGETS_TO_BUILD="$L_TARGET"       \
     -DCLANG_VENDOR="Heiwa/Linux"              \
