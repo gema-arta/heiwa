@@ -248,7 +248,6 @@ cmake -B build \
     -DLLVM_INCLUDE_TESTS=OFF                  \
     -DLLVM_INCLUDE_GO_TESTS=OFF               \
     -DLLVM_INCLUDE_DOCS=OFF                   \
-    -DLLVM_OPTIMIZED_TABLEGEN=ON              \
     -DLLVM_TARGET_ARCH="$L_TARGET"            \
     -DLLVM_TARGETS_TO_BUILD="$L_TARGET"       \
     -DLIBUNWIND_ENABLE_STATIC=OFF             \
