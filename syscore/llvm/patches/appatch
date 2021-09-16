@@ -10,6 +10,8 @@ pushd ${LLVM_SRC}/projects/ && \
         ppc32-compiler-rt.patch
     do patch -Np1 -i ../../extra/llvm/patches/${P}
     done; unset P
+    sed -i 's|COMPILER_RT_HAS_SANITIZER_COMMON TRUE|COMPILER_RT_HAS_SANITIZER_COMMON FALSE|' \
+    compiler-rt/cmake/config-ix.cmake
     patch -Np1 -i ../../extra/llvm/patches/libunwind-ppc32.patch
     for P in \
         libcxx-musl.patch \
@@ -42,3 +44,4 @@ pushd ${LLVM_SRC}/../ && \
     do patch -Np1 -i ./extra/llvm/patches/${P}
     done; unset P
 popd
+
