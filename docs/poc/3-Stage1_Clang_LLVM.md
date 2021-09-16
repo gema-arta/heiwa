@@ -180,10 +180,6 @@ popd
 # Apply patches (from Void Linux).
 ../extra/llvm/patches/appatch
 
-# Disable sanitizers for musl libc, it's broken since duplicates some libc bits.
-sed -i 's|COMPILER_RT_HAS_SANITIZER_COMMON TRUE|COMPILER_RT_HAS_SANITIZER_COMMON FALSE|' \
-projects/compiler-rt/cmake/config-ix.cmake
-
 # Update config.guess for better platform detection.
 cp -fv ../extra/llvm/files/config.guess cmake/.
 ```
@@ -211,12 +207,12 @@ time {
 # Configure `libcxxabi` source.
 pushd ${LLVM_SRC}/projects/libcxxabi/ && \
     cmake -B build \
-        -DCMAKE_INSTALL_PREFIX="/clang1-tools"   \
-        -DCMAKE_CXX_FLAGS="-flto=thin $CXXFLAGS" \
-        -DLLVM_PATH="$LLVM_SRC"                  \
-        -DLIBCXXABI_ENABLE_STATIC=OFF            \
-        -DLIBCXXABI_USE_LLVM_UNWINDER=ON         \
-        -DLIBCXXABI_USE_COMPILER_RT=ON           \
+        -DCMAKE_INSTALL_PREFIX="/clang1-tools"         \
+        -DCMAKE_CXX_FLAGS="-fPIC -flto=thin $CXXFLAGS" \
+        -DLLVM_PATH="$LLVM_SRC"                        \
+        -DLIBCXXABI_ENABLE_STATIC=OFF                  \
+        -DLIBCXXABI_USE_LLVM_UNWINDER=ON               \
+        -DLIBCXXABI_USE_COMPILER_RT=ON                 \
         -DLIBCXXABI_LIBCXX_INCLUDES="${LLVM_SRC}/projects/libcxx/include"
 
 # Build.
@@ -232,16 +228,16 @@ time {
 # Configure `libcxx` source.
 pushd ${LLVM_SRC}/projects/libcxx/ && \
     cmake -B build \
-        -DCMAKE_INSTALL_PREFIX="/clang1-tools"                                  \
-        -DCMAKE_CXX_FLAGS="-isystem /clang1-tools/include -flto=thin $CXXFLAGS" \
-        -DLLVM_PATH="$LLVM_SRC"                                                 \
-        -DLIBCXX_ENABLE_STATIC=OFF                                              \
-        -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=OFF                                \
-        -DLIBCXX_CXX_ABI=libcxxabi                                              \
-        -DLIBCXX_CXX_ABI_INCLUDE_PATHS="/clang1-tools/include"                  \
-        -DLIBCXX_CXX_ABI_LIBRARY_PATH="/clang1-tools/lib"                       \
-        -DLIBCXX_HAS_MUSL_LIBC=ON                                               \
-        -DLIBCXX_USE_COMPILER_RT=ON                                             \
+        -DCMAKE_INSTALL_PREFIX="/clang1-tools"                                        \
+        -DCMAKE_CXX_FLAGS="-isystem /clang1-tools/include -fPIC -flto=thin $CXXFLAGS" \
+        -DLLVM_PATH="$LLVM_SRC"                                                       \
+        -DLIBCXX_ENABLE_STATIC=OFF                                                    \
+        -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=OFF                                      \
+        -DLIBCXX_CXX_ABI=libcxxabi                                                    \
+        -DLIBCXX_CXX_ABI_INCLUDE_PATHS="/clang1-tools/include"                        \
+        -DLIBCXX_CXX_ABI_LIBRARY_PATH="/clang1-tools/lib"                             \
+        -DLIBCXX_HAS_MUSL_LIBC=ON                                                     \
+        -DLIBCXX_USE_COMPILER_RT=ON                                                   \
         -DLIBCXX_HAS_ATOMIC_LIB=OFF
 
 # Build.
@@ -260,7 +256,6 @@ cmake -B build \
     -DCMAKE_BUILD_TYPE=Release -Wno-dev       \
     -DCMAKE_INSTALL_PREFIX="/clang1-tools"    \
     -DBUILD_SHARED_LIBS=ON                    \
-    -DOCAMLFIND=NO                            \
     -DLLVM_APPEND_VC_REV=OFF                  \
     -DLLVM_HOST_TRIPLE="$T_TRIPLET"           \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$T_TRIPLET" \
@@ -284,7 +279,6 @@ cmake -B build \
     -DLLVM_INCLUDE_TESTS=OFF                  \
     -DLLVM_INCLUDE_GO_TESTS=OFF               \
     -DLLVM_INCLUDE_DOCS=OFF                   \
-    -DLLVM_OPTIMIZED_TABLEGEN=ON              \
     -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON       \
     -DLLVM_INSTALL_CCTOOLS_SYMLINKS=ON        \
     -DLLVM_INSTALL_UTILS=ON                   \
@@ -650,7 +644,7 @@ find /clang1-tools/lib/ -type f \( -name '*.a' -o -name '*.so*' \) -exec llvm-st
 ```bash
 find /clang1-tools/{{,usr/}{,s}bin,libexec/awk}/ -type f -exec /clang0-tools/bin/llvm-strip --strip-unneeded {} \;
 ```
-> Exit from privileged user.
+> Now, exit from privileged user.
 ```bash
 exit
 ```
