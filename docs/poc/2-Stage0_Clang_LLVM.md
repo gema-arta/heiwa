@@ -181,7 +181,7 @@ readelf -l a.out | grep --color=auto "Req.*ter"
 # |      [Requesting program interpreter: /clang0-tools/lib/ld-musl-x86_64.so.1]
 ```
 
-### `6` - Clang/LLVM + libunwind, libcxxabi, and libcxx
+### `6` - Clang/LLVM + libunwind, libcxxabi, and libcxx <kbd>static</kbd>
 > #### `12.x.x` or newer
 > - C language family frontend for LLVM;  
 > - C++ runtime stack unwinder from LLVM;  
@@ -244,9 +244,13 @@ cmake -B build \
     -DLLVM_INCLUDE_DOCS=OFF                   \
     -DLLVM_TARGET_ARCH="$L_TARGET"            \
     -DLLVM_TARGETS_TO_BUILD="$L_TARGET"       \
-    -DLIBUNWIND_ENABLE_STATIC=OFF             \
-    -DLIBCXXABI_ENABLE_STATIC=OFF             \
-    -DLIBCXX_ENABLE_STATIC=OFF                \
+    -DLIBUNWIND_ENABLE_ASSERTIONS=OFF         \
+    -DLIBUNWIND_ENABLE_SHARED=OFF             \
+    -DLIBCXXABI_ENABLE_ASSERTIONS=OFF         \
+    -DLIBCXXABI_ENABLE_STATIC_UNWINDER=ON     \
+    -DLIBCXXABI_ENABLE_SHARED=OFF             \
+    -DLIBCXX_ENABLE_ASSERTIONS=OFF            \
+    -DLIBCXX_ENABLE_SHARED=OFF                \
     -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=OFF  \
     -DLIBCXX_HAS_MUSL_LIBC=ON                 \
     -DCOMPILER_RT_BUILD_LIBFUZZER=OFF         \
