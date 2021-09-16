@@ -181,7 +181,7 @@ readelf -l a.out | grep --color=auto "Req.*ter"
 # |      [Requesting program interpreter: /clang0-tools/lib/ld-musl-x86_64.so.1]
 ```
 
-### `6` - Clang/LLVM + libunwind, libcxxabi, and libcxx <kbd>static</kbd>
+### `6` - Clang/LLVM + libunwind, libcxxabi, and libcxx
 > #### `12.x.x` or newer
 > - C language family frontend for LLVM;  
 > - C++ runtime stack unwinder from LLVM;  
@@ -218,10 +218,11 @@ cp -fv ../extra/llvm/files/config.guess cmake/.
 ```bash
 # Configure source.
 cmake -B build \
-    -DCMAKE_BUILD_TYPE=MinSizeRel -Wno-dev    \
+    -DCMAKE_BUILD_TYPE=Release -Wno-dev       \
     -DCMAKE_INSTALL_PREFIX="/clang0-tools"    \
     -DCMAKE_C_COMPILER="${H_TRIPLET}-gcc"     \
     -DCMAKE_CXX_COMPILER="${H_TRIPLET}-g++"   \
+    -DBUILD_SHARED_LIBS=ON                    \
     -DLLVM_APPEND_VC_REV=OFF                  \
     -DLLVM_HOST_TRIPLE="$T_TRIPLET"           \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$T_TRIPLET" \
@@ -245,11 +246,11 @@ cmake -B build \
     -DLLVM_TARGET_ARCH="$L_TARGET"            \
     -DLLVM_TARGETS_TO_BUILD="$L_TARGET"       \
     -DLIBUNWIND_ENABLE_ASSERTIONS=OFF         \
+    -DLIBUNWIND_ENABLE_STATIC=OFF             \
     -DLIBCXXABI_ENABLE_ASSERTIONS=OFF         \
-    -DLIBCXXABI_ENABLE_STATIC_UNWINDER=ON     \
-    -DLIBCXXABI_ENABLE_SHARED=OFF             \
+    -DLIBCXXABI_ENABLE_STATIC=OFF             \
     -DLIBCXX_ENABLE_ASSERTIONS=OFF            \
-    -DLIBCXX_ENABLE_SHARED=OFF                \
+    -DLIBCXX_ENABLE_STATIC=OFF                \
     -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=OFF  \
     -DLIBCXX_HAS_MUSL_LIBC=ON                 \
     -DCOMPILER_RT_BUILD_LIBFUZZER=OFF         \
