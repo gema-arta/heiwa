@@ -642,7 +642,9 @@ find /clang1-tools/lib{,exec}/ -name '*.la' -exec rm -fv {} \;
 find /clang1-tools/lib/ -type f \( -name '*.a' -o -name '*.so*' \) -exec llvm-strip --strip-unneeded {} \;
 ```
 ```bash
-find /clang1-tools/{{,usr/}{,s}bin,libexec/awk}/ -type f -exec /clang0-tools/bin/llvm-strip --strip-unneeded {} \;
+if cp -v $(command -v llvm-strip) .; then
+    find /clang1-tools/{{,usr/}{,s}bin,libexec/awk}/ -type f -exec ./llvm-strip --strip-unneeded {} \;
+fi && rm -v llvm-strip
 ```
 > Now, exit from privileged user.
 ```bash
