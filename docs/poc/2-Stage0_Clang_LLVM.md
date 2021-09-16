@@ -212,10 +212,6 @@ popd
 # Apply patches (from Void Linux).
 ../extra/llvm/patches/appatch
 
-# Disable sanitizers for musl libc, it's broken since duplicates some libc bits.
-sed -i 's|COMPILER_RT_HAS_SANITIZER_COMMON TRUE|COMPILER_RT_HAS_SANITIZER_COMMON FALSE|' \
-projects/compiler-rt/cmake/config-ix.cmake
-
 # Update config.guess for better platform detection.
 cp -fv ../extra/llvm/files/config.guess cmake/.
 ```
