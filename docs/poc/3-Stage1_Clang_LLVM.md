@@ -191,6 +191,7 @@ pushd ${LLVM_SRC}/projects/libunwind/ && \
         -DCMAKE_C_FLAGS="-fPIC -flto=thin $CFLAGS"     \
         -DCMAKE_CXX_FLAGS="-fPIC -flto=thin $CXXFLAGS" \
         -DLLVM_PATH="$LLVM_SRC"                        \
+        -DLIBUNWIND_ENABLE_ASSERTIONS=OFF              \
         -DLIBUNWIND_ENABLE_STATIC=OFF                  \
         -DLIBUNWIND_USE_COMPILER_RT=ON
 
@@ -210,6 +211,7 @@ pushd ${LLVM_SRC}/projects/libcxxabi/ && \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools"         \
         -DCMAKE_CXX_FLAGS="-fPIC -flto=thin $CXXFLAGS" \
         -DLLVM_PATH="$LLVM_SRC"                        \
+        -DLIBCXXABI_ENABLE_ASSERTIONS=OFF              \
         -DLIBCXXABI_ENABLE_STATIC=OFF                  \
         -DLIBCXXABI_USE_LLVM_UNWINDER=ON               \
         -DLIBCXXABI_USE_COMPILER_RT=ON                 \
@@ -231,6 +233,7 @@ pushd ${LLVM_SRC}/projects/libcxx/ && \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools"                                        \
         -DCMAKE_CXX_FLAGS="-isystem /clang1-tools/include -fPIC -flto=thin $CXXFLAGS" \
         -DLLVM_PATH="$LLVM_SRC"                                                       \
+        -DLIBCXX_ENABLE_ASSERTIONS=OFF                                                \
         -DLIBCXX_ENABLE_STATIC=OFF                                                    \
         -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=OFF                                      \
         -DLIBCXX_CXX_ABI=libcxxabi                                                    \
