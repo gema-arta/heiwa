@@ -199,7 +199,7 @@ readelf -l a.out | grep --color=auto "Req.*ter"
 # |      [Requesting program interpreter: /clang0-tools/lib/ld-musl-x86_64.so.1]
 ```
 
-### `6` - Clang/LLVM + libunwind, libcxxabi, and libcxx
+### `6` - Clang/LLVM + libunwind, libcxxabi, and libcxx <kbd>stage 1</kbd>
 > #### `12.x.x` or newer
 > - C language family frontend for LLVM;  
 > - C++ runtime stack unwinder from LLVM;  
