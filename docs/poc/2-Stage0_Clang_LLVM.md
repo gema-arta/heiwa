@@ -152,7 +152,7 @@ tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc{-1.2.1,}
 ../../extra/gcc/patches/appatch
 ```
 ```bash
-# Create a dedicated directory and configure source. Ensure to use current musl libc built.
+# Create a dedicated directory and configure source. Ensure to use previously built musl libc.
 mkdir -v build && cd build &&                                \
 LDFLAGS="-Wl,-rpath,/clang0-tools/lib $LDFLAGS" ../configure \
     --prefix=/clang0-tools                                   \
