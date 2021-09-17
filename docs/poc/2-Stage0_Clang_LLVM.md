@@ -153,15 +153,16 @@ tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc{-1.2.1,}
 ```
 ```bash
 # Create a dedicated directory and configure source.
-mkdir -v build && cd build &&       ../configure \
-    --prefix=/clang0-tools                       \
-    --build=${C_TRIPLET}                         \
-    --host=${C_TRIPLET}                          \
-    --target=${H_TRIPLET}                        \
-    --with-sysroot=/clang0-tools                 \
-    --enable-{clocale=generic,languages=c\,c++}  \
-    --enable-{shared,threads=posix}              \
-    --disable-lib{mpx,mudflap,sanitizer,ssp,vtv} \
+mkdir -v build && cd build &&                                \
+LDFLAGS="-Wl,-rpath,/clang0-tools/lib $LDFLAGS" ../configure \
+    --prefix=/clang0-tools                                   \
+    --build=${C_TRIPLET}                                     \
+    --host=${C_TRIPLET}                                      \
+    --target=${H_TRIPLET}                                    \
+    --with-sysroot=/clang0-tools                             \
+    --enable-{clocale=generic,languages=c\,c++}              \
+    --enable-{shared,threads=posix}                          \
+    --disable-lib{mpx,mudflap,sanitizer,ssp,vtv}             \
     --disable-{gnu-unique-object,lto,multilib,nls,static,symvers,werror}
 ```
 ```bash
