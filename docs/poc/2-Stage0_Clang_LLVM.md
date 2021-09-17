@@ -21,13 +21,16 @@ The purpose of this stage is to build a temporary Clang/LLVM toolchain with GCC 
 ```bash
 # The recommended make target `headers_install` cannot be used, because it requires `rsync` which may not be available.
 # The headers are first placed in "./usr/", then copied to the needed location.
-
+```
+```bash
 # Make sure there are no stale files embedded in the package. Then build.
 time { make mrproper && make ARCH=${C_ARCH} headers; }
-
+```
+```bash
 # Remove unnecessary dotfiles and Makefile.
 find usr/include \( -name '.*' -o -name 'Makefile' \) -exec rm -fv {} \;
-
+```
+```bash
 # Install.
 mkdir -v /clang0-tools/${H_TRIPLET} && \
 cp -rfv usr/include /clang0-tools/${H_TRIPLET}/.
@@ -46,10 +49,12 @@ mkdir -v build && cd build &&    ../configure \
     --with-sysroot=/clang0-tools/${H_TRIPLET} \
     --without-{debuginfod,stage1-ldflags}     \
     --disable-{gdb,libdecnumber,lto,multilib,nls,readline,sim,static,werror}
-
+```
+```bash
 # Check host's environment and make sure all necessary tools are available to build Binutils. Then build.
 time { make configure-host && make; }
-
+```
+```bash
 # Install.
 time { make install; }
 ```
@@ -64,7 +69,8 @@ time { make install; }
 tar xf  ../gmp-6.2.1.tar.xz && mv -fv gmp{-6.2.1,}
 tar xf ../mpfr-4.1.0.tar.xz && mv -fv mpfr{-4.1.0,}
 tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc{-1.2.1,}
-
+```
+```bash
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build &&                                \
 CFLAGS="$CFLAGS -O0" CXXFLAGS="$CXXFLAGS -O0"   ../configure \
@@ -78,10 +84,12 @@ CFLAGS="$CFLAGS -O0" CXXFLAGS="$CXXFLAGS -O0"   ../configure \
     --enable-{clocale=generic,languages=c,threads=no}        \
     --disable-{decimal-float,lto,multilib,nls,shared,werror} \
     --disable-lib{atomic,gomp,itm,mpx,mudflap,quadmath,sanitizer,ssp,stdcxx,vtv}
-
-# Build only the minimum.
+```
+```bash
+# Only build the minimum.
 time { make all-{gcc,target-libgcc}; }
-
+```
+```bash
 # Install.
 time { make install-{gcc,target-libgcc}; }
 ```
@@ -99,10 +107,12 @@ time { make install-{gcc,target-libgcc}; }
     --disable-static                    \
     --with-malloc=mallocng              \
     --enable-optimize=speed
-
+```
+```bash
 # Build.
 time { make; }
-
+```
+```bash
 # Install and fix wrong shared object symlink, also create a `ldd` symlink to use to print shared object dependencies.
 time {
     make DESTDIR=/clang0-tools install
@@ -136,10 +146,12 @@ ln -sv ../include /clang0-tools/usr/include
 tar xf  ../gmp-6.2.1.tar.xz && mv -fv gmp{-6.2.1,}
 tar xf ../mpfr-4.1.0.tar.xz && mv -fv mpfr{-4.1.0,}
 tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc{-1.2.1,}
-
+```
+```bash
 # Apply patches (from Alpine Linux).
 ../../extra/gcc/patches/appatch
-
+```
+```bash
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build &&       ../configure \
     --prefix=/clang0-tools                       \
@@ -151,10 +163,12 @@ mkdir -v build && cd build &&       ../configure \
     --enable-{shared,threads=posix}              \
     --disable-lib{mpx,mudflap,sanitizer,ssp,vtv} \
     --disable-{gnu-unique-object,lto,multilib,nls,static,symvers,werror}
-
+```
+```bash
 # Build.
 time { make; }
-
+```
+```bash
 # Install.
 time { make install; }
 ```
@@ -162,10 +176,12 @@ time { make install; }
 # Adjust the current GCC to produce binaries with "/clang0-tools/lib/ld-musl-${T_ARCH}.so.1" by dumping the specs file, then `sed` it.
 ${H_TRIPLET}-gcc -dumpspecs > specs
 sed -i "s|/lib/ld-musl-${T_ARCH}.so.1|/clang0-tools/lib/ld-musl-${T_ARCH}.so.1|g" specs
-
+```
+```bash
 # Check the path of the specs file.
 grep --color=auto "/clang0-tools/lib/ld-musl-${T_ARCH}.so.1" specs
-
+```
+```bash
 # Install the specs file if the path is correct.
 SPECFILE="$(dirname $(${H_TRIPLET}-gcc -print-libgcc-file-name))/specs"
 mv -fv specs "$SPECFILE" && unset SPECFILE
@@ -175,7 +191,8 @@ mv -fv specs "$SPECFILE" && unset SPECFILE
 echo "int main(){}" > dummy.c
 ${H_TRIPLET}-gcc ${CFLAGS} dummy.c
 readelf -l a.out | grep --color=auto "Req.*ter"
-
+```
+```bash
 # | The output should be:
 # |-----------------------
 # |      [Requesting program interpreter: /clang0-tools/lib/ld-musl-x86_64.so.1]
@@ -192,7 +209,8 @@ readelf -l a.out | grep --color=auto "Req.*ter"
 ```bash
 # Exit from LLVM source directory if already entered after decompressing.
 popd
-
+```
+```bash
 # Rename LLVM source directory to "$LLVM_SRC", then enter.
 mv -fv llvm-12.0.1.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 ```
@@ -208,10 +226,12 @@ pushd ${LLVM_SRC}/tools/ && \
     tar xf ../../pkgs/clang-12.0.1.src.tar.xz && mv -fv clang{-12.0.1.src,}
     tar xf ../../pkgs/lld-12.0.1.src.tar.xz   && mv -fv lld{-12.0.1.src,}
 popd
-
+```
+```bash
 # Apply patches (from Void Linux).
 ../extra/llvm/patches/appatch
-
+```
+```bash
 # Update config.guess for better platform detection.
 cp -fv ../extra/llvm/files/config.guess cmake/.
 ```
@@ -266,10 +286,12 @@ cmake -B build \
     -DCLANG_DEFAULT_LINKER=lld                \
     -DCLANG_DEFAULT_UNWINDLIB=libunwind       \
     -DDEFAULT_SYSROOT="/clang0-tools"
-
+```
+```bash
 # Build.
 time { make -C build; }
-
+```
+```bash
 # Install.
 time {
     pushd build/ && \
