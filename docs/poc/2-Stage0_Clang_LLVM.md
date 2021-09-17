@@ -23,7 +23,7 @@ The purpose of this stage is to build a temporary Clang/LLVM toolchain with GCC 
 # The headers are first placed in "./usr/", then copied to the needed location.
 ```
 ```bash
-# Make sure there are no stale files embedded in the package. Then build.
+# Ensure there are no stale files embedded in the package. Then build.
 time { make mrproper && make ARCH=${C_ARCH} headers; }
 ```
 ```bash
@@ -51,7 +51,7 @@ mkdir -v build && cd build &&    ../configure \
     --disable-{gdb,libdecnumber,lto,multilib,nls,readline,sim,static,werror}
 ```
 ```bash
-# Check host's environment and make sure all necessary tools are available to build Binutils. Then build.
+# Check host's environment and ensure all necessary tools are available to build Binutils. Then build.
 time { make configure-host && make; }
 ```
 ```bash
@@ -152,7 +152,7 @@ tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc{-1.2.1,}
 ../../extra/gcc/patches/appatch
 ```
 ```bash
-# Create a dedicated directory and configure source.
+# Create a dedicated directory and configure source. Ensure to use current musl libc built.
 mkdir -v build && cd build &&                                \
 LDFLAGS="-Wl,-rpath,/clang0-tools/lib $LDFLAGS" ../configure \
     --prefix=/clang0-tools                                   \
