@@ -167,7 +167,7 @@ LDFLAGS="-Wl,-rpath,/clang0-tools/lib $LDFLAGS" ../configure \
 ```
 ```bash
 # Build.
-time { make; }
+time { make AS_FOR_TARGET=${H_TRIPLET}-as LD_FOR_TARGET=${H_TRIPLET}-ld; }
 ```
 ```bash
 # Install.
