@@ -136,10 +136,12 @@ cmake -B build \
     -DBUILD_SHARED_LIBS=ON                 \
     -DWITH_NATIVE_INSTRUCTIONS=YES         \
     -DZLIB_COMPAT=ON
-
+```
+```bash
 # Build.
 time { make -C build; }
-
+```
+```bash
 # Install.
 time { make -C build install; }
 ```
