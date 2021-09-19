@@ -171,7 +171,8 @@ time { make PREFIX=/clang1-tools install-dynamic; }
 ```bash
 # Exit from LLVM source directory if already entered after decompressing.
 popd
-
+```
+```bash
 # Rename LLVM source directory to "$LLVM_SRC", then enter.
 mv -fv llvm-12.0.1.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 ```
@@ -179,18 +180,20 @@ mv -fv llvm-12.0.1.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 # Decompress `clang`, `lld`, `compiler-rt`, `libunwind`, `libcxxabi`, and `libcxx` to correct directories.
 pushd ${LLVM_SRC}/projects/ && \
     tar xf ../../pkgs/compiler-rt-12.0.1.src.tar.xz && mv -fv compiler-rt{-12.0.1.src,}
-    tar xf ../../pkgs/libunwind-12.0.1.src.tar.xz   && mv -fv libunwind{-12.0.1.src,}
-    tar xf ../../pkgs/libcxxabi-12.0.1.src.tar.xz   && mv -fv libcxxabi{-12.0.1.src,}
-    tar xf ../../pkgs/libcxx-12.0.1.src.tar.xz      && mv -fv libcxx{-12.0.1.src,}
+    tar xf   ../../pkgs/libunwind-12.0.1.src.tar.xz && mv -fv libunwind{-12.0.1.src,}
+    tar xf   ../../pkgs/libcxxabi-12.0.1.src.tar.xz && mv -fv libcxxabi{-12.0.1.src,}
+    tar xf      ../../pkgs/libcxx-12.0.1.src.tar.xz && mv -fv libcxx{-12.0.1.src,}
 popd
 pushd ${LLVM_SRC}/tools/ && \
     tar xf ../../pkgs/clang-12.0.1.src.tar.xz && mv -fv clang{-12.0.1.src,}
-    tar xf ../../pkgs/lld-12.0.1.src.tar.xz   && mv -fv lld{-12.0.1.src,}
+    tar xf   ../../pkgs/lld-12.0.1.src.tar.xz && mv -fv lld{-12.0.1.src,}
 popd
-
+```
+```bash
 # Apply patches (from Void Linux).
 ../extra/llvm/patches/appatch
-
+```
+```bash
 # Update config.guess for better platform detection.
 cp -fv ../extra/llvm/files/config.guess cmake/.
 ```
@@ -205,10 +208,12 @@ pushd ${LLVM_SRC}/projects/libunwind/ && \
         -DLIBUNWIND_ENABLE_ASSERTIONS=OFF        \
         -DLIBUNWIND_ENABLE_STATIC=OFF            \
         -DLIBUNWIND_USE_COMPILER_RT=ON
-
+```
+```bash
 # Build.
 time { make -C build; }
-
+```
+```bash
 # Install, also the headers.
 time {
     make -C build install                      && \
@@ -227,10 +232,12 @@ pushd ${LLVM_SRC}/projects/libcxxabi/ && \
         -DLIBCXXABI_USE_LLVM_UNWINDER=ON         \
         -DLIBCXXABI_USE_COMPILER_RT=ON           \
         -DLIBCXXABI_LIBCXX_INCLUDES="${LLVM_SRC}/projects/libcxx/include"
-
+```
+```bash
 # Build.
 time { make -C build; }
-
+```
+```bash
 # Install, also the headers.
 time {
     make -C build install                      && \
@@ -244,7 +251,6 @@ pushd ${LLVM_SRC}/projects/libcxx/ && \
         -DCMAKE_INSTALL_PREFIX="/clang1-tools"                                  \
         -DCMAKE_CXX_FLAGS="-isystem /clang1-tools/include -flto=thin $CXXFLAGS" \
         -DLLVM_PATH="$LLVM_SRC"                                                 \
-        -DLIBCXX_ENABLE_ASSERTIONS=OFF                                          \
         -DLIBCXX_ENABLE_STATIC=OFF                                              \
         -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=OFF                                \
         -DLIBCXX_CXX_ABI=libcxxabi                                              \
@@ -253,10 +259,12 @@ pushd ${LLVM_SRC}/projects/libcxx/ && \
         -DLIBCXX_HAS_MUSL_LIBC=ON                                               \
         -DLIBCXX_USE_COMPILER_RT=ON                                             \
         -DLIBCXX_HAS_ATOMIC_LIB=OFF
-
+```
+```bash
 # Build.
 time { make -C build; }
-
+```
+```bash
 # Install.
 time { make -C build install && popd; }
 ```
@@ -306,10 +314,12 @@ cmake -B build \
     -DCLANG_DEFAULT_LINKER=lld                \
     -DCLANG_DEFAULT_UNWINDLIB=libunwind       \
     -DDEFAULT_SYSROOT="/clang1-tools"
-
+```
+```bash
 # Build.
 time { make -C build; }
-
+```
+```bash
 # Install.
 time {
     pushd build/ && \
