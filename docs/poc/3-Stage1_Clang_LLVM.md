@@ -215,8 +215,8 @@ time { make -C build; }
 ```bash
 # Install, also the headers.
 time {
-    make -C build install                      && \
-    cp -fv include/*.h /clang1-tools/include/. && popd
+    make -C build install                                && \
+    install -vm644 -t /clang1-tools/include/ include/*.h && popd
 }
 ```
 ```bash
@@ -238,8 +238,8 @@ time { make -C build; }
 ```bash
 # Install, also the headers.
 time {
-    make -C build install                      && \
-    cp -fv include/*.h /clang1-tools/include/. && popd
+    make -C build install                                && \
+    install -vm644 -t /clang1-tools/include/ include/*.h && popd
 }
 ```
 ```bash
