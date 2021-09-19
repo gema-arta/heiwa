@@ -78,7 +78,7 @@ source                                       ~/.bashrc
 ```bash
 # Quick test for the new triplet of Stage-0 Clang/LLVM.
 echo "int main(){}" > dummy.c
-${CC} ${CFLAGS} dummy.c -v -Wl,--verbose &> dummy.log
+${CC} ${CFLAGS} ${LDFLAGS} -Wl,--verbose -v dummy.c &> dummy.log
 ${READELF} -l a.out | grep --color=auto "Req.*ter"
 ```
 ```bash
