@@ -28,12 +28,12 @@ time { make mrproper && make ARCH=${C_ARCH} headers; }
 ```
 ```bash
 # Remove unnecessary dotfiles and Makefile.
-find usr/include \( -name '.*' -o -name 'Makefile' \) -exec rm -fv {} \;
+find ./usr/include \( -name '.*' -o -name 'Makefile' \) -exec rm -fv {} \;
 ```
 ```bash
 # Install.
 mkdir -v /clang0-tools/${H_TRIPLET} && \
-cp -rfv usr/include /clang0-tools/${H_TRIPLET}/.
+cp -rfv ./usr/include /clang0-tools/${H_TRIPLET}/.
 ```
 
 ### `2` - GNU Binutils
@@ -48,7 +48,9 @@ mkdir -v build && cd build &&    ../configure \
     --target=${H_TRIPLET}                     \
     --with-sysroot=/clang0-tools/${H_TRIPLET} \
     --without-{debuginfod,stage1-ldflags}     \
-    --disable-{gdb,libdecnumber,lto,multilib,nls,readline,sim,static,werror}
+    --disable-{compressed-debug-sections,gdb} \
+    --disable-{libdecnumber,lto{,-plugin}}    \
+    --disable-{multilib,nls,readline,sim,static,werror}
 ```
 ```bash
 # Check host's environment and ensure all necessary tools are available to build Binutils. Then build.
@@ -71,18 +73,17 @@ tar xf ../mpfr-4.1.0.tar.xz && mv -fv mpfr{-4.1.0,}
 tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc{-1.2.1,}
 ```
 ```bash
-# Create a dedicated directory and configure source.
-mkdir -v build && cd build &&                                \
-CFLAGS="$CFLAGS -O0" CXXFLAGS="$CXXFLAGS -O0"   ../configure \
-    --prefix=/clang0-tools                                   \
-    --build=${C_TRIPLET}                                     \
-    --host=${C_TRIPLET}                                      \
-    --target=${H_TRIPLET}                                    \
-    --with-sysroot=/clang0-tools/${H_TRIPLET}                \
-    --with-{arch=${C_CPU},newlib}                            \
-    --without-headers                                        \
-    --enable-{clocale=generic,languages=c,threads=no}        \
-    --disable-{decimal-float,lto,multilib,nls,shared,werror} \
+# Create a dedicated directory and configure source. Disable optimization.
+mkdir -v build && cd build &&                                          \
+CFLAGS="$(sed 's|s|0|' <<< "$CFLAGS")" CXXFLAGS="$CFLAGS" ../configure \
+    --prefix=/clang0-tools                                             \
+    --build=${C_TRIPLET}                                               \
+    --host=${C_TRIPLET}                                                \
+    --target=${H_TRIPLET}                                              \
+    --with-sysroot=/clang0-tools/${H_TRIPLET}                          \
+    --with{-{arch=${C_CPU},newlib},out-headers}                        \
+    --enable-{clocale=generic,languages=c,threads=no}                  \
+    --disable-{decimal-float,lto{,-plugin},multilib,nls,shared,werror} \
     --disable-lib{atomic,gomp,itm,mpx,mudflap,quadmath,sanitizer,ssp,stdcxx,vtv}
 ```
 ```bash
@@ -126,8 +127,10 @@ mkdir -v /clang0-tools/etc && \
 cat > /clang0-tools/etc/ld-musl-${T_ARCH}.path << EOF
 /clang0-tools/lib
 /clang0-tools/${H_TRIPLET}/lib
-/usr/lib
+/lib64
+/usr/lib64
 /lib
+/usr/lib
 EOF
 ```
 ```bash
@@ -152,46 +155,44 @@ tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc{-1.2.1,}
 ../../extra/gcc/patches/appatch
 ```
 ```bash
-# Create a dedicated directory and configure source. Ensure to use previously built musl libc.
-mkdir -v build && cd build &&                                \
-LDFLAGS="-Wl,-rpath,/clang0-tools/lib $LDFLAGS" ../configure \
-    --prefix=/clang0-tools                                   \
-    --build=${C_TRIPLET}                                     \
-    --host=${C_TRIPLET}                                      \
-    --target=${H_TRIPLET}                                    \
-    --with-sysroot=/clang0-tools                             \
-    --enable-{clocale=generic,languages=c\,c++}              \
-    --enable-{shared,threads=posix}                          \
-    --disable-lib{mpx,mudflap,sanitizer,ssp,vtv}             \
-    --disable-{gnu-unique-object,lto,multilib,nls,static,symvers,werror}
+# Create a dedicated directory and configure source.
+mkdir -v build && cd build &&       ../configure \
+    --prefix=/clang0-tools                       \
+    --build=${C_TRIPLET}                         \
+    --host=${C_TRIPLET}                          \
+    --target=${H_TRIPLET}                        \
+    --with-sysroot=/clang0-tools                 \
+    --enable-{clocale=generic,languages=c\,c++}  \
+    --enable-{shared,threads=posix}              \
+    --disable-lib{mpx,mudflap,sanitizer,ssp,vtv} \
+    --disable-{gnu-unique-object,lto{,-plugin}}  \
+    --disable-{multilib,nls,static,symvers,werror}
 ```
 ```bash
 # Build.
-time { make AS_FOR_TARGET=${H_TRIPLET}-as LD_FOR_TARGET=${H_TRIPLET}-ld; }
+time { make; }
 ```
 ```bash
 # Install.
 time { make install; }
 ```
 ```bash
-# Adjust the current GCC to produce binaries with "/clang0-tools/lib/ld-musl-${T_ARCH}.so.1" by dumping the specs file, then `sed` it.
+# Adjust current GCC to produce binaries with "/clang0-tools/lib/ld-musl-${T_ARCH}.so.1" by modifying the specs.
 ${H_TRIPLET}-gcc -dumpspecs > specs
 sed -i "s|/lib/ld-musl-${T_ARCH}.so.1|/clang0-tools/lib/ld-musl-${T_ARCH}.so.1|g" specs
 ```
 ```bash
-# Check the path of the specs file.
-grep --color=auto "/clang0-tools/lib/ld-musl-${T_ARCH}.so.1" specs
-```
-```bash
 # Install the specs file if the path is correct.
-SPECFILE="$(dirname $(${H_TRIPLET}-gcc -print-libgcc-file-name))/specs"
-mv -fv specs "$SPECFILE" && unset SPECFILE
+if grep --color=auto "/clang0-tools/lib/ld-musl-${T_ARCH}.so.1" specs; then
+    SPECFILE="$(dirname $(${H_TRIPLET}-gcc -print-libgcc-file-name))/specs"
+    mv -fv specs "$SPECFILE" && unset SPECFILE
+fi
 ```
 ```bash
 # Quick test.
 echo "int main(){}" > dummy.c
 ${H_TRIPLET}-gcc ${CFLAGS} ${LDFLAGS} dummy.c
-readelf -l a.out | grep --color=auto "Req.*ter"
+${H_TRIPLET}-readelf -l a.out | grep --color=auto "Req.*ter"
 ```
 ```bash
 # | The output should be:
@@ -244,7 +245,6 @@ cmake -B build \
     -DCMAKE_C_COMPILER="${H_TRIPLET}-gcc"     \
     -DCMAKE_CXX_COMPILER="${H_TRIPLET}-g++"   \
     -DBUILD_SHARED_LIBS=ON                    \
-    -DLLVM_APPEND_VC_REV=OFF                  \
     -DLLVM_HOST_TRIPLE="$T_TRIPLET"           \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$T_TRIPLET" \
     -DLLVM_ENABLE_BINDINGS=OFF                \
@@ -256,8 +256,8 @@ cmake -B build \
     -DLLVM_ENABLE_LIBEDIT=OFF                 \
     -DLLVM_ENABLE_TERMINFO=OFF                \
     -DLLVM_ENABLE_LIBXML2=OFF                 \
-    -DLLVM_ENABLE_LIBPFM=OFF                  \
     -DLLVM_ENABLE_OCAMLDOC=OFF                \
+    -DLLVM_ENABLE_ZLIB=OFF                    \
     -DLLVM_ENABLE_Z3_SOLVER=OFF               \
     -DLLVM_INCLUDE_BENCHMARKS=OFF             \
     -DLLVM_INCLUDE_EXAMPLES=OFF               \
@@ -270,7 +270,6 @@ cmake -B build \
     -DLIBUNWIND_ENABLE_STATIC=OFF             \
     -DLIBCXXABI_ENABLE_ASSERTIONS=OFF         \
     -DLIBCXXABI_ENABLE_STATIC=OFF             \
-    -DLIBCXX_ENABLE_ASSERTIONS=OFF            \
     -DLIBCXX_ENABLE_STATIC=OFF                \
     -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=OFF  \
     -DLIBCXX_HAS_MUSL_LIBC=ON                 \
@@ -329,11 +328,8 @@ find /clang0-tools/{lib{exec,64},{,${H_TRIPLET}/}lib}/ -name '*.la' -exec rm -fv
 find /clang0-tools/{lib64,{,${H_TRIPLET}/}lib}/ -type f \( -name '*.a' -o -name '*.so*' \) -exec llvm-strip --strip-unneeded {} \;
 ```
 ```bash
-find /clang0-tools/libexec/gcc/${H_TRIPLET}/10.3.1/ -type f -exec llvm-strip --strip-unneeded {} \;
-```
-```bash
 if cp -v $(command -v llvm-strip) .; then
-    find /clang0-tools/{,${H_TRIPLET}/}bin/ -type f -exec ./llvm-strip --strip-unneeded {} \;
+    find /clang0-tools/{{,${H_TRIPLET}/}bin,libexec}/ -type f -exec ./llvm-strip --strip-unneeded {} \;
 fi && rm -v llvm-strip
 ```
 
