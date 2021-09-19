@@ -28,12 +28,12 @@ time { make mrproper && make ARCH=${C_ARCH} headers; }
 ```
 ```bash
 # Remove unnecessary dotfiles and Makefile.
-find ./usr/include \( -name '.*' -o -name 'Makefile' \) -exec rm -fv {} \;
+find usr/include \( -name '.*' -o -name 'Makefile' \) -exec rm -fv {} \;
 ```
 ```bash
 # Install.
 mkdir -v /clang0-tools/${H_TRIPLET} && \
-cp -rfv ./usr/include /clang0-tools/${H_TRIPLET}/.
+cp -rfv usr/include /clang0-tools/${H_TRIPLET}/.
 ```
 
 ### `2` - GNU Binutils
