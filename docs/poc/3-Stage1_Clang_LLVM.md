@@ -356,10 +356,12 @@ CFLAGS="-flto=thin $CFLAGS"        \
             --build=${T_TRIPLET}   \
             --host=${T_TRIPLET}    \
             --disable-{doc,static}
-
+```
+```bash
 # Build.
 time { make; }
-
+```
+```bash
 # Install.
 time { make install; }
 ```
@@ -372,10 +374,12 @@ time { make install; }
 ```bash
 # Ensure to use symlink instead of hardlink for `unpigz`.
 sed -i 's|ln -f|ln -sf|' Makefile
-
+```
+```bash
 # Build.
 time { make CC=${CC} CFLAGS="-flto=thin $CFLAGS"; }
-
+```
+```bash
 # Install and create symlinks as `gzip` tools.
 ln -sfv pigz gzip; ln -sfv unpigz gunzip
 install -vm755 -t /clang1-tools/bin/ {,un}pigz g{,un}zip
@@ -389,7 +393,8 @@ install -vm755 -t /clang1-tools/bin/ {,un}pigz g{,un}zip
 ```bash
 # Build.
 time { make LIBINTL=MUSL CFLAGS="-flto=thin $CFLAGS"; }
-
+```
+```bash
 # Only install `msgfmt`, `msgmerge` and `xgettext`.
 install -vm755 -t /clang1-tools/bin/ msg{fmt,merge} xgettext 
 ```
@@ -400,12 +405,11 @@ install -vm755 -t /clang1-tools/bin/ msg{fmt,merge} xgettext
 
 > **Required!** For current and next stage (chroot environment).
 ```bash
-# Copy the Toybox .config file.
+# Copy the Toybox .config file. Ensure `libz` is enabled in the config.
 cp -v ../../extra/toybox/files/.config.toolchain.nolibcrypto .config
-
-# Ensure `libz` is enabled in the config.
 grep --color=auto "CONFIG_TOYBOX_LIBZ=y" .config
-
+```
+```bash
 # Export commands as TOYBOX variable that will be use to verify Toybox .config.
 read -rd '' TOYBOX << "EOF"
 base64 base32 basename cat chgrp chmod chown chroot cksum comm cp cut date
@@ -415,29 +419,35 @@ nproc od paste printenv printf pwd readlink realpath rm rmdir seq sha1sum shred
 sleep sort split stat stty sync tac tail tee test timeout touch tr true truncate
 tty uname uniq unlink wc who whoami yes file find xargs egrep grep fgrep sed tar
 EOF
-
+```
+```bash
 # Verify 87 commands, and make sure enabled (=y).
 # Pipe to ` | wc -l` at the right of `done` to check the total of commands.
 for X in ${TOYBOX}; do
     grep -v '#' .config | grep --color=auto -i "CONFIG_${X}=" \
     || 2>&1 echo "> ${X} not CONFIGURED!"
 done
-
+```
+```bash
 # Build with verbose. Toybox will use `cc` that breaks the build, so we need to specify CC and HOSTCC variable.
 time { make CC=${CC} HOSTCC=${CC} CFLAGS="-flto=thin $CFLAGS" V=1; }
-
+```
+```bash
 # Verify compiled 87 commands.
 ./toybox | tr ' ' '\n'i \
 | grep --color=auto -xE $(echo ${TOYBOX} | tr ' ' '|'i) | wc -l
-
+```
+```bash
 # Verify unconfigured commands, but compiled.
 # `[` (coreutils)
 ./toybox | tr ' ' '\n'i \
 | grep --color=auto -vxE $(echo ${TOYBOX} | tr ' ' '|'i)
-
+```
+```bash
 # So, totally is 88 commands.
 ./toybox | wc -w
-
+```
+```bash
 # Install and unset exported commands in the TOYBOX variable.
 time { make CC=${CC} HOSTCC=${CC} PREFIX=/clang1-tools install && unset X TOYBOX; }
 ```
@@ -450,16 +460,19 @@ time { make CC=${CC} HOSTCC=${CC} PREFIX=/clang1-tools install && unset X TOYBOX
 ```bash
 # Ensure some unneeded files are not installed.
 sed -i 's|extras||' Makefile.in
-
+```
+```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"        \
 ./configure --prefix=/clang1-tools \
             --build=${T_TRIPLET}   \
             --host=${T_TRIPLET}
-
+```
+```bash
 # Build.
 time { make; }
-
+```
+```bash
 # Install.
 time { make install; }
 ```
@@ -476,10 +489,12 @@ CFLAGS="-flto=thin $CFLAGS"        \
             --build=${T_TRIPLET}   \
             --host=${T_TRIPLET}    \
             --with-packager="Heiwa/Linux"
-
+```
+```bash
 # Build.
 time { make; }
-
+```
+```bash
 # Install.
 time { make install; }
 ```
@@ -496,10 +511,12 @@ CFLAGS="-flto=thin $CFLAGS"        \
             --build=${T_TRIPLET}   \
             --host=${T_TRIPLET}    \
             --without-guile
-
+```
+```bash
 # Build.
 time { make; }
-
+```
+```bash
 # Install.
 time { make install; }
 ```
@@ -515,10 +532,12 @@ CFLAGS="-flto=thin $CFLAGS"        \
 ./configure --prefix=/clang1-tools \
             --build=${T_TRIPLET}   \
             --host=${T_TRIPLET}
-
+```
+```bash
 # Build.
 time { make; }
-
+```
+```bash
 # Install.
 time { make install; }
 ```
@@ -538,10 +557,12 @@ CFLAGS="-flto=thin $CFLAGS"                   \
             --without-external-libintl-perl   \
             --without-external-Text-Unidecode \
             --without-external-Unicode-EastAsianWidth
-
+```
+```bash
 # Build.
 time { make; }
-
+```
+```bash
 # Install.
 time { make install; }
 ```
@@ -560,10 +581,12 @@ CFLAGS="-flto=thin $CFLAGS"        \
             --disable-profiling    \
             --without-bash-malloc  \
             --enable-net-redirections
-
+```
+```bash
 # Build.
 time { make; }
-
+```
+```bash
 # Install.
 time { make install; }
 ```
@@ -577,7 +600,8 @@ time { make install; }
 # Decompress, then copy `perl-cross` over the source.
 tar xzf ../perl-cross-1.3.6.tar.gz && \
 cp -af ./perl-cross-1.3.6/* .
-
+```
+```bash
 # Configure source (from perl-cross).
 CFLAGS="-DNO_POSIX_2008_LOCALE -D_GNU_SOURCE $CFLAGS" \
 HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE"     \
@@ -585,10 +609,12 @@ LDFLAGS="-Wl,-z,stack-size=2097152 -pthread $LDFLAGS" \
 ./configure --prefix=/clang1-tools                    \
             --build=${T_TRIPLET}                      \
             --target=${T_TRIPLET}
-
+```
+```bash
 # Build. Fails with LTO since v5.28. This will display a lot of compiler warnings.
 time { make; }
-
+```
+```bash
 # Install.
 time { make install; }
 ```
@@ -599,12 +625,11 @@ time { make install; }
 
 > **Required!** To build Clang/LLVM and other required packages in the next stage (chroot environment).
 ```bash
-# Prevent main script that uses hard-coded paths to host "/usr/include" and "/usr/lib" directories.
+# Prevent main script that uses hard-coded paths to host "/usr/include" and "/usr/lib" directories. Use ThinLTO rather than FullLTO to speedup build.
 sed -i '/def add_multiarch_paths/a \        return' setup.py
-
-# Use ThinLTO rather than FullLTO to speedup build.
 sed -i 's|-flto|-flto=thin|' configure
-
+```
+```bash
 # Configure source using provided libraries (built-in).
 ax_cv_c_float_words_bigendian=no   \
 ./configure --prefix=/clang1-tools \
@@ -612,10 +637,12 @@ ax_cv_c_float_words_bigendian=no   \
             --host=${T_TRIPLET}    \
             --without-ensurepip    \
             --with-lto --enable-shared
-
+```
+```bash
 # Build. -> Ignore all issues at the end! We won't build them. <-
 time { make; }
-
+```
+```bash
 # Install.
 time { make install; }
 ```
@@ -628,7 +655,8 @@ time { make install; }
 ```bash
 # Disable applications that using Cmake from attempting to install files in "/usr/lib64".
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
-
+```
+```bash
 # Configure source using provided libraries (built-in).
 CFLAGS="-flto=thin $CFLAGS"                  \
 CXXFLAGS="-flto=thin $CXXFLAGS"              \
@@ -638,10 +666,12 @@ CXXFLAGS="-flto=thin $CXXFLAGS"              \
             --docdir=/share/doc/cmake-3.21.2 \
             -- -DCMAKE_BUILD_TYPE=MinSizeRel \
             -Wno-dev -DCMAKE_USE_OPENSSL=OFF
-
+```
+```bash
 # Build.
 time { make; }
-
+```
+```bash
 # Install.
 time { make install; }
 ```
@@ -662,9 +692,9 @@ find /clang1-tools/lib{,exec}/ -name '*.la' -exec rm -fv {} \;
 find /clang1-tools/lib/ -type f \( -name '*.a' -o -name '*.so*' \) -exec llvm-strip --strip-unneeded {} \;
 ```
 ```bash
-if cp -v $(command -v llvm-strip) .; then
-    find /clang1-tools/{{,usr/}{,s}bin,libexec/awk}/ -type f -exec ./llvm-strip --strip-unneeded {} \;
-fi && rm -v llvm-strip
+if cp -v $(command -v llvm-strip) ./; then
+    find /clang1-tools/{{,usr/}{,s}bin,libexec}/ -type f -exec ./llvm-strip --strip-unneeded {} \;
+fi && rm -v ./llvm-strip
 ```
 > Now, exit from privileged user.
 ```bash
