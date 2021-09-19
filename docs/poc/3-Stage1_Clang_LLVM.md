@@ -245,18 +245,17 @@ time {
 ```bash
 # Configure `libcxx` source.
 pushd ${LLVM_SRC}/projects/libcxx/ && \
-    cmake -B build \
-        -DCMAKE_INSTALL_PREFIX="/clang1-tools"                                  \
-        -DCMAKE_CXX_FLAGS="-isystem /clang1-tools/include -flto=thin $CXXFLAGS" \
-        -DLLVM_PATH="$LLVM_SRC"                                                 \
-        -DLIBCXX_ENABLE_STATIC=OFF                                              \
-        -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=OFF                                \
-        -DLIBCXX_CXX_ABI=libcxxabi                                              \
-        -DLIBCXX_CXX_ABI_INCLUDE_PATHS="/clang1-tools/include"                  \
-        -DLIBCXX_CXX_ABI_LIBRARY_PATH="/clang1-tools/lib"                       \
-        -DLIBCXX_HAS_MUSL_LIBC=ON                                               \
-        -DLIBCXX_USE_COMPILER_RT=ON                                             \
-        -DLIBCXX_HAS_ATOMIC_LIB=OFF
+    cmake -B build -DCMAKE_INSTALL_PREFIX="/clang1-tools"                                  \
+                   -DCMAKE_CXX_FLAGS="-isystem /clang1-tools/include -flto=thin $CXXFLAGS" \
+                   -DLLVM_PATH="$LLVM_SRC"                                                 \
+                   -DLIBCXX_ENABLE_STATIC=OFF                                              \
+                   -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=OFF                                \
+                   -DLIBCXX_CXX_ABI=libcxxabi                                              \
+                   -DLIBCXX_CXX_ABI_INCLUDE_PATHS="/clang1-tools/include"                  \
+                   -DLIBCXX_CXX_ABI_LIBRARY_PATH="/clang1-tools/lib"                       \
+                   -DLIBCXX_HAS_MUSL_LIBC=ON                                               \
+                   -DLIBCXX_USE_COMPILER_RT=ON                                             \
+                   -DLIBCXX_HAS_ATOMIC_LIB=OFF
 ```
 ```bash
 # Build.
