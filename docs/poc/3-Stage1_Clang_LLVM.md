@@ -143,7 +143,7 @@ time { make -C build; }
 ```
 ```bash
 # Install.
-time { make -C build install; }
+time { cmake -B build -DCMAKE_INSTALL_PREFIX="/clang1-tools" -P cmake_install.cmake; }
 ```
 
 ### `5` - NetBSD curses
