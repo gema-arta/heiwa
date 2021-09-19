@@ -154,12 +154,13 @@ time { make -C build install; }
 ```bash
 # Build.
 time { make CFLAGS="-flto=thin $CFLAGS" all-dynamic; }
-
+```
+```bash
 # Install.
 time { make PREFIX=/clang1-tools install-dynamic; }
 ```
 
-### `6` - Clang/LLVM + libunwind, libcxxabi, and libcxx
+### `6` - Clang/LLVM <kbd>stage 2</kbd>
 > #### `12.x.x` or newer
 > - C language family frontend for LLVM;  
 > - C++ runtime stack unwinder from LLVM;  
