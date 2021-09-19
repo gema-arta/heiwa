@@ -245,6 +245,7 @@ cmake -B build \
     -DCMAKE_C_COMPILER="${H_TRIPLET}-gcc"     \
     -DCMAKE_CXX_COMPILER="${H_TRIPLET}-g++"   \
     -DBUILD_SHARED_LIBS=ON                    \
+    -DLLVM_APPEND_VC_REV=OFF                  \
     -DLLVM_HOST_TRIPLE="$T_TRIPLET"           \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$T_TRIPLET" \
     -DLLVM_ENABLE_BINDINGS=OFF                \
