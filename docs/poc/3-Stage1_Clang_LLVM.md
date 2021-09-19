@@ -150,7 +150,7 @@ time { make -C build install; }
 > #### `0.3.2` or newer
 > The NetBSD curses package contains libraries for terminal-independent handling of character screens.
 
-> **Required!** For the most programs that depends on `-ltinfo` or `-lterminfo` linker's flags, including Stage-1 Clang/LLVM.
+> **Required!** For the most programs that depends on `-ltinfo` or `-lterminfo` dynamic linker flags, including Stage-1 Clang/LLVM.
 ```bash
 # Build.
 time { make CFLAGS="-flto=thin $CFLAGS" all-dynamic; }
