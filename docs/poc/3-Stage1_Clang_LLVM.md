@@ -48,10 +48,12 @@ source ~/.bashrc
             --disable-static       \
             --with-malloc=mallocng \
             --enable-optimize=speed
-
+```
+```bash
 # Build.
 time { make; }
-
+```
+```bash
 # Install and fix wrong shared object symlink, also create a `ldd` symlink to use to print shared object dependencies.
 time {
     make DESTDIR=/clang1-tools install
@@ -78,13 +80,16 @@ source                                          ~/.bashrc
 echo "int main(){}" > dummy.c
 ${CC} ${CFLAGS} dummy.c -v -Wl,--verbose &> dummy.log
 ${READELF} -l a.out | grep --color=auto "Req.*ter"
-
+```
+```bash
 # | The output should be:
 # |-----------------------
 # |      [Requesting program interpreter: /clang1-tools/lib/ld-musl-x86_64.so.1]
-
+```
+```bash
 grep --color=auto "ld.lld:.*crt[1in].o" dummy.log
-
+```
+```bash
 # | The output should be:
 # |-----------------------
 # |ld.lld: /clang0-tools/lib/gcc/x86_64-heiwa-linux-musl/10.3.1/../../../Scrt1.o
@@ -100,16 +105,19 @@ grep --color=auto "ld.lld:.*crt[1in].o" dummy.log
 ```bash
 # The recommended make target `headers_install` cannot be used, because it requires `rsync` which may not be available.
 # The headers are first placed in "./usr/", then copied to the needed location.
-
+```
+```bash
 # Make sure there are no stale files embedded in the package. Then build.
 time {
     make LLVM=1 LLVM_IAS=1 mrproper && \
     make ARCH=${C_ARCH} LLVM=1 LLVM_IAS=1 HOSTCC=${CC} headers
 }
-
+```
+```bash
 # Remove unnecessary dotfiles and Makefile.
 find usr/include \( -name '.*' -o -name 'Makefile' \) -exec rm -fv {} \;
-
+```
+```bash
 # Install.
 cp -rfv usr/include /clang1-tools/.
 ```
