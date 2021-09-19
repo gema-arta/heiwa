@@ -107,7 +107,7 @@ grep --color=auto "ld.lld:.*crt[1in].o" dummy.log
 # The headers are first placed in "./usr/", then copied to the needed location.
 ```
 ```bash
-# Make sure there are no stale files embedded in the package. Then build.
+# Ensure there are no stale files embedded in the package. Then build.
 time {
     make LLVM=1 LLVM_IAS=1 mrproper && \
     make ARCH=${C_ARCH} LLVM=1 LLVM_IAS=1 HOSTCC=${CC} headers
@@ -361,7 +361,7 @@ time { make install; }
 
 > **Required!** As the default ".gz" files de/compressor for current and next stage (chroot environment).
 ```bash
-# Make sure to use symlink instead of hardlink for `unpigz`.
+# Ensure to use symlink instead of hardlink for `unpigz`.
 sed -i 's|ln -f|ln -sf|' Makefile
 
 # Build.
