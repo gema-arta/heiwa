@@ -200,14 +200,13 @@ cp -fv ../extra/llvm/files/config.guess cmake/.
 ```bash
 # Configure `libunwind` source.
 pushd ${LLVM_SRC}/projects/libunwind/ && \
-    cmake -B build \
-        -DCMAKE_INSTALL_PREFIX="/clang1-tools"   \
-        -DCMAKE_C_FLAGS="-flto=thin $CFLAGS"     \
-        -DCMAKE_CXX_FLAGS="-flto=thin $CXXFLAGS" \
-        -DLLVM_PATH="$LLVM_SRC"                  \
-        -DLIBUNWIND_ENABLE_ASSERTIONS=OFF        \
-        -DLIBUNWIND_ENABLE_STATIC=OFF            \
-        -DLIBUNWIND_USE_COMPILER_RT=ON
+    cmake -B build -DCMAKE_INSTALL_PREFIX="/clang1-tools"   \
+                   -DCMAKE_C_FLAGS="-flto=thin $CFLAGS"     \
+                   -DCMAKE_CXX_FLAGS="-flto=thin $CXXFLAGS" \
+                   -DLLVM_PATH="$LLVM_SRC"                  \
+                   -DLIBUNWIND_ENABLE_ASSERTIONS=OFF        \
+                   -DLIBUNWIND_ENABLE_STATIC=OFF            \
+                   -DLIBUNWIND_USE_COMPILER_RT=ON
 ```
 ```bash
 # Build.
