@@ -283,16 +283,15 @@ cmake -B build \
     -DLLVM_ENABLE_IDE=OFF                     \
     -DLLVM_ENABLE_LIBCXX=ON                   \
     -DLLVM_ENABLE_LLD=ON                      \
+    -DLLVM_ENABLE_LTO=Thin                    \
     -DLLVM_ENABLE_RTTI=ON                     \
     -DLLVM_ENABLE_BACKTRACES=OFF              \
     -DLLVM_ENABLE_UNWIND_TABLES=OFF           \
     -DLLVM_ENABLE_WARNINGS=OFF                \
     -DLLVM_ENABLE_LIBEDIT=OFF                 \
     -DLLVM_ENABLE_LIBXML2=OFF                 \
-    -DLLVM_ENABLE_LIBPFM=OFF                  \
     -DLLVM_ENABLE_OCAMLDOC=OFF                \
     -DLLVM_ENABLE_Z3_SOLVER=OFF               \
-    -DLLVM_ENABLE_LTO=Thin                    \
     -DLLVM_INCLUDE_BENCHMARKS=OFF             \
     -DLLVM_INCLUDE_EXAMPLES=OFF               \
     -DLLVM_INCLUDE_TESTS=OFF                  \
