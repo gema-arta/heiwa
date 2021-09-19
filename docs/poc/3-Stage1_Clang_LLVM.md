@@ -336,8 +336,8 @@ EOF
 # Setup new PATH since "/clang0-tools" won't be used anymore and use Stage-1 Clang/LLVM default triplet (pc).
 sed -e "/CXX=/s/${CXX}/${T_TRIPLET}-clang++/" \
     -e "/CC=/s/${CC}/${T_TRIPLET}-clang/"     \
-    -e 's|/clang0-tools/bin:||' -i ~/.bashrc
-source                             ~/.bashrc
+    -e 's|:/clang0-tools/bin:|:|' -i ~/.bashrc
+source                               ~/.bashrc
 ```
 ```bash
 # Back to "${HEIWA}/sources/pkgs" directory.
