@@ -222,15 +222,14 @@ time {
 ```bash
 # Configure `libcxxabi` source.
 pushd ${LLVM_SRC}/projects/libcxxabi/ && \
-    cmake -B build \
-        -DCMAKE_INSTALL_PREFIX="/clang1-tools"   \
-        -DCMAKE_CXX_FLAGS="-flto=thin $CXXFLAGS" \
-        -DLLVM_PATH="$LLVM_SRC"                  \
-        -DLIBCXXABI_ENABLE_ASSERTIONS=OFF        \
-        -DLIBCXXABI_ENABLE_STATIC=OFF            \
-        -DLIBCXXABI_USE_LLVM_UNWINDER=ON         \
-        -DLIBCXXABI_USE_COMPILER_RT=ON           \
-        -DLIBCXXABI_LIBCXX_INCLUDES="${LLVM_SRC}/projects/libcxx/include"
+    cmake -B build -DCMAKE_INSTALL_PREFIX="/clang1-tools"   \
+                   -DCMAKE_CXX_FLAGS="-flto=thin $CXXFLAGS" \
+                   -DLLVM_PATH="$LLVM_SRC"                  \
+                   -DLIBCXXABI_ENABLE_ASSERTIONS=OFF        \
+                   -DLIBCXXABI_ENABLE_STATIC=OFF            \
+                   -DLIBCXXABI_USE_LLVM_UNWINDER=ON         \
+                   -DLIBCXXABI_USE_COMPILER_RT=ON           \
+                   -DLIBCXXABI_LIBCXX_INCLUDES="${LLVM_SRC}/projects/libcxx/include"
 ```
 ```bash
 # Build.
