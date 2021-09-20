@@ -13,6 +13,20 @@ The purpose of this stage is to build a temporary Clang/LLVM toolchain with GCC 
 > heiwa@localh3art /media/Heiwa/sources/pkgs $ rm -rf target-package
 > ```
 
+> #### Tracking Installed Files by Example
+> Use the staged directory to browse where the files are installed, then reinstall it to correct locations. Below are three examples.
+> ```bash
+> < extracting and enter the directory >
+> 
+> < compilation process >
+> 
+> heiwa@l...s/pkgs/target-package $ make DESTDIR="$(pwd)/work" install
+> heiwa@l...s/pkgs/target-package $ make PREFIX="$(pwd)/work/clang0-tools" install
+> heiwa@l...s/pkgs/target-package $ cmake -DCMAKE_INSTALL_PREFIX="$(pwd)/work/clang0-tools" -P cmake_install.cmake 
+>
+> < exiting and cleaning up directory >
+> ```
+
 ### `1` - Linux API Headers
 > #### `5.13.x` (CacULE) or newer
 > The Linux API Headers expose the kernel's API for use by musl libc.
