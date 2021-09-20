@@ -87,6 +87,7 @@ ${READELF} -l a.out | grep --color=auto "Req.*ter"
 # |      [Requesting program interpreter: /clang1-tools/lib/ld-musl-x86_64.so.1]
 ```
 ```bash
+# Ensure `ld.lld` links to C runtime objects. [ https://wiki.osdev.org/Creating_a_C_Library#Program_Initialization ]
 grep --color=auto "ld.lld:.*crt[1in].o" dummy.log
 ```
 ```bash
