@@ -395,7 +395,7 @@ sed -i 's|ln -f|ln -sf|' Makefile
 ```
 ```bash
 # Build.
-time { make CC=${CC} CFLAGS="-flto=thin $CFLAGS"; }
+time { make CC=${CC} CFLAGS="-flto=thin $(sed 's|s|3|' <<< "$CFLAGS")"; }
 ```
 ```bash
 # Install and create symlinks as `gzip` tools.
