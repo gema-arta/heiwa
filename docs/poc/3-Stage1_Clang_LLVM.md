@@ -20,9 +20,9 @@ The purpose of this stage is to build a pure and complete Clang/LLVM toolchain t
 > 
 > < compilation process >
 > 
-> heiwa@l...s/pkgs/target-package $ make DESTDIR="$(pwd)/work" install
-> heiwa@l...s/pkgs/target-package $ make PREFIX="$(pwd)/work/clang0-tools" install
-> heiwa@l...s/pkgs/target-package/build $ cmake -DCMAKE_INSTALL_PREFIX="$(pwd)/work/clang0-tools" -P cmake_install.cmake 
+> heiwa@...pkgs/target-package $ make DESTDIR="$(pwd)/work" install
+> heiwa@...pkgs/target-package $ make PREFIX="$(pwd)/work/clang1-tools" install
+> heiwa@...pkgs/target-package/build $ cmake -DCMAKE_INSTALL_PREFIX="$(pwd)/work/clang1-tools" -P cmake_install.cmake 
 >
 > < exiting and cleaning up directory >
 > ```
