@@ -1,5 +1,5 @@
 ## `III` Stage-1 Clang/LLVM Toolchain
-The purpose of this stage is to build freestanding stage 2 Clang/LLVM toolchain that will be used to build the "Final System" afterwards.
+The purpose of this stage is to build self-hosted stage 2 Clang/LLVM toolchain that will be used to build the "Final System" afterwards.
 
 > #### Compilation Instruction!
 > ```bash
@@ -182,7 +182,7 @@ time { make PREFIX=/clang1-tools install-dynamic; }
 > - Low level support for a standard C++ library from LLVM;  
 > - New implementation of the C++ standard library, targeting C++11 from LLVM.
 
-> **Required!** Build Stage-1 Clang/LLVM as freestanding toolchain.
+> **Required!** Build Stage-1 Clang/LLVM self-hosted toolchain.
 ```bash
 # Exit from LLVM source directory if already entered after decompressing.
 popd
