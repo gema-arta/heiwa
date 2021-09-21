@@ -369,10 +369,10 @@ popd
 > **Required!** As the default ".xz" and ".lzma" files de/compressor for current and next stage (chroot environment).
 ```bash
 # Configure source.
-CFLAGS="-flto=thin $CFLAGS"        \
-./configure --prefix=/clang1-tools \
-            --build=${T_TRIPLET}   \
-            --host=${T_TRIPLET}    \
+CFLAGS="-flto=thin $(sed 's|s|3|' <<< "$CFLAGS")" \
+./configure --prefix=/clang1-tools                \
+            --build=${T_TRIPLET}                  \
+            --host=${T_TRIPLET}                   \
             --disable-{doc,static}
 ```
 ```bash
