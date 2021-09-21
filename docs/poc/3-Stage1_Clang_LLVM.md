@@ -1,5 +1,5 @@
 ## `III` Stage-1 Clang/LLVM Toolchain
-The purpose of this stage is to build self-hosted stage 2 Clang/LLVM toolchain that will be used to build the "Final System" afterwards.
+The purpose of this stage is to build stage 2 Clang/LLVM toolchain (self-hosted) that will be used to build the "Final System" afterwards.
 
 > #### Compilation Instruction!
 > ```bash
