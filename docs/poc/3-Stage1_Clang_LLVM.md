@@ -447,8 +447,8 @@ for X in ${TOYBOX}; do
 done
 ```
 ```bash
-# Build with verbose. Toybox will use `cc` that breaks the build, so we need to specify CC and HOSTCC variable.
-time { make CC=${CC} HOSTCC=${CC} CFLAGS="-flto=thin $CFLAGS" V=1; }
+# Build with verbose.
+time { make CROSS_COMPILE=${T_TRIPLET}- CFLAGS="-flto=thin $CFLAGS" V=1; }
 ```
 ```bash
 # Verify compiled 87 commands.
