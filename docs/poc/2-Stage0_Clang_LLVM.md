@@ -1,5 +1,5 @@
 ## `II` Stage-0 Clang/LLVM (ft. GNU) Cross-Toolchain
-The purpose of this stage is to build stage 1 Clang/LLVM toolchain with GCC libraries which will be used to build stage 2 Clang/LLVM toolchain (self-hosted), because if it build directly using host's Clang/LLVM, it will fail or break. [LLVM reference](https://clang.llvm.org/docs/Toolchain.html) **•** [CLFS reference](http://clfs.org/view/clfs-embedded/x86) **•** [musl faq](https://wiki.musl-libc.org/faq.html).
+The purpose of this stage is to build stage 1 Clang/LLVM toolchain with GCC libraries which will be used to build stage 2 Clang/LLVM toolchain (self-hosted), because if it build directly using host's Clang/LLVM or GCC, it will fail or break. [LLVM reference](https://clang.llvm.org/docs/Toolchain.html) **•** [CLFS reference](http://clfs.org/view/clfs-embedded/x86) **•** [musl faq](https://wiki.musl-libc.org/faq.html).
 
 > #### Compilation Instruction!
 > ```bash
