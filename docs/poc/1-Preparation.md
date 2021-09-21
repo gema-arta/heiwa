@@ -46,19 +46,19 @@ mount -vo noatime,gc_merge,compress_algorithm=lz4,compress_extension='*',compres
 ### `2` - Creating sources and toolchains directories
 > Create directories to build Clang/LLVM with GCC and the final toolchain without GCC libraries. As root, link them to host's root directory.
 
-> The "/clang1-tools" should use "/usr" merge with relative paths. **Why?** Because we implement it.
+> The "/clang{0,1}-tools" should use "/usr" merge with relative paths. **Why?** Because we implement it.
 ```bash
 if [[ -d "$HEIWA" ]]; then
     if mkdir -pv ${HEIWA}/clang{0,1}-tools; then
         ln -sfv ${HEIWA}/clang0-tools /
         ln -sfv ${HEIWA}/clang1-tools /
+        ln -sfv ./lib /clang0-tools/lib64
         ln -sfv ./bin /clang1-tools/sbin
         if mkdir -v /clang1-tools/usr; then
             ln -sfv ../bin /clang1-tools/usr/bin
             ln -sfv ../sbin /clang1-tools/usr/sbin
         fi
-    fi
-    mkdir -pv ${HEIWA}/sources/{extra,pkgs}
+    fi && mkdir -pv ${HEIWA}/sources/{extra,pkgs}
 fi
 ```
 
@@ -76,8 +76,8 @@ passwd heiwa
 ```bash
 if [[ -d "${HEIWA}/sources" ]]; then
     chmod -vR a+wt ${HEIWA}/sources
-    chown -Rv heiwa ${HEIWA}/sources
-    chown -Rv heiwa {${HEIWA},}/clang{0,1}-tools
+    chown -hRv heiwa ${HEIWA}/sources
+    chown -hRv heiwa {${HEIWA},}/clang{0,1}-tools
 fi
 ```
 > #### Setup default process priorites
