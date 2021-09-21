@@ -123,7 +123,7 @@ C_TRIPLET="$(sed 's|-[^-]*|-cross|' <<<  "$MACHTYPE")" # Host cross-triplet, to 
 T_ARCH="$(uname -m)"                                   # Target CPU architecture, use native host's arch.
 C_ARCH="$(cut -d_ -f1 <<< "$T_ARCH")"                  # CPU arch, to be used to build Linux API headers.
 C_CPU="$(sed 's|_|-|' <<< "$T_ARCH")"                  # CPU type, to be used to build static GCC.
-L_TARGET="X86"                                         # LLVM-specific architecture build target.
+L_TARGET="${C_ARCH^^}"                                 # LLVM-specific architecture build target.
 T_TRIPLET="${T_ARCH}-pc-linux-musl"                    # Target triplet for final toolchain.
 H_TRIPLET="$(sed 's|-[^-]*|-heiwa|' <<< "$T_TRIPLET")" # Target triplet for cross-libraries.
 ```
@@ -132,8 +132,8 @@ H_TRIPLET="$(sed 's|-[^-]*|-heiwa|' <<< "$T_TRIPLET")" # Target triplet for cros
 printf '%b\n' $C_{ARCH,CPU,TRIPLET} $L_TARGET $T_{ARCH,TRIPLET} $H_TRIPLET
 ```
 ```bash
-# | On the glibc host, the output should be:
-# |------------------------------------------
+# | On the amd64 glibc host, the output should be:
+# |------------------------------------------------
 # |x86
 # |x86-64
 # |x86_64-cross-linux-gnu
