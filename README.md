@@ -68,7 +68,7 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 > | Stage-1      | heiwa | heiwa | heiwa  | Build stage 2 Clang/LLVM temporary toolchain using previously Clang/LLVM built. Now become self-hosted.  | Native |
 > | Stage-2      | heiwa | heiwa | heiwa  | Build "Final System" using previously Clang/LLVM built. This LLVM built has wider registered targets.    | Native |
 
-> This will be long to develop PoC along with the package manager, and the **Stage-2** is like Stage 3 Gentoo tarball.
+> This will be long to develop PoC along with the package manager, and the **Stage-2** is like [Gentoo Stage 3 tarball](https://wiki.gentoo.org/wiki/Stage_tarball).
 
 </details>
 
