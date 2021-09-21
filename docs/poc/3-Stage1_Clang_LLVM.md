@@ -413,8 +413,8 @@ install -vm755 -t /clang1-tools/bin/ {,un}pigz g{,un}zip
 time { make LIBINTL=MUSL CFLAGS="-flto=thin $CFLAGS"; }
 ```
 ```bash
-# Only install `msgfmt`, `msgmerge` and `xgettext`.
-install -vm755 -t /clang1-tools/bin/ msg{fmt,merge} xgettext 
+# Only install the tools.
+install -vm755 -t /clang1-tools/bin/ autopoint msg{fmt,merge} xgettext 
 ```
 
 ### `10` - Toybox (Coreutils, File, Findutils, Grep, Sed, Tar)
