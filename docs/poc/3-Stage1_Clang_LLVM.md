@@ -466,8 +466,11 @@ time { make CC=${CC} HOSTCC=${CC} CFLAGS="-flto=thin $CFLAGS" V=1; }
 ./toybox | wc -w
 ```
 ```bash
-# Install and unset exported commands in the TOYBOX variable.
-time { make CC=${CC} HOSTCC=${CC} PREFIX=/clang1-tools install && unset X TOYBOX; }
+# Install and fix symlinks that caused by "/usr" merge.
+time {
+    unset X TOYBOX && make CC=${CC} HOSTCC=${CC} PREFIX=/clang1-tools install && \
+    find /clang1-tools/bin/ -type l ! -exec test -e {} \; -exec ln -sfv toybox {} \;
+}
 ```
 
 ### `11` - GNU AWK
