@@ -54,7 +54,7 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 > |  ✓  | 1. [Preparation](./docs/poc/1-Preparation.md)                                        | Finished          | -                          |
 > |  ✓  | 2. [Stage-0 Clang/LLVM (ft. GNU) Cross-Toolchain](./docs/poc/2-Stage0_Clang_LLVM.md) | Finished          | Build time and build size. |
 > |  ?  | 3. [Stage-1 Clang/LLVM Toolchain](./docs/poc/3-Stage1_Clang_LLVM.md)                 | Re-fixing         | Build time and build size. |
-> |     | 4. [Stage-2 Final System](./docs/poc/4-Stage2_Final_System.md) (core)                               | Under development | Faster performance.        |
+> |     | 4. [Stage-2 Final System](./docs/poc/4-Stage2_Final_System.md) (core)                | Under development | Faster performance.        |
 > |     | 5. [System Configuration](./docs/poc/5-System_Configuration.md)                      | Pending           | -                          |
 
 > Generally there's no **Stage-0** for the toolchain. I lower the value in **build stages** because for the final toolchain, is actually in the **Stage-2** (Final System) because here there are 3 stages where "stage 1 Clang/LLVM" in **Stage-0** uses GCC libraries after bootstrapping musl libc and "stage 2 Clang/LLVM" in **Stage-1** is no more from minimal as **Stage-0** but become self-hosted and native. Then, **Stage-1** is used to build **Stage-2** (Final System). ... :thinking: ...
@@ -62,13 +62,13 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 > Well, the **build stages** and **toolchain stages** are differents.
 
 > The current "inefficient" method is:
-> | Build Stages                                 | Build | Host  | Target | Action                                                                                                   | Status |
-> |----------------------------------------------|:-----:|:-----:|:------:|----------------------------------------------------------------------------------------------------------|:------:|
-> | Stage-0 Clang/LLVM (ft. GNU) Cross-Toolchain | host  | host  | heiwa  | Build minimal musl-GCC using host's GCC, then build stage 1 Clang/LLVM using previously musl-GCC built.  | Cross  |
-> | Stage-1 Clang/LLVM Toolchain                 | heiwa | heiwa | heiwa  | Build stage 2 Clang/LLVM temporary toolchain using previously Clang/LLVM built. Now become self-hosted.  | Native |
-> | Stage-2 Final System (core)                  | heiwa | heiwa | heiwa  | Build "Final System" using previously Clang/LLVM built. This LLVM build has a wider registered targets.  | Native |
+> | Build Stages | Build | Host  | Target | Action                                                                                                   | Status |
+> |:------------:|:-----:|:-----:|:------:|----------------------------------------------------------------------------------------------------------|:------:|
+> | Stage-0      | host  | host  | heiwa  | Build minimal musl-GCC using host's GCC, then build stage 1 Clang/LLVM using previously musl-GCC built.  | Cross  |
+> | Stage-1      | heiwa | heiwa | heiwa  | Build stage 2 Clang/LLVM temporary toolchain using previously Clang/LLVM built. Now become self-hosted.  | Native |
+> | Stage-2      | heiwa | heiwa | heiwa  | Build "Final System" using previously Clang/LLVM built. This LLVM built has wider registered targets.    | Native |
 
-> This will be long to develop PoC along with the package manager, and the **Stage-2** is like Stage 3 Gentoo.
+> This will be long to develop PoC along with the package manager, and the **Stage-2** is like Stage 3 Gentoo tarball.
 
 </details>
 
