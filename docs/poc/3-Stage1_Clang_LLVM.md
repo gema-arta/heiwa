@@ -343,11 +343,19 @@ time {
 ```
 ```bash
 # Configure Stage-1 Clang/LLVM with default triplet (pc) to produce binaries with "/clang1-tools/lib/ld-musl-${T_ARCH}.so.1".
-ln -sfv clang              /clang1-tools/bin/${T_TRIPLET}-clang
-ln -sfv ${T_TRIPLET}-clang /clang1-tools/bin/cc
-ln -sfv clang++            /clang1-tools/bin/${T_TRIPLET}-clang++
+ln -sfv clang   /clang1-tools/bin/${T_TRIPLET}-clang
+ln -sfv clang++ /clang1-tools/bin/${T_TRIPLET}-clang++
 cat > /clang1-tools/bin/${T_TRIPLET}.cfg << EOF
 -Wl,-dynamic-linker /clang1-tools/lib/ld-musl-${T_ARCH}.so.1
+EOF
+```
+```bash
+# Configure Stage-1 Clang/LLVM with new triplet to produce binaries with "/lib/ld-musl-${T_ARCH}.so.1" and "/usr" in chroot later.
+ln -sfv clang              /clang1-tools/bin/${H_TRIPLET}-clang
+ln -sfv ${H_TRIPLET}-clang /clang1-tools/bin/cc
+ln -sfv clang++            /clang1-tools/bin/${H_TRIPLET}-clang++
+cat > /clang1-tools/bin/${H_TRIPLET}.cfg << EOF
+--sysroot=/usr -Wl,-dynamic-linker /lib/ld-musl-${T_ARCH}so.1
 EOF
 ```
 ```bash
