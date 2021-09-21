@@ -65,7 +65,7 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 > | Build Stages                                 | Build | Host  | Target | Action                                                                                                   | Status |
 > |----------------------------------------------|:-----:|:-----:|:------:|----------------------------------------------------------------------------------------------------------|:------:|
 > | Stage-0 Clang/LLVM (ft. GNU) Cross-Toolchain | host  | host  | heiwa  | Build minimal musl-GCC using host's GCC, then build stage 1 Clang/LLVM using previously musl-GCC built.  | Cross  |
-> | Stage-1 Clang/LLVM Toolchain                 | heiwa | heiwa | heiwa  | Build stage 2 Clang/LLVM temporary toolchain using previously Clang/LLVM built. Now become self-hosted. | Native |
+> | Stage-1 Clang/LLVM Toolchain                 | heiwa | heiwa | heiwa  | Build stage 2 Clang/LLVM temporary toolchain using previously Clang/LLVM built. Now become self-hosted.  | Native |
 > | Stage-2 Final System (core)                  | heiwa | heiwa | heiwa  | Build "Final System" using previously Clang/LLVM built. This LLVM build has a wider registered targets.  | Native |
 
 > This will be long to develop PoC along with the package manager, and the **Stage-2** is like Stage 3 Gentoo.
