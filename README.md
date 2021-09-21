@@ -57,15 +57,14 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 > |     | 4. [Final System](./docs/poc/4-Final_System.md) (core)                               | Under development | Faster performance.        |
 > |     | 5. [System Configuration](./docs/poc/5-System_Configuration.md)                      | Pending           | -                          |
 
-> Generally there's no "stage 0" for the toolchain, but actually "preparation".
+> Generally there's no **Stage-0** for the toolchain. I lower the value in **stage naming** because for the final toolchain, namely **Stage-2**, is actually in the **Final System** because here there are 3 stages where "stage 1 Clang/LLVM" in **Stage-0** uses GCC libraries after bootstrapping musl libc and "stage 2 Clang/LLVM" in **Stage-1** is no more from minimal as **Stage-0** but become freestanding and native. Then, **Stage-1** used to build **Final System**.
 
-> I lower the stage value because for the final toolchain, namely "stage 2", is actually in the "Final System (core)" because here there are 3 stages where "stage 0" itself uses GCC libraries after bootstrapping musl libc and "stage 1" is no more from minimal as "stage 0" but it's freestanding. So the current "inefficient" method is:
-
-> | Stage | Build | Host  | Target | Action                                                                                                   |
-> |:-----:|:-----:|:-----:|:------:|----------------------------------------------------------------------------------------------------------|
-> |   2   | host  | host  | heiwa  | Build minimal musl-GCC using host's GCC, then build stage 1 Clang/LLVM using previously musl-GCC built.  |
-> |   3   | heiwa | heiwa | heiwa  | Build stage 2 Clang/LLVM temporary toolchain using previously Clang/LLVM built. Now become freestanding. |
-> |   4   | heiwa | heiwa | heiwa  | Build "Final System" using previously Clang/LLVM built. This LLVM build has a wider registered target.   |
+> So, the current "inefficient" method is:
+> | Stage                                        | Build | Host  | Target | Action                                                                                                   | Status |
+> |----------------------------------------------|:-----:|:-----:|:------:|----------------------------------------------------------------------------------------------------------|:------:|
+> | Stage-0 Clang/LLVM (ft. GNU) Cross-Toolchain | host  | host  | heiwa  | Build minimal musl-GCC using host's GCC, then build stage 1 Clang/LLVM using previously musl-GCC built.  | Cross  |
+> | Stage-1 Clang/LLVM Toolchain                 | heiwa | heiwa | heiwa  | Build stage 2 Clang/LLVM temporary toolchain using previously Clang/LLVM built. Now become freestanding. | Native |
+> | Final System (core)                          | heiwa | heiwa | heiwa  | Build "Final System" using previously Clang/LLVM built. This LLVM build has a wider registered targets.  | Native |
 
 > This will be long to develop PoC along with the package manager, and the whole system is like Stage 3 Gentoo.
 
