@@ -447,8 +447,8 @@ for X in ${TOYBOX}; do
 done
 ```
 ```bash
-# Build with verbose.
-time { make CROSS_COMPILE=${T_TRIPLET}- CFLAGS="-flto=thin $CFLAGS" V=1; }
+# Build with verbose. Toybox will use `cc` that breaks the build, so we need to point HOSTCC to CC.
+time { make HOSTCC=${CC} CFLAGS="-flto=thin $CFLAGS" V=1; }
 ```
 ```bash
 # Verify compiled 87 commands.
@@ -468,7 +468,7 @@ time { make CROSS_COMPILE=${T_TRIPLET}- CFLAGS="-flto=thin $CFLAGS" V=1; }
 ```bash
 # Install and fix symlinks that caused by "/usr" merge.
 time {
-    unset X TOYBOX && make CC=${CC} HOSTCC=${CC} PREFIX=/clang1-tools install && \
+    unset X TOYBOX && make HOSTCC=${CC} PREFIX=/clang1-tools install && \
     find /clang1-tools/bin/ -type l ! -exec test -e {} \; -exec ln -sfv toybox {} \;
 }
 ```
