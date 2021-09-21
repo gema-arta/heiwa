@@ -59,7 +59,13 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 
 > Generally there's no "stage 0" for the toolchain, but actually "preparation".
 
-> I lower the stage value because for the final toolchain, namely "stage 2", is actually in the "Final System (core)" because here there are 3 stages where "stage 0" itself uses GCC libraries after bootstrapping musl libc and "stage 1" is no more from minimal as "stage 0" but uses "Release" Cmake build type.
+> I lower the stage value because for the final toolchain, namely "stage 2", is actually in the "Final System (core)" because here there are 3 stages where "stage 0" itself uses GCC libraries after bootstrapping musl libc and "stage 1" is no more from minimal as "stage 0" but it's freestanding. So the current "inefficient" method is:
+
+> | Stage | Build | Host  | Target | Action                                                                                                   |
+> |:-----:|:-----:|:-----:|:------:|----------------------------------------------------------------------------------------------------------|
+> |   2   | host  | host  | heiwa  | Build minimal musl-GCC using host's GCC, then build stage 1 Clang/LLVM using previously musl-GCC built.  |
+> |   3   | heiwa | heiwa | heiwa  | Build stage 2 Clang/LLVM temporary toolchain using previously Clang/LLVM built. Now become freestanding. |
+> |   4   | heiwa | heiwa | heiwa  | Build "Final System" using previously Clang/LLVM built. This LLVM build has a wider registered target.   |
 
 > This will be long to develop PoC along with the package manager, and the whole system is like Stage 3 Gentoo.
 
