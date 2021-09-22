@@ -44,3 +44,6 @@ pushd ${LLVM_SRC}/../ && \
     do patch -Np1 -i ./extra/llvm/patches/${P}
     done; unset P
 popd
+
+# Update config.guess for better platform detection.
+cp -fv ../extra/llvm/files/config.guess cmake/.
