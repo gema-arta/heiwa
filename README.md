@@ -57,16 +57,26 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 > |     | 4. [Stage-2 Final System](./docs/poc/4-Stage2_Final_System.md) (core)                | Under development | Faster performance.        |
 > |     | 5. [System Configuration](./docs/poc/5-System_Configuration.md)                      | Pending           | -                          |
 
-> Generally there's no **Stage-0** for the toolchain. I lower the value in **build stages** because for the final toolchain, is actually in the **Stage-2** (Final System) because here there are 3 stages where "stage 1 Clang/LLVM" in **Stage-0** uses GCC libraries after bootstrapping musl libc and "stage 2 Clang/LLVM" in **Stage-1** is no more from minimal as **Stage-0** but become self-hosted and native. Then, **Stage-1** is used to build **Stage-2** (Final System). ... :thinking: ...
+> Generally there's no **Stage-0** for the toolchain. I lowered the value in **build stages** because for the final toolchain is actually in the **Stage-2** (Final System) because here there are 3 stages where "stage 1 Clang/LLVM" in **Stage-0** uses GCC libraries after bootstrapping musl libc and "stage 2 Clang/LLVM" in **Stage-1** is no more from minimal as **Stage-0** but become native self-hosted. Then, **Stage-1** is used to build **Stage-2** (Final System). Confused?
+> 
+> > Well, the **build stages** and **toolchain stages** are differents.
 
-> Well, the **build stages** and **toolchain stages** are differents.
-
-> The current "inefficient" and "painful" method is:
-> | Build Stages | Build | Host  | Target | Action                                                                                            | Status |
-> |:------------:|:-----:|:-----:|:------:|---------------------------------------------------------------------------------------------------|:------:|
-> | Stage-0      | host  | host  | heiwa  | Build minimal GCC using host's GCC, then build stage 1 Clang/LLVM using second GCC (musl) built.  | Cross  |
-> | Stage-1      | heiwa | heiwa | heiwa  | Build stage 2 Clang/LLVM using previously Clang/LLVM built. Now become self-hosted.               | Native |
-> | Stage-2      | heiwa | heiwa | heiwa  | Build "Final System" using second Clang/LLVM built. This LLVM built has wider registered targets. | Native |
+> The current "inefficient", "painful", and "fake cross-compilation" method as described below:
+> | Build Stages | Build | Host  | Target | Action                                                                                            | Status         |
+> |:------------:|:-----:|:-----:|:------:|---------------------------------------------------------------------------------------------------|:--------------:|
+> | Stage-0      | host  | host  | heiwa  | Build GCC using host's GCC, then build stage 1 Clang/LLVM using second GCC (musl) built.          | Cross          |
+> | Stage-1      | host  | heiwa | heiwa  | Build stage 2 Clang/LLVM using previously Clang/LLVM built. Now become self-hosted.               | Crossed Native |
+> | Stage-2      | heiwa | heiwa | heiwa  | Build "Final System" using second Clang/LLVM built. This LLVM built has wider registered targets. | Native         |
+> 
+> > If **build**, **host**, and **target** are all the same, this is called a **native**.
+> 
+> > If **build** and **host** are the same but **target** is different, this is called a **cross**.
+> 
+> > If **build**, **host**, and **target** are all different this is called a **canadian** (for obscure reasons dealing with Canada's political party and the background of the person working on the build at that time).
+> 
+> > If **host** and **target** are the same, but **build** is different, you are using a **cross-compiler** to build a **native** for a **different system**. Some people call this a **host-x-host**, **crossed native**, or **cross-built native**.
+> 
+> > If **build** and **target** are the same, but **host** is different, you are using a **cross-compiler** to build a **cross-compiler** that produces code for **the machine you're building on**. This is rare, so there is no common way of describing it. There is a proposal to call this a **crossback**.
 
 > This will be long to develop PoC along with the package manager, and the **Stage-2** is like [Gentoo Stage 3 tarball](https://wiki.gentoo.org/wiki/Stage_tarball).
 
