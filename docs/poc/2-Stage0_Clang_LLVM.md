@@ -1,5 +1,5 @@
 ## `II` Stage-0 Clang/LLVM (ft. GNU) Cross-Toolchain
-The purpose of this stage is to build stage 1 Clang/LLVM toolchain with GCC libraries which will be used to build stage 2 Clang/LLVM toolchain (self-hosted), because if it build directly using host's Clang/LLVM or GCC, it will fail or break. [LLVM reference](https://clang.llvm.org/docs/Toolchain.html) **•** [CLFS reference](http://clfs.org/view/clfs-embedded/x86) **•** [musl faq](https://wiki.musl-libc.org/faq.html).
+The purpose of this stage is to build stage 1 Clang/LLVM toolchain with GCC libraries which will be used to build stage 2 Clang/LLVM toolchain (self-hosted), because if it build directly using host's Clang/LLVM nor GCC, it will fails or breaks. [LLVM reference](https://clang.llvm.org/docs/Toolchain.html) **•** [CLFS reference](http://clfs.org/view/clfs-embedded/x86) **•** [musl faq](https://wiki.musl-libc.org/faq.html).
 
 > #### Compilation Instruction!
 > ```bash
@@ -14,7 +14,7 @@ The purpose of this stage is to build stage 1 Clang/LLVM toolchain with GCC libr
 > ```
 
 > #### Tracking Installed Files by Example
-> Use the staged directory to browse where the files are installed, then reinstall it to correct locations. Below are three examples.
+> Use the staged directory to browse where the files are installed, then reinstall into correct locations. Below are three examples.
 > ```bash
 > < extracting and enter the directory >
 > 
