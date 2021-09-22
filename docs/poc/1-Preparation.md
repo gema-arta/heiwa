@@ -11,7 +11,7 @@
 > <summary>Screenshot of Gentoo/Linux host</summary>
 > 
 > <br>
-> <p align="center"><img src="https://i.imgur.com/ZRNPehJ.png" alt=""/></p>
+> <p align="center"><img src="https://i.imgur.com/PlotBPA.png" alt=""/></p>
 > 
 > </details>
 
@@ -33,13 +33,13 @@ export HEIWA="/media/Heiwa"; mkdir -pv "$HEIWA"
 ```
 > Next, mount the target volume/partition.
 
-> An example for **EXT4** on **Linux-5.13.x** or newer.
+> An example for **EXT4** on **Linux-5.14.x** or newer.
 ```bash
 mount -vo noatime,discard /dev/sdxY "$HEIWA"
 ```
-> An example for **F2FS** on **Linux-5.13.x** or newer.
+> An example for **F2FS** on **Linux-5.14.x** or newer.
 ```bash
-mount -vo noatime,gc_merge,compress_algorithm=lz4,compress_extension='*',compress_chksum,atgc /dev/sdxY "$HEIWA"
+mount -vo noatime,gc_merge,compress_algorithm=lz4,compress_extension='*',compress_chksum,compress_cache,atgc /dev/sdxY "$HEIWA"
 ```
 
 ### `2` - Creating sources and toolchains directories
