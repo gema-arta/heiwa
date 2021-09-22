@@ -253,7 +253,7 @@ fi
 ```bash
 # Sanity check.
 ${HEI_TRIPLET}-gcc -x c++ - ${CFLAGS} ${LDFLAGS} <<< 'int main(){}'
-${HEI_TRIPLET}-readelf -l a.out | grep --color=auto "Req.*ter''
+${HEI_TRIPLET}-readelf -l a.out | grep --color=auto "Req.*ter"
 ```
 ```bash
 # | The output should be:
