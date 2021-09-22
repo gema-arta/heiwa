@@ -50,13 +50,13 @@ mount -vo noatime,gc_merge,compress_algorithm=lz4,compress_extension='*',compres
 ```bash
 if [[ -d "$HEIWA" ]]; then
     if mkdir -pv ${HEIWA}/clang{0,1}-tools; then
-        ln -sfv ${HEIWA}/clang0-tools /
         ln -sfv ${HEIWA}/clang1-tools /
-        ln -sfv ./lib /clang0-tools/lib64
-        ln -sfv ./bin /clang1-tools/sbin
-        if mkdir -v /clang1-tools/usr; then
-            ln -sfv ../bin /clang1-tools/usr/bin
-            ln -sfv ../sbin /clang1-tools/usr/sbin
+        ln -sfv ${HEIWA}/clang2-tools /
+        ln -sfv ./lib /clang1-tools/lib64
+        ln -sfv ./bin /clang2-tools/sbin
+        if mkdir -v /clang2-tools/usr; then
+            ln -sfv ../bin /clang2-tools/usr/bin
+            ln -sfv ../sbin /clang2-tools/usr/sbin
         fi
     fi && mkdir -pv ${HEIWA}/sources/{extra,pkgs}
 fi
@@ -112,7 +112,7 @@ umask 022
 unalias -a
 HEIWA="${HEIWA:-/media/Heiwa}"
 LC_ALL="POSIX"
-PATH="/clang1-tools/bin:/clang0-tools/bin:/usr/bin:/bin"
+PATH="/clang2-tools/bin:/clang1-tools/bin:/usr/bin:/bin"
 LLVM_SRC="\${HEIWA}/sources/llvm"
 export HEIWA LC_ALL PATH LLVM_SRC
 EOF
