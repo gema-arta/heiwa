@@ -42,22 +42,22 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 
 </details>
 
-- [ ] Create a Proof-of-Concept. *Under development, optimizing ..*
+- [ ] Create a Proof-of-Concept. Under developments, optimizing ..
 
 <details>
 <summary>Details</summary>
 
 <br>
 
-> |  ?  | Build Stages                                                                         | Status            | Optimized more for         |
-> |:---:|--------------------------------------------------------------------------------------|:-----------------:|----------------------------|
-> |  ✓  | 1. [Preparation](./docs/poc/1-Preparation.md)                                        | Finished          | -                          |
-> |  ?  | 2. [Stage-0 Clang/LLVM (ft. GNU) Cross-Toolchain](./docs/poc/2-Stage0_Clang_LLVM.md) | Reworked          | Build time and build size. |
-> |     | 3. [Stage-1 Clang/LLVM Toolchain](./docs/poc/3-Stage1_Clang_LLVM.md)                 | Pending           | Build time and build size. |
-> |     | 4. [Stage-2 Final System](./docs/poc/4-Stage2_Final_System.md) (core)                | Under development | Faster performance.        |
-> |     | 5. [System Configuration](./docs/poc/5-System_Configuration.md)                      | Pending           | -                          |
+> |  ?  | Build Stages                                                                           | Status             | Optimized more for         |
+> |:---:|----------------------------------------------------------------------------------------|:------------------:|----------------------------|
+> |  ✓  | 1. [Preparation](./docs/poc/1-Preparation.md)                                          | Finished (unfixed) | -                          |
+> |  ?  | 2. [Stage-0 Clang/LLVM (feat. GNU) Cross-Toolchain](./docs/poc/2-Stage0_Clang_LLVM.md) | Reworked           | Build time and build size. |
+> |     | 3. [Stage-1 Clang/LLVM Toolchain](./docs/poc/3-Stage1_Clang_LLVM.md)                   | Pending            | Build time and build size. |
+> |     | 4. [Stage-2 Final System](./docs/poc/4-Stage2_Final_System.md) (core)                  | Pending            | Faster performance.        |
+> |     | 5. [System Configuration](./docs/poc/5-System_Configuration.md)                        | Pending            | -                          |
 
-> Generally there's no **Stage-0** for the toolchain. I lowered the value in **build stages** because for the final toolchain is actually in the **Stage-2** (Final System) because here there are 3 stages where "stage 1 Clang/LLVM" in **Stage-0** uses GCC libraries after bootstrapping musl libc and "stage 2 Clang/LLVM" in **Stage-1** is no more from minimal as **Stage-0** but become native self-hosted. Then, **Stage-1** is used to build **Stage-2** (Final System). Confused?
+> Generally there's no **Stage-0** for the toolchain. I lowered the **build stages** value because to match the final toolchain that actually in the **Stage-2** (Final System), there are 3 stages where "stage 1 Clang/LLVM" in **Stage-0** uses GCC libraries after bootstrapping musl libc and "stage 2 Clang/LLVM" in **Stage-1** is no more from minimal as **Stage-0** but become native self-hosted. Then, **Stage-1** is used to build **Stage-2** (Final System). Confused?
 > 
 > > Well, the **build stages** and **toolchain stages** are differents.
 
@@ -83,8 +83,8 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 </details>
 
 - [ ] Create a fast, flexible, and futuristic package manager.
-- [ ] Build an auto build systems.
-- [ ] Packaging, make it usable but with the aim of not being big.
+- [ ] Create an auto build systems.
+- [ ] Packaging, make it usable but with the aim of not being big. When? Idk.
 
 > Always W.I.P, since this is hobbyist. A radical experiments.
 
