@@ -38,7 +38,7 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 > |  ✓  | Default text-editor                                | GNU nano           | I don't use Neo/Vi/m. :stuck_out_tongue_winking_eye: |
 > |  ✓  | Device manager                                     | eudev              | No reason, portable.           |
 
-> I think Microsoft mimalloc breaks some packages if build whole system with it, need more research.
+> I think Microsoft mimalloc breaks some packages if build the whole system with it, need more research.
 
 </details>
 
@@ -61,12 +61,12 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 
 > Well, the **build stages** and **toolchain stages** are differents.
 
-> The current "inefficient" method is:
-> | Build Stages | Build | Host  | Target | Action                                                                                                   | Status |
-> |:------------:|:-----:|:-----:|:------:|----------------------------------------------------------------------------------------------------------|:------:|
-> | Stage-0      | host  | host  | heiwa  | Build minimal musl-GCC using host's GCC, then build stage 1 Clang/LLVM using previously musl-GCC built.  | Cross  |
-> | Stage-1      | heiwa | heiwa | heiwa  | Build stage 2 Clang/LLVM temporary toolchain using previously Clang/LLVM built. Now become self-hosted.  | Native |
-> | Stage-2      | heiwa | heiwa | heiwa  | Build "Final System" using previously Clang/LLVM built. This LLVM built has wider registered targets.    | Native |
+> The current "inefficient" and "painful" method is:
+> | Build Stages | Build | Host  | Target | Action                                                                                            | Status |
+> |:------------:|:-----:|:-----:|:------:|---------------------------------------------------------------------------------------------------|:------:|
+> | Stage-0      | host  | host  | heiwa  | Build minimal GCC using host's GCC, then build stage 1 Clang/LLVM using second GCC (musl) built.  | Cross  |
+> | Stage-1      | heiwa | heiwa | heiwa  | Build stage 2 Clang/LLVM using previously Clang/LLVM built. Now become self-hosted.               | Native |
+> | Stage-2      | heiwa | heiwa | heiwa  | Build "Final System" using second Clang/LLVM built. This LLVM built has wider registered targets. | Native |
 
 > This will be long to develop PoC along with the package manager, and the **Stage-2** is like [Gentoo Stage 3 tarball](https://wiki.gentoo.org/wiki/Stage_tarball).
 
