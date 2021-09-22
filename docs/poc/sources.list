@@ -1,4 +1,5 @@
-https://github.com/xanmod/linux/archive/5.14.6-xanmod1-cacule.tar.gz
+https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.14.tar.xz
+https://github.com/xanmod/linux/releases/download/5.14.6-xanmod1/patch-5.14.6-xanmod1.xz
 https://ftp.gnu.org/gnu/binutils/binutils-2.36.1.tar.xz
 https://dev.alpinelinux.org/~nenolod/gcc-10.3.1_git20210424.tar.xz
 https://ftp.gnu.org/gnu/gmp/gmp-6.2.1.tar.xz
