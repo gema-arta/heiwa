@@ -51,7 +51,7 @@ cp -rfv usr/include /clang1-tools/${HEI_TRIPLET}/.
 ```
 
 ### `2` - GNU Binutils
-> #### `2.36.1` or newer
+> #### `2.37` or newer
 > The GNU Binutils package contains a linker, an assembler, and other tools for handling object files.
 
 > **Required!** To build the entire packages in this stage.
