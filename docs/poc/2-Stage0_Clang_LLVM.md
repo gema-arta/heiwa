@@ -149,11 +149,11 @@ time { make install-{gcc,target-libgcc}; }
 ```bash
 # Configure source.
 ./configure CROSS_COMPILE=${HEI_TRIPLET}- \
-    --prefix=/                            \
-    --target=${HEI_TRIPLET}               \
-    --disable-static                      \
-    --with-malloc=mallocng                \
-    --enable-optimize=speed
+            --prefix=/                    \
+            --target=${HEI_TRIPLET}       \
+            --disable-static              \
+            --with-malloc=mallocng        \
+            --enable-optimize=speed
 ```
 ```bash
 # Build.
@@ -291,17 +291,13 @@ pushd ${LLVM_SRC}/tools/ && \
 popd
 ```
 ```bash
-# Apply patches (from Void Linux).
+# Apply patches (from Void Linux) and update config.guess for better platform detection.
 ../extra/llvm/patches/appatch
-```
-```bash
-# Update config.guess for better platform detection.
-cp -fv ../extra/llvm/files/config.guess cmake/.
 ```
 ```bash
 # Configure source.
 cmake -B build \
-    -DCMAKE_BUILD_TYPE=Release -Wno-dev         \
+    -DCMAKE_BUILD_TYPE=MinSizeRel -Wno-dev      \
     -DCMAKE_INSTALL_PREFIX="/clang1-tools"      \
     -DCMAKE_C_COMPILER="${HEI_TRIPLET}-gcc"     \
     -DCMAKE_CXX_COMPILER="${HEI_TRIPLET}-g++"   \
@@ -335,6 +331,7 @@ cmake -B build \
     -DLIBCXX_ENABLE_STATIC=OFF                  \
     -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=OFF    \
     -DLIBCXX_HAS_MUSL_LIBC=ON                   \
+    -DLIBCXX_INCLUDE_BENCHMARKS=OFF             \
     -DCOMPILER_RT_BUILD_LIBFUZZER=OFF           \
     -DCOMPILER_RT_BUILD_MEMPROF=OFF             \
     -DCOMPILER_RT_BUILD_PROFILE=OFF             \
@@ -362,7 +359,7 @@ time {
 }
 ```
 ```bash
-# Configure Stage-0 Clang/LLVM with new triplet to produce binaries with "/clang2-tools/lib/ld-musl-${TGT_ARCH}.so.1" later.
+# Configure Stage-0 Clang/LLVM with heiwa triplet to produce binaries with "/clang2-tools/lib/ld-musl-${TGT_ARCH}.so.1" later.
 ln -sfv clang   /clang1-tools/bin/${HEI_TRIPLET}-clang
 ln -sfv clang++ /clang1-tools/bin/${HEI_TRIPLET}-clang++
 cat > /clang1-tools/bin/${HEI_TRIPLET}.cfg << EOF
