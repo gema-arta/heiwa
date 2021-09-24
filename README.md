@@ -57,6 +57,8 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 > |     | 4. [Stage-2 Final System](./docs/poc/4-Stage2_Final_System.md) (core)                  | Pending            | Faster performance.        |
 > |     | 5. [System Configuration](./docs/poc/5-System_Configuration.md)                        | Pending            | -                          |
 
+> Now working on the [Ccache](https://github.com/ccache/ccache) implementation.
+
 > Generally there's no **Stage-0** for the toolchain. I lowered the **build stages** value because to match the final toolchain that actually in the **Stage-2** (Final System), there are 3 stages where "stage 1 Clang/LLVM" in **Stage-0** uses GCC libraries after bootstrapping musl libc and "stage 2 Clang/LLVM" in **Stage-1** is no more from minimal as **Stage-0** but become native self-hosted. Then, **Stage-1** is used to build **Stage-2** (Final System). Confused?
 > 
 > > Well, the **build stages** and **toolchain stages** are differents.
