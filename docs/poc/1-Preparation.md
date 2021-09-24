@@ -29,7 +29,8 @@ mkfs.f2fs -l "Heiwa.Linux" -O extra_attr,inode_checksum,sb_checksum,compression,
 ```
 > Then, export the mount point variable and create the directory if not exist. **Why "/media"?** It's easily detected with GVFS via D-Bus.
 ```bash
-export HEIWA="/media/Heiwa"; mkdir -pv "$HEIWA"
+export HEIWA="/media/Heiwa"
+mkdir -pv "$HEIWA"
 ```
 > Next, mount the target volume/partition.
 
@@ -50,7 +51,7 @@ if [[ -d "$HEIWA" ]]; then
         ln -sfv ${HEIWA}/clang1-tools /
         ln -sfv ${HEIWA}/clang2-tools /
         ln -sfv lib /clang1-tools/lib64
-    fi && mkdir -pv ${HEIWA}/sources/{extra,pkgs}
+    fi && mkdir -pv ${HEIWA}/sources/{ccache,extra,pkgs}
 fi
 ```
 
@@ -134,7 +135,8 @@ LC_ALL="POSIX"
 HEIWA="${HEIWA:-/media/Heiwa}"
 PATH="/clang2-tools/bin:/clang1-tools/bin:/usr/bin:/bin"
 LLVM_SRC="\${HEIWA}/sources/llvm"
-export LC_ALL HEIWA PATH LLVM_SRC
+CCACHE_DIR="\${HEIWA}/sources/ccache"
+export LC_ALL HEIWA PATH LLVM_SRC CCACHE_DIR
 EOF
 ```
 > If you want multitasking responsiveness when using multiple jobs, set the load average to prevent slowdown system e.g core/threads + 2.
