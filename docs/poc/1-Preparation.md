@@ -99,7 +99,7 @@ case $(uname -m) in
             TGT_ARCH="x86_64"
             TGT_TRIPLET="${TGT_ARCH}-pc-linux-musl"
             HEI_TRIPLET="${TGT_ARCH}-heiwa-linux-musl"
-            DEF_CXFLAGS="-march=native"
+            CUS_CXFLAGS="-march=native"
     ;;
     *)      echo 'Any architecture other than x86_64 currently not implemented yet.'
     ;;
@@ -107,7 +107,7 @@ esac
 ```
 > Let's check if the above variables are all correct.
 ```bash
-printf '%s\n' $HST_TRIPLET $GCC_MCPU $TGT_{LLVM,ARCH,TRIPLET} $HEI_TRIPLET $DEF_CXFLAGS
+printf '%s\n' $HST_TRIPLET $GCC_MCPU $TGT_{LLVM,ARCH,TRIPLET} $HEI_TRIPLET $CUS_CXFLAGS
 ```
 ```bash
 # | On the x86_64 glibc host, the output should be:
@@ -124,7 +124,7 @@ printf '%s\n' $HST_TRIPLET $GCC_MCPU $TGT_{LLVM,ARCH,TRIPLET} $HEI_TRIPLET $DEF_
 ```bash
 cat > ~/.bash_profile << EOF
 exec env -i HOME="\$HOME" TERM="\$TERM" \
-DEF_CXFLAGS="$DEF_CXFLAGS -Os -pipe -w -g0" $(command -v bash)
+DEF_CXFLAGS=" $CUS_CXFLAGS -Os -pipe -w -g0 " $(command -v bash)
 EOF
 cat > ~/.bashrc << EOF
 set +h
