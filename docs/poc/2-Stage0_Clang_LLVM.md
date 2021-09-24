@@ -54,7 +54,7 @@ cp -rfv usr/include /clang1-tools/${HEI_TRIPLET}/.
 > #### `2.37` or newer
 > The GNU Binutils package contains a linker, an assembler, and other tools for handling object files.
 
-> **Required!** To build the entire packages in this stage.
+> **Required!** The musl libc and GCC perform various tests on the linker and assembler to determine which of their own features to enable.
 ```bash
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build &&                            \
@@ -151,6 +151,7 @@ time { make install-{gcc,target-libgcc}; }
 ./configure CROSS_COMPILE=${HEI_TRIPLET}- \
             --prefix=/                    \
             --target=${HEI_TRIPLET}       \
+            --disable-gcc-wrapper         \
             --disable-static              \
             --with-malloc=mallocng        \
             --enable-optimize=speed
@@ -183,7 +184,7 @@ cat > /clang1-tools/etc/ld-musl-${TGT_ARCH}.path << EOF
 EOF
 ```
 ```bash
-# Building final GCC will looking for system headers in the "/clang1-tools/usr/include", so create the directory then symlink it.
+# The final GCC will looking for headers in the "/clang1-tools/usr/include", so create the directory then symlink it.
 mkdir -v /clang1-tools/usr && \
 ln -sv ../include /clang1-tools/usr/include
 ```
@@ -251,7 +252,7 @@ if grep --color=auto "/clang1-tools/lib/ld-musl-${TGT_ARCH}.so.1" specs; then
 fi
 ```
 ```bash
-# Sanity check.
+# Sanity check for the current GCC.
 ${HEI_TRIPLET}-gcc -x c++ - ${CFLAGS} ${LDFLAGS} <<< 'int main(){}'
 ${HEI_TRIPLET}-readelf -l a.out | grep --color=auto "Req.*ter"
 ```
@@ -297,7 +298,7 @@ popd
 ```bash
 # Configure source.
 cmake -B build \
-    -DCMAKE_BUILD_TYPE=MinSizeRel -Wno-dev      \
+    -DCMAKE_BUILD_TYPE=Release -Wno-dev         \
     -DCMAKE_INSTALL_PREFIX="/clang1-tools"      \
     -DCMAKE_C_COMPILER="${HEI_TRIPLET}-gcc"     \
     -DCMAKE_CXX_COMPILER="${HEI_TRIPLET}-g++"   \
