@@ -268,7 +268,7 @@ ${HEI_TRIPLET}-readelf -l a.out | grep --color=auto "Req.*ter"
 
 > **Required!** Only build dynamic libraries and the headers for Ccache compression support.
 ```bash
-# Build with verbose.
+# Build with verbose. Use optimization level 3.
 time { make -C lib CC=${HEI_TRIPLET}-gcc libzstd-release V=1; }
 ```
 ```bash
@@ -282,7 +282,7 @@ time { make -C lib PREFIX=/clang1-tools install-{includes,shared}; }
 
 > **Required!** To speeds up Clang/LLVM builds.
 ```bash
-# Configure source.
+# Configure source. Use optimization level 3.
 cmake -B build \
     -DCMAKE_BUILD_TYPE=Release -Wno-dev       \
     -DCMAKE_PREFIX_PATH="/clang1-tools"       \
@@ -345,7 +345,7 @@ popd
 ../extra/llvm/patches/appatch
 ```
 ```bash
-# Configure source.
+# Configure source. Use optimization level 3.
 cmake -B build \
     -DCMAKE_BUILD_TYPE=Release -Wno-dev         \
     -DCMAKE_INSTALL_PREFIX="/clang1-tools"      \
