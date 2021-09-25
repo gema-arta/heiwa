@@ -40,11 +40,11 @@ if [ -x "$(command -v bison)" ]; then
     msg "bison" "$(bison --version | sed 1q | cut -d' ' -f2-)"
 fi
 if [ -h "$(command -v yacc)" ]; then
-  sym "$(command -v yacc)" "$(readlink -f $(command -v yacc))"
+    sym "$(command -v yacc)" "$(readlink -f $(command -v yacc))"
 elif [ -x "$(command -v yacc)" ]; then
-  sym "yacc" "$(yacc --version | sed 1q)"
+    sym "yacc" "$(yacc --version | sed 1q)"
 else
-  err "yacc not found nor installed!"
+    err "yacc not found nor installed!"
 fi
 
 # bzip2.
