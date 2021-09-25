@@ -93,7 +93,7 @@ exec su - heiwa
 ```
 > Then, setup the toolchain environment variables.
 ```bash
-HST_TRIPLET="$(sed 's|-[^-]*|-cross|' <<< $(gcc -dumpmachine))"
+HST_TRIPLET="$(sed 's|-[^-]*|-cross|' <(gcc -dumpmachine))"
 case $(uname -m) in
     x86_64) GCC_MCPU="x86-64"
             TGT_LLVM="X86"
@@ -121,7 +121,7 @@ printf '%s\n' $HST_TRIPLET $GCC_MCPU $TGT_{LLVM,ARCH,TRIPLET} $HEI_TRIPLET $CUS_
 # |x86_64-heiwa-linux-musl
 # |-march=native
 ```
-> Now apply the above variables into bash startup profile.
+> Now apply the above variables into bash startup profile. If you want multitasking responsiveness when using multiple jobs, set the load average to prevent slowdown system for example (core/threads) + 2.
 ```bash
 cat > ~/.bash_profile << EOF
 exec env -i HOME="\$HOME" TERM="\$TERM" \
@@ -137,11 +137,6 @@ PATH="/clang2-tools/bin:/clang1-tools/bin:/usr/bin:/bin"
 LLVM_SRC="\${HEIWA}/sources/llvm"
 CCACHE_DIR="\${HEIWA}/sources/ccache"
 export LC_ALL HEIWA PATH LLVM_SRC CCACHE_DIR
-EOF
-```
-> If you want multitasking responsiveness when using multiple jobs, set the load average to prevent slowdown system e.g core/threads + 2.
-```bash
-cat >> ~/.bashrc << EOF
 HST_TRIPLET="$HST_TRIPLET"
 GCC_MCPU="$GCC_MCPU"
 TGT_LLVM="$TGT_LLVM"
