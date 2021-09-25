@@ -17,28 +17,31 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 
 <br>
 
-> |  ?  | Kernel and Userspace                               | Packages           | Extended Description           |
-> |:---:|----------------------------------------------------|:------------------:|--------------------------------|
-> |  ✓  | Low-level standard libraries and toolchain         | Clang/LLVM         | Modular, fast, and modern.     |
-> |  ?  | C dynamic memory allocator                         | Microsoft mimalloc | Excellent performance.         |
-> |  ✓  | Linux kernel patchset                              | Xanmod (CacULE)    | Optimized performance.         |
+> |  ?  | Kernel and Userspace                               | Packages           | Extended Description            |
+> |:---:|----------------------------------------------------|:------------------:|---------------------------------|
+> |  ✓  | Low-level standard libraries and toolchain         | Clang/LLVM         | Modular, fast, and modern.      |
+> |  ?  | C dynamic memory allocator                         | Microsoft mimalloc | Excellent performance.          |
+> |  ✓  | Linux kernel patchset                              | Xanmod (CacULE)    | Optimized performance.          |
 > |  ✓  | C runtime library                                  | musl               | Clean, POSIX, and [fast?](https://www.linkedin.com/pulse/testing-alternative-c-memory-allocators-pt-2-musl-mystery-gomes) |
-> |  ✓  | Build system tools                                 | GNU                | Broad-scale compatibility.     |
-> |  ✓  | SSL/TLS implementation                             | OpenSSL            | Full-featured and robust.      |
-> |  ✓  | Native language support                            | gettext-tiny       | Stub of bloated GNU gettext.   |
-> |  ✓  | Z data compression library                         | Zlib-ng            | Optimized for NGS.             |
-> |  ✓  | Curses (terminal control) library                  | NetBSD curses      | Smaller than GNU ncurses.      |
-> |  ✓  | Command-line interpreter or shell                  | GNU Bash           | Best implementation.           |
-> |  ✓  | Line-editing and history-capabilities library      | GNU Readline       | Best implementation.           |
-> |  ✓  | Unified interface for querying installed libraries | Pkgconf            | No circular dependencies.      |
-> |  ✓  | Gzip data compressor and decompressor              | Pigz               | Parallel threads support.      |
-> |  ✓  | Most userspace utility programs                    | Toybox             | Small, fast, and simple.       |
-> |     | Init and process supervision                       | Finit              | F for fast. Fast init.         |
-> |  ✓  | Manpage suite tools                                | OpenBSD mandoc     | Smaller than GNU man-db.       |
+> |  ✓  | Build system tools                                 | GNU                | Broad-scale compatibility.      |
+> |  ✓  | SSL/TLS implementation                             | OpenSSL            | Full-featured and robust.       |
+> |  ✓  | Native language support                            | gettext-tiny       | Stub of bloated GNU gettext.    |
+> |  ✓  | Z data compression library                         | Zlib-ng            | Optimized for NGS.              |
+> |  ✓  | Curses (terminal control) library                  | NetBSD curses      | Smaller than GNU ncurses.       |
+> |  ✓  | Command-line interpreter or shell                  | GNU Bash           | Best implementation.            |
+> |  ✓  | Line-editing and history-capabilities library      | GNU Readline       | Best implementation.            |
+> |  ✓  | Unified interface for querying installed libraries | Pkgconf            | No circular dependencies.       |
+> |  ✓  | Gzip data compressor and decompressor              | Pigz               | Parallel threads support.       |
+> |  ✓  | Most userspace utility programs                    | Toybox             | Small, fast, and simple.        |
+> |  ✓  | Ninja build system replacement                     | Samurai            | Portable (C99), simple, faster. |
+> |     | Init and process supervision                       | Finit              | F for fast. Fast init.          |
+> |  ✓  | Manpage suite tools                                | OpenBSD mandoc     | Smaller than GNU man-db.        |
 > |  ✓  | Default text-editor                                | GNU nano           | I don't use Neo/Vi/m. :stuck_out_tongue_winking_eye: |
-> |  ✓  | Device manager                                     | eudev              | No reason, portable.           |
+> |  ✓  | Device manager                                     | eudev              | No reason, portable.            |
 
 > I think Microsoft mimalloc breaks some packages if build the whole system with it, need more research.
+
+> Samurai only used in the "Final System".
 
 </details>
 
