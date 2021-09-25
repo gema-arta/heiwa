@@ -262,7 +262,56 @@ ${HEI_TRIPLET}-readelf -l a.out | grep --color=auto "Req.*ter"
 # |      [Requesting program interpreter: /clang1-tools/lib/ld-musl-x86_64.so.1]
 ```
 
-### `6` - Clang/LLVM <kbd>stage 1</kbd>
+### `6` - Zstd
+> #### `1.5.0` or newer
+> The Zstd (Zstandard) package contains real-time compression algorithm, providing high compression ratios. It offers a very wide range of compression / speed trade-offs, while being backed by a very fast decoder.
+
+> **Required!** Only build dynamic libraries and the headers for Ccache compression support.
+```bash
+# Build with verbose.
+time { make -C lib CC=${HEI_TRIPLET}-gcc libzstd-release V=1; }
+```
+```bash
+# Install.
+time { make -C lib PREFIX=/clang1-tools install-{includes,shared}; }
+```
+
+### `7` - Ccache
+> #### `4.4.1` or newer
+> The Ccache package contains compiler cache. It speeds up recompilation by caching previous compilations and detecting when the same compilation is being done again.
+
+> **Required!** To speeds up Clang/LLVM builds.
+```bash
+# Configure source.
+cmake -B build \
+    -DCMAKE_BUILD_TYPE=Release -Wno-dev       \
+    -DCMAKE_PREFIX_PATH="/clang1-tools"       \
+    -DCMAKE_INSTALL_PREFIX="/clang1-tools"    \
+    -DCMAKE_C_COMPILER="${HEI_TRIPLET}-gcc"   \
+    -DCMAKE_CXX_COMPILER="${HEI_TRIPLET}-g++" \
+    -DREDIS_STORAGE_BACKEND=NO                \
+    -DENABLE_DOCUMENTATION=NO                 \
+    -DENABLE_TESTING=NO
+```
+```bash
+# Build.
+time { make -C build; }
+```
+```bash
+# Install.
+time { make -C build install; }
+```
+```bash
+# Configure ccache.
+cat > /clang1-tools/etc/ccache.conf << "EOF"
+max_size = 10G
+umask = 002
+compression = true
+compression_level = 1
+EOF
+```
+
+### `8` - Clang/LLVM <kbd>stage 1</kbd>
 > #### `12.x.x` or newer
 > - C language family frontend for LLVM;  
 > - C++ runtime stack unwinder from LLVM;  
@@ -303,6 +352,7 @@ cmake -B build \
     -DCMAKE_C_COMPILER="${HEI_TRIPLET}-gcc"     \
     -DCMAKE_CXX_COMPILER="${HEI_TRIPLET}-g++"   \
     -DBUILD_SHARED_LIBS=ON                      \
+    -DLLVM_CCACHE_BUILD=ON                      \
     -DLLVM_APPEND_VC_REV=OFF                    \
     -DLLVM_HOST_TRIPLE="$TGT_TRIPLET"           \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$TGT_TRIPLET" \
@@ -372,7 +422,7 @@ EOF
 popd
 ```
 
-### `7` - Cleaning Up
+### `9` - Cleaning Up
 > #### This section is recommended!
 
 > Remove the documentation and manpages.
