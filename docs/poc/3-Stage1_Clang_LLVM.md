@@ -58,6 +58,7 @@ source ~/.bashrc
 ```bash
 # Configure source.
 ./configure --prefix=/             \
+            --disable-gcc-wrapper  \
             --disable-static       \
             --with-malloc=mallocng \
             --enable-optimize=speed
@@ -151,7 +152,6 @@ cmake -B build \
     -DCMAKE_INSTALL_PREFIX="/clang2-tools" \
     -DCMAKE_C_FLAGS="-flto=thin $CFLAGS"   \
     -DBUILD_SHARED_LIBS=ON                 \
-    -DWITH_NATIVE_INSTRUCTIONS=YES         \
     -DZLIB_COMPAT=ON
 ```
 ```bash
@@ -294,6 +294,7 @@ cmake -B build \
     -DCMAKE_BUILD_TYPE=Release -Wno-dev         \
     -DCMAKE_INSTALL_PREFIX="/clang2-tools"      \
     -DBUILD_SHARED_LIBS=ON                      \
+    -DLLVM_CCACHE_BUILD=ON                      \
     -DLLVM_APPEND_VC_REV=OFF                    \
     -DLLVM_HOST_TRIPLE="$TGT_TRIPLET"           \
     -DLLVM_DEFAULT_TARGET_TRIPLE="$TGT_TRIPLET" \
