@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-export LC_ALL=C LANG=C
+export LC_ALL=C LANG=C; unalias -a
 
 G="\033[0;32m" M="\033[1;35m" R="\033[1;31m" NC="\033[0m"
 msg() { printf "${M}*${NC} ${G}${1}${NC} ${2}\n"; }
