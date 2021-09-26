@@ -151,10 +151,10 @@ time { make install-{gcc,target-libgcc}; }
 ./configure CROSS_COMPILE=${HEI_TRIPLET}- \
             --prefix=/                    \
             --target=${HEI_TRIPLET}       \
-            --disable-gcc-wrapper         \
-            --disable-static              \
             --with-malloc=mallocng        \
-            --enable-optimize=speed
+            --enable-optimize=speed       \
+            --disable-gcc-wrapper         \
+            --disable-static
 ```
 ```bash
 # Build.
@@ -280,7 +280,7 @@ time { make -C lib PREFIX=/clang1-tools install-{includes,shared}; }
 > #### `4.4.1` or newer
 > The Ccache package contains compiler cache. It speeds up recompilation by caching previous compilations and detecting when the same compilation is being done again.
 
-> **Required!** To speeds up Clang/LLVM builds.
+> **Required!** To speeds up Clang/LLVM builds across stage 1 and stage 2.
 ```bash
 # Configure source. Use optimization level 3.
 cmake -B build \
@@ -289,9 +289,9 @@ cmake -B build \
     -DCMAKE_INSTALL_PREFIX="/clang1-tools"    \
     -DCMAKE_C_COMPILER="${HEI_TRIPLET}-gcc"   \
     -DCMAKE_CXX_COMPILER="${HEI_TRIPLET}-g++" \
-    -DREDIS_STORAGE_BACKEND=NO                \
     -DENABLE_DOCUMENTATION=NO                 \
-    -DENABLE_TESTING=NO
+    -DENABLE_TESTING=NO                       \
+    -DREDIS_STORAGE_BACKEND=NO
 ```
 ```bash
 # Build.
@@ -345,7 +345,7 @@ popd
 ../extra/llvm/patches/appatch
 ```
 ```bash
-# Configure source. Use optimization level 3.
+# Configure entire source. Use optimization level 3.
 cmake -B build \
     -DCMAKE_BUILD_TYPE=Release -Wno-dev         \
     -DCMAKE_INSTALL_PREFIX="/clang1-tools"      \
@@ -445,4 +445,4 @@ fi && rm -v ./llvm-strip
 
 <h2></h2>
 
-~Continue to [Stage-1 Clang/LLVM Toolchain](./3-Stage1_Clang_LLVM.md).~ (under developments)
+Continue to [Stage-1 Clang/LLVM Toolchain](./3-Stage1_Clang_LLVM.md).
