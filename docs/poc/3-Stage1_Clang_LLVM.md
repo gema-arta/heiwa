@@ -513,7 +513,7 @@ time { make HOSTCC=${CC} PREFIX=/clang2-tools/bin install_flat && unset X TOYBOX
 > #### `5.1.0` or newer
 > The GNU Awk (gawk) package contains programs for manipulating text files.
 
-> **Required!** For current and later stage (chroot environment) that most build systems depends on GNU implementation style.
+> **Required!** For current and later stage (chroot environment) that most build systems depends on GNU-style permutation.
 ```bash
 # Ensure some unneeded files are not installed, use symlinks rather than hardlinks, and disable version links.
 sed -e '/^LN =/s/=.*/= $(LN_S)/'         \
@@ -543,7 +543,7 @@ time {
 > #### `3.8` or newer
 > The GNU Diffutils package contains programs that show the differences between files or directories.
 
-> **Required!** For current and later stage (chroot environment) that most build systems depends on GNU implementation style.
+> **Required!** For current and later stage (chroot environment) that most build systems depends on GNU-style permutation.
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"                   \
@@ -564,8 +564,8 @@ time { make install; }
 ### `13` - GNU Make
 > #### `4.3` or newer
 > The GNU Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
- 
-> **Required!** For current and later stage (chroot environment) that most build systems depends on GNU implementation style.
+
+> **Required!** For current and later stage (chroot environment) that most build systems depends on GNU-style permutation.
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"                   \
@@ -758,7 +758,7 @@ if cp -v $(command -v llvm-strip) ./; then
     find /clang2-tools/{libexec,bin}/ -type f -exec ./llvm-strip --strip-unneeded {} \;
 fi && rm -v ./llvm-strip
 ```
-> Now, exit from privileged user.
+> Now exit from privileged user.
 ```bash
 exit
 ```
