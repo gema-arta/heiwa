@@ -1,7 +1,7 @@
 ## `I` Preparation
 
 > #### Announcement
-> * Currently only focus on **x86_64** architecture, build with native CPU optimization and ThinLTO for the final toolchain. [Triplet at OSDev](https://wiki.osdev.org/Target_Triplet).
+> * Currently only built pure **x86_64** Arch/ABI with native CPU-EXTENSION and use ThinLTO started from Stage-1. [Triplet at OSDev](https://wiki.osdev.org/Target_Triplet).
 
 > #### Host System Requirements
 > ```sh
@@ -48,10 +48,11 @@ mount -vo noatime,gc_merge,compress_algorithm=lz4,compress_extension='*',compres
 ```bash
 if [[ -d "$HEIWA" ]]; then
     if mkdir -pv ${HEIWA}/clang{1,2}-tools; then
-        ln -sfv ${HEIWA}/clang1-tools /
-        ln -sfv ${HEIWA}/clang2-tools /
-        ln -sfv lib /clang1-tools/lib64
-    fi && mkdir -pv ${HEIWA}/sources/{ccache,extra,pkgs}
+        ln  -sfv ${HEIWA}/clang1-tools /
+        ln  -sfv ${HEIWA}/clang2-tools /
+        ln  -sfv lib /clang1-tools/lib64
+    fi
+    mkdir -pv ${HEIWA}/sources/{ccache,extra,pkgs}
 fi
 ```
 
@@ -68,7 +69,7 @@ passwd heiwa
 
 ```bash
 if [[ -d "${HEIWA}/sources" && -d "${HEIWA}/clang1-tools" && -d "${HEIWA}/clang2-tools" ]]; then
-    chmod -vR a+wt ${HEIWA}/sources
+    chmod -Rv  a+wt  ${HEIWA}/sources
     chown -hRv heiwa ${HEIWA}/sources
     chown -hRv heiwa {${HEIWA},}/clang{1,2}-tools
 fi
@@ -79,8 +80,9 @@ fi
 > > The below rules can slow down the system, especially GUI if run.
 ```bash
 if ! grep -qo 'heiwa.*priority' /etc/security/limits.conf; then
-    echo "heiwa            -       priority        -1" >> \
-    /etc/security/limits.conf
+cat >> /etc/security/limits.conf << "EOF"
+heiwa            -       priority        -1
+EOF
 fi
 ```
 > #### * End of as root!
@@ -147,12 +149,12 @@ export HST_TRIPLET GCC_MCPU TGT_LLVM TGT_ARCH TGT_TRIPLET HEI_TRIPLET
 CFLAGS="\${DEF_CXFLAGS}"
 CXXFLAGS="\${DEF_CXFLAGS}"
 LDFLAGS="-Wl,-O2 -Wl,--as-needed"
-MAKEFLAGS="-j\$(nproc) -l\$((\$(nproc)+2))"
+MAKEFLAGS="-j\$(nproc) -l\$((\$(nproc)+3))"
 export CFLAGS CXXFLAGS LDFLAGS MAKEFLAGS
 EOF
 source ~/.bash_profile
 ```
-> If you want multitasking responsiveness when using multiple jobs, set the load average to prevent system slowdown e.g core/threads + 2.
+> If you want multitasking responsiveness when using multiple jobs, set the load average to prevent system slowdown e.g core/threads + 3.
 
 > #### After Preparation
 > Copy "[syscore/*](./../../syscore/)" to "${HEIWA}/sources/extra/" now!
