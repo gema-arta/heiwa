@@ -57,11 +57,11 @@ source ~/.bashrc
 > **Required!** As mentioned in the description above.
 ```bash
 # Configure source.
-./configure --prefix=/             \
-            --disable-gcc-wrapper  \
-            --disable-static       \
-            --with-malloc=mallocng \
-            --enable-optimize=speed
+./configure --prefix=/              \
+            --with-malloc=mallocng  \
+            --enable-optimize=speed \
+            --disable-gcc-wrapper   \
+            --disable-static
 ```
 ```bash
 # Build.
@@ -247,8 +247,8 @@ cmake -B build -DCMAKE_BUILD_TYPE=Release -Wno-dev      \
                -DLLVM_PATH="$LLVM_SRC"                  \
                -DLIBCXXABI_ENABLE_ASSERTIONS=OFF        \
                -DLIBCXXABI_ENABLE_STATIC=OFF            \
-               -DLIBCXXABI_USE_LLVM_UNWINDER=ON         \
                -DLIBCXXABI_USE_COMPILER_RT=ON           \
+               -DLIBCXXABI_USE_LLVM_UNWINDER=ON         \
                -DLIBCXXABI_LIBCXX_INCLUDES="${LLVM_SRC}/projects/libcxx/include"
 ```
 ```bash
@@ -276,9 +276,9 @@ cmake -B build -DCMAKE_BUILD_TYPE=Release -Wno-dev                              
                -DLIBCXX_CXX_ABI=libcxxabi                                              \
                -DLIBCXX_CXX_ABI_INCLUDE_PATHS="/clang2-tools/include"                  \
                -DLIBCXX_CXX_ABI_LIBRARY_PATH="/clang2-tools/lib"                       \
-               -DLIBCXX_HAS_MUSL_LIBC=ON                                               \
                -DLIBCXX_USE_COMPILER_RT=ON                                             \
-               -DLIBCXX_HAS_ATOMIC_LIB=OFF
+               -DLIBCXX_HAS_ATOMIC_LIB=OFF                                             \
+               -DLIBCXX_HAS_MUSL_LIBC=ON
 ```
 ```bash
 # Build.
@@ -366,7 +366,7 @@ cat > /clang2-tools/bin/${HEI_TRIPLET}.cfg << EOF
 EOF
 ```
 ```bash
-# Setup new PATH since "/clang1-tools" won't be used anymore and use Stage-1 Clang/LLVM pc triplet.
+# Now set the compiler to pc triplet from Stage-1 Clang/LLVM to use current musl libc built and remove "/clang1-tools" from PATH.
 sed -e "/CXX=/s/${CXX}/${TGT_TRIPLET}-clang++/" \
     -e "/CC=/s/${CC}/${TGT_TRIPLET}-clang/"     \
     -e 's|:/clang1-tools/bin:|:|' -i ~/.bashrc
@@ -516,8 +516,8 @@ time { make HOSTCC=${CC} PREFIX=/clang2-tools/bin install_flat && unset X TOYBOX
 > **Required!** For current and later stage (chroot environment) that most build systems depends on GNU implementation style.
 ```bash
 # Ensure some unneeded files are not installed, use symlinks rather than hardlinks, and disable version links.
-sed -e '/^LN =/s|=.*|= $(LN_S)|'         \
-    -e '/install-exec-hook:/s|$|\nfoo:|' \
+sed -e '/^LN =/s/=.*/= $(LN_S)/'         \
+    -e '/install-exec-hook:/s/$/\nfoo:/' \
     -e 's|extras||' -si {,doc/}Makefile.in
 ```
 ```bash
@@ -633,16 +633,16 @@ time { make install; }
 > #### `5.1` (with patch level 8) or newer
 > The GNU Bash package contains the Bourne-Again SHell.
 
-> **Required!** As the default shell at later stage (chroot environment).
+> **Required!** As the default shell in the later stage (chroot environment).
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"                 \
 ./configure --prefix=/clang2-tools          \
             --build=$(support/config.guess) \
             --host=${TGT_TRIPLET}           \
-            --disable-profiling             \
             --without-bash-malloc           \
-            --enable-net-redirections
+            --enable-net-redirections       \
+            --disable-profiling
 ```
 ```bash
 # Build.
@@ -669,7 +669,7 @@ CFLAGS="-DNO_POSIX_2008_LOCALE -D_GNU_SOURCE $CFLAGS" \
 HOSTLDFLAGS="-pthread" HOSTCFLAGS="-D_GNU_SOURCE"     \
 LDFLAGS="-Wl,-z,stack-size=2097152 -pthread $LDFLAGS" \
 ./configure --prefix=/clang2-tools                    \
-            --build=${TGT_TRIPLET}
+            --build=$(cnf/config.guess)
 ```
 ```bash
 # Build. Fails with LTO since version 5.28.
@@ -692,12 +692,13 @@ sed -i 's|-flto|-flto=thin|' configure
 ```
 ```bash
 # Configure source using provided libraries (built-in).
-ax_cv_c_float_words_bigendian=no   \
-./configure --prefix=/clang2-tools \
-            --build=${TGT_TRIPLET} \
-            --host=${TGT_TRIPLET}  \
-            --without-ensurepip    \
-            --with-lto --enable-shared
+ax_cv_c_float_words_bigendian=no      \
+./configure --prefix=/clang2-tools    \
+            --build=$(./config.guess) \
+            --host=${TGT_TRIPLET}     \
+            --with-lto                \
+            --without-ensurepip       \
+            --enable-shared
 ```
 ```bash
 # Build. -> Ignore all issues at the end! We won't build them. <-
@@ -723,8 +724,8 @@ CFLAGS="-flto=thin $CFLAGS"                  \
 CXXFLAGS="-flto=thin $CXXFLAGS"              \
 ./bootstrap --prefix=/clang2-tools           \
             --mandir=/share/man              \
-            --parallel=$(nproc)              \
             --docdir=/share/doc/cmake-3.21.3 \
+            --parallel=$(nproc)              \
             -- -DCMAKE_BUILD_TYPE=Release    \
             -Wno-dev -DCMAKE_USE_OPENSSL=OFF
 ```
@@ -740,7 +741,7 @@ time { make install; }
 ### `20` - Cleaning Up, Changing Ownership, and Saving the Clang/LLVM Toolchain
 > #### This section is recommended!
 
-> Remove the documentation, manpages, and all unecessary files.
+> Remove the documentation, manpages, and all unnecessary files.
 ```bash
 rm -rf /clang2-tools/share/{bash-completion,doc,emacs,info,man,vim}
 ```
@@ -754,7 +755,7 @@ find /clang2-tools/lib/ -type f \( -name '*.a' -o -name '*.so*' \) -exec llvm-st
 ```
 ```bash
 if cp -v $(command -v llvm-strip) ./; then
-    find /clang2-tools/{{,usr/}{,s}bin,libexec}/ -type f -exec ./llvm-strip --strip-unneeded {} \;
+    find /clang2-tools/{libexec,bin}/ -type f -exec ./llvm-strip --strip-unneeded {} \;
 fi && rm -v ./llvm-strip
 ```
 > Now, exit from privileged user.
