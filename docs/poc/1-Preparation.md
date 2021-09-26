@@ -121,7 +121,7 @@ printf '%s\n' $HST_TRIPLET $GCC_MCPU $TGT_{LLVM,ARCH,TRIPLET} $HEI_TRIPLET $CUS_
 # |x86_64-heiwa-linux-musl
 # |-march=native
 ```
-> Now apply the above variables into bash startup profile. If you want multitasking responsiveness when using multiple jobs, set the load average to prevent slowdown system for example (core/threads) + 2.
+> Now apply the above variables into bash startup profile.
 ```bash
 cat > ~/.bash_profile << EOF
 exec env -i HOME="\$HOME" TERM="\$TERM" \
@@ -152,6 +152,7 @@ export CFLAGS CXXFLAGS LDFLAGS MAKEFLAGS
 EOF
 source ~/.bash_profile
 ```
+> If you want multitasking responsiveness when using multiple jobs, set the load average to prevent system slowdown e.g core/threads + 2.
 
 > #### After Preparation
 > Copy "[syscore/*](./../../syscore/)" to "${HEIWA}/sources/extra/" now!
