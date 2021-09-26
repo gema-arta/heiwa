@@ -241,8 +241,9 @@ time { make install; }
 ```
 ```bash
 # Adjust current GCC to produce binaries with "/clang1-tools/lib/ld-musl-${TGT_ARCH}.so.1" by modifying the specs.
-${HEI_TRIPLET}-gcc -dumpspecs > specs
-sed -i "s|/lib/ld-musl-${TGT_ARCH}.so.1|/clang1-tools/lib/ld-musl-${TGT_ARCH}.so.1|g" specs
+if ${HEI_TRIPLET}-gcc -dumpspecs > specs; then
+    sed -i "s|/lib/ld-musl-${TGT_ARCH}.so.1|/clang1-tools/lib/ld-musl-${TGT_ARCH}.so.1|g" specs
+fi
 ```
 ```bash
 # Install the specs file if the path is correct.
@@ -304,8 +305,8 @@ time { make -C build install; }
 ```bash
 # Configure ccache.
 cat > /clang1-tools/etc/ccache.conf << "EOF"
-max_size = 10G
 umask = 002
+compiler_check = %compiler% -v
 compression = true
 compression_level = 1
 EOF
