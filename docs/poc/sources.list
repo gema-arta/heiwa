@@ -1,7 +1,7 @@
 https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.14.tar.xz
 https://github.com/xanmod/linux/releases/download/5.14.8-xanmod1-cacule/patch-5.14.8-xanmod1-cacule.xz
 https://ftp.gnu.org/gnu/binutils/binutils-2.37.tar.xz
-https://dev.alpinelinux.org/~nenolod/gcc-10.3.1_git20210424.tar.xz
+https://dev.alpinelinux.org/~nenolod/gcc-10.3.1_git20210921.tar.xz
 https://ftp.gnu.org/gnu/gmp/gmp-6.2.1.tar.xz
 https://ftp.gnu.org/gnu/mpfr/mpfr-4.1.0.tar.xz
 https://ftp.gnu.org/gnu/mpc/mpc-1.2.1.tar.gz
