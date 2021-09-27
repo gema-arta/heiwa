@@ -32,6 +32,7 @@ The purpose of this stage is to build stage 1 Clang/LLVM toolchain with GCC libr
 > The Linux API Headers expose the kernel's API for use by musl libc.
 
 > **Required!** As mentioned in the description above.
+> > **Build time:** <20s
 ```bash
 # The recommended make target `headers_install` cannot be used, because it requires `rsync` which may not be available.
 # The headers are first placed in "./usr/", then copied to the needed location.
@@ -55,6 +56,7 @@ cp -rfv usr/include /clang1-tools/${HEI_TRIPLET}/.
 > The GNU Binutils package contains a linker, an assembler, and other tools for handling object files.
 
 > **Required!** The musl libc and GCC perform various tests on the linker and assembler to determine which of their own features to enable.
+> > **Build time:** ~3m
 ```bash
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build &&                            \
@@ -90,6 +92,7 @@ time { make install; }
 > The GCC package contains the GNU compiler collection, which includes the C and C++ compilers.
 
 > **Required!** This build of GCC is mainly done, so that the musl libc can be built next.
+> > **Build time:** <20m
 ```bash
 # GCC requires the GMP, MPFR, and MPC packages to either be present on the host or to be present in source form within the GCC source tree.
 tar xf  ../gmp-6.2.1.tar.xz && mv -fv gmp{-6.2.1,}
@@ -146,6 +149,7 @@ time { make install-{gcc,target-libgcc}; }
 > The musl package contains the main C library. This library provides the basic routines for allocating memory, searching directories, opening and closing files, reading and writing files, string handling, pattern matching, arithmetic, and so on.
 
 > **Required!** As mentioned in the description above.
+> > **Build time:** <2m
 ```bash
 # Configure source.
 ./configure CROSS_COMPILE=${HEI_TRIPLET}- \
@@ -194,6 +198,7 @@ ln -sv ../include /clang1-tools/usr/include
 > The GCC package contains the GNU compiler collection, which includes the C and C++ compilers.
 
 > **Required!** This second build of GCC will produce the final cross compiler which will use the previously built musl libc.
+> > **Build time:** <40m
 ```bash
 # GCC requires the GMP, MPFR, and MPC packages to either be present on the host or to be present in source form within the GCC source tree.
 tar xf  ../gmp-6.2.1.tar.xz && mv -fv gmp{-6.2.1,}
@@ -268,6 +273,7 @@ ${HEI_TRIPLET}-readelf -l a.out | grep --color=auto "Req.*ter"
 > The Zstd (Zstandard) package contains real-time compression algorithm, providing high compression ratios. It offers a very wide range of compression / speed trade-offs, while being backed by a very fast decoder.
 
 > **Required!** Only build dynamic libraries and headers for Ccache compression support.
+> > **Build time:** <2m
 ```bash
 # Build with verbose. Use optimization level 3.
 time { make -C lib CC=${HEI_TRIPLET}-gcc libzstd-release V=1; }
@@ -282,6 +288,7 @@ time { make -C lib PREFIX=/clang1-tools install-{includes,shared}; }
 > The Ccache package contains compiler cache. It speeds up recompilation by caching previous compilations and detecting when the same compilation is being done again.
 
 > **Required!** To speeds up Clang/LLVM builds across stage 1 and stage 2.
+> > **Build time:** ~3m
 ```bash
 # Configure source. Use optimization level 3.
 cmake -B build \
@@ -320,6 +327,7 @@ EOF
 > - New implementation of the C++ standard library, targeting C++11 from LLVM.
 
 > **Required!** Build Stage-0 Clang/LLVM toolchain with `libgcc_s.so*` and `libstdc++.so*` dependencies since built with GCC toolchain.
+> > **Build time:** ~4h-6h
 ```bash
 # Exit from LLVM source directory if already entered after decompressing.
 popd
