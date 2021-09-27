@@ -267,7 +267,7 @@ ${HEI_TRIPLET}-readelf -l a.out | grep --color=auto "Req.*ter"
 > #### `1.5.0` or newer
 > The Zstd (Zstandard) package contains real-time compression algorithm, providing high compression ratios. It offers a very wide range of compression / speed trade-offs, while being backed by a very fast decoder.
 
-> **Required!** Only build dynamic libraries and the headers for Ccache compression support.
+> **Required!** Only build dynamic libraries and headers for Ccache compression support.
 ```bash
 # Build with verbose. Use optimization level 3.
 time { make -C lib CC=${HEI_TRIPLET}-gcc libzstd-release V=1; }
@@ -306,7 +306,7 @@ time { make -C build install; }
 # Configure ccache.
 cat > /clang1-tools/etc/ccache.conf << "EOF"
 umask = 002
-compiler_check = %compiler% -v
+compiler_check = none
 compression = true
 compression_level = 1
 EOF
