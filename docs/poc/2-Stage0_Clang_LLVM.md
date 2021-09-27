@@ -86,7 +86,7 @@ time { make install; }
 ```
 
 ### `3` - GCC <kbd>static</kbd>
-> #### `10.3.1_git20210424` (from Alpine Linux)
+> #### `10.3.1_git20210921` (from Alpine Linux)
 > The GCC package contains the GNU compiler collection, which includes the C and C++ compilers.
 
 > **Required!** This build of GCC is mainly done, so that the musl libc can be built next.
@@ -190,7 +190,7 @@ ln -sv ../include /clang1-tools/usr/include
 ```
 
 ### `5` - GCC <kbd>final</kbd>
-> #### `10.3.1_git20210424` (from Alpine Linux)
+> #### `10.3.1_git20210921` (from Alpine Linux)
 > The GCC package contains the GNU compiler collection, which includes the C and C++ compilers.
 
 > **Required!** This second build of GCC will produce the final cross compiler which will use the previously built musl libc.
