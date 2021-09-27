@@ -436,8 +436,8 @@ time { make CC=${CC} CFLAGS="-flto=thin $(tr Os O3 <<< "$CFLAGS")"; }
 # Install and create symlinks as `gzip` tools.
 time {
     install -vm755 -t /clang2-tools/bin/ pigz
-    ln -sfv pigz /clang2-tools/bin/unpigz
-    ln -sfv pigz /clang2-tools/bin/gzip
+    ln -sfv pigz   /clang2-tools/bin/unpigz
+    ln -sfv pigz   /clang2-tools/bin/gzip
     ln -sfv unpigz /clang2-tools/bin/gunzip
 }
 ```
@@ -482,7 +482,7 @@ EOF
 # Pipe to ` | wc -l` at the right of `done` to check the total of commands.
 for X in ${TOYBOX}; do
     grep -v '#' .config | grep --color=auto -i "CONFIG_${X}=" \
-    || 2>&1 echo "> ${X} not CONFIGURED!"
+    || >&2 echo "> ${X} not CONFIGURED!"
 done
 ```
 ```bash
@@ -654,7 +654,7 @@ time { make install; }
 ```
 
 ### `17` - Perl (+ cross)
-> #### `5.34.0` (and `1.3.6` for cross)
+> #### `5.34.0` (+ `1.3.6` for cross)
 > The Perl package contains the Practical Extraction and Report Language.
 
 > **Required!** To build required packages in the later stage (chroot environment). 
@@ -720,13 +720,12 @@ sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
 ```
 ```bash
 # Configure source using provided libraries (built-in). Use optimization level 3.
-CFLAGS="-flto=thin $CFLAGS"                  \
-CXXFLAGS="-flto=thin $CXXFLAGS"              \
-./bootstrap --prefix=/clang2-tools           \
-            --mandir=/share/man              \
-            --docdir=/share/doc/cmake-3.21.3 \
-            --parallel=$(nproc)              \
-            -- -DCMAKE_BUILD_TYPE=Release    \
+CFLAGS="-flto=thin $CFLAGS" CXXFLAGS="$CFLAGS" \
+./bootstrap --prefix=/clang2-tools             \
+            --mandir=/share/man                \
+            --docdir=/share/doc/cmake-3.21.3   \
+            --parallel=$(nproc)                \
+            -- -DCMAKE_BUILD_TYPE=Release      \
             -Wno-dev -DCMAKE_USE_OPENSSL=OFF
 ```
 ```bash
@@ -738,7 +737,7 @@ time { make; }
 time { make install; }
 ```
 
-### `20` - Cleaning Up, Changing Ownership, and Saving the Clang/LLVM Toolchain
+### `20` - Cleaning Up, Stripping Unneeded Symbols, and Saving Clang/LLVM Toolchain
 > #### This section is recommended!
 
 > Remove the documentation, manpages, and all unnecessary files.
