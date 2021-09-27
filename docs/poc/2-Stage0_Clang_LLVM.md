@@ -346,56 +346,58 @@ popd
 ../extra/llvm/patches/appatch
 ```
 ```bash
-# Configure entire source. Use optimization level 3.
+# Configure the entire source. Use optimization level 3, and optimize GNU `ld` linking memory usage.
 cmake -B build \
-    -DCMAKE_BUILD_TYPE=Release -Wno-dev         \
-    -DCMAKE_INSTALL_PREFIX="/clang1-tools"      \
-    -DCMAKE_C_COMPILER="${HEI_TRIPLET}-gcc"     \
-    -DCMAKE_CXX_COMPILER="${HEI_TRIPLET}-g++"   \
-    -DBUILD_SHARED_LIBS=ON                      \
-    -DLLVM_CCACHE_BUILD=ON                      \
-    -DLLVM_APPEND_VC_REV=OFF                    \
-    -DLLVM_HOST_TRIPLE="$TGT_TRIPLET"           \
-    -DLLVM_DEFAULT_TARGET_TRIPLE="$TGT_TRIPLET" \
-    -DLLVM_ENABLE_BINDINGS=OFF                  \
-    -DLLVM_ENABLE_IDE=OFF                       \
-    -DLLVM_ENABLE_LIBCXX=ON                     \
-    -DLLVM_ENABLE_BACKTRACES=OFF                \
-    -DLLVM_ENABLE_UNWIND_TABLES=OFF             \
-    -DLLVM_ENABLE_WARNINGS=OFF                  \
-    -DLLVM_ENABLE_LIBEDIT=OFF                   \
-    -DLLVM_ENABLE_TERMINFO=OFF                  \
-    -DLLVM_ENABLE_LIBXML2=OFF                   \
-    -DLLVM_ENABLE_OCAMLDOC=OFF                  \
-    -DLLVM_ENABLE_ZLIB=OFF                      \
-    -DLLVM_ENABLE_Z3_SOLVER=OFF                 \
-    -DLLVM_INCLUDE_BENCHMARKS=OFF               \
-    -DLLVM_INCLUDE_EXAMPLES=OFF                 \
-    -DLLVM_INCLUDE_TESTS=OFF                    \
-    -DLLVM_INCLUDE_GO_TESTS=OFF                 \
-    -DLLVM_INCLUDE_DOCS=OFF                     \
-    -DLLVM_TARGET_ARCH="$TGT_LLVM"              \
-    -DLLVM_TARGETS_TO_BUILD="$TGT_LLVM"         \
-    -DLIBUNWIND_ENABLE_ASSERTIONS=OFF           \
-    -DLIBUNWIND_ENABLE_STATIC=OFF               \
-    -DLIBCXXABI_ENABLE_ASSERTIONS=OFF           \
-    -DLIBCXXABI_ENABLE_STATIC=OFF               \
-    -DLIBCXX_ENABLE_STATIC=OFF                  \
-    -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=OFF    \
-    -DLIBCXX_HAS_MUSL_LIBC=ON                   \
-    -DLIBCXX_INCLUDE_BENCHMARKS=OFF             \
-    -DCOMPILER_RT_BUILD_LIBFUZZER=OFF           \
-    -DCOMPILER_RT_BUILD_MEMPROF=OFF             \
-    -DCOMPILER_RT_BUILD_PROFILE=OFF             \
-    -DCOMPILER_RT_BUILD_SANITIZERS=OFF          \
-    -DCOMPILER_RT_BUILD_XRAY=OFF                \
-    -DCLANG_VENDOR="Heiwa/Linux (feat. GNU)"    \
-    -DCLANG_ENABLE_ARCMT=OFF                    \
-    -DCLANG_ENABLE_STATIC_ANALYZER=OFF          \
-    -DCLANG_DEFAULT_CXX_STDLIB=libc++           \
-    -DCLANG_DEFAULT_RTLIB=compiler-rt           \
-    -DCLANG_DEFAULT_LINKER=lld                  \
-    -DCLANG_DEFAULT_UNWINDLIB=libunwind         \
+    -DCMAKE_BUILD_TYPE=Release -Wno-dev                         \
+    -DCMAKE_INSTALL_PREFIX="/clang1-tools"                      \
+    -DCMAKE_C_COMPILER="${HEI_TRIPLET}-gcc"                     \
+    -DCMAKE_CXX_COMPILER="${HEI_TRIPLET}-g++"                   \
+    -DCMAKE_EXE_LINKER_FLAGS="$LDFLAGS -Wl,--no-keep-memory"    \
+    -DCMAKE_SHARED_LINKER_FLAGS="$LDFLAGS -Wl,--no-keep-memory" \
+    -DBUILD_SHARED_LIBS=ON                                      \
+    -DLLVM_CCACHE_BUILD=ON                                      \
+    -DLLVM_APPEND_VC_REV=OFF                                    \
+    -DLLVM_HOST_TRIPLE="$TGT_TRIPLET"                           \
+    -DLLVM_DEFAULT_TARGET_TRIPLE="$TGT_TRIPLET"                 \
+    -DLLVM_ENABLE_BINDINGS=OFF                                  \
+    -DLLVM_ENABLE_IDE=OFF                                       \
+    -DLLVM_ENABLE_LIBCXX=ON                                     \
+    -DLLVM_ENABLE_BACKTRACES=OFF                                \
+    -DLLVM_ENABLE_UNWIND_TABLES=OFF                             \
+    -DLLVM_ENABLE_WARNINGS=OFF                                  \
+    -DLLVM_ENABLE_LIBEDIT=OFF                                   \
+    -DLLVM_ENABLE_TERMINFO=OFF                                  \
+    -DLLVM_ENABLE_LIBXML2=OFF                                   \
+    -DLLVM_ENABLE_OCAMLDOC=OFF                                  \
+    -DLLVM_ENABLE_ZLIB=OFF                                      \
+    -DLLVM_ENABLE_Z3_SOLVER=OFF                                 \
+    -DLLVM_INCLUDE_BENCHMARKS=OFF                               \
+    -DLLVM_INCLUDE_EXAMPLES=OFF                                 \
+    -DLLVM_INCLUDE_TESTS=OFF                                    \
+    -DLLVM_INCLUDE_GO_TESTS=OFF                                 \
+    -DLLVM_INCLUDE_DOCS=OFF                                     \
+    -DLLVM_TARGET_ARCH="$TGT_LLVM"                              \
+    -DLLVM_TARGETS_TO_BUILD="$TGT_LLVM"                         \
+    -DLIBUNWIND_ENABLE_ASSERTIONS=OFF                           \
+    -DLIBUNWIND_ENABLE_STATIC=OFF                               \
+    -DLIBCXXABI_ENABLE_ASSERTIONS=OFF                           \
+    -DLIBCXXABI_ENABLE_STATIC=OFF                               \
+    -DLIBCXX_ENABLE_STATIC=OFF                                  \
+    -DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=OFF                    \
+    -DLIBCXX_HAS_MUSL_LIBC=ON                                   \
+    -DLIBCXX_INCLUDE_BENCHMARKS=OFF                             \
+    -DCOMPILER_RT_BUILD_LIBFUZZER=OFF                           \
+    -DCOMPILER_RT_BUILD_MEMPROF=OFF                             \
+    -DCOMPILER_RT_BUILD_PROFILE=OFF                             \
+    -DCOMPILER_RT_BUILD_SANITIZERS=OFF                          \
+    -DCOMPILER_RT_BUILD_XRAY=OFF                                \
+    -DCLANG_VENDOR="Heiwa/Linux (feat. GNU)"                    \
+    -DCLANG_ENABLE_ARCMT=OFF                                    \
+    -DCLANG_ENABLE_STATIC_ANALYZER=OFF                          \
+    -DCLANG_DEFAULT_CXX_STDLIB=libc++                           \
+    -DCLANG_DEFAULT_RTLIB=compiler-rt                           \
+    -DCLANG_DEFAULT_LINKER=lld                                  \
+    -DCLANG_DEFAULT_UNWINDLIB=libunwind                         \
     -DDEFAULT_SYSROOT="/clang1-tools"
 ```
 ```bash
@@ -423,7 +425,7 @@ EOF
 popd
 ```
 
-### `9` - Cleaning Up
+### `9` - Cleaning Up and Stripping Unneeded Symbols
 > #### This section is recommended!
 
 > Remove the documentation and manpages.
