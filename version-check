@@ -4,7 +4,7 @@ export LC_ALL=C LANG=C; unalias -a
 G="\033[0;32m" M="\033[1;35m" R="\033[1;31m" NC="\033[0m"
 msg() { printf "${M}*${NC} ${G}${1}${NC} ${2}\n"; }
 sym() { printf "${R}~${NC} ${1} ${M}->${NC} ${2}\n"; }
-err() { 2>&1 printf "${R}error:${NC} ${@}\n"; exit 1; }
+err() { >&2 printf "${R}error:${NC} ${@}\n"; exit 1; }
 
 cat << "EOF"
 
@@ -152,7 +152,7 @@ fi
 if [ -x "$(command -v ldd)" ]; then
     msg "ldd" "$(ldd --version | sed 1q | cut -d' ' -f2-)"
 else
-    err "What's your libc implementation? nothing ldd found in this system!"
+    err "What's your libc implementation? ldd not found in this system!"
 fi
 
 # gzip.
@@ -186,9 +186,9 @@ else
     err "Perl not installed!"
 fi
 
-# Python.
-if [ -x "$(command -v python)" ]; then
-    msg "Python" "$(python --version | cut -d' ' -f 2-)"
+# Python3.
+if [ -x "$(command -v python3)" ]; then
+    msg "Python" "$(python3 --version | cut -d' ' -f 2-)"
 else
     err "Python not installed!"
 fi
@@ -212,11 +212,11 @@ fi
 
 # Compiler sanity check.
 msg "gcc" "sanity check:\n"
-if echo 'int main(){}' | gcc -x c++ - -march=native -O2 -ftree-vectorize -pipe -g0 && [ -x a.out ]; then
-    readelf -l a.out | grep --color=auto "Req.*ter"
+if echo 'int main(){}' | gcc -x c++ - -march=native -O2 -ftree-vectorize -pipe -w -g0 && [ -x a.out ]; then
+    readelf -l a.out   | grep --color=auto  "Req.*ter"
     printf "\n${G}[${NC} %s ${G}]${NC}\n\n" "OK"
-    rm -f dummy.c a.out
+    rm -f      a.out
 else
-    printf "${R}[${NC} %s ${R}]${NC}\n\n" "FAILED"
-    rm -f dummy.c a.out && exit 1
+    printf "${R}[${NC} %s ${R}]${NC}\n\n"   "FAILED"
+    rm -f      a.out    && exit 1
 fi && unset LC_ALL LANG && exit $?
