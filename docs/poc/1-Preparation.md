@@ -108,7 +108,7 @@ case $(uname -m) in
     ;;
 esac
 ```
-> Let's check if the above variables are all correct.
+> Let's check if the above environment variables are all correct.
 ```bash
 printf '%s\n' $HST_TRIPLET $GCC_MCPU $TGT_{LLVM,ARCH,TRIPLET} $HEI_TRIPLET $CUS_CXFLAGS
 ```
@@ -123,7 +123,7 @@ printf '%s\n' $HST_TRIPLET $GCC_MCPU $TGT_{LLVM,ARCH,TRIPLET} $HEI_TRIPLET $CUS_
 # |x86_64-heiwa-linux-musl
 # |-march=native
 ```
-> Now apply the above variables into bash startup profile.
+> Now apply the above environment variables into bash startup profile.
 ```bash
 cat > ~/.bash_profile << EOF
 exec env -i HOME="\$HOME" TERM="\$TERM" \
