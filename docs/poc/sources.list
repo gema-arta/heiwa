@@ -8,7 +8,6 @@ https://ftp.gnu.org/gnu/mpc/mpc-1.2.1.tar.gz
 https://musl.libc.org/releases/musl-1.2.2.tar.gz
 https://github.com/facebook/zstd/releases/download/v1.5.0/zstd-1.5.0.tar.gz
 https://github.com/ccache/ccache/releases/download/v4.4.1/ccache-4.4.1.tar.xz
-https://ftp.barfooze.de/pub/sabotage/tarballs/netbsd-curses-0.3.2.tar.xz
 https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.1/llvm-12.0.1.src.tar.xz
 https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.1/clang-12.0.1.src.tar.xz
 https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.1/compiler-rt-12.0.1.src.tar.xz
@@ -16,6 +15,7 @@ https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.1/libcxx-12.
 https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.1/libcxxabi-12.0.1.src.tar.xz
 https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.1/libunwind-12.0.1.src.tar.xz
 https://github.com/llvm/llvm-project/releases/download/llvmorg-12.0.1/lld-12.0.1.src.tar.xz
+https://ftp.barfooze.de/pub/sabotage/tarballs/netbsd-curses-0.3.2.tar.xz
 https://github.com/zlib-ng/zlib-ng/archive/refs/tags/2.0.5.tar.gz
 https://tukaani.org/xz/xz-5.2.5.tar.xz
 https://zlib.net/pigz/pigz-2.6.tar.gz
