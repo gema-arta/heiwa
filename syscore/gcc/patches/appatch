@@ -41,7 +41,8 @@ for P in \
     0038-gcc-go-Disable-printing-of-unaccessible-ppc64-struct.patch \
     0039-CRuntime_Musl-Support-v1.2.0-for-32-bits.patch \
     0040-configure-Add-enable-autolink-libatomic-use-in-LINK_.patch \
-    0041-Use-generic-errstr.go-implementation-on-musl.patch
+    0041-Use-generic-errstr.go-implementation-on-musl.patch \
+    0042-configure-fix-detection-of-atomic-builtins-in-libato.patch
 do
     patch -Np1 -i ../../extra/gcc/patches/${P}
 done
