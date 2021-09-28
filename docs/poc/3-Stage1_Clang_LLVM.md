@@ -797,9 +797,14 @@ fi
 
 > At this point the essential programs and libraries have been created and your current toolchain is in a good state. Your toolchain can now be backed up for later reuse. In case of fatal failures in the subsequent chapters, it often turns out that removing everything and starting over (more carefully) is the best option to recover. Unfortunately, all the temporary files will be removed, too. To avoid spending extra time to redo something which has been built successfully, prepare a backup. In fact, "clang1-tools" is not used anymore, so it's safe to delete it without backing up.
 ```bash
-if [[ -d "${HEIWA}/clang1-tools" && -d "${HEIWA}/clang2-tools" ]]; then
-    pushd "$HEIWA" && rm -rf ./clang1-tools && XZ_OPT="-9e -T2" \
-        tar -vcJpf clang2-tools.tar.xz clang2-tools          && \
+if [[ -d "${HEIWA}/clang1-tools" ]]; then
+    pushd "$HEIWA" && rm -rf ./clang1-tools && \
+        [[ -h /clang1-tools ]] && unlink /clang1-tools
+    popd
+fi
+if [[ -d "${HEIWA}/clang2-tools" ]]; then
+    pushd "$HEIWA" && XZ_OPT="-9e -T2" \
+        tar -vcJpf clang2-tools.tar.xz clang2-tools
     popd
 fi
 ```
