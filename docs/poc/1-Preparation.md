@@ -149,8 +149,9 @@ export HST_TRIPLET GCC_MCPU TGT_LLVM TGT_ARCH TGT_TRIPLET HEI_TRIPLET
 CFLAGS="\${DEF_CXFLAGS}"
 CXXFLAGS="\${DEF_CXFLAGS}"
 LDFLAGS="-Wl,-O2 -Wl,--as-needed"
-MAKEFLAGS="-j\$(nproc) -l\$((\$(nproc)+3))"
-export CFLAGS CXXFLAGS LDFLAGS MAKEFLAGS
+JOBS="\$(nproc)"
+MAKEFLAGS="-j\${JOBS} -l\$((\${JOBS}+3))"
+export CFLAGS CXXFLAGS LDFLAGS JOBS MAKEFLAGS
 EOF
 source ~/.bash_profile
 ```
