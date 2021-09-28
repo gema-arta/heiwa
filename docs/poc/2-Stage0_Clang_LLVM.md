@@ -287,7 +287,7 @@ time { make -C lib PREFIX=/clang1-tools install-{includes,shared}; }
 > #### `4.4.1` or newer
 > The Ccache package contains compiler cache. It speeds up recompilation by caching previous compilations and detecting when the same compilation is being done again.
 
-> **Required!** To speeds up Clang/LLVM builds across stage 1 and stage 2.
+> **Required!** To speeds up Clang/LLVM builds across stage 1 and stage 2, especially when errors occur such as power loss.
 > > **Build time:** ~3m
 ```bash
 # Configure source. Use optimization level 3.
