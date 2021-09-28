@@ -55,6 +55,7 @@ source ~/.bashrc
 > The musl package contains the main C library. This library provides the basic routines for allocating memory, searching directories, opening and closing files, reading and writing files, string handling, pattern matching, arithmetic, and so on.
 
 > **Required!** As mentioned in the description above.
+> > **Build time:** <2m
 ```bash
 # Configure source.
 ./configure --prefix=/              \
@@ -120,6 +121,7 @@ grep --color=auto "ld.lld:.*crt[1in].o" dummy.log
 > The Linux API Headers expose the kernel's API for use by musl libc.
 
 > **Required!** As mentioned in the description above.
+> > **Build time:** <20s
 ```bash
 # The recommended make target `headers_install` cannot be used, because it requires `rsync` which may not be available.
 # The headers are first placed in "./usr/", then copied to the needed location.
@@ -145,6 +147,7 @@ cp -rfv usr/include /clang2-tools/.
 > The Zlib-ng package contains zlib data compression library for the next generation systems.
 
 > **Required!** By Pigz at current stage and optionally enabled for Stage-1 Clang/LLVM builds.
+> > **Build time:** <25s
 ```bash
 # Configure source. Use optimization level 3.
 cmake -B build \
@@ -168,6 +171,7 @@ time { make -C build install; }
 > The NetBSD curses package contains libraries for terminal-independent handling of character screens.
 
 > **Required!** For the most programs that depends on `-ltinfo` or `-lterminfo` dynamic linker flags, including Stage-1 Clang/LLVM builds.
+> > **Build time:** ~30s
 ```bash
 # Build.
 time { make CFLAGS="-flto=thin $CFLAGS" all-dynamic; }
@@ -189,6 +193,7 @@ time {
 > - New implementation of the C++ standard library, targeting C++11 from LLVM.
 
 > **Required!** Build Stage-1 Clang/LLVM self-hosted toolchain.
+> > **Build time:** ~4h-7h
 ```bash
 # Exit from LLVM source directory if already entered after decompressing.
 popd
