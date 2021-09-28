@@ -367,7 +367,7 @@ ln -sfv clang                /clang2-tools/bin/${HEI_TRIPLET}-clang
 ln -sfv ${HEI_TRIPLET}-clang /clang2-tools/bin/cc
 ln -sfv clang++              /clang2-tools/bin/${HEI_TRIPLET}-clang++
 cat > /clang2-tools/bin/${HEI_TRIPLET}.cfg << EOF
---sysroot=/usr -Wl,-dynamic-linker /lib/ld-musl-${TGT_ARCH}so.1
+--sysroot=/usr -Wl,-dynamic-linker /lib/ld-musl-${TGT_ARCH}.so.1
 EOF
 ```
 ```bash
@@ -762,7 +762,7 @@ time { make install; }
 
 > Remove the documentation, manpages, and all unnecessary files.
 ```bash
-rm -rf /clang2-tools/share/{bash-completion,doc,emacs,info,man,vim}
+rm -rf /clang2-tools/share/{bash-completion,doc,emacs,info,locale,man,vim}
 ```
 > The libtool ".la" files are only useful when linking with static libraries. They are unneeded and potentially harmful when using dynamic shared libraries, specially when using non-autotools build systems. So, remove those files.
 ```bash
@@ -774,7 +774,7 @@ find /clang2-tools/lib/ -type f \( -name '*.a' -o -name '*.so*' \) -exec llvm-st
 ```
 ```bash
 if cp -v $(command -v llvm-strip) ./; then
-    find /clang2-tools/{libexec,bin}/ -type f -exec ./llvm-strip --strip-unneeded {} \;
+    find /clang2-tools/{lib{/bash,exec},bin}/ -type f -exec ./llvm-strip --strip-unneeded {} \;
 fi && rm -v ./llvm-strip
 ```
 > Now exit from privileged user.
@@ -795,23 +795,21 @@ fi
 ```
 > #### Backup
 
-> At this point the essential programs and libraries have been created and your current toolchain is in a good state. Your toolchain can now be backed up for later reuse. In case of fatal failures in the subsequent chapters, it often turns out that removing everything and starting over (more carefully) is the best option to recover. Unfortunately, all the temporary files will be removed, too. To avoid spending extra time to redo something which has been built successfully, prepare a backup.
+> At this point the essential programs and libraries have been created and your current toolchain is in a good state. Your toolchain can now be backed up for later reuse. In case of fatal failures in the subsequent chapters, it often turns out that removing everything and starting over (more carefully) is the best option to recover. Unfortunately, all the temporary files will be removed, too. To avoid spending extra time to redo something which has been built successfully, prepare a backup. In fact, "clang1-tools" is not used anymore, so it's safe to delete it without backing up.
 ```bash
 if [[ -d "${HEIWA}/clang1-tools" && -d "${HEIWA}/clang2-tools" ]]; then
-    pushd "$HEIWA" && export XZ_OPT="-9e -T2"      && \
-        tar -cJpf clang1-tools.tar.xz clang1-tools && \
-        tar -cJpf clang2-tools.tar.xz clang2-tools && \
-    popd && unset XZ_OPT
+    pushd "$HEIWA" && rm -rf ./clang1-tools && XZ_OPT="-9e -T2" \
+        tar -vcJpf clang2-tools.tar.xz clang2-tools          && \
+    popd
 fi
 ```
 > #### Restore
 
 > In case some mistakes have been made and you need to start over, you can use this backup to restore the system and save some recovery time. Since the sources are located under "$HEIWA", they are included in the backup archive as well, so they do not need to be downloaded again.
 ```bash
-if [[ -d "${HEIWA}/clang1-tools" && -d "${HEIWA}/clang2-tools" ]]; then
-    pushd "$HEIWA" && rm -rf clang{0,1}-tools        && \
-        tar -xpf clang1-tools.tar.xz --numeric-owner && \
-        tar -xpf clang2-tools.tar.xz --numeric-owner && \
+if [[ -d "${HEIWA}/clang2-tools" ]]; then
+    pushd "$HEIWA" && rm -rf ./clang2-tools           && \
+        tar -vxpf clang2-tools.tar.xz --numeric-owner && \
     popd
 fi
 ```
