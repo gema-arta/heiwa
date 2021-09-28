@@ -56,8 +56,8 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 > |:---:|----------------------------------------------------------------------------------------|:------------------:|----------------------------|
 > |  ✓  | 1. [Preparation](./docs/poc/1-Preparation.md)                                          | Finished (unfixed) | -                          |
 > |  ✓  | 2. [Stage-0 Clang/LLVM (feat. GNU) Cross-Toolchain](./docs/poc/2-Stage0_Clang_LLVM.md) | Finished (unfixed) | Build time and build size. |
-> |  ?  | 3. [Stage-1 Clang/LLVM Toolchain](./docs/poc/3-Stage1_Clang_LLVM.md)                   | Reworked           | Build time and build size. |
-> |     | 4. [Stage-2 Final System](./docs/poc/4-Stage2_Final_System.md) (core)                  | Pending            | Faster performance.        |
+> |  ✓  | 3. [Stage-1 Clang/LLVM Toolchain](./docs/poc/3-Stage1_Clang_LLVM.md)                   | Finished (unfixed) | Build time and build size. |
+> |  ?  | 4. [Stage-2 Final System](./docs/poc/4-Stage2_Final_System.md)                         | Under devel        | Faster performance.        |
 > |     | 5. [System Configuration](./docs/poc/5-System_Configuration.md)                        | Pending            | -                          |
 
 > Generally there's no **Stage-0** for the toolchain. I lowered the **build stages** value because to match the final toolchain which actually in the **Stage-2** "Final System", there are 3 stages where "stage 1 Clang/LLVM" in the **Stage-0** uses GCC libraries after bootstrapping musl libc and "stage 2 Clang/LLVM" in the **Stage-1** is no more from minimal as **Stage-0** but become native self-hosted. Then, **Stage-1** is used to build **Stage-2** "Final System".
