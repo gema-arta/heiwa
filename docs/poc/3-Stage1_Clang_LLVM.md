@@ -409,6 +409,7 @@ popd
 > The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
 
 > **Required!** As the default ".xz" and ".lzma" files de/compressor at current and later stage (chroot environment).
+> > **Build time:** ~30s
 ```bash
 # Configure source. Use optimization level 3.
 CFLAGS="-flto=thin $(tr Os O3 <<< "$CFLAGS")" \
@@ -433,6 +434,7 @@ time { make install; }
 > The Pigz package contains parallel implementation of gzip, is a fully functional replacement for GNU zip that exploits multiple processors and multiple cores to the hilt when compressing data.
 
 > **Required!** As the default ".gz" files de/compressor at current and later stage (chroot environment).
+> > **Build time:** ~10s
 ```bash
 # Build. Use optimization level 3.
 time { make CC=${CC} CFLAGS="-flto=thin $(tr Os O3 <<< "$CFLAGS")"; }
@@ -452,6 +454,7 @@ time {
 > The Gettext-tiny package contains utilities for internationalization and localization. These allow programs to be compiled with NLS (Native Language Support), enabling them to output messages in the user's native language. A lightweight replacements for tools typically used from the GNU gettext suite, which is incredibly bloated and takes a lot of time to build (in the order of an hour on slow devices).
 
 > **Required!** To allow programs compiled with NLS (Native Language Support) in the later stage (chroot environment).
+> > **Build time:** ~2s
 ```bash
 # Build.
 time { make LIBINTL=MUSL CFLAGS="-flto=thin $CFLAGS"; }
@@ -466,6 +469,7 @@ time { install -vm755 -t /clang2-tools/bin/ autopoint msg{fmt,merge} xgettext; }
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
 > **Required!** For current and later stage (chroot environment).
+> > **Build time:** ~35s
 ```bash
 # Copy the Toybox .config file. Ensure `libz` is enabled in the config.
 cp -v ../../extra/toybox/files/.config.toolchain.nolibcrypto .config
@@ -519,6 +523,7 @@ time { make HOSTCC=${CC} PREFIX=/clang2-tools/bin install_flat && unset X TOYBOX
 > The GNU Awk (gawk) package contains programs for manipulating text files.
 
 > **Required!** For current and later stage (chroot environment) that most build systems depends on GNU-style permutation.
+> > **Build time:** ~35s
 ```bash
 # Ensure some unneeded files are not installed, use symlinks rather than hardlinks, and disable version links.
 sed -e '/^LN =/s/=.*/= $(LN_S)/'         \
@@ -549,6 +554,7 @@ time {
 > The GNU Diffutils package contains programs that show the differences between files or directories.
 
 > **Required!** For current and later stage (chroot environment) that most build systems depends on GNU-style permutation.
+> > **Build time:** <30s
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"                   \
@@ -571,6 +577,7 @@ time { make install; }
 > The GNU Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
 
 > **Required!** For current and later stage (chroot environment) that most build systems depends on GNU-style permutation.
+> > **Build time:** ~15s
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"                   \
@@ -593,6 +600,7 @@ time { make install; }
 > The GNU Patch package contains a program for modifying or creating files by applying a patch file typically created by the diff program.
 
 > **Required!** For current and later stage (chroot environment). The GNU's `patch` can handle offset lines, which is powerful feature.
+> > **Build time:** ~15s
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"                   \
@@ -614,6 +622,7 @@ time { make install; }
 > The Texinfo package contains programs for reading, writing, and converting info pages.
 
 > **Required!** For most packages in the later stage (chroot environment). Nothing is GNU-free.
+> > **Build time:** <1m
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"                   \
@@ -639,6 +648,7 @@ time { make install; }
 > The GNU Bash package contains the Bourne-Again SHell.
 
 > **Required!** As the default shell in the later stage (chroot environment).
+> > **Build time:** ~1m
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"                 \
@@ -663,6 +673,7 @@ time { make install; }
 > The Perl package contains the Practical Extraction and Report Language.
 
 > **Required!** To build required packages in the later stage (chroot environment). 
+> > **Build time:** ~5m
 ```bash
 # Decompress, then copy `perl-cross` over the source.
 tar xzf ../perl-cross-1.3.6.tar.gz && \
@@ -690,9 +701,12 @@ time { make install; }
 > The Python3 package contains the Python development environment. It is useful for object-oriented programming, writing scripts, prototyping large programs, or developing entire applications.
 
 > **Required!** To build Clang/LLVM and other required packages in the later stage (chroot environment).
+> > **Build time:** <5m
 ```bash
-# Prevent main script that uses hard-coded paths to host "/usr/include" and "/usr/lib" directories and use ThinLTO.
-sed -i '/def add_multiarch_paths/a \        return' setup.py
+# Prevent using hard-coded paths to host's headers and libraries directory, fix multiple jobs, and use ThinLTO.
+sed -e '/def add_multiarch_paths/a \        return' \
+    -e "/self\.parallel/s/True/${JOBS}/" -i setup.py
+sed -i "s|-j0|-j${JOBS}|" Makefile.pre.in
 sed -i 's|-flto|-flto=thin|' configure
 ```
 ```bash
@@ -719,6 +733,7 @@ time { make install; }
 > The CMake package contains a modern toolset used for generating Makefiles. It is a successor of the auto-generated configure script and aims to be platform- and compiler-independent. A significant user of CMake is KDE since version 4.
 
 > **Required!** To build Clang/LLVM and other packages in the later stage (chroot environment).
+> > **Build time:** <1h
 ```bash
 # Disable applications that using Cmake from attempting to install files in "/usr/lib64".
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
@@ -729,7 +744,7 @@ CFLAGS="-flto=thin $CFLAGS" CXXFLAGS="$CFLAGS" \
 ./bootstrap --prefix=/clang2-tools             \
             --mandir=/share/man                \
             --docdir=/share/doc/cmake-3.21.3   \
-            --parallel=$(nproc)                \
+            --parallel=${JOBS}                 \
             -- -DCMAKE_BUILD_TYPE=Release      \
             -Wno-dev -DCMAKE_USE_OPENSSL=OFF
 ```
