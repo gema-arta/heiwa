@@ -17,15 +17,22 @@ https://github.com/heiwalinux/heiwa
 EOF
 
 # bash.
-if [ -x "$(command -v bash)" ]; then
-    msg "bash" "$(bash --version | sed 1q | cut -d' ' -f4-5)"
-    if SH="$(readlink -f /bin/sh)" && echo "$SH" | grep -Fqo 'bash'; then
-        sym "/bin/sh" "$SH"
-    else
-        err "/bin/sh does not point to bash!"
-    fi && unset SH
+if [ ! -z "$@" ] && [ -x "$(command -v sh)" ]; then
+    msg "sh" "($(command -v sh))"
+    if [ -L "/bin/sh" ]; then
+        sym "/bin/sh" "$(readlink -f /bin/sh)"
+    fi
 else
-    err "bash not installed!"
+    if [ -x "$(command -v bash)" ]; then
+        msg "bash" "$(bash --version | sed 1q | cut -d' ' -f4-5)"
+        if SH="$(readlink -f /bin/sh)" && echo "$SH" | grep -Fqo 'bash'; then
+            sym "/bin/sh" "$SH"
+        else
+            err "/bin/sh does not point to bash!"
+        fi && unset SH
+    else
+        err "bash not installed!"
+    fi
 fi
 
 # binutils.
@@ -39,7 +46,7 @@ fi
 if [ -x "$(command -v bison)" ]; then
     msg "bison" "$(bison --version | sed 1q | cut -d' ' -f2-)"
 fi
-if [ -h "$(command -v yacc)" ]; then
+if [ -L "$(command -v yacc)" ]; then
     sym "$(command -v yacc)" "$(readlink -f $(command -v yacc))"
 elif [ -x "$(command -v yacc)" ]; then
     sym "yacc" "$(yacc --version | sed 1q)"
@@ -120,7 +127,7 @@ fi
 if [ -x "$(command -v flex)" ]; then
     msg "flex" "$(flex --version | cut -d' ' -f2)"
 fi
-if [ -h "$(command -v lex)" ]; then
+if [ -L "$(command -v lex)" ]; then
     sym "$(command -v lex)" "$(readlink -f $(command -v lex))"
 elif [ -x "$(command -v lex)" ]; then
     sym "lex" "$(lex --version | sed 1q)"
@@ -132,7 +139,7 @@ fi
 if [ -x "$(command -v gawk)" ]; then
     msg "GNU Awk" "$(gawk --version | sed 1q | cut -d' ' -f3-)"
 fi
-if [ -h "$(command -v awk)" ]; then
+if [ -L "$(command -v awk)" ]; then
     sym "$(command -v awk)" "$(readlink -f $(command -v awk))"
 elif [ -x "$(command -v awk)" ]; then
     sym "awk" "$(awk --version | sed 1q)"
@@ -196,7 +203,7 @@ fi
 # makeinfo.
 if [ -x "$(command -v makeinfo)" ]; then
     msg "makeinfo" "$(makeinfo --version | sed 1q | cut -d' ' -f2-)"
-    if [ -h "$(command -v makeinfo)" ]; then
+    if [ -L "$(command -v makeinfo)" ]; then
         sym "$(command -v makeinfo)" "$(readlink -f $(command -v makeinfo))"
     fi
 else
