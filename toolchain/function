@@ -1,0 +1,90 @@
+#!/usr/bin/env sh
+export LC_ALL=C LANG=C; . "$(dirname ${0})/heiwa.conf"
+
+# ~~~~~~~
+
+HEIWA="$(sh -c "echo ${TGT_ROOTFS}")"     # Target ROOT (/) FileSystem.
+CRS_TOOLS="clang1-tools"                  # Stage 1 Clang/LLVM Cross-Toolchain.
+TMP_TOOLS="clang2-tools"                  # Stage 2 Clang/LLVM and Temporary Tools.
+DISTFILES="$(dirname ${0})/../distfiles"  # Distribution files (package tarballs).
+REPO_CORE="$(dirname ${0})/../syscore"    # Syscore local repository path.
+CCACHE_DIR="$(dirname ${0})/../ccache"    # Ccache directory.
+
+export HEIWA CRS_TOOLS TMP_TOOLS DISTFILES REPO_CORE CCACHE_DIR
+
+# ~~~~~~~
+
+G="\033[1;32m" B="\033[1;34m" M="\033[1;35m" R="\033[1;31m" NC="\033[0m" \
+g="\033[0;32m" b="\033[0;34m" m="\033[0;35m" r="\033[0;31m" # ANSI Color.
+
+# ~~~~~~~
+
+msg() { printf "${G} > ${NC}${@}\n"; }
+hdr() { printf "${B}*${M}) ${NC}${@}\n"; }
+die() { >&2 printf "${R}error:${NC} ${@}\n"; exit 1; }
+
+# ~~~~~~~
+
+iof() { [ ${1} = ON ] && :; }
+
+# ~~~~~~~
+
+get_privilege() {
+    [ -x "$(command -v doas)" ] && PRIV="doas" || :
+    [ -x "$(command -v sudo)" ] && PRIV="sudo" || :
+    [ -n "$PRIV" ] || die "${m}sudo${NC} nor ${m}doas${NC} not found!"
+}
+
+# ~~~~~~~
+
+version_check() {
+    hdr "Checking host system requirements"
+    if [ -x "$(dirname ${0})/../version-check" ]; then
+        "$(dirname ${0})/../version-check" x || die "Failed to check host system requirements!"
+    fi
+}
+
+# ~~~~~~~
+
+prepare_tools() {
+    if [ "${EUID:-$(id -u)}" -ne 0 ]; then
+        get_privilege
+        hdr "Preparing toolchain directories"
+        
+        if [ -n "$HEIWA" ]; then
+            msg "Detected ${m}TGT_ROOTFS${NC} as ${g}${HEIWA}${NC}"
+            
+            [ -d "$DISTFILES" ]            || { msg "Creating ${m}${DISTFILES}${NC}"  ; mkdir -pv "$DISTFILES"                   ; }
+            [ -d "$CCACHE_DIR" ]           || { msg "Creating ${m}${CCACHE_DIR}${NC}" ; mkdir -pv "$CCACHE_DIR"                  ; }
+            [ -w "${HEIWA}/.." ]           ||   ASRT="$PRIV"                          # Run as root if "${HEIWA}/.." not writable.
+            [ -d "${HEIWA}/${CRS_TOOLS}" ] || { msg "Creating ${m}${CRS_TOOLS}${NC}"  ; ${ASRT} mkdir -pv "${HEIWA}/${CRS_TOOLS}"; }
+            [ -d "${HEIWA}/${TMP_TOOLS}" ] || { msg "Creating ${m}${TMP_TOOLS}${NC}"  ; ${ASRT} mkdir -pv "${HEIWA}/${TMP_TOOLS}"; }
+            
+            
+            for DIR in "$CRS_TOOLS" "$TMP_TOOLS"; do
+                if [ "$(readlink -f "/${DIR}")" != "${HEIWA}/${DIR}" ]; then
+                    msg "Symlink ${m}/${DIR}${NC} ${r}[forced]${NC}"
+                    ${PRIV} ln -sfv "${HEIWA}/${DIR}" / || die "Failed to symlink ${m}/${DIR}${NC}!"
+                fi
+            done; unset DIR
+            
+            [ -L "/${CRS_TOOLS}/lib64" ]   || { msg "Merging ${m}lib{,64}${NC}"       ; ${ASRT} ln -sfv lib "/${CRS_TOOLS}/lib64"; }
+            
+            if [ -n "$ASRT" ]; then
+                USER="${USER:-$(id -nu)}"
+                for DIR in "$CRS_TOOLS" "$TMP_TOOLS"; do
+                    if [ "$(stat -c '%U' "${HEIWA}/${DIR}")" != "$USER" ]; then
+                        msg "Changing the ${m}${DIR}${NC} owner to ${g}${USER}${NC} ${r}[forced]${NC}"
+                        ${ASRT} chown -hRv "$USER":"$USER" "${HEIWA}/${DIR}" || die "Failed to ${m}chown${NC} ${m}${DIR}${NC}!"
+                    fi
+                done; unset DIR
+            fi
+            
+            msg "Preparation finished"
+        else
+            die "Please fill ${m}TGT_ROOTFS${NC} in the ${m}heiwa.conf${NC}!"
+        fi
+    else
+        die "Don't run as ${r}root${NC}!"
+    fi
+}
