@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-export LC_ALL=C LANG=C; . "$(dirname ${0})/function"
+. "$(dirname ${0})/function"
 
 iof ${HOST_CHECK} && version_check
 
