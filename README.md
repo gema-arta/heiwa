@@ -86,7 +86,7 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 </details>
 
 - [ ] Create a fast, flexible, and futuristic package manager.
-- [ ] Create an auto build systems. Work in progress ..
+- [ ] Create an auto-build system. Work in progress ..
 - [ ] Packaging, make it usable but with the aim of not being big. When? Idk.
 
 > Always W.I.P, since this is hobbyist. A radical experiments.
