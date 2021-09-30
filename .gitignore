@@ -1,2 +1,3 @@
-distfiles
-ccache
+toolchain/ccache
+toolchain/distfiles
+toolchain/kanri
