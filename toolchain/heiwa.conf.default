@@ -7,7 +7,7 @@ TARGET_ROOTFS="/media/Heiwa"
 
 NATIVE_ARCH="$(uname -m)"
 
-CROSSFLAGS="-flto=thin -Os -pipe -w -g0"
+CROSSFLAGS="-flto=thin -march=native -Os -pipe -w -g0"
 LDFLAGS="-Wl,-O2 -Wl,--as-needed"
 
 JOBS="$(nproc)"
