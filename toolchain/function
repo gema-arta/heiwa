@@ -1,22 +1,26 @@
 #!/usr/bin/env sh
-export LC_ALL=POSIX; umask 022; . "$(dirname ${0})/heiwa.conf"; unalias -a
+export LC_ALL=POSIX CWD="$(dirname ${0})" CRS="$(readlink /proc/${$}/exe)"
+
+if [ ! -f "${CWD}/heiwa.conf" ]; then
+    cp -f "${CWD}/heiwa.conf.default" "${CWD}/heiwa.conf"
+fi; . "${CWD}/heiwa.conf"
 
 G="\033[1;32m" B="\033[1;34m" M="\033[1;35m" R="\033[1;31m" NC="\033[0m" \
 g="\033[0;32m" b="\033[0;34m" m="\033[0;35m" r="\033[0;31m" # ANSI Colors.
 
-msg() { printf "${G} > ${NC}${@}\n"; }
-hea() { printf "\n${B}*${M}) ${NC}${@}\n"; }
-die() { >&2 printf "${R}error:${NC} ${@}\n"; exit 1; }
+msg() {     printf " ${G}%s${NC} %b\n"             '>' "${@}"; }
+hea() {     printf "\n${B}%s${M}%s${NC} %b\n"  '*' ')' "${@}"; }
+die() { >&2 printf "${R}%s${NC} %b\n" 'error:' "${@}"; exit 1; }
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-HEIWA="$(sh -c "echo ${TARGET_ROOTFS}")" # Target root (/) FileSystem.
-CRS_TOOLS="clang1-tools"                 # Stage 1 Clang/LLVM Cross-Toolchain.
-TMP_TOOLS="clang2-tools"                 # Stage 2 Clang/LLVM and Temporary Tools.
-DISTFILES="$(dirname ${0})/distfiles"    # Distribution files (tarballs) path.
-REPO_CORE="$(dirname ${0})/../syscore"   # System core local repository path.
-KANRI_TMP="$(dirname ${0})/kanri"        # Kanri temporary directory path.
-CCACHE_DIR="$(dirname ${0})/ccache"      # Ccache directory path.
+HEIWA="$(${CRS} -c "echo ${TARGET_ROOTFS}")" # Target root (/) FileSystem.
+CRS_TOOLS="clang1-tools"                     # Stage 1 Clang/LLVM Cross-Toolchain.
+TMP_TOOLS="clang2-tools"                     # Stage 2 Clang/LLVM and Temporary Tools.
+DISTFILES="${CWD}/distfiles"                 # Distribution files (tarballs) path.
+REPO_CORE="${CWD}/../syscore"                # System core local repository path.
+KANRI_TMP="${CWD}/kanri"                     # Kanri temporary directory path.
+CCACHE_DIR="${CWD}/ccache"                   # Ccache directory path.
 
 export HEIWA CRS_TOOLS TMP_TOOLS DISTFILES REPO_CORE KANRI_TMP CCACHE_DIR
 
@@ -29,8 +33,8 @@ export HEIWA CRS_TOOLS TMP_TOOLS DISTFILES REPO_CORE KANRI_TMP CCACHE_DIR
 
 version_check() {
     hea "Checking host system requirements"
-    if [ -x "$(dirname ${0})/../version-check" ]; then
-        if ! "$(dirname ${0})/../version-check" x; then
+    if [ -x "${CWD}/../version-check" ]; then
+        if ! "${CWD}/../version-check" x; then
             die "Failed to check host system requirements!"
         fi
     fi
