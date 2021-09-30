@@ -43,9 +43,9 @@ version_check() {
 toolchain_var() {
     hea "Setting up cross-toolchain environment"
     HST_TRIPLET="$(${CC:-gcc} -dumpmachine | sed 's|-[^-]*|-cross|')"
-    DEF_CXFLAGS="-march=native ${CROSSFLAGS}"
-    [ -z "$LOAD" ] || LOADAVG="-l${LOAD}"
-    MAKEFLAGS="-j${JOBS:-2} ${LOADAVG}"
+    
+    [ -z "$LOAD" ] || LOADAVG=" -l${LOAD}"
+    MAKEFLAGS="-j${JOBS:-2}${LOADAVG}"
     
     case "$NATIVE_ARCH" in
         x86_64) GCC_MCPU="x86-64"
@@ -57,16 +57,16 @@ toolchain_var() {
         *)      die "Any architecture other than ${g}x86_64${NC} currently not implemented yet."
         ;;
     esac
-    export HST_TRIPLET DEF_CXFLAGS LDFLAGS JOBS LOAD MAKEFLAGS GCC_MCPU TGT_LLVM TGT_ARCH TGT_TRIPLET HEI_TRIPLET
+    export HST_TRIPLET CROSSFLAGS LDFLAGS JOBS LOAD MAKEFLAGS GCC_MCPU TGT_LLVM TGT_ARCH TGT_TRIPLET HEI_TRIPLET
     
     msg "Detected ${m}NATIVE_ARCH${NC} as ${g}${TGT_ARCH}${NC}"
-    for VAR in "$HST_TRIPLET"              \
-               "$GCC_MCPU"                 \
-               "$TGT_LLVM"                 \
-               "$TGT_ARCH"                 \
-               "$TGT_TRIPLET"              \
-               "$HEI_TRIPLET"              \
-               "${DEF_CXFLAGS} ${LDFLAGS}" \
+    for VAR in "$HST_TRIPLET"             \
+               "$GCC_MCPU"                \
+               "$TGT_LLVM"                \
+               "$TGT_ARCH"                \
+               "$TGT_TRIPLET"             \
+               "$HEI_TRIPLET"             \
+               "${CROSSFLAGS} ${LDFLAGS}" \
                "$MAKEFLAGS"
     do  
         msg "${m}|${NC} ${VAR}"
@@ -78,14 +78,24 @@ prepare_tools() {
     if [ -n "$HEIWA" ]; then
         msg "Detected ${m}TARGET_ROOTFS${NC} as ${g}${HEIWA}${NC}"
         
-        [ -d "$DISTFILES" ]            || { msg "Creating ${m}${DISTFILES}${NC}"  ; mkdir -pv "$DISTFILES"                   ; }
-        [ -d "$KANRI_TMP" ]            || { msg "Creating ${m}${KANRI_TMP}${NC}"  ; mkdir -pv "$KANRI_TMP"                   ; }
-        [ -d "$CCACHE_DIR" ]           || { msg "Creating ${m}${CCACHE_DIR}${NC}" ; mkdir -pv "$CCACHE_DIR"                  ; }
-        [ -w "${HEIWA}/.." ]           ||   ASRT="$PRIV"                          # Run as root if "${HEIWA}/.." not writable.
-        [ -d "${HEIWA}/${CRS_TOOLS}" ] || { msg "Creating ${m}${CRS_TOOLS}${NC}"  ; ${ASRT} mkdir -pv "${HEIWA}/${CRS_TOOLS}"; }
-        [ -d "${HEIWA}/${TMP_TOOLS}" ] || { msg "Creating ${m}${TMP_TOOLS}${NC}"  ; ${ASRT} mkdir -pv "${HEIWA}/${TMP_TOOLS}"; }
+        for DIR in "$DISTFILES" "$KANRI_TMP" "$CCACHE_DIR"; do
+            if [ ! -d "$DIR" ]; then
+                msg "Creating ${m}${DIR}${NC}"
+                if ! mkdir -pv "$DIR"; then
+                    die "Failed to create ${m}${DIR}${NC}!"
+                fi
+            fi
+        done
+        
+        [ -w "$(dirname "$HEIWA")" ] || ASRT="$PRIV"
         
         for DIR in "$CRS_TOOLS" "$TMP_TOOLS"; do
+            if [ ! -d "${HEIWA}/${DIR}" ]; then
+                msg "Creating ${m}${DIR}${NC}"
+                if ! ${ASRT} mkdir -pv "${HEIWA}/${DIR}"; then
+                    die "Failed to create ${m}${DIR}${NC}!"
+                fi
+            fi
             if [ "$(readlink -f "/${DIR}")" != "${HEIWA}/${DIR}" ]; then
                 msg "Symlink ${m}/${DIR}${NC} ${r}[forced]${NC}"
                 if ! ${PRIV} ln -sfv "${HEIWA}/${DIR}" /; then
@@ -94,7 +104,12 @@ prepare_tools() {
             fi
         done
         
-        [ -L "/${CRS_TOOLS}/lib64" ]   || { msg "Merging ${m}lib{,64}${NC}"       ; ${ASRT} ln -sfv lib "/${CRS_TOOLS}/lib64"; }
+        if [ ! -L "/${CRS_TOOLS}/lib64" ]; then
+            msg "Merging ${m}lib{,64}${NC}"
+            if ! ${ASRT} ln -sfv lib "/${CRS_TOOLS}/lib64"; then
+                die "Failed to merge ${m}lib{,64}${NC}!"
+            fi
+        fi
         
         if [ -n "$ASRT" ]; then
             USER="${USER:-$(id -nu)}"
