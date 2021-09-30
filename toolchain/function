@@ -1,16 +1,21 @@
 #!/usr/bin/env sh
 export LC_ALL=POSIX CWD="$(dirname ${0})" CRS="$(readlink /proc/${$}/exe)"
 
-if [ ! -f "${CWD}/heiwa.conf" ]; then
-    cp -f "${CWD}/heiwa.conf.default" "${CWD}/heiwa.conf"
-fi; . "${CWD}/heiwa.conf"
-
 G="\033[1;32m" B="\033[1;34m" M="\033[1;35m" R="\033[1;31m" NC="\033[0m" \
 g="\033[0;32m" b="\033[0;34m" m="\033[0;35m" r="\033[0;31m" # ANSI Colors.
 
 msg() {     printf " ${G}%s${NC} %b\n"             '>' "${@}"; }
 hea() {     printf "\n${B}%s${M}%s${NC} %b\n"  '*' ')' "${@}"; }
 die() { >&2 printf "${R}%s${NC} %b\n" 'error:' "${@}"; exit 1; }
+
+[ "${EUID:-$(id -u)}" -ne 0 ] || die "Don't run as ${r}root${NC}!"
+[ ! -x "$(command -v doas)" ] || PRIV="doas"
+[ ! -x "$(command -v sudo)" ] || PRIV="sudo"
+[ -n "$PRIV" ]                || die "${m}sudo${NC} nor ${m}doas${NC} not found!"
+
+if [ ! -f "${CWD}/heiwa.conf" ]; then
+    cp -f "${CWD}/heiwa.conf.default" "${CWD}/heiwa.conf"
+fi; . "${CWD}/heiwa.conf"
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -25,11 +30,6 @@ CCACHE_DIR="${CWD}/ccache"                   # Ccache directory path.
 export HEIWA CRS_TOOLS TMP_TOOLS DISTFILES REPO_CORE KANRI_TMP CCACHE_DIR
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-[ "${EUID:-$(id -u)}" -ne 0 ] || die "Don't run as ${r}root${NC}!"
-[ ! -x "$(command -v doas)" ] || PRIV="doas"
-[ ! -x "$(command -v sudo)" ] || PRIV="sudo"
-[ -n "$PRIV" ]                || die "${m}sudo${NC} nor ${m}doas${NC} not found!"
 
 version_check() {
     hea "Checking host system requirements"
@@ -105,9 +105,9 @@ prepare_tools() {
         done
         
         if [ ! -L "/${CRS_TOOLS}/lib64" ]; then
-            msg "Merging ${m}lib{,64}${NC}"
+            msg "Merging ${m}/${CRS_TOOLS}/lib{,64}${NC}"
             if ! ${ASRT} ln -sfv lib "/${CRS_TOOLS}/lib64"; then
-                die "Failed to merge ${m}lib{,64}${NC}!"
+                die "Failed to merge ${m}/${CRS_TOOLS}/lib{,64}${NC}"
             fi
         fi
         
