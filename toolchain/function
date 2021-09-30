@@ -1,6 +1,15 @@
 #!/usr/bin/env sh
 export LC_ALL=POSIX; umask 022; . "$(dirname ${0})/heiwa.conf"; unalias -a
 
+G="\033[1;32m" B="\033[1;34m" M="\033[1;35m" R="\033[1;31m" NC="\033[0m" \
+g="\033[0;32m" b="\033[0;34m" m="\033[0;35m" r="\033[0;31m" # ANSI Colors.
+
+msg() { printf "${G} > ${NC}${@}\n"; }
+hea() { printf "\n${B}*${M}) ${NC}${@}\n"; }
+die() { >&2 printf "${R}error:${NC} ${@}\n"; exit 1; }
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 HEIWA="$(sh -c "echo ${TARGET_ROOTFS}")" # Target root (/) FileSystem.
 CRS_TOOLS="clang1-tools"                 # Stage 1 Clang/LLVM Cross-Toolchain.
 TMP_TOOLS="clang2-tools"                 # Stage 2 Clang/LLVM and Temporary Tools.
@@ -11,20 +20,12 @@ CCACHE_DIR="$(dirname ${0})/ccache"      # Ccache directory path.
 
 export HEIWA CRS_TOOLS TMP_TOOLS DISTFILES REPO_CORE KANRI_TMP CCACHE_DIR
 
-G="\033[1;32m" B="\033[1;34m" M="\033[1;35m" R="\033[1;31m" NC="\033[0m" \
-g="\033[0;32m" b="\033[0;34m" m="\033[0;35m" r="\033[0;31m" # ANSI Color.
-
-msg() { printf "${G} > ${NC}${@}\n"; }
-hea() { printf "\n${B}*${M}) ${NC}${@}\n"; }
-die() { >&2 printf "${R}error:${NC} ${@}\n"; exit 1; }
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 [ "${EUID:-$(id -u)}" -ne 0 ] || die "Don't run as ${r}root${NC}!"
-
-get_privilege() {
-    [ -x "$(command -v doas)" ] && PRIV="doas" || :
-    [ -x "$(command -v sudo)" ] && PRIV="sudo" || :
-    [ -n "$PRIV" ] || die "${m}sudo${NC} nor ${m}doas${NC} not found!"
-}
+[ ! -x "$(command -v doas)" ] || PRIV="doas"
+[ ! -x "$(command -v sudo)" ] || PRIV="sudo"
+[ -n "$PRIV" ]                || die "${m}sudo${NC} nor ${m}doas${NC} not found!"
 
 version_check() {
     hea "Checking host system requirements"
@@ -69,11 +70,8 @@ toolchain_var() {
 }
 
 prepare_tools() {
-    get_privilege
     hea "Preparing cross-toolchain directories"
-    
     if [ -n "$HEIWA" ]; then
-        
         msg "Detected ${m}TARGET_ROOTFS${NC} as ${g}${HEIWA}${NC}"
         
         [ -d "$DISTFILES" ]            || { msg "Creating ${m}${DISTFILES}${NC}"  ; mkdir -pv "$DISTFILES"                   ; }
@@ -105,7 +103,6 @@ prepare_tools() {
                 fi
             done
         fi
-        
     else
         die "Please fill ${m}TARGET_ROOTFS${NC} in the ${m}heiwa.conf${NC}!"
     fi
