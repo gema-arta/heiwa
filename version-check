@@ -17,10 +17,10 @@ https://github.com/heiwalinux/heiwa
 EOF
 
 # bash.
-if [ ! -z "$@" ] && [ -x "$(command -v sh)" ]; then
-    msg "sh" "($(command -v sh))"
-    if [ -L "/bin/sh" ]; then
-        sym "/bin/sh" "$(readlink -f /bin/sh)"
+if [ ! -z "${@}" ] && CRS="$(readlink /proc/${$}/exe)" && [ -x "$CRS" ]; then
+    msg "$(basename "$CRS")" "$(command -v "$CRS")"
+    if readlink -f /bin/sh | grep -Fqo "$CRS"; then
+        sym "/bin/sh" "$CRS"
     fi
 else
     if [ -x "$(command -v bash)" ]; then
