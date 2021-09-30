@@ -1,5 +1,7 @@
 # heiwa.conf: Configuration for Auto-build System
 # Heiwa/Linux
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# You have to copy this from `heiwa.conf.default`.
 
 TARGET_ROOTFS="/media/Heiwa"
 
