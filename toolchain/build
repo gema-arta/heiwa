@@ -1,6 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname ${0})/function"
 
-iof ${HOST_CHECK} && version_check
+version_check
+
+toolchain_var
 
 prepare_tools
