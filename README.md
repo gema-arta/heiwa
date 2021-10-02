@@ -32,9 +32,10 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 > |  ✓  | Line-editing and history-capabilities library      | GNU Readline       | Best implementation.            |
 > |  ✓  | Unified interface for querying installed libraries | Pkgconf            | No circular dependencies.       |
 > |  ✓  | Gzip data compressor and decompressor              | Pigz               | Parallel threads support.       |
-> |  ✓  | Most userspace utility programs                    | Toybox             | Small, fast, and simple.        |
+> |  ✓  | Most userspace utility tools/programs              | Toybox             | Small, fast, and simple.        |
 > |  ✓  | Ninja build system replacement                     | Samurai            | Portable (C99), simple, faster. |
 > |     | Init and process supervision                       | Finit              | F for fast. Fast init.          |
+> |     | GNU Wget replacement                               | GNU Wget2          | Multithreads and feature-rich.  |
 > |  ✓  | Manpage suite tools                                | OpenBSD mandoc     | Smaller than GNU man-db.        |
 > |  ✓  | Default text-editor                                | GNU nano           | I don't use Neo/Vi/m. :stuck_out_tongue_winking_eye: |
 > |  ✓  | Device manager                                     | eudev              | No reason, portable.            |
@@ -91,7 +92,7 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 
 > Always W.I.P, since this is hobbyist. A radical experiments.
 
-See [docs](./docs). Go [discussions](https://github.com/heiwalinux/heiwa/discussions) for the Errata.
+See [docs](./docs). Go [discussions](https://github.com/heiwalinux/heiwa/discussions) for the Errata. Join the telegram group (unspecifically) at [Linux Internals ID](https://t.me/linuxinid).
 
 ##  
 <pre><samp>
