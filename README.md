@@ -63,8 +63,10 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 
 > Generally there's no **Stage-0** for the toolchain. I lowered the **build stages** value because to match the final toolchain which actually in the **Stage-2** "Final System", there are 3 stages where "stage 1 Clang/LLVM" in the **Stage-0** uses GCC libraries after bootstrapping musl libc and "stage 2 Clang/LLVM" in the **Stage-1** is no more from minimal as **Stage-0** but become native self-hosted. Then, **Stage-1** is used to build **Stage-2** "Final System".
 > 
-> > Well, the **build stages** and **toolchain stages** are differents.
+> > Well, the **build stages** and **toolchain stages** are differents. 
 
+> > Hopefully I can understand how to "native cross-compilation" musl with Clang/LLVM to get rid of GCC.
+> 
 > The current "inefficient", "painful", and "fake cross-compilation" method as described below:
 > | Build Stages | Build | Host  | Target | Action                                                                                            | Status         |
 > |:------------:|:-----:|:-----:|:------:|---------------------------------------------------------------------------------------------------|:--------------:|
