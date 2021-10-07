@@ -63,9 +63,15 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 
 > Generally there's no **Stage-0** for the toolchain. I lowered the **build stages** value because to match the final toolchain which actually in the **Stage-2** "Final System", there are 3 stages where "stage 1 Clang/LLVM" in the **Stage-0** uses GCC libraries after bootstrapping musl libc and "stage 2 Clang/LLVM" in the **Stage-1** is no more from minimal as **Stage-0** but become native self-hosted. Then, **Stage-1** is used to build **Stage-2** "Final System".
 > 
-> > Well, the **build stages** and **toolchain stages** are differents. 
+> > Conclusion, the **build stages** and **toolchain stages** are differents. 
 
-> > Hopefully I can understand how to "native cross-compilation" musl with Clang/LLVM to get rid of GCC.
+> > Let me tell you ..
+>
+> One of the reasons why building GCC+Binutils as cross-compiler is to create completely isolated cross-toolchain. Most Clang/LLVM on the GNU/Linux distribution still use GCC libraries, where we need to explicitly point the library path there when building cross-toolchain if using host's Clang/LLVM. Like Gentoo use [slots](https://devmanual.gentoo.org/general-concepts/slotting/index.html), it's not portable used to create Proof-of-Concept if different hosts are different layouts. That's in my perspective.
+> 
+> > Everything **just fine** without **confused screaming**.
+
+> > Hopefully I can understand how to "native cross-compilation" musl with Clang/LLVM to get rid of GCC next.
 > 
 > The current "inefficient", "painful", and "fake cross-compilation" method as described below:
 > | Build Stages | Build | Host  | Target | Action                                                                                            | Status         |
