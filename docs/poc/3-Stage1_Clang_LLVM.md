@@ -57,8 +57,7 @@ source ~/.bashrc
 > **Required!** As mentioned in the description above.
 > > **Build time:** <2m
 ```bash
-# Configure source. Use optimization level 3.
-CFLAGS="$(tr Os O3 <<< "$CFLAGS")"  \
+# Configure source.
 ./configure --prefix=/              \
             --with-malloc=mallocng  \
             --disable-gcc-wrapper   \
@@ -150,9 +149,8 @@ cp -rfv usr/include /clang2-tools/.
 > **Required!** By Pigz at current stage and optionally enabled for Stage-1 Clang/LLVM builds.
 > > **Build time:** <25s
 ```bash
-# Configure source. Use optimization level 3.
-cmake -B build \
-    -DCMAKE_BUILD_TYPE=Release -Wno-dev    \
+# Configure source.
+cmake -B build -Wno-dev \
     -DCMAKE_INSTALL_PREFIX="/clang2-tools" \
     -DCMAKE_C_FLAGS="-flto=thin $CFLAGS"   \
     -DBUILD_SHARED_LIBS=ON                 \
@@ -221,9 +219,9 @@ popd
 ../syscore/llvm/patches/appatch
 ```
 ```bash
-# Configure `libunwind` source. Use optimization level 3.
+# Configure `libunwind` source.
 pushd ${LLVM_SRC}/projects/libunwind/ &&                \
-cmake -B build -DCMAKE_BUILD_TYPE=Release -Wno-dev      \
+cmake -B build -Wno-dev                                 \
                -DCMAKE_INSTALL_PREFIX="/clang2-tools"   \
                -DCMAKE_C_FLAGS="-flto=thin $CFLAGS"     \
                -DCMAKE_CXX_FLAGS="-flto=thin $CXXFLAGS" \
@@ -245,9 +243,9 @@ time {
 }
 ```
 ```bash
-# Configure `libcxxabi` source. Use optimization level 3.
+# Configure `libcxxabi` source.
 pushd ${LLVM_SRC}/projects/libcxxabi/ &&                \
-cmake -B build -DCMAKE_BUILD_TYPE=Release -Wno-dev      \
+cmake -B build -Wno-dev                                 \
                -DCMAKE_INSTALL_PREFIX="/clang2-tools"   \
                -DCMAKE_CXX_FLAGS="-flto=thin $CXXFLAGS" \
                -DLLVM_PATH="$LLVM_SRC"                  \
@@ -270,9 +268,9 @@ time {
 }
 ```
 ```bash
-# Configure `libcxx` source. Use optimization level 3.
+# Configure `libcxx` source.
 pushd ${LLVM_SRC}/projects/libcxx/ &&                                                  \
-cmake -B build -DCMAKE_BUILD_TYPE=Release -Wno-dev                                     \
+cmake -B build -Wno-dev                                                                \
                -DCMAKE_INSTALL_PREFIX="/clang2-tools"                                  \
                -DCMAKE_CXX_FLAGS="-isystem /clang2-tools/include -flto=thin $CXXFLAGS" \
                -DLLVM_PATH="$LLVM_SRC"                                                 \
@@ -299,9 +297,8 @@ time { make -C build install && popd; }
 rm -rf projects/lib{unwind,cxx{abi,}}
 ```
 ```bash
-# Configure Clang/LLVM source. Use optimization level 3.
-cmake -B build \
-    -DCMAKE_BUILD_TYPE=Release -Wno-dev         \
+# Configure Clang/LLVM source.
+cmake -B build -Wno-dev \
     -DCMAKE_INSTALL_PREFIX="/clang2-tools"      \
     -DBUILD_SHARED_LIBS=ON                      \
     -DLLVM_CCACHE_BUILD=ON                      \
@@ -412,8 +409,8 @@ popd
 > **Required!** As the default ".xz" and ".lzma" files de/compressor at current and later stage (chroot environment).
 > > **Build time:** ~30s
 ```bash
-# Configure source. Use optimization level 3.
-CFLAGS="-flto=thin $(tr Os O3 <<< "$CFLAGS")" \
+# Configure source.
+CFLAGS="-flto=thin $CFLAGS"                   \
 ./configure --prefix=/clang2-tools            \
             --build=$(build-aux/config.guess) \
             --host=${TGT_TRIPLET}             \
@@ -437,8 +434,8 @@ time { make install; }
 > **Required!** As the default ".gz" files de/compressor at current and later stage (chroot environment).
 > > **Build time:** ~10s
 ```bash
-# Build. Use optimization level 3.
-time { make CC=${CC} CFLAGS="-flto=thin $(tr Os O3 <<< "$CFLAGS")"; }
+# Build.
+time { make CC=${CC} CFLAGS="-flto=thin $CFLAGS"; }
 ```
 ```bash
 # Install and create symlinks as `gzip` tools.
@@ -740,14 +737,13 @@ time { make install; }
 sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake
 ```
 ```bash
-# Configure source using provided libraries (built-in). Use optimization level 3.
+# Configure source using provided libraries (built-in).
 CFLAGS="-flto=thin $CFLAGS" CXXFLAGS="$CFLAGS" \
 ./bootstrap --prefix=/clang2-tools             \
             --mandir=/share/man                \
             --docdir=/share/doc/cmake-3.21.3   \
             --parallel=${JOBS}                 \
-            -- -DCMAKE_BUILD_TYPE=Release      \
-            -Wno-dev -DCMAKE_USE_OPENSSL=OFF
+            -- -Wno-dev -DCMAKE_USE_OPENSSL=OFF
 ```
 ```bash
 # Build.
