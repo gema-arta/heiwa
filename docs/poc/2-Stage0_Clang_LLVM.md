@@ -149,15 +149,16 @@ time { make install-{gcc,target-libgcc}; }
 > The musl package contains the main C library. This library provides the basic routines for allocating memory, searching directories, opening and closing files, reading and writing files, string handling, pattern matching, arithmetic, and so on.
 
 > **Required!** As mentioned in the description above.
-> > **Build time:** <2m
+> > **Build time:** ~2m
 ```bash
-# Configure source.
+# Configure source. Use optimization level 3.
+CFLAGS="$(tr Os O3 <<< "$CFLAGS")"        \
 ./configure CROSS_COMPILE=${HEI_TRIPLET}- \
             --prefix=/                    \
             --target=${HEI_TRIPLET}       \
             --with-malloc=mallocng        \
-            --enable-optimize=speed       \
             --disable-gcc-wrapper         \
+            --disable-optimize            \
             --disable-static
 ```
 ```bash
