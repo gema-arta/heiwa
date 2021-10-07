@@ -8,16 +8,16 @@ pushd ${LLVM_SRC}/projects/ && \
         compiler-rt-size_t.patch \
         compiler-rt-xray-ppc64-musl.patch \
         ppc32-compiler-rt.patch
-    do patch -Np1 -i ../../extra/llvm/patches/${P}
+    do patch -Np1 -i ../../syscore/llvm/patches/${P}
     done; unset P
     # Disable sanitizers for musl libc, it's broken since duplicates some libc bits.
     sed -i '/COMPILER_RT_HAS_SANITIZER_COMMON/s/TRUE/FALSE/' compiler-rt/cmake/config-ix.cmake
-    patch -Np1 -i ../../extra/llvm/patches/libunwind-ppc32.patch
+    patch -Np1 -i ../../syscore/llvm/patches/libunwind-ppc32.patch
     for P in \
         libcxx-musl.patch \
         libcxx-ppc.patch \
         libcxx-ssp-nonshared.patch
-    do patch -Np1 -i ../../extra/llvm/patches/${P}
+    do patch -Np1 -i ../../syscore/llvm/patches/${P}
     done; unset P
 popd
 
@@ -27,7 +27,7 @@ pushd ${LLVM_SRC}/tools/ && \
         clang-002-add-musl-triples.patch \
         clang-003-ppc64-dynamic-linker-path.patch \
         clang-004-ppc64-musl-elfv2.patch
-    do patch -Np1 -i ../../extra/llvm/patches/${P}
+    do patch -Np1 -i ../../syscore/llvm/patches/${P}
     done; unset P
     [ -d ../projects/libunwind/include ] && \
     cp -rfv ../projects/libunwind/include/mach-o lld/include/.
@@ -41,9 +41,9 @@ pushd ${LLVM_SRC}/../ && \
         llvm-004-override-opt.patch \
         llvm-005-ppc-bigpic.patch \
         llvm-006-aarch64-mf_exec.patch
-    do patch -Np1 -i ./extra/llvm/patches/${P}
+    do patch -Np1 -i ./syscore/llvm/patches/${P}
     done; unset P
 popd
 
 # Update config.guess for better platform detection.
-cp -fv ../extra/llvm/files/config.guess cmake/.
+cp -fv ../syscore/llvm/files/config.guess cmake/.
