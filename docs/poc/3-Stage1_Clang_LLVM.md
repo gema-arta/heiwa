@@ -217,7 +217,7 @@ popd
 ```
 ```bash
 # Apply patches (from Void Linux) and update config.guess for better platform detection.
-../extra/llvm/patches/appatch
+../syscore/llvm/patches/appatch
 ```
 ```bash
 # Configure `libunwind` source. Use optimization level 3.
@@ -472,7 +472,7 @@ time { install -vm755 -t /clang2-tools/bin/ autopoint msg{fmt,merge} xgettext; }
 > > **Build time:** ~35s
 ```bash
 # Copy the Toybox .config file. Ensure `libz` is enabled in the config.
-cp -v ../../extra/toybox/files/.config.toolchain.nolibcrypto .config
+cp -v ../../syscore/toybox/files/.config.toolchain.nolibcrypto .config
 grep --color=auto "CONFIG_TOYBOX_LIBZ=y" .config
 ```
 ```bash
