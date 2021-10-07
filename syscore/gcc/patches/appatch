@@ -44,5 +44,5 @@ for P in \
     0041-Use-generic-errstr.go-implementation-on-musl.patch \
     0042-configure-fix-detection-of-atomic-builtins-in-libato.patch
 do
-    patch -Np1 -i ../../extra/gcc/patches/${P}
+    patch -Np1 -i ../../syscore/gcc/patches/${P}
 done
