@@ -57,11 +57,12 @@ source ~/.bashrc
 > **Required!** As mentioned in the description above.
 > > **Build time:** <2m
 ```bash
-# Configure source.
+# Configure source. Use optimization level 3.
+CFLAGS="$(tr Os O3 <<< "$CFLAGS")"  \
 ./configure --prefix=/              \
             --with-malloc=mallocng  \
-            --enable-optimize=speed \
             --disable-gcc-wrapper   \
+            --disable-optimize      \
             --disable-static
 ```
 ```bash
@@ -790,7 +791,7 @@ exit
 > Change the ownership of the "${HEIWA}/clang2-tools" directory to root by running the following command.
 ```bash
 if [[ -d "${HEIWA}/clang2-tools" ]]; then
-    chown -R root:root ${HEIWA}/clang2-tools
+    chown -R root:root "$HEIWA"/clang2-tools
 fi
 ```
 > #### Backup
@@ -799,7 +800,7 @@ fi
 ```bash
 if [[ -d "${HEIWA}/clang1-tools" ]]; then
     pushd "$HEIWA" && rm -rf ./clang1-tools && \
-        [[ -h /clang1-tools ]] && unlink /clang1-tools
+        [[ -L /clang1-tools ]] && unlink /clang1-tools
     popd
 fi
 if [[ -d "${HEIWA}/clang2-tools" ]]; then
