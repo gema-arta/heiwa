@@ -102,7 +102,7 @@ tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc{-1.2.1,}
 ```bash
 # Create a dedicated directory and configure source. Disable optimization.
 mkdir -v build && cd build &&                            \
-CFLAGS="$(tr Os O0 <<< "$CFLAGS")" CXXFLAGS="$CFLAGS"    \
+CFLAGS="$(tr O2 O0 <<< "$CFLAGS")" CXXFLAGS="$CFLAGS"    \
 ../configure --prefix=/clang1-tools                      \
              --build=${HST_TRIPLET}                      \
              --host=${HST_TRIPLET}                       \
@@ -151,8 +151,7 @@ time { make install-{gcc,target-libgcc}; }
 > **Required!** As mentioned in the description above.
 > > **Build time:** ~2m
 ```bash
-# Configure source. Use optimization level 3.
-CFLAGS="$(tr Os O3 <<< "$CFLAGS")"        \
+# Configure source.
 ./configure CROSS_COMPILE=${HEI_TRIPLET}- \
             --prefix=/                    \
             --target=${HEI_TRIPLET}       \
@@ -276,7 +275,7 @@ ${HEI_TRIPLET}-readelf -l a.out | grep --color=auto "Req.*ter"
 > **Required!** Only build dynamic libraries and headers for Ccache compression support.
 > > **Build time:** <2m
 ```bash
-# Build with verbose. Use optimization level 3.
+# Build with verbose.
 time { make -C lib CC=${HEI_TRIPLET}-gcc libzstd-release V=1; }
 ```
 ```bash
@@ -291,9 +290,8 @@ time { make -C lib PREFIX=/clang1-tools install-{includes,shared}; }
 > **Required!** To speeds up Clang/LLVM builds across stage 1 and stage 2, especially when errors occur such as power loss.
 > > **Build time:** ~3m
 ```bash
-# Configure source. Use optimization level 3.
-cmake -B build \
-    -DCMAKE_BUILD_TYPE=Release -Wno-dev       \
+# Configure source.
+cmake -B build -Wno-dev \
     -DCMAKE_PREFIX_PATH="/clang1-tools"       \
     -DCMAKE_INSTALL_PREFIX="/clang1-tools"    \
     -DCMAKE_C_COMPILER="${HEI_TRIPLET}-gcc"   \
@@ -355,9 +353,8 @@ popd
 ../syscore/llvm/patches/appatch
 ```
 ```bash
-# Configure the entire source. Use optimization level 3.
-cmake -B build \
-    -DCMAKE_BUILD_TYPE=Release -Wno-dev         \
+# Configure the entire source.
+cmake -B build -Wno-dev \
     -DCMAKE_INSTALL_PREFIX="/clang1-tools"      \
     -DCMAKE_C_COMPILER="${HEI_TRIPLET}-gcc"     \
     -DCMAKE_CXX_COMPILER="${HEI_TRIPLET}-g++"   \
