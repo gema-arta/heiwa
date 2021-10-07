@@ -95,14 +95,14 @@ exec su - heiwa
 ```
 > Then, setup the toolchain environment variables.
 ```bash
-HST_TRIPLET="$(sed 's|-[^-]*|-cross|' <(gcc -dumpmachine))"
+HST_TRIPLET="$(sed 's|-[^-]*|-cross|' <(cc -dumpmachine))"
 case $(uname -m) in
     x86_64) GCC_MCPU="x86-64"
             TGT_LLVM="X86"
             TGT_ARCH="x86_64"
             TGT_TRIPLET="${TGT_ARCH}-pc-linux-musl"
             HEI_TRIPLET="${TGT_ARCH}-heiwa-linux-musl"
-            CUS_CXFLAGS="-march=native"
+            ADDON_FLAGS="-march=native"
     ;;
     *)      echo 'Any architecture other than x86_64 currently not implemented yet.'
     ;;
@@ -110,7 +110,7 @@ esac
 ```
 > Let's check if the above environment variables are all correct.
 ```bash
-printf '%s\n' $HST_TRIPLET $GCC_MCPU $TGT_{LLVM,ARCH,TRIPLET} $HEI_TRIPLET $CUS_CXFLAGS
+printf '%s\n' $HST_TRIPLET $GCC_MCPU $TGT_{LLVM,ARCH,TRIPLET} $HEI_TRIPLET $ADDON_FLAGS
 ```
 ```bash
 # | On the x86_64 glibc host, the output should be:
@@ -126,8 +126,8 @@ printf '%s\n' $HST_TRIPLET $GCC_MCPU $TGT_{LLVM,ARCH,TRIPLET} $HEI_TRIPLET $CUS_
 > Now apply the above environment variables into bash startup profile.
 ```bash
 cat > ~/.bash_profile << EOF
-exec env -i HOME="\$HOME" TERM="\$TERM" \
-DEF_CXFLAGS=" $CUS_CXFLAGS -Os -pipe -w -g0 " $(command -v bash)
+exec env -i HOME="\$HOME" TERM="\$TERM" HOST_PATH="\$PATH" \
+COMMON_FLAGS=" $ADDON_FLAGS -O2 -pipe -w -g0 " $(command -v bash)
 EOF
 cat > ~/.bashrc << EOF
 set +h
@@ -135,7 +135,7 @@ umask 022
 unalias -a
 LC_ALL="POSIX"
 HEIWA="${HEIWA:-/media/Heiwa}"
-PATH="/clang2-tools/bin:/clang1-tools/bin:/usr/bin:/bin"
+PATH="/clang2-tools/bin:/clang1-tools/bin:\${HOST_PATH}"
 LLVM_SRC="\${HEIWA}/sources/llvm"
 CCACHE_DIR="\${HEIWA}/sources/ccache"
 export LC_ALL HEIWA PATH LLVM_SRC CCACHE_DIR
@@ -146,8 +146,8 @@ TGT_ARCH="$TGT_ARCH"
 TGT_TRIPLET="\${TGT_ARCH}-pc-linux-musl"
 HEI_TRIPLET="\${TGT_ARCH}-heiwa-linux-musl"
 export HST_TRIPLET GCC_MCPU TGT_LLVM TGT_ARCH TGT_TRIPLET HEI_TRIPLET
-CFLAGS="\${DEF_CXFLAGS}"
-CXXFLAGS="\${DEF_CXFLAGS}"
+CFLAGS="\${COMMON_FLAGS}"
+CXXFLAGS="\${COMMON_FLAGS}"
 LDFLAGS="-Wl,-O2 -Wl,--as-needed"
 JOBS="\$(nproc)"
 MAKEFLAGS="-j\${JOBS} -l\$((\${JOBS}+3))"
