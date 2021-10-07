@@ -47,12 +47,12 @@ mount -vo noatime,gc_merge,compress_algorithm=lz4,compress_extension='*',compres
 > Create directories to build Clang/LLVM with GCC and the final toolchain without GCC libraries. As root, link them to host's root directory.
 ```bash
 if [[ -d "$HEIWA" ]]; then
-    if mkdir -pv ${HEIWA}/clang{1,2}-tools; then
-        ln  -sfv ${HEIWA}/clang1-tools /
-        ln  -sfv ${HEIWA}/clang2-tools /
+    if mkdir -pv "$HEIWA"/clang{1,2}-tools; then
+        ln  -sfv "$HEIWA"/clang1-tools /
+        ln  -sfv "$HEIWA"/clang2-tools /
         ln  -sfv lib /clang1-tools/lib64
     fi
-    mkdir -pv ${HEIWA}/sources/{ccache,extra,pkgs}
+    mkdir -pv "$HEIWA"/sources/{ccache,syscore,pkgs}
 fi
 ```
 
@@ -69,9 +69,9 @@ passwd heiwa
 
 ```bash
 if [[ -d "${HEIWA}/sources" && -d "${HEIWA}/clang1-tools" && -d "${HEIWA}/clang2-tools" ]]; then
-    chmod -Rv  a+wt  ${HEIWA}/sources
-    chown -hRv heiwa ${HEIWA}/sources
-    chown -hRv heiwa {${HEIWA},}/clang{1,2}-tools
+    chmod -Rv  a+wt  "$HEIWA"/sources
+    chown -hRv heiwa "$HEIWA"/sources
+    chown -hRv heiwa {"$HEIWA",}/clang{1,2}-tools
 fi
 ```
 > #### Setup default process priorites
@@ -158,7 +158,7 @@ source ~/.bash_profile
 > If you want multitasking responsiveness when using multiple jobs, set the load average to prevent system slowdown e.g core/threads + 3.
 
 > #### After Preparation
-> Copy "[syscore/*](./../../syscore/)" to "${HEIWA}/sources/extra/" now!
+> Copy "[syscore/*](./../../syscore/)" to "${HEIWA}/sources/syscore/" now!
 
 <h2></h2>
 
