@@ -67,7 +67,7 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 
 > > Let me tell you ..
 >
-> One of the reasons why building GCC+Binutils as cross-compiler is to create completely isolated cross-toolchain. Most Clang/LLVM on the GNU/Linux distribution still use GCC libraries, where we need to explicitly point the library path there when building cross-toolchain if using host's Clang/LLVM. Like Gentoo use [slots](https://devmanual.gentoo.org/general-concepts/slotting/index.html), it's not portable used to create Proof-of-Concept if different hosts are different layouts. That's in my perspective.
+> One of the reasons why building GCC+Binutils as cross-compiler is to create completely isolated cross-toolchain. Most Clang/LLVM on the GNU/Linux distribution still using GCC libraries, where we need to explicitly point the library path there when building cross-toolchain if using host's Clang/LLVM. Like Gentoo uses [slots](https://devmanual.gentoo.org/general-concepts/slotting/index.html), it's not portable used to create Proof-of-Concept if different hosts are different layouts. That's in my perspective.
 > 
 > > Everything **just fine** without **confused screaming**.
 
@@ -104,7 +104,7 @@ See [docs](./docs). Go [discussions](https://github.com/heiwalinux/heiwa/discuss
 
 ##  
 <pre><samp>
-<a href="https://github.com/owl4ce">owl4ce</a> © 2021
+<a href="https://github.com/owl4ce">Harry Kurn</a> © 2021
 
 The registered trademark Linux® is used pursuant to a sublicense from the Linux Foundation,
 the exclusive licensee of Linus Torvalds, owner of the mark on a world-wide basis.
