@@ -149,9 +149,9 @@ time { make install-{gcc,target-libgcc}; }
 > The musl package contains the main C library. This library provides the basic routines for allocating memory, searching directories, opening and closing files, reading and writing files, string handling, pattern matching, arithmetic, and so on.
 
 > **Required!** As mentioned in the description above.
-> > **Build time:** ~2m
+> > **Build time:** <2m
 ```bash
-# Configure source.
+# Configure source. The `disable-optimize` here means disable built-in optimization which `-Os` or `-O3` by default.
 ./configure CROSS_COMPILE=${HEI_TRIPLET}- \
             --prefix=/                    \
             --target=${HEI_TRIPLET}       \
@@ -276,7 +276,7 @@ ${HEI_TRIPLET}-readelf -l a.out | grep --color=auto "Req.*ter"
 > > **Build time:** <2m
 ```bash
 # Build with verbose.
-time { make -C lib CC=${HEI_TRIPLET}-gcc libzstd-release V=1; }
+time { make -C lib CC=${HEI_TRIPLET}-gcc libzstd V=1; }
 ```
 ```bash
 # Install.
@@ -287,7 +287,7 @@ time { make -C lib PREFIX=/clang1-tools install-{includes,shared}; }
 > #### `4.4.1` or newer
 > The Ccache package contains compiler cache. It speeds up recompilation by caching previous compilations and detecting when the same compilation is being done again.
 
-> **Required!** To speeds up Clang/LLVM builds across stage 1 and stage 2, especially when errors occur such as power loss.
+> **Required!** To speeds up Clang/LLVM builds across stage 1 and stage 2, especially when errors occur such as power loss. Simply rebuild.
 > > **Build time:** ~3m
 ```bash
 # Configure source.
@@ -445,7 +445,7 @@ find /clang1-tools/{libexec,{,${HEI_TRIPLET}/}lib}/ -name '*.la' -exec rm -fv {}
 find /clang1-tools/{,${HEI_TRIPLET}/}lib/ -type f \( -name '*.a' -o -name '*.so*' \) -exec llvm-strip --strip-unneeded {} \;
 ```
 ```bash
-if cp -v $(command -v llvm-strip) ./; then
+if cp -v $(command -v llvm-strip) .; then
     find /clang1-tools/{libexec,{,${HEI_TRIPLET}/}bin}/ -type f -exec ./llvm-strip --strip-unneeded {} \;
 fi && rm -v ./llvm-strip
 ```
