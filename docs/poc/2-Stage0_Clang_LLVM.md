@@ -207,7 +207,7 @@ tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc{-1.2.1,}
 ```
 ```bash
 # Apply patches (from Alpine Linux).
-../../extra/gcc/patches/appatch
+../../syscore/gcc/patches/appatch
 ```
 ```bash
 # Create a dedicated directory and configure source.
@@ -351,7 +351,7 @@ popd
 ```
 ```bash
 # Apply patches (from Void Linux) and update config.guess for better platform detection.
-../extra/llvm/patches/appatch
+../syscore/llvm/patches/appatch
 ```
 ```bash
 # Configure the entire source. Use optimization level 3, and optimize GNU `ld` linking memory usage.
