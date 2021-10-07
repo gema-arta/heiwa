@@ -57,7 +57,7 @@ source ~/.bashrc
 > **Required!** As mentioned in the description above.
 > > **Build time:** <2m
 ```bash
-# Configure source.
+# Configure source. The `disable-optimize` here means disable built-in optimization which `-Os` or `-O3` by default.
 ./configure --prefix=/              \
             --with-malloc=mallocng  \
             --disable-gcc-wrapper   \
@@ -192,7 +192,7 @@ time {
 > - New implementation of the C++ standard library, targeting C++11 from LLVM.
 
 > **Required!** Build Stage-1 Clang/LLVM self-hosted toolchain.
-> > **Build time:** ~4h-7h
+> > **Build time:** ~4h-6h
 ```bash
 # Exit from LLVM source directory if already entered after decompressing.
 popd
@@ -770,7 +770,7 @@ find /clang2-tools/lib{,exec}/ -name '*.la' -exec rm -fv {} \;
 find /clang2-tools/lib/ -type f \( -name '*.a' -o -name '*.so*' \) -exec llvm-strip --strip-unneeded {} \;
 ```
 ```bash
-if cp -v $(command -v llvm-strip) ./; then
+if cp -v $(command -v llvm-strip) .; then
     find /clang2-tools/{lib{/bash,exec},bin}/ -type f -exec ./llvm-strip --strip-unneeded {} \;
 fi && rm -v ./llvm-strip
 ```
