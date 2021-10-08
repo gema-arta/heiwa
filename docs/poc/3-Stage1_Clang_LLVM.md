@@ -170,7 +170,7 @@ time { make -C build install; }
 > The NetBSD curses package contains libraries for terminal-independent handling of character screens.
 
 > **Required!** For the most programs that depends on `-ltinfo` or `-lterminfo` dynamic linker flags, including Stage-1 Clang/LLVM builds.
-> > **Build time:** ~30s
+> > **Build time:** <30s
 ```bash
 # Build.
 time { make CFLAGS="-flto=thin $CFLAGS" all-dynamic; }
@@ -192,7 +192,7 @@ time {
 > - New implementation of the C++ standard library, targeting C++11 from LLVM.
 
 > **Required!** Build Stage-1 Clang/LLVM self-hosted toolchain.
-> > **Build time:** ~4h-6h
+> > **Build time:** ~2h-6h
 ```bash
 # Exit from LLVM source directory if already entered after decompressing.
 popd
@@ -317,6 +317,7 @@ cmake -B build -Wno-dev \
     -DLLVM_ENABLE_WARNINGS=OFF                  \
     -DLLVM_ENABLE_LIBEDIT=OFF                   \
     -DLLVM_ENABLE_LIBXML2=OFF                   \
+    -DLLVM_ENABLE_ASSERTIONS=OFF                \
     -DLLVM_ENABLE_OCAMLDOC=OFF                  \
     -DLLVM_ENABLE_ZLIB=ON                       \
     -DLLVM_ENABLE_Z3_SOLVER=OFF                 \
@@ -407,7 +408,7 @@ popd
 > The Xz package contains programs for compressing and decompressing files. It provides capabilities for the lzma and the newer xz compression formats. Compressing text files with xz yields a better compression percentage than with the traditional gzip or bzip2 commands.
 
 > **Required!** As the default ".xz" and ".lzma" files de/compressor at current and later stage (chroot environment).
-> > **Build time:** ~30s
+> > **Build time:** <30s
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"                   \
@@ -671,7 +672,7 @@ time { make install; }
 > The Perl package contains the Practical Extraction and Report Language.
 
 > **Required!** To build required packages in the later stage (chroot environment). 
-> > **Build time:** ~5m
+> > **Build time:** <5m
 ```bash
 # Decompress, then copy `perl-cross` over the source.
 tar xzf ../perl-cross-1.3.6.tar.gz && \
