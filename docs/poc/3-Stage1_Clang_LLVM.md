@@ -150,11 +150,11 @@ cp -rfv usr/include /clang2-tools/.
 > > **Build time:** <25s
 ```bash
 # Configure source.
-cmake -B build -Wno-dev \
-    -DCMAKE_INSTALL_PREFIX="/clang2-tools" \
-    -DCMAKE_C_FLAGS="-flto=thin $CFLAGS"   \
-    -DBUILD_SHARED_LIBS=ON                 \
-    -DZLIB_COMPAT=ON
+cmake -B build -Wno-dev                               \
+               -DCMAKE_INSTALL_PREFIX="/clang2-tools" \
+               -DCMAKE_C_FLAGS="-flto=thin $CFLAGS"   \
+               -DBUILD_SHARED_LIBS=ON                 \
+               -DZLIB_COMPAT=ON
 ```
 ```bash
 # Build.
@@ -221,7 +221,7 @@ popd
 ```bash
 # Configure `libunwind` source.
 pushd ${LLVM_SRC}/projects/libunwind/ &&                \
-cmake -B build -Wno-dev                                 \
+cmake -B build -DCMAKE_BUILD_TYPE=Release -Wno-dev      \
                -DCMAKE_INSTALL_PREFIX="/clang2-tools"   \
                -DCMAKE_C_FLAGS="-flto=thin $CFLAGS"     \
                -DCMAKE_CXX_FLAGS="-flto=thin $CXXFLAGS" \
@@ -245,7 +245,7 @@ time {
 ```bash
 # Configure `libcxxabi` source.
 pushd ${LLVM_SRC}/projects/libcxxabi/ &&                \
-cmake -B build -Wno-dev                                 \
+cmake -B build -DCMAKE_BUILD_TYPE=Release -Wno-dev      \
                -DCMAKE_INSTALL_PREFIX="/clang2-tools"   \
                -DCMAKE_CXX_FLAGS="-flto=thin $CXXFLAGS" \
                -DLLVM_PATH="$LLVM_SRC"                  \
@@ -270,7 +270,7 @@ time {
 ```bash
 # Configure `libcxx` source.
 pushd ${LLVM_SRC}/projects/libcxx/ &&                                                  \
-cmake -B build -Wno-dev                                                                \
+cmake -B build -DCMAKE_BUILD_TYPE=Release -Wno-dev                                     \
                -DCMAKE_INSTALL_PREFIX="/clang2-tools"                                  \
                -DCMAKE_CXX_FLAGS="-isystem /clang2-tools/include -flto=thin $CXXFLAGS" \
                -DLLVM_PATH="$LLVM_SRC"                                                 \
@@ -298,47 +298,47 @@ rm -rf projects/lib{unwind,cxx{abi,}}
 ```
 ```bash
 # Configure Clang/LLVM source.
-cmake -B build -Wno-dev \
-    -DCMAKE_INSTALL_PREFIX="/clang2-tools"      \
-    -DBUILD_SHARED_LIBS=ON                      \
-    -DLLVM_CCACHE_BUILD=ON                      \
-    -DLLVM_APPEND_VC_REV=OFF                    \
-    -DLLVM_HOST_TRIPLE="$TGT_TRIPLET"           \
-    -DLLVM_DEFAULT_TARGET_TRIPLE="$TGT_TRIPLET" \
-    -DLLVM_ENABLE_BINDINGS=OFF                  \
-    -DLLVM_ENABLE_EH=ON                         \
-    -DLLVM_ENABLE_IDE=OFF                       \
-    -DLLVM_ENABLE_LIBCXX=ON                     \
-    -DLLVM_ENABLE_LLD=ON                        \
-    -DLLVM_ENABLE_LTO=Thin                      \
-    -DLLVM_ENABLE_RTTI=ON                       \
-    -DLLVM_ENABLE_BACKTRACES=OFF                \
-    -DLLVM_ENABLE_UNWIND_TABLES=OFF             \
-    -DLLVM_ENABLE_WARNINGS=OFF                  \
-    -DLLVM_ENABLE_LIBEDIT=OFF                   \
-    -DLLVM_ENABLE_LIBXML2=OFF                   \
-    -DLLVM_ENABLE_ASSERTIONS=OFF                \
-    -DLLVM_ENABLE_OCAMLDOC=OFF                  \
-    -DLLVM_ENABLE_ZLIB=ON                       \
-    -DLLVM_ENABLE_Z3_SOLVER=OFF                 \
-    -DLLVM_INCLUDE_BENCHMARKS=OFF               \
-    -DLLVM_INCLUDE_EXAMPLES=OFF                 \
-    -DLLVM_INCLUDE_TESTS=OFF                    \
-    -DLLVM_INCLUDE_GO_TESTS=OFF                 \
-    -DLLVM_INCLUDE_DOCS=OFF                     \
-    -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON         \
-    -DLLVM_INSTALL_CCTOOLS_SYMLINKS=ON          \
-    -DLLVM_INSTALL_UTILS=ON                     \
-    -DLLVM_TARGET_ARCH="$TGT_LLVM"              \
-    -DLLVM_TARGETS_TO_BUILD="$TGT_LLVM"         \
-    -DCLANG_VENDOR="Heiwa/Linux"                \
-    -DCLANG_ENABLE_ARCMT=OFF                    \
-    -DCLANG_ENABLE_STATIC_ANALYZER=OFF          \
-    -DCLANG_DEFAULT_CXX_STDLIB=libc++           \
-    -DCLANG_DEFAULT_RTLIB=compiler-rt           \
-    -DCLANG_DEFAULT_LINKER=lld                  \
-    -DCLANG_DEFAULT_UNWINDLIB=libunwind         \
-    -DDEFAULT_SYSROOT="/clang2-tools"
+cmake -B build -DCMAKE_BUILD_TYPE=Release -Wno-dev         \
+               -DCMAKE_INSTALL_PREFIX="/clang2-tools"      \
+               -DBUILD_SHARED_LIBS=ON                      \
+               -DLLVM_CCACHE_BUILD=ON                      \
+               -DLLVM_APPEND_VC_REV=OFF                    \
+               -DLLVM_HOST_TRIPLE="$TGT_TRIPLET"           \
+               -DLLVM_DEFAULT_TARGET_TRIPLE="$TGT_TRIPLET" \
+               -DLLVM_ENABLE_BINDINGS=OFF                  \
+               -DLLVM_ENABLE_EH=ON                         \
+               -DLLVM_ENABLE_IDE=OFF                       \
+               -DLLVM_ENABLE_LIBCXX=ON                     \
+               -DLLVM_ENABLE_LLD=ON                        \
+               -DLLVM_ENABLE_LTO=Thin                      \
+               -DLLVM_ENABLE_RTTI=ON                       \
+               -DLLVM_ENABLE_BACKTRACES=OFF                \
+               -DLLVM_ENABLE_UNWIND_TABLES=OFF             \
+               -DLLVM_ENABLE_WARNINGS=OFF                  \
+               -DLLVM_ENABLE_LIBEDIT=OFF                   \
+               -DLLVM_ENABLE_LIBXML2=OFF                   \
+               -DLLVM_ENABLE_ASSERTIONS=OFF                \
+               -DLLVM_ENABLE_OCAMLDOC=OFF                  \
+               -DLLVM_ENABLE_ZLIB=ON                       \
+               -DLLVM_ENABLE_Z3_SOLVER=OFF                 \
+               -DLLVM_INCLUDE_BENCHMARKS=OFF               \
+               -DLLVM_INCLUDE_EXAMPLES=OFF                 \
+               -DLLVM_INCLUDE_TESTS=OFF                    \
+               -DLLVM_INCLUDE_GO_TESTS=OFF                 \
+               -DLLVM_INCLUDE_DOCS=OFF                     \
+               -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON         \
+               -DLLVM_INSTALL_CCTOOLS_SYMLINKS=ON          \
+               -DLLVM_INSTALL_UTILS=ON                     \
+               -DLLVM_TARGET_ARCH="$TGT_LLVM"              \
+               -DLLVM_TARGETS_TO_BUILD="$TGT_LLVM"         \
+               -DCLANG_VENDOR="Heiwa/Linux"                \
+               -DCLANG_ENABLE_ARCMT=OFF                    \
+               -DCLANG_ENABLE_STATIC_ANALYZER=OFF          \
+               -DCLANG_DEFAULT_CXX_STDLIB=libc++           \
+               -DCLANG_DEFAULT_RTLIB=compiler-rt           \
+               -DCLANG_DEFAULT_LINKER=lld                  \
+               -DCLANG_DEFAULT_UNWINDLIB=libunwind         \
+               -DDEFAULT_SYSROOT="/clang2-tools"
 ```
 ```bash
 # Build.
@@ -800,6 +800,8 @@ if [[ -d "${HEIWA}/clang1-tools" ]]; then
         [[ -L /clang1-tools ]] && unlink /clang1-tools
     popd
 fi
+```
+```bash
 if [[ -d "${HEIWA}/clang2-tools" ]]; then
     pushd "$HEIWA" && XZ_OPT="-9e -T2" \
         tar -vcJpf clang2-tools.tar.xz clang2-tools
