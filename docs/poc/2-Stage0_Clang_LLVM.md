@@ -56,7 +56,7 @@ cp -rfv usr/include /clang1-tools/${HEI_TRIPLET}/.
 > The GNU Binutils package contains a linker, an assembler, and other tools for handling object files.
 
 > **Required!** The musl libc and GCC perform various tests on the linker and assembler to determine which of their own features to enable.
-> > **Build time:** ~3m
+> > **Build time:** <3m
 ```bash
 # Create a dedicated directory and configure source.
 mkdir -v build && cd build &&                            \
@@ -273,7 +273,11 @@ ${HEI_TRIPLET}-readelf -l a.out | grep --color=auto "Req.*ter"
 > The Zstd (Zstandard) package contains real-time compression algorithm, providing high compression ratios. It offers a very wide range of compression / speed trade-offs, while being backed by a very fast decoder.
 
 > **Required!** Only build dynamic libraries and headers for Ccache compression support.
-> > **Build time:** <2m
+> > **Build time:** ~1m
+```bash
+# Disable built-in optimization which is `-O3` by default when `-O?` was detected from CFLAGS.
+sed -i 's|-O3||' lib/Makefile
+```
 ```bash
 # Build with verbose.
 time { make -C lib CC=${HEI_TRIPLET}-gcc libzstd V=1; }
@@ -288,7 +292,11 @@ time { make -C lib PREFIX=/clang1-tools install-{includes,shared}; }
 > The Ccache package contains compiler cache. It speeds up recompilation by caching previous compilations and detecting when the same compilation is being done again.
 
 > **Required!** To speeds up Clang/LLVM builds across stage 1 and stage 2, especially when errors occur such as power loss. Simply rebuild.
-> > **Build time:** ~3m
+> > **Build time:** ~2m
+```bash
+# Disable CMAKE_BUILD_TYPE which forced to "Release" if none was specified.
+sed -i '/CMAKE_BUILD_TYPE/s/Release//' cmake/DefaultBuildType.cmake
+```
 ```bash
 # Configure source.
 cmake -B build -Wno-dev \
@@ -326,7 +334,7 @@ EOF
 > - New implementation of the C++ standard library, targeting C++11 from LLVM.
 
 > **Required!** Build Stage-0 Clang/LLVM toolchain with `libgcc_s.so*` and `libstdc++.so*` dependencies since built with GCC toolchain.
-> > **Build time:** ~4h-6h
+> > **Build time:** ~2h-6h
 ```bash
 # Exit from LLVM source directory if already entered after decompressing.
 popd
@@ -372,6 +380,7 @@ cmake -B build -Wno-dev \
     -DLLVM_ENABLE_LIBEDIT=OFF                   \
     -DLLVM_ENABLE_TERMINFO=OFF                  \
     -DLLVM_ENABLE_LIBXML2=OFF                   \
+    -DLLVM_ENABLE_ASSERTIONS=OFF                \
     -DLLVM_ENABLE_OCAMLDOC=OFF                  \
     -DLLVM_ENABLE_ZLIB=OFF                      \
     -DLLVM_ENABLE_Z3_SOLVER=OFF                 \
