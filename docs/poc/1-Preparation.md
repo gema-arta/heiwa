@@ -151,12 +151,12 @@ CXXFLAGS="\${COMMON_FLAGS}"
 CPPFLAGS="-DNDEBUG"
 LDFLAGS="-Wl,-O2 -Wl,--as-needed"
 JOBS="\$(nproc)"
-MAKEFLAGS="-j\${JOBS} -l\$((\${JOBS}+3))"
+MAKEFLAGS="-j\${JOBS} -l\$((\${JOBS}+2))"
 export CFLAGS CXXFLAGS CPPFLAGS LDFLAGS JOBS MAKEFLAGS
 EOF
 source ~/.bash_profile
 ```
-> If you want multitasking responsiveness when using multiple jobs, set the load average to prevent system slowdown e.g core/threads + 3.
+> If you want multitasking responsiveness when using multiple jobs, set the load average to prevent system overload, e.g core/threads + 2.
 
 > #### After Preparation
 > Copy "[syscore/*](./../../syscore/)" to "${HEIWA}/sources/syscore/" now!
