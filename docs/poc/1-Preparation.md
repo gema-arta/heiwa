@@ -76,12 +76,12 @@ fi
 ```
 > #### Setup default process priorites
 
-> This is an optional section to make privileged user use **19** as default user-level priority through linux-PAM. Don't use **RT** priorities! It's bad.
-> > The below rules can slow down the system, especially GUI if run.
+> This is an optional section to make privileged user use **22** as default user-level priority through linux-PAM. Don't use **RT** priorities! It's bad.
+> > The reason why doing this is to anticipate system freezes in certain situations, especially building Clang/LLVM on low-end devices.
 ```bash
 if ! grep -qo 'heiwa.*priority' /etc/security/limits.conf; then
 cat >> /etc/security/limits.conf << "EOF"
-heiwa            -       priority        -1
+heiwa            -       priority        2
 EOF
 fi
 ```
@@ -148,10 +148,11 @@ HEI_TRIPLET="\${TGT_ARCH}-heiwa-linux-musl"
 export HST_TRIPLET GCC_MCPU TGT_LLVM TGT_ARCH TGT_TRIPLET HEI_TRIPLET
 CFLAGS="\${COMMON_FLAGS}"
 CXXFLAGS="\${COMMON_FLAGS}"
+CPPFLAGS="-DNDEBUG"
 LDFLAGS="-Wl,-O2 -Wl,--as-needed"
 JOBS="\$(nproc)"
 MAKEFLAGS="-j\${JOBS} -l\$((\${JOBS}+3))"
-export CFLAGS CXXFLAGS LDFLAGS JOBS MAKEFLAGS
+export CFLAGS CXXFLAGS CPPFLAGS LDFLAGS JOBS MAKEFLAGS
 EOF
 source ~/.bash_profile
 ```
