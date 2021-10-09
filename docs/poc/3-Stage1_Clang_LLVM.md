@@ -142,49 +142,22 @@ find usr/include \( -name '.*' -o -name 'Makefile' \) -exec rm -fv {} \;
 cp -rfv usr/include /clang2-tools/.
 ```
 
-### `4` - Zlib-ng
-> #### `2.0.5` or newer
-> The Zlib-ng package contains zlib data compression library for the next generation systems.
-
-> **Required!** By Pigz at current stage and optionally enabled for Stage-1 Clang/LLVM builds.
-> > **Build time:** <25s
-```bash
-# Configure source.
-cmake -B build -Wno-dev                               \
-               -DCMAKE_INSTALL_PREFIX="/clang2-tools" \
-               -DCMAKE_C_FLAGS="-flto=thin $CFLAGS"   \
-               -DBUILD_SHARED_LIBS=ON                 \
-               -DZLIB_COMPAT=ON
-```
-```bash
-# Build.
-time { make -C build; }
-```
-```bash
-# Install.
-time { make -C build install; }
-```
-
-### `5` - NetBSD curses
+### `4` - NetBSD curses
 > #### `0.3.2` or newer
 > The NetBSD curses package contains libraries for terminal-independent handling of character screens.
 
 > **Required!** For the most programs that depends on `-ltinfo` or `-lterminfo` dynamic linker flags, including Stage-1 Clang/LLVM builds.
-> > **Build time:** <30s
+> > **Build time:** <40s
 ```bash
 # Build.
 time { make CFLAGS="-flto=thin $CFLAGS" all-dynamic; }
 ```
 ```bash
-# Install and create symlinks as `libtinfo` libraries (which actually replace GNU ncurses).
-time {
-    make PREFIX=/clang2-tools install-dynamic
-    ln -sfv libterminfo.so /clang2-tools/lib/libtinfo.so
-    ln -sfv libterminfo.so /clang2-tools/lib/libtinfow.so
-}
+# Install.
+time { make PREFIX=/clang2-tools install-dynamic; }
 ```
 
-### `6` - Clang/LLVM <kbd>stage 2</kbd>
+### `5` - Clang/LLVM <kbd>stage 2</kbd>
 > #### `12.x.x` or newer
 > - C language family frontend for LLVM;  
 > - C++ runtime stack unwinder from LLVM;  
@@ -219,7 +192,7 @@ popd
 ../syscore/llvm/patches/appatch
 ```
 ```bash
-# Configure `libunwind` source.
+# Configure `libunwind` source. Build time: <5s
 pushd ${LLVM_SRC}/projects/libunwind/ &&                \
 cmake -B build -DCMAKE_BUILD_TYPE=Release -Wno-dev      \
                -DCMAKE_INSTALL_PREFIX="/clang2-tools"   \
@@ -243,7 +216,7 @@ time {
 }
 ```
 ```bash
-# Configure `libcxxabi` source.
+# Configure `libcxxabi` source. Build time: <35s
 pushd ${LLVM_SRC}/projects/libcxxabi/ &&                \
 cmake -B build -DCMAKE_BUILD_TYPE=Release -Wno-dev      \
                -DCMAKE_INSTALL_PREFIX="/clang2-tools"   \
@@ -268,7 +241,7 @@ time {
 }
 ```
 ```bash
-# Configure `libcxx` source.
+# Configure `libcxx` source. Build time: <2m
 pushd ${LLVM_SRC}/projects/libcxx/ &&                                                  \
 cmake -B build -DCMAKE_BUILD_TYPE=Release -Wno-dev                                     \
                -DCMAKE_INSTALL_PREFIX="/clang2-tools"                                  \
@@ -319,7 +292,7 @@ cmake -B build -DCMAKE_BUILD_TYPE=Release -Wno-dev         \
                -DLLVM_ENABLE_LIBXML2=OFF                   \
                -DLLVM_ENABLE_ASSERTIONS=OFF                \
                -DLLVM_ENABLE_OCAMLDOC=OFF                  \
-               -DLLVM_ENABLE_ZLIB=ON                       \
+               -DLLVM_ENABLE_ZLIB=OFF                      \
                -DLLVM_ENABLE_Z3_SOLVER=OFF                 \
                -DLLVM_INCLUDE_BENCHMARKS=OFF               \
                -DLLVM_INCLUDE_EXAMPLES=OFF                 \
@@ -401,6 +374,33 @@ grep --color=auto "ld.lld:.*crt[1in].o" dummy.log
 ```bash
 # Back to "${HEIWA}/sources/pkgs" directory.
 popd
+```
+
+### `6` - Zlib-ng
+> #### `2.0.5` or newer
+> The Zlib-ng package contains zlib data compression library for the next generation systems.
+
+> **Required!** By Pigz at the current stage.
+> > **Build time:** <20s
+```bash
+# Disable CMAKE_BUILD_TYPE which forced to "Release" if none was specified.
+sed -i '/CMAKE_BUILD_TYPE/s/Release//' CMakeLists.txt
+```
+```bash
+# Configure source.
+cmake -B build -Wno-dev                               \
+               -DCMAKE_INSTALL_PREFIX="/clang2-tools" \
+               -DCMAKE_C_FLAGS="-flto=thin $CFLAGS"   \
+               -DBUILD_SHARED_LIBS=ON                 \
+               -DZLIB_COMPAT=ON
+```
+```bash
+# Build.
+time { make -C build; }
+```
+```bash
+# Install.
+time { make -C build install; }
 ```
 
 ### `7` - Xz
