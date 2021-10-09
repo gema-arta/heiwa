@@ -1,8 +1,0 @@
-#!/usr/bin/env sh
-. "$(dirname ${0})/function"
-
-version_check
-
-toolchain_var
-
-prepare_tools
