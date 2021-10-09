@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 export LC_ALL=C LANG=C; unalias -a
 
-G="\033[0;32m" M="\033[1;35m" R="\033[1;31m" NC="\033[0m"
+G='\033[0;32m' M='\033[1;35m' R='\033[1;31m' NC='\033[0m'
 msg() { printf "${M}*${NC} ${G}${1}${NC} ${2}\n"   ; }
 sym() { printf "${R}~${NC} ${1} ${M}->${NC} ${2}\n"; }
 err() { >&2 printf "${R}error:${NC} ${@}\n"; exit 1; }
@@ -16,7 +16,7 @@ https://github.com/heiwalinux/heiwa
 
 EOF
 
-# bash.
+# Any shell (if the argument exist) or bash (for practical purpose with PoC).
 if [ ! -z "${@}" ] && CRS="$(readlink /proc/${$}/exe)" && [ -x "$CRS" ]; then
     msg "$(basename "$CRS")" "$(command -v "$CRS")"
     if readlink -f /bin/sh | grep -Fqo "$CRS"; then
@@ -25,21 +25,28 @@ if [ ! -z "${@}" ] && CRS="$(readlink /proc/${$}/exe)" && [ -x "$CRS" ]; then
 else
     if [ -x "$(command -v bash)" ]; then
         msg "bash" "$(bash --version | sed 1q | cut -d' ' -f4-5)"
-        if SH="$(readlink -f /bin/sh)" && echo "$SH" | grep -Fqo 'bash'; then
-            sym "/bin/sh" "$SH"
+        if readlink -f /bin/sh | grep -Fqo 'bash'; then
+            sym "/bin/sh" "$(readlink -f /bin/sh)"
         else
             err "/bin/sh does not point to bash!"
-        fi && unset SH
+        fi
     else
-        err "bash not installed!"
+        err "bash not installed in this system!"
     fi
 fi
 
-# binutils.
+# GNU's ld or LLVM's lld.
 if [ -x "$(command -v ld)" ]; then
-    msg "binutils" "$(ld --version | sed 1q | cut -d' ' -f3-)"
+    if ld --version | grep -Fqo 'Free Software Foundation'; then
+        msg "GNU ld" "$(ld --version | sed 1q | cut -d' ' -f3-)"
+    elif ld --version | grep -Fqo 'LLD'; then
+        msg "LLD" "$(ld --version | cut -d' ' -f2-)"
+    fi
+    if [ -L $(command -v ld) ]; then
+        sym "$(command -v ld)" "$(readlink -f $(command -v ld))"
+    fi
 else
-    err "binutils not installed!"
+    err "ld (GNU binutils) nor lld (LLVM) not installed in this system!"
 fi
 
 # bison and yacc.
@@ -51,21 +58,21 @@ if [ -L "$(command -v yacc)" ]; then
 elif [ -x "$(command -v yacc)" ]; then
     sym "yacc" "$(yacc --version | sed 1q)"
 else
-    err "yacc not found nor installed!"
+    err "yacc not found nor installed in this system!"
 fi
 
 # bzip2.
 if [ -x "$(command -v bzip2)" ]; then
     msg "bzip2" "$(bzip2 --version 2>&1 </dev/null | sed 1q | cut -d' ' -f8-)"
 else
-    err "bzip2 not installed!"
+    err "bzip2 not installed in this system!"
 fi
 
 # cmake.
 if [ -x "$(command -v cmake)" ]; then
     msg "cmake" "$(cmake --version | sed 1q | cut -d' ' -f3)"
 else
-    err "cmake not installed!"
+    err "cmake not installed in this system!"
 fi
 
 # coreutils implementation and it's diff, find, grep, sed, tar.
@@ -75,8 +82,9 @@ if [ -x "$(command -v chown)" ] && chown --help 2>&1 | grep -Fqo 'BusyBox'; then
         if busybox --list 2>&1 | grep -Fqo "$X"; then
             sym "${X}" "$(command -v busybox) ${X}"
         else
-            sym "${X}" "?"; err "${X} not compiled in $(command -v busybox)!"
-        fi && unset X
+            sym "${X}" "?"
+            err "${X} not compiled in $(command -v busybox)!"
+        fi
     done
 elif [ -x "$(command -v chown)" ] && chown --help 2>&1 | grep -Fqo 'Toybox'; then
     msg "Toybox" "$(toybox chown --help 2>&1 | sed 1q | cut -d' ' -f2-)"
@@ -84,8 +92,9 @@ elif [ -x "$(command -v chown)" ] && chown --help 2>&1 | grep -Fqo 'Toybox'; the
         if toybox 2>&1 | grep -Fqo " ${X} "; then
             sym "${X}" "$(command -v toybox) ${X}"
         else
-            sym "${X}" "?"; err "${X} not compiled in $(command -v toybox)!"
-        fi && unset X
+            sym "${X}" "?"
+            err "${X} not compiled in $(command -v toybox)!"
+        fi
     done
 elif [ -x "$(command -v chown)" ]; then
     msg "coreutils" "$(chown --version | sed 1q | cut -d' ' -f2-)"
@@ -93,34 +102,34 @@ elif [ -x "$(command -v chown)" ]; then
     if [ -x "$(command -v diff)" ]; then
         msg "diffutils" "$(diff --version | sed 1q | cut -d' ' -f2-)"
     else
-        err "diffutils not installed!"
+        err "diffutils not installed in this system!"
     fi
     # findutils.
     if [ -x "$(command -v find)" ]; then
         msg "findutils" "$(find --version | sed 1q | cut -d' ' -f2-)"
     else
-        err "findutils not installed!"
+        err "findutils not installed in this system!"
     fi
     # grep.
     if [ -x "$(command -v grep)" ]; then
         msg "grep" "$(grep --version | sed 1q | cut -d' ' -f2-)"
     else
-        err "grep not installed!"
+        err "grep not installed in this system!"
     fi
     # sed.
     if [ -x "$(command -v sed)" ]; then
         msg "sed" "$(sed --version | sed 1q | cut -d' ' -f2-)"
     else
-        err "sed not installed!"
+        err "sed not installed in this system!"
     fi
     # tar.
     if [ -x "$(command -v tar)" ]; then
         msg "tar" "$(tar --version | sed 1q | cut -d' ' -f2-)"
     else
-        err "tar not installed!"
+        err "tar not installed in this system!"
     fi
 else
-    err "There's no any coreutils implementation installed!"
+    err "There's no any coreutils implementation installed in this system!"
 fi
 
 # flex and lex.
@@ -132,7 +141,7 @@ if [ -L "$(command -v lex)" ]; then
 elif [ -x "$(command -v lex)" ]; then
     sym "lex" "$(lex --version | sed 1q)"
 else 
-    err "lex not found nor installed!"
+    err "lex not found nor installed in this system!"
 fi
 
 # GNU Awk and awk.
@@ -144,60 +153,74 @@ if [ -L "$(command -v awk)" ]; then
 elif [ -x "$(command -v awk)" ]; then
     sym "awk" "$(awk --version | sed 1q)"
 else 
-    err "awk not found nor installed!"
+    err "awk not found nor installed in this system!"
 fi
 
-# GCC.
-if [ -x "$(command -v gcc)" ] && [ -x "$(command -v g++)" ]; then
-    msg "gcc" "$(gcc --version | sed 1q | cut -d' ' -f2-)"
-    msg "g++" "$(g++ --version | sed 1q | cut -d' ' -f2-)"
+# GCC or Clang.
+if [ -x "$(command -v cc)" ]; then
+    if cc --version | grep -Fqo 'Free Software Foundation'; then
+        CC='gcc' CXX='g++'
+    elif cc --version | grep -Fqo 'clang version'; then
+        CC='clang' CXX='clang++'
+    else
+        err "GCC nor Clang not installed in this system!"
+    fi
+    msg "$CC" "$("$CC" --version | sed 1q | cut -d' ' -f2-)"
+    msg "$CXX" "$("$CXX" --version | sed 1q | cut -d' ' -f2-)"
+    if [ -L "$(command -v cc)" ]; then
+        sym "$(command -v cc)" "$(readlink -f $(command -v cc))"
+    fi
 else
-    err "GCC not installed!"
+    err "There's no compiler installed in this system!"
 fi
 
-# libc ldd.
+# ldd (system's libc).
 if [ -x "$(command -v ldd)" ]; then
     msg "ldd" "$(ldd --version | sed 1q | cut -d' ' -f2-)"
 else
-    err "What's your libc implementation? ldd not found in this system!"
+    err "There's no ldd (libc) found in this system!"
 fi
 
 # gzip.
 if [ -x "$(command -v gzip)" ]; then
     msg "gzip" "$(gzip --version | sed 1q | cut -d' ' -f2)"
 else
-    err "gzip not installed!"
+    err "gzip not installed in this system!"
 fi
 
 # Linux.
-msg "Linux" "$(cut -d' ' -f 3- /proc/version)"
+if grep -Fqo 'Linux' /proc/version; then
+    msg "Linux" "$(cut -d' ' -f 3- /proc/version)"
+else
+    err "This system is not Linux!"
+fi
 
 # m4.
 if [ -x "$(command -v m4)" ]; then
     msg "m4" "$(m4 --version | sed 1q | cut -d' ' -f2-)"
 else
-    err "m4 not installed!"
+    err "m4 not installed in this system!"
 fi
 
 # Make.
 if [ -x "$(command -v make)" ]; then
     msg "Make" "is $(make --version | sed 1q | cut -d' ' -f 1-)"
 else
-    err "Make not installed!"
+    err "Make not installed in this system!"
 fi
 
 # Perl.
 if [ -x "$(command -v perl)" ]; then
     msg "Perl" "$(perl -v | grep -F 'version' | cut -d' ' -f9-)"
 else
-    err "Perl not installed!"
+    err "Perl not installed in this system!"
 fi
 
 # Python3.
 if [ -x "$(command -v python3)" ]; then
     msg "Python" "$(python3 --version | cut -d' ' -f 2-)"
 else
-    err "Python not installed!"
+    err "Python not installed in this system!"
 fi
 
 # makeinfo.
@@ -207,23 +230,23 @@ if [ -x "$(command -v makeinfo)" ]; then
         sym "$(command -v makeinfo)" "$(readlink -f $(command -v makeinfo))"
     fi
 else
-    err "There's no makeinfo found nor installed!"
+    err "There's no makeinfo found nor installed in this system!"
 fi
 
 # xz.
 if [ -x "$(command -v xz)" ]; then
     msg "xz" "$(xz --version | sed 1q | cut -d' ' -f2-)"
 else
-    err "xz not installed!"
+    err "xz not installed in this system!"
 fi
 
 # Compiler sanity check.
-msg "gcc" "sanity check:\n"
-if echo 'int main(){}' | gcc -x c++ - -march=native -O2 -ftree-vectorize -pipe -w -g0 && [ -x a.out ]; then
+msg "$CC" "sanity check:\n"
+if echo 'int main(){}' | "$CC" -x c++ - -march=native -O2 -ftree-vectorize -pipe -w -g0 && [ -x a.out ]; then
     readelf -l a.out   | grep --color=auto  "Req.*ter"
     printf "\n${G}[${NC} %s ${G}]${NC}\n\n" "OK"
     rm -f      a.out
 else
     printf "${R}[${NC} %s ${R}]${NC}\n\n"   "FAILED"
-    rm -f      a.out    && exit 1
-fi && unset LC_ALL LANG && exit $?
+    rm -f      a.out  && exit 1
+fi; unset LC_ALL LANG && exit $?
