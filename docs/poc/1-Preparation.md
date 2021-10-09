@@ -76,12 +76,12 @@ fi
 ```
 > #### Setup default process priorites
 
-> This is an optional section to make privileged user use **22** as default user-level priority through linux-PAM. Don't use **RT** priorities! It's bad.
-> > The reason why doing this is to anticipate system freezes in certain situations, especially building Clang/LLVM on low-end devices.
+> This is an optional section to make privileged user use **19** as default user-level priority through linux-PAM. Don't use **RT** priorities! It's bad.
+> > The reason why doing this is to speeds up build-time by prioritizing compilation process over the user processes. However, this is not recommended for low-end devices, you may want anticipate system freezes in certain situations, so set the **-1** below to more than **0**.
 ```bash
 if ! grep -qo 'heiwa.*priority' /etc/security/limits.conf; then
 cat >> /etc/security/limits.conf << "EOF"
-heiwa            -       priority        2
+heiwa            -       priority        -1
 EOF
 fi
 ```
@@ -151,12 +151,12 @@ CXXFLAGS="\${COMMON_FLAGS}"
 CPPFLAGS="-DNDEBUG"
 LDFLAGS="-Wl,-O2 -Wl,--as-needed"
 JOBS="\$(nproc)"
-MAKEFLAGS="-j\${JOBS} -l\$((\${JOBS}+2))"
+MAKEFLAGS="-j\${JOBS} -l\$((\${JOBS}+3))"
 export CFLAGS CXXFLAGS CPPFLAGS LDFLAGS JOBS MAKEFLAGS
 EOF
 source ~/.bash_profile
 ```
-> If you want multitasking responsiveness when using multiple jobs, set the load average to prevent system overload, e.g core/threads + 2.
+> If you want multitasking responsiveness when using multiple jobs, set the load average to prevent system overload e.g **core/threads** + **3**.
 
 > #### After Preparation
 > Copy "[syscore/*](./../../syscore/)" to "${HEIWA}/sources/syscore/" now!
