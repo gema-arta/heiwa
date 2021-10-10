@@ -11,7 +11,7 @@
 > <summary>Screenshot of Gentoo/Linux host</summary>
 > 
 > <br>
-> <p align="center"><img src="https://i.imgur.com/PlotBPA.png" alt=""/></p>
+> <p align="center"><img src="https://i.imgur.com/3t9Y0bC.png" alt=""/></p>
 > 
 > </details>
 
