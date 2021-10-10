@@ -468,7 +468,7 @@ time { install -vm755 -t /clang2-tools/bin/ autopoint msg{fmt,merge} xgettext; }
 > The Toybox package contains "portable" utilities for showing and setting the basic system characteristics.
 
 > **Required!** For current and later stage (chroot environment).
-> > **Build time:** ~35s
+> > **Build time:** <40s
 ```bash
 # Copy the Toybox .config file. Ensure `libz` is enabled in the config.
 cp -v ../../syscore/toybox/files/.config.toolchain.nolibcrypto .config
@@ -477,21 +477,23 @@ grep --color=auto "CONFIG_TOYBOX_LIBZ=y" .config
 ```bash
 # Export commands as TOYBOX variable that will be used to verify Toybox .config.
 read -rd '' TOYBOX << "EOF"
-base64 base32 basename cat chgrp chmod chown chroot cksum comm cp cut date dd
-df dirname du echo env expand expr factor false fmt fold groups head hostid id
-install link ln logname ls md5sum mkdir mkfifo mknod mktemp mv nice nl nohup
-nproc od paste printenv printf pwd readlink realpath rm rmdir seq sha1sum shred
-sleep sort split stat stty sync tac tail tee test timeout touch tr true truncate
-tty uname uniq unlink wc who whoami yes file find xargs egrep grep fgrep sed tar
+base64 base32 basename cat chgrp chmod chown chroot cksum comm cp cut date dd df dirname du echo
+env expand expr factor false fmt fold groups head hostid id install link ln logname ls md5sum
+mkdir mkfifo mknod mktemp mv nice nl nohup nproc od paste printenv printf pwd readlink realpath
+rm rmdir seq sha1sum shred sleep sort split stat stty sync tac tail tee test timeout touch tr
+true truncate tty uname uniq unlink wc who whoami yes file find xargs egrep grep fgrep sed tar
 EOF
 ```
 ```bash
 # Verify 87 commands, and ensure enabled (=y).
 # Pipe to ` | wc -l` at the right of `done` to check the total of commands.
 for X in ${TOYBOX}; do
-    grep -v '#' .config | grep --color=auto -i "CONFIG_${X}=" \
-    || >&2 echo "> ${X} not CONFIGURED!"
+    grep -v '#' .config | grep --color=auto -i "CONFIG_${X}=" || >&2 echo "> ${X} not CONFIGURED!"
 done
+```
+```bash
+# Disable built-in optimization which is `-Os` by default.
+sed -si 's|-Os||g' configure scripts/mcm-buildall.sh
 ```
 ```bash
 # Build with verbose. Toybox will use `cc` that breaks the build, so point HOSTCC to current CC.
@@ -499,14 +501,12 @@ time { make HOSTCC=${CC} CFLAGS="-flto=thin $CFLAGS" V=1; }
 ```
 ```bash
 # Verify compiled 87 commands.
-./toybox | tr ' ' '\n' \
-| grep --color=auto -xE $(echo ${TOYBOX} | tr ' ' '|') | wc -l
+./toybox | tr ' ' '\n' | grep --color=auto -xE $(echo ${TOYBOX} | tr ' ' '|') | wc -l
 ```
 ```bash
 # Verify unconfigured commands, but compiled.
 # `[` (coreutils)
-./toybox | tr ' ' '\n' \
-| grep --color=auto -vxE $(echo ${TOYBOX} | tr ' ' '|')
+./toybox | tr ' ' '\n' | grep --color=auto -vxE $(echo ${TOYBOX} | tr ' ' '|')
 ```
 ```bash
 # So, totally is 88 commands.
@@ -522,7 +522,7 @@ time { make HOSTCC=${CC} PREFIX=/clang2-tools/bin install_flat && unset X TOYBOX
 > The GNU Awk (gawk) package contains programs for manipulating text files.
 
 > **Required!** For current and later stage (chroot environment) that most build systems depends on GNU-style permutation.
-> > **Build time:** ~35s
+> > **Build time:** <50s
 ```bash
 # Ensure some unneeded files are not installed, use symlinks rather than hardlinks, and disable version links.
 sed -e '/^LN =/s/=.*/= $(LN_S)/'         \
@@ -541,7 +541,7 @@ CFLAGS="-flto=thin $CFLAGS"           \
 time { make; }
 ```
 ```bash
-# Install and create symlink as `awk` which not linked because version links is disabled.
+# Install and create symlink as `awk` (which not automatically linked since version links is disabled).
 time {
     make install
     ln -sfv gawk /clang2-tools/bin/awk
@@ -553,7 +553,7 @@ time {
 > The GNU Diffutils package contains programs that show the differences between files or directories.
 
 > **Required!** For current and later stage (chroot environment) that most build systems depends on GNU-style permutation.
-> > **Build time:** <30s
+> > **Build time:** <40s
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"                   \
@@ -576,7 +576,7 @@ time { make install; }
 > The GNU Make package contains a program for controlling the generation of executables and other non-source files of a package from source files.
 
 > **Required!** For current and later stage (chroot environment) that most build systems depends on GNU-style permutation.
-> > **Build time:** ~15s
+> > **Build time:** <20s
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"                   \
@@ -599,7 +599,7 @@ time { make install; }
 > The GNU Patch package contains a program for modifying or creating files by applying a patch file typically created by the diff program.
 
 > **Required!** For current and later stage (chroot environment). The GNU's `patch` can handle offset lines, which is powerful feature.
-> > **Build time:** ~15s
+> > **Build time:** <20s
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"                   \
@@ -621,7 +621,7 @@ time { make install; }
 > The Texinfo package contains programs for reading, writing, and converting info pages.
 
 > **Required!** For most packages in the later stage (chroot environment). Nothing is GNU-free.
-> > **Build time:** <1m
+> > **Build time:** ~1m
 ```bash
 # Configure source.
 CFLAGS="-flto=thin $CFLAGS"                   \
@@ -672,7 +672,7 @@ time { make install; }
 > The Perl package contains the Practical Extraction and Report Language.
 
 > **Required!** To build required packages in the later stage (chroot environment). 
-> > **Build time:** <5m
+> > **Build time:** <6m
 ```bash
 # Decompress, then copy `perl-cross` over the source.
 tar xzf ../perl-cross-1.3.6.tar.gz && \
@@ -700,13 +700,13 @@ time { make install; }
 > The Python3 package contains the Python development environment. It is useful for object-oriented programming, writing scripts, prototyping large programs, or developing entire applications.
 
 > **Required!** To build Clang/LLVM and other required packages in the later stage (chroot environment).
-> > **Build time:** <5m
+> > **Build time:** <6m
 ```bash
 # Prevent using hard-coded paths to host's headers and libraries directory, fix multiple jobs, and use ThinLTO.
 sed -e '/def add_multiarch_paths/a \        return' \
     -e "/self\.parallel/s/True/${JOBS}/" -i setup.py
 sed -i "s|-j0|-j${JOBS}|" Makefile.pre.in
-sed -i 's|-flto|-flto=thin|' configure
+sed -e 's|-flto|-flto=thin|' -e 's|-O3||' -i configure
 ```
 ```bash
 # Configure source using provided libraries (built-in).
