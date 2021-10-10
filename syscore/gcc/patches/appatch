@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 # Number 0021 removed.
 
 for P in \
@@ -43,6 +43,5 @@ for P in \
     0040-configure-Add-enable-autolink-libatomic-use-in-LINK_.patch \
     0041-Use-generic-errstr.go-implementation-on-musl.patch \
     0042-configure-fix-detection-of-atomic-builtins-in-libato.patch
-do
-    patch -Np1 -i ../../syscore/gcc/patches/${P}
-done
+do patch -Np1 -i ../../syscore/gcc/patches/${P}
+done; unset P
