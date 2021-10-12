@@ -743,7 +743,7 @@ CFLAGS="-flto=thin $CFLAGS" CXXFLAGS="$CFLAGS" \
 ./bootstrap --prefix=/clang2-tools             \
             --mandir=/share/man                \
             --docdir=/share/doc/cmake-3.21.3   \
-            --parallel=${JOBS}                 \
+            --enable-ccache --parallel=${JOBS} \
             -- -Wno-dev -DCMAKE_USE_OPENSSL=OFF
 ```
 ```bash
