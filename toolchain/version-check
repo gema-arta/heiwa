@@ -1,17 +1,37 @@
 #!/usr/bin/env sh
-export LC_ALL=C LANG=C; unalias -a
+#
+# Host system requirements checker for Heiwa/Linux builds
+# This POSIX-sh script is part of the "Magnolia" Auto-build System
+#
+# ISC License
+#
+# Copyright (c) 2021 Heiwa/Linux
+#
+# Permission to use, copy, modify, and/or distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+# REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+# AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+# INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+# LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+# OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+# PERFORMANCE OF THIS SOFTWARE.
 
-G='\033[0;32m' M='\033[1;35m' R='\033[1;31m' NC='\033[0m'
-msg() { printf "${M}*${NC} ${G}${1}${NC} ${2}\n"   ; }
-sym() { printf "${R}~${NC} ${1} ${M}->${NC} ${2}\n"; }
-err() { >&2 printf "${R}error:${NC} ${@}\n"; exit 1; }
+export LC_ALL=POSIX; unalias -a
+
+G='\033[0;32m' M='\033[1;35m' R='\033[1;31m' NC='\033[0m' # Some ANSI Color codes.
+
+# Some messed and opinionated pretty function-outputs. Yes, shell-script is dirty.
+msg() {     printf "${M}%s${NC} ${G}%b${NC} %b\n"    '*' "${1}" "${2}"; }
+sym() {     printf "${R}%s${NC} %b ${M}->${NC} %b\n" '~' "${1}" "${2}"; }
+die() { >&2 printf "${R}%s${NC} %b\n"          'dieor:' "${@}"; exit 1; }
 
 cat << "EOF"
 
-POSIX-sh script to check host system requirements for Heiwa/Linux builds.
-Author: owl4ce <findarr@pm.me>
-License: GPL-2.0
------------------------------------
+Checking host system requirements ..
+-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-
 https://github.com/heiwalinux/heiwa
 
 EOF
@@ -28,10 +48,10 @@ else
         if readlink -f /bin/sh | grep -Fqo 'bash'; then
             sym "/bin/sh" "$(readlink -f /bin/sh)"
         else
-            err "/bin/sh does not point to bash!"
+            die "/bin/sh does not point to bash!"
         fi
     else
-        err "bash not installed in this system!"
+        die "bash not installed in this system!"
     fi
 fi
 
@@ -46,7 +66,7 @@ if [ -x "$(command -v ld)" ]; then
         sym "$(command -v ld)" "$(readlink -f $(command -v ld))"
     fi
 else
-    err "ld (GNU binutils) nor lld (LLVM) not installed in this system!"
+    die "ld (GNU binutils) nor lld (LLVM) not installed in this system!"
 fi
 
 # bison and yacc.
@@ -58,21 +78,21 @@ if [ -L "$(command -v yacc)" ]; then
 elif [ -x "$(command -v yacc)" ]; then
     sym "yacc" "$(yacc --version | sed 1q)"
 else
-    err "yacc not found nor installed in this system!"
+    die "yacc not found nor installed in this system!"
 fi
 
 # bzip2.
 if [ -x "$(command -v bzip2)" ]; then
     msg "bzip2" "$(bzip2 --version 2>&1 </dev/null | sed 1q | cut -d' ' -f8-)"
 else
-    err "bzip2 not installed in this system!"
+    die "bzip2 not installed in this system!"
 fi
 
 # cmake.
 if [ -x "$(command -v cmake)" ]; then
     msg "cmake" "$(cmake --version | sed 1q | cut -d' ' -f3)"
 else
-    err "cmake not installed in this system!"
+    die "cmake not installed in this system!"
 fi
 
 # coreutils implementation and it's diff, find, grep, sed, tar.
@@ -83,7 +103,7 @@ if [ -x "$(command -v chown)" ] && chown --help 2>&1 | grep -Fqo 'BusyBox'; then
             sym "${X}" "$(command -v busybox) ${X}"
         else
             sym "${X}" "?"
-            err "${X} not compiled in $(command -v busybox)!"
+            die "${X} not compiled in $(command -v busybox)!"
         fi
     done
 elif [ -x "$(command -v chown)" ] && chown --help 2>&1 | grep -Fqo 'Toybox'; then
@@ -93,7 +113,7 @@ elif [ -x "$(command -v chown)" ] && chown --help 2>&1 | grep -Fqo 'Toybox'; the
             sym "${X}" "$(command -v toybox) ${X}"
         else
             sym "${X}" "?"
-            err "${X} not compiled in $(command -v toybox)!"
+            die "${X} not compiled in $(command -v toybox)!"
         fi
     done
 elif [ -x "$(command -v chown)" ]; then
@@ -102,34 +122,34 @@ elif [ -x "$(command -v chown)" ]; then
     if [ -x "$(command -v diff)" ]; then
         msg "diffutils" "$(diff --version | sed 1q | cut -d' ' -f2-)"
     else
-        err "diffutils not installed in this system!"
+        die "diffutils not installed in this system!"
     fi
     # findutils.
     if [ -x "$(command -v find)" ]; then
         msg "findutils" "$(find --version | sed 1q | cut -d' ' -f2-)"
     else
-        err "findutils not installed in this system!"
+        die "findutils not installed in this system!"
     fi
     # grep.
     if [ -x "$(command -v grep)" ]; then
         msg "grep" "$(grep --version | sed 1q | cut -d' ' -f2-)"
     else
-        err "grep not installed in this system!"
+        die "grep not installed in this system!"
     fi
     # sed.
     if [ -x "$(command -v sed)" ]; then
         msg "sed" "$(sed --version | sed 1q | cut -d' ' -f2-)"
     else
-        err "sed not installed in this system!"
+        die "sed not installed in this system!"
     fi
     # tar.
     if [ -x "$(command -v tar)" ]; then
         msg "tar" "$(tar --version | sed 1q | cut -d' ' -f2-)"
     else
-        err "tar not installed in this system!"
+        die "tar not installed in this system!"
     fi
 else
-    err "There's no any coreutils implementation installed in this system!"
+    die "There's no any coreutils implementation installed in this system!"
 fi
 
 # flex and lex.
@@ -141,7 +161,7 @@ if [ -L "$(command -v lex)" ]; then
 elif [ -x "$(command -v lex)" ]; then
     sym "lex" "$(lex --version | sed 1q)"
 else 
-    err "lex not found nor installed in this system!"
+    die "lex not found nor installed in this system!"
 fi
 
 # GNU Awk and awk.
@@ -153,7 +173,7 @@ if [ -L "$(command -v awk)" ]; then
 elif [ -x "$(command -v awk)" ]; then
     sym "awk" "$(awk --version | sed 1q)"
 else 
-    err "awk not found nor installed in this system!"
+    die "awk not found nor installed in this system!"
 fi
 
 # GCC or Clang.
@@ -163,7 +183,7 @@ if [ -x "$(command -v cc)" ]; then
     elif cc --version | grep -Fqo 'clang version'; then
         CC='clang' CXX='clang++'
     else
-        err "GCC nor Clang not installed in this system!"
+        die "GCC nor Clang not installed in this system!"
     fi
     msg "$CC" "$("$CC" --version | sed 1q | cut -d' ' -f2-)"
     msg "$CXX" "$("$CXX" --version | sed 1q | cut -d' ' -f2-)"
@@ -171,56 +191,56 @@ if [ -x "$(command -v cc)" ]; then
         sym "$(command -v cc)" "$(readlink -f $(command -v cc))"
     fi
 else
-    err "There's no compiler installed in this system!"
+    die "There's no compiler installed in this system!"
 fi
 
 # ldd (system's libc).
 if [ -x "$(command -v ldd)" ]; then
     msg "ldd" "$(ldd --version | sed 1q | cut -d' ' -f2-)"
 else
-    err "There's no ldd (libc) found in this system!"
+    die "There's no ldd (libc) found in this system!"
 fi
 
 # gzip.
 if [ -x "$(command -v gzip)" ]; then
     msg "gzip" "$(gzip --version | sed 1q | cut -d' ' -f2)"
 else
-    err "gzip not installed in this system!"
+    die "gzip not installed in this system!"
 fi
 
 # Linux.
 if grep -Fqo 'Linux' /proc/version; then
     msg "Linux" "$(cut -d' ' -f 3- /proc/version)"
 else
-    err "This system is not Linux!"
+    die "This system is not Linux!"
 fi
 
 # m4.
 if [ -x "$(command -v m4)" ]; then
     msg "m4" "$(m4 --version | sed 1q | cut -d' ' -f2-)"
 else
-    err "m4 not installed in this system!"
+    die "m4 not installed in this system!"
 fi
 
 # Make.
 if [ -x "$(command -v make)" ]; then
     msg "Make" "is $(make --version | sed 1q | cut -d' ' -f 1-)"
 else
-    err "Make not installed in this system!"
+    die "Make not installed in this system!"
 fi
 
 # Perl.
 if [ -x "$(command -v perl)" ]; then
     msg "Perl" "$(perl -v | grep -F 'version' | cut -d' ' -f9-)"
 else
-    err "Perl not installed in this system!"
+    die "Perl not installed in this system!"
 fi
 
 # Python3.
 if [ -x "$(command -v python3)" ]; then
     msg "Python" "$(python3 --version | cut -d' ' -f 2-)"
 else
-    err "Python not installed in this system!"
+    die "Python not installed in this system!"
 fi
 
 # makeinfo.
@@ -230,23 +250,23 @@ if [ -x "$(command -v makeinfo)" ]; then
         sym "$(command -v makeinfo)" "$(readlink -f $(command -v makeinfo))"
     fi
 else
-    err "There's no makeinfo found nor installed in this system!"
+    die "There's no makeinfo found nor installed in this system!"
 fi
 
 # xz.
 if [ -x "$(command -v xz)" ]; then
     msg "xz" "$(xz --version | sed 1q | cut -d' ' -f2-)"
 else
-    err "xz not installed in this system!"
+    die "xz not installed in this system!"
 fi
 
 # Compiler sanity check.
 msg "$CC" "sanity check:\n"
-if echo 'int main(){}' | "$CC" -x c++ - -march=native -O2 -ftree-vectorize -pipe -w -g0 && [ -x a.out ]; then
-    readelf -l a.out   | grep --color=auto  "Req.*ter"
-    printf "\n${G}[${NC} %s ${G}]${NC}\n\n" "OK"
-    rm -f      a.out
+if echo 'int main(){}' | "$CC" -x c++ - -march=native -O2 -pipe -w -g0 && [ -x a.out ]; then
+    readelf -l a.out | grep --color=auto "Req.*ter"
+    printf "\n${G}%s${NC} %s ${G}%s${NC}\n\n" '[' "OK" ']'
+    rm -f a.out && exit $?
 else
-    printf "${R}[${NC} %s ${R}]${NC}\n\n"   "FAILED"
-    rm -f      a.out  && exit 1
-fi; unset LC_ALL LANG && exit $?
+    printf "${R}%s${NC} %s ${R}%s${NC}\n\n" '[' "FAILED" ']'
+    rm -f a.out && exit 1
+fi
