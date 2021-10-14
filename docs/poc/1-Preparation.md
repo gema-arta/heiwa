@@ -5,13 +5,13 @@
 
 > #### Host System Requirements
 > ```sh
-> sh <(curl -s "https://raw.githubusercontent.com/heiwalinux/heiwa/main/version-check")
+> sh <(curl -sL https://git.io/JKsPH)
 > ```
 > <details>
 > <summary>Screenshot of Gentoo/Linux host</summary>
 > 
 > <br>
-> <p align="center"><img src="https://i.imgur.com/3t9Y0bC.png" alt=""/></p>
+> <p align="center"><img src="https://i.imgur.com/KbAiaDm.png" alt=""/></p>
 > 
 > </details>
 
