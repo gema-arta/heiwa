@@ -26,7 +26,7 @@ G='\033[0;32m' M='\033[1;35m' R='\033[1;31m' NC='\033[0m' # Some ANSI Color code
 # Some messed and opinionated pretty function-outputs. Yes, shell-script is dirty.
 msg() {     printf "${M}%s${NC} ${G}%b${NC} %b\n"    '*' "${1}" "${2}"; }
 sym() {     printf "${R}%s${NC} %b ${M}->${NC} %b\n" '~' "${1}" "${2}"; }
-die() { >&2 printf "${R}%s${NC} %b\n"          'dieor:' "${@}"; exit 1; }
+die() { >&2 printf "${R}%s${NC} %b\n"          'error:' "${@}"; exit 1; }
 
 cat << "EOF"
 
