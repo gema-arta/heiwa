@@ -1,0 +1,522 @@
+#!/usr/bin/env sh
+#
+# The core of "Magnolia" Auto-build System
+#
+# ISC License
+#
+# Copyright (c) 2021 Heiwa/Linux
+#
+# Permission to use, copy, modify, and/or distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+# REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+# AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+# INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+# LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+# OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+# PERFORMANCE OF THIS SOFTWARE.
+
+# Speed-up script by using POSIX locale (and portability), safe exec, and unalias all.
+export LC_ALL=POSIX; set -e; unalias -a; umask 022 ##### Only writable by their owner.
+# Export current working directory from the `build` script, and current running shell.
+export CWD="$(cd -- "$(dirname ${0})"; pwd -P)" CRS="$(readlink -f "/proc/${$}/exe")"
+
+# Disable hashing function for bash and zsh to avoid remember the PATH of executables.
+for X in bash zsh; do [ "$(command -v "$X")" != "$CRS" ] || { set +h && break; }; done
+
+G='\033[1;32m' B='\033[1;34m' M='\033[1;35m' R='\033[1;31m' NC='\033[0m' \
+g='\033[0;32m' b='\033[0;34m' m='\033[0;35m' r='\033[0;31m' # Some ANSI Color codes.
+
+# Some messed and opinionated pretty function-outputs. Yes, shell-script is dirty.
+msg() {     printf " ${G}%s${NC} %b\n"             '>' "${@}"; } # Main message.
+sub() {     printf " ${M}%s${NC} %b\n"             '•' "${@}"; } # Sub-message.
+hea() {     printf "\n${B}%s${M}%s${NC} %b\n"  '*' ')' "${@}"; } # Header message.
+die() { >&2 printf "${R}%s${NC} %b\n" 'error:' "${@}"; exit 1; } # Die message.
+lst() {     printf "%s${r}%s${NC}%s %b\n"  '-' '~' '-' "${@}"; } # List message.
+srg() {     printf '\n%s %b\n\n'           '¯\_(ツ)_/¯' "${@}"; } # Shrug message.
+
+# Process interruption signal-trap. Triggered by: hang up, interrupt, and terminate.
+trap "srg \"${r}process suddenly interrupted.${NC}\"; trap - INT; exit" HUP INT TERM
+
+# Determine the authority delegator, only `doas` or `sudo`.
+[ "${EUID:-$(id -u)}" -ne 0 ] || die "Don't run as ${r}root${NC}!"
+[ ! -x "$(command -v doas)" ] || AUD='doas'
+[ ! -x "$(command -v sudo)" ] || AUD='sudo'
+[ -x "$(command -v "$AUD")" ] || die "${m}sudo${NC} nor ${m}doas${NC} not found!"
+
+# Load the configuration from "heiwa.conf", auto-generated.
+[    -f "${CWD}/heiwa.conf" ] || install "${CWD}/heiwa.conf.def" "${CWD}/heiwa.conf"
+      . "${CWD}/heiwa.conf"
+
+# ~-~-~-~-~-~-~-~-~-~-~-~-~~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+# The target root (/) file system.
+export HEIWA="$("$CRS" -c "echo ${TARGET_ROOTFS}")"
+# The identity for Stage-0 builds.
+export CL1_TOOLS='clang1-tools'
+# The identity for Stage-1 builds.
+export CL2_TOOLS='clang2-tools'
+# System core, the local "core" repository directory path.
+export REPO_CORE="${CWD}/../syscore"
+# Distribution files, the package tarballs directory path.
+export DIST_DIR="${DIST_DIR:-${CWD}/distfiles}"
+# Magnolia's working directory path for building the packages.
+export MAGNOLIA_DIR="${MAGNOLIA_DIR:-${CWD}/magnolia}"
+# Ccache directory path, to be used to build cross LLVM and Cmake.
+export CCACHE_DIR="${CWD}/ccache"
+# Magnolia's cross @syscore set, to be used as package recorder.
+SYSCORE_SET="${MAGNOLIA_DIR}/@syscore_cross"
+# Magnolia's staged directory name for staged installation.
+STAGED_DIR='STELLATA'
+# File-name for Magnolia's build recipe, stellata.
+BUILD_RECIPE='stellata'
+# Valid tarball file-extensions, separated by "|".
+TARBALL_EXTS='bz2|gz|xz'
+# The tarball URLs (extended-)regular expressions.
+URL_REGEXP="(ftp|http|https)://.*.(${TARBALL_EXTS})"
+
+# ~-~-~-~-~-~-~-~-~-~-~-~-~~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~
+
+version_check()
+{
+    if [ -x "${CWD}/version-check" ]; then
+        if ! "$CRS" "${CWD}/version-check" :; then
+            die "Failed to check host system requirements."
+        fi
+    fi
+}
+
+toolchain_var()
+{
+    hea "Setting up toolchain environment"
+    # Host cross-triplet, cross-gcc built.
+    HST_TRIPLET="$(${CC:-cc} -dumpmachine | sed 's|-[^-]*|-cross|')"
+    # Determine the load-average,
+    [ -z "$LOAD" ] || LOAD=" -l${LOAD}"
+    # then apply it to makeflags.
+    MAKEFLAGS="-j${JOBS:-2}${LOAD}"
+    # Detect the native CPU arch.
+    case "$NATIVE_ARCH" in
+        x86_64) TGT_LLVM='X86'
+                GCC_MCPU='x86-64'
+                TGT_ARCH='x86_64'
+                TGT_TRIPLET="${TGT_ARCH}-pc-linux-musl"
+                HEI_TRIPLET="${TGT_ARCH}-heiwa-linux-musl"
+        ;;
+        *)      die "Any architecture other than ${g}x86_64${NC} currently not implemented yet."
+        ;;
+    esac
+    export COMMON_FLAGS \
+           CPPFLAGS     \
+           LDFLAGS      \
+           JOBS         \
+           LOAD         \
+           MAKEFLAGS    \
+           TGT_LLVM     \
+           GCC_MCPU     \
+           TGT_ARCH     \
+           HST_TRIPLET  \
+           TGT_TRIPLET  \
+           HEI_TRIPLET  \
+           PATH="/${CL2_TOOLS}/bin:/${CL1_TOOLS}/bin:${PATH}"
+    # Time to show-off,
+    msg "Detected ${m}NATIVE_ARCH${NC} as ${g}${TGT_ARCH}${NC}"
+    for TC_ENVAR in "$TGT_LLVM"                              \
+                    "$GCC_MCPU"                              \
+                    "$TGT_ARCH"                              \
+                    "$HST_TRIPLET"                           \
+                    "$TGT_TRIPLET"                           \
+                    "$HEI_TRIPLET"                           \
+                    "${COMMON_FLAGS} ${CPPFLAGS} ${LDFLAGS}" \
+                    "$MAKEFLAGS"
+    do # with awesome outputs :P
+        sub "${m}|${NC} ${b}\"${NC}${TC_ENVAR}${b}\"${NC}"
+    done
+}
+
+prepare_tools()
+{
+    hea "Preparing cross-toolchain directories"
+    # HEIWA = TARGET_ROOTFS.
+    if [ -z "$HEIWA" ]; then
+        die "Please fill ${m}\$TARGET_ROOTFS${NC} in the ${g}heiwa.conf${NC}!"
+    fi; msg "Detected ${m}TARGET_ROOTFS${NC} as ${g}${HEIWA}${NC}"
+    # Prepare the local directories.
+    for DIR in "$DIST_DIR" "$MAGNOLIA_DIR" "$CCACHE_DIR"; do
+        if [ ! -d "$DIR" ]; then
+            msg "Creating ${m}$(echo "$DIR" | grep -oE '[^/]+$')${NC} directory"
+            if ! install -dv "$DIR"; then
+                die "Failed to create ${m}${DIR}${NC} directory."
+            fi
+        fi
+    done
+    # Detect the write-access of parent directory.
+    [ -w "$(dirname "$HEIWA")" ] || RUN_AS="$AUD"
+    # Prepare the target directories and the symlinks.
+    for DIR in "$CL1_TOOLS" "$CL2_TOOLS"; do
+        if [ ! -d "${HEIWA}/${DIR}" ]; then
+            msg "Creating ${m}${DIR}${NC} directory"
+            if ! ${RUN_AS} install -dv "${HEIWA}/${DIR}"; then
+                die "Failed to create ${m}${DIR}${NC} directory."
+            fi
+        fi
+        if [ "$(readlink -f "/${DIR}")" != "${HEIWA}/${DIR}" ]; then
+            msg "Symlink ${m}/${DIR}${NC} ${r}[forced]${NC}"
+            if ! ${AUD} ln -sfv "${HEIWA}/${DIR}" /; then
+                die "Failed to symlink ${m}/${DIR}${NC}."
+            fi
+        fi
+    done
+    # Merge "lib64" and "lib" for "clang1-tools".
+    if [ ! -L "/${CL1_TOOLS}/lib64" ]; then
+        msg "Merging ${m}/${CL1_TOOLS}/lib${NC}{,${m}64${NC}} directories"
+        if ! ${RUN_AS} ln -sfv lib "/${CL1_TOOLS}/lib64"; then
+            die "Failed to merge ${m}/${CL1_TOOLS}/lib{,64}${NC} directories."
+        fi
+    fi
+    # Change the directories ownership, if created by "root" before.
+    if [ -n "$RUN_AS" ] && USER="${USER:-$(id -nu)}" && [ -n "$USER" ]; then
+        for DIR in "$CL1_TOOLS" "$CL2_TOOLS"; do
+            if [ ! -x "$(command -v stat)" ]; then
+                die "Something wrong with ${g}stat${NC} command."
+            fi
+            if [ "$(stat -c '%U' "${HEIWA}/${DIR}")" != "$USER" ]; then
+                msg "Changing ownership of ${m}${DIR}${NC} to ${g}${USER}${NC} ${r}[forced]${NC}"
+                if ! ${RUN_AS} chown -hRv "$USER":"$USER" "${HEIWA}/${DIR}"; then
+                    die "Failed to ${g}chown${NC} ${m}${DIR}${NC} directory."
+                fi
+            fi
+        done
+    fi
+}
+
+host_magnolia()
+{
+    get_pkgs_cross_stage()
+    {
+        eval "echo \"\${PKGS_STAGE${BUILD_STAGE}}\""
+    }
+    get_pkgs_information()
+    {
+        for PKGS_INFO in Description \
+                         URL         \
+                         Maintainer  \
+                         Packager
+        do # Only show matched package information in the build recipe.
+            if grep -Fqo "$PKGS_INFO" "${PKGS}/${BUILD_RECIPE}"; then
+               sub "${r}${PKGS_INFO}${NC} $(sed -e '/Maintainer/s/, / </'   \
+                                                -e '/Maintainer/s/$/>/'     \
+                                                -e '/Packager/s/, / </'     \
+                                                -e '/Packager/s/$/>/'       \
+                                                -e '/</s/ at /@/'           \
+                                                -e '/</s/ dot /./'          \
+                                                -ne "s/# ${PKGS_INFO}: //p" \
+                                                "${PKGS}/${BUILD_RECIPE}")"
+            fi
+        done
+    }
+    construct_ready_pkgs()
+    {
+        # Only use filter_flags() in the build recipe!
+        filter_flags()
+        {
+            msg "Filtering ${m}COMMON_FLAGS${NC} .."
+            # Parse multiple flags from the arguments.
+            for FLAGS in "${@}"; do
+                if echo "$COMMON_FLAGS" | grep -Fqo "$FLAGS"; then
+                    # The flags (extended-)regular expressions.
+                    FLAGS_REGEXP="-[a-z]*${FLAGS}[=0-9Aa-zZ]* [ ]*"
+                    sub "${r}Filtered${NC} ${NC}$(echo "$COMMON_FLAGS" | grep -oE -- "${FLAGS_REGEXP}")"
+                    export COMMON_FLAGS="$(echo "$COMMON_FLAGS" | sed -- "s/${FLAGS_REGEXP}//g")"
+                fi
+            done
+        }
+        rem_unpacked()
+        {
+            if [ -d "${MAGNOLIA_DIR}/${UNPACKED_PKG}" ]; then
+                if ! rm -rf "${MAGNOLIA_DIR}/${UNPACKED_PKG}"; then
+                    die "Failed to remove ${m}${UNPACKED_PKG}${NC} unpacked source."
+                fi
+            fi
+        }
+        # Set the toolchain to Clang/LLVM toolchain for Stage-1 builds and above.
+        if [ "$BUILD_STAGE" -gt 0 ]; then
+            msg "Using Clang/LLVM as main toolchain .."
+            export CC='clang'
+            export CXX='clang++'
+            export LD='ld.lld'
+            export CC_LD="${LD}"
+            export CXX_LD="${LD}"
+            export AR='llvm-ar'
+            export AS='llvm-as'
+            export NM='llvm-nm'
+            export OBJCOPY='llvm-objcopy'
+            export OBJDUMP='llvm-objdump'
+            export RANLIB='llvm-ranlib'
+            export READELF='llvm-readelf'
+            export SIZE='llvm-size'
+            export STRIP='llvm-strip'
+            sub "${r}Applied${NC} Clang/LLVM toolchain"
+        fi
+        # Load and execute the build recipe.
+        . "${PKGS}/${BUILD_RECIPE}"
+        # Ensure build() function is defined in the build recipe.
+        if [ -z "$(command -v build)" ]; then
+            die "Please add ${m}build()${NC} function in the ${g}${PKGS}${NC} build recipe!"
+        fi
+        # Fetch the package tarballs and verify digest,
+        msg "Fetching source .."
+        # ensure $source variable is exist.
+        if [ -z "$source" ]; then
+            die "There's no sources to fetch. Please set ${m}\$source${NC} in the ${g}${PKGS}${NC} build recipe!"
+        fi
+        # Parse the multiple tarballs, URL.
+        for SOURCE in ${source}; do
+            # Ensure the tarball file-extensions are all valid.
+            if ! echo "$SOURCE" | grep -qwE "$TARBALL_EXTS"; then
+                sub "${r}Unknown${NC} ${SOURCE} ${r}!=${NC} (${TARBALL_EXTS})"
+                die "Invalid tarball file-extensions. Please fix ${m}\$source${NC} in the ${g}${PKGS}${NC} build recipe!"
+            fi
+            # Determine the URL first then apply as URL_SOURCE.
+            if echo "$SOURCE" | grep -qoE "$URL_REGEXP"; then
+                URL_SOURCE="$SOURCE"
+            fi
+            # Determine the correct tarball file-name. Because,
+            # some tarball just using version as their file-name.
+            if echo "$SOURCE" | grep -vqE "$URL_REGEXP"; then
+                TARBALL="$SOURCE"
+                # The SOURCE loop counter. Determine the main tarball.
+                if N_LOOP="$((${N_LOOP:-1}+1))" && [ "$N_LOOP" -eq 2 ]; then
+                    MAIN_TARBALL="$TARBALL"
+                    # The correct unpacked directory name, 
+                    # for multiple packages compability with single tarball.
+                    UNPACKED_PKG="${name}-${version}"
+                fi
+                if [ -d "$DIST_DIR" ] && cd -- "$DIST_DIR"; then
+                    # Force fetch the tarball with exceptions.
+                    if [ ! -x "$(command -v wget)" ]; then
+                        die "Something wrong with ${g}wget${NC} command."
+                    fi
+                    # Check the internet connection.
+                    if wget -q --no-hsts --spider 1.1.1.1; then
+                        # Ensure the tarball downloadable,
+                        if ! wget -nv --no-hsts --spider "$URL_SOURCE"; then
+                            die "Something wrong when checking the URL."
+                        fi
+                        # if URL is valid, then fetch the tarball.
+                        if ! wget -Ncq -w 3 -t 3 --no-hsts --show-progress -O "$TARBALL" "$URL_SOURCE"; then
+                            die "Failed to fetch ${m}${TARBALL}${NC} archive."
+                        fi
+                    else
+                        if [ "$N_LOOP" -eq 2 ]; then
+                            # Only print when fetching the first tarball.
+                            sub "${r}No internet connection${NC}"
+                            srg "fetching skipped."
+                        fi
+                    fi
+                    # Verify the tarball existence (or fetched succesfully).
+                    if [ -f "$TARBALL" ]; then
+                        sub "${r}Fetched${NC} ${DIST_DIR}/${TARBALL}"
+                    else
+                        die "The ${m}${TARBALL}${NC} archive not found. Has it been fetched successfully?"
+                    fi
+                    # Verify digest, only reads SHA256 if the variable exist.
+                    if [ -n "$sha256" ]; then
+                        sub "${r}Checksum${NC} ${g}${TARBALL}${NC}"
+                        if ! echo "$sha256" | grep -F "$TARBALL" | sha256sum -c --quiet >/dev/null; then
+                            die "Failed to check ${m}${TARBALL}${NC} digest."
+                        fi
+                    fi
+                else
+                    die "There's no ${m}${DIST_DIR}${NC} directory."
+                fi
+            fi
+        done
+        # Unpack the main tarball, build, and install.
+        if [ -d "$MAGNOLIA_DIR" ] && cd -- "$MAGNOLIA_DIR"; then
+            # First, determine the main tarball file-extensions.
+            COMP_ALG="$(echo "$MAIN_TARBALL" | grep -oE "$TARBALL_EXTS")"
+            if [ -z "$COMP_ALG" ]; then
+                die "Something wrong with tarball file-extensions (equivalent to compression algorithm)."
+            fi
+            # Now, unpack the package main tarball.
+            msg "Unpacking ${m}${COMP_ALG}${NC} archive .."
+            if [ ! -f "${DIST_DIR}/${MAIN_TARBALL}" ]; then
+                die "Something wrong with ${m}${MAIN_TARBALL}${NC} archive."
+            fi
+            # Ensure tar is executable. Force delete the existing directory.
+            if [ ! -x "$(command -v tar)" ]; then
+                die "Something wrong with ${g}tar${NC} command."
+            fi; rem_unpacked
+            if tar --auto-compress -xpf "${DIST_DIR}/${MAIN_TARBALL}"; then
+                # Ensure the unpacked directory name matched with package name and version.
+                UNPACKED_DIR="$(find -maxdepth 1 -type d -iname "*${version}*" -printf '%f\n' 2>/dev/null | sed 1q)"
+                if [ "$UNPACKED_DIR" != "$UNPACKED_PKG" ]; then
+                    if mv -f "$UNPACKED_DIR" "$UNPACKED_PKG"; then
+                        sub "${r}Renamed${NC} ${UNPACKED_DIR} ${m}->${NC} ${UNPACKED_PKG}"
+                    fi
+                fi
+                sub "${r}Unpacked${NC} ${MAGNOLIA_DIR}/${UNPACKED_PKG}"
+            else
+                die "Failed to unpack ${m}${MAIN_TARBALL}${NC} archive."
+            fi
+            # Build the target package.
+            msg "Building ${g}${PKGS}${NC} .."
+            # Pre build process.
+            # Export the COMMON_FLAGS as both CFLAGS and CXXFLAGS.
+            export CFLAGS="$COMMON_FLAGS" CXXFLAGS="$COMMON_FLAGS"
+            # Export the directory for staged installation.
+            export PKG="${MAGNOLIA_DIR}/${UNPACKED_PKG}/${STAGED_DIR}"
+            # Force copy existing installed GNU info `dir` index. Why?
+            # The reason is to update index by package native-builder.
+            for DIR_INFO in $(find "$HEIWA" -type f -name 'dir' -path '*/share/info/*' 2>/dev/null); do
+                DIRNAME="$(dirname "$DIR_INFO" | sed "s|${HEIWA}||")"
+                if [ -n "$DIRNAME" ] && install -d "${PKG}/${DIRNAME}"; then
+                    install -t "${PKG}/${DIRNAME}/" "$DIR_INFO"
+                fi
+            done
+            # The build timer start (in seconds).
+            ATIME="$(date +%s)"
+            # Run the build process with pretty trace-logs.
+            {   echo "------------[ cut here ]------------"
+                if build 2>&1; then
+                    STATS='success'
+                else
+                    STATS='failure'
+                fi
+                echo "---[ build $STATS @ $(date +%s) ]---"
+            } | tee "${PKG}_BUILD.log"
+            # The build timer end, get from the last line of build log.
+            ZTIME="$(sed '$!d' "${PKG}_BUILD.log" | grep -oE '[0-9]+')"
+            # Check if the package successfully built.
+            if ! grep -Fqo 'build success @ ' "${PKG}_BUILD.log"; then
+                die "Failed to build. Log: ${g}${PKG}_BUILD.log${NC}"
+            fi
+            # Post build process.
+            if [ -d "$PKG" ] && cd -- "$PKG"; then
+                # Calculate the build-time.
+                BUILD_TIME="$((ZTIME-ATIME))s"
+                # Remove all useless ".la" (libtool) files.
+                if [ "${rm_la:-yes}" != 'no' ]; then
+                    msg "Removing useless ${m}.la${NC} files .."
+                    for LA in $(find -name '*.la' 2>/dev/null | cut -d/ -f2-); do
+                        rm -f "$LA" && lst "$LA"
+                    done
+                fi
+                # Strip all unneeded symbols from binaries.
+                if [ "${strip:-yes}" != 'no' ]; then
+                    msg "Stripping unneeded symbols .."
+                    # Copy the `llvm-strip` or `strip` to parent directory, to avoid stripping the binary itself.
+                    for STRIP in llvm-strip strip; do
+                        if [ -x "$(command -v "$STRIP")" ]; then
+                            if install -t ../ $(command -v "$STRIP"); then
+                                strip_unneeded() { ../"$STRIP" --strip-unneeded "${@}"; }
+                                break
+                            fi
+                        fi
+                    done
+                    if [ -n "$(command -v strip_unneeded)" ]; then
+                        for LIB in $(find -type f \( -name '*.a' -o -name '*.so*' \) 2>/dev/null | cut -d/ -f2-); do
+                            strip_unneeded "$LIB" && lst "$LIB"
+                        done
+                        for BIN in $(find -type f \( -path '*/libexec/*' -o -path '*/*bin/*' \) -exec grep -IL . "{}" \; 2>/dev/null | cut -d/ -f2-); do
+                            strip_unneeded "$BIN" && lst "$BIN"
+                        done
+                        rm -f ../"$STRIP"
+                    fi
+                fi
+                msg "Built complete and installed into ${m}${UNPACKED_PKG}/${STAGED_DIR}${NC} staged directory"
+                # Show the build-time.
+                if [ -n "$BUILD_TIME" ]; then
+                    sub "${r}Build-time${NC} ${BUILD_TIME}"
+                    echo "$BUILD_TIME" > "${PKG}_BUILD_TIME.log"
+                fi
+                # Show the build-size.
+                if [ -x "$(command -v du)" ]; then
+                    BUILD_SIZE="$(du -sh "$PKG" | cut -f1)"
+                    sub "${r}Build-size${NC} ${BUILD_SIZE}"
+                    echo "$BUILD_SIZE" > "${PKG}_BUILD_SIZE.log"
+                fi
+                # Install files from staged directory into correct location.
+                msg "Installing into correct location .."
+                for FILE in $(find -type f 2>/dev/null | cut -d/ -f2-); do
+                    # Create the parent directory of file first. Then install.
+                    DIRNAME="$(dirname "$FILE")"
+                    if [ -n "$DIRNAME" ] && install -d "${HEIWA}/${DIRNAME}"; then
+                        if ! install -t "${HEIWA}/${DIRNAME}/" "$FILE"; then
+                            die "Failed to install ${m}${PKGS}${NC} into correct location."
+                        fi; lst "${HEIWA}/${FILE}"
+                    fi
+                done
+                # Record package into cross @syscore set.
+                msg "Recording ${g}${PKGS}${NC} into cross ${m}@syscore${NC} set .."
+                if [ -n "$SYSCORE_SET" ]; then
+                    if [ ! -d "$(dirname "$SYSCORE_SET")" ]; then
+                        install -d "$(dirname "$SYSCORE_SET")"
+                    fi; echo "${PKGS} - ${BUILD_STAGE}" >> "$SYSCORE_SET"
+                else
+                    die "Failed to record. There's no path for cross ${m}@syscore${NC} set file."
+                fi
+                # Now, remove unpacked package-directory.
+                msg "Cleaning up ${g}${PKGS}${NC} unpacked source .."
+                rem_unpacked
+                # Construct success.
+                msg "The ${g}${PKGS}${NC} package successfully merged"
+            else
+                die "Failed on post build process. The ${m}${PKG}${NC} directory not created."
+            fi
+        else
+            die "There's no ${m}${MAGNOLIA_DIR}${NC} directory."
+        fi
+    }
+    # Determine the build-stage level, failed if undefined or greater than Stage-1.
+    if [ -z "$BUILD_STAGE" ] || [ "$BUILD_STAGE" -gt 1 ]; then
+        die "Failed to run \`${m}host_magnolia${NC} ${g}${BUILD_STAGE}${NC}\`. Please correct argument in the ${g}build${NC}!"
+    fi; export BUILD_STAGE
+    # Verify and construct packages across build stage.
+    hea "Verifying ${m}Stage-${BUILD_STAGE}${NC} packages"
+    if [ -z "$(get_pkgs_cross_stage)" ]; then
+        die "There's no package to construct. Please fill ${m}\$PKGS_STAGE${BUILD_STAGE}${NC} in the ${g}heiwa.conf${NC}!"
+    fi
+    if [ -d "$REPO_CORE" ] && cd -- "$REPO_CORE"; then
+        # Determine which packages to construct.
+        for PKGS in $(get_pkgs_cross_stage); do
+            # Ensure the package build recipe is exist.
+            if [ ! -f "${PKGS}/${BUILD_RECIPE}" ]; then
+                die "There's no build recipe for ${m}${PKGS}${NC}!"
+            fi; msg "Found the build recipe for ${g}${PKGS}${NC}"
+            # Run the package-informator in the subshell for safety reason.
+            (get_pkgs_information)
+            # Check if the package already installed. Then show the status.
+            if [ -f "$SYSCORE_SET" ] && grep -Fqo "${PKGS} - ${BUILD_STAGE}" "$SYSCORE_SET"; then
+                sub "${r}Status      ${g}Installed${NC}"
+            else
+                sub "${r}Status      Not installed${NC}"
+                # List all ready-to-build packages.
+                READY_PKGS="${READY_PKGS} ${PKGS} "
+            fi
+        done
+        # Construct all ready-to-build packages.
+        if [ -n "$READY_PKGS" ]; then
+            for PKGS in ${READY_PKGS}; do
+                # Export patches and files directory of the packages if exists.
+                for DIR in patches files; do
+                    [ ! -d "${PKGS}/${DIR}" ] || export "$DIR"="${REPO_CORE}/${PKGS}/${DIR}"
+                done
+                hea "Constructing ${m}Stage-${BUILD_STAGE}${NC} ${g}${PKGS}${NC}"
+                # Run the package-constructor in the subshell for safety reason.
+                (construct_ready_pkgs)
+            done
+            # Prevent multiple packages across build stage from being preserved.
+            unset READY_PKGS
+        else
+            srg "there's no package to construct."
+        fi
+    else
+        die "There's no ${m}${REPO_CORE}${NC} directory."
+    fi
+    # Back to the first directory where this script executed.
+    cd -- "$CWD"
+}
