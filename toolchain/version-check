@@ -176,6 +176,13 @@ else
     die "awk not found nor installed in this system!"
 fi
 
+# GNU Wget
+if [ -x "$(command -v wget)" ]; then
+    msg "GNU Wget" "$(wget --version | sed 1q | cut -d' ' -f3-)"
+else
+    die "GNU Wget not installed in this system!"
+fi
+
 # GCC or Clang.
 if [ -x "$(command -v cc)" ]; then
     if cc --version | grep -Fqo 'Free Software Foundation'; then
