@@ -1,6 +1,5 @@
 toolchain/ccache
 toolchain/distfiles
 toolchain/magnolia
-toolchain/function
-toolchain/heiwa.conf*
+toolchain/heiwa.conf
 stellata
