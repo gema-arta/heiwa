@@ -1,0 +1,51 @@
+# Description: The GNU binary utilities
+# URL:         https://sourceware.org/binutils
+# Maintainer:  Harry Kurn, findarr at pm dot me
+
+name=binutils
+version=2.37
+
+source="
+https://ftp.gnu.org/gnu/binutils/${name}-${version}.tar.xz  ${name}-${version}.tar.xz
+"
+
+if [ "$BUILD_STAGE" -eq 0 ]; then
+    filter_flags lto
+    PREFIX=/${CL1_TOOLS}
+    TARGET=${HEI_TRIPLET}
+    SYSROOT=${PREFIX}/${HEI_TRIPLET}
+else
+    die "The ${name} is only used in the Stage-0 builds."
+fi
+
+build() {
+    cd ${name}-${version}
+    
+    mkdir -v build && cd build &&                    \
+    ../configure --prefix=${PREFIX}                  \
+                 --target=${TARGET}                  \
+                 --with-sysroot=${SYSROOT}           \
+                 --without-debuginfod                \
+                 --without-stage1-ldflags            \
+                 --enable-deterministic-archives     \
+                 --disable-compressed-debug-sections \
+                 --disable-gdb                       \
+                 --disable-multilib                  \
+                 --disable-nls                       \
+                 --disable-libdecnumber              \
+                 --disable-lto                       \
+                 --disable-lto-plugin                \
+                 --disable-readline                  \
+                 --disable-separate-code             \
+                 --disable-sim                       \
+                 --disable-static                    \
+                 --disable-werror
+    
+    make configure-host && make
+    
+    make DESTDIR="$PKG" install
+}
+
+sha256="
+820d9724f020a3e69cb337893a0b63c2db161dadcb0e06fc11dc29eb1e84a32c  ${name}-${version}.tar.xz
+"
