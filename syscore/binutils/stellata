@@ -21,7 +21,7 @@ fi
 build() {
     cd ${name}-${version}
     
-    mkdir -v build && cd build &&                    \
+    install -dv build && cd build &&                 \
     ../configure --prefix=${PREFIX}                  \
                  --target=${TARGET}                  \
                  --with-sysroot=${SYSROOT}           \
