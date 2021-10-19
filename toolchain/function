@@ -445,9 +445,22 @@ host_magnolia()
                     # Create the parent directory of file first. Then install.
                     DIRNAME="$(dirname "$FILE")"
                     if [ -n "$DIRNAME" ] && install -d "${HEIWA}/${DIRNAME}"; then
-                        if ! install -t "${HEIWA}/${DIRNAME}/" "$FILE"; then
-                            die "Failed to install ${m}${PKGS}${NC} into correct location."
-                        fi; lst "${HEIWA}/${FILE}"
+                        if install -t "${HEIWA}/${DIRNAME}/" "$FILE"; then
+                            lst "${HEIWA}/${FILE}"
+                        else
+                            die "Failed to install ${m}${FILE}${NC} into correct location."
+                        fi
+                    fi
+                done
+                for LINK in $(find -L -xtype l 2>/dev/null | cut -d/ -f2-); do
+                    # Create the parent directory of file first. Then symlinks.
+                    DIRNAME="$(dirname "$LINK")"
+                    if [ -n "$DIRNAME" ] && install -d "${HEIWA}/${DIRNAME}"; then
+                        if ln -sf "$(readlink "$LINK")" "${HEIWA}/${DIRNAME}/$(basename "$LINK")"; then
+                            lst "${HEIWA}/${LINK}"
+                        else
+                            die "Failed to create symlink ${m}${LINK}${NC} to correct location."
+                        fi
                     fi
                 done
                 # Record package into cross @syscore set.
