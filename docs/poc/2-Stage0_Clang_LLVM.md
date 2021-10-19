@@ -207,7 +207,7 @@ tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc{-1.2.1,}
 ```
 ```bash
 # Apply patches (from Alpine Linux).
-../../syscore/gcc/patches/appatch
+for P in ../../syscore/gcc/patches/*.patch; do patch -Np1 -i "$P"; done
 ```
 ```bash
 # Create a dedicated directory and configure source.
