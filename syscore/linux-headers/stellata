@@ -1,0 +1,35 @@
+# Description: The Linux kernel API headers
+# URL:         https://www.kernel.org
+# Maintainer:  Harry Kurn, findarr at pm dot me
+
+name=linux-headers
+version=5.14
+
+source="
+https://cdn.kernel.org/pub/linux/kernel/v5.x/${name%%-*}-${version}.tar.xz  ${name%%-*}-${version}.tar.xz
+"
+
+if [ "$BUILD_STAGE" -eq 0 ]; then
+    filter_flags lto
+    PREFIX=/${CL1_TOOLS}/${HEI_TRIPLET}
+elif [ "$BUILD_STAGE" -eq 1 ]; then
+    PREFIX=/${CL2_TOOLS}
+    MAKE_OPT="LLVM=1 LLVM_IAS=1 HOSTCC=${CC}"
+fi
+
+build() {
+    cd ${name}-${version}
+    
+    patch -Np1 -i "$patches"/include-uapi-linux-swab-Fix-potentially-missing-__always_inline.patch
+    
+    make ${MAKE_OPT} mrproper && make ARCH="${TGT_ARCH:-$(uname -m)}" ${MAKE_OPT} headers
+    
+    find usr/include \( -name '.*' -o -name 'Makefile' \) -delete
+    
+    install -d "$PKG"/${PREFIX}
+    cp -a usr/include "$PKG"/${PREFIX}
+}
+
+sha256="
+7e068b5e0d26a62b10e5320b25dce57588cbbc6f781c090442138c9c9c3271b2  ${name%%-*}-${version}.tar.xz
+"
