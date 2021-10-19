@@ -349,8 +349,8 @@ host_magnolia()
             # Ensure tar is executable. Force delete the existing directory.
             if [ ! -x "$(command -v tar)" ]; then
                 die "Something wrong with ${g}tar${NC} command."
-            fi; rem_unpacked
-            if tar --auto-compress -xpf "${DIST_DIR}/${MAIN_TARBALL}"; then
+            fi
+            if rem_unpacked && tar --auto-compress -xpf "${DIST_DIR}/${MAIN_TARBALL}"; then
                 # Ensure the unpacked directory name matched with package name and version.
                 UNPACKED_DIR="$(find -maxdepth 1 -type d -iname "*${version}*" -printf '%f\n' 2>/dev/null | sed 1q)"
                 if [ "$UNPACKED_DIR" != "$UNPACKED_PKG" ]; then
@@ -442,19 +442,23 @@ host_magnolia()
                 # Install files from staged directory into correct location.
                 msg "Installing into correct location .."
                 for FILE in $(find -type f 2>/dev/null | cut -d/ -f2-); do
-                    # Create the parent directory of file first. Then install.
                     DIRNAME="$(dirname "$FILE")"
+                    # Create the parent directory of file first. Then install.
                     if [ -n "$DIRNAME" ] && install -d "${HEIWA}/${DIRNAME}"; then
                         if install -t "${HEIWA}/${DIRNAME}/" "$FILE"; then
-                            lst "${HEIWA}/${FILE}"
+                            # Exclude printing GNU info `dir` index.
+                            if [ "$(basename "$DIR")" != 'dir' ]; then
+                                lst "${HEIWA}/${FILE}"
+                            fi
                         else
                             die "Failed to install ${m}${FILE}${NC} into correct location."
                         fi
                     fi
                 done
+                # Re-create symlinks from staged directory into correct location.
                 for LINK in $(find -L -xtype l 2>/dev/null | cut -d/ -f2-); do
-                    # Create the parent directory of file first. Then symlinks.
                     DIRNAME="$(dirname "$LINK")"
+                    # Create the parent directory of file first. Then symlinks.
                     if [ -n "$DIRNAME" ] && install -d "${HEIWA}/${DIRNAME}"; then
                         if ln -sf "$(readlink "$LINK")" "${HEIWA}/${DIRNAME}/$(basename "$LINK")"; then
                             lst "${HEIWA}/${LINK}"
@@ -468,7 +472,8 @@ host_magnolia()
                 if [ -n "$SYSCORE_SET" ]; then
                     if [ ! -d "$(dirname "$SYSCORE_SET")" ]; then
                         install -d "$(dirname "$SYSCORE_SET")"
-                    fi; echo "${BUILD_STAGE} - ${PKGS}" >> "$SYSCORE_SET"
+                    fi
+                    echo "${BUILD_STAGE} - ${PKGS}" >> "$SYSCORE_SET"
                 else
                     die "Failed to record. There's no path for cross ${m}@syscore${NC} set file."
                 fi
