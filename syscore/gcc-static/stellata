@@ -41,7 +41,7 @@ build() {
     tar -xpf "$DIST_DIR"/${mpc_name}-${mpc_version}.tar.gz && \
     mv -fv ${mpc_name}-${mpc_version} ${mpc_name}
     
-    mkdir -v build && cd build &&                \
+    install -dv build && cd build &&             \
     ../configure --prefix=${PREFIX}              \
                  --build=${BUILD}                \
                  --host=${HOST}                  \
