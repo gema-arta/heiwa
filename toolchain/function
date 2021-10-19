@@ -508,7 +508,7 @@ host_magnolia()
             # Run the package-informator in the subshell for safety reason.
             (get_pkgs_information)
             # Check if the package already installed. Then show the status.
-            if [ -f "$SYSCORE_SET" ] && grep -Fqo "${BUILD_STAGE} - ${PKGS}" "$SYSCORE_SET"; then
+            if [ -f "$SYSCORE_SET" ] && grep -Fqx "${BUILD_STAGE} - ${PKGS}" "$SYSCORE_SET"; then
                 sub "${r}Status      ${g}Installed${NC}"
             else
                 sub "${r}Status      Not installed${NC}"
