@@ -1,0 +1,88 @@
+# Description: The GNU compiler collection (Alpine Linux edition) [static]
+# URL:         https://dev.alpinelinux.org/~nenolod
+# Maintainer:  Harry Kurn, findarr at pm dot me
+
+name=gcc-static
+version=10.3.1_git20210921
+gmp_name=gmp
+gmp_version=6.2.1
+mpfr_name=mpfr
+mpfr_version=4.1.0
+mpc_name=mpc
+mpc_version=1.2.1
+
+source="
+https://dev.alpinelinux.org/~nenolod/${name%%-*}-${version}.tar.xz        ${name%%-*}-${version}.tar.xz
+https://ftp.gnu.org/gnu/${gmp_name}/${gmp_name}-${gmp_version}.tar.xz     ${gmp_name}-${gmp_version}.tar.xz
+https://ftp.gnu.org/gnu/${mpfr_name}/${mpfr_name}-${mpfr_version}.tar.xz  ${mpfr_name}-${mpfr_version}.tar.xz
+https://ftp.gnu.org/gnu/${mpc_name}/${mpc_name}-${mpc_version}.tar.gz     ${mpc_name}-${mpc_version}.tar.gz
+"
+
+if [ "$BUILD_STAGE" -eq 0 ]; then
+    filter_flags lto O tree-vectorize
+    PREFIX=/${CL1_TOOLS}
+    BUILD=${HST_TRIPLET}
+    HOST=${HST_TRIPLET}
+    TARGET=${HEI_TRIPLET}
+    SYSROOT=${PREFIX}/${HEI_TRIPLET}
+else
+    die "The ${name} is only used in the Stage-0 builds."
+fi
+
+build() {
+    cd ${name}-${version}
+    
+    tar -xpf "$DIST_DIR"/${gmp_name}-${gmp_version}.tar.xz && \
+    mv -fv ${gmp_name}-${gmp_version} ${gmp_name}
+    
+    tar -xpf "$DIST_DIR"/${mpfr_name}-${mpfr_version}.tar.xz && \
+    mv -fv ${mpfr_name}-${mpfr_version} ${mpfr_name}
+    
+    tar -xpf "$DIST_DIR"/${mpc_name}-${mpc_version}.tar.gz && \
+    mv -fv ${mpc_name}-${mpc_version} ${mpc_name}
+    
+    mkdir -v build && cd build &&                \
+    ../configure --prefix=${PREFIX}              \
+                 --build=${BUILD}                \
+                 --host=${HOST}                  \
+                 --target=${TARGET}              \
+                 --with-sysroot=${SYSROOT}       \
+                 --with-arch=${GCC_MCPU}         \
+                 --with-newlib                   \
+                 --without-headers               \
+                 --enable-clocale=generic        \
+                 --enable-initfini-array         \
+                 --enable-languages=c            \
+                 --disable-decimal-float         \
+                 --disable-gnu-indirect-function \
+                 --disable-gnu-unique-object     \
+                 --disable-lto                   \
+                 --disable-lto-plugin            \
+                 --disable-multilib              \
+                 --disable-nls                   \
+                 --disable-shared                \
+                 --disable-symvers               \
+                 --disable-threads               \
+                 --disable-werror                \
+                 --disable-libatomic             \
+                 --disable-libgomp               \
+                 --disable-libitm                \
+                 --disable-libmpx                \
+                 --disable-libmudflap            \
+                 --disable-libquadmath           \
+                 --disable-libsanitizer          \
+                 --disable-libssp                \
+                 --disable-libstdcxx             \
+                 --disable-libvtv
+    
+    make all-gcc all-target-libgcc
+    
+    make DESTDIR="$PKG" install-gcc install-target-libgcc
+}
+
+sha256="
+7eb73f9394a2b6c51c8f6f5daa0edf5cc9a27bec6cdc5461e3eae248d923a14d  ${name%%-*}-${version}.tar.xz
+fd4829912cddd12f84181c3451cc752be224643e87fac497b69edddadc49b4f2  ${gmp_name}-${gmp_version}.tar.xz
+0c98a3f1732ff6ca4ea690552079da9c597872d30e96ec28414ee23c95558a7f  ${mpfr_name}-${mpfr_version}.tar.xz
+17503d2c395dfcf106b622dc142683c1199431d095367c6aacba6eec30340459  ${mpc_name}-${mpc_version}.tar.gz
+"
