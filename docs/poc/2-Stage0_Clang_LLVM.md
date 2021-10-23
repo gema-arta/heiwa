@@ -39,7 +39,7 @@ The purpose of this stage is to build stage 1 Clang/LLVM toolchain with GCC libr
 ```
 ```bash
 # Ensure there are no stale files embedded in the package. Then build.
-time { make mrproper && make ARCH=${TGT_ARCH} headers; }
+time { make mrproper && make ARCH=${TARGET_ARCH} headers; }
 ```
 ```bash
 # Remove unnecessary dotfiles and Makefile.
@@ -47,8 +47,8 @@ find usr/include \( -name '.*' -o -name 'Makefile' \) -exec rm -fv {} \;
 ```
 ```bash
 # Install.
-mkdir -v /clang1-tools/${HEI_TRIPLET} && \
-cp -rfv usr/include /clang1-tools/${HEI_TRIPLET}/.
+install -dv /clang1-tools/${TARGET_CUSTOM_TRIPLET}
+cp -afv usr/include /clang1-tools/${TARGET_CUSTOM_TRIPLET}/.
 ```
 
 ### `2` - GNU Binutils
@@ -59,23 +59,23 @@ cp -rfv usr/include /clang1-tools/${HEI_TRIPLET}/.
 > > **Build time:** <3m
 ```bash
 # Create a dedicated directory and configure source.
-mkdir -v build && cd build &&                            \
-../configure --prefix=/clang1-tools                      \
-             --target=${HEI_TRIPLET}                     \
-             --with-sysroot=/clang1-tools/${HEI_TRIPLET} \
-             --without-debuginfod                        \
-             --without-stage1-ldflags                    \
-             --enable-deterministic-archives             \
-             --disable-compressed-debug-sections         \
-             --disable-gdb                               \
-             --disable-multilib                          \
-             --disable-nls                               \
-             --disable-libdecnumber                      \
-             --disable-lto{,-plugin}                     \
-             --disable-readline                          \
-             --disable-separate-code                     \
-             --disable-sim                               \
-             --disable-static                            \
+install -dv build && cd build
+../configure --prefix=/clang1-tools                                \
+             --target=${TARGET_CUSTOM_TRIPLET}                     \
+             --with-sysroot=/clang1-tools/${TARGET_CUSTOM_TRIPLET} \
+             --without-debuginfod                                  \
+             --without-stage1-ldflags                              \
+             --enable-deterministic-archives                       \
+             --disable-compressed-debug-sections                   \
+             --disable-gdb                                         \
+             --disable-multilib                                    \
+             --disable-nls                                         \
+             --disable-libdecnumber                                \
+             --disable-lto{,-plugin}                               \
+             --disable-readline                                    \
+             --disable-separate-code                               \
+             --disable-sim                                         \
+             --disable-static                                      \
              --disable-werror
 ```
 ```bash
@@ -101,38 +101,38 @@ tar xzf ../mpc-1.2.1.tar.gz && mv -fv mpc{-1.2.1,}
 ```
 ```bash
 # Create a dedicated directory and configure source. Disable optimization.
-mkdir -v build && cd build &&                            \
-CFLAGS="$(tr O2 O0 <<< "$CFLAGS")" CXXFLAGS="$CFLAGS"    \
-../configure --prefix=/clang1-tools                      \
-             --build=${HST_TRIPLET}                      \
-             --host=${HST_TRIPLET}                       \
-             --target=${HEI_TRIPLET}                     \
-             --with-sysroot=/clang1-tools/${HEI_TRIPLET} \
-             --with-arch=${GCC_MCPU}                     \
-             --with-newlib                               \
-             --without-headers                           \
-             --enable-clocale=generic                    \
-             --enable-initfini-array                     \
-             --enable-languages=c                        \
-             --disable-decimal-float                     \
-             --disable-gnu-indirect-function             \
-             --disable-gnu-unique-object                 \
-             --disable-lto{,-plugin}                     \
-             --disable-multilib                          \
-             --disable-nls                               \
-             --disable-shared                            \
-             --disable-symvers                           \
-             --disable-threads                           \
-             --disable-werror                            \
-             --disable-libatomic                         \
-             --disable-libgomp                           \
-             --disable-libitm                            \
-             --disable-libmpx                            \
-             --disable-libmudflap                        \
-             --disable-libquadmath                       \
-             --disable-libsanitizer                      \
-             --disable-libssp                            \
-             --disable-libstdcxx                         \
+install -dv build && cd build
+CFLAGS="$(tr O2 O0 <<< "$CFLAGS")" CXXFLAGS="$CFLAGS"              \
+../configure --prefix=/clang1-tools                                \
+             --build=${HOST_CROSS_TRIPLET}                         \
+             --host=${HOST_CROSS_TRIPLET}                          \
+             --target=${TARGET_CUSTOM_TRIPLET}                     \
+             --with-sysroot=/clang1-tools/${TARGET_CUSTOM_TRIPLET} \
+             --with-arch=${TARGET_MCPU}                            \
+             --with-newlib                                         \
+             --without-headers                                     \
+             --enable-clocale=generic                              \
+             --enable-initfini-array                               \
+             --enable-languages=c                                  \
+             --disable-decimal-float                               \
+             --disable-gnu-indirect-function                       \
+             --disable-gnu-unique-object                           \
+             --disable-lto{,-plugin}                               \
+             --disable-multilib                                    \
+             --disable-nls                                         \
+             --disable-shared                                      \
+             --disable-symvers                                     \
+             --disable-threads                                     \
+             --disable-werror                                      \
+             --disable-libatomic                                   \
+             --disable-libgomp                                     \
+             --disable-libitm                                      \
+             --disable-libmpx                                      \
+             --disable-libmudflap                                  \
+             --disable-libquadmath                                 \
+             --disable-libsanitizer                                \
+             --disable-libssp                                      \
+             --disable-libstdcxx                                   \
              --disable-libvtv
 ```
 ```bash
@@ -152,12 +152,12 @@ time { make install-{gcc,target-libgcc}; }
 > > **Build time:** <2m
 ```bash
 # Configure source. The `disable-optimize` here means disable built-in optimization which `-Os` or `-O3` by default.
-./configure CROSS_COMPILE=${HEI_TRIPLET}- \
-            --prefix=/                    \
-            --target=${HEI_TRIPLET}       \
-            --with-malloc=mallocng        \
-            --disable-gcc-wrapper         \
-            --disable-optimize            \
+./configure CROSS_COMPILE=${TARGET_CUSTOM_TRIPLET}- \
+            --prefix=/                              \
+            --target=${TARGET_CUSTOM_TRIPLET}       \
+            --with-malloc=mallocng                  \
+            --disable-gcc-wrapper                   \
+            --disable-optimize                      \
             --disable-static
 ```
 ```bash
@@ -168,7 +168,7 @@ time { make; }
 # Install and fix wrong shared object symlink.
 time {
     make DESTDIR=/clang1-tools install
-    ln -sfv libc.so /clang1-tools/lib/ld-musl-${TGT_ARCH}.so.1
+    ln -sfv libc.so /clang1-tools/lib/ld-musl-${TARGET_ARCH}.so.1
 }
 ```
 ```bash
@@ -177,10 +177,10 @@ ln -sfv ../lib/libc.so /clang1-tools/bin/ldd
 ```
 ```bash
 # Configure path for the dynamic linker.
-mkdir -v /clang1-tools/etc && \
-cat > /clang1-tools/etc/ld-musl-${TGT_ARCH}.path << EOF
+install -dv /clang1-tools/etc
+cat > /clang1-tools/etc/ld-musl-${TARGET_ARCH}.path << EOF
 /clang1-tools/lib
-/clang1-tools/${HEI_TRIPLET}/lib
+/clang1-tools/${TARGET_CUSTOM_TRIPLET}/lib
 /lib64
 /usr/lib64
 /lib
@@ -189,7 +189,7 @@ EOF
 ```
 ```bash
 # The final GCC will looking for headers in the "/clang1-tools/usr/include", so create the directory then symlink it.
-mkdir -v /clang1-tools/usr && \
+install -dv /clang1-tools/usr
 ln -sv ../include /clang1-tools/usr/include
 ```
 
@@ -211,29 +211,29 @@ for P in ../../syscore/gcc/patches/*.patch; do patch -Np1 -i "$P"; done
 ```
 ```bash
 # Create a dedicated directory and configure source.
-mkdir -v build && cd build &&                \
-../configure --prefix=/clang1-tools          \
-             --build=${HST_TRIPLET}          \
-             --host=${HST_TRIPLET}           \
-             --target=${HEI_TRIPLET}         \
-             --with-sysroot=/clang1-tools    \
-             --enable-clocale=generic        \
-             --enable-initfini-array         \
-             --enable-languages=c,c++        \
-             --enable-shared                 \
-             --enable-threads=posix          \
-             --disable-gnu-indirect-function \
-             --disable-gnu-unique-object     \
-             --disable-lto{,-plugin}         \
-             --disable-multilib              \
-             --disable-nls                   \
-             --disable-static                \
-             --disable-symvers               \
-             --disable-werror                \
-             --disable-libmpx                \
-             --disable-libmudflap            \
-             --disable-libsanitizer          \
-             --disable-libssp                \
+install -dv build && cd build
+../configure --prefix=/clang1-tools            \
+             --build=${HOST_CROSS_TRIPLET}     \
+             --host=${HOST_CROSS_TRIPLET}      \
+             --target=${TARGET_CUSTOM_TRIPLET} \
+             --with-sysroot=/clang1-tools      \
+             --enable-clocale=generic          \
+             --enable-initfini-array           \
+             --enable-languages=c,c++          \
+             --enable-shared                   \
+             --enable-threads=posix            \
+             --disable-gnu-indirect-function   \
+             --disable-gnu-unique-object       \
+             --disable-lto{,-plugin}           \
+             --disable-multilib                \
+             --disable-nls                     \
+             --disable-static                  \
+             --disable-symvers                 \
+             --disable-werror                  \
+             --disable-libmpx                  \
+             --disable-libmudflap              \
+             --disable-libsanitizer            \
+             --disable-libssp                  \
              --disable-libvtv
 ```
 ```bash
@@ -245,22 +245,22 @@ time { make; }
 time { make install; }
 ```
 ```bash
-# Adjust current GCC to produce binaries with "/clang1-tools/lib/ld-musl-${TGT_ARCH}.so.1" by modifying the specs.
-if ${HEI_TRIPLET}-gcc -dumpspecs > specs; then
-    sed -i "s|/lib/ld-musl-${TGT_ARCH}.so.1|/clang1-tools/lib/ld-musl-${TGT_ARCH}.so.1|g" specs
+# Adjust current GCC to produce binaries with "/clang1-tools/lib/ld-musl-${TARGET_ARCH}.so.1" by modifying the specs.
+if ${TARGET_CUSTOM_TRIPLET}-gcc -dumpspecs > specs; then
+    sed -i "s|/lib/ld-musl-${TARGET_ARCH}.so.1|/clang1-tools/lib/ld-musl-${TARGET_ARCH}.so.1|g" specs
 fi
 ```
 ```bash
 # Install the specs file if the path is correct.
-if grep --color=auto "/clang1-tools/lib/ld-musl-${TGT_ARCH}.so.1" specs; then
-    SPECFILE="$(dirname $(${HEI_TRIPLET}-gcc -print-libgcc-file-name))/specs"
+if grep --color=auto "/clang1-tools/lib/ld-musl-${TARGET_ARCH}.so.1" specs; then
+    SPECFILE="$(dirname $(${TARGET_CUSTOM_TRIPLET}-gcc -print-libgcc-file-name))/specs"
     mv -fv specs "$SPECFILE" && unset SPECFILE
 fi
 ```
 ```bash
 # Sanity check for the current GCC.
-${HEI_TRIPLET}-gcc -x c++ - ${CFLAGS} ${LDFLAGS} <<< 'int main(){}'
-${HEI_TRIPLET}-readelf -l a.out | grep --color=auto "Req.*ter"
+${TARGET_CUSTOM_TRIPLET}-gcc -x c++ - ${CFLAGS} ${LDFLAGS} <<< 'int main(){}'
+${TARGET_CUSTOM_TRIPLET}-readelf -l a.out | grep --color=auto "Req.*ter"
 ```
 ```bash
 # | The output should be:
@@ -280,7 +280,7 @@ sed -i 's|-O3||' lib/Makefile
 ```
 ```bash
 # Build with verbose.
-time { make -C lib CC=${HEI_TRIPLET}-gcc libzstd V=1; }
+time { make -C lib CC=${TARGET_CUSTOM_TRIPLET}-gcc libzstd V=1; }
 ```
 ```bash
 # Install.
@@ -299,13 +299,13 @@ sed -i '/CMAKE_BUILD_TYPE/s/Release//' cmake/DefaultBuildType.cmake
 ```
 ```bash
 # Configure source.
-cmake -B build -Wno-dev                                  \
-               -DCMAKE_PREFIX_PATH="/clang1-tools"       \
-               -DCMAKE_INSTALL_PREFIX="/clang1-tools"    \
-               -DCMAKE_C_COMPILER="${HEI_TRIPLET}-gcc"   \
-               -DCMAKE_CXX_COMPILER="${HEI_TRIPLET}-g++" \
-               -DENABLE_DOCUMENTATION=NO                 \
-               -DENABLE_TESTING=NO                       \
+cmake -B build -Wno-dev                                            \
+               -DCMAKE_PREFIX_PATH="/clang1-tools"                 \
+               -DCMAKE_INSTALL_PREFIX="/clang1-tools"              \
+               -DCMAKE_C_COMPILER="${TARGET_CUSTOM_TRIPLET}-gcc"   \
+               -DCMAKE_CXX_COMPILER="${TARGET_CUSTOM_TRIPLET}-g++" \
+               -DENABLE_DOCUMENTATION=NO                           \
+               -DENABLE_TESTING=NO                                 \
                -DREDIS_STORAGE_BACKEND=NO
 ```
 ```bash
@@ -364,15 +364,15 @@ popd
 # Configure the entire source. Optimize very high memory consumption while linking LLVM projects with GNU `ld`.
 cmake -B build -DCMAKE_BUILD_TYPE=Release -Wno-dev                         \
                -DCMAKE_INSTALL_PREFIX="/clang1-tools"                      \
-               -DCMAKE_C_COMPILER="${HEI_TRIPLET}-gcc"                     \
-               -DCMAKE_CXX_COMPILER="${HEI_TRIPLET}-g++"                   \
+               -DCMAKE_C_COMPILER="${TARGET_CUSTOM_TRIPLET}-gcc"           \
+               -DCMAKE_CXX_COMPILER="${TARGET_CUSTOM_TRIPLET}-g++"         \
                -DCMAKE_EXE_LINKER_FLAGS="$LDFLAGS -Wl,--no-keep-memory"    \
                -DCMAKE_SHARED_LINKER_FLAGS="$LDFLAGS -Wl,--no-keep-memory" \
                -DBUILD_SHARED_LIBS=ON                                      \
                -DLLVM_CCACHE_BUILD=ON                                      \
                -DLLVM_APPEND_VC_REV=OFF                                    \
-               -DLLVM_HOST_TRIPLE="$HEI_TRIPLET"                           \
-               -DLLVM_DEFAULT_TARGET_TRIPLE="$TGT_TRIPLET"                 \
+               -DLLVM_HOST_TRIPLE="$TARGET_CUSTOM_TRIPLET"                 \
+               -DLLVM_DEFAULT_TARGET_TRIPLE="$TARGET_MACHINE_TRIPLET"      \
                -DLLVM_ENABLE_BINDINGS=OFF                                  \
                -DLLVM_ENABLE_IDE=OFF                                       \
                -DLLVM_ENABLE_LIBCXX=ON                                     \
@@ -391,8 +391,8 @@ cmake -B build -DCMAKE_BUILD_TYPE=Release -Wno-dev                         \
                -DLLVM_INCLUDE_TESTS=OFF                                    \
                -DLLVM_INCLUDE_GO_TESTS=OFF                                 \
                -DLLVM_INCLUDE_DOCS=OFF                                     \
-               -DLLVM_TARGET_ARCH="$TGT_LLVM"                              \
-               -DLLVM_TARGETS_TO_BUILD="$TGT_LLVM"                         \
+               -DLLVM_TARGET_ARCH="$TARGET_LLVM"                           \
+               -DLLVM_TARGETS_TO_BUILD="$TARGET_LLVM"                      \
                -DLIBUNWIND_ENABLE_ASSERTIONS=OFF                           \
                -DLIBUNWIND_ENABLE_STATIC=OFF                               \
                -DLIBCXXABI_ENABLE_ASSERTIONS=OFF                           \
@@ -428,11 +428,11 @@ time {
 }
 ```
 ```bash
-# Configure Stage-0 Clang/LLVM with heiwa triplet to produce binaries with "/clang2-tools/lib/ld-musl-${TGT_ARCH}.so.1" later.
-ln -sfv clang   /clang1-tools/bin/${HEI_TRIPLET}-clang
-ln -sfv clang++ /clang1-tools/bin/${HEI_TRIPLET}-clang++
-cat > /clang1-tools/bin/${HEI_TRIPLET}.cfg << EOF
--Wl,-dynamic-linker /clang2-tools/lib/ld-musl-${TGT_ARCH}.so.1
+# Configure Stage-0 Clang/LLVM with heiwa triplet to produce binaries with "/clang2-tools/lib/ld-musl-${TARGET_ARCH}.so.1" later.
+ln -sfv clang   /clang1-tools/bin/${TARGET_CUSTOM_TRIPLET}-clang
+ln -sfv clang++ /clang1-tools/bin/${TARGET_CUSTOM_TRIPLET}-clang++
+cat > /clang1-tools/bin/${TARGET_CUSTOM_TRIPLET}.cfg << EOF
+-Wl,-dynamic-linker /clang2-tools/lib/ld-musl-${TARGET_ARCH}.so.1
 EOF
 ```
 ```bash
@@ -449,16 +449,16 @@ rm -rf /clang1-tools/share/{info,man}
 ```
 > The libtool ".la" files are only useful when linking with static libraries. They are unneeded and potentially harmful when using dynamic shared libraries, specially when using non-autotools build systems. So, remove those files.
 ```bash
-find /clang1-tools/{libexec,{,${HEI_TRIPLET}/}lib}/ -name '*.la' -exec rm -fv {} \;
+find /clang1-tools/{libexec,{,${TARGET_CUSTOM_TRIPLET}/}lib}/ -name '*.la' -exec rm -fv {} \;
 ```
 > Strip off all unneeded symbols from binaries using `llvm-strip`. A large number of files will be reported "The file was not recognized as a valid object file". These warnings can be safely ignored. These warnings indicate that those files are scripts instead of binaries.
 ```bash
-find /clang1-tools/{,${HEI_TRIPLET}/}lib/ -type f \( -name '*.a' -o -name '*.so*' \) -exec llvm-strip --strip-unneeded {} \;
+find /clang1-tools/{,${TARGET_CUSTOM_TRIPLET}/}lib/ -type f \( -name '*.a' -o -name '*.so*' \) -exec llvm-strip --strip-unneeded {} \;
 ```
 ```bash
-if cp -v $(command -v llvm-strip) .; then
-    find /clang1-tools/{libexec,{,${HEI_TRIPLET}/}bin}/ -type f -exec ./llvm-strip --strip-unneeded {} \;
-fi && rm -v ./llvm-strip
+if install -t . $(command -v llvm-strip); then
+    find /clang1-tools/{libexec,{,${TARGET_CUSTOM_TRIPLET}/}bin}/ -type f -exec ./llvm-strip --strip-unneeded {} \;
+fi; rm -v ./llvm-strip
 ```
 
 <h2></h2>
