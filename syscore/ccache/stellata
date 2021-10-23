@@ -1,0 +1,50 @@
+# Description: The fast compiler cache
+# URL:         https://ccache.dev
+# Maintainer:  Harry Elric, alternate-se7en at pm dot me
+
+name=ccache
+version=4.4.1
+
+source="
+https://github.com/${name}/${name}/releases/download/v4.4.1/${name}-4.4.1.tar.xz  ${name}-${version}.tar.xz
+"
+
+if [ "$BUILD_STAGE" -eq 0 ]; then
+    filter_flags lto
+    PREFIX="/${CLANG1_TOOLS}"
+    CMAKE_OPT="
+    -DCMAKE_PREFIX_PATH="$PREFIX"
+    -DCMAKE_C_COMPILER="${TARGET_CUSTOM_TRIPLET}-gcc"
+    -DCMAKE_CXX_COMPILER="${TARGET_CUSTOM_TRIPLET}-g++"
+    -DENABLE_DOCUMENTATION=NO
+    "
+fi
+
+build() {
+    cd ${name}-${version}
+    
+    sed -i '/CMAKE_BUILD_TYPE/s/Release//' cmake/DefaultBuildType.cmake
+    
+    cmake -B build -Wno-dev ${CMAKE_OPT} \
+                -DCMAKE_INSTALL_PREFIX="$PREFIX" \
+                -DENABLE_TESTING=NO \
+                -DREDIS_STORAGE_BACKEND=NO
+    
+    make -C build
+    
+    make -C build DESTDIR="$PKG" install
+    
+    if [ "$BUILD_STAGE" -eq 0 ]; then
+        install -d "$PKG"/"$PREFIX"/etc
+        cat > "$PKG"/"$PREFIX"/etc/ccache.conf <<- "EOF"
+		umask = 002
+		compiler_check = none
+		compression = true
+		compression_level = 1
+		EOF
+    fi
+}
+
+sha256="
+ebd6dfb5b15dfe39310e1f5834bafbe6ab526c71df8ad08a508e8a242bad8159  ${name}-${version}.tar.xz
+"
