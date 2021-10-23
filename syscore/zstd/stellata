@@ -1,0 +1,32 @@
+# Description: The zstd fast compression library
+# URL:         https://facebook.github.io/zstd
+# Maintainer:  Harry Elric, alternate-se7en at pm dot me
+
+name=zstd
+version=1.5.0
+
+source="
+https://github.com/facebook/${name}/releases/download/v${version}/${name}-${version}.tar.gz  ${name}-${version}.tar.gz
+"
+
+if [ "$BUILD_STAGE" -eq 0 ]; then
+    filter_flags lto
+    PREFIX="/${CLANG1_TOOLS}"
+    # Fixed build failure due to zstd respect TARGET_ARCH.
+    unset TARGET_ARCH
+fi
+
+build() {
+    cd ${name}-${version}
+    
+    sed -i 's|-O3||' lib/Makefile
+    
+    if [ "$BUILD_STAGE" -eq 0 ]; then
+        make -C lib CC=${TARGET_CUSTOM_TRIPLET}-gcc libzstd V=1
+        make -C lib PREFIX="$PKG"/"$PREFIX" install-includes install-shared
+    fi    
+}
+
+sha256="
+0d9ade222c64e912d6957b11c923e214e2e010a18f39bec102f572e693ba2867  ${name}-${version}.tar.gz
+"
