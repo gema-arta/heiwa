@@ -125,7 +125,7 @@ printf '%s\n' $HOST_CROSS_TRIPLET $TARGET_{LLVM,MCPU,ARCH,{MACHINE,CUSTOM}_TRIPL
 ```bash
 cat > ~/.bash_profile << EOF
 exec env -i HOME="\$HOME" TERM="\$TERM" HOST_PATH="\$PATH" \
-COMMON_FLAGS='-march=native -O2 -pipe -w -g0' $(command -v bash)
+COMMON_FLAGS='-march=native -O2 -ftree-vectorize -pipe -w -g0' $(command -v bash)
 EOF
 cat > ~/.bashrc << EOF
 set +h
