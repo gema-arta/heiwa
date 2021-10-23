@@ -11,7 +11,7 @@
 > <summary>Screenshot of Gentoo/Linux host</summary>
 > 
 > <br>
-> <p align="center"><img src="https://i.imgur.com/KbAiaDm.png" alt=""/></p>
+> <p align="center"><img src="https://i.imgur.com/7Szb22L.png" alt=""/></p>
 > 
 > </details>
 
@@ -21,15 +21,15 @@
 
 > **EXT4.** Recommended for HDDs.
 ```bash
-mkfs.ext4 -m 0 -L "Heiwa.Linux" /dev/sdxY
+mkfs.ext4 -m 0 -L 'Heiwa.Linux' /dev/sdxY
 ```
 > **F2FS.** Recommended for SSDs.
 ```bash
-mkfs.f2fs -l "Heiwa.Linux" -O extra_attr,inode_checksum,sb_checksum,compression,encrypt /dev/sdxY
+mkfs.f2fs -l 'Heiwa.Linux' -O extra_attr,inode_checksum,sb_checksum,compression,encrypt /dev/sdxY
 ```
 > Then, export the mount point variable and create the directory if not exist. **Why "/media"?** It's easily detected with GVFS via D-Bus.
 ```bash
-export HEIWA="/media/Heiwa"
+export HEIWA='/media/Heiwa'
 mkdir -pv "$HEIWA"
 ```
 > Next, mount the target volume/partition.
@@ -95,14 +95,13 @@ exec su - heiwa
 ```
 > Then, setup the toolchain environment variables.
 ```bash
-HST_TRIPLET="$(sed 's|-[^-]*|-cross|' <(cc -dumpmachine))"
+HOST_CROSS_TRIPLET="$(sed 's|-[^-]*|-cross|' <(cc -dumpmachine))"
 case $(uname -m) in
-    x86_64) GCC_MCPU="x86-64"
-            TGT_LLVM="X86"
-            TGT_ARCH="x86_64"
-            TGT_TRIPLET="${TGT_ARCH}-pc-linux-musl"
-            HEI_TRIPLET="${TGT_ARCH}-heiwa-linux-musl"
-            ADDON_FLAGS="-march=native"
+    x86_64) TARGET_LLVM='X86'
+            TARGET_MCPU='x86-64'
+            TARGET_ARCH='x86_64'
+            TARGET_MACHINE_TRIPLET="${TARGET_ARCH}-pc-linux-musl"
+            TARGET_CUSTOM_TRIPLET="${TARGET_ARCH}-heiwa-linux-musl"
     ;;
     *)      echo 'Any architecture other than x86_64 currently not implemented yet.'
     ;;
@@ -110,42 +109,41 @@ esac
 ```
 > Let's check if the above environment variables are all correct.
 ```bash
-printf '%s\n' $HST_TRIPLET $GCC_MCPU $TGT_{LLVM,ARCH,TRIPLET} $HEI_TRIPLET $ADDON_FLAGS
+printf '%s\n' $HOST_CROSS_TRIPLET $TARGET_{LLVM,MCPU,ARCH,{MACHINE,CUSTOM}_TRIPLET}
 ```
 ```bash
 # | On the x86_64 glibc host, the output should be:
 # |------------------------------------------------
 # |x86_64-cross-linux-gnu
-# |x86-64
 # |X86
+# |x86-64
 # |x86_64
 # |x86_64-pc-linux-musl
 # |x86_64-heiwa-linux-musl
-# |-march=native
 ```
 > Now apply the above environment variables into bash startup profile.
 ```bash
 cat > ~/.bash_profile << EOF
 exec env -i HOME="\$HOME" TERM="\$TERM" HOST_PATH="\$PATH" \
-COMMON_FLAGS=" $ADDON_FLAGS -O2 -pipe -w -g0 " $(command -v bash)
+COMMON_FLAGS='-march=native -O2 -pipe -w -g0' $(command -v bash)
 EOF
 cat > ~/.bashrc << EOF
 set +h
 umask 022
 unalias -a
-LC_ALL="POSIX"
+LC_ALL='POSIX'
 HEIWA="${HEIWA:-/media/Heiwa}"
 PATH="/clang2-tools/bin:/clang1-tools/bin:\${HOST_PATH}"
 LLVM_SRC="\${HEIWA}/sources/llvm"
 CCACHE_DIR="\${HEIWA}/sources/ccache"
 export LC_ALL HEIWA PATH LLVM_SRC CCACHE_DIR
-HST_TRIPLET="$HST_TRIPLET"
-GCC_MCPU="$GCC_MCPU"
-TGT_LLVM="$TGT_LLVM"
-TGT_ARCH="$TGT_ARCH"
-TGT_TRIPLET="\${TGT_ARCH}-pc-linux-musl"
-HEI_TRIPLET="\${TGT_ARCH}-heiwa-linux-musl"
-export HST_TRIPLET GCC_MCPU TGT_LLVM TGT_ARCH TGT_TRIPLET HEI_TRIPLET
+HOST_CROSS_TRIPLET="$HOST_CROSS_TRIPLET"
+TARGET_LLVM="$TARGET_LLVM"
+TARGET_MCPU="$TARGET_MCPU"
+TARGET_ARCH="$TARGET_ARCH"
+TARGET_MACHINE_TRIPLET="\${TARGET_ARCH}-pc-linux-musl"
+TARGET_CUSTOM_TRIPLET="\${TARGET_ARCH}-heiwa-linux-musl"
+export HOST_CROSS_TRIPLET TARGET_LLVM TARGET_MCPU TARGET_ARCH TARGET_MACHINE_TRIPLET TARGET_CUSTOM_TRIPLET
 CFLAGS="\${COMMON_FLAGS}"
 CXXFLAGS="\${COMMON_FLAGS}"
 CPPFLAGS="-DNDEBUG"
