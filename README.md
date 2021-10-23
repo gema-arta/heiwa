@@ -57,7 +57,7 @@ for optimizing <b>the performance</b>. It's all <b>balanced</b>.
 > |:---:|----------------------------------------------------------------------------------------|:------------------:|----------------------------|
 > |  ✓  | 1. [Preparation](./docs/poc/1-Preparation.md)                                          | Finished (unfixed) | -                          |
 > |  ✓  | 2. [Stage-0 Clang/LLVM (feat. GNU) Cross-Toolchain](./docs/poc/2-Stage0_Clang_LLVM.md) | Finished (unfixed) | Build time and build size. |
-> |  ✓  | 3. [Stage-1 Clang/LLVM Toolchain](./docs/poc/3-Stage1_Clang_LLVM.md)                   | Finished (unfixed) | Build time and build size. |
+> |  ?  | 3. [Stage-1 Clang/LLVM Toolchain](./docs/poc/3-Stage1_Clang_LLVM.md)                   | Re-worked          | Build time and build size. |
 > |  ?  | 4. [Stage-2 Final System](./docs/poc/4-Stage2_Final_System.md)                         | Under devel        | Faster performance.        |
 > |     | 5. [System Configuration](./docs/poc/5-System_Configuration.md)                        | Pending            | -                          |
 
