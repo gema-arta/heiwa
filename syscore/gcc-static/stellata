@@ -1,6 +1,6 @@
 # Description: The GNU compiler collection (Alpine Linux edition) [static]
 # URL:         https://dev.alpinelinux.org/~nenolod
-# Maintainer:  Harry Kurn, findarr at pm dot me
+# Maintainer:  Harry Elric, alternate-se7en at pm dot me
 
 name=gcc-static
 version=10.3.1_git20210921
@@ -20,11 +20,11 @@ https://ftp.gnu.org/gnu/${mpc_name}/${mpc_name}-${mpc_version}.tar.gz     ${mpc_
 
 if [ "$BUILD_STAGE" -eq 0 ]; then
     filter_flags lto O tree-vectorize
-    PREFIX=/${CL1_TOOLS}
-    BUILD=${HST_TRIPLET}
-    HOST=${HST_TRIPLET}
-    TARGET=${HEI_TRIPLET}
-    SYSROOT=${PREFIX}/${HEI_TRIPLET}
+    PREFIX="/${CLANG1_TOOLS}"
+    BUILD="${HOST_CROSS_TRIPLET}"
+    HOST="${HOST_CROSS_TRIPLET}"
+    TARGET="${TARGET_CUSTOM_TRIPLET}"
+    SYSROOT="${PREFIX}/${TARGET}"
 else
     die "The ${name} is only used in the Stage-0 builds."
 fi
@@ -32,47 +32,47 @@ fi
 build() {
     cd ${name}-${version}
     
-    tar -xpf "$DIST_DIR"/${gmp_name}-${gmp_version}.tar.xz && \
+    tar -xpf "$DIST_DIR"/${gmp_name}-${gmp_version}.tar.xz
     mv -fv ${gmp_name}-${gmp_version} ${gmp_name}
     
-    tar -xpf "$DIST_DIR"/${mpfr_name}-${mpfr_version}.tar.xz && \
+    tar -xpf "$DIST_DIR"/${mpfr_name}-${mpfr_version}.tar.xz
     mv -fv ${mpfr_name}-${mpfr_version} ${mpfr_name}
     
-    tar -xpf "$DIST_DIR"/${mpc_name}-${mpc_version}.tar.gz && \
+    tar -xpf "$DIST_DIR"/${mpc_name}-${mpc_version}.tar.gz
     mv -fv ${mpc_name}-${mpc_version} ${mpc_name}
     
-    install -dv build && cd build &&             \
-    ../configure --prefix=${PREFIX}              \
-                 --build=${BUILD}                \
-                 --host=${HOST}                  \
-                 --target=${TARGET}              \
-                 --with-sysroot=${SYSROOT}       \
-                 --with-arch=${GCC_MCPU}         \
-                 --with-newlib                   \
-                 --without-headers               \
-                 --enable-clocale=generic        \
-                 --enable-initfini-array         \
-                 --enable-languages=c            \
-                 --disable-decimal-float         \
+    install -dv build && cd build
+    ../configure --prefix="$PREFIX" \
+                 --build="$BUILD" \
+                 --host="$HOST" \
+                 --target="$TARGET" \
+                 --with-sysroot="$SYSROOT" \
+                 --with-arch="$TARGET_MCPU" \
+                 --with-newlib \
+                 --without-headers \
+                 --enable-clocale=generic \
+                 --enable-initfini-array \
+                 --enable-languages=c \
+                 --disable-decimal-float \
                  --disable-gnu-indirect-function \
-                 --disable-gnu-unique-object     \
-                 --disable-lto                   \
-                 --disable-lto-plugin            \
-                 --disable-multilib              \
-                 --disable-nls                   \
-                 --disable-shared                \
-                 --disable-symvers               \
-                 --disable-threads               \
-                 --disable-werror                \
-                 --disable-libatomic             \
-                 --disable-libgomp               \
-                 --disable-libitm                \
-                 --disable-libmpx                \
-                 --disable-libmudflap            \
-                 --disable-libquadmath           \
-                 --disable-libsanitizer          \
-                 --disable-libssp                \
-                 --disable-libstdcxx             \
+                 --disable-gnu-unique-object \
+                 --disable-lto \
+                 --disable-lto-plugin \
+                 --disable-multilib \
+                 --disable-nls \
+                 --disable-shared \
+                 --disable-symvers \
+                 --disable-threads \
+                 --disable-werror \
+                 --disable-libatomic \
+                 --disable-libgomp \
+                 --disable-libitm \
+                 --disable-libmpx \
+                 --disable-libmudflap \
+                 --disable-libquadmath \
+                 --disable-libsanitizer \
+                 --disable-libssp \
+                 --disable-libstdcxx \
                  --disable-libvtv
     
     make all-gcc all-target-libgcc
