@@ -1,6 +1,6 @@
 # Description: The Linux kernel API headers
-# URL:         https://www.kernel.org
-# Maintainer:  Harry Kurn, findarr at pm dot me
+# URL:         https://kernel.org
+# Maintainer:  Harry Elric, alternate-se7en at pm dot me
 
 name=linux-headers
 version=5.14
@@ -11,10 +11,14 @@ https://cdn.kernel.org/pub/linux/kernel/v5.x/${name%%-*}-${version}.tar.xz  ${na
 
 if [ "$BUILD_STAGE" -eq 0 ]; then
     filter_flags lto
-    PREFIX=/${CL1_TOOLS}/${HEI_TRIPLET}
+    PREFIX="/${CLANG1_TOOLS}/${TARGET_CUSTOM_TRIPLET}"
 elif [ "$BUILD_STAGE" -eq 1 ]; then
-    PREFIX=/${CL2_TOOLS}
-    MAKE_OPT="LLVM=1 LLVM_IAS=1 HOSTCC=${CC}"
+    PREFIX="/${CLANG2_TOOLS}"
+    MAKE_OPT="
+    LLVM=1
+    LLVM_IAS=1
+    HOSTCC="${CC}"
+    "
 fi
 
 build() {
@@ -22,12 +26,12 @@ build() {
     
     patch -Np1 -i "$patches"/include-uapi-linux-swab-Fix-potentially-missing-__always_inline.patch
     
-    make ${MAKE_OPT} mrproper && make ARCH="${TGT_ARCH:-$(uname -m)}" ${MAKE_OPT} headers
+    make ${MAKE_OPT} mrproper && make ARCH="${TARGET_ARCH:-$(uname -m)}" ${MAKE_OPT} headers
     
     find usr/include \( -name '.*' -o -name 'Makefile' \) -delete
     
-    install -d "$PKG"/${PREFIX}
-    cp -a usr/include "$PKG"/${PREFIX}
+    install -d "$PKG"/"$PREFIX"
+    cp -a usr/include "$PKG"/"$PREFIX"/
 }
 
 sha256="
