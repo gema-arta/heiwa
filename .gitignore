@@ -1,3 +1,4 @@
+toolchain/@syscore_cross
 toolchain/ccache
 toolchain/distfiles
 toolchain/magnolia
