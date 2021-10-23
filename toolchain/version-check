@@ -18,8 +18,10 @@
 # LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 # OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 # PERFORMANCE OF THIS SOFTWARE.
+#
 
-export LC_ALL=POSIX; unalias -a
+# Speed-up script by using POSIX locale (and portability), safe execution, unalias all,
+export LC_ALL=POSIX; set -e; unalias -a; umask 022 # and only writable by their owner.
 
 G='\033[0;32m' M='\033[1;35m' R='\033[1;31m' NC='\033[0m' # Some ANSI Color codes.
 
@@ -272,7 +274,7 @@ msg "$CC" "sanity check:\n"
 if echo 'int main(){}' | "$CC" -x c++ - -march=native -O2 -pipe -w -g0 && [ -x a.out ]; then
     readelf -l a.out | grep --color=auto "Req.*ter"
     printf "\n${G}%s${NC} %s ${G}%s${NC}\n\n" '[' "OK" ']'
-    rm -f a.out && exit $?
+    rm -f a.out && exit ${?}
 else
     printf "${R}%s${NC} %s ${R}%s${NC}\n\n" '[' "FAILED" ']'
     rm -f a.out && exit 1
