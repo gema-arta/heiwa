@@ -1,6 +1,6 @@
-# Description: The GNU compiler collection (Alpine Linux edition)
+# Description: The GNU compiler collection (Alpine Linux edition) [final]
 # URL:         https://dev.alpinelinux.org/~nenolod
-# Maintainer:  Harry Kurn, findarr at pm dot me
+# Maintainer:  Harry Elric, alternate-se7en at pm dot me
 
 name=gcc
 version=10.3.1_git20210921
@@ -20,11 +20,11 @@ https://ftp.gnu.org/gnu/${mpc_name}/${mpc_name}-${mpc_version}.tar.gz     ${mpc_
 
 if [ "$BUILD_STAGE" -eq 0 ]; then
     filter_flags lto
-    PREFIX=/${CL1_TOOLS}
-    BUILD=${HST_TRIPLET}
-    HOST=${HST_TRIPLET}
-    TARGET=${HEI_TRIPLET}
-    SYSROOT=${PREFIX}
+    PREFIX="/${CLANG1_TOOLS}"
+    BUILD="${HOST_CROSS_TRIPLET}"
+    HOST="${HOST_CROSS_TRIPLET}"
+    TARGET="${TARGET_CUSTOM_TRIPLET}"
+    SYSROOT="${PREFIX}"
 else
     die "The ${name} is only used in the Stage-0 builds."
 fi
@@ -32,52 +32,52 @@ fi
 build() {
     cd ${name}-${version}
     
-    tar -xpf "$DIST_DIR"/${gmp_name}-${gmp_version}.tar.xz && \
+    tar -xpf "$DIST_DIR"/${gmp_name}-${gmp_version}.tar.xz
     mv -fv ${gmp_name}-${gmp_version} ${gmp_name}
     
-    tar -xpf "$DIST_DIR"/${mpfr_name}-${mpfr_version}.tar.xz && \
+    tar -xpf "$DIST_DIR"/${mpfr_name}-${mpfr_version}.tar.xz
     mv -fv ${mpfr_name}-${mpfr_version} ${mpfr_name}
     
-    tar -xpf "$DIST_DIR"/${mpc_name}-${mpc_version}.tar.gz && \
+    tar -xpf "$DIST_DIR"/${mpc_name}-${mpc_version}.tar.gz
     mv -fv ${mpc_name}-${mpc_version} ${mpc_name}
     
     for P in "$patches"/*.patch; do
         patch -Np1 -i "$P"
     done
     
-    install -dv build && cd build &&             \
-    ../configure --prefix=${PREFIX}              \
-                 --build=${BUILD}                \
-                 --host=${HOST}                  \
-                 --target=${TARGET}              \
-                 --with-sysroot=${SYSROOT}       \
-                 --enable-clocale=generic        \
-                 --enable-initfini-array         \
-                 --enable-languages=c,c++        \
-                 --enable-shared                 \
-                 --enable-threads=posix          \
+    install -dv build && cd build
+    ../configure --prefix="$PREFIX" \
+                 --build="$BUILD" \
+                 --host="$HOST" \
+                 --target="$TARGET" \
+                 --with-sysroot="$SYSROOT" \
+                 --enable-clocale=generic \
+                 --enable-initfini-array \
+                 --enable-languages=c,c++ \
+                 --enable-shared \
+                 --enable-threads=posix \
                  --disable-gnu-indirect-function \
-                 --disable-gnu-unique-object     \
-                 --disable-lto                   \
-                 --disable-lto-plugin            \
-                 --disable-multilib              \
-                 --disable-nls                   \
-                 --disable-static                \
-                 --disable-symvers               \
-                 --disable-werror                \
-                 --disable-libmpx                \
-                 --disable-libmudflap            \
-                 --disable-libsanitizer          \
-                 --disable-libssp                \
+                 --disable-gnu-unique-object \
+                 --disable-lto \
+                 --disable-lto-plugin \
+                 --disable-multilib \
+                 --disable-nls \
+                 --disable-static \
+                 --disable-symvers \
+                 --disable-werror \
+                 --disable-libmpx \
+                 --disable-libmudflap \
+                 --disable-libsanitizer \
+                 --disable-libssp \
                  --disable-libvtv
     
     make
     
     make DESTDIR="$PKG" install
     
-    "$PKG"/${PREFIX}/bin/${HEI_TRIPLET}-gcc -dumpspecs > specs
-    sed -i "s|/lib/ld-musl-${TGT_ARCH}.so.1|${PREFIX}/lib/ld-musl-${TGT_ARCH}.so.1|g" specs
-    mv -fv specs "$(dirname $("$PKG"/${PREFIX}/bin/${HEI_TRIPLET}-gcc -print-libgcc-file-name))/specs"
+    "$PKG"/"$PREFIX"/bin/${TARGET_CUSTOM_TRIPLET}-gcc -dumpspecs > specs
+    sed -i "s|/lib/ld-musl-${TARGET_ARCH}.so.1|${PREFIX}/lib/ld-musl-${TARGET_ARCH}.so.1|g" specs
+    mv -fv specs "$(dirname $("$PKG"/"$PREFIX"/bin/${TARGET_CUSTOM_TRIPLET}-gcc -print-libgcc-file-name))/specs"
 }
 
 sha256="
