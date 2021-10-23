@@ -1,6 +1,6 @@
 # Description: The GNU binary utilities
 # URL:         https://sourceware.org/binutils
-# Maintainer:  Harry Kurn, findarr at pm dot me
+# Maintainer:  Harry Elric, alternate-se7en at pm dot me
 
 name=binutils
 version=2.37
@@ -11,9 +11,9 @@ https://ftp.gnu.org/gnu/binutils/${name}-${version}.tar.xz  ${name}-${version}.t
 
 if [ "$BUILD_STAGE" -eq 0 ]; then
     filter_flags lto
-    PREFIX=/${CL1_TOOLS}
-    TARGET=${HEI_TRIPLET}
-    SYSROOT=${PREFIX}/${HEI_TRIPLET}
+    PREFIX="/${CLANG1_TOOLS}"
+    TARGET="${TARGET_CUSTOM_TRIPLET}"
+    SYSROOT="${PREFIX}/${TARGET}"
 else
     die "The ${name} is only used in the Stage-0 builds."
 fi
@@ -21,24 +21,24 @@ fi
 build() {
     cd ${name}-${version}
     
-    install -dv build && cd build &&                 \
-    ../configure --prefix=${PREFIX}                  \
-                 --target=${TARGET}                  \
-                 --with-sysroot=${SYSROOT}           \
-                 --without-debuginfod                \
-                 --without-stage1-ldflags            \
-                 --enable-deterministic-archives     \
+    install -dv build && cd build
+    ../configure --prefix="$PREFIX" \
+                 --target="$TARGET" \
+                 --with-sysroot="$SYSROOT" \
+                 --without-debuginfod \
+                 --without-stage1-ldflags \
+                 --enable-deterministic-archives \
                  --disable-compressed-debug-sections \
-                 --disable-gdb                       \
-                 --disable-multilib                  \
-                 --disable-nls                       \
-                 --disable-libdecnumber              \
-                 --disable-lto                       \
-                 --disable-lto-plugin                \
-                 --disable-readline                  \
-                 --disable-separate-code             \
-                 --disable-sim                       \
-                 --disable-static                    \
+                 --disable-gdb \
+                 --disable-multilib \
+                 --disable-nls \
+                 --disable-libdecnumber \
+                 --disable-lto \
+                 --disable-lto-plugin \
+                 --disable-readline \
+                 --disable-separate-code \
+                 --disable-sim \
+                 --disable-static \
                  --disable-werror
     
     make configure-host && make
