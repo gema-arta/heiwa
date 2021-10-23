@@ -1,6 +1,6 @@
 # Description: The musl C library (libc) implementation
 # URL:         https://musl.libc.org
-# Maintainer:  Harry Kurn, findarr at pm dot me
+# Maintainer:  Harry Elric, alternate-se7en at pm dot me
 
 name=musl
 version=1.2.2
@@ -11,14 +11,20 @@ https://musl.libc.org/releases/${name}-${version}.tar.gz  ${name}-${version}.tar
 
 if [ "$BUILD_STAGE" -eq 0 ]; then
     filter_flags lto
-    DESTDIR=/${CL1_TOOLS}
-    CONFIG_OPT="CROSS_COMPILE=${HEI_TRIPLET}- --target=${HEI_TRIPLET}"
+    DESTDIR="/${CLANG1_TOOLS}"
+    CONFIG_OPT="
+    CROSS_COMPILE="${TARGET_CUSTOM_TRIPLET}-"
+    --target="${TARGET_CUSTOM_TRIPLET}"
+    "
 elif [ "$BUILD_STAGE" -eq 1 ]; then
-    DESTDIR=/${CL2_TOOLS}
+    DESTDIR="/${CLANG2_TOOLS}"
 else
-    export LDFLAGS="-Wl,-soname,libc.musl-$(uname -m).so.1 $LDFLAGS"
-    PREFIX=usr
-    CONFIG_OPT="--sysconfdir=/etc --localstatedir=/var"
+    export LDFLAGS="-Wl,-soname,libc.musl-$(uname -m).so.1 ${LDFLAGS}"
+    PREFIX='usr'
+    CONFIG_OPT='
+    --sysconfdir=/etc
+    --localstatedir=/var
+    '
 fi
 
 build() {
@@ -28,42 +34,40 @@ build() {
         patch -Np1 -i "$P"
     done
     
-    ./configure ${CONFIG_OPT}      \
-            --prefix=/${PREFIX}    \
+    ./configure ${CONFIG_OPT} \
+            --prefix="/${PREFIX}" \
             --with-malloc=mallocng \
-            --disable-gcc-wrapper  \
-            --disable-optimize     \
+            --disable-gcc-wrapper \
+            --disable-optimize \
             --disable-static
-            
+    
     make
     
-    make DESTDIR="$PKG"/${DESTDIR} install
+    make DESTDIR="$PKG"/"$DESTDIR" install
     
-    install -d "$PKG"/${DESTDIR}/bin
-    install -d "$PKG"/${DESTDIR}/etc
+    install -d "$PKG"/"$DESTDIR"/bin
+    install -d "$PKG"/"$DESTDIR"/etc
     
     if [ "$BUILD_STAGE" -lt 2 ]; then
-        ln -sfv ../lib/libc.so "$PKG"/${DESTDIR}/bin/ldd
+        ln -sfv ../lib/libc.so "$PKG"/"$DESTDIR"/bin/ldd
+        ln -sfv libc.so "$PKG"/"$DESTDIR"/lib/ld-musl-${TARGET_ARCH}.so.1
         
-        ln -sfv libc.so "$PKG"/${DESTDIR}/lib/ld-musl-${TGT_ARCH}.so.1
-        
-        cat > "$PKG"/${DESTDIR}/etc/ld-musl-${TGT_ARCH}.path <<- EOF
+        cat > "$PKG"/"$DESTDIR"/etc/ld-musl-${TARGET_ARCH}.path <<- EOF
 		${DESTDIR}/lib
 		EOF
     elif [ "$PREFIX" = 'usr' ]; then
         ln -sfv ../usr/lib/libc.so "$PKG"/bin/ldd
-        
         install -vm755 -t "$PKG"/sbin/ "$files"/ldconfig
         
         for H in "$files"/*.h; do
-            if [ "$(basename "$H")" = "error.h" ]; then
+            if [ "$(basename "$H")" = 'error.h' ]; then
                 install -vm644 -t "$PKG"/usr/include/ "$H"
             else
                 install -vm644 -t "$PKG"/usr/include/sys/ "$H"
             fi
         done
         
-        cat > "$PKG"/${DESTDIR}/etc/ld-musl-${TGT_ARCH}.path <<- EOF
+        cat > "$PKG"/"$DESTDIR"/etc/ld-musl-${TARGET_ARCH:-$(uname -m)}.path <<- EOF
 		/lib
 		/${PREFIX}/lib
 		/${PREFIX}/local/lib
@@ -71,16 +75,16 @@ build() {
     fi
     
     if [ "$BUILD_STAGE" -eq 0 ]; then        
-        cat >> "$PKG"/${DESTDIR}/etc/ld-musl-${TGT_ARCH}.path <<- EOF
-		${DESTDIR}/${HEI_TRIPLET}/lib
+        cat >> "$PKG"/"$DESTDIR"/etc/ld-musl-${TARGET_ARCH}.path <<- EOF
+		${DESTDIR}/${TARGET_CUSTOM_TRIPLET}/lib
 		/lib64
 		/usr/lib64
 		/lib
 		/usr/lib
 		EOF
         
-        install -d "$PKG"/${DESTDIR}/usr
-        ln -sv ../include "$PKG"/${DESTDIR}/usr/include
+        install -d "$PKG"/"$DESTDIR"/usr
+        ln -sv ../include "$PKG"/"$DESTDIR"/usr/include
     fi
 }
 
