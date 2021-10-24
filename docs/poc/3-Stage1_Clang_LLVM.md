@@ -31,20 +31,20 @@ The purpose of this stage is to build stage 2 Clang/LLVM self-hosted toolchain a
 > Apply toolchain environment, but don't set the compiler to heiwa triplet of Stage-0 Clang/LLVM in order to build musl libc first at this stage.
 ```bash
 cat >> ~/.bashrc << "EOF"
-CC="clang"
-CXX="clang++"
-LD="ld.lld"
+CC='clang'
+CXX='clang++'
+LD='ld.lld'
 CC_LD="${LD}"
 CXX_LD="${LD}"
-AR="llvm-ar"
-AS="llvm-as"
-NM="llvm-nm"
-OBJCOPY="llvm-objcopy"
-OBJDUMP="llvm-objdump"
-RANLIB="llvm-ranlib"
-READELF="llvm-readelf"
-SIZE="llvm-size"
-STRIP="llvm-strip"
+AR='llvm-ar'
+AS='llvm-as'
+NM='llvm-nm'
+OBJCOPY='llvm-objcopy'
+OBJDUMP='llvm-objdump'
+RANLIB='llvm-ranlib'
+READELF='llvm-readelf'
+SIZE='llvm-size'
+STRIP='llvm-strip'
 export CC CXX LD CC_LD CXX_LD AR AS NM OBJCOPY OBJDUMP RANLIB READELF SIZE STRIP
 EOF
 source ~/.bashrc
@@ -72,25 +72,25 @@ time { make; }
 # Install and fix wrong shared object symlink.
 time {
     make DESTDIR=/clang2-tools install
-    ln -sfv libc.so /clang2-tools/lib/ld-musl-${TGT_ARCH}.so.1
+    ln -sfv libc.so /clang2-tools/lib/ld-musl-${TARGET_ARCH}.so.1
 }
 ```
 ```bash
 # Optionally, create a `ldd` symlink to use to print shared object dependencies.
-mkdir -v /clang2-tools/bin && \
+install -dv /clang2-tools/bin
 ln -sfv ../lib/libc.so /clang2-tools/bin/ldd
 ```
 ```bash
 # Configure path for the dynamic linker.
-mkdir -v /clang2-tools/etc && \
-cat > /clang2-tools/etc/ld-musl-${TGT_ARCH}.path << "EOF"
+install -dv /clang2-tools/etc
+cat > /clang2-tools/etc/ld-musl-${TARGET_ARCH}.path << "EOF"
 /clang2-tools/lib
 EOF
 ```
 ```bash
 # Now set the compiler to heiwa triplet from Stage-0 Clang/LLVM to use current musl libc built.
-sed -e "/CXX=/s/${CXX}/${HEI_TRIPLET}-clang++/" \
-    -e "/CC=/s/${CC}/${HEI_TRIPLET}-clang/" -i ~/.bashrc
+sed -e "/CXX=/s/${CXX}/${TARGET_CUSTOM_TRIPLET}-clang++/" \
+    -e "/CC=/s/${CC}/${TARGET_CUSTOM_TRIPLET}-clang/" -i ~/.bashrc
 source ~/.bashrc
 ```
 ```bash
@@ -130,7 +130,7 @@ grep --color=auto "ld.lld:.*crt[1in].o" dummy.log
 # Ensure there are no stale files embedded in the package. Then build.
 time {
     make LLVM=1 LLVM_IAS=1 mrproper && \
-    make ARCH=${TGT_ARCH} LLVM=1 LLVM_IAS=1 HOSTCC=${CC} headers
+    make ARCH=${TARGET_ARCH} LLVM=1 LLVM_IAS=1 HOSTCC=${CC} headers
 }
 ```
 ```bash
@@ -176,13 +176,13 @@ mv -fv llvm-12.0.1.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 ```
 ```bash
 # Decompress `clang`, `lld`, `compiler-rt`, `libunwind`, `libcxxabi`, and `libcxx` to correct directories.
-pushd ${LLVM_SRC}/projects/ && \
+pushd "$LLVM_SRC"/projects/ && \
     tar xf ../../pkgs/compiler-rt-12.0.1.src.tar.xz && mv -fv compiler-rt{-12.0.1.src,}
     tar xf   ../../pkgs/libunwind-12.0.1.src.tar.xz && mv -fv libunwind{-12.0.1.src,}
     tar xf   ../../pkgs/libcxxabi-12.0.1.src.tar.xz && mv -fv libcxxabi{-12.0.1.src,}
     tar xf      ../../pkgs/libcxx-12.0.1.src.tar.xz && mv -fv libcxx{-12.0.1.src,}
 popd
-pushd ${LLVM_SRC}/tools/ && \
+pushd "$LLVM_SRC"/tools/ && \
     tar xf ../../pkgs/clang-12.0.1.src.tar.xz && mv -fv clang{-12.0.1.src,}
     tar xf   ../../pkgs/lld-12.0.1.src.tar.xz && mv -fv lld{-12.0.1.src,}
 popd
@@ -193,7 +193,7 @@ popd
 ```
 ```bash
 # Configure `libunwind` source. Build time: <5s
-pushd ${LLVM_SRC}/projects/libunwind/ &&                \
+pushd "$LLVM_SRC"/projects/libunwind/ &&                \
 cmake -B build -DCMAKE_BUILD_TYPE=Release -Wno-dev      \
                -DCMAKE_INSTALL_PREFIX="/clang2-tools"   \
                -DCMAKE_C_FLAGS="-flto=thin $CFLAGS"     \
@@ -217,7 +217,7 @@ time {
 ```
 ```bash
 # Configure `libcxxabi` source. Build time: <35s
-pushd ${LLVM_SRC}/projects/libcxxabi/ &&                \
+pushd "$LLVM_SRC"/projects/libcxxabi/ &&                \
 cmake -B build -DCMAKE_BUILD_TYPE=Release -Wno-dev      \
                -DCMAKE_INSTALL_PREFIX="/clang2-tools"   \
                -DCMAKE_CXX_FLAGS="-flto=thin $CXXFLAGS" \
@@ -242,7 +242,7 @@ time {
 ```
 ```bash
 # Configure `libcxx` source. Build time: <2m
-pushd ${LLVM_SRC}/projects/libcxx/ &&                                                  \
+pushd "$LLVM_SRC"/projects/libcxx/ &&                                                  \
 cmake -B build -DCMAKE_BUILD_TYPE=Release -Wno-dev                                     \
                -DCMAKE_INSTALL_PREFIX="/clang2-tools"                                  \
                -DCMAKE_CXX_FLAGS="-isystem /clang2-tools/include -flto=thin $CXXFLAGS" \
@@ -271,46 +271,46 @@ rm -rf projects/lib{unwind,cxx{abi,}}
 ```
 ```bash
 # Configure Clang/LLVM source.
-cmake -B build -DCMAKE_BUILD_TYPE=Release -Wno-dev         \
-               -DCMAKE_INSTALL_PREFIX="/clang2-tools"      \
-               -DBUILD_SHARED_LIBS=ON                      \
-               -DLLVM_CCACHE_BUILD=ON                      \
-               -DLLVM_APPEND_VC_REV=OFF                    \
-               -DLLVM_HOST_TRIPLE="$TGT_TRIPLET"           \
-               -DLLVM_DEFAULT_TARGET_TRIPLE="$TGT_TRIPLET" \
-               -DLLVM_ENABLE_BINDINGS=OFF                  \
-               -DLLVM_ENABLE_EH=ON                         \
-               -DLLVM_ENABLE_IDE=OFF                       \
-               -DLLVM_ENABLE_LIBCXX=ON                     \
-               -DLLVM_ENABLE_LLD=ON                        \
-               -DLLVM_ENABLE_LTO=Thin                      \
-               -DLLVM_ENABLE_RTTI=ON                       \
-               -DLLVM_ENABLE_BACKTRACES=OFF                \
-               -DLLVM_ENABLE_UNWIND_TABLES=OFF             \
-               -DLLVM_ENABLE_WARNINGS=OFF                  \
-               -DLLVM_ENABLE_LIBEDIT=OFF                   \
-               -DLLVM_ENABLE_LIBXML2=OFF                   \
-               -DLLVM_ENABLE_ASSERTIONS=OFF                \
-               -DLLVM_ENABLE_OCAMLDOC=OFF                  \
-               -DLLVM_ENABLE_ZLIB=OFF                      \
-               -DLLVM_ENABLE_Z3_SOLVER=OFF                 \
-               -DLLVM_INCLUDE_BENCHMARKS=OFF               \
-               -DLLVM_INCLUDE_EXAMPLES=OFF                 \
-               -DLLVM_INCLUDE_TESTS=OFF                    \
-               -DLLVM_INCLUDE_GO_TESTS=OFF                 \
-               -DLLVM_INCLUDE_DOCS=OFF                     \
-               -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON         \
-               -DLLVM_INSTALL_CCTOOLS_SYMLINKS=ON          \
-               -DLLVM_INSTALL_UTILS=ON                     \
-               -DLLVM_TARGET_ARCH="$TGT_LLVM"              \
-               -DLLVM_TARGETS_TO_BUILD="$TGT_LLVM"         \
-               -DCLANG_VENDOR="Heiwa/Linux"                \
-               -DCLANG_ENABLE_ARCMT=OFF                    \
-               -DCLANG_ENABLE_STATIC_ANALYZER=OFF          \
-               -DCLANG_DEFAULT_CXX_STDLIB=libc++           \
-               -DCLANG_DEFAULT_RTLIB=compiler-rt           \
-               -DCLANG_DEFAULT_LINKER=lld                  \
-               -DCLANG_DEFAULT_UNWINDLIB=libunwind         \
+cmake -B build -DCMAKE_BUILD_TYPE=Release -Wno-dev                    \
+               -DCMAKE_INSTALL_PREFIX="/clang2-tools"                 \
+               -DBUILD_SHARED_LIBS=ON                                 \
+               -DLLVM_CCACHE_BUILD=ON                                 \
+               -DLLVM_APPEND_VC_REV=OFF                               \
+               -DLLVM_HOST_TRIPLE="$TARGET_MACHINE_TRIPLET"           \
+               -DLLVM_DEFAULT_TARGET_TRIPLE="$TARGET_MACHINE_TRIPLET" \
+               -DLLVM_ENABLE_BINDINGS=OFF                             \
+               -DLLVM_ENABLE_EH=ON                                    \
+               -DLLVM_ENABLE_IDE=OFF                                  \
+               -DLLVM_ENABLE_LIBCXX=ON                                \
+               -DLLVM_ENABLE_LLD=ON                                   \
+               -DLLVM_ENABLE_LTO=Thin                                 \
+               -DLLVM_ENABLE_RTTI=ON                                  \
+               -DLLVM_ENABLE_BACKTRACES=OFF                           \
+               -DLLVM_ENABLE_UNWIND_TABLES=OFF                        \
+               -DLLVM_ENABLE_WARNINGS=OFF                             \
+               -DLLVM_ENABLE_LIBEDIT=OFF                              \
+               -DLLVM_ENABLE_LIBXML2=OFF                              \
+               -DLLVM_ENABLE_ASSERTIONS=OFF                           \
+               -DLLVM_ENABLE_OCAMLDOC=OFF                             \
+               -DLLVM_ENABLE_ZLIB=OFF                                 \
+               -DLLVM_ENABLE_Z3_SOLVER=OFF                            \
+               -DLLVM_INCLUDE_BENCHMARKS=OFF                          \
+               -DLLVM_INCLUDE_EXAMPLES=OFF                            \
+               -DLLVM_INCLUDE_TESTS=OFF                               \
+               -DLLVM_INCLUDE_GO_TESTS=OFF                            \
+               -DLLVM_INCLUDE_DOCS=OFF                                \
+               -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON                    \
+               -DLLVM_INSTALL_CCTOOLS_SYMLINKS=ON                     \
+               -DLLVM_INSTALL_UTILS=ON                                \
+               -DLLVM_TARGET_ARCH="$TARGET_LLVM"                      \
+               -DLLVM_TARGETS_TO_BUILD="$TARGET_LLVM"                 \
+               -DCLANG_VENDOR="Heiwa/Linux"                           \
+               -DCLANG_ENABLE_ARCMT=OFF                               \
+               -DCLANG_ENABLE_STATIC_ANALYZER=OFF                     \
+               -DCLANG_DEFAULT_CXX_STDLIB=libc++                      \
+               -DCLANG_DEFAULT_RTLIB=compiler-rt                      \
+               -DCLANG_DEFAULT_LINKER=lld                             \
+               -DCLANG_DEFAULT_UNWINDLIB=libunwind                    \
                -DDEFAULT_SYSROOT="/clang2-tools"
 ```
 ```bash
@@ -326,26 +326,26 @@ time {
 }
 ```
 ```bash
-# Configure Stage-1 Clang/LLVM with pc triplet to produce binaries with "/clang2-tools/lib/ld-musl-${TGT_ARCH}.so.1".
-ln -sfv clang   /clang2-tools/bin/${TGT_TRIPLET}-clang
-ln -sfv clang++ /clang2-tools/bin/${TGT_TRIPLET}-clang++
-cat > /clang2-tools/bin/${TGT_TRIPLET}.cfg << EOF
--Wl,-dynamic-linker /clang2-tools/lib/ld-musl-${TGT_ARCH}.so.1
+# Configure Stage-1 Clang/LLVM with pc triplet to produce binaries with "/clang2-tools/lib/ld-musl-${TARGET_ARCH}.so.1".
+ln -sfv clang   /clang2-tools/bin/${TARGET_MACHINE_TRIPLET}-clang
+ln -sfv clang++ /clang2-tools/bin/${TARGET_MACHINE_TRIPLET}-clang++
+cat > /clang2-tools/bin/${TARGET_MACHINE_TRIPLET}.cfg << EOF
+-Wl,-dynamic-linker /clang2-tools/lib/ld-musl-${TARGET_ARCH}.so.1
 EOF
 ```
 ```bash
-# Configure Stage-1 Clang/LLVM with heiwa triplet to produce binaries with "/lib/ld-musl-${TGT_ARCH}.so.1" and "/usr" in chroot later.
-ln -sfv clang                /clang2-tools/bin/${HEI_TRIPLET}-clang
-ln -sfv ${HEI_TRIPLET}-clang /clang2-tools/bin/cc
-ln -sfv clang++              /clang2-tools/bin/${HEI_TRIPLET}-clang++
-cat > /clang2-tools/bin/${HEI_TRIPLET}.cfg << EOF
---sysroot=/usr -Wl,-dynamic-linker /lib/ld-musl-${TGT_ARCH}.so.1
+# Configure Stage-1 Clang/LLVM with heiwa triplet to produce binaries with "/lib/ld-musl-${TARGET_ARCH}.so.1" and "/usr" in chroot later.
+ln -sfv clang                          /clang2-tools/bin/${TARGET_CUSTOM_TRIPLET}-clang
+ln -sfv ${TARGET_CUSTOM_TRIPLET}-clang /clang2-tools/bin/cc
+ln -sfv clang++                        /clang2-tools/bin/${TARGET_CUSTOM_TRIPLET}-clang++
+cat > /clang2-tools/bin/${TARGET_CUSTOM_TRIPLET}.cfg << EOF
+--sysroot=/usr -Wl,-dynamic-linker /lib/ld-musl-${TARGET_ARCH}.so.1
 EOF
 ```
 ```bash
 # Now set the compiler to pc triplet from Stage-1 Clang/LLVM to use current musl libc built and remove "/clang1-tools" from PATH.
-sed -e "/CXX=/s/${CXX}/${TGT_TRIPLET}-clang++/" \
-    -e "/CC=/s/${CC}/${TGT_TRIPLET}-clang/"     \
+sed -e "/CXX=/s/${CXX}/${TARGET_MACHINE_TRIPLET}-clang++/" \
+    -e "/CC=/s/${CC}/${TARGET_MACHINE_TRIPLET}-clang/"     \
     -e 's|:/clang1-tools/bin:|:|' -i ~/.bashrc
 source ~/.bashrc
 ```
@@ -414,7 +414,7 @@ time { make -C build install; }
 CFLAGS="-flto=thin $CFLAGS"                   \
 ./configure --prefix=/clang2-tools            \
             --build=$(build-aux/config.guess) \
-            --host=${TGT_TRIPLET}             \
+            --host=${TARGET_MACHINE_TRIPLET}  \
             --enable-threads=posix            \
             --disable-doc                     \
             --disable-static
@@ -514,7 +514,7 @@ time { make HOSTCC=${CC} CFLAGS="-flto=thin $CFLAGS" V=1; }
 ```
 ```bash
 # Install to single "bin" directory rather than {,usr}/{bin,sbin}.
-time { make HOSTCC=${CC} PREFIX=/clang2-tools/bin install_flat && unset X TOYBOX; }
+time { make HOSTCC=${CC} PREFIX=/clang2-tools/bin install_flat && unset TOYBOX; }
 ```
 
 ### `11` - GNU Awk
@@ -534,7 +534,7 @@ sed -e '/^LN =/s/=.*/= $(LN_S)/'         \
 CFLAGS="-flto=thin $CFLAGS"           \
 ./configure --prefix=/clang2-tools    \
             --build=$(./config.guess) \
-            --host=${TGT_TRIPLET}
+            --host=${TARGET_MACHINE_TRIPLET}
 ```
 ```bash
 # Build.
@@ -559,7 +559,7 @@ time {
 CFLAGS="-flto=thin $CFLAGS"                   \
 ./configure --prefix=/clang2-tools            \
             --build=$(build-aux/config.guess) \
-            --host=${TGT_TRIPLET}             \
+            --host=${TARGET_MACHINE_TRIPLET}  \
             --with-packager="Heiwa/Linux"
 ```
 ```bash
@@ -582,7 +582,7 @@ time { make install; }
 CFLAGS="-flto=thin $CFLAGS"                   \
 ./configure --prefix=/clang2-tools            \
             --build=$(build-aux/config.guess) \
-            --host=${TGT_TRIPLET}             \
+            --host=${TARGET_MACHINE_TRIPLET}  \
             --without-guile
 ```
 ```bash
@@ -605,7 +605,7 @@ time { make install; }
 CFLAGS="-flto=thin $CFLAGS"                   \
 ./configure --prefix=/clang2-tools            \
             --build=$(build-aux/config.guess) \
-            --host=${TGT_TRIPLET}
+            --host=${TARGET_MACHINE_TRIPLET}
 ```
 ```bash
 # Build.
@@ -627,7 +627,7 @@ time { make install; }
 CFLAGS="-flto=thin $CFLAGS"                   \
 ./configure --prefix=/clang2-tools            \
             --build=$(build-aux/config.guess) \
-            --host=${TGT_TRIPLET}             \
+            --host=${TARGET_MACHINE_TRIPLET}  \
             --disable-perl-xs                 \
             --without-external-libintl-perl   \
             --without-external-Text-Unidecode \
@@ -650,12 +650,12 @@ time { make install; }
 > > **Build time:** ~1m
 ```bash
 # Configure source.
-CFLAGS="-flto=thin $CFLAGS"                 \
-./configure --prefix=/clang2-tools          \
-            --build=$(support/config.guess) \
-            --host=${TGT_TRIPLET}           \
-            --without-bash-malloc           \
-            --enable-net-redirections       \
+CFLAGS="-flto=thin $CFLAGS"                  \
+./configure --prefix=/clang2-tools           \
+            --build=$(support/config.guess)  \
+            --host=${TARGET_MACHINE_TRIPLET} \
+            --without-bash-malloc            \
+            --enable-net-redirections        \
             --disable-profiling
 ```
 ```bash
@@ -710,12 +710,12 @@ sed -e 's|-flto|-flto=thin|' -e 's|-O3||' -i configure
 ```
 ```bash
 # Configure source using provided libraries (built-in).
-ax_cv_c_float_words_bigendian=no      \
-./configure --prefix=/clang2-tools    \
-            --build=$(./config.guess) \
-            --host=${TGT_TRIPLET}     \
-            --with-lto                \
-            --without-ensurepip       \
+ax_cv_c_float_words_bigendian=no             \
+./configure --prefix=/clang2-tools           \
+            --build=$(./config.guess)        \
+            --host=${TARGET_MACHINE_TRIPLET} \
+            --with-lto                       \
+            --without-ensurepip              \
             --enable-shared
 ```
 ```bash
@@ -771,9 +771,9 @@ find /clang2-tools/lib{,exec}/ -name '*.la' -exec rm -fv {} \;
 find /clang2-tools/lib/ -type f \( -name '*.a' -o -name '*.so*' \) -exec llvm-strip --strip-unneeded {} \;
 ```
 ```bash
-if cp -v $(command -v llvm-strip) .; then
+if install -t . $(command -v llvm-strip); then
     find /clang2-tools/{lib{/bash,exec},bin}/ -type f -exec ./llvm-strip --strip-unneeded {} \;
-fi && rm -v ./llvm-strip
+fi; rm -v ./llvm-strip
 ```
 > Now exit from privileged user.
 ```bash
@@ -803,7 +803,7 @@ fi
 ```
 ```bash
 if [[ -d "${HEIWA}/clang2-tools" ]]; then
-    pushd "$HEIWA" && XZ_OPT="-9e -T2" \
+    pushd "$HEIWA" && XZ_OPT='-9e -T2' \
         tar -vcJpf clang2-tools.tar.xz clang2-tools
     popd
 fi
