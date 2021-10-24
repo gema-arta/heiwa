@@ -345,13 +345,13 @@ mv -fv llvm-12.0.1.src "$LLVM_SRC" && pushd "$LLVM_SRC"
 ```
 ```bash
 # Decompress `clang`, `lld`, `compiler-rt`, `libunwind`, `libcxxabi`, and `libcxx` to correct directories.
-pushd ${LLVM_SRC}/projects/ && \
+pushd "$LLVM_SRC"/projects/ && \
     tar xf ../../pkgs/compiler-rt-12.0.1.src.tar.xz && mv -fv compiler-rt{-12.0.1.src,}
     tar xf   ../../pkgs/libunwind-12.0.1.src.tar.xz && mv -fv libunwind{-12.0.1.src,}
     tar xf   ../../pkgs/libcxxabi-12.0.1.src.tar.xz && mv -fv libcxxabi{-12.0.1.src,}
     tar xf      ../../pkgs/libcxx-12.0.1.src.tar.xz && mv -fv libcxx{-12.0.1.src,}
 popd
-pushd ${LLVM_SRC}/tools/ && \
+pushd "$LLVM_SRC"/tools/ && \
     tar xf ../../pkgs/clang-12.0.1.src.tar.xz && mv -fv clang{-12.0.1.src,}
     tar xf   ../../pkgs/lld-12.0.1.src.tar.xz && mv -fv lld{-12.0.1.src,}
 popd
